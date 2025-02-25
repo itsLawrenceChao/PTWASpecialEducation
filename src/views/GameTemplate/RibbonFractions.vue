@@ -1,18 +1,23 @@
 <template>
-  <div ref="container">
-    <h2>{{ GameData.Question }}</h2>
-    <v-stage :config="configKonva">
-      <v-layer>
-        <v-rect :config="configBG"></v-rect>
-      </v-layer>
-    </v-stage>
+  <div class="container">
+    <div class="question">{{ GameData.Question }}</div>
+    <div class="answerArea">
+      <div class="ribbons">
+        <div v-for="i in 10" :key="i - 1" class="rowContainer">
+          <div v-for="j in 5" :key="j - 1" class="ribbonPart"></div>
+        </div>
+      </div>
+      <div class="checkBoxes">
+        <div class="rowContainer">這是一條緞帶。</div>
+        <div v-for="i in 9" :key="i" class="rowContainer">
+          <button>✔</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { getGameAssets } from "@/utilitys/get_assets.js";
-import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 export default {
   components: {},
 
@@ -30,29 +35,56 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
 
   data() {
-    return {
-      configKonva: {},
-      configBG: {
-        x: 0,
-        y: 0,
-        fill: "gray",
-        stroke: "gray",
-      },
-    };
+    return {};
   },
 
-  mounted() {
-    this.initializeScene();
-  },
+  mounted() {},
 
-  methods: {
-    initializeScene() {
-      this.gameWidth = this.$refs.container.clientWidth;
-      this.configKonva.width = this.gameWidth;
-      this.configKonva.height = this.gameWidth / 2;
-      this.configBG.width = this.gameWidth;
-      this.configBG.height = this.gameWidth / 2;
-    },
-  },
+  methods: {},
 };
 </script>
+
+<style scoped lang="scss">
+.container {
+  height: 100%;
+  width: 100%;
+}
+.question {
+  font-size: 2rem;
+}
+.answerArea {
+  padding: 2%;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  font-size: 2rem;
+}
+.ribbons {
+  width: 70%;
+  height: 100%;
+}
+.ribbonPart {
+  width: 20%;
+  height: 80%;
+  background-color: lightblue;
+  border-right: 2px black dashed;
+}
+.checkBoxes {
+  width: 28%;
+  height: 100%;
+  margin-left: auto;
+}
+.rowContainer {
+  height: 10%;
+  width: 100%;
+  display: flex;
+}
+.rowContainer button {
+  font-size: 1rem;
+  height: 80%;
+  aspect-ratio: 1;
+  background-color: transparent;
+  color: transparent;
+  border: 2px black solid;
+}
+</style>
