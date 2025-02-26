@@ -72,6 +72,9 @@ export default {
     DragImages: defineAsyncComponent(
       () => import("@/components/DragImages.vue")
     ),
+    FractionForAnswer: defineAsyncComponent(
+      () => import("@/components/FractionForAnswer.vue")
+    ),
   },
   props: {
     GameData: {
