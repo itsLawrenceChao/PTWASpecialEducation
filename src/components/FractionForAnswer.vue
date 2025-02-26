@@ -1,19 +1,23 @@
 <template>
   <div :class="$attrs.class">
     <div ref="container" class="fraction-for-answer">
-      <input
-        ref="numerator"
-        class="fraction-input numerator"
-        type="text"
-        @click="showNumPad('numerator', $event)"
-      />
-      <span class="line"></span>
-      <input
-        ref="denominator"
-        class="fraction-input denominator"
-        type="text"
-        @click="showNumPad('denominator', $event)"
-      />
+      <span v-if="Data.prefix" class="prefix">{{ Data.prefix }}</span>
+      <div class="fraction-container">
+        <input
+          ref="numerator"
+          class="fraction-input numerator"
+          type="text"
+          @click="showNumPad('numerator', $event)"
+        />
+        <span class="line"></span>
+        <input
+          ref="denominator"
+          class="fraction-input denominator"
+          type="text"
+          @click="showNumPad('denominator', $event)"
+        />
+      </div>
+      <span v-if="Data.suffix" class="suffix">{{ Data.suffix }}</span>
     </div>
     <FloatNumPad
       v-if="virtualNumpadSwitch"
@@ -29,8 +33,8 @@ import { defineAsyncComponent } from "vue";
 export default {
   name: "FractionForAnswer",
   components: {
-    FloatNumPad: defineAsyncComponent(() =>
-      import("@/components/FloatNumPad.vue")
+    FloatNumPad: defineAsyncComponent(
+      () => import("@/components/FloatNumPad.vue")
     ),
   },
   props: {
@@ -63,8 +67,8 @@ export default {
       this.activeInputRef = inputRef;
 
       this.numPadPosition = {
-        top: `${inputRect.bottom + window.scrollY + this.numPadOffset}px`,
-        left: `${inputRect.left + window.scrollX}px`,
+        top: `${inputRect.top + window.scrollY}px`,
+        left: `${inputRect.right + window.scrollX + this.numPadOffset}px`,
       };
 
       this.virtualNumpadSwitch = true;
@@ -84,18 +88,28 @@ export default {
       }
     },
     validateAnswer() {
-      const userNumerator = this.$refs.numerator.value;
-      const userDenominator = this.$refs.denominator.value;
+      const userNumerator = parseInt(this.$refs.numerator.value, 10);
+      const userDenominator = parseInt(this.$refs.denominator.value, 10);
+
+      // 檢查是否有輸入值和分母不為0
+      if (
+        isNaN(userNumerator) ||
+        isNaN(userDenominator) ||
+        userDenominator === 0
+      ) {
+        this.$emit("replyAnswer", false);
+        return;
+      }
+
+      // 計算實際的小數值來比較
+      const correctValue = this.Data.numerator / this.Data.denominator;
+      const userValue = userNumerator / userDenominator;
+
+      const isCorrect = correctValue === userValue;
 
       const correctAnswer = `${this.Data.numerator}/${this.Data.denominator}`;
+      const userAnswer = `${userNumerator}/${userDenominator}`;
 
-      const isCorrect =
-        parseInt(userNumerator, 10) === this.Data.numerator &&
-        parseInt(userDenominator, 10) === this.Data.denominator;
-
-      let userAnswer = `${parseInt(userNumerator, 10) || null}/${
-        parseInt(userDenominator, 10) || null
-      }`;
       this.$emit("replyAnswer", isCorrect);
       this.$emit("recordAnswer", [
         correctAnswer,
@@ -124,13 +138,18 @@ export default {
 <style scoped>
 .fraction-for-answer {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.fraction-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 0.2rem;
 }
 
@@ -149,5 +168,14 @@ export default {
   border-top: 0.2rem solid black;
   width: 100%;
   margin: 2px 0;
+}
+
+.prefix,
+.suffix {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  align-items: center;
+  white-space: nowrap;
 }
 </style>
