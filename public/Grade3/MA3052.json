@@ -28,10 +28,34 @@
         "Answer": "角2",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "1-1.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "1-1a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "1-1b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -42,10 +66,34 @@
         "Answer": "角2",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "1-2.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "1-2a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "1-2b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -56,10 +104,34 @@
         "Answer": "角2",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "1-3.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "1-3a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "1-3b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -72,10 +144,34 @@
         "Answer": "角1",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "2-1.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "2-1a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "2-1b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -86,10 +182,34 @@
         "Answer": "角1",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "2-2.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "2-2a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "2-2b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -100,10 +220,34 @@
         "Answer": "角1",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "2-3.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "2-3a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "2-3b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -116,10 +260,34 @@
         "Answer": "角1",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "3-1.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "3-1a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "2-1b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -130,10 +298,34 @@
         "Answer": "角2",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "3-2.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "3-2a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "3-2b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -144,10 +336,34 @@
         "Answer": "角1",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "3-3.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "3-3a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "3-3b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -160,10 +376,34 @@
         "Answer": "角2",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "4-1.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "4-1a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "4-1b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -174,10 +414,34 @@
         "Answer": "角2",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "4-2.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "4-2a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "4-2b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
@@ -188,10 +452,34 @@
         "Answer": "角1",
         "SlotComponents": [
           {
-            "Name": "ImageContainer",
+            "Name": "DragImages",
             "Data": {
-              "Src": "4-3.PNG",
-              "Alt": "一個角度"
+              "backgroundType": "color",
+              "background": "white",
+              "backgroundRatio": {
+                "width": 6,
+                "height": 6
+              },
+              "images": [
+                {
+                  "path": "4-3a.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                },
+                {
+                  "path": "4-3b.png",
+                  "ratio": {
+                    "width": 2,
+                    "height": 2
+                  },
+                  "draggable": true,
+                  "rotatable": true
+                }
+              ]
             }
           }
         ]
