@@ -73,6 +73,7 @@ export default {
   name: "SelectGame",
   components: {
     ImageContainer: getComponents("ImageContainer"),
+    DragImages: getComponents("DragImages"),
   },
   props: {
     GameData: {
