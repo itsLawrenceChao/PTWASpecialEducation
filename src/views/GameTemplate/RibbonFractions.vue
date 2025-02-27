@@ -3,13 +3,27 @@
     <div class="question">{{ GameData.Question }}</div>
     <div class="answerArea">
       <div class="ribbons">
-        <div v-for="i in 10" :key="i - 1" class="rowContainer">
-          <div v-for="j in 5" :key="j - 1" class="ribbonPart"></div>
+        <div class="rowContainer">
+          <div
+            v-for="j in GameData.Denominator"
+            :key="j - 1"
+            class="ribbonPart"
+            :style="wholeRibbonStyle[j - 1]"
+          ></div>
+        </div>
+
+        <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
+          <div
+            v-for="j in GameData.Denominator"
+            :key="j - 1"
+            class="ribbonPart"
+            :style="ribbonStyle[i - 1][j - 1]"
+          ></div>
         </div>
       </div>
       <div class="checkBoxes">
         <div class="rowContainer">這是一條緞帶。</div>
-        <div v-for="i in 9" :key="i" class="rowContainer">
+        <div v-for="i in GameData.Option" :key="i" class="rowContainer">
           <button>✔</button>
         </div>
       </div>
@@ -35,12 +49,62 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
 
   data() {
-    return {};
+    return {
+      map: [],
+      wholeRibbonStyle: [],
+      ribbonStyle: [],
+      color: "lightblue",
+    };
   },
 
-  mounted() {},
+  beforeMount() {
+    this.setMap();
+    this.setRibbonStyle();
+  },
 
-  methods: {},
+  methods: {
+    setMap() {
+      this.correctOptionID = this.randomCombination(
+        this.GameData.Option,
+        this.GameData.CorrectOption
+      );
+      for (let i = 0; i < this.GameData.Option; ++i) {
+        if (this.correctOptionID.includes(i)) this.map.push(this.GameData.Numerator);
+        else {
+          let random;
+          do {
+            random = Math.ceil(Math.random() * this.GameData.Denominator);
+          } while (random == this.GameData.Numerator);
+          this.map.push(random);
+        }
+      }
+    },
+    setRibbonStyle() {
+      for (let j = 0; j < this.GameData.Denominator; ++j) {
+        let style = {};
+        if (j == this.GameData.Denominator - 1) style.border = "none";
+        this.wholeRibbonStyle.push(style);
+      }
+
+      for (let i = 0; i < this.GameData.Option; ++i) {
+        let row = [];
+        for (let j = 0; j < this.GameData.Denominator; ++j) {
+          let style = {};
+          if (j == this.GameData.Denominator - 1) style.border = "none";
+          row.push(style);
+        }
+        this.ribbonStyle.push(row);
+      }
+    },
+    randomCombination(n, r) {
+      let combination = [];
+      do {
+        let random = Math.floor(Math.random() * n);
+        if (!combination.includes(random)) combination.push(random);
+      } while (combination.length < r);
+      return combination;
+    },
+  },
 };
 </script>
 
