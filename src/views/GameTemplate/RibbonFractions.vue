@@ -60,6 +60,7 @@ export default {
   beforeMount() {
     this.setMap();
     this.setRibbonStyle();
+    console.log(this.correctOptionID);
   },
 
   methods: {
@@ -80,17 +81,30 @@ export default {
       }
     },
     setRibbonStyle() {
+      if (this.GameData.Color) this.color = this.GameData.Color;
       for (let j = 0; j < this.GameData.Denominator; ++j) {
-        let style = {};
-        if (j == this.GameData.Denominator - 1) style.border = "none";
+        let style = {
+          backgroundColor: this.color,
+        };
+        if (j == 0) style.borderLeft = "1px black solid";
+        else if (j == this.GameData.Denominator - 1)
+          style.borderRight = "1px black solid";
         this.wholeRibbonStyle.push(style);
       }
 
       for (let i = 0; i < this.GameData.Option; ++i) {
         let row = [];
+        let coloredRibbon = this.randomCombination(
+          this.GameData.Denominator,
+          this.map[i]
+        );
         for (let j = 0; j < this.GameData.Denominator; ++j) {
           let style = {};
-          if (j == this.GameData.Denominator - 1) style.border = "none";
+          if (j == 0) style.borderLeft = "1px black solid";
+          else if (j == this.GameData.Denominator - 1)
+            style.borderRight = "1px black solid";
+
+          if (coloredRibbon.includes(j)) style.backgroundColor = this.color;
           row.push(style);
         }
         this.ribbonStyle.push(row);
@@ -130,8 +144,9 @@ export default {
 .ribbonPart {
   width: 20%;
   height: 80%;
-  background-color: lightblue;
   border-right: 2px black dashed;
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
 }
 .checkBoxes {
   width: 28%;
