@@ -24,6 +24,7 @@ const componentsMapping = {
   InteractiveMathEquation: () =>
     import("@/components/InteractiveMathEquation.vue"),
   FloatNumPad: () => import("@/components/FloatNumPad.vue"),
+  DragImages: () => import("@/components/DragImages.vue"),
 };
 export function GetComponents(name) {
   console.warn(
