@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div class="question">{{ GameData.Question }}</div>
+    <div class="question">
+      {{ GameData.Question }}
+    </div>
     <div class="answerArea">
       <div class="ribbons">
         <div class="rowContainer">
@@ -23,8 +25,8 @@
       </div>
       <div class="checkBoxes">
         <div class="rowContainer">這是一條緞帶。</div>
-        <div v-for="i in GameData.Option" :key="i" class="rowContainer">
-          <button>✔</button>
+        <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
+          <button :style="btnStyle[i - 1]" @click="handleClick(i - 1)">✔</button>
         </div>
       </div>
     </div>
@@ -53,6 +55,8 @@ export default {
       map: [],
       wholeRibbonStyle: [],
       ribbonStyle: [],
+      btnStyle: [],
+      selected: [],
       color: "lightblue",
     };
   },
@@ -60,6 +64,7 @@ export default {
   beforeMount() {
     this.setMap();
     this.setRibbonStyle();
+    this.setbtnStyle();
     console.log(this.correctOptionID);
   },
 
@@ -110,6 +115,15 @@ export default {
         this.ribbonStyle.push(row);
       }
     },
+    setbtnStyle() {
+      for (let i = 0; i < this.GameData.Option; ++i) {
+        let style = {
+          color: "transparent",
+        };
+        this.btnStyle.push(style);
+        this.selected.push(false);
+      }
+    },
     randomCombination(n, r) {
       let combination = [];
       do {
@@ -117,6 +131,15 @@ export default {
         if (!combination.includes(random)) combination.push(random);
       } while (combination.length < r);
       return combination;
+    },
+    handleClick(i) {
+      if (this.btnStyle[i].color == "black") {
+        this.btnStyle[i].color = "transparent";
+        this.selected[i] = false;
+      } else {
+        this.btnStyle[i].color = "black";
+        this.selected[i] = true;
+      }
     },
   },
 };
@@ -163,7 +186,6 @@ export default {
   height: 80%;
   aspect-ratio: 1;
   background-color: transparent;
-  color: transparent;
   border: 2px black solid;
 }
 </style>
