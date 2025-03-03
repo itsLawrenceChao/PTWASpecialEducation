@@ -1,33 +1,34 @@
 <template>
   <div class="container">
-    <div class="question">
-      {{ GameData.Question }}
-    </div>
-    <div class="answerArea">
-      <div class="ribbons">
-        <div class="rowContainer">
-          <div
-            v-for="j in GameData.Denominator"
-            :key="j - 1"
-            class="ribbonPart"
-            :style="wholeRibbonStyle[j - 1]"
-          ></div>
-        </div>
-
-        <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
-          <div
-            v-for="j in GameData.Denominator"
-            :key="j - 1"
-            class="ribbonPart"
-            :style="ribbonStyle[i - 1][j - 1]"
-          ></div>
-        </div>
+    <div class="ribbons">
+      <div class="rowContainer">{{ GameData.Question }}</div>
+      <div class="rowContainer">
+        <div
+          v-for="j in GameData.Denominator"
+          :key="j - 1"
+          class="ribbonPart"
+          :style="wholeRibbonStyle[j - 1]"
+        ></div>
       </div>
-      <div class="checkBoxes">
-        <div class="rowContainer">這是一條緞帶。</div>
-        <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
-          <button :style="btnStyle[i - 1]" @click="handleClick(i - 1)">✔</button>
-        </div>
+
+      <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
+        <div
+          v-for="j in GameData.Denominator"
+          :key="j - 1"
+          class="ribbonPart"
+          :style="ribbonStyle[i - 1][j - 1]"
+        ></div>
+      </div>
+    </div>
+    <div class="checkBoxes">
+      <div class="rowContainer">
+        <button class="submitBtn" @click="checkAnswer">提交答案</button>
+      </div>
+      <div class="rowContainer">這是一條緞帶。</div>
+      <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
+        <button class="checkBoxBtn" :style="btnStyle[i - 1]" @click="handleClick(i - 1)">
+          ✔
+        </button>
       </div>
     </div>
   </div>
@@ -149,14 +150,7 @@ export default {
 .container {
   height: 100%;
   width: 100%;
-}
-.question {
-  font-size: 2rem;
-}
-.answerArea {
   padding: 2%;
-  width: 100%;
-  height: 90%;
   display: flex;
   font-size: 2rem;
 }
@@ -181,11 +175,21 @@ export default {
   width: 100%;
   display: flex;
 }
-.rowContainer button {
+.checkBoxBtn {
   font-size: 1rem;
   height: 80%;
   aspect-ratio: 1;
   background-color: transparent;
   border: 2px black solid;
+}
+.submitBtn {
+  border: none;
+  background-color: lightgray;
+  cursor: pointer;
+  border-radius: 1rem;
+  &:hover {
+    background-color: darken(lightgray, 10%);
+  }
+  font-size: 2rem;
 }
 </style>
