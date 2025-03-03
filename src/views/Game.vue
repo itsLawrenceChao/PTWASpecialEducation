@@ -230,11 +230,15 @@ export default {
     MultiplyBoard: defineAsyncComponent(() =>
       import("@/views/GameTemplate/MultiplyBoard.vue")
     ),
+    FindFood: defineAsyncComponent(() => import("@/views/GameTemplate/FindFood.vue")),
     FractionArithmetic: defineAsyncComponent(() =>
       import("@/views/GameTemplate/FractionArithmetic.vue")
     ),
     RibbonFractions: defineAsyncComponent(() =>
       import("@/views/GameTemplate/RibbonFractions.vue")
+    ),
+    FindPattern: defineAsyncComponent(() =>
+      import("@/views/GameTemplate/FindPattern.vue")
     ),
   },
   data() {

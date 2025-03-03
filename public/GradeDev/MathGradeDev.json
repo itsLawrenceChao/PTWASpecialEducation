@@ -115,6 +115,12 @@
                 "Img": "MA3011.png"
               },
               {
+                "id": "Dev02_FindPattern",
+                "Name": "找規律",
+                "Description": "#",
+                "Img": "MA3011.png"
+              },
+              {
                 "id": "Dev02_RibbonFractions",
                 "Name": "緞帶切分",
                 "Description": "#",
