@@ -66,7 +66,6 @@ export default {
     this.setMap();
     this.setRibbonStyle();
     this.setbtnStyle();
-    console.log(this.correctOptionID);
   },
 
   methods: {
@@ -142,6 +141,39 @@ export default {
         this.selected[i] = true;
       }
     },
+    checkAnswer() {
+      let isCorrect = true,
+        wrongAnswers = [];
+      for (let i = 0; i < this.GameData.Option; ++i) {
+        if (this.selected[i] != this.correctOptionID.includes(i)) {
+          isCorrect = false;
+          wrongAnswers.push(this.map[i]);
+        }
+      }
+      console.log(isCorrect);
+      this.emitAnswers(wrongAnswers);
+    },
+    emitAnswers(wrongAnswers) {
+      if (wrongAnswers.length > 0) {
+        while (wrongAnswers.findIndex(this.isNumerator) != -1) {
+          wrongAnswers[wrongAnswers.findIndex(this.isNumerator)] = "未勾選";
+        }
+        this.$emit("play-effect", "WrongSound");
+        this.$emit("add-record", [
+          this.GameData.Numerator,
+          wrongAnswers.toString(),
+          "錯誤",
+        ]);
+      } else {
+        this.$emit("play-effect", "CorrectSound");
+        this.$emit("add-record", [this.GameData.Numerator, "#", "正確"]);
+        this.$emit("next-question");
+      }
+    },
+    isNumerator(i) {
+      if (i == this.GameData.Numerator) return true;
+      else return false;
+    },
   },
 };
 </script>
@@ -183,6 +215,7 @@ export default {
   border: 2px black solid;
 }
 .submitBtn {
+  height: 80%;
   border: none;
   background-color: lightgray;
   cursor: pointer;
