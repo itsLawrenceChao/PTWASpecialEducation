@@ -4,24 +4,22 @@
       <div v-if="GameData.questionText" class="text-area">
         {{ GameData.questionText }}
       </div>
-      <div v-if="GameConfig.layout.top" class="game-area">
+      <div v-if="GameConfig.layout.top" class="game-area--top game-area">
         <component
           :is="GameData.topComponent.Name"
           :Data="GameData.topComponent.Data"
           :ID="ID"
-          class="game-area--top"
           @replyAnswer="topReply"
         ></component>
       </div>
       <div v-if="GameData.middleText" class="text-area">
         {{ GameData.middleText }}
       </div>
-      <div v-if="GameConfig.layout.down" class="game-area">
+      <div v-if="GameConfig.layout.down" class="game-area--down game-area">
         <component
           :is="GameData.downComponent.Name"
           :Data="GameData.downComponent.Data"
           :ID="ID"
-          class="game-area--down"
           @replyAnswer="downReply"
         ></component>
       </div>
@@ -51,26 +49,23 @@ export default {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     Fractions: defineAsyncComponent(() => import("@/components/Fractions.vue")),
     Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
-    NumberLine: defineAsyncComponent(
-      () => import("@/components/NumberLine.vue")
+    NumberLine: defineAsyncComponent(() =>
+      import("@/components/NumberLine.vue")
     ),
-    NumberLineWithBlank: defineAsyncComponent(
-      () => import("@/components/NumberLineWithBlank.vue")
+    NumberLineWithBlank: defineAsyncComponent(() =>
+      import("@/components/NumberLineWithBlank.vue")
     ),
-    DragOnNumberLine: defineAsyncComponent(
-      () => import("@/components/DragOnNumberLine.vue")
+    DragOnNumberLine: defineAsyncComponent(() =>
+      import("@/components/DragOnNumberLine.vue")
     ),
-    ImageContainer: defineAsyncComponent(
-      () => import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(() =>
+      import("@/components/ImageContainer.vue")
     ),
-    InteractiveMathEquation: defineAsyncComponent(
-      () => import("@/components/InteractiveMathEquation.vue")
+    InteractiveMathEquation: defineAsyncComponent(() =>
+      import("@/components/InteractiveMathEquation.vue")
     ),
-    RepeatImage: defineAsyncComponent(
-      () => import("@/components/RepeatImage.vue")
-    ),
-    DragImages: defineAsyncComponent(
-      () => import("@/components/DragImages.vue")
+    RepeatImage: defineAsyncComponent(() =>
+      import("@/components/RepeatImage.vue")
     ),
   },
   props: {
@@ -228,6 +223,7 @@ export default {
       }
     },
     CheckAnswer() {
+      console.log(this.topComponentsAnswer, this.downComponentsAnswer);
       if (
         this.GameConfig.layout.top == false ||
         this.GameConfig.checkAnswer.top == false
@@ -240,7 +236,7 @@ export default {
       ) {
         this.downComponentsAnswer = true;
       }
-      console.log(this.topComponentsAnswer, this.downComponentsAnswer);
+
       let ans = this.topComponentsAnswer && this.downComponentsAnswer;
       console.log(ans);
 
@@ -282,19 +278,12 @@ export default {
     font-size: $text-medium;
   }
   .game-area {
+    max-height: 40vh;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: $border-radius;
     background-color: #f0f0f0;
-    &--top {
-      height: 100%;
-      width: 100%;
-    }
-    &--down {
-      height: 100%;
-      width: 100%;
-    }
   }
 }
 .right-column {
