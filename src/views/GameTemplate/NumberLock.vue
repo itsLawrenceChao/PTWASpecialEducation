@@ -49,23 +49,26 @@ export default {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     Fractions: defineAsyncComponent(() => import("@/components/Fractions.vue")),
     Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
-    NumberLine: defineAsyncComponent(() =>
-      import("@/components/NumberLine.vue")
+    NumberLine: defineAsyncComponent(
+      () => import("@/components/NumberLine.vue")
     ),
-    NumberLineWithBlank: defineAsyncComponent(() =>
-      import("@/components/NumberLineWithBlank.vue")
+    NumberLineWithBlank: defineAsyncComponent(
+      () => import("@/components/NumberLineWithBlank.vue")
     ),
-    DragOnNumberLine: defineAsyncComponent(() =>
-      import("@/components/DragOnNumberLine.vue")
+    DragOnNumberLine: defineAsyncComponent(
+      () => import("@/components/DragOnNumberLine.vue")
     ),
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
-    InteractiveMathEquation: defineAsyncComponent(() =>
-      import("@/components/InteractiveMathEquation.vue")
+    InteractiveMathEquation: defineAsyncComponent(
+      () => import("@/components/InteractiveMathEquation.vue")
     ),
-    RepeatImage: defineAsyncComponent(() =>
-      import("@/components/RepeatImage.vue")
+    RepeatImage: defineAsyncComponent(
+      () => import("@/components/RepeatImage.vue")
+    ),
+    DragImages: defineAsyncComponent(
+      () => import("@/components/DragImages.vue")
     ),
   },
   props: {
