@@ -266,27 +266,39 @@ export default {
   padding: 10px;
   border-radius: 10px;
   border: solid;
-  max-height: 80vh;
+  max-height: 78vh;
 }
 .left-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: $gap--small;
+  max-height: 100%;
+  overflow-y: auto;
 
   .text-area {
+    flex-shrink: 0;
     padding: $gap--tiny;
     background-color: #dfdfdf;
     border-radius: $border-radius;
     font-size: $text-medium;
   }
   .game-area {
-    max-height: 40vh;
+    min-height: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: $border-radius;
     background-color: #f0f0f0;
+
+    &--top {
+      flex-shrink: 0;
+    }
+
+    &--down {
+      flex: 1;
+      min-height: 0;
+    }
   }
 }
 .right-column {
