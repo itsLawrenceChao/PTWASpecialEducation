@@ -135,7 +135,7 @@ export default {
     drawBG() {
       this.configBG.image = this.images.bg;
       this.configBG.width = this.gameWidth;
-      this.configBG.height = this.gameWidth;
+      this.configBG.height = this.gameHeight;
     },
     spawnMole() {
       let id = this.configObjects.position.length;
