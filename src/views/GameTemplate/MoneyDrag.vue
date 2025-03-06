@@ -111,7 +111,7 @@ export default {
     this.slotData = this.GameData.upperComponent.Data;
   },
   mounted() {
-    this.$refs.deleteArea.$el.style.backgroundImage = `url(${this.GameConfig.trashBin})`;
+    this.$refs.deleteArea.$el.style.backgroundImage = `url(${this.trashBin})`;
   },
   methods: {
     init() {
