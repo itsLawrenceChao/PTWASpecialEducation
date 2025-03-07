@@ -13,6 +13,12 @@
                 "Name": "數到10000",
                 "Description": "將數字連連看",
                 "Img": "MA3011.png"
+              },
+              {
+                "id": "MA3013",
+                "Name": "數到10000",
+                "Description": "將數字連連看",
+                "Img": "MA3011.png"
               }
             ]
           },
@@ -415,6 +421,17 @@
               {
                 "id": "MA3151",
                 "Name": "認識一位小數",
+                "Description": "",
+                "Img": ""
+              }
+            ]
+          },
+          {
+            "Title": "認識十分位",
+            "Games": [
+              {
+                "id": "MA3153",
+                "Name": "認識十分位2",
                 "Description": "",
                 "Img": ""
               }
