@@ -4,11 +4,7 @@
       <h2>{{ GameData.Question }}</h2>
       <v-stage :config="configKonva">
         <v-layer>
-          <v-image
-            v-for="(road, index) in configRoad"
-            :key="index"
-            :config="road"
-          />
+          <v-image v-for="(road, index) in configRoad" :key="index" :config="road" />
         </v-layer>
 
         <v-layer>
@@ -21,39 +17,23 @@
             :key="index"
             :config="tunnel"
           />
-          <v-rect
-            v-for="(box, index) in configTextBox"
-            :key="index"
-            :config="box"
-          />
-          <v-text
-            v-for="(option, index) in configOption"
-            :key="index"
-            :config="option"
-          />
+          <v-rect v-for="(box, index) in configTextBox" :key="index" :config="box" />
+          <v-text v-for="(option, index) in configOption" :key="index" :config="option" />
         </v-layer>
       </v-stage>
     </div>
     <div id="btnContainer">
       <img :src="upBtn" class="controlBtn" @click="getCurrentOptionId('up')" />
       <br />
-      <img
-        :src="rightBtn"
-        class="controlBtn"
-        @click="getCurrentOptionId('right')"
-      />
+      <img :src="rightBtn" class="controlBtn" @click="getCurrentOptionId('right')" />
       <br />
-      <img
-        :src="downBtn"
-        class="controlBtn"
-        @click="getCurrentOptionId('down')"
-      />
+      <img :src="downBtn" class="controlBtn" @click="getCurrentOptionId('down')" />
     </div>
   </div>
 </template>
 
 <script>
-import { getSystemAssets, getGameStaticAssets } from "@/utilitys/get_assets.js";
+import { getGameAssets, getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
 
@@ -95,17 +75,15 @@ export default {
   },
 
   mounted() {
-    this.options = canvasTools.shuffleOptions(this.GameData.Options);
-    this.currentOptionId = Math.floor(Math.random() * this.options.length);
     this.initializeScene();
     window.addEventListener("keydown", this.input);
-    var btnCon = document.getElementById("btnContainer");
-    btnCon.style.height = this.configKonva.height + "px";
-    this.game = window.setInterval(this.update, 20);
+    this.moveRoad();
   },
 
   methods: {
     initializeScene() {
+      this.options = canvasTools.shuffleOptions(this.GameData.Options);
+      this.currentOptionId = Math.floor(Math.random() * this.options.length);
       this.gameWidth = this.$refs.container.clientWidth * 0.8;
       this.configKonva.width = this.gameWidth;
       this.configKonva.height = this.gameWidth / 2;
@@ -114,6 +92,7 @@ export default {
       this.drawOptions();
       this.drawTextBox();
       this.drawCar();
+      this.setBtnStyle();
     },
     drawRoad() {
       const roadImg = new window.Image();
@@ -198,9 +177,9 @@ export default {
         this.carOffset
       ).y;
     },
-    update() {
-      this.moveRoad();
-      this.moveCar();
+    setBtnStyle() {
+      var btnCon = document.getElementById("btnContainer");
+      btnCon.style.height = this.configKonva.height + "px";
     },
     moveRoad() {
       if (this.roadX < this.gameWidth * -1.2) {
@@ -224,19 +203,18 @@ export default {
             this.textBoxOffset
           ).x;
       }
+      requestAnimationFrame(this.moveRoad);
     },
     moveCar() {
       switch (this.movement) {
         case "up":
           if (
             this.configCar.y >
-            canvasTools.offset(
-              this.configRoad[this.currentOptionId],
-              this.carOffset
-            ).y
+            canvasTools.offset(this.configRoad[this.currentOptionId], this.carOffset).y
           ) {
             this.configCar.y -= this.speed * 4;
             this.configCar.rotation = -10;
+            requestAnimationFrame(this.moveCar);
           } else {
             this.configCar.rotation = 0;
             this.canMove = true;
@@ -246,13 +224,11 @@ export default {
         case "down":
           if (
             this.configCar.y <
-            canvasTools.offset(
-              this.configRoad[this.currentOptionId],
-              this.carOffset
-            ).y
+            canvasTools.offset(this.configRoad[this.currentOptionId], this.carOffset).y
           ) {
             this.configCar.y += this.speed * 4;
             this.configCar.rotation = 10;
+            requestAnimationFrame(this.moveCar);
           } else {
             this.configCar.rotation = 0;
             this.canMove = true;
@@ -289,6 +265,7 @@ export default {
             else {
               this.movement = "up";
               this.canMove = false;
+              this.moveCar();
             }
             break;
           case "down":
@@ -298,6 +275,7 @@ export default {
             else {
               this.movement = "down";
               this.canMove = false;
+              this.moveCar();
             }
             break;
           case "right":
@@ -308,8 +286,7 @@ export default {
     },
     checkAnswer() {
       if (
-        this.options[this.currentOptionId] ==
-        this.GameData.Options[this.GameData.Answer]
+        this.options[this.currentOptionId] == this.GameData.Options[this.GameData.Answer]
       ) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
