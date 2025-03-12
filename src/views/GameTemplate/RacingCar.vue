@@ -39,7 +39,7 @@
 <script>
 import { getGameAssets, getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, withScopeId } from "vue";
 
 export default {
   props: {
@@ -66,7 +66,7 @@ export default {
       configOption: [],
       configTextBox: [],
       configCar: {},
-      configEndingImage: {},
+      configEndingImage: null,
       configSmoke: [],
 
       speed: 1,
@@ -318,9 +318,10 @@ export default {
       this.roadX = 0;
       this.speed = 1;
       this.canMove = true;
+      requestAnimationFrame(this.moveRoad);
     },
     endingAnimation() {
-      if (this.configCar.x > this.gameWidth) {
+      if (this.configCar.x > this.gameWidth && this.configEndingImage == null) {
         this.$emit("next-question");
       } else {
         this.configCar.x += this.speed;
@@ -328,7 +329,8 @@ export default {
         requestAnimationFrame(this.endingAnimation);
       }
       this.endingFrameCount++;
-      if (this.endingFrameCount % 20 == 0) this.drawSmoke();
+      if (this.endingFrameCount % 20 == 0 && this.configCar.x < this.gameWidth)
+        this.drawSmoke();
     },
     drawSmoke() {
       const smokeImg = new window.Image();
@@ -339,7 +341,7 @@ export default {
         height: this.laneWidth * 0.1,
         width: this.laneWidth * 0.1,
         image: smokeImg,
-        visible: true,
+        opacity: 1,
       };
       smoke.x = canvasTools.corner(smoke).x;
       smoke.y = canvasTools.corner(smoke).y;
@@ -347,14 +349,70 @@ export default {
     },
     moveSmoke() {
       for (let i in this.configSmoke) {
-        this.configSmoke[i].x -= 2;
-        if (this.configSmoke[i].width < this.laneWidth) {
-          this.configSmoke[i].width++;
-          this.configSmoke[i].height++;
-          this.configSmoke[i].y = canvasTools.center(this.configCar).y;
-          this.configSmoke[i].y = canvasTools.corner(this.configSmoke[i]).y;
+        if (this.GameData.EndingImage && Number(i) == 3) {
+          if (this.configEndingImage) {
+            this.moveImageSmoke();
+            this.moveEndingImage();
+          } else {
+            this.drawEndingImage();
+            this.moveImageSmoke();
+            this.moveEndingImage();
+          }
+        } else {
+          this.configSmoke[i].x -= 2;
+          if (this.configSmoke[i].width < this.laneWidth) {
+            this.configSmoke[i].width++;
+            this.configSmoke[i].height++;
+            this.configSmoke[i].y = canvasTools.center(this.configCar).y;
+            this.configSmoke[i].y = canvasTools.corner(this.configSmoke[i]).y;
+          } else if (this.configSmoke[i].opacity > 0) {
+            this.configSmoke[i].opacity -= 0.05;
+          } else {
+            this.configSmoke[i].visible = false;
+          }
         }
       }
+    },
+    drawEndingImage() {
+      const img = new window.Image();
+      img.src = getGameAssets(this.ID, this.GameData.EndingImage);
+      this.configEndingImage = {
+        image: img,
+      };
+    },
+    moveImageSmoke() {
+      let center = {
+        x: this.gameWidth * 0.5,
+        y: this.gameWidth * 0.25,
+      };
+      this.configSmoke[3].x +=
+        canvasTools.unitVector(canvasTools.center(this.configSmoke[3]), center).x * 5;
+      this.configSmoke[3].y +=
+        canvasTools.unitVector(canvasTools.center(this.configSmoke[3]), center).y * 5;
+      if (this.configSmoke[3].height <= this.gameWidth * 0.5)
+        this.configSmoke[3].height += 3;
+      if (this.configSmoke[3].width <= this.gameWidth) this.configSmoke[3].width += 6;
+      else
+        setTimeout(() => {
+          this.$emit("next-question");
+        }, 2000);
+    },
+    moveEndingImage() {
+      this.configEndingImage.x = canvasTools.center(this.configSmoke[3]).x;
+      this.configEndingImage.y = canvasTools.center(this.configSmoke[3]).y;
+      if (this.configEndingImage.image.height * 2 > this.configEndingImage.image.width) {
+        this.configEndingImage.height = this.configSmoke[3].height * 0.75;
+        this.configEndingImage.width =
+          (this.configEndingImage.height * this.configEndingImage.image.width) /
+          this.configEndingImage.image.height;
+      } else {
+        this.configEndingImage.width = this.configSmoke[3].width * 0.75;
+        this.configEndingImage.height =
+          (this.configEndingImage.width * this.configEndingImage.image.height) /
+          this.configEndingImage.image.width;
+      }
+      this.configEndingImage.x = canvasTools.corner(this.configEndingImage).x;
+      this.configEndingImage.y = canvasTools.corner(this.configEndingImage).y;
     },
   },
 };
