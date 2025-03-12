@@ -20,6 +20,10 @@
           <v-rect v-for="(box, index) in configTextBox" :key="index" :config="box" />
           <v-text v-for="(option, index) in configOption" :key="index" :config="option" />
         </v-layer>
+        <v-layer>
+          <v-image v-for="(smoke, index) in configSmoke" :key="index" :config="smoke" />
+          <v-image :config="configEndingImage" />
+        </v-layer>
       </v-stage>
     </div>
     <div id="btnContainer">
@@ -62,6 +66,8 @@ export default {
       configOption: [],
       configTextBox: [],
       configCar: {},
+      configEndingImage: {},
+      configSmoke: [],
 
       speed: 1,
       canMove: true,
@@ -77,7 +83,7 @@ export default {
   mounted() {
     this.initializeScene();
     window.addEventListener("keydown", this.input);
-    this.moveRoad();
+    requestAnimationFrame(this.moveRoad);
   },
 
   methods: {
@@ -202,8 +208,8 @@ export default {
             this.configRoad[0],
             this.textBoxOffset
           ).x;
+        requestAnimationFrame(this.moveRoad);
       }
-      requestAnimationFrame(this.moveRoad);
     },
     moveCar() {
       switch (this.movement) {
@@ -265,7 +271,7 @@ export default {
             else {
               this.movement = "up";
               this.canMove = false;
-              this.moveCar();
+              requestAnimationFrame(this.moveCar);
             }
             break;
           case "down":
@@ -275,7 +281,7 @@ export default {
             else {
               this.movement = "down";
               this.canMove = false;
-              this.moveCar();
+              requestAnimationFrame(this.moveCar);
             }
             break;
           case "right":
@@ -294,7 +300,9 @@ export default {
           this.options[this.currentOptionId],
           "正確",
         ]);
-        this.$emit("next-question");
+        this.drawSmoke();
+        this.endingFrameCount = 0;
+        requestAnimationFrame(this.endingAnimation);
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
@@ -310,6 +318,43 @@ export default {
       this.roadX = 0;
       this.speed = 1;
       this.canMove = true;
+    },
+    endingAnimation() {
+      if (this.configCar.x > this.gameWidth) {
+        this.$emit("next-question");
+      } else {
+        this.configCar.x += this.speed;
+        this.moveSmoke();
+        requestAnimationFrame(this.endingAnimation);
+      }
+      this.endingFrameCount++;
+      if (this.endingFrameCount % 20 == 0) this.drawSmoke();
+    },
+    drawSmoke() {
+      const smokeImg = new window.Image();
+      smokeImg.src = getGameStaticAssets("RacingCar", "smoke.png");
+      let smoke = {
+        x: canvasTools.center(this.configCar).x,
+        y: canvasTools.center(this.configCar).y,
+        height: this.laneWidth * 0.1,
+        width: this.laneWidth * 0.1,
+        image: smokeImg,
+        visible: true,
+      };
+      smoke.x = canvasTools.corner(smoke).x;
+      smoke.y = canvasTools.corner(smoke).y;
+      this.configSmoke.push(smoke);
+    },
+    moveSmoke() {
+      for (let i in this.configSmoke) {
+        this.configSmoke[i].x -= 2;
+        if (this.configSmoke[i].width < this.laneWidth) {
+          this.configSmoke[i].width++;
+          this.configSmoke[i].height++;
+          this.configSmoke[i].y = canvasTools.center(this.configCar).y;
+          this.configSmoke[i].y = canvasTools.corner(this.configSmoke[i]).y;
+        }
+      }
     },
   },
 };
