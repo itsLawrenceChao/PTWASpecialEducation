@@ -33,8 +33,9 @@ export default {
   },
   computed: {
     gridStyle() {
+      const effectiveColumns = Math.min(this.columns, this.count);
       return {
-        gridTemplateColumns: `repeat(${this.columns}, 1fr)`,
+        gridTemplateColumns: `repeat(${effectiveColumns}, 1fr)`,
       };
     },
   },
