@@ -1,12 +1,5 @@
 <template>
-  <div ref="container">
-    <h2>{{ GameData.Question }}</h2>
-    <v-stage :config="configKonva">
-      <v-layer>
-        <v-rect :config="configBG"></v-rect>
-      </v-layer>
-    </v-stage>
-  </div>
+  <div ref="container" class="container"></div>
 </template>
 
 <script>
@@ -25,34 +18,28 @@ export default {
       type: Object,
       required: true,
     },
+    ID: {
+      type: String,
+      required: true,
+    },
   },
 
   emits: ["play-effect", "add-record", "next-question"],
 
   data() {
-    return {
-      configKonva: {},
-      configBG: {
-        x: 0,
-        y: 0,
-        fill: "gray",
-        stroke: "gray",
-      },
-    };
+    return {};
   },
 
-  mounted() {
-    this.initializeScene();
-  },
+  mounted() {},
 
-  methods: {
-    initializeScene() {
-      this.gameWidth = this.$refs.container.clientWidth;
-      this.configKonva.width = this.gameWidth;
-      this.configKonva.height = this.gameWidth / 2;
-      this.configBG.width = this.gameWidth;
-      this.configBG.height = this.gameWidth / 2;
-    },
-  },
+  methods: {},
 };
 </script>
+
+<style lang="css" scoped>
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: gray;
+}
+</style>
