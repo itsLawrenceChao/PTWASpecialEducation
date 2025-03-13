@@ -131,6 +131,206 @@
                             }
                         ]
                     ]
+                },
+                {
+                    "Title": {
+                        "Type":"TextOnly",
+                        "Data":{
+                            "Text": "漢堡系列"
+                        }
+                    },
+                    "Elements":[
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"培根漢堡.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "培根漢堡"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "30元"
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"起司漢堡.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "起司漢堡"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "25元"
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"豬排漢堡.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "豬排漢堡"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "35元"
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"牛肉漢堡.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "牛肉漢堡"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "40元"
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"雙層牛肉漢堡.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "雙層牛肉漢堡"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "50元"
+                                }
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "Title": {
+                        "Type":"TextOnly",
+                        "Data":{
+                            "Text": "飲料系列"
+                        }
+                    },
+                    "Elements":[
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"紅茶.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "紅茶"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "15元"
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"豆漿.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "豆漿"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "15元"
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"奶茶.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "奶茶"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "20元"
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "Type":"ImageContainer",
+                                "Data":{
+                                    "Src":"阿華田.jpg"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "阿華田"
+                                }
+                            },
+                            {
+                                "Type":"TextOnly",
+                                "Data":{
+                                    "Text": "25元"
+                                }
+                            }
+                        ]
+                    ]
                 }
             ]
         },

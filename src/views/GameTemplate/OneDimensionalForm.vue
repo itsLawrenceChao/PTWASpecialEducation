@@ -84,8 +84,8 @@ export default {
 }
 .column {
   flex: 1;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 5px;
+  padding-right: 5px;
   display: block;
   justify-items: center;
 }
@@ -100,6 +100,6 @@ export default {
   grid-auto-rows: 20%;
   gap: 5px;
   height: 80%;
-  width: fit-content;
+  width: 100%;
 }
 </style>
