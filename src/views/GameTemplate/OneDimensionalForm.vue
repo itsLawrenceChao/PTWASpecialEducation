@@ -100,6 +100,6 @@ export default {
   grid-auto-rows: 20%;
   gap: 5px;
   height: 80%;
-  width: 100%;
+  width: fit-content;
 }
 </style>
