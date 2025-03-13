@@ -1,15 +1,21 @@
 <template>
   <div ref="container" class="container">
-    <div class="title">FORM TITLE</div>
+    <div class="title">
+      <component
+        :is="GameData.FormTitle.Type"
+        :Data="{ Text: GameData.FormTitle.Content, Size: 'large' }"
+        :ID="ID"
+      />
+    </div>
     <div class="form">
-      <div class="column">
-        <div class="title">TITLE</div>
-        <div class="formElements">
-          <div v-for="i in 6" :key="i - 1">{{ i }}</div>
+      <div v-for="(column, index) in GameData.Form" :key="index" class="column">
+        <div class="title">
+          <component
+            :is="column.Title.Type"
+            :Data="{ Text: column.Title.Content }"
+            :ID="ID"
+          />
         </div>
-      </div>
-      <div class="column">
-        <div class="title">TITLE</div>
         <div class="formElements">
           <div v-for="i in 6" :key="i - 1">{{ i }}</div>
         </div>
@@ -20,10 +26,12 @@
 
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
-import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
 export default {
-  components: {},
+  components: {
+    TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
+    ImageContainer: defineAsyncComponent(() => import("@/components/ImageContainer.vue")),
+  },
 
   props: {
     GameData: {
@@ -56,14 +64,12 @@ export default {
 .container {
   height: 100%;
   width: 100%;
-  background-color: gray;
-  font-size: 2rem;
 }
 .form {
   height: 50%;
   width: 100%;
-  background-color: white;
   display: flex;
+  background-color: lightblue;
 }
 .column {
   flex: 1;
@@ -71,8 +77,8 @@ export default {
   padding-right: 5%;
 }
 .title {
-  text-align: center;
-  width: 100%;
+  padding: 10px;
+  background-color: lightblue;
 }
 .formElements {
   font-size: 2rem;
