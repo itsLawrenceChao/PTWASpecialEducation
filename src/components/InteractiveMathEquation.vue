@@ -29,6 +29,7 @@
             type="text"
             class="interactive-equation__input"
             @touchstart="handleInputClick(index, $event)"
+            @input="validateAnswers()"
           />
         </template>
         <span v-else class="interactive-equation__text">{{ item.value }}</span>
@@ -49,6 +50,7 @@
           type="text"
           class="interactive-equation__input"
           @touchstart="handleFinalAnswerClick($event, index)"
+          @input="validateAnswers()"
         />
         <span v-else class="interactive-equation__text">{{ item.value }}</span>
       </template>
