@@ -1,23 +1,17 @@
 <template>
   <div ref="container" class="container">
     <div class="title">
-      <component
-        :is="GameData.FormTitle.Type"
-        :Data="{ Text: GameData.FormTitle.Content, Size: 'large' }"
-        :ID="ID"
-      />
+      <component :is="GameData.FormTitle.Type" :Data="GameData.FormTitle.Data" :ID="ID" />
     </div>
     <div class="form">
       <div v-for="(column, index) in GameData.Form" :key="index" class="column">
         <div class="title">
-          <component
-            :is="column.Title.Type"
-            :Data="{ Text: column.Title.Content }"
-            :ID="ID"
-          />
+          <component :is="column.Title.Type" :Data="column.Title.Data" :ID="ID" />
         </div>
         <div class="formElements">
-          <div v-for="i in 6" :key="i - 1">{{ i }}</div>
+          <div v-for="(element, elementIndex) in formData[index]" :key="elementIndex">
+            <component :is="element.Type" :Data="element.Data" :ID="ID" />
+          </div>
         </div>
       </div>
     </div>
@@ -51,12 +45,29 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
 
   data() {
-    return {};
+    return {
+      formData: [],
+      formStyle: [],
+    };
   },
 
-  mounted() {},
+  mounted() {
+    this.setFormContent();
+    this.setFormStyle();
+  },
 
-  methods: {},
+  methods: {
+    setFormContent() {
+      for (let column in this.GameData.Form) {
+        let columnData = [];
+        for (let row in this.GameData.Form[column].Elements) {
+          columnData = columnData.concat(this.GameData.Form[column].Elements[row]);
+        }
+        this.formData.push(columnData);
+      }
+    },
+    setFormStyle() {},
+  },
 };
 </script>
 
@@ -75,15 +86,20 @@ export default {
   flex: 1;
   padding-left: 5%;
   padding-right: 5%;
+  display: block;
+  justify-items: center;
 }
 .title {
-  padding: 10px;
+  padding: 5px;
   background-color: lightblue;
 }
 .formElements {
   font-size: 2rem;
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 2%;
+  grid-template-columns: repeat(3, fit-content(100%));
+  grid-auto-rows: 20%;
+  gap: 5px;
+  height: 80%;
+  width: fit-content;
 }
 </style>
