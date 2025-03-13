@@ -16,83 +16,118 @@
         {
             "FormTitle": {
                 "Type":"TextOnly",
-                "Content":"價目表"
+                "Data":{
+                    "Text": "價目表",
+                    "Size": "large"
+                }
             },
             "Form":[
                 {
                     "Title": {
                         "Type":"TextOnly",
-                        "Content":"吐司系列"
+                        "Data":{
+                            "Text": "吐司系列"
+                        }
                     },
                     "Elements":[
                         [
                             {
                                 "Type":"ImageContainer",
-                                "Src":"草莓吐司.jpg"
+                                "Data":{
+                                    "Src":"草莓吐司.jpg"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"草莓吐司"
+                                "Data":{
+                                    "Text": "草莓吐司"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"15元"
+                                "Data":{
+                                    "Text": "草莓吐司"
+                                }
                             }
                         ],
                         [
                             {
                                 "Type":"ImageContainer",
-                                "Src":"巧克力吐司.jpg"
+                                "Data":{
+                                    "Src":"巧克力吐司.jpg"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"巧克力吐司"
+                                "Data":{
+                                    "Text": "巧克力吐司"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"15元"
+                                "Data":{
+                                    "Text": "15元"
+                                }
                             }
                         ],
                         [
                             {
                                 "Type":"ImageContainer",
-                                "Src":"火腿蛋吐司.jpg"
+                                "Data":{
+                                    "Src":"火腿蛋吐司.jpg"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"火腿蛋吐司"
+                                "Data":{
+                                    "Text": "火腿蛋吐司"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"35元"
+                                "Data":{
+                                    "Text": "35元"
+                                }
                             }
                         ],
                         [
                             {
                                 "Type":"ImageContainer",
-                                "Src":"鮪魚蛋吐司.jpg"
+                                "Data":{
+                                    "Src":"鮪魚蛋吐司.jpg"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"鮪魚蛋吐司"
+                                "Data":{
+                                    "Text": "鮪魚蛋吐司"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"40元"
+                                "Data":{
+                                    "Text": "40元"
+                                }
                             }
                         ],
                         [
                             {
                                 "Type":"ImageContainer",
-                                "Src":"卡拉雞吐司.jpg"
+                                "Data":{
+                                    "Src":"卡拉雞吐司.jpg"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"卡拉雞吐司"
+                                "Data":{
+                                    "Text": "卡拉雞吐司"
+                                }
                             },
                             {
                                 "Type":"TextOnly",
-                                "Content":"45元"
+                                "Data":{
+                                    "Text": "45元"
+                                }
                             }
                         ]
                     ]
