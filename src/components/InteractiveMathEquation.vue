@@ -163,8 +163,8 @@ export default {
     updateNumPadPosition(targetElement) {
       const rect = targetElement.getBoundingClientRect();
       this.numPadPosition = {
-        top: `${rect.bottom + window.scrollY + this.numPadOffset}px`,
-        left: `${rect.left + window.scrollX}px`,
+        top: `${rect.top + window.scrollY + this.numPadOffset}px`,
+        left: `${rect.right + window.scrollX}px`,
       };
     },
 
