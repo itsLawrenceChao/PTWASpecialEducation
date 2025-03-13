@@ -237,6 +237,9 @@ export default {
     FindPattern: defineAsyncComponent(() =>
       import("@/views/GameTemplate/FindPattern.vue")
     ),
+    OneDimensionalForm: defineAsyncComponent(() =>
+      import("@/views/GameTemplate/OneDimensionalForm.vue")
+    ),
   },
   data() {
     return {
