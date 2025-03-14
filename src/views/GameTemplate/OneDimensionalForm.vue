@@ -1,11 +1,11 @@
 <template>
   <div ref="container" class="container">
-    <div class="title">
+    <div v-if="GameData.FormTitle" class="title">
       <component :is="GameData.FormTitle.Type" :Data="GameData.FormTitle.Data" :ID="ID" />
     </div>
     <div class="form">
       <div v-for="(column, index) in GameData.Form" :key="index" class="column">
-        <div class="title">
+        <div v-if="column.Title" class="title">
           <component :is="column.Title.Type" :Data="column.Title.Data" :ID="ID" />
         </div>
         <div class="formElements" :style="formStyle[index]">
