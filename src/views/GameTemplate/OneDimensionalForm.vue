@@ -8,7 +8,7 @@
         <div class="title">
           <component :is="column.Title.Type" :Data="column.Title.Data" :ID="ID" />
         </div>
-        <div class="formElements">
+        <div class="formElements" :style="formStyle[index]">
           <div v-for="(element, elementIndex) in formData[index]" :key="elementIndex">
             <component :is="element.Type" :Data="element.Data" :ID="ID" />
           </div>
@@ -66,7 +66,26 @@ export default {
         this.formData.push(columnData);
       }
     },
-    setFormStyle() {},
+    setFormStyle() {
+      let rowHeight = this.setRowHeight();
+      for (let column in this.GameData.Form) {
+        let columnAmount = this.GameData.Form[column].Elements[0].length;
+        let formStyle = {
+          gridTemplateColumns: "repeat(" + columnAmount + ", fit-content(100%))",
+          gridAutoRows: rowHeight + "%",
+        };
+        this.formStyle.push(formStyle);
+      }
+    },
+    setRowHeight() {
+      let maxRow = 0;
+      for (let column in this.GameData.Form) {
+        if (this.GameData.Form[column].Elements.length > maxRow) {
+          maxRow = this.GameData.Form[column].Elements.length;
+        }
+      }
+      return 100 / maxRow;
+    },
   },
 };
 </script>
@@ -96,8 +115,6 @@ export default {
 .formElements {
   font-size: 2rem;
   display: grid;
-  grid-template-columns: repeat(3, fit-content(100%));
-  grid-auto-rows: 20%;
   gap: 5px;
   height: 80%;
   width: fit-content;
