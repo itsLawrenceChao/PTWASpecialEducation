@@ -35,7 +35,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"草莓吐司.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -55,7 +56,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"巧克力吐司.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -75,7 +77,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"火腿蛋吐司.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -95,7 +98,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"鮪魚蛋吐司.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -115,7 +119,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"卡拉雞吐司.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -145,7 +150,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"培根漢堡.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -165,7 +171,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"起司漢堡.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -185,7 +192,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"豬排漢堡.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -205,7 +213,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"牛肉漢堡.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -225,7 +234,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"雙層牛肉漢堡.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -255,7 +265,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"紅茶.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -275,7 +286,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"豆漿.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -295,7 +307,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"奶茶.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
@@ -315,7 +328,8 @@
                                 "Type":"ImageContainer",
                                 "Data":{
                                     "Src":"阿華田.jpg"
-                                }
+                                },
+                                "Draggable":true
                             },
                             {
                                 "Type":"TextOnly",
