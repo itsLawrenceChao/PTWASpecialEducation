@@ -20,13 +20,20 @@
           <div
             v-for="(element, elementIndex) in formData[index]"
             :key="elementIndex"
-            :draggable="element.Draggable"
-            @dragstart="handleDragStart($event, element, index, elementIndex)"
-            @dragend="handleDragEnd($event)"
-            @dragover.prevent
-            @drop="handleDrop($event, index, elementIndex)"
+            :style="getDragStyle(index, elementIndex)"
+            @mousedown="handleStart($event, index, elementIndex)"
+            @mousemove="handleMove"
+            @mouseup="handleEnd"
+            @touchstart.prevent="handleStart($event, index, elementIndex)"
+            @touchmove.prevent="handleMove"
+            @touchend="handleEnd"
           >
-            <component :is="element.Type" :Data="element.Data" :ID="ID" />
+            <component
+              :is="element.Type"
+              :Data="element.Data"
+              :ID="ID"
+              @copy.prevent
+            />
           </div>
         </div>
       </div>
@@ -67,6 +74,10 @@ export default {
       updateKey: 0,
       formData: [],
       formStyle: [],
+      selectedElement: null,
+      isDragging: false,
+      dragPosition: { x: 0, y: 0 },
+      startPosition: { x: 0, y: 0 },
     };
   },
 
@@ -109,35 +120,56 @@ export default {
       }
       return 100 / maxRow;
     },
-    handleDragStart(event, element, columnIndex, elementIndex) {
-      event.dataTransfer.effectAllowed = "move";
-      const dragElement = event.target;
-      event.dataTransfer.setDragImage(dragElement, 0, 0);
-      dragElement.classList.add("dragging");
-      event.dataTransfer.setData(
-        "text/plain",
-        JSON.stringify({
-          element,
-          columnIndex,
-          elementIndex,
-        })
-      );
+    handleStart(event, columnIndex, elementIndex) {
+      if (this.formData[columnIndex][elementIndex].Draggable) {
+        event.preventDefault();
+        this.isDragging = true;
+        this.selectedElement = { columnIndex, elementIndex };
+
+        let pos;
+        if (event.type === "touchstart") {
+          pos = event.touches[0];
+        } else {
+          pos = event;
+        }
+        this.startPosition = { x: pos.clientX, y: pos.clientY };
+        this.dragPosition = { x: 0, y: 0 };
+      }
     },
 
-    handleDragEnd(event) {
-      event.target.classList.remove("dragging");
+    handleMove(event) {
+      if (!this.isDragging) return;
+
+      let pos;
+      if (event.type === "touchmove") {
+        pos = event.touches[0];
+      } else {
+        pos = event;
+      }
+      this.dragPosition = {
+        x: pos.clientX - this.startPosition.x,
+        y: pos.clientY - this.startPosition.y,
+      };
     },
-    handleDrop(event, targetColumnIndex, targetElementIndex) {
-      const data = JSON.parse(event.dataTransfer.getData("text/plain"));
-      const {
-        columnIndex: sourceColumnIndex,
-        elementIndex: sourceElementIndex,
-      } = data;
-      const temp = this.formData[targetColumnIndex][targetElementIndex];
-      this.formData[targetColumnIndex][targetElementIndex] =
-        this.formData[sourceColumnIndex][sourceElementIndex];
-      this.formData[sourceColumnIndex][sourceElementIndex] = temp;
-      this.updateKey++;
+
+    handleEnd() {
+      this.isDragging = false;
+      this.selectedElement = null;
+      this.dragPosition = { x: 0, y: 0 };
+    },
+
+    getDragStyle(columnIndex, elementIndex) {
+      if (
+        this.selectedElement?.columnIndex === columnIndex &&
+        this.selectedElement?.elementIndex === elementIndex
+      ) {
+        return {
+          transform: `translate(${this.dragPosition.x}px, ${this.dragPosition.y}px)`,
+          transition: this.isDragging ? "none" : "transform 0.3s",
+          zIndex: this.isDragging ? "1" : "auto",
+        };
+      }
+      return {};
     },
   },
 };
