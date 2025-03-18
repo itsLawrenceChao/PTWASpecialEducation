@@ -59,6 +59,7 @@ export default {
       clickedTarget: null,
       clickedEvent: null,
       wrongInputIndex: [],
+      numPadOffset: 10,
     };
   },
   created() {
@@ -152,10 +153,11 @@ export default {
     showKeyboard(event, index) {
       this.clickedTarget = index;
       this.clickedEvent = event;
+      const inputRect = event.target.getBoundingClientRect();
       this.isShowNumPad = true;
       this.floatNumPadLocation = {
-        top: event.clientY,
-        left: event.clientX,
+        top: `${inputRect.top + window.scrollY + this.numPadOffset}px`,
+        left: `${inputRect.right + window.scrollX}px`,
       };
     },
     fillToInput(content) {
