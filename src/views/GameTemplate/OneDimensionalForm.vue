@@ -8,7 +8,7 @@
       />
     </div>
     <div :key="updateKey" class="form">
-      <div v-for="(column, index) in GameData.Form" :key="index" class="column">
+      <div v-for="(column, index) in formData" :key="index" class="column">
         <div v-if="column.Title" class="title">
           <component
             :is="column.Title.Type"
@@ -18,7 +18,7 @@
         </div>
         <div class="formElements" :style="formStyle[index]">
           <div
-            v-for="(element, elementIndex) in formData[index]"
+            v-for="(element, elementIndex) in formDataConcat[index]"
             :key="elementIndex"
             :style="getDragStyle(index, elementIndex)"
             @mousedown="handleStart($event, index, elementIndex)"
@@ -44,6 +44,7 @@
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import { defineAsyncComponent } from "vue";
+import fetchJson from "@/utilitys/fetch-json";
 export default {
   components: {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
@@ -73,6 +74,7 @@ export default {
     return {
       updateKey: 0,
       formData: [],
+      formDataConcat: [],
       formStyle: [],
       selectedElement: null,
       isDragging: false,
@@ -81,28 +83,31 @@ export default {
     };
   },
 
-  mounted() {
+  async mounted() {
+    this.formData = await fetchJson(
+      getGameAssets("Dev02_OneDimensionalForm", "Forms.json")
+    );
+    this.formData = this.formData.data.AllForms[this.GameData.Form];
     this.setFormContent();
     this.setFormStyle();
   },
 
   methods: {
     setFormContent() {
-      for (let column in this.GameData.Form) {
-        let columnData = [];
-        for (let row in this.GameData.Form[column].Elements) {
-          columnData = columnData.concat(
-            this.GameData.Form[column].Elements[row]
-          );
-        }
-        this.formData.push(columnData);
-      }
       console.log(this.formData);
+      for (let column in this.formData) {
+        let columnData = [];
+        for (let row in this.formData[column].Elements) {
+          columnData = columnData.concat(this.formData[column].Elements[row]);
+        }
+        this.formDataConcat.push(columnData);
+      }
+      console.log(this.formDataConcat);
     },
     setFormStyle() {
       let rowHeight = this.setRowHeight();
-      for (let column in this.GameData.Form) {
-        let columnAmount = this.GameData.Form[column].Elements[0].length;
+      for (let column in this.formData) {
+        let columnAmount = this.formData[column].Elements[0].length;
         let formStyle = {
           gridTemplateColumns:
             "repeat(" + columnAmount + ", fit-content(100%))",
@@ -110,18 +115,19 @@ export default {
         };
         this.formStyle.push(formStyle);
       }
+      console.log(this.formStyle);
     },
     setRowHeight() {
       let maxRow = 0;
-      for (let column in this.GameData.Form) {
-        if (this.GameData.Form[column].Elements.length > maxRow) {
-          maxRow = this.GameData.Form[column].Elements.length;
+      for (let column in this.formData) {
+        if (this.formData[column].Elements.length > maxRow) {
+          maxRow = this.formData[column].Elements.length;
         }
       }
       return 100 / maxRow;
     },
     handleStart(event, columnIndex, elementIndex) {
-      if (this.formData[columnIndex][elementIndex].Draggable) {
+      if (this.formDataConcat[columnIndex][elementIndex].Draggable) {
         event.preventDefault();
         this.isDragging = true;
         this.selectedElement = { columnIndex, elementIndex };
