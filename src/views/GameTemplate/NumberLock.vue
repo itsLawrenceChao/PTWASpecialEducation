@@ -70,6 +70,9 @@ export default {
     DragImages: defineAsyncComponent(
       () => import("@/components/DragImages.vue")
     ),
+    NumberBoard: defineAsyncComponent(
+      () => import("@/components/NumberBoard.vue")
+    ),
   },
   props: {
     GameData: {
