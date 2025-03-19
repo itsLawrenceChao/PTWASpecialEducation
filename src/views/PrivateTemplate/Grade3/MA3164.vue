@@ -90,8 +90,8 @@ export default {
       configBG: {
         x: 0,
         y: 0,
-        fill: "#D09F57",
-        stroke: "#D09F57",
+        fill: "#CBF3f0",
+        stroke: "#CBF3f0",
       },
       configRing: {
         stroke: "black",
