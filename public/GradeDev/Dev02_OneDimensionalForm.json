@@ -55,7 +55,34 @@
                     "Size": "large"
                 }
             },
-            "Form":"TainanMuseum"
+            "Form":"TainanMuseum",
+            "Questions":[
+                {
+                    "Text": "就讀台北市立國小三年級的樂樂和爸爸、媽媽去參觀，票價一共是多少元?",
+                    "Type":"NumberIncrementor",
+                    "Data":{
+                        "digitCount": 3,
+                        "answer": 500
+                    }
+                },
+                {
+                    "Text": "奶奶去台南市立美術館，不需要收費，請問奶奶是使用哪種票種?",
+                    "Type":"DefaultDragBox",
+                    "Data":{
+                        "answer": "設籍台南市65歲以上市民"
+                    }
+                },
+                {
+                    "Text": "高雄旅行社舉辦台南市立美術館一日遊的活動，有15人報名，一個人的票價是多少元? ",
+                    "Type":"NumberIncrementor",
+                    "Data":{
+                        "digitCount": 3,
+                        "answer": 150
+                    }
+                }
+            ]
+            
+            
         }
     ]
 }

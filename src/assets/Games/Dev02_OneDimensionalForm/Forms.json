@@ -348,7 +348,8 @@
                             "Type": "TextOnly",
                             "Data": {
                                 "Text": "一般民眾"
-                            }
+                            },
+                            "Draggable": true
                         },
                         {
                             "Type": "TextOnly",
@@ -362,7 +363,8 @@
                             "Type": "TextOnly",
                             "Data": {
                                 "Text": "10人以上團體"
-                            }
+                            },
+                            "Draggable": true
                         },
                         {
                             "Type": "TextOnly",
@@ -376,7 +378,8 @@
                             "Type": "TextOnly",
                             "Data": {
                                 "Text": "65以上長者"
-                            }
+                            },
+                            "Draggable": true
                         },
                         {
                             "Type": "TextOnly",
@@ -390,7 +393,8 @@
                             "Type": "TextOnly",
                             "Data": {
                                 "Text": "外縣市學生"
-                            }
+                            },
+                            "Draggable": true
                         },
                         {
                             "Type": "TextOnly",
@@ -404,7 +408,8 @@
                             "Type": "TextOnly",
                             "Data": {
                                 "Text": "設籍台南市市民"
-                            }
+                            },
+                            "Draggable": true
                         },
                         {
                             "Type": "TextOnly",
@@ -418,7 +423,8 @@
                             "Type": "TextOnly",
                             "Data": {
                                 "Text": "未滿7歲之嬰幼兒"
-                            }
+                            },
+                            "Draggable": true
                         },
                         {
                             "Type": "TextOnly",
@@ -432,7 +438,8 @@
                             "Type": "TextOnly",
                             "Data": {
                                 "Text": "設籍台南市65歲以上市民"
-                            }
+                            },
+                            "Draggable": true
                         },
                         {
                             "Type": "TextOnly",

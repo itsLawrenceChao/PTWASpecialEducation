@@ -42,7 +42,6 @@
       v-for="(question, index) in questionData"
       :key="index"
       class="question"
-      :style="questionStyle"
     >
       <div>{{ question.Text }}</div>
       <div class="questionContent">
@@ -98,7 +97,6 @@ export default {
       formDataConcat: [],
       formStyle: [],
       questionData: [],
-      questionStyle: {},
       selectedElement: null,
       isDragging: false,
       dragPosition: { x: 0, y: 0 },
@@ -147,10 +145,6 @@ export default {
         };
         this.formStyle.push(formStyle);
       }
-      this.questionStyle = {
-        height:
-          (this.$refs.container.clientHeight * 0.5 * rowHeight) / 100 + "px",
-      };
     },
     setRowHeight() {
       let maxRow = 0;
@@ -307,6 +301,7 @@ export default {
   width: fit-content;
 }
 .question {
+  height: 10%;
   font-size: 1.5rem;
   padding: 10px;
   align-items: center;
