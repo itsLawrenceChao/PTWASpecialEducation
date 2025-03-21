@@ -1,5 +1,5 @@
 <template>
-  <div ref="container" class="container">
+  <div :key="updateKey" ref="container" class="container">
     <div v-if="GameData.FormTitle" class="title">
       <component
         :is="GameData.FormTitle.Type"
@@ -7,7 +7,7 @@
         :ID="ID"
       />
     </div>
-    <div :key="updateKey" class="form">
+    <div class="form">
       <div v-for="(column, index) in formData" :key="index" class="column">
         <div v-if="column.Title" class="title">
           <component
@@ -38,6 +38,24 @@
         </div>
       </div>
     </div>
+    <div
+      v-for="(question, index) in questionData"
+      :key="index"
+      class="question"
+      :style="questionStyle"
+    >
+      <div>{{ question.Text }}</div>
+      <div class="questionContent">
+        <div v-if="question.Type == 'DefaultDragBox'" class="defaultDragBox" />
+        <component
+          :is="question.Type"
+          v-else
+          :Data="question.Data"
+          :ID="ID"
+          @replyAnswer="handleAnswer($event, index)"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -50,6 +68,9 @@ export default {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     ImageContainer: defineAsyncComponent(() =>
       import("@/components/ImageContainer.vue")
+    ),
+    NumberIncrementor: defineAsyncComponent(() =>
+      import("@/components/NumberIncrementor.vue")
     ),
   },
 
@@ -76,10 +97,13 @@ export default {
       formData: [],
       formDataConcat: [],
       formStyle: [],
+      questionData: [],
+      questionStyle: {},
       selectedElement: null,
       isDragging: false,
       dragPosition: { x: 0, y: 0 },
       startPosition: { x: 0, y: 0 },
+      answer: [],
     };
   },
 
@@ -90,11 +114,20 @@ export default {
     this.formData = this.formData.data.AllForms[this.GameData.Form];
     this.setFormContent();
     this.setFormStyle();
+    this.setQuestionData();
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.handleResize);
   },
 
   methods: {
+    handleResize() {
+      this.formStyle = [];
+      this.questionStyle = {};
+      this.setFormStyle();
+    },
     setFormContent() {
-      console.log(this.formData);
       for (let column in this.formData) {
         let columnData = [];
         for (let row in this.formData[column].Elements) {
@@ -102,7 +135,6 @@ export default {
         }
         this.formDataConcat.push(columnData);
       }
-      console.log(this.formDataConcat);
     },
     setFormStyle() {
       let rowHeight = this.setRowHeight();
@@ -115,7 +147,10 @@ export default {
         };
         this.formStyle.push(formStyle);
       }
-      console.log(this.formStyle);
+      this.questionStyle = {
+        height:
+          (this.$refs.container.clientHeight * 0.5 * rowHeight) / 100 + "px",
+      };
     },
     setRowHeight() {
       let maxRow = 0;
@@ -125,6 +160,15 @@ export default {
         }
       }
       return 100 / maxRow;
+    },
+    setQuestionData() {
+      for (let question of this.GameData.Questions) {
+        this.questionData.push({
+          Text: question.Text,
+          Type: question.Type,
+          Data: question.Data,
+        });
+      }
     },
     handleStart(event, columnIndex, elementIndex) {
       if (this.formDataConcat[columnIndex][elementIndex].Draggable) {
@@ -158,10 +202,37 @@ export default {
       };
     },
 
-    handleEnd() {
+    handleEnd(event) {
+      if (!this.isDragging) return;
+
+      const dragBoxes = document.querySelectorAll(".questionContent");
+
+      const draggedElement = event.target;
+      const draggedRect = draggedElement.getBoundingClientRect();
+
+      for (let boxIndex = 0; boxIndex < dragBoxes.length; boxIndex++) {
+        if (this.GameData.Questions[boxIndex].Type == "DefaultDragBox") {
+          const box = dragBoxes[boxIndex];
+          const boxRect = box.getBoundingClientRect();
+          if (this.isOverlapping(draggedRect, boxRect)) {
+            this.handleDragBox(boxIndex);
+            break;
+          }
+        }
+      }
+
       this.isDragging = false;
       this.selectedElement = null;
       this.dragPosition = { x: 0, y: 0 };
+    },
+
+    isOverlapping(rect1, rect2) {
+      return !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+      );
     },
 
     getDragStyle(columnIndex, elementIndex) {
@@ -177,6 +248,30 @@ export default {
       }
       return {};
     },
+    handleAnswer(event, index) {
+      this.answer[index] = event;
+    },
+    handleDragBox(index) {
+      const draggedElement =
+        this.formDataConcat[this.selectedElement.columnIndex][
+          this.selectedElement.elementIndex
+        ];
+      this.questionData[index].Type = draggedElement.Type;
+      this.questionData[index].Data = draggedElement.Data;
+      this.updateKey++;
+      switch (this.questionData[index].Type) {
+        case "ImageContainer":
+          this.answer[index] =
+            draggedElement.Data.Src ==
+            this.GameData.Questions[index].Data.answer;
+          break;
+        case "TextOnly":
+          this.answer[index] =
+            draggedElement.Data.Text ==
+            this.GameData.Questions[index].Data.answer;
+          break;
+      }
+    },
   },
 };
 </script>
@@ -191,6 +286,7 @@ export default {
   width: 100%;
   display: flex;
   background-color: lightblue;
+  padding-bottom: 10px;
 }
 .column {
   flex: 1;
@@ -209,5 +305,23 @@ export default {
   gap: 5px;
   height: 80%;
   width: fit-content;
+}
+.question {
+  font-size: 1.5rem;
+  padding: 10px;
+  align-items: center;
+  display: flex;
+}
+.questionContent {
+  height: 100%;
+  width: fit-content;
+  margin-left: 5px;
+}
+.defaultDragBox {
+  height: 100%;
+  aspect-ratio: 1/1;
+  border: 2px solid black;
+  align-items: center;
+  display: flex;
 }
 </style>

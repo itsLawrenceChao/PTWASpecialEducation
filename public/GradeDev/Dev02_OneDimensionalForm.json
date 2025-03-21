@@ -21,7 +21,31 @@
                     "Size": "large"
                 }
             },
-            "Form":"BreakfastShop"
+            "Form":"BreakfastShop",
+            "Questions":[
+                {
+                    "Text": "1. 漢堡系列中，哪一種最貴?",
+                    "Type":"DefaultDragBox",
+                    "Data":{
+                        "answer": "雙層牛肉漢堡.jpg"
+                    }
+                },
+                {
+                    "Text": "2. 哪一種餐點價格和鮪魚蛋吐司一樣?",
+                    "Type":"DefaultDragBox",
+                    "Data":{
+                        "answer": "牛肉漢堡.jpg"
+                    }
+                },
+                {
+                    "Text": "3. 阿美想要買一份豬排漢堡和一杯阿華田，一共要付多少錢呢?",
+                    "Type":"NumberIncrementor",
+                    "Data":{
+                        "digitCount": 2,
+                        "answer": 60
+                    }
+                }
+            ]
         },
         {
             "FormTitle": {
