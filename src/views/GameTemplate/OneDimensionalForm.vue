@@ -1,5 +1,5 @@
 <template>
-  <div :key="updateKey" ref="container" class="container">
+  <div ref="container" class="container">
     <div v-if="GameData.FormTitle" class="title">
       <component
         :is="GameData.FormTitle.Type"
@@ -7,7 +7,7 @@
         :ID="ID"
       />
     </div>
-    <div class="form">
+    <div :key="updateKey" class="form">
       <div v-for="(column, index) in formData" :key="index" class="column">
         <div v-if="column.Title" class="title">
           <component
@@ -55,6 +55,7 @@
         />
       </div>
     </div>
+    <button class="submitBtn" @click="checkAnswer">提交答案</button>
   </div>
 </template>
 
@@ -266,6 +267,22 @@ export default {
           break;
       }
     },
+    checkAnswer() {
+      let isCorrect = true;
+      for (let i = 0; i < this.questionData.length; i++) {
+        if (!this.answer[i]) {
+          isCorrect = false;
+        }
+      }
+      if (isCorrect) {
+        this.$emit("play-effect", "CorrectSound");
+        this.$emit("add-record", ["不支援顯示", "不支援顯示", "正確"]);
+        this.$emit("next-question");
+      } else {
+        this.$emit("play-effect", "WrongSound");
+        this.$emit("add-record", ["不支援顯示", "不支援顯示", "錯誤"]);
+      }
+    },
   },
 };
 </script>
@@ -318,5 +335,16 @@ export default {
   border: 2px solid black;
   align-items: center;
   display: flex;
+}
+.submitBtn {
+  font-size: 1.5rem;
+  border: none;
+  background-color: lightgray;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  &:hover {
+    background-color: darken(lightgray, 10%);
+  }
 }
 </style>
