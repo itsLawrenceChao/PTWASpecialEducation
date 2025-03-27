@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { getSystemAssets } from "@/utilitys/get_assets.js";
+import { getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
 
@@ -71,11 +71,17 @@ export default {
       offsets: {},
 
       startId: 0,
+      correctCount: 0,
+      requiredCorrect: null,
+      allOptions: [],
+      trueOptions: [],
     };
   },
   mounted() {
     this.initializeScene();
     this.initializeOption();
+    this.requiredCorrect =
+      this.GameData.requiredCorrect || this.trueOptions.length;
     this.game = window.setInterval(this.update, 20);
   },
 
@@ -135,7 +141,7 @@ export default {
     drawBG() {
       this.configBG.image = this.images.bg;
       this.configBG.width = this.gameWidth;
-      this.configBG.height = this.gameWidth;
+      this.configBG.height = this.gameHeight;
     },
     spawnMole() {
       let id = this.configObjects.position.length;
@@ -346,6 +352,10 @@ export default {
         this.trueOptions = this.trueOptions.filter(
           (option) => option != this.configObjects.option[id].text
         );
+        this.correctCount++;
+        if (this.correctCount >= this.requiredCorrect) {
+          this.$emit("next-question");
+        }
       } else if (this.configObjects.option[id].text == null) {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
@@ -361,7 +371,6 @@ export default {
           "錯誤",
         ]);
       }
-      if (this.trueOptions.length == 0) this.$emit("next-question");
     },
     printCorrectAnswers() {
       return this.GameData.Question.concat(":", this.GameData.True.join("/"));

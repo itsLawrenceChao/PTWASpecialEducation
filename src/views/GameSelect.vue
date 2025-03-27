@@ -84,7 +84,7 @@
             </button>
           </template>
         </div>
-        <p class="sidebar__title">章節</p>
+        <p class="sidebar__title">單元</p>
         <div v-if="showInfo" class="sidebar__button-group">
           <template v-for="(items, key) in currentSemesterChapters" :key="key">
             <button class="sidebar__button" @click="selectChapter(key)">

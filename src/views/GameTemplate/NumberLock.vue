@@ -49,23 +49,29 @@ export default {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     Fractions: defineAsyncComponent(() => import("@/components/Fractions.vue")),
     Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
-    NumberLine: defineAsyncComponent(() =>
-      import("@/components/NumberLine.vue")
+    NumberLine: defineAsyncComponent(
+      () => import("@/components/NumberLine.vue")
     ),
-    NumberLineWithBlank: defineAsyncComponent(() =>
-      import("@/components/NumberLineWithBlank.vue")
+    NumberLineWithBlank: defineAsyncComponent(
+      () => import("@/components/NumberLineWithBlank.vue")
     ),
-    DragOnNumberLine: defineAsyncComponent(() =>
-      import("@/components/DragOnNumberLine.vue")
+    DragOnNumberLine: defineAsyncComponent(
+      () => import("@/components/DragOnNumberLine.vue")
     ),
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
-    InteractiveMathEquation: defineAsyncComponent(() =>
-      import("@/components/InteractiveMathEquation.vue")
+    InteractiveMathEquation: defineAsyncComponent(
+      () => import("@/components/InteractiveMathEquation.vue")
     ),
-    RepeatImage: defineAsyncComponent(() =>
-      import("@/components/RepeatImage.vue")
+    RepeatImage: defineAsyncComponent(
+      () => import("@/components/RepeatImage.vue")
+    ),
+    DragImages: defineAsyncComponent(
+      () => import("@/components/DragImages.vue")
+    ),
+    NumberBoard: defineAsyncComponent(
+      () => import("@/components/NumberBoard.vue")
     ),
     FractionForAnswer: defineAsyncComponent(
       () => import("@/components/FractionForAnswer.vue")
@@ -266,27 +272,39 @@ export default {
   padding: 10px;
   border-radius: 10px;
   border: solid;
-  max-height: 80vh;
+  max-height: 78vh;
 }
 .left-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: $gap--small;
+  max-height: 100%;
+  overflow-y: auto;
 
   .text-area {
+    flex-shrink: 0;
     padding: $gap--tiny;
     background-color: #dfdfdf;
     border-radius: $border-radius;
     font-size: $text-medium;
   }
   .game-area {
-    max-height: 40vh;
+    min-height: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: $border-radius;
     background-color: #f0f0f0;
+
+    &--top {
+      flex-shrink: 0;
+    }
+
+    &--down {
+      flex: 1;
+      min-height: 0;
+    }
   }
 }
 .right-column {
