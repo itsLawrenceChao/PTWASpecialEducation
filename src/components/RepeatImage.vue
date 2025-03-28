@@ -28,15 +28,38 @@ export default {
     return {
       count: this.Data.Count,
       imageUrl: getGameAssets(this.ID, this.Data.Src),
-      columns: this.Data.Columns || 8,
+      columns: 0,
     };
   },
   computed: {
     gridStyle() {
-      const effectiveColumns = Math.min(this.columns, this.count);
+      const columns = this.calculateColumns();
+      const effectiveColumns = Math.min(columns, this.count);
       return {
         gridTemplateColumns: `repeat(${effectiveColumns}, 1fr)`,
       };
+    },
+  },
+  beforeMount() {
+    try {
+      this.columns = this.calculateColumns();
+      console.log(this.columns);
+    } catch (error) {
+      console.error("計算列數時發生錯誤：", error);
+      this.columns = 6;
+    }
+  },
+  methods: {
+    calculateColumns() {
+      if (this.Data.Columns) {
+        return this.Data.Columns;
+      }
+      for (let i = 1; i <= 7; i++) {
+        if (this.count / i <= 7) {
+          return Math.ceil(this.count / i);
+        }
+      }
+      return 7;
     },
   },
 };
