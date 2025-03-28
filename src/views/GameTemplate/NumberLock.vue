@@ -266,7 +266,7 @@ export default {
   padding: 10px;
   border-radius: 10px;
   border: solid;
-  max-height: 80vh;
+  max-height: 79vh;
 }
 .left-column {
   display: flex;
@@ -281,7 +281,7 @@ export default {
     font-size: $text-medium;
   }
   .game-area {
-    max-height: 40vh;
+    max-height: 39vh;
     display: flex;
     justify-content: center;
     align-items: center;
