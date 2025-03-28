@@ -45,7 +45,7 @@ export default {
       this.columns = this.calculateColumns();
       console.log(this.columns);
     } catch (error) {
-      console.error("計算列數時發生錯誤：", error);
+      console.warn("計算列數時發生錯誤：", error);
       this.columns = 6;
     }
   },
