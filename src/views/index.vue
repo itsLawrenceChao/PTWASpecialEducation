@@ -2,16 +2,14 @@
   <div class="index-container">
     <NavBar />
     <div ref="gradeContainer" class="grade-container">
-      <p class="title">
-        請選擇年級
-      </p>
+      <p class="title">請選擇年級</p>
       <div class="grade-select-menu">
         <div v-for="(card, index) in imgSrcs" class="grad-card-container">
           <router-link
             :to="{ name: 'GameSelect', params: { id: index + 1 } }"
             class="submenu-link-block"
           >
-            <img :src="card" class="img-fluid" alt="一年遊戲">
+            <img :src="card" class="img-fluid" alt="一年遊戲" />
           </router-link>
         </div>
       </div>
@@ -19,7 +17,9 @@
     <footer class="" style="background-color: #f19c79">
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2024 版權所有:
-        <a class="text-white" href="https://programtheworld.tw/">programtheworld.tw</a>
+        <a class="text-white" href="https://programtheworld.tw/">
+          programtheworld.tw
+        </a>
       </div>
     </footer>
   </div>
