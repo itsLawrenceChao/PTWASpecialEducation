@@ -22,7 +22,7 @@
       <div id="navbarText" class="collapse navbar-collapse mx-3">
         <div
           class="container sticky-top d-flex justify-content-end"
-          style="--bs-breadcrumb-divider: '>'"
+          :style="{ '--bs-breadcrumb-divider': '>' }"
         >
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item">
