@@ -468,7 +468,7 @@ header {
   -moz-user-select: none !important;
   -ms-user-select: none !important;
   .game-select__nav {
-    background-color: #cb9fcf;
+    background-color: #f4c49f;
     height: 10vh !important;
     padding: 0 2rem;
     display: grid;
@@ -498,11 +498,10 @@ header {
         max-width: 9rem;
         height: 3rem;
         border-radius: $border-radius;
-        background-color: #bdb2ff;
+        background-color: #f4fc93;
         border: none;
         &--active {
-          background-color: #9f86ff;
-          color: white;
+          background-color: #d4e700;
         }
       }
     }
@@ -527,7 +526,7 @@ header {
         height: 3rem;
         padding: 10px 1rem;
         border-radius: $border-radius;
-        background-color: #bdb2ff;
+        background-color: #f4fc93;
         border: none;
       }
     }
@@ -617,7 +616,7 @@ header {
   display: flex;
   flex-direction: column;
   height: 90vh;
-  background-color: #ddd;
+  background-color: #dfedb3;
   padding: 0 0.7rem;
   &__title {
     font-size: 1.5em;
@@ -630,15 +629,14 @@ header {
   &__button {
     transition: transform 0.3s ease;
     font-size: 1rem;
-    background-color: #feece9;
+    background-color: #f8fbe8;
     color: #333;
     @extend .button-border;
     width: 100%;
     font-weight: 600;
     height: 2.6rem;
     &--semester-active {
-      background-color: #4caf50; // 綠色
-      color: white;
+      background-color: #a8c2ea;
     }
   }
 }
