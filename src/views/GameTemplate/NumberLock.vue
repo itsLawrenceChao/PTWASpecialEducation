@@ -73,6 +73,9 @@ export default {
     NumberBoard: defineAsyncComponent(
       () => import("@/components/NumberBoard.vue")
     ),
+    FractionForAnswer: defineAsyncComponent(
+      () => import("@/components/FractionForAnswer.vue")
+    ),
   },
   props: {
     GameData: {

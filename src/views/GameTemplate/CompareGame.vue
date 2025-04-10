@@ -103,11 +103,11 @@ export default {
   name: "CompareGame",
   components: {
     draggable,
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
-    ImageWithText: defineAsyncComponent(() =>
-      import("@/components/ImageWithText.vue")
+    ImageWithText: defineAsyncComponent(
+      () => import("@/components/ImageWithText.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     CoulorBarChart: GetComponents("CoulorBarChart"),
@@ -115,6 +115,7 @@ export default {
     ImageTable: GetComponents("ImageTable"),
     DrawImage: GetComponents("DrawImage"),
     NumberBoard: GetComponents("NumberBoard"),
+    FractionDisplay: GetComponents("FractionDisplay"),
   },
   props: {
     GameData: {
