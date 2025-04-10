@@ -22,7 +22,11 @@
             />
             <div class="row Game_Component">
               <!-- Dynamic import component -->
-              <div v-if="GameStatus == 'Progressing'" id="GameContainer" class="games">
+              <div
+                v-if="GameStatus == 'Progressing'"
+                id="GameContainer"
+                class="games"
+              >
                 <EffectWindow
                   v-if="ShowReply"
                   id="CorrecIncorrect"
@@ -160,85 +164,108 @@ export default {
     LevelAndTime,
     MediaModal,
     loading,
-    LinkGame: defineAsyncComponent(() => import("@/views/GameTemplate/LinkGame.vue")),
-    CompareGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/CompareGame.vue")
+    LinkGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/LinkGame.vue")
     ),
-    TrueFalseGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/TrueFalseGame.vue")
+    CompareGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/CompareGame.vue")
     ),
-    SelectGame: defineAsyncComponent(() => import("@/views/GameTemplate/SelectGame.vue")),
-    NumberInputGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/NumberInputGame.vue")
+    TrueFalseGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/TrueFalseGame.vue")
     ),
-    ClassifyGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/ClassifyGame.vue")
+    SelectGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/SelectGame.vue")
     ),
-    SortGame: defineAsyncComponent(() => import("@/views/GameTemplate/SortGame.vue")),
-    FindTheItemGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/FindTheItemGame.vue")
+    NumberInputGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/NumberInputGame.vue")
     ),
-    AutoNumberingGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/AutoNumberingGame.vue")
+    ClassifyGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/ClassifyGame.vue")
     ),
-    NumberingGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/NumberingGame.vue")
+    SortGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/SortGame.vue")
     ),
-    CompareGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/CompareGame.vue")
+    FindTheItemGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/FindTheItemGame.vue")
     ),
-    FillinBlank: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/FillinBlank.vue")
+    AutoNumberingGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/AutoNumberingGame.vue")
     ),
-    CalculatorGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/CalculatorGame.vue")
+    NumberingGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/NumberingGame.vue")
     ),
-    PairingGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/PairingGame.vue")
+    CompareGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/CompareGame.vue")
     ),
-    NumberLock: defineAsyncComponent(() => import("@/views/GameTemplate/NumberLock.vue")),
-    RacingCar: defineAsyncComponent(() => import("@/views/GameTemplate/RacingCar.vue")),
-    WhackaMole: defineAsyncComponent(() => import("@/views/GameTemplate/WhackaMole.vue")),
+    FillinBlank: defineAsyncComponent(
+      () => import("@/views/GameTemplate/FillinBlank.vue")
+    ),
+    CalculatorGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/CalculatorGame.vue")
+    ),
+    PairingGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/PairingGame.vue")
+    ),
+    NumberLock: defineAsyncComponent(
+      () => import("@/views/GameTemplate/NumberLock.vue")
+    ),
+    RacingCar: defineAsyncComponent(
+      () => import("@/views/GameTemplate/RacingCar.vue")
+    ),
+    WhackaMole: defineAsyncComponent(
+      () => import("@/views/GameTemplate/WhackaMole.vue")
+    ),
     Maze: defineAsyncComponent(() => import("@/views/GameTemplate/Maze.vue")),
-    NumberLock: defineAsyncComponent(() => import("@/views/GameTemplate/NumberLock.vue")),
-    SelectGameMulti: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/SelectGameMulti.vue")
+    NumberLock: defineAsyncComponent(
+      () => import("@/views/GameTemplate/NumberLock.vue")
     ),
-    NumberSearchGame: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/NumberSearchGame.vue")
+    SelectGameMulti: defineAsyncComponent(
+      () => import("@/views/GameTemplate/SelectGameMulti.vue")
+    ),
+    NumberSearchGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/NumberSearchGame.vue")
     ),
     // eslint-disable-next-line vue/no-reserved-component-names
     Track: defineAsyncComponent(() => import("@/views/GameTemplate/Track.vue")),
     EffectWindow,
-    SideBar: defineAsyncComponent(() => import("@/components/game-system/SideBar.vue")),
-    CopyItem: defineAsyncComponent(() => import("@/views/GameTemplate/CopyItem.vue")),
-    Airplane: defineAsyncComponent(() => import("@/views/GameTemplate/Airplane.vue")),
-    ComponentTesters: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/componentTesters.vue")
+    SideBar: defineAsyncComponent(
+      () => import("@/components/game-system/SideBar.vue")
+    ),
+    CopyItem: defineAsyncComponent(
+      () => import("@/views/GameTemplate/CopyItem.vue")
+    ),
+    Airplane: defineAsyncComponent(
+      () => import("@/views/GameTemplate/Airplane.vue")
+    ),
+    ComponentTesters: defineAsyncComponent(
+      () => import("@/views/GameTemplate/componentTesters.vue")
     ), //for testing only
-    BalloonShooting: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/BalloonShooting.vue")
+    BalloonShooting: defineAsyncComponent(
+      () => import("@/views/GameTemplate/BalloonShooting.vue")
     ),
-    NumberLock: defineAsyncComponent(() => import("@/views/GameTemplate/NumberLock.vue")),
-    LinkToImage: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/LinktoImage.vue")
+    NumberLock: defineAsyncComponent(
+      () => import("@/views/GameTemplate/NumberLock.vue")
     ),
-    WordProblemWithCalculator: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/WordProblemWithCalculator.vue")
+    LinkToImage: defineAsyncComponent(
+      () => import("@/views/GameTemplate/LinktoImage.vue")
     ),
-    MoneyDrag: defineAsyncComponent(() => import("@/views/GameTemplate/MoneyDrag.vue")),
-    MultiplyBoard: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/MultiplyBoard.vue")
+    WordProblemWithCalculator: defineAsyncComponent(
+      () => import("@/views/GameTemplate/WordProblemWithCalculator.vue")
     ),
-    FindFood: defineAsyncComponent(() => import("@/views/GameTemplate/FindFood.vue")),
-    FractionArithmetic: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/FractionArithmetic.vue")
+    MoneyDrag: defineAsyncComponent(
+      () => import("@/views/GameTemplate/MoneyDrag.vue")
     ),
-    RibbonFractions: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/RibbonFractions.vue")
+    MultiplyBoard: defineAsyncComponent(
+      () => import("@/views/GameTemplate/MultiplyBoard.vue")
     ),
-    FindPattern: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/FindPattern.vue")
+    FractionArithmetic: defineAsyncComponent(
+      () => import("@/views/GameTemplate/FractionArithmetic.vue")
+    ),
+    RibbonFractions: defineAsyncComponent(
+      () => import("@/views/GameTemplate/RibbonFractions.vue")
+    ),
+    FindPattern: defineAsyncComponent(
+      () => import("@/views/GameTemplate/FindPattern.vue")
     ),
   },
   data() {
@@ -300,10 +327,11 @@ export default {
     ]),
 
     selfdefinetemplate() {
-      return defineAsyncComponent(() =>
-        import(
-          `@/views/PrivateTemplate/Grade${this.$route.params.Grade}/${this.$route.params.id}.vue`
-        )
+      return defineAsyncComponent(
+        () =>
+          import(
+            `@/views/PrivateTemplate/Grade${this.$route.params.Grade}/${this.$route.params.id}.vue`
+          )
       );
     },
     hintInfo() {
