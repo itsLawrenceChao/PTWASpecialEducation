@@ -63,7 +63,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f19c79;
+  background-color: #f4c49f;
   padding: 0 1rem;
   height: 10vh;
 }
