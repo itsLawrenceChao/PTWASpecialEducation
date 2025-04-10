@@ -2,23 +2,23 @@
   <nav>
     <div>
       <RouterLink to="/">
-        <img :src="logo" alt="Program the World">
+        <img :src="logo" alt="Program the World" />
       </RouterLink>
     </div>
     <ul>
       <li>
         <a href="https://programtheworld.tw/donate/donate" alt="捐款">
-          <img :src="donation" class="navbar_picAndText">
+          <img :src="donation" class="navbar_picAndText" />
         </a>
       </li>
       <li>
         <a href="#grade-title" alt="遊戲">
-          <img :src="sharing" class="navbar_picAndText">
+          <img :src="sharing" class="navbar_picAndText" />
         </a>
       </li>
       <li>
         <a href="https://programtheworld.tw/works/index" alt="耕耘">
-          <img :src="effort" class="navbar_picAndText">
+          <img :src="effort" class="navbar_picAndText" />
         </a>
       </li>
       <li>
@@ -26,7 +26,7 @@
           href="https://programtheworld.tw/about/about?pagetarget=us"
           alt="關於"
         >
-          <img :src="about" class="navbar_picAndText">
+          <img :src="about" class="navbar_picAndText" />
         </a>
       </li>
       <li>
@@ -35,7 +35,7 @@
           href="https://www.facebook.com/program.the.world"
           alt="facebook"
         >
-          <img :src="facebook" class="navbar_pic">
+          <img :src="facebook" class="navbar_pic" />
         </a>
       </li>
     </ul>
