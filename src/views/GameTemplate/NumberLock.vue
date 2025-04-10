@@ -70,6 +70,12 @@ export default {
     DragImages: defineAsyncComponent(
       () => import("@/components/DragImages.vue")
     ),
+    NumberBoard: defineAsyncComponent(
+      () => import("@/components/NumberBoard.vue")
+    ),
+    FractionForAnswer: defineAsyncComponent(
+      () => import("@/components/FractionForAnswer.vue")
+    ),
   },
   props: {
     GameData: {
@@ -273,8 +279,11 @@ export default {
   flex-direction: column;
   justify-content: center;
   gap: $gap--small;
+  max-height: 100%;
+  overflow-y: auto;
 
   .text-area {
+    flex-shrink: 0;
     padding: $gap--tiny;
     background-color: #dfdfdf;
     border-radius: $border-radius;
@@ -282,11 +291,21 @@ export default {
   }
   .game-area {
     max-height: 39vh;
+    min-height: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: $border-radius;
     background-color: #f0f0f0;
+
+    &--top {
+      flex-shrink: 0;
+    }
+
+    &--down {
+      flex: 1;
+      min-height: 0;
+    }
   }
 }
 .right-column {

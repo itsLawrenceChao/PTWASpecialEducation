@@ -58,7 +58,7 @@
         "downComponent": {
           "Name": "Markdown",
           "Data": {
-            "Render": "$i$ 公分 = $i$ 毫米",
+            "Render": "$i$公分等於$i$毫米",
             "Answer": ["3", "30"]
           }
         }
@@ -102,7 +102,7 @@
         "downComponent": {
           "Name": "Markdown",
           "Data": {
-            "Render": "$i$ 公分 = $i$ 毫米",
+            "Render": "$i$公分等於$i$毫米",
             "Answer": ["4", "40"]
           }
         }
@@ -146,7 +146,7 @@
         "downComponent": {
           "Name": "Markdown",
           "Data": {
-            "Render": "$i$ 公分 = $i$ 毫米",
+            "Render": "$i$公分等於$i$毫米",
             "Answer": ["5", "50"]
           }
         }
@@ -190,7 +190,7 @@
         "downComponent": {
           "Name": "Markdown",
           "Data": {
-            "Render": "$i$ 公分 = $i$ 毫米",
+            "Render": "$i$公分等於$i$毫米",
             "Answer": ["1", "10"]
           }
         }
@@ -234,7 +234,7 @@
         "downComponent": {
           "Name": "Markdown",
           "Data": {
-            "Render": "$i$ 公分 = $i$ 毫米",
+            "Render": "$i$公分等於$i$毫米",
             "Answer": ["2", "20"]
           }
         }

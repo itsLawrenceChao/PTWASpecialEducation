@@ -276,6 +276,8 @@ export default {
 .interactive-equation {
   $self: &;
   font-size: 24px;
+  height: 100%;
+  width: 100%;
 
   &__container {
     display: flex;
