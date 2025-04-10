@@ -84,7 +84,7 @@ export default {
 
 <style scoped lang="scss">
 header {
-  background-color: #f19c79;
+  background-color: #f4c49f;
   height: 10vh !important;
   touch-action: none;
   user-select: none;
@@ -97,7 +97,7 @@ header {
 }
 
 .navbar {
-  background-color: #f19c79;
+  background-color: #f4c49f;
 
   .navbar-brand {
     img {
