@@ -22,8 +22,8 @@ import Markdown from "@/components/Markdown.vue";
 export default {
   name: "MA3061",
   components: {
-    DragToAlign: defineAsyncComponent(() =>
-      import("@/components/DragToAlign.vue")
+    DragToAlign: defineAsyncComponent(
+      () => import("@/components/DragToAlign.vue")
     ),
     Markdown,
   },
@@ -91,7 +91,7 @@ export default {
   }
   &__submit {
     border: none;
-    background-color: #aabdc3;
+    background-color: $submit-color;
     height: 4rem;
   }
 }

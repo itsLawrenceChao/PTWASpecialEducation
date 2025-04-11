@@ -50,14 +50,14 @@ import { getGameStaticAssets } from "@/utilitys/get_assets.js"; // Feel free to 
 export default {
   name: "FractionGame",
   components: {
-    InteractiveFractionVisual: defineAsyncComponent(() =>
-      import("@/components/InteractiveFractionVisual.vue")
+    InteractiveFractionVisual: defineAsyncComponent(
+      () => import("@/components/InteractiveFractionVisual.vue")
     ),
-    NumberIncrementor: defineAsyncComponent(() =>
-      import("@/components/NumberIncrementor.vue")
+    NumberIncrementor: defineAsyncComponent(
+      () => import("@/components/NumberIncrementor.vue")
     ),
-    FractionForAnswer: defineAsyncComponent(() =>
-      import("@/components/FractionForAnswer.vue")
+    FractionForAnswer: defineAsyncComponent(
+      () => import("@/components/FractionForAnswer.vue")
     ),
   },
   props: {
@@ -218,7 +218,7 @@ export default {
 
 .submit-btn {
   padding: 0.5rem 2rem;
-  background-color: #4caf50;
+  background-color: $submit-color;
   color: white;
   border: none;
   border-radius: 4px;
