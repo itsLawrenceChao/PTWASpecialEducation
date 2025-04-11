@@ -404,32 +404,34 @@ export default {
       this.switchMode("game");
     },
     queryGame(searchList, tarSymbol) {
+      if (!tarSymbol) return undefined;
+
       let finded_id = new Set();
       let foundGames = [];
-      for (var i in searchList) {
-        for (var z in searchList[i].Section) {
-          for (var x in searchList[i].Section[z].Games) {
-            if (searchList[i].Section[z].Games[x].id.includes(tarSymbol)) {
-              if (!finded_id.has(searchList[i].Section[z].Games[x].id)) {
-                finded_id.add(searchList[i].Section[z].Games[x].id);
-                let temp = searchList[i].Section[z].Games[x];
-                foundGames.push(temp);
-              }
-            }
-            if (searchList[i].Section[z].Games[x].Name.includes(tarSymbol)) {
-              if (!finded_id.has(searchList[i].Section[z].Games[x].id)) {
-                finded_id.add(searchList[i].Section[z].Games[x].id);
-                let temp = searchList[i].Section[z].Games[x];
-                find.push(temp);
+
+      // 將關鍵字轉為小寫以進行不分大小寫搜尋
+      tarSymbol = tarSymbol.toLowerCase();
+
+      for (let chapter in searchList) {
+        const sections = searchList[chapter]?.Section || [];
+        for (let section of sections) {
+          const games = section?.Games || [];
+          for (let game of games) {
+            // 檢查 ID 和名稱（不分大小寫）
+            if (
+              game.id?.toLowerCase().includes(tarSymbol) ||
+              game.Name?.toLowerCase().includes(tarSymbol)
+            ) {
+              if (!finded_id.has(game.id)) {
+                finded_id.add(game.id);
+                foundGames.push(game);
               }
             }
           }
         }
       }
-      if (foundGames.length == 0) {
-        return undefined;
-      }
-      return foundGames;
+
+      return foundGames.length > 0 ? foundGames : undefined;
     },
     switchMode(mode) {
       this.showMode = mode;
@@ -438,7 +440,48 @@ export default {
     searchGame() {
       let keyword = this.searchInput;
       this.searchResult = [];
-      this.searchResult = this.queryGame(this.mathShowInfo, keyword);
+
+      // 搜尋所有科目和所有學期
+      let mathResults = [];
+      let chineseResults = [];
+      let techResults = [];
+
+      // 遍歷每個學期的資料
+      if (this.mathShowInfo) {
+        this.mathShowInfo.forEach((semester) => {
+          const results = this.queryGame(semester.gameItem || [], keyword);
+          if (results) {
+            mathResults.push(...results);
+          }
+        });
+      }
+
+      if (this.chineseShowInfo) {
+        this.chineseShowInfo.forEach((semester) => {
+          const results = this.queryGame(semester.gameItem || [], keyword);
+          if (results) {
+            chineseResults.push(...results);
+          }
+        });
+      }
+
+      if (this.technologyShowInfo) {
+        this.technologyShowInfo.forEach((semester) => {
+          const results = this.queryGame(semester.gameItem || [], keyword);
+          if (results) {
+            techResults.push(...results);
+          }
+        });
+      }
+
+      // 合併所有搜尋結果
+      this.searchResult = [...mathResults, ...chineseResults, ...techResults];
+
+      // 如果沒有結果，設為 undefined
+      if (this.searchResult.length === 0) {
+        this.searchResult = undefined;
+      }
+
       this.searchInput = "";
       this.switchMode("search");
     },
