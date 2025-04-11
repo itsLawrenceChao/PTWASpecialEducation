@@ -237,7 +237,7 @@ export default {
       refresh: 0,
       selectedSemester: 0, // 新增：當前選擇的學期
       externalLinks: {
-        Chinese: "https://dict.revised.moe.edu.tw/search.jsp?la=0&powerMode=0",
+        Chinese: "https://jl123.pythonanywhere.com/grade/type/",
         Technology:
           "https://ptwa-npo.github.io/games/technology/grade1/index.html",
       },
