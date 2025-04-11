@@ -69,65 +69,77 @@
       class="game-select__container"
       style="overflow-y: hidden"
     >
-      <div class="sidebar">
-        <p class="sidebar__title">學期</p>
-        <div class="sidebar__button-group">
-          <template v-for="(semester, index) in showInfo" :key="index">
-            <button
-              class="sidebar__button"
-              :class="{
-                'sidebar__button--semester-active': selectedSemester === index,
-              }"
-              @click="selectSemester(index)"
-            >
-              {{ semester.lableName }}
-            </button>
-          </template>
-        </div>
-        <p class="sidebar__title">單元</p>
-        <div v-if="showInfo" class="sidebar__button-group">
-          <template v-for="(items, key) in currentSemesterChapters" :key="key">
-            <button class="sidebar__button" @click="selectChapter(key)">
-              {{ items.Title }}
-            </button>
-          </template>
-        </div>
-      </div>
-      <!-- 遊戲卡片區域 -->
-      <div v-if="showGameCards" :key="refresh" class="game-display__container">
-        <div
-          v-for="(items, index) in currentChapterSections"
-          :key="index"
-          class="game-charpter__container"
-        >
-          <p class="game-charpter__title">
-            {{ items.Title }}
-          </p>
-          <div class="game-card__group">
-            <div v-for="item in items.Games" class="card game-card">
-              <GameCard
-                :game-info="{
-                  id: item.id,
-                  imgSrc: item.Img,
-                  name: item.Name,
-                  description: item.Description,
+      <template v-if="hasCurrentSubjectData">
+        <div class="sidebar">
+          <p class="sidebar__title">學期</p>
+          <div class="sidebar__button-group">
+            <template v-for="(semester, index) in showInfo" :key="index">
+              <button
+                class="sidebar__button"
+                :class="{
+                  'sidebar__button--semester-active':
+                    selectedSemester === index,
                 }"
-                @enter-game="
-                  switchRouter({
-                    name: 'Game',
-                    params: {
-                      id: item.id,
-                      Grade: grade,
-                      Subject: nowSubject,
-                      GameName: item.Name,
-                    },
-                  })
-                "
-                @read-text="makeReadText"
-              />
+                @click="selectSemester(index)"
+              >
+                {{ semester.lableName }}
+              </button>
+            </template>
+          </div>
+          <p class="sidebar__title">單元</p>
+          <div v-if="showInfo" class="sidebar__button-group">
+            <template
+              v-for="(items, key) in currentSemesterChapters"
+              :key="key"
+            >
+              <button class="sidebar__button" @click="selectChapter(key)">
+                {{ items.Title }}
+              </button>
+            </template>
+          </div>
+        </div>
+        <div
+          v-if="showGameCards"
+          :key="refresh"
+          class="game-display__container"
+        >
+          <div
+            v-for="(items, index) in currentChapterSections"
+            :key="index"
+            class="game-charpter__container"
+          >
+            <p class="game-charpter__title">
+              {{ items.Title }}
+            </p>
+            <div class="game-card__group">
+              <div v-for="item in items.Games" class="card game-card">
+                <GameCard
+                  :game-info="{
+                    id: item.id,
+                    imgSrc: item.Img,
+                    name: item.Name,
+                    description: item.Description,
+                  }"
+                  @enter-game="
+                    switchRouter({
+                      name: 'Game',
+                      params: {
+                        id: item.id,
+                        Grade: grade,
+                        Subject: nowSubject,
+                        GameName: item.Name,
+                      },
+                    })
+                  "
+                  @read-text="makeReadText"
+                />
+              </div>
             </div>
           </div>
         </div>
+      </template>
+      <div v-else class="under-construction">
+        <img :src="underConstructionSrc" alt="建構中" />
       </div>
     </section>
     <section v-if="showMode == 'search'" class="search_result">
@@ -202,6 +214,10 @@ export default {
       chineseLogoSrc: getSystemAssets("chinese.png", "subject"),
       technologyLogoSrc: getSystemAssets("technology.png", "subject"),
       navLogoSrc: getSystemAssets("logo.png", "nav_bar"),
+      underConstructionSrc: getSystemAssets(
+        "under-construction.png",
+        "general"
+      ),
       searchInput: "",
       searchResult: [],
       grade: 0,
@@ -230,6 +246,16 @@ export default {
     currentChapterSections() {
       if (!this.currentSemesterChapters || !this.selectedCharpter) return [];
       return this.currentSemesterChapters[this.selectedCharpter]?.Section || [];
+    },
+    hasCurrentSubjectData() {
+      if (this.nowSubject === "Math") {
+        return this.mathShowInfo !== null;
+      } else if (this.nowSubject === "Chinese") {
+        return this.chineseShowInfo !== null;
+      } else if (this.nowSubject === "Technology") {
+        return this.technologyShowInfo !== null;
+      }
+      return false;
     },
   },
   async created() {
@@ -638,6 +664,24 @@ header {
     &--semester-active {
       background-color: #a8c2ea;
     }
+  }
+}
+.under-construction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+  grid-column: 1 / -1;
+  padding: 2rem;
+  overflow: hidden;
+
+  img {
+    max-width: 80%;
+    max-height: 79vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 }
 </style>
