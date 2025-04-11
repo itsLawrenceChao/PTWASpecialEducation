@@ -196,7 +196,7 @@ export default {
     flex: 1;
     height: 100%;
     border: none;
-    background-color: #faf3ed;
+    background-color: $submit-color;
     align-self: flex-end;
     width: 10rem;
   }

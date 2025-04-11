@@ -89,7 +89,7 @@
         class="SucessButton"
         @click="CheckAllAnswer"
       >
-        檢查答案
+        送出答案
       </button>
       <!-- <button @click="Triger" class="btn btn-primary">Triger</button> -->
     </section>
@@ -103,11 +103,11 @@ export default {
   name: "CompareGame",
   components: {
     draggable,
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
-    ImageWithText: defineAsyncComponent(() =>
-      import("@/components/ImageWithText.vue")
+    ImageWithText: defineAsyncComponent(
+      () => import("@/components/ImageWithText.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     CoulorBarChart: GetComponents("CoulorBarChart"),
@@ -382,7 +382,7 @@ export default {
   .SucessButton {
     padding: 1rem;
     width: 40%;
-    background-color: #3a86ff;
+    background-color: $submit-color;
     border: none;
     border-radius: 12px;
     font-size: x-large;

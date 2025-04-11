@@ -146,7 +146,7 @@
         </div>
       </div>
       <div class="buttons">
-        <button @click="CheckAnswer">檢查答案</button>
+        <button class="submit-btn" @click="CheckAnswer">送出答案</button>
       </div>
     </div>
   </div>
@@ -526,8 +526,8 @@ export default {
     height: auto;
     border: none;
   }
-  .btn-primary {
-    width: 40px;
+  .submit-btn {
+    background-color: $submit-color;
   }
 }
 .space {

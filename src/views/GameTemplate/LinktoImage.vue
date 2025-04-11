@@ -43,7 +43,7 @@
         </v-stage>
       </div>
       <div class="Functions">
-        <button @click="CheckAllAnswer">檢查答案</button>
+        <button @click="CheckAllAnswer">送出答案</button>
         <button @click="ClearAll">清除所有答案</button>
         <button @click="Pop">清除最後一個</button>
 
@@ -497,7 +497,7 @@ export default {
     min-width: 200px;
     height: 3rem;
     border: none;
-    background-color: #4caf50;
+    background-color: $submit-color;
     border-radius: 15px;
     scale: 1;
     transition: 0.5s;

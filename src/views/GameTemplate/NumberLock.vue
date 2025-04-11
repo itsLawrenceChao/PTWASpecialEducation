@@ -32,7 +32,7 @@
           @virtualpadinput-pop="Pop"
         />
       </div>
-      <button class="button--submit" @click="CheckAnswer">檢查答案</button>
+      <button class="button--submit" @click="CheckAnswer">送出答案</button>
     </div>
     {{ NowSelect }}
   </div>
@@ -318,6 +318,7 @@ export default {
     gap: 10px;
   }
   .button--submit {
+    background-color: $submit-color;
     width: 100%;
     height: 100%;
     min-height: 50px;

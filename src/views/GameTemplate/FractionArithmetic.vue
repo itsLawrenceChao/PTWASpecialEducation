@@ -44,11 +44,11 @@ import FractionForAnswer from "@/components/FractionForAnswer.vue";
 export default {
   name: "FractionArithmetic",
   components: {
-    FractionDisplay: defineAsyncComponent(() =>
-      import("@/components/FractionDisplay.vue")
+    FractionDisplay: defineAsyncComponent(
+      () => import("@/components/FractionDisplay.vue")
     ),
-    DragFraction: defineAsyncComponent(() =>
-      import("@/components/DragFraction.vue")
+    DragFraction: defineAsyncComponent(
+      () => import("@/components/DragFraction.vue")
     ),
     FractionForAnswer,
   },
@@ -171,6 +171,6 @@ export default {
   height: 100%;
   width: 25%;
   border: none;
-  background-color: #e4c9b6;
+  background-color: $submit-color;
 }
 </style>
