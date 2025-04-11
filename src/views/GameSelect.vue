@@ -236,6 +236,11 @@ export default {
       showMode: "menu", // menu, game, search
       refresh: 0,
       selectedSemester: 0, // 新增：當前選擇的學期
+      externalLinks: {
+        Chinese: "https://dict.revised.moe.edu.tw/search.jsp?la=0&powerMode=0",
+        Technology:
+          "https://ptwa-npo.github.io/games/technology/grade1/index.html",
+      },
     };
   },
   computed: {
@@ -367,6 +372,18 @@ export default {
     },
     changeSubject(subject) {
       this.nowSubject = subject;
+
+      // 檢查是否為三年級的外部連結科目
+      if (
+        this.grade === "3" &&
+        (subject === "Chinese" || subject === "Technology")
+      ) {
+        // 在新視窗開啟外部連結
+        window.open(this.externalLinks[subject], "_blank");
+        return;
+      }
+
+      // 原有的科目邏輯
       if (subject == "Math") {
         this.showInfo = this.mathShowInfo;
         this.handleSession("set", "Subject", subject);
