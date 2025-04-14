@@ -8,7 +8,6 @@ const tool = axios.create({
 export default async function (url) {
   try {
     const res = await tool.get(url);
-    console.log("we");
     return res;
   } catch (error) {
     console.log("error");
