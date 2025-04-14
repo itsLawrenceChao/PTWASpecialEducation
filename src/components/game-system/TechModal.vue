@@ -38,6 +38,10 @@ export default {
       type: String,
       required: true,
     },
+    gameId: {
+      type: String,
+      required: true,
+    },
   },
   emits: ["close"],
   data() {
@@ -51,6 +55,7 @@ export default {
   },
   mounted() {
     // if mediaData is not given, use default tech video, if both are not available, load 404 image
+    console.log(this.gameId, this.mediaData);
     if (this.mediaData == undefined) {
       let defaultTechVideo = this.checkDefaultMediaAvailability();
       if (defaultTechVideo == "") {
@@ -81,7 +86,8 @@ export default {
       }
     },
     checkUserGivenMediaAvailability() {
-      const userGivenTechVideo = getGameAssets(this.mediaData);
+      const userGivenTechVideo = getGameAssets(this.gameId, this.mediaData);
+      console.log(userGivenTechVideo);
       if (userGivenTechVideo.includes("undefined")) {
         return "";
       } else {
@@ -89,6 +95,7 @@ export default {
       }
     },
     checkGivenMediaType(src) {
+      console.log(src);
       if (src.includes(".mp4")) {
         return "video";
       } else {
