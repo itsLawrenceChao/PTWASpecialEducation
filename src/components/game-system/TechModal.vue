@@ -120,7 +120,10 @@ export default {
 }
 video {
   width: 100%;
+  max-width: 800px;
   height: auto;
+  max-height: 60vh;
+  object-fit: contain;
 }
 .tech-modal__container {
   display: flex;
@@ -144,6 +147,14 @@ video {
     text-align: center;
     margin-bottom: 1rem;
     align-self: flex-start;
+  }
+  .tech-modal__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
   }
   img {
     max-height: 60vh;
