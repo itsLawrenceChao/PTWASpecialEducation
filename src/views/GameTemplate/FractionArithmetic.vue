@@ -1,7 +1,9 @@
 <template>
   <div class="game">
     <div class="question-and-answer">
-      <h1 class="question__description">{{ questionDescription }}</h1>
+      <h1 class="question__description">
+        <FractionText :text="questionDescription" :ID="ID"></FractionText>
+      </h1>
       <div class="question__math-expression">
         <FractionDisplay
           :Data="questionLeftTerm"
@@ -40,6 +42,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import FractionForAnswer from "@/components/FractionForAnswer.vue";
+import FractionText from "@/components/FractionText.vue";
 
 export default {
   name: "FractionArithmetic",
@@ -51,6 +54,7 @@ export default {
       () => import("@/components/DragFraction.vue")
     ),
     FractionForAnswer,
+    FractionText,
   },
   props: {
     GameData: {
