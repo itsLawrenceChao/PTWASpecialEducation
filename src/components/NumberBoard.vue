@@ -1,13 +1,18 @@
 <template>
-  <table class="NumberBoard">
-    <tr class="EachRow">
-      <td v-for="unit in Unit" class="UnitEachBlanket">{{ unit }}</td>
+  <table class="number-board">
+    <tr class="number-board__row">
+      <td
+        v-for="unit in Unit"
+        class="number-board__cell number-board__cell--unit"
+      >
+        {{ unit }}
+      </td>
     </tr>
-    <tr class="EachRow">
+    <tr class="number-board__row">
       <td
         v-for="(number, index) in numbers"
-        class="EachBlanket"
-        :class="{ clickable: isInput }"
+        class="number-board__cell"
+        :class="{ 'number-board__cell--clickable': isInput }"
         @click="isInput ? incrementDigit(index) : null"
       >
         {{ number }}
@@ -87,49 +92,48 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.NumberBoard {
-  height: auto;
+.number-board {
+  width: 100%;
+  height: 100%;
+  display: table;
   border: solid;
   border-color: blue;
-  display: inline-block; // 使用 inline-block 讓表格根據內容自動調整大小
-  max-width: fit-content;
-  margin: 0 auto;
-}
+  table-layout: fixed;
+  border-collapse: collapse;
+  max-width: 350px;
 
-.EachRow {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: space-around;
-  font-family: "YuanQuan";
-
-  td {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &__row {
     width: 100%;
-    border: solid;
+    display: table-row;
+    font-family: "YuanQuan";
+    box-sizing: border-box;
   }
-}
 
-.UnitEachBlanket {
-  font-size: 1.5em;
-  text-align: center;
-  writing-mode: vertical-rl; /* 直排，從右到左 */
-  text-orientation: upright; /* 保持字體直立 */
-  letter-spacing: 0.2em;
-}
+  &__cell {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border: solid;
+    box-sizing: border-box;
+    font-size: 1.2em;
 
-.EachBlanket {
-  font-size: 1.5em; // 增大字體大小
-  text-align: center;
+    &--unit {
+      font-size: 1.5em;
+      text-align: center;
+      min-height: 2em;
+      overflow: hidden;
+      word-break: break-all;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
 
-  &.clickable {
-    cursor: pointer;
-    user-select: none;
+    &--clickable {
+      cursor: pointer;
+      user-select: none;
 
-    &:hover {
-      background-color: #f0f0f0;
+      &:hover {
+        background-color: #f0f0f0;
+      }
     }
   }
 }
