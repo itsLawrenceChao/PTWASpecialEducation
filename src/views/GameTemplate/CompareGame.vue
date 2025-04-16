@@ -161,12 +161,12 @@ export default {
   },
   created() {
     this.TotalQuestion = this.GameData.Datas.length;
-    for (var i in this.GameData.Datas) {
+    this.GameData.Datas.forEach(() => {
       this.Answered.push(null);
       this.Answers.push([]);
       let TempImg = [];
       this.ImageDatas.push(TempImg);
-    }
+    });
     this.Symbol = this.BSESymbol;
   },
   methods: {
@@ -228,12 +228,10 @@ export default {
       if (this.GameData.SlotComponentVerifycation == true) {
         // Check if the SlotComponent is correct
         let temp = true;
-        let cnt = 0;
         this.SlotComponentanswer.forEach((element) => {
           if (element != true) {
             temp = false;
           }
-          cnt++;
         });
         console.log("Temp", temp);
         if (temp == false) {
