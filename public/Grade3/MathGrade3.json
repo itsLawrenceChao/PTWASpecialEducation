@@ -29,7 +29,7 @@
                 "id": "MA3015",
                 "Name": "拿出正確的錢幣",
                 "Description": "拿出正確的錢幣",
-                "Img": ""
+                "Img": "MA3015.png"
               }
             ]
           },
@@ -107,7 +107,7 @@
                 "id": "MA3031",
                 "Name": "量量看",
                 "Description": "",
-                "Img": ""
+                "Img": "MA3031.png"
               },
               {
                 "id": "MA3032",
