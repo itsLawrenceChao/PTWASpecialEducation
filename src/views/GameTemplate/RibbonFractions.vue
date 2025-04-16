@@ -1,34 +1,39 @@
 <template>
   <div class="container">
-    <div class="ribbons">
-      <div class="rowContainer">{{ GameData.Question }}</div>
-      <div class="rowContainer">
-        <div
-          v-for="j in GameData.Denominator"
-          :key="j - 1"
-          class="ribbonPart"
-          :style="wholeRibbonStyle[j - 1]"
-        ></div>
-      </div>
-
-      <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
-        <div
-          v-for="j in GameData.Denominator"
-          :key="j - 1"
-          class="ribbonPart"
-          :style="ribbonStyle[i - 1][j - 1]"
-        ></div>
-      </div>
+    <div class="question">
+      {{ GameData.Question }}
+      <button class="submitBtn" @click="checkAnswer">提交答案</button>
     </div>
-    <div class="checkBoxes">
-      <div class="rowContainer">
-        <button class="submitBtn" @click="checkAnswer">提交答案</button>
+    <div class="options">
+      <div class="ribbons">
+        <div class="rowContainer">
+          <div
+            v-for="j in GameData.Denominator"
+            :key="j - 1"
+            class="ribbonPart"
+            :style="wholeRibbonStyle[j - 1]"
+          ></div>
+        </div>
+        <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
+          <div
+            v-for="j in GameData.Denominator"
+            :key="j - 1"
+            class="ribbonPart"
+            :style="ribbonStyle[i - 1][j - 1]"
+          ></div>
+        </div>
       </div>
-      <div class="rowContainer">這是一條緞帶。</div>
-      <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
-        <button class="checkBoxBtn" :style="btnStyle[i - 1]" @click="handleClick(i - 1)">
-          ✔
-        </button>
+      <div class="checkBoxes">
+        <div class="rowContainer">這是一條緞帶。</div>
+        <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
+          <button
+            class="checkBoxBtn"
+            :style="btnStyle[i - 1]"
+            @click="handleClick(i - 1)"
+          >
+            ✔
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -75,7 +80,8 @@ export default {
         this.GameData.CorrectOption
       );
       for (let i = 0; i < this.GameData.Option; ++i) {
-        if (this.correctOptionID.includes(i)) this.map.push(this.GameData.Numerator);
+        if (this.correctOptionID.includes(i))
+          this.map.push(this.GameData.Numerator);
         else {
           let random;
           do {
@@ -183,8 +189,17 @@ export default {
   height: 100%;
   width: 100%;
   padding: 2%;
-  display: flex;
+
   font-size: 2rem;
+}
+.question {
+  width: 100%;
+  height: 10%;
+}
+.options {
+  display: flex;
+  width: 100%;
+  height: 90%;
 }
 .ribbons {
   width: 70%;
