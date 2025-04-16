@@ -16,7 +16,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -40,7 +40,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -64,7 +64,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -83,12 +83,12 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -112,7 +112,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -131,14 +131,14 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       }
     ],
     [
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -162,7 +162,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -186,7 +186,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -205,12 +205,12 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -234,7 +234,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -253,14 +253,14 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       }
     ],
     [
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -279,12 +279,12 @@
             }
           ]
         ],
-        "Answer": ["Small"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -308,7 +308,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -332,7 +332,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -351,12 +351,12 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -375,14 +375,14 @@
             }
           ]
         ],
-        "Answer": ["Small"]
+        "Answer": ["Equal"]
       }
     ],
     [
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -401,12 +401,12 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -430,7 +430,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -449,12 +449,12 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -473,12 +473,12 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -504,7 +504,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -528,7 +528,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -552,7 +552,7 @@
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -571,12 +571,12 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
@@ -595,12 +595,12 @@
             }
           ]
         ],
-        "Answer": ["Large"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
