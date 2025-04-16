@@ -230,10 +230,9 @@ export default {
         this.Title.push(this.CustomeUnit[unitIndex]);
       }
     } else {
+      const unitType = this.Data.Unit || this.UnitPreset.UseUnit;
       for (var titleIndex = 0; titleIndex < this.NumberAmount; titleIndex++) {
-        this.Title.push(
-          this.UnitPreset.Units[this.UnitPreset.UseUnit].Title[titleIndex]
-        );
+        this.Title.push(this.UnitPreset.Units[unitType].Title[titleIndex]);
       }
     }
     for (var ansIndex = 0; ansIndex <= this.NumberAmount; ansIndex++) {
