@@ -403,9 +403,9 @@
               },
               {
                 "id": "MA3163",
-                "Name": "直徑、半徑、圓心",
-                "Description": "",
-                "Img": "MA3163.png "
+                "Name": "距離與半徑",
+                "Description": "比比看，並將正確的符號拖曳到框框中",
+                "Img": "MA3163.png"
               }
             ]
           }
