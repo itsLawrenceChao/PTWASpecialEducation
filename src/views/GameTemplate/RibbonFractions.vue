@@ -37,11 +37,35 @@
       </div>
     </div>
     <div v-if="GameData.Type == 'Paper'" class="options grid">
-      <div v-for="j in 9" :key="j - 1" class="paper">
-        <div class="gridContainer">
-          <div v-for="i in 15" :key="i - 1" class="paperPiece"></div>
+      <div class="paper">
+        <div class="gridContainer" :style="gridContainerStyle">
+          <div
+            v-for="j in GameData.Denominator"
+            :key="j - 1"
+            class="paperPiece"
+            :style="wholePaperStyle[j - 1]"
+          ></div>
         </div>
         這是一張色紙。
+      </div>
+      <div v-for="i in GameData.Option" :key="i - 1" class="paper">
+        <div class="gridContainer" :style="gridContainerStyle">
+          <div
+            v-for="j in GameData.Denominator"
+            :key="j - 1"
+            class="paperPiece"
+            :style="paperStyle[i - 1][j - 1]"
+          ></div>
+        </div>
+        <div class="checkBoxContainer">
+          <button
+            class="checkBoxBtn"
+            :style="btnStyle[i - 1]"
+            @click="handleClick(i - 1)"
+          >
+            ✔
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -69,6 +93,8 @@ export default {
       map: [],
       wholeRibbonStyle: [],
       ribbonStyle: [],
+      wholePaperStyle: [],
+      paperStyle: [],
       btnStyle: [],
       selected: [],
       color: "lightblue",
@@ -80,7 +106,7 @@ export default {
     if (this.GameData.Type == "Ribbon") {
       this.setRibbonStyle();
     } else if (this.GameData.Type == "Paper") {
-      //this.setPaperStyle();
+      this.setPaperStyle();
     }
     this.setbtnStyle();
   },
@@ -131,6 +157,50 @@ export default {
           row.push(style);
         }
         this.ribbonStyle.push(row);
+      }
+    },
+    setPaperStyle() {
+      this.gridContainerStyle = {
+        gridTemplateColumns: `repeat(${this.GameData.Factors[0]}, 1fr)`,
+      };
+      if (this.GameData.Color) this.color = this.GameData.Color;
+      for (let i = 0; i < this.GameData.Factors[1]; ++i) {
+        for (let j = 0; j < this.GameData.Factors[0]; ++j) {
+          let style = {
+            backgroundColor: this.color,
+          };
+          if (i == 0) style.borderTop = "1px black solid";
+          else if (i == this.GameData.Factors[1] - 1)
+            style.borderBottom = "1px black solid";
+
+          if (j == 0) style.borderLeft = "1px black solid";
+          else if (j == this.GameData.Factors[0] - 1)
+            style.borderRight = "1px black solid";
+          this.wholePaperStyle.push(style);
+        }
+      }
+      for (let i = 0; i < this.GameData.Option; ++i) {
+        let grid = [];
+        let coloredPaper = this.randomCombination(
+          this.GameData.Denominator,
+          this.map[i]
+        );
+        for (let i = 0; i < this.GameData.Factors[1]; ++i) {
+          for (let j = 0; j < this.GameData.Factors[0]; ++j) {
+            let style = {};
+            if (i == 0) style.borderTop = "1px black solid";
+            else if (i == this.GameData.Factors[1] - 1)
+              style.borderBottom = "1px black solid";
+
+            if (j == 0) style.borderLeft = "1px black solid";
+            else if (j == this.GameData.Factors[0] - 1)
+              style.borderRight = "1px black solid";
+            if (coloredPaper.includes(grid.length))
+              style.backgroundColor = this.color;
+            grid.push(style);
+          }
+        }
+        this.paperStyle.push(grid);
       }
     },
     setbtnStyle() {
@@ -255,7 +325,6 @@ export default {
   width: 100%;
   height: 80%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
 }
 .checkBoxBtn {
   font-size: 1rem;
