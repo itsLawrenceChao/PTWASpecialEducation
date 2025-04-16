@@ -290,7 +290,7 @@ export default {
     },
     getJsonData(selectedSubject) {
       let url = `./Grade${this.grade}/${selectedSubject}Grade${this.grade}.json`;
-      return fetchJson(url).catch((err) => {
+      return fetchJson(url).catch(() => {
         throw `cannot load ${selectedSubject} 's JSON file`;
       });
     },
@@ -435,7 +435,7 @@ export default {
     },
     switchMode(mode) {
       this.showMode = mode;
-      this.makeReadText("", "", (stop = true));
+      this.makeReadText("", "", true);
     },
     searchGame() {
       let keyword = this.searchInput;
@@ -490,7 +490,7 @@ export default {
       this.searchInput = "";
     },
     switchRouter(to) {
-      this.makeReadText("", "", (stop = true));
+      this.makeReadText("", "", true);
       this.$router.push(to);
     },
     selectSemester(index) {
