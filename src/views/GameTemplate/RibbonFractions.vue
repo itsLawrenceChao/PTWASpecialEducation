@@ -4,7 +4,7 @@
       {{ GameData.Question }}
       <button class="submitBtn" @click="checkAnswer">提交答案</button>
     </div>
-    <div class="options">
+    <div v-if="GameData.Type == 'Ribbon'" class="options flex">
       <div class="ribbons">
         <div class="rowContainer">
           <div
@@ -34,6 +34,14 @@
             ✔
           </button>
         </div>
+      </div>
+    </div>
+    <div v-if="GameData.Type == 'Paper'" class="options grid">
+      <div v-for="j in 9" :key="j - 1" class="paper">
+        <div class="gridContainer">
+          <div v-for="i in 15" :key="i - 1" class="paperPiece"></div>
+        </div>
+        這是一張色紙。
       </div>
     </div>
   </div>
@@ -69,7 +77,11 @@ export default {
 
   beforeMount() {
     this.setMap();
-    this.setRibbonStyle();
+    if (this.GameData.Type == "Ribbon") {
+      this.setRibbonStyle();
+    } else if (this.GameData.Type == "Paper") {
+      //this.setPaperStyle();
+    }
     this.setbtnStyle();
   },
 
@@ -197,20 +209,37 @@ export default {
   height: 10%;
 }
 .options {
-  display: flex;
   width: 100%;
   height: 90%;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
 }
 .ribbons {
   width: 70%;
   height: 100%;
 }
+.paper {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
 .ribbonPart {
-  width: 20%;
+  width: 100%;
   height: 80%;
   border-right: 2px black dashed;
   border-top: 1px black solid;
   border-bottom: 1px black solid;
+}
+.paperPiece {
+  width: 100%;
+  height: 100%;
+  border: 1px black dashed;
 }
 .checkBoxes {
   width: 28%;
@@ -221,6 +250,12 @@ export default {
   height: 10%;
   width: 100%;
   display: flex;
+}
+.gridContainer {
+  width: 100%;
+  height: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .checkBoxBtn {
   font-size: 1rem;
