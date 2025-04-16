@@ -341,56 +341,6 @@
     "lableName": "下學期",
     "gameItem": [
       {
-        "Title": "1 - 分數的加減",
-        "Section": [
-          {
-            "Title": "和1一樣大的分數",
-            "Games": [
-              {
-                "id": "MA3111",
-                "Name": "和1一樣大的分數",
-                "Description": "",
-                "Img": ""
-              }
-            ]
-          },
-          {
-            "Title": "分數的加法",
-            "Games": [
-              {
-                "id": "MA3112",
-                "Name": "分數的加法(計算題)",
-                "Description": "",
-                "Img": ""
-              },
-              {
-                "id": "MA3113",
-                "Name": "分數的加法(應用題)",
-                "Description": "",
-                "Img": ""
-              }
-            ]
-          },
-          {
-            "Title": "分數的減法",
-            "Games": [
-              {
-                "id": "MA3114",
-                "Name": "分數的減法(計算題)",
-                "Description": "",
-                "Img": ""
-              },
-              {
-                "id": "MA3115",
-                "Name": "分數的減法(應用題)",
-                "Description": "",
-                "Img": ""
-              }
-            ]
-          }
-        ]
-      },
-      {
         "Title": "4 - 公斤和公克",
         "Section": [
           {
