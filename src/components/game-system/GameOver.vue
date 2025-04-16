@@ -1,6 +1,13 @@
 <template>
   <div id="Done" class="game-over__container">
-    <img :src="fireworkSrc" class="effects" />
+    <video
+      :src="fireworkSrc"
+      class="effects"
+      autoplay
+      loop
+      muted
+      playsinline
+    ></video>
     <div class="game-over__button-group">
       <button class="action-btn" @click="endGame">結束遊戲</button>
       <button class="action-btn" @click="download">結束遊戲(下載紀錄)</button>
@@ -16,7 +23,8 @@ export default {
   emits: ["restart", "downloadRecord", "previousPage"],
   computed: {
     fireworkSrc() {
-      return getSystemEffectAssets("Firework.gif");
+      console.log(getSystemEffectAssets("Firework.mp4"));
+      return getSystemEffectAssets("Firework.mp4");
     },
   },
   methods: {
