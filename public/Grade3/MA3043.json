@@ -4,6 +4,7 @@
     "Type": "PlainText",
     "Content": "請點擊數線上的空格，並使用數字鍵盤填入正確的數字。"
   },
+  "introvideo": "MA3043.mp4",
   "TotalLevel": 3,
   "GameType": "NumberLock",
   "GameConfig": {

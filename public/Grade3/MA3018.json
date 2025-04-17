@@ -2,6 +2,7 @@
   "id": "MA3018",
   "TotalLevel": 3,
   "GameType": "NumberLock",
+  "introvideo": "MA3018.mp4",
   "GameConfig": {
     "NumberPadAutoDisappear": false,
     "layout": {

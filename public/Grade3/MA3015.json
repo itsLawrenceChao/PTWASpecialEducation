@@ -1,6 +1,6 @@
 {
   "id": "MA3015",
-  "introvideo": "src",
+  "introvideo": "MA3015.mp4",
   "GameType": "MoneyDrag",
   "GameConfig": {
     "auto-rand": true
