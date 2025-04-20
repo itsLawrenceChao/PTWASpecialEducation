@@ -40,7 +40,7 @@ export default {
   emits: ["readText", "enterGame"],
   data() {
     return {
-      image404: getSystemAssets("image404width.gif", "general"),
+      image404: getSystemAssets("404-not-found.png", "general"),
       imageSrc: undefined,
     };
   },

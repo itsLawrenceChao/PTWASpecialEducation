@@ -103,7 +103,7 @@ export default {
       }
     },
     load404Image() {
-      this.mediaSrc = getSystemAssets("image404width.gif", "general");
+      this.mediaSrc = getSystemAssets("404-not-found.png", "general");
     },
     closeModal() {
       this.$emit("close");
