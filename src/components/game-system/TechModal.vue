@@ -158,7 +158,10 @@ video {
   }
   img {
     max-height: 60vh;
-    max-width: auto;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 }
 </style>
