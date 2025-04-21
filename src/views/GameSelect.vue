@@ -703,14 +703,19 @@ header {
   flex-direction: column;
   height: 90vh;
   background-color: #dfedb3;
-  padding: 0 0.7rem;
+  padding: 0 0.5rem;
+  overflow-y: auto;
   &__title {
     font-size: 1.5em;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    background-color: #dfedb3;
+    z-index: 1;
   }
   &__button-group {
     display: grid;
-    gap: 1rem;
+    gap: 0.5rem;
   }
   &__button {
     transition: transform 0.3s ease;
@@ -720,7 +725,8 @@ header {
     @extend .button-border;
     width: 100%;
     font-weight: 600;
-    height: 2.6rem;
+    height: 2.5rem;
+    padding: 0 0.5rem;
     &--semester-active {
       background-color: #a8c2ea;
     }
