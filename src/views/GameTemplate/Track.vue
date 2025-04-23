@@ -60,11 +60,7 @@
 <script>
 import { getComponents } from "@/utilitys/get-components.js";
 import { soundManager } from "@/utilitys/sound-manager.js";
-import {
-  getSystemAssets,
-  getGameStaticAssets,
-  getSoundAssets,
-} from "@/utilitys/get_assets";
+import { getGameStaticAssets, getSoundAssets } from "@/utilitys/get_assets";
 
 export default {
   name: "QuizComponent",
