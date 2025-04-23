@@ -86,8 +86,8 @@ export default {
       currentInput: "",
 
       NUMBER_LINE_Y_RATIO: 0.15,
-      LINE_X_START_RATIO: 0.05,
-      LINE_X_END_RATIO: 0.95,
+      LINE_X_START_RATIO: 0.03,
+      LINE_X_END_RATIO: 0.97,
       ARROW_OFFSET_RATIO: 0.01,
       RECT_PADDING: 5,
       FONT_SIZE_RATIO: 0.03,
@@ -166,15 +166,12 @@ export default {
       }
     },
     getMarkerPosition(index, intervalLength) {
-      return (
-        this.gameWidth * this.LINE_X_START_RATIO +
-        intervalLength * (index + 0.5)
-      );
+      return this.gameWidth * this.LINE_X_START_RATIO + intervalLength * index;
     },
     calculateIntervalLength() {
       return (
-        (this.gameWidth * 0.9) /
-        ((this.Data.max - this.Data.min) / this.Data.spacing + 1)
+        (this.gameWidth * (this.LINE_X_END_RATIO - this.LINE_X_START_RATIO)) /
+        ((this.Data.max - this.Data.min) / this.Data.spacing + 0.5)
       );
     },
     drawNumbers() {
