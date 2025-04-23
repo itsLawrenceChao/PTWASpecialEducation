@@ -20,24 +20,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 1,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 6,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 8,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               }
             ],
@@ -87,24 +84,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 2,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 10,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 6,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               }
             ],
@@ -154,24 +148,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 11,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 9,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 3,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               }
             ],
@@ -223,24 +214,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 8,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 11,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 1,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               }
             ],
@@ -290,24 +278,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 4,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 7,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 9,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               }
             ],
@@ -357,24 +342,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 5,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 10,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 1,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               }
             ],
@@ -424,24 +406,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 9,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 12,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 4,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               }
             ],
@@ -493,24 +472,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 1,
-                  "min": 25,
-                  "sec": 0
+                  "min": 25
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 4,
-                  "min": 55,
-                  "sec": 0
+                  "min": 55
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 7,
-                  "min": 10,
-                  "sec": 0
+                  "min": 10
                 }
               }
             ],
@@ -560,24 +536,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 8,
-                  "min": 35,
-                  "sec": 0
+                  "min": 35
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 5,
-                  "min": 20,
-                  "sec": 0
+                  "min": 20
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 12,
-                  "min": 5,
-                  "sec": 0
+                  "min": 5
                 }
               }
             ],
@@ -627,24 +600,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 4,
-                  "min": 45,
-                  "sec": 0
+                  "min": 45
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 9,
-                  "min": 15,
-                  "sec": 0
+                  "min": 15
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 6,
-                  "min": 25,
-                  "sec": 0
+                  "min": 25
                 }
               }
             ],
@@ -694,24 +664,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 2,
-                  "min": 40,
-                  "sec": 0
+                  "min": 40
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 5,
-                  "min": 50,
-                  "sec": 0
+                  "min": 50
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 12,
-                  "min": 10,
-                  "sec": 0
+                  "min": 10
                 }
               }
             ],
@@ -763,24 +730,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 6,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 9,
-                  "min": 28,
-                  "sec": 0
+                  "min": 28
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 3,
-                  "min": 45,
-                  "sec": 0
+                  "min": 45
                 }
               }
             ],
@@ -830,24 +794,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 12,
-                  "min": 10,
-                  "sec": 0
+                  "min": 10
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 5,
-                  "min": 25,
-                  "sec": 0
+                  "min": 25
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 1,
-                  "min": 39,
-                  "sec": 0
+                  "min": 39
                 }
               }
             ],
@@ -897,24 +858,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 2,
-                  "min": 24,
-                  "sec": 0
+                  "min": 24
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 8,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 4,
-                  "min": 5,
-                  "sec": 0
+                  "min": 5
                 }
               }
             ],
@@ -964,24 +922,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 3,
-                  "min": 48,
-                  "sec": 0
+                  "min": 48
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 11,
-                  "min": 20,
-                  "sec": 0
+                  "min": 20
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 7,
-                  "min": 10,
-                  "sec": 0
+                  "min": 10
                 }
               }
             ],
@@ -1031,24 +986,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 12,
-                  "min": 0,
-                  "sec": 0
+                  "min": 0
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 6,
-                  "min": 6,
-                  "sec": 0
+                  "min": 6
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 3,
-                  "min": 30,
-                  "sec": 0
+                  "min": 30
                 }
               }
             ],
@@ -1100,24 +1052,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 11,
-                  "min": 41,
-                  "sec": 0
+                  "min": 41
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 2,
-                  "min": 13,
-                  "sec": 0
+                  "min": 13
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 5,
-                  "min": 22,
-                  "sec": 0
+                  "min": 22
                 }
               }
             ],
@@ -1167,24 +1116,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 7,
-                  "min": 49,
-                  "sec": 0
+                  "min": 49
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 1,
-                  "min": 1,
-                  "sec": 0
+                  "min": 1
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 6,
-                  "min": 8,
-                  "sec": 0
+                  "min": 8
                 }
               }
             ],
@@ -1234,24 +1180,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 9,
-                  "min": 31,
-                  "sec": 0
+                  "min": 31
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 4,
-                  "min": 58,
-                  "sec": 0
+                  "min": 58
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 11,
-                  "min": 24,
-                  "sec": 0
+                  "min": 24
                 }
               }
             ],
@@ -1301,24 +1244,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 3,
-                  "min": 42,
-                  "sec": 0
+                  "min": 42
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 12,
-                  "min": 22,
-                  "sec": 0
+                  "min": 22
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 8,
-                  "min": 18,
-                  "sec": 0
+                  "min": 18
                 }
               }
             ],
@@ -1368,24 +1308,21 @@
                 "Name": "Clock",
                 "Data": {
                   "hour": 1,
-                  "min": 48,
-                  "sec": 0
+                  "min": 48
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 11,
-                  "min": 6,
-                  "sec": 0
+                  "min": 6
                 }
               },
               {
                 "Name": "Clock",
                 "Data": {
                   "hour": 8,
-                  "min": 12,
-                  "sec": 0
+                  "min": 12
                 }
               }
             ],
