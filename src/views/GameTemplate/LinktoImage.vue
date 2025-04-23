@@ -169,7 +169,7 @@ export default {
           x: item.x + NewX,
           y: item.y + NewY + this.SelectionHeight,
           radius: 10,
-          fill: "yellow",
+          fill: "orange",
         });
       });
     };
