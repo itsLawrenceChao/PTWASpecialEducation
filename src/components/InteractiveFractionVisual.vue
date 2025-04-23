@@ -4,6 +4,7 @@
       ref="fractionChart"
       class="fraction-chart"
       :class="{ 'fraction-chart--clickable': !displayOnly }"
+      @wheel="handleWheel"
     >
       <canvas
         v-if="!isCupMode"
@@ -400,6 +401,20 @@ export default {
       }
       this.checkAnswer();
     },
+
+    handleWheel(event) {
+      if (this.displayOnly) return;
+
+      // 阻止預設的滾動行為
+      event.preventDefault();
+
+      // 根據滾輪方向增加或減少分數
+      if (event.deltaY < 0) {
+        this.increaseFraction();
+      } else {
+        this.decreaseFraction();
+      }
+    },
   },
 };
 </script>
@@ -420,6 +435,7 @@ export default {
   align-items: center;
   min-height: inherit;
   position: relative;
+  overflow: hidden;
   &__canvas {
     width: 100%;
     height: 100%;
