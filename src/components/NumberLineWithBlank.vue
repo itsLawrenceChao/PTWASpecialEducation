@@ -43,8 +43,8 @@
 import { defineAsyncComponent } from "vue";
 export default {
   components: {
-    FloatingNumPad: defineAsyncComponent(() =>
-      import("@/components/FloatNumPad.vue")
+    FloatingNumPad: defineAsyncComponent(
+      () => import("@/components/FloatNumPad.vue")
     ),
   },
   props: {
@@ -240,9 +240,6 @@ export default {
       this.openNumPad();
     },
     updateMenuPosition(rect) {
-      const stage = this.$refs.stage.getStage();
-      const pointerPos = stage.getPointerPosition();
-
       const containerRect = this.$refs.container.getBoundingClientRect();
       const rectTop = containerRect.top + rect.y + rect.height;
       const rectLeft = containerRect.left + rect.x;
