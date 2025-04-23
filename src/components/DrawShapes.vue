@@ -166,6 +166,7 @@ export default {
           e.target.getStage().getPointerPosition().y,
         ],
         stroke: "green",
+        strokeWidth: 8,
       });
     },
     moveLine(e) {
