@@ -3,7 +3,7 @@
   "GameType": "SelectGame",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請分辨圖片中的角度為鈍角、銳角或直角"
+    "Content": "選選看適合的時間單位"
   },
   "GameConfig": {
     "GlobalTitle": "請選擇正確的單位",
