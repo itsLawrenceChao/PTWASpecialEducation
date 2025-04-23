@@ -67,7 +67,7 @@
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
         "Question_Text": "洗手大約需要1 (        )，請問使用哪個單位?",
-        "Answer": "秒鐘",
+        "Answer": "分鐘",
         "SlotComponents": [
           {
             "Name": "ImageContainer",
