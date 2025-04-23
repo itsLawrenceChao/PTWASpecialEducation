@@ -209,14 +209,14 @@ export default {
       this.currentLine = newLine; // 保存對當前線的引用
     },
 
-    Drawing(e) {
+    Drawing() {
       if (this.OnDrawing && this.currentLine) {
         let MousePos = this.$refs.stage.getNode().getPointerPosition();
         this.currentLine.points.splice(2, 2, MousePos.x, MousePos.y);
         this.$refs.LineLayer.getNode().batchDraw(); // 使用 batchDraw 來優化性能
       }
     },
-    EndDrawing(e) {
+    EndDrawing() {
       if (!this.OnDrawing) {
         return;
       }
