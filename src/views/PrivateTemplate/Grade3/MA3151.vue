@@ -45,7 +45,6 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import { getGameStaticAssets } from "@/utilitys/get_assets.js"; // Feel free to change your the method to get assets.
 
 export default {
   name: "FractionGame",
