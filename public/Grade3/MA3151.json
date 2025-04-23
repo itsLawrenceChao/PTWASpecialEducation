@@ -123,7 +123,7 @@
     [
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上\\frac{6}{10}杯水",
+        "questionDescription": "先塗上0.6杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -144,7 +144,7 @@
       },
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上\\frac{7}{10}杯水",
+        "questionDescription": "先塗上0.7杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -165,7 +165,7 @@
       },
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上\\frac{8}{10}杯水",
+        "questionDescription": "先塗上0.8杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -186,7 +186,7 @@
       },
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上\\frac{9}{10}杯水",
+        "questionDescription": "先塗上0.9杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -207,7 +207,7 @@
       },
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上\\frac{5}{10}杯水",
+        "questionDescription": "先塗上0.5杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
