@@ -11,7 +11,7 @@
     [
       {
         "answerType": "decimal",
-        "questionDescription": "先塗上3/10杯水",
+        "questionDescription": "先塗上\\frac{3}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -33,7 +33,7 @@
       },
       {
         "answerType": "decimal",
-        "questionDescription": "先塗上1/10杯水",
+        "questionDescription": "先塗上\\frac{1}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -55,7 +55,7 @@
       },
       {
         "answerType": "decimal",
-        "questionDescription": "先塗上2/10杯水",
+        "questionDescription": "先塗上\\frac{2}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -77,7 +77,7 @@
       },
       {
         "answerType": "decimal",
-        "questionDescription": "先塗上4/10杯水",
+        "questionDescription": "先塗上\\frac{4}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -99,7 +99,7 @@
       },
       {
         "answerType": "decimal",
-        "questionDescription": "先塗上5/10杯水",
+        "questionDescription": "先塗上\\frac{5}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -123,7 +123,7 @@
     [
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上6/10杯水",
+        "questionDescription": "先塗上\\frac{6}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -144,7 +144,7 @@
       },
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上7/10杯水",
+        "questionDescription": "先塗上\\frac{7}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -165,7 +165,7 @@
       },
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上8/10杯水",
+        "questionDescription": "先塗上\\frac{8}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -186,7 +186,7 @@
       },
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上9/10杯水",
+        "questionDescription": "先塗上\\frac{9}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,
@@ -207,7 +207,7 @@
       },
       {
         "answerType": "fraction",
-        "questionDescription": "先塗上5/10杯水",
+        "questionDescription": "先塗上\\frac{5}{10}杯水",
         "question": {
           "Numerator": 0,
           "Denominator": 10,

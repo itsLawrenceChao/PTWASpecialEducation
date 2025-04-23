@@ -1,6 +1,8 @@
 <template>
   <div class="MA3151__container">
-    <p class="question-text">{{ GameData.questionDescription }}</p>
+    <p class="question-text">
+      <FractionText :text="GameData.questionDescription" :ID="ID" />
+    </p>
     <div class="question-section">
       <InteractiveFractionVisual
         :Data="GameData.question"
@@ -57,6 +59,9 @@ export default {
     ),
     FractionForAnswer: defineAsyncComponent(
       () => import("@/components/FractionForAnswer.vue")
+    ),
+    FractionText: defineAsyncComponent(
+      () => import("@/components/FractionText.vue")
     ),
   },
   props: {
