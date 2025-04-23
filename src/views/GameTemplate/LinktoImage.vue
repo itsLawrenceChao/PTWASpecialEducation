@@ -189,6 +189,15 @@ export default {
   },
   methods: {
     StartDrawing(index) {
+      // 檢查這個矩形是否已經有連線
+      for (let i = this.LinkedRecord.length - 1; i >= 0; i--) {
+        if (this.LinkedRecord[i][0] === index) {
+          // 移除該連線
+          this.LinkedRecord.splice(i, 1);
+          this.Lines.splice(i, 1);
+        }
+      }
+
       this.OnDrawingRectIndex = index;
       this.OnDrawing = true;
       this.ErrorMesseagesSwitch.WrongAnswer = false;
@@ -222,12 +231,20 @@ export default {
       }
       let MousePos = this.$refs.stage.getNode().getPointerPosition();
       let point = this.WhichMountPoint(MousePos.x, MousePos.y);
-      let linkedBefore = this.CheckPairedBefore(this.OnDrawingRectIndex, point);
 
-      if (point === -1 || linkedBefore) {
+      if (point === -1) {
         // 如果沒有連接到有效的點，刪除最後添加的線
         this.Lines.pop();
       } else {
+        // 檢查這個點是否已經有連線
+        for (let i = this.LinkedRecord.length - 1; i >= 0; i--) {
+          if (this.LinkedRecord[i][1] === point) {
+            // 移除該連線
+            this.LinkedRecord.splice(i, 1);
+            this.Lines.splice(i, 1);
+          }
+        }
+
         // 更新線的終點為有效的連接點
         this.currentLine.points.splice(
           2,
@@ -235,9 +252,9 @@ export default {
           this.ImageMountPoint[point].x,
           this.ImageMountPoint[point].y
         );
-      }
-      if (point != -1 && linkedBefore != true)
         this.LinkedRecord.push([this.OnDrawingRectIndex, point]);
+      }
+
       this.OnDrawing = false;
       this.currentLine = null;
       this.$refs.LineLayer.getNode().batchDraw();
@@ -255,8 +272,15 @@ export default {
       return -1;
     },
     CheckPairedBefore(x, y) {
+      // 檢查起點是否已經有連線
       for (let i in this.LinkedRecord) {
-        if (this.LinkedRecord[i][0] == x && this.LinkedRecord[i][1] == y) {
+        if (this.LinkedRecord[i][0] == x) {
+          return true;
+        }
+      }
+      // 檢查終點是否已經有連線
+      for (let i in this.LinkedRecord) {
+        if (this.LinkedRecord[i][1] == y) {
           return true;
         }
       }
