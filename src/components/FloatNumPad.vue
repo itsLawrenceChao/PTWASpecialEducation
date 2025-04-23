@@ -80,8 +80,8 @@ export default {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
 
-        let top = parseFloat(this.Data.top) + this.bais;
-        let left = parseFloat(this.Data.left) + this.bais;
+        let top = parseFloat(this.Data.top);
+        let left = parseFloat(this.Data.left);
 
         if (top + numpadHeight > viewportHeight) {
           top = viewportHeight - numpadHeight;
