@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:electron": "cross-env ELECTRON=true vite build",
     "preview": "vite preview",
     "docker-test": "docker-compose build --no-cache && docker-compose up",
     "test-all": "eslint . && npm run build && npm run docker-test",
@@ -16,7 +17,7 @@
     "format": "prettier .  --write",
     "format-check": "prettier --check .",
     "electron:dev": "concurrently \"vite\" \"cross-env NODE_ENV=development electron .\"",
-    "electron:build": "npm run build && electron-builder"
+    "electron:build": "npm run build:electron && electron-builder"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
