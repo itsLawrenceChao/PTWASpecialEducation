@@ -279,7 +279,7 @@
             }
           ]
         ],
-        "Answer": ["Big"]
+        "Answer": ["Small"]
       },
       {
         "QuestionText": "比大小",
@@ -375,7 +375,7 @@
             }
           ]
         ],
-        "Answer": ["Equal"]
+        "Answer": ["Small"]
       }
     ],
     [
