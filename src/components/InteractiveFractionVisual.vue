@@ -380,30 +380,25 @@ export default {
         y: this.gameHeight * this.gridScale.y,
       };
     },
-
-    handleShapeClick() {
-      if (this.displayOnly) return;
-
-      this.numerator =
-        this.numerator >= this.denominator ? 0 : this.numerator + 1;
-
+    checkAnswer() {
       const isCorrect =
         this.numerator === this.answer.numerator &&
         this.denominator === this.answer.denominator;
 
       this.$emit("replyAnswer", isCorrect);
     },
-
     decreaseFraction() {
       if (this.numerator > 0) {
         this.numerator--;
       }
+      this.checkAnswer();
     },
 
     increaseFraction() {
       if (this.numerator < this.denominator) {
         this.numerator++;
       }
+      this.checkAnswer();
     },
   },
 };
