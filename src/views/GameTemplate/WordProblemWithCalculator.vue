@@ -141,9 +141,13 @@ export default {
 </script>
 <style scoped lang="scss">
 .outter-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: $gap--medium;
+  justify-content: center;
+  align-items: center;
 }
 .head-container {
   @extend .container-basic;
@@ -153,6 +157,8 @@ export default {
   font-size: $text-large;
 }
 .word-problem {
+  width: 100%;
+  padding: $gap--medium;
   display: flex;
   justify-content: center;
   gap: $gap--medium;
@@ -161,6 +167,7 @@ export default {
     width: 40%;
   }
   .left-container {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
