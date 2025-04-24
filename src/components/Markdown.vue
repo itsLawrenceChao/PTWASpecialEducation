@@ -66,6 +66,9 @@ export default {
     this.parseMarkdown();
     emitter.on("checkAnswer", this.markWrong);
   },
+  beforeUnmount() {
+    emitter.off("checkAnswer", this.markWrong);
+  },
   methods: {
     parseMarkdown() {
       const content = this.markdownContent.trim();
