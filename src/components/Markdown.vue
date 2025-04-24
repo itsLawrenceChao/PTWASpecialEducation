@@ -158,8 +158,8 @@ export default {
       const inputRect = event.target.getBoundingClientRect();
       this.isShowNumPad = true;
       this.floatNumPadLocation = {
-        top: `${inputRect.top + window.scrollY + this.numPadOffset}px`,
-        left: `${inputRect.right + window.scrollX}px`,
+        top: `${inputRect.bottom + window.scrollY + this.numPadOffset}px`,
+        left: `${inputRect.left + window.scrollX}px`,
       };
     },
     fillToInput(content) {
