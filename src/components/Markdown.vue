@@ -180,9 +180,16 @@ export default {
     markWrong() {
       this.checkAnswer();
       let cnt = 0;
+      // 先檢查 inputRefs 是否存在
+      if (!this.$refs.inputRefs) {
+        console.warn("inputRefs not found");
+        return;
+      }
+
       this.elements.forEach((element) => {
         if (element.el === "input") {
-          if (this.wrongInputIndex.includes(cnt)) {
+          // 檢查該索引的 input 是否存在
+          if (this.wrongInputIndex.includes(cnt) && this.$refs.inputRefs[cnt]) {
             this.$refs.inputRefs[cnt].style.backgroundColor = "red";
           }
           cnt++;

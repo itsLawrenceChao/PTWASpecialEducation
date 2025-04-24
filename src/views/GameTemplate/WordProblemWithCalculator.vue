@@ -105,10 +105,8 @@ export default {
   },
   methods: {
     checkAnswer() {
-      if (this.GameConfig.calculatorVerify == false)
-        this.calculatorAnswerStatus = true;
-      if (this.GameConfig.markdownVerify == false)
-        this.markdownAnswerStatus = true;
+      if (!this.GameConfig.calculatorVerify) this.calculatorAnswerStatus = true;
+      if (!this.GameConfig.markdownVerify) this.markdownAnswerStatus = true;
 
       emitter.emit("checkAnswer");
       if (this.markdownAnswerStatus && this.calculatorAnswerStatus) {
