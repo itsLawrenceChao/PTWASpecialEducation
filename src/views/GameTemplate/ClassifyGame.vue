@@ -47,7 +47,12 @@
             class="drop-area__list"
           >
             <template #item="{ element }">
-              <div class="drop-area__item">
+              <div
+                class="drop-area__item"
+                :class="{
+                  'incorrect-item': incorrectItems.includes(element.Tag),
+                }"
+              >
                 <component
                   :is="element['Name']"
                   :Data="element['Data']"
@@ -96,6 +101,7 @@ export default {
       GroupID: 0,
       groupedItems: this.GameData.Answer.map(() => []),
       draggableItems: [],
+      incorrectItems: [],
     };
   },
   watch: {
@@ -148,6 +154,16 @@ export default {
     handleIncorrectAnswer(index) {
       this.$emit("play-effect", "WrongSound");
 
+      // 找出所有群組中的錯誤項目
+      const allIncorrectItems = [];
+      this.groupedItems.forEach((group, groupIndex) => {
+        const incorrectItems = group.filter(
+          (item) => !this.GameData.Answer[groupIndex].Items.includes(item.Tag)
+        );
+        allIncorrectItems.push(...incorrectItems.map((item) => item.Tag));
+      });
+      this.incorrectItems = allIncorrectItems;
+
       this.$emit("add-record", [
         this.groupedItems[index],
         this.GameData.Answer[index].Items,
@@ -156,6 +172,7 @@ export default {
     },
 
     handleCorrectAnswer() {
+      this.incorrectItems = [];
       this.$emit("add-record", [
         this.groupedItems,
         this.GameData.Answer,
@@ -267,6 +284,13 @@ export default {
       cursor: pointer;
       display: flex;
       justify-content: center;
+      transition: border-color 0.3s ease;
+
+      &.incorrect-item {
+        border: 3px solid red;
+        border-radius: 10px;
+        padding: 0.5rem;
+      }
     }
   }
 }
