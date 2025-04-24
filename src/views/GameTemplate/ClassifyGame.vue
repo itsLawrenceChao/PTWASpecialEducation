@@ -95,11 +95,25 @@ export default {
       questionText: this.GameData.Text,
       GroupID: 0,
       groupedItems: this.GameData.Answer.map(() => []),
-      draggableItems: this.GameData.Question,
+      draggableItems: [],
     };
   },
-  created() {},
+  watch: {
+    GameData: {
+      handler() {
+        this.initializeItems();
+      },
+      deep: true,
+    },
+  },
+  created() {
+    this.initializeItems();
+  },
   methods: {
+    initializeItems() {
+      this.draggableItems = [...this.GameData.Question];
+      this.groupedItems = this.GameData.Answer.map(() => []);
+    },
     checkAnswer() {
       for (let groupIndex in this.groupedItems) {
         if (!this.isGroupSizeCorrect(groupIndex)) {
