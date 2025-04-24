@@ -42,6 +42,8 @@
 import VirtualNumPad from "@/components/VirtualNumPadInput.vue";
 import { defineAsyncComponent } from "vue";
 import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
+
 export default {
   name: "NumberLock",
   components: {
@@ -253,6 +255,7 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", ["不支援顯示", "不支援顯示", `錯誤`]);
+        emitter.emit("checkAnswer");
       }
     },
   },
