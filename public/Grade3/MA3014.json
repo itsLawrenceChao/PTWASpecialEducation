@@ -1,84 +1,259 @@
 {
-    "id": "MA3014",
-    "introvideo": "src",
-    "TotalLevel": 1,
-    "GameType": "ClassifyGame",
-    "ItemsWithImage": true,
-    "GameConfig":{
-
-    },
-    "Questions": [
-        {   
-            "Text": "請將以下物品分類成一般垃圾、資源回收物、有害垃圾",
-            "InitBox": "物品",
-            "Question": [
-                {
-                    "Tag": "1",
-                    "Name": "TextOnly",
-                    "Data": {
-                        "Text" : "衛生紙"
-                    }
-                },
-                {
-                    "Tag": "2",
-                    "Name": "TextOnly",
-                    "Data": {
-                        "Text" : "橡皮筋"
-                    }
-                },
-                {
-                    "Tag": "3",
-                    "Name": "TextOnly",
-                    "Data": {
-                        "Text" : "寶特瓶"
-                    }
-                },
-                {
-                    "Tag": "4",
-                    "Name": "TextOnly",
-                    "Data": {
-                        "Text" : "鐵鋁罐"
-                    }
-                },
-                {
-                    "Tag": "5",
-                    "Name": "TextOnly",
-                    "Data": {
-                        "Text" : "鋁箔包"
-                    }
-                },
-                {
-                    "Tag" : "6",
-                    "Name": "Water",
-                    "Data": {
-                        "Scale": "1000",
-                        "Ml": "300"
-                    }
-                },
-                {
-                    "Tag" : "7",
-                    "Name": "Clock",
-                    "Data": {
-                        "sec" : "0",
-                        "min" : "20",
-                        "hour" : "1"
-                    }
-                }
-            ],
-            "Answer": [
-                {
-                    "GroupName": "一般垃圾",
-                    "Tags": ["1", "2"]
-                },
-                {
-                    "GroupName": "資源回收物",
-                    "Tags": ["3", "4", "5"]
-                },
-                {
-                    "GroupName": "有害垃圾",
-                    "Tags": []
-                }
-            ]
+  "id": "MA3014",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "數數看圖片裡面有多少元?"
+  },
+  "introvideo": "MA3014.mp4",
+  "TotalLevel": 1,
+  "GameType": "Track",
+  "GameConfig": {},
+  "Hint": {},
+  "Questions": [
+    {
+      "Question": [
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "1-1.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["2631", "2701", "2641"],
+          "AnswerIndex": 0
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "1-2.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["1387", "1367", "1376"],
+          "AnswerIndex": 2
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "1-3.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["2676", "2477", "2378"],
+          "AnswerIndex": 1
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "1-4.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["1639", "1299", "1629"],
+          "AnswerIndex": 2
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "1-5.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["1424", "1444", "1414"],
+          "AnswerIndex": 0
         }
-    ]
+      ]
+    },
+    {
+      "Question": [
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "2-1.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["1640", "1046", "1042"],
+          "AnswerIndex": 1
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "2-2.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["2831", "2140", "2138"],
+          "AnswerIndex": 2
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "2-3.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["2312", "2308", "2430"],
+          "AnswerIndex": 1
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "2-4.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["3142", "3078", "3085"],
+          "AnswerIndex": 2
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "2-5.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["3201", "3081", "3191"],
+          "AnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "Question": [
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "3-1.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["1140", "1400", "1138"],
+          "AnswerIndex": 0
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "3-2.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["1908", "2091", "2009"],
+          "AnswerIndex": 2
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "3-3.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["3611", "3606", "3511"],
+          "AnswerIndex": 0
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "3-4.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["3410", "3104", "3084"],
+          "AnswerIndex": 1
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "3-5.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["4090", "5060", "4860"],
+          "AnswerIndex": 1
+        }
+      ]
+    },
+    {
+      "Question": [
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "4-1.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["3704", "3480", "3804"],
+          "AnswerIndex": 2
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "4-2.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["2032", "1932", "1952"],
+          "AnswerIndex": 2
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "4-3.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["2020", "2002", "2015"],
+          "AnswerIndex": 0
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "4-4.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["2040", "2100", "2045"],
+          "AnswerIndex": 0
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "4-5.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["1908", "2389", "1963"],
+          "AnswerIndex": 1
+        }
+      ]
+    },
+    {
+      "Question": [
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "5-1.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["2451", "2531", "2135"],
+          "AnswerIndex": 1
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "5-2.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["5075", "5105", "1570"],
+          "AnswerIndex": 1
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "5-3.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["5223", "5130", "5310"],
+          "AnswerIndex": 0
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "5-4.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["5230", "5010", "4985"],
+          "AnswerIndex": 0
+        },
+        {
+          "name": "ImageContainer",
+          "Data": {
+            "Src": "5-5.png",
+            "Alt": "ddd"
+          },
+          "Selections": ["4983", "5237", "5367"],
+          "AnswerIndex": 2
+        }
+      ]
+    }
+  ]
 }

@@ -1,94 +1,197 @@
 {
-    "id": "MA3013",
-    "introvideo": "src",
-    "TotalLevel": 6,
-    "GameType": "NumberInputGame",
-    "GameConfig": {},
-    "Questions": [
-        {
-            "Question": "請問左方的圖片是多少平方公分呢",
-            "Answer": "6",
-            "SlotComponents": [
-                {
-                    "Name": "ImageContainer",
-                    "Data" : {
-                        "Src": "level1.png",
-                        "Alt": "一個方格板上面有積木"
-                    }
-                }
-            ]
-        },
-        {
-            "Question": "請問左方的圖片是多少平方公分呢",
-            "Answer": "6",
-            "SlotComponents": [
-                {
-                    "Name": "ImageContainer",
-                    "Data" : {
-                        "Src": "level2.png",
-                        "Alt": "一個方格板上面有積木"
-                    }
-                }
-            ]
-        },
-        {
-            "Question": "請問左方的圖片是多少平方公分呢",
-            "Answer": "7",
-            "SlotComponents": [
-                {
-                    "Name": "ImageContainer",
-                    "Data" : {
-                        "Src": "level3.png",
-                        "Alt": "一個方格板上面有積木"
-                    }
-                }
-            ]
-        },
-        {
-            "Question": "請問左方的圖片是多少平方公分呢",
-            "Answer": "6",
-            "SlotComponents": [
-                {
-                    "Name": "ImageContainer",
-                    "Data" : {
-                        "Src": "level4.png",
-                        "Alt": "一個方格板上面有積木"
-                    }
-                }
-            ]
-        },
-        {
-            "Question": "請問左方的圖片是多少平方公分呢",
-            "Answer": "6",
-            "SlotComponents": [
-                {
-                    "Name": "ImageContainer",
-                    "Data" : {
-                        "Src": "level5.png",
-                        "Alt": "一個方格板上面有積木"
-                    }
-                }
-            ]
-        },
-        {
-            "Question": "請問左方的圖片是多少平方公分呢",
-            "Answer": "6",
-            "SlotComponents": [
-                {
-                    "Name": "NumberLine",
-                    "Data": {
-                        "Unit": "Number",
-                        "Start": 0,
-                        "End": 1000,
-                        "Increment": 100,
-                        "Annotate": 200,
-                        "Blank": {
-                            "100": "100",
-                            "200": "200"
-                        }
-                    }
-                }
-            ]
-        }
+  "id": "MA3013",
+  "introvideo": "src",
+  "GameType": "SelfDefine",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "請數數看出現的金額是多少錢，並且在題目中的框框以及定位版中輸入確的答案"
+  },
+  "GameConfig": {},
+  "Questions": [
+    [
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 1361是$i$個千、$i$ 個百、$i$個十、$i$個一合起來的",
+        "markdownInputIndex": [1, 3, 6, 1],
+        "moneyBoard": [1, 3, 6, 1],
+        "answer": 1361
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": " $n$ 1525是$i$個千、$i$ 個百、$i$個十、$i$個一合起來的",
+        "markdownInputIndex": [1, 5, 2, 5],
+        "moneyBoard": [1, 5, 2, 5],
+        "answer": 1525
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 1839是$i$個千、$i$ 個百、$i$個十、$i$個一合起來的",
+        "markdownInputIndex": [1, 8, 3, 9],
+        "moneyBoard": [1, 8, 3, 9],
+        "answer": 1839
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 2184是$i$個千、$i$ 個百、$i$個十、$i$個一合起來的",
+        "markdownInputIndex": [2, 1, 8, 4],
+        "moneyBoard": [2, 1, 8, 4],
+        "answer": 2184
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 3763是$i$個千、$i$ 個百、$i$個十、$i$個一合起來的",
+        "markdownInputIndex": [3, 7, 6, 3],
+        "moneyBoard": [3, 7, 6, 3],
+        "answer": 3763
+      }
+    ],
+    [
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案。",
+        "markdownIndex": "$n$ 4 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [3, 8, 2],
+        "moneyBoard": [4, 3, 8, 2],
+        "answer": 4382
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 3 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [1, 6, 5],
+        "moneyBoard": [3, 1, 6, 5],
+        "answer": 3165
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 3 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [3, 3, 3],
+        "moneyBoard": [3, 3, 3, 3],
+        "answer": 3333
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 5 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [6, 1, 9],
+        "moneyBoard": [5, 6, 1, 9],
+        "answer": 5619
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 2 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [4, 6, 8],
+        "moneyBoard": [2, 4, 6, 8],
+        "answer": 2468
+      }
+    ],
+    [
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 0 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [20, 1, 2],
+        "moneyBoard": [0, 20, 1, 2],
+        "answer": 2012
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 0 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [13, 5, 3],
+        "moneyBoard": [0, 13, 5, 3],
+        "answer": 1353
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 0 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [18, 7, 8],
+        "moneyBoard": [0, 18, 7, 8],
+        "answer": 1878
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 0 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [10, 9, 9],
+        "moneyBoard": [0, 10, 9, 9],
+        "answer": 1099
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 0 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [24, 6, 3],
+        "moneyBoard": [0, 24, 6, 3],
+        "answer": 2463
+      }
+    ],
+    [
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 1 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [5, 2, 10],
+        "moneyBoard": [1, 5, 2, 10],
+        "answer": 1530
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 1 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [2, 3, 12],
+        "moneyBoard": [1, 2, 3, 12],
+        "answer": 1242
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 2 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [4, 5, 11],
+        "moneyBoard": [2, 4, 5, 11],
+        "answer": 2461
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 3 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [9, 6, 16],
+        "moneyBoard": [3, 9, 6, 16],
+        "answer": 3976
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 5 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [3, 7, 14],
+        "moneyBoard": [5, 3, 7, 14],
+        "answer": 5384
+      }
+    ],
+    [
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 6 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [13, 0, 7],
+        "moneyBoard": [6, 13, 0, 7],
+        "answer": 7307
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 5 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [8, 9, 10],
+        "moneyBoard": [5, 8, 9, 10],
+        "answer": 5900
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 3 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [1, 11, 2],
+        "moneyBoard": [3, 1, 11, 2],
+        "answer": 3212
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 4 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [0, 12, 5],
+        "moneyBoard": [4, 0, 12, 5],
+        "answer": 4125
+      },
+      {
+        "questionText": "請數數看錢幣，並且在以下的框框中以及定位版中輸入確的答案",
+        "markdownIndex": "$n$ 2 個千、$i$ 個百、$i$ 個十、$i$ 個一合起來是",
+        "markdownInputIndex": [12, 5, 9],
+        "moneyBoard": [2, 12, 5, 9],
+        "answer": 3259
+      }
     ]
+  ]
 }

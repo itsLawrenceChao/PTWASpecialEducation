@@ -1,21 +1,35 @@
 <template>
-    <div>
-        <p class="h3">{{ this.GameData.Question.text }}</p>
-        <div class="container">
-            <div class="component1">
-                <component :is="this.slotcomponent.Name" :Data="this.slotcomponent.Data" :ID="this.id"></component>
-            </div>
-            <div class="optionbar">
-                <p class="h5">{{ this.GameData.Question.SubQuestion }}</p>
-                <div id="error_msg">{{ errorMsg }}</div>
-                <div class="Buttons">
-                    <button v-for="(items,index) in btn"  @click="judgeAnswer(items)">
-                        {{ items }}
-                    </button>
-                </div>
-            </div>
+  <div>
+    <p class="h3">
+      {{ GameData.Question.text }}
+    </p>
+    <div class="container">
+      <div class="component1">
+        <component
+          :is="slotcomponent.Name"
+          :Data="slotcomponent.Data"
+          :ID="ID"
+        />
+      </div>
+      <div class="optionbar">
+        <p class="h5">
+          {{ GameData.Question.SubQuestion }}
+        </p>
+        <div id="error_msg">
+          {{ errorMsg }}
         </div>
+        <div class="Buttons">
+          <button
+            v-for="(items, index) in btn"
+            :key="index"
+            @click="judgeAnswer(items)"
+          >
+            {{ items }}
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -35,97 +49,100 @@
         }
  * 
  */
-import Desribepng from '@/assets/GamePic/Source/description.png';
-import { GamesGetAssetsFile } from '@/utilitys/get_assets.js';
-import { defineAsyncComponent } from 'vue';
+import { getGameAssets } from "@/utilitys/get_assets.js";
+import { defineAsyncComponent } from "vue";
 export default {
-    Name: 'NumberingGame',
-    data(){
-        return {
-            imageUrl : '',
-            btn:[],
-            errorMsg: '',
-            slotcomponent: {
-
-            }
-        }
+  Name: "NumberingGame",
+  components: {
+    ImageContainer: defineAsyncComponent(() =>
+      import("@/components/ImageContainer.vue")
+    ),
+  },
+  props: {
+    GameData: {
+      type: Object,
+      required: true,
     },
-    props: {
-        GameData: {
-            type: Object,
-            required: true
-        },
-        GameConfig:{
-            type: Object,
-            required: true
-        },
-        id:{
-            type: String,
-            required: true
-        }
+    GameConfig: {
+      type: Object,
+      required: true,
     },
-    created(){
-        this.slotcomponent.Name = this.GameData.SlotComponents[0].Name;
-        this.slotcomponent.Data = this.GameData.SlotComponents[0].Data;
+    ID: {
+      type: String,
+      required: true,
     },
-    mounted(){
-        this.imageUrl=GamesGetAssetsFile(this.id,this.GameData.img)
-        for(var i=this.GameData.Question.Range[0];i<=this.GameData.Question.Range[1];i++){
-            this.btn.push(i);
-        }
-    },
-    methods:{
-        judgeAnswer(answer){
-            if(answer == this.GameData.Answer){
-                this.$emit('play-effect', 'CorrectSound')
-                this.$emit('add-record',[this.GameData.Answer, answer,"正確"])
-                this.$emit('next-question');
-            }
-            else{
-                this.$emit('play-effect', 'WrongSound',)
-                this.$emit('add-record',[this.GameData.Answer,answer,"錯誤"])
-            }
-        }
-    },
-    components: {
-        ImageContainer: defineAsyncComponent(() => import('@/components/ImageContainer.vue'))
+  },
+  emits: ["play-effect", "add-record", "next-question"],
+  data() {
+    return {
+      imageUrl: "",
+      btn: [],
+      errorMsg: "",
+      slotcomponent: {},
+    };
+  },
+  created() {
+    this.slotcomponent.Name = this.GameData.SlotComponents[0].Name;
+    this.slotcomponent.Data = this.GameData.SlotComponents[0].Data;
+  },
+  mounted() {
+    this.imageUrl = getGameAssets(this.ID, this.GameData.img);
+    for (
+      var i = this.GameData.Question.Range[0];
+      i <= this.GameData.Question.Range[1];
+      i++
+    ) {
+      this.btn.push(i);
     }
-}
+  },
+  methods: {
+    judgeAnswer(answer) {
+      if (answer == this.GameData.Answer) {
+        this.$emit("play-effect", "CorrectSound");
+        this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);
+        this.$emit("next-question");
+      } else {
+        this.$emit("play-effect", "WrongSound");
+        this.$emit("add-record", [this.GameData.Answer, answer, "錯誤"]);
+      }
+    },
+  },
+};
 </script>
-<style scoped>
-.GameImg{
-    height: auto;
+<style scoped lang="scss">
+.GameImg {
+  height: auto;
 }
-p{
-    margin-left: 1rem;
+p {
+  margin-left: 1rem;
 }
-.container{
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 70vh;
+  .component1 {
+    width: 60%;
+    height: 100%;
+    component {
+      height: 100%;
+    }
+  }
+  .optionbar {
+    width: 40%;
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 70vh;
-    .component1{
-        width: 60%;
-        height: 100%;
-        component{
-            height: 100%;
-        }
+    flex-direction: column;
+    justify-content: center;
+    .Buttons {
+      button {
+        min-width: 5rem;
+        margin: 10pt;
+        height: 3rem;
+        border-radius: 12px;
+        background-color: #bdb2ff;
+        border: none;
+      }
     }
-    .optionbar{
-        width: 40%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        .Buttons{
-            button{
-                min-width: 5rem;
-                margin: 10pt;
-                height: 3rem;
-                border-radius: 12px;
-                background-color: #bdb2ff;
-                border: none;
-            }
-        }
-    }
+  }
 }
 </style>

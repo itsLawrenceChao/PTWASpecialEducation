@@ -1,96 +1,63 @@
 <template>
-  <div class="gameContainer">
-    <div id="canvasContainer">
+  <div ref="container" class="gameContainer">
+    <div>
       <h2>{{ GameData.Question }}</h2>
       <v-stage :config="configKonva">
         <v-layer>
-          <v-rect :config="configLane"></v-rect>
+          <v-image
+            v-for="(road, index) in configRoad"
+            :key="index"
+            :config="road"
+          />
         </v-layer>
 
         <v-layer>
-          <v-image :config="configCar"></v-image>
+          <v-image :config="configCar" />
         </v-layer>
 
         <v-layer>
-          <passage
-            v-for="i in map"
-            :Y="i[1]"
-            :w="laneWidth"
-            :l="configKonva.width"
-            :option="GameData.Options[i[0]]"
-            :speed="speed"
-            @end="end"
-            @onClick="moveOnClick"
-          >
-          </passage>
+          <v-image
+            v-for="(tunnel, index) in configTunnel"
+            :key="index"
+            :config="tunnel"
+          />
+          <v-rect
+            v-for="(box, index) in configTextBox"
+            :key="index"
+            :config="box"
+          />
+          <v-text
+            v-for="(option, index) in configOption"
+            :key="index"
+            :config="option"
+          />
         </v-layer>
       </v-stage>
     </div>
     <div id="btnContainer">
-      <img :src="upBtn" class="controlBtn" @click="move(1)" />
+      <img :src="upBtn" class="controlBtn" @click="getCurrentOptionId('up')" />
       <br />
-      <img :src="rightBtn" class="controlBtn" @click="move(0)" />
+      <img
+        :src="rightBtn"
+        class="controlBtn"
+        @click="getCurrentOptionId('right')"
+      />
       <br />
-      <img :src="downBtn" class="controlBtn" @click="move(-1)" />
+      <img
+        :src="downBtn"
+        class="controlBtn"
+        @click="getCurrentOptionId('down')"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { GamesGetAssetsFile } from "@/utilitys/get_assets.js";
-import { Container } from "konva/lib/Container";
+import { getSystemAssets, getGameStaticAssets } from "@/utilitys/get_assets.js";
+import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
 
-const carImg = document.createElement("img");
-carImg.src = GamesGetAssetsFile("MA3029", "RacingCar.png");
-
 export default {
-  components: {
-    //lane: defineAsyncComponent(() => import("@/components/lane.vue")),
-    passage: defineAsyncComponent(() => import("@/components/passage.vue")),
-  },
-  data() {
-    return {
-      configKonva: {
-        width: 1000,
-        height: 500,
-      },
-
-      configCar: {
-        image: carImg,
-        x: 50,
-        y: 0,
-        width: 150,
-        height: 150,
-        key: 0,
-      },
-
-      configLane: {
-        x: 0,
-        y: 0,
-        width: 1000,
-        height: 500,
-        fill: "gray",
-        stroke: "gray",
-      },
-
-      map: [
-        [0, 0, false],
-        //[225, false],
-      ],
-
-      laneWidth: 0,
-
-      game: true,
-
-      speed: 1,
-
-      upBtn: GamesGetAssetsFile("MA3029", "arrowUp.jpg"),
-      rightBtn: GamesGetAssetsFile("MA3029", "arrowRight.jpg"),
-      downBtn: GamesGetAssetsFile("MA3029", "arrowDown.jpg"),
-    };
-  },
-
   props: {
     GameData: {
       type: Object,
@@ -100,120 +67,278 @@ export default {
       type: Object,
       required: true,
     },
+    ID: {
+      type: String,
+      required: true,
+    },
   },
 
-  beforeMount() {
-    var gameWidth = document.getElementById("GameContainer").clientWidth;
-    //var canvasCon = document.getElementById("canvasContainer");
-    this.configKonva.width = Math.floor(gameWidth * 0.8);
-    this.configKonva.height = Math.floor(this.configKonva.width / 2);
-    this.configLane.width = this.configKonva.width;
-    this.configLane.height = this.configKonva.height;
+  emits: ["play-effect", "add-record", "next-question"],
+  data() {
+    return {
+      configKonva: {},
+      configRoad: [],
+      configTunnel: [],
+      configOption: [],
+      configTextBox: [],
+      configCar: {},
 
-    this.options = this.GameData.Options.length;
-    this.ans = this.GameData.Answer;
-    //console.log(this.GameData.Options.length);
+      speed: 1,
+      canMove: true,
+      movement: "idle",
+      currentOptionId: 0,
 
-    window.addEventListener("keydown", this.input);
-    this.laneWidth = Math.floor(this.configKonva.height / this.options);
-    for (var i = 1; i < this.options; i++) {
-      //console.log(i);
-      this.map.push([i, this.laneWidth * i, false]);
-    }
-    this.map[this.ans][2] = true;
-    this.configCar.height = Math.floor(this.laneWidth * 0.8);
-    this.configCar.width = this.configCar.height;
-    this.configCar.y = this.laneWidth / 2 - this.configCar.height / 2;
-    //this.randomPassage();
+      upBtn: getGameStaticAssets("RacingCar", "arrowUp.jpg"),
+      rightBtn: getGameStaticAssets("RacingCar", "arrowRight.jpg"),
+      downBtn: getGameStaticAssets("RacingCar", "arrowDown.jpg"),
+    };
   },
 
   mounted() {
+    this.options = canvasTools.shuffleOptions(this.GameData.Options);
+    this.currentOptionId = Math.floor(Math.random() * this.options.length);
+    this.initializeScene();
+    window.addEventListener("keydown", this.input);
     var btnCon = document.getElementById("btnContainer");
     btnCon.style.height = this.configKonva.height + "px";
+    this.game = window.setInterval(this.update, 20);
   },
 
   methods: {
+    initializeScene() {
+      this.gameWidth = this.$refs.container.clientWidth * 0.8;
+      this.configKonva.width = this.gameWidth;
+      this.configKonva.height = this.gameWidth / 2;
+      this.drawRoad();
+      this.drawTunnel();
+      this.drawOptions();
+      this.drawTextBox();
+      this.drawCar();
+    },
+    drawRoad() {
+      const roadImg = new window.Image();
+      roadImg.src = getGameStaticAssets("RacingCar", "road.png");
+      this.laneWidth = this.gameWidth / 2 / this.options.length;
+      this.roadX = 0;
+      for (var i = 0; i < this.options.length; i++) {
+        let road = {
+          x: 0,
+          y: this.laneWidth * i,
+          width: this.gameWidth * 2.225,
+          height: this.laneWidth,
+          image: roadImg,
+        };
+        this.configRoad.push(road);
+      }
+    },
+    drawTunnel() {
+      const tunnelImg = new window.Image();
+      tunnelImg.src = getGameStaticAssets("RacingCar", "tunnel.png");
+      this.tunnelOffset = {
+        x: this.gameWidth,
+        y: 0,
+      };
+      for (var i = 0; i < this.options.length; i++) {
+        let tunnel = {
+          x: canvasTools.offset(this.configRoad[i], this.tunnelOffset).x,
+          y: this.laneWidth * i,
+          width: this.laneWidth * 2,
+          height: this.laneWidth,
+          image: tunnelImg,
+        };
+        this.configTunnel.push(tunnel);
+      }
+    },
+    drawOptions() {
+      this.optionOffset = {
+        x: this.gameWidth + this.laneWidth * 0.85,
+        y: this.laneWidth * 0.325,
+      };
+      for (var i = 0; i < this.options.length; i++) {
+        let option = {
+          x: canvasTools.offset(this.configRoad[i], this.optionOffset).x,
+          y: canvasTools.offset(this.configRoad[i], this.optionOffset).y,
+          fontSize: this.laneWidth * 0.4,
+          text: this.options[i],
+        };
+        this.configOption.push(option);
+      }
+    },
+    drawTextBox() {
+      this.textBoxOffset = {
+        x: this.gameWidth + this.laneWidth * 0.75,
+        y: this.laneWidth * 0.25,
+      };
+      for (var i = 0; i < this.options.length; i++) {
+        let box = {
+          cornerRadius: this.laneWidth * 0.1,
+          stroke: "black",
+          fill: "white",
+          x: canvasTools.offset(this.configRoad[i], this.textBoxOffset).x,
+          y: canvasTools.offset(this.configRoad[i], this.textBoxOffset).y,
+          height: this.laneWidth * 0.5,
+          width: this.laneWidth * 1,
+        };
+        this.configTextBox.push(box);
+      }
+    },
+    drawCar() {
+      const carImg = new window.Image();
+      carImg.src = getGameStaticAssets("RacingCar", "car.png");
+      this.configCar.image = carImg;
+      this.configCar.height = this.laneWidth * 0.8;
+      this.configCar.width = this.laneWidth * 0.8;
+      this.carOffset = { x: this.laneWidth * 0.2, y: this.laneWidth * 0.1 };
+      this.configCar.x = canvasTools.offset(
+        this.configRoad[this.currentOptionId],
+        this.carOffset
+      ).x;
+      this.configCar.y = canvasTools.offset(
+        this.configRoad[this.currentOptionId],
+        this.carOffset
+      ).y;
+    },
+    update() {
+      this.moveRoad();
+      this.moveCar();
+    },
+    moveRoad() {
+      if (this.roadX < this.gameWidth * -1.2) {
+        this.checkAnswer();
+      } else {
+        this.roadX -= this.speed;
+        for (let road in this.configRoad) this.configRoad[road].x = this.roadX;
+        for (let tunnel in this.configTunnel)
+          this.configTunnel[tunnel].x = canvasTools.offset(
+            this.configRoad[0],
+            this.tunnelOffset
+          ).x;
+        for (let option in this.configOption)
+          this.configOption[option].x = canvasTools.offset(
+            this.configRoad[0],
+            this.optionOffset
+          ).x;
+        for (let box in this.configTextBox)
+          this.configTextBox[box].x = canvasTools.offset(
+            this.configRoad[0],
+            this.textBoxOffset
+          ).x;
+      }
+    },
+    moveCar() {
+      switch (this.movement) {
+        case "up":
+          if (
+            this.configCar.y >
+            canvasTools.offset(
+              this.configRoad[this.currentOptionId],
+              this.carOffset
+            ).y
+          ) {
+            this.configCar.y -= this.speed * 4;
+            this.configCar.rotation = -10;
+          } else {
+            this.configCar.rotation = 0;
+            this.canMove = true;
+            this.movement = "idle";
+          }
+          break;
+        case "down":
+          if (
+            this.configCar.y <
+            canvasTools.offset(
+              this.configRoad[this.currentOptionId],
+              this.carOffset
+            ).y
+          ) {
+            this.configCar.y += this.speed * 4;
+            this.configCar.rotation = 10;
+          } else {
+            this.configCar.rotation = 0;
+            this.canMove = true;
+            this.movement = "idle";
+          }
+          break;
+      }
+    },
     input(e) {
       //W = 38/87; A = 37/65; S = 40/83; D = 39/68
       //console.log(e.keyCode);
       switch (e.keyCode) {
         case 38:
         case 87:
-          this.move(1);
+          this.getCurrentOptionId("up");
           break;
 
         case 40:
         case 83:
-          this.move(-1);
+          this.getCurrentOptionId("down");
           break;
 
         case 32:
-          this.move(0);
+          this.getCurrentOptionId("right");
           break;
       }
     },
-    move(key) {
-      if (key == 1) this.configCar.key--;
-      else if (key == -1) this.configCar.key++;
-      else if (key == 0) {
-        this.speed = 10;
-        window.removeEventListener("keydown", this.input);
-      }
-      if (this.configCar.key <= 0) this.configCar.key = 0;
-      else if (this.configCar.key >= this.options)
-        this.configCar.key = this.options - 1;
-      //console.log(this.configCar.key);
-      this.configCar.y =
-        this.map[this.configCar.key][1] +
-        this.laneWidth / 2 -
-        this.configCar.height / 2;
-    },
-    end() {
-      if (this.game) {
-        this.game = false;
-        if (this.configCar.key == this.ans) {
-          //this.configTemp.text = "SUCCESS";
-          this.$emit("play-effect", "CorrectSound");
-          this.$emit("add-record", [
-            this.GameData.Answer,
-            this.configCar.key,
-            "正確",
-          ]);
-          this.$emit("next-question");
-          console.log("check answer : True");
-        } else {
-          this.$emit("play-effect", "WrongSound");
-          this.$emit("add-record", [
-            this.GameData.Answer,
-            this.configCar.key,
-            "錯誤",
-          ]);
-          setTimeout(this.replay, 1000);
-          console.log("check answer : False");
+    getCurrentOptionId(direction) {
+      if (this.canMove) {
+        switch (direction) {
+          case "up":
+            this.currentOptionId--;
+            if (this.currentOptionId < 0) this.currentOptionId = 0;
+            else {
+              this.movement = "up";
+              this.canMove = false;
+            }
+            break;
+          case "down":
+            this.currentOptionId++;
+            if (this.currentOptionId > this.options.length - 1)
+              this.currentOptionId = this.options.length - 1;
+            else {
+              this.movement = "down";
+              this.canMove = false;
+            }
+            break;
+          case "right":
+            this.speed = 10;
+            this.canMove = false;
         }
-        //this.configTemp.visible = true;
       }
-      //alert("end");
+    },
+    checkAnswer() {
+      if (
+        this.options[this.currentOptionId] ==
+        this.GameData.Options[this.GameData.Answer]
+      ) {
+        this.$emit("play-effect", "CorrectSound");
+        this.$emit("add-record", [
+          this.GameData.Options[this.GameData.Answer],
+          this.options[this.currentOptionId],
+          "正確",
+        ]);
+        this.$emit("next-question");
+      } else {
+        this.$emit("play-effect", "WrongSound");
+        this.$emit("add-record", [
+          this.GameData.Options[this.GameData.Answer],
+          this.options[this.currentOptionId],
+          "錯誤",
+        ]);
+        this.replay();
+      }
     },
 
     replay() {
-      this.game = true;
+      this.roadX = 0;
       this.speed = 1;
-      window.addEventListener("keydown", this.input);
-    },
-
-    moveOnClick(Y) {
-      this.configCar.key = Y / this.laneWidth;
-      this.configCar.y =
-        this.map[this.configCar.key][1] +
-        this.laneWidth / 2 -
-        this.configCar.height / 2;
+      this.canMove = true;
     },
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .gameContainer {
   display: flex;
   width: 100%;

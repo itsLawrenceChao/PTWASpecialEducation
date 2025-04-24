@@ -1,30 +1,345 @@
 {
-    "id": "MA3018",
-    "introvideo": "src",
-    "TotalLevel": 1,
-    "GameType": "NumberingGame",
-    "GameConfig":{
-        
+  "id": "MA3018",
+  "TotalLevel": 3,
+  "GameType": "NumberLock",
+  "introvideo": "MA3018.mp4",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "在數線上做做看"
+  },
+  "GameConfig": {
+    "NumberPadAutoDisappear": false,
+    "layout": {
+      "top": true,
+      "down": true,
+      "pad": false
     },
-    "Questions": [
-        {   
-            "Question": {
-                "text": "請數數看題目中有多少支甜甜圈",
-                "SubQuestion": "請點擊下方的按鈕選擇答案",
-                "Range": [5, 10]
-            },
-            "Answer": 8,
-            "SlotComponents" : [
-                {
-                    "Name": "ImageContainer",
-                    "Data": {
-                        "Src": "NumberningGameSample.png",
-                        "Alt": "一張含有甜甜圈的圖片"
-                    }
-                }
-            ],
-            "img": "NumberningGameSample.png",
-            "alt": "一張含有甜甜圈的圖片"
+    "checkAnswer": {
+      "top": false,
+      "down": true
+    }
+  },
+  "Questions": [
+    [
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線1的位置。小鴨向右移動6格，會停在哪一個數字上呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 1,
+            "image": "S_1.png",
+            "finalPosition": 7
+          }
         }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線2的位置。小鴨向右移動3格，會停在哪一個數字上呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 2,
+            "image": "S_1.png",
+            "finalPosition": 5
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線3的位置。小鴨向右移動11格，會停在哪一個數字上呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 3,
+            "image": "S_1.png",
+            "finalPosition": 14
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線3的位置。小鴨向右移動10格，會停在哪一個數字上呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 3,
+            "image": "S_1.png",
+            "finalPosition": 13
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線4的位置。小鴨向右移動8格，會停在哪一個數字上呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 4,
+            "image": "S_1.png",
+            "finalPosition": 12
+          }
+        }
+      }
+    ],
+    [
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "小鴨從9的位置，向左移動3格，會到哪一個數字上?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 9,
+            "image": "S_1.png",
+            "finalPosition": 6
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "小鴨從15的位置，向左移動8格，會到哪一個數字上?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 15,
+            "image": "S_1.png",
+            "finalPosition": 7
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "小鴨從11的位置，向左移動6格，會到哪一個數字上?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 11,
+            "image": "S_1.png",
+            "finalPosition": 5
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "小鴨從12的位置，向左移動4格，會到哪一個數字上?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 12,
+            "image": "S_1.png",
+            "finalPosition": 8
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "小鴨從13的位置，向左移動5格，會到哪一個數字上?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 13,
+            "image": "S_1.png",
+            "finalPosition": 8
+          }
+        }
+      }
+    ],
+    [
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線3的位置，牠想吃的糖果在數線14的位置上。小鴨要向右移動多少格，才會到達糖果在的位置呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 3,
+            "image": "S_1.png",
+            "finalPosition": 14
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線5的位置，牠想吃的糖果在數線10的位置上。小鴨要向右移動多少格，才會到達糖果在的位置呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 5,
+            "image": "S_1.png",
+            "finalPosition": 10
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線12的位置，牠想吃的糖果在數線8的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 12,
+            "image": "S_1.png",
+            "finalPosition": 8
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線13的位置，牠想吃的糖果在數線6的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 13,
+            "image": "S_1.png",
+            "finalPosition": 6
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "有一隻小鴨停在數線15的位置，牠想吃的糖果在數線4的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
+            "Size": "large"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "DragOnNumberLine",
+          "Data": {
+            "spacing": 1,
+            "max": 15,
+            "min": 0,
+            "init_pos": 15,
+            "image": "S_1.png",
+            "finalPosition": 4
+          }
+        }
+      }
     ]
+  ]
 }

@@ -1,26 +1,30 @@
-// 在你的 get_components.js 文件中
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from "vue";
 
-const ComponentsMapping = {
-    ImageContainer: () => import('@/components/ImageContainer.vue'),
-    ImageWithText: () => import('@/components/ImageWithText.vue'),
-    TextOnly: () => import('@/components/TextOnly.vue'),
-    CoulorBarChart: () => import('@/components/CoulorBarChart.vue'),
-    CircleChart: () => import('@/components/CircleChart.vue'),
-    ImageTable: () => import('@/components/DrawImageTable.vue'),
-    DrawImage: () => import('@/components/DrawImage.vue'),
-    NumberBoard: () => import('@/components/NumberBoard.vue'),
-    Numpad: () => import('@/components/VirtualNumPadInput.vue'),
-    Calculator: () => import('@/components/calculator.vue'),
-    Clock: () => import('@/components/clock.vue'),
-    VirtualNumPad: () => import('@/components/VirtualNumPad.vue'),
-    Input: () => import('@/components/ReplyInput.vue'),
-    Fractions: () => import('@/components/Fractions.vue'),
-    Markdown: () => import('@/components/Markdown.vue'),
-    NumberLine: () => import('@/components/NumberLineV2.vue'),
-    Water: () => import('@/components/Water.vue'),
-    MoneyGenerator: () => import('@/components/MoneyGenerator.vue'),
+const componentsMapping = {
+    ImageContainer: defineAsyncComponent(() => import('@/components/ImageContainer.vue')),
+    ImageWithText: defineAsyncComponent(() => import('@/components/ImageWithText.vue')),
+    TextOnly: defineAsyncComponent(() => import('@/components/TextOnly.vue')),
+    CoulorBarChart: defineAsyncComponent(() => import('@/components/CoulorBarChart.vue')),
+    CircleChart: defineAsyncComponent(() => import('@/components/CircleChart.vue')),
+    ImageTable: defineAsyncComponent(() => import('@/components/DrawImageTable.vue')),
+    DrawImage: defineAsyncComponent(() => import('@/components/DrawImage.vue')),
+    NumberBoard: defineAsyncComponent(() => import('@/components/NumberBoard.vue')),
+    Numpad: defineAsyncComponent(() => import('@/components/VirtualNumPadInput.vue')),
+    Calculator: defineAsyncComponent(() => import('@/components/Calculator.vue')),
+    Clock: defineAsyncComponent(() => import('@/components/Clock.vue')),
+    VirtualNumPad: defineAsyncComponent(() => import('@/components/VirtualNumPad.vue')),
+    Input: defineAsyncComponent(() => import('@/components/ReplyInput.vue')),
+    Fractions: defineAsyncComponent(() => import('@/components/Fractions.vue')),
+    Markdown: defineAsyncComponent(() => import('@/components/Markdown.vue')),
+    Water: defineAsyncComponent(() => import('@/components/Water.vue')),
+    MoneyGenerator: defineAsyncComponent(() => import('@/components/MoneyGenerator.vue')),
+    CardWithButton: defineAsyncComponent(() => import('@/components/CardWithButton.vue')),
 }
+
 export function GetComponents(name) {
-    return ComponentsMapping[name] ? defineAsyncComponent(ComponentsMapping[name]) : null
+  return componentsMapping[name] || null;
+}
+
+export function getComponents(name) {
+  return componentsMapping[name] || null;
 }

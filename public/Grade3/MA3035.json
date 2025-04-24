@@ -1,0 +1,627 @@
+{
+  "id": "MA3035",
+  "introvideo": "hint1.mp4",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "[Insert question.]"
+  },
+  "TotalLevel": 1,
+  "GameType": "WordProblemWithCalculator",
+  "GameConfig": {
+    "calculatorVerify": true,
+    "markdownVerify": true
+  },
+  "Hint": {},
+  "Questions": [
+    [
+      {
+        "headQuestion": "姐姐有兩條顏色不同的緞帶，綠色長8公分2毫米，黃色長3公分9毫米，姐姐把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["82", "39"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "121",
+            "Number": ["82", "39"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _8公分2毫米 $i$ 3公分9毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 12, 1, 121]
+        }
+      },
+      {
+        "headQuestion": "姐姐有兩條顏色不同的緞帶，綠色長6公分5毫米，黃色長2公分5毫米，姐姐把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["65", "25"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "90",
+            "Number": ["65", "25"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _6公分5毫米 $i$ 2公分5毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 9, 0, 90]
+        }
+      },
+      {
+        "headQuestion": "阿拓有兩條顏色不同的緞帶，紅色長7公分6毫米，藍色長1公分8毫米，阿拓把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["76", "18"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "94",
+            "Number": ["76", "18"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _7公分6毫米 $i$ 1公分8毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 9, 4, 94]
+        }
+      },
+      {
+        "headQuestion": "阿拓有兩條顏色不同的緞帶，紅色長5公分4毫米，藍色長6公分9毫米，阿拓把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["54", "69"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "123",
+            "Number": ["54", "69"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _5公分4毫米 $i$ 6公分9毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 12, 3, 123]
+        }
+      },
+      {
+        "headQuestion": "阿拓有兩條顏色不同的緞帶，紅色長6公分6毫米，藍色長6公分8毫米，阿拓把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["66", "68"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "134",
+            "Number": ["66", "68"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _6公分6毫米 $i$ 6公分8毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 13, 4, 134]
+        }
+      }
+    ],
+    [
+      {
+        "headQuestion": "姐姐有兩條顏色不同的緞帶，綠色長8公分2毫米，黃色長3公分9毫米，姐姐把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["82", "39"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "121",
+            "Number": ["82", "39"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _8公分2毫米 $i$ 3公分9毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 12, 1, 121]
+        }
+      },
+      {
+        "headQuestion": "姐姐有兩條顏色不同的緞帶，綠色長6公分5毫米，黃色長2公分5毫米，姐姐把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["65", "25"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "90",
+            "Number": ["65", "25"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _6公分5毫米 $i$ 2公分5毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 9, 0, 90]
+        }
+      },
+      {
+        "headQuestion": "阿拓有兩條顏色不同的緞帶，紅色長7公分6毫米，藍色長1公分8毫米，阿拓把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["76", "18"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "94",
+            "Number": ["76", "18"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _7公分6毫米 $i$ 1公分8毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 9, 4, 94]
+        }
+      },
+      {
+        "headQuestion": "阿拓有兩條顏色不同的緞帶，紅色長5公分4毫米，藍色長6公分9毫米，阿拓把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["54", "69"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "123",
+            "Number": ["54", "69"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _5公分4毫米 $i$ 6公分9毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 12, 3, 123]
+        }
+      },
+      {
+        "headQuestion": "阿拓有兩條顏色不同的緞帶，紅色長6公分6毫米，藍色長6公分8毫米，阿拓把兩條緞帶接在一起，請問兩條緞帶加起來共長幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["66", "68"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "134",
+            "Number": ["66", "68"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _6公分6毫米 $i$ 6公分8毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 13, 4, 134]
+        }
+      }
+    ],
+    [
+      {
+        "headQuestion": "繩子有18公分8毫米，用剪刀剪掉52毫米，請問繩子剩下幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["188", "52"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "136",
+            "Number": ["188", "52"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _18公分8毫米 $i$ 52毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 13, 6, 136]
+        }
+      },
+      {
+        "headQuestion": "繩子有9公分7毫米，用剪刀剪掉33毫米，請問繩子剩下幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["97", "33"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "64",
+            "Number": ["97", "33"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _9公分7毫米 $i$ 33毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 6, 4, 64]
+        }
+      },
+      {
+        "headQuestion": "綠緞帶有12公分7毫米，用剪刀剪掉25毫米，請問綠緞帶剩下幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["127", "25"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "102",
+            "Number": ["127", "25"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _12公分7毫米 $i$ 25毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 10, 2, 102]
+        }
+      },
+      {
+        "headQuestion": "綠緞帶有7公分8毫米，用剪刀剪掉46毫米，請問綠緞帶剩下幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["78", "46"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "32",
+            "Number": ["78", "46"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _7公分8毫米 $i$ 46毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 3, 2, 32]
+        }
+      },
+      {
+        "headQuestion": "綠緞帶有10公分9毫米，用剪刀剪掉65毫米，請問綠緞帶剩下幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["109", "65"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "44",
+            "Number": ["109", "65"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _10公分9毫米 $i$ 65毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 4, 4, 44]
+        }
+      }
+    ],
+    [
+      {
+        "headQuestion": "阿海的鉛筆長17公分3毫米，小田的鉛筆比阿海的短3公分8毫米，請問小田的鉛筆長度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["173", "38"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "135",
+            "Number": ["173", "38"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _17公分3毫米 $i$ 3公分8毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 13, 5, 135]
+        }
+      },
+      {
+        "headQuestion": "阿海的鉛筆長14公分2毫米，小田的鉛筆比阿海的短2公分7毫米，請問小田的鉛筆長度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["142", "27"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "115",
+            "Number": ["142", "27"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _14公分2毫米 $i$ 2公分7毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 11, 5, 115]
+        }
+      },
+      {
+        "headQuestion": "阿海的鉛筆長13公分6毫米，小田的鉛筆比阿海的短5公分8毫米，請問小田的鉛筆長度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["136", "58"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "78",
+            "Number": ["136", "58"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _13公分6毫米 $i$ 5公分8毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 7, 8, 78]
+        }
+      },
+      {
+        "headQuestion": "姐姐的手鍊長15公分2毫米，妹妹的手鍊比姐姐的短4公分6毫米，請問妹妹的手鍊長度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["152", "46"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "106",
+            "Number": ["152", "46"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _15公分2毫米 $i$ 4公分6毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 10, 6, 106]
+        }
+      },
+      {
+        "headQuestion": "姐姐的手鍊長16公分5毫米，妹妹的手鍊比姐姐的短3公分7毫米，請問妹妹的手鍊長度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["165", "37"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "128",
+            "Number": ["165", "37"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _16公分5毫米 $i$ 3公分7毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["-", 12, 8, 128]
+        }
+      }
+    ],
+    [
+      {
+        "headQuestion": "哥哥有兩個杯子，馬克杯高度是87毫米，保溫杯比馬克杯高7公分5毫米，請問保溫杯的高度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["87", "75"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "162",
+            "Number": ["87", "75"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _87毫米 $i$ 7公分5毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 16, 2, 162]
+        }
+      },
+      {
+        "headQuestion": "哥哥有兩個杯子，馬克杯高度是98毫米，保溫杯比馬克杯高6公分8毫米，請問保溫杯的高度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["98", "68"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "166",
+            "Number": ["98", "68"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _98毫米 $i$ 6公分8毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 16, 6, 166]
+        }
+      },
+      {
+        "headQuestion": "大熊有一個馬克杯高度是96毫米，他又買了一個玻璃杯，玻璃杯比馬克杯高11公分7毫米，請問玻璃杯的高度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["96", "117"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "213",
+            "Number": ["96", "117"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _96毫米 $i$ 11公分7毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 21, 3, 213]
+        }
+      },
+      {
+        "headQuestion": "大熊有一個馬克杯高度是101毫米，他又買了一個玻璃杯，玻璃杯比馬克杯高5公分8毫米，請問玻璃杯的高度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["101", "58"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "159",
+            "Number": ["101", "58"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _101毫米 $i$ 5公分8毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 15, 9, 159]
+        }
+      },
+      {
+        "headQuestion": "大熊有一個馬克杯高度是123毫米，他又買了一個玻璃杯，玻璃杯比馬克杯高6公分4毫米，請問玻璃杯的高度是幾公分幾毫米?",
+        "calculator": {
+          "Unit": "Length",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["123", "64"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "187",
+            "Number": ["123", "64"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "橫式: _123毫米 $i$ 6公分4毫米 = $i$ 公分 $i$ 毫米 $n$ 也等於 $i$ 毫米_",
+          "Answer": ["+", 18, 7, 187]
+        }
+      }
+    ]
+  ]
+}

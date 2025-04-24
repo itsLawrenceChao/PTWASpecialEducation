@@ -1,58 +1,339 @@
 {
-    "id":"MA3023",
-    "introvideo": "src",
-    "TotalLevel": 2,
-    "GameType" : "FillinBlank",
-    "IntroText": {
-        "Type": "PlainText",
-        "Content": "數學不好的哥哥打算買運動相關的用品，請聰明的你幫哥哥算出總共要花多少錢"
-    },
-    "GameConfig": {
-        "WithImage": true
-    },
-    "_Comment" : "CheckAnswerMode: OnFill, OnClick",
-    "Questions": [
-        [{
-            "Question_Text": "Sample Question",
-            "AssistiveComponent":["Numpad"],
-            "SlotComponents":[
-                {
-                    "Name" : "clock",
-                    "Data" : {
-                        "hour": 3,
-                        "min": 20,
-                        "sec": 0
-                    }
-                }
-            ],
-            "Question" : [
-                ["橫式: 3時5分","$input","25分"],
-                ["$gap","=", "$input", "時", "$input" ,"分"],
-                ["$gap","答案: 下午","$input","時","$input","分"]
-            ],
-            "Answer": ["+","3","30","3","30"],
-            "SubQuestionTitle": "請填入正確的數字"
-        }],
-        [{
-            "Question_Text": "Sample Question",
-            "AssistiveComponent":["Numpad"],
-            "SlotComponents":[
-                {
-                    "Name" : "clock",
-                    "Data" : {
-                        "hour": 3,
-                        "min": 20,
-                        "sec": 0
-                    }
-                }
-            ],
-            "Question" : [
-                ["橫式: 3時5分","$input","25分"],
-                ["$gap","=", "$input", "時", "$input" ,"分"],
-                ["$gap","答案: 下午","$input","時","$input","分"]
-            ],
-            "Answer": ["+","3","30","3","30"],
-            "SubQuestionTitle": "請填入正確的數字"
-        }]
+  "id": "MA3023",
+  "GameType": "CalculatorGame",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "請使用計算器將以下的數字相加"
+  },
+  "GameConfig": {},
+  "Questions": [
+    [
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["2456", "1240"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "1216",
+          "Number": ["2456", "1240"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["3659", "1542"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "2117",
+          "Number": ["3659", "1542"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["4857", "1526"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "3331",
+          "Number": ["4857", "1526"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["5674", "1351"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "4323",
+          "Number": ["5674", "1351"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["5498", "1385"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "4113",
+          "Number": ["5498", "1385"],
+          "Symbol": "-"
+        }
+      }
+    ],
+    [
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["3882", "1258"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "2624",
+          "Number": ["3882", "1258"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["4673", "2545"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "2128",
+          "Number": ["4673", "2545"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["2685", "1517"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "1168",
+          "Number": ["2685", "1517"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["3984", "3268"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "716",
+          "Number": ["3984", "3268"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["2961", "2453"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "508",
+          "Number": ["2961", "2453"],
+          "Symbol": "-"
+        }
+      }
+    ],
+    [
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["6529", "3155"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "3374",
+          "Number": ["6529", "3155"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["5637", "2584"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "3053",
+          "Number": ["5637", "2584"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["5925", "4271"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "1654",
+          "Number": ["5925", "4271"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["6454", "1393"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "5061",
+          "Number": ["6454", "1393"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["4816", "2635"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "2181",
+          "Number": ["4816", "2635"],
+          "Symbol": "-"
+        }
+      }
+    ],
+    [
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["7475", "2750"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "4725",
+          "Number": ["7475", "2750"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["6285", "3471"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "2814",
+          "Number": ["6285", "3471"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["5267", "1924"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "3343",
+          "Number": ["5267", "1924"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["4776", "2856"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "1920",
+          "Number": ["4776", "2856"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 5,
+        "Preset": {
+          "Number": ["6879", "4235"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "2644",
+          "Number": ["6879", "4235"],
+          "Symbol": "-"
+        }
+      }
     ]
+  ]
 }

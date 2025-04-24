@@ -1,0 +1,245 @@
+{
+  "id": "MA3053",
+  "GameType": "SelectGame",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "請分辨圖片中的角度為鈍角、銳角或直角"
+  },
+  "GameConfig": {
+    "GlobalTitle": "請選擇正確的角度",
+    "RandomMode": true
+  },
+  "Hint": {
+    "ShowAs": "Single",
+    "Rule": {
+      "RuleType": "WrongTimes"
+    },
+    "Data": {
+      "MaxWrongTimes": 2,
+      "SourceType": "video",
+      "FilePath": "hint1.mp4"
+    }
+  },
+  "Questions": [
+    [
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "鈍角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "1-1.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "銳角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "1-2.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "銳角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "1-3.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "鈍角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "2-1.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "直角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "2-2.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "銳角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "2-3.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "銳角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "3-1.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "鈍角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "3-2.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "直角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "3-3.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "銳角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "4-1.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "鈍角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "4-2.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "銳角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "4-3.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "鈍角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "5-1.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "銳角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "5-2.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      },
+      {
+        "Question": ["鈍角", "銳角", "直角"],
+        "Question_Text": "請問左圖是什麼角呢?",
+        "Answer": "鈍角",
+        "SlotComponents": [
+          {
+            "Name": "ImageContainer",
+            "Data": {
+              "Src": "5-3.PNG",
+              "Alt": "一個角度"
+            }
+          }
+        ]
+      }
+    ]
+  ]
+}

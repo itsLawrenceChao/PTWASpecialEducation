@@ -2,16 +2,16 @@
   <div class="OutterContainer">
     <div class="Head">
       <p
+        v-if="GameData.QuestionText && GameData.QuestionText != ''"
         class="h1 Title"
-        v-if="this.GameData.QuestionText && this.GameData.QuestionText != ''"
       >
-        {{ this.GameData.QuestionText }}
+        {{ GameData.QuestionText }}
       </p>
       <p
+        v-if="GameData.Description && GameData.Description != ''"
         class="h2 SubTitle"
-        v-if="this.GameData.Description && this.GameData.Description != ''"
       >
-        {{ this.GameData.Description }}
+        {{ GameData.Description }}
       </p>
     </div>
     <hr />
@@ -24,17 +24,17 @@
         <section
           class="QuestionRow"
           :class="{
-            'QuestionRow-Wrong': this.Answered[index] == false,
-            'QuestionRow-Right': this.Answered[index] == true,
+            'QuestionRow-Wrong': Answered[index] == false,
+            'QuestionRow-Right': Answered[index] == true,
           }"
         >
           <div class="CompareCard Left">
             <component
               :is="item[0].Name"
               :Data="item[0].Data"
-              :ID="this.id"
-              @ReplyAnswer="SlotComponentReplyAnswer(0, $event)"
-            ></component>
+              :ID="ID"
+              @reply-answer="SlotComponentReplyAnswer(0, $event)"
+            />
           </div>
           <div class="SymbolContainer">
             <draggable
@@ -48,7 +48,9 @@
             >
               <template #item="{ element }">
                 <div class="clickable Options">
-                  <p class="h1">{{ element.Text }}</p>
+                  <p class="h1">
+                    {{ element.Text }}
+                  </p>
                 </div>
               </template>
             </draggable>
@@ -57,18 +59,17 @@
             <component
               :is="item[1].Name"
               :Data="item[1].Data"
-              :ID="this.id"
-              @ReplyAnswer="SlotComponentReplyAnswer(1, $event)"
-            ></component>
+              :ID="ID"
+              @reply-answer="SlotComponentReplyAnswer(1, $event)"
+            />
           </div>
         </section>
       </div>
     </div>
     <section class="OptionBar">
       <div class="Left">
-        <p class="OptionBarTitle">{{ this.GameData.OptionBarTitle }}</p>
         <draggable
-          :list="this.Symbol"
+          :list="Symbol"
           :sort="false"
           item-key="name"
           :group="{ name: 'Symbols', pull: 'clone', put: false }"
@@ -76,36 +77,37 @@
         >
           <template #item="{ element }">
             <div class="OptionBarItems clickable">
-              <p class="h1">{{ element.Text }}</p>
+              <p class="h1">
+                {{ element.Text }}
+              </p>
             </div>
           </template>
         </draggable>
       </div>
       <button
-        @click="CheckAllAnswer"
+        v-if="GameConfig.CheckAnswerMode == 'Button'"
         class="SucessButton"
-        v-if="this.GameConfig.CheckAnswerMode == 'Button'"
+        @click="CheckAllAnswer"
       >
-        檢查答案
+        送出答案
       </button>
       <!-- <button @click="Triger" class="btn btn-primary">Triger</button> -->
     </section>
   </div>
 </template>
 <script>
-import { GamesGetAssetsFile } from "@/utilitys/get_assets.js";
 import draggable from "vuedraggable";
 import { defineAsyncComponent } from "vue";
-import { GetComponents } from "@/utilitys/get_components.js";
+import { GetComponents } from "@/utilitys/get-components.js";
 export default {
   name: "CompareGame",
   components: {
     draggable,
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
-    ImageWithText: defineAsyncComponent(() =>
-      import("@/components/ImageWithText.vue")
+    ImageWithText: defineAsyncComponent(
+      () => import("@/components/ImageWithText.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     CoulorBarChart: GetComponents("CoulorBarChart"),
@@ -114,7 +116,6 @@ export default {
     DrawImage: GetComponents("DrawImage"),
     NumberBoard: GetComponents("NumberBoard"),
   },
-  emits: ["play-effect", "add-record", "next-level"],
   props: {
     GameData: {
       type: Object,
@@ -124,11 +125,12 @@ export default {
       type: Object,
       required: true,
     },
-    id: {
+    ID: {
       type: String,
       required: true,
     },
   },
+  emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
       a: "",
@@ -156,6 +158,16 @@ export default {
         },
       ],
     };
+  },
+  created() {
+    this.TotalQuestion = this.GameData.Datas.length;
+    this.GameData.Datas.forEach(() => {
+      this.Answered.push(null);
+      this.Answers.push([]);
+      let TempImg = [];
+      this.ImageDatas.push(TempImg);
+    });
+    this.Symbol = this.BSESymbol;
   },
   methods: {
     Triger() {
@@ -216,12 +228,10 @@ export default {
       if (this.GameData.SlotComponentVerifycation == true) {
         // Check if the SlotComponent is correct
         let temp = true;
-        let cnt = 0;
         this.SlotComponentanswer.forEach((element) => {
           if (element != true) {
             temp = false;
           }
-          cnt++;
         });
         console.log("Temp", temp);
         if (temp == false) {
@@ -232,14 +242,14 @@ export default {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
           this.GameData.Answer[0],
-          this.Answers[0],
+          this.Answers[0][0].tag,
           "錯誤",
         ]);
       } else {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
           this.GameData.Answer[0],
-          this.Answers[0],
+          this.Answers[0][0].tag,
           "正確",
         ]);
         this.$emit("next-question");
@@ -257,20 +267,10 @@ export default {
       this.SlotComponentanswer[index] = answer;
     },
   },
-  created() {
-    this.TotalQuestion = this.GameData.Datas.length;
-    for (var i in this.GameData.Datas) {
-      this.Answered.push(null);
-      this.Answers.push([]);
-      let TempImg = [];
-      this.ImageDatas.push(TempImg);
-    }
-    this.Symbol = this.BSESymbol;
-  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .Head {
   width: 100%;
   padding-left: 2rem;
@@ -365,9 +365,6 @@ export default {
   .Left {
     width: 60%;
     margin: 0 2rem;
-    .OptionBarTitle {
-      font-size: 1.4rem;
-    }
     .Options {
       display: flex;
       flex-direction: row;
@@ -383,10 +380,15 @@ export default {
   .SucessButton {
     padding: 1rem;
     width: 40%;
-    background-color: #3a86ff;
+    background-color: $submit-color;
     border: none;
     border-radius: 12px;
     font-size: x-large;
   }
+}
+:deep(.number-board-container) {
+  height: 70%;
+  width: 90%;
+  font-size: 1.2rem;
 }
 </style>

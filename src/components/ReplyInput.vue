@@ -1,45 +1,48 @@
 <template>
-<div class="Outter">
-    <input :type="Data.Type" @input="Reply2Parent" v-model="ReplyDatas">
-</div>
+  <div class="Outter">
+    <input v-model="ReplyDatas" :type="configs.Type" @input="Reply2Parent" />
+  </div>
 </template>
 <script>
 export default {
-    name: 'ReplyInput',
-    props: {
-        Data: {
-            type: Object,
-            required: true
-        }
+  name: "ReplyInput",
+  props: {
+    Data: {
+      type: Object,
+      required: true,
     },
-    data() {
-        return {
-            ReplyDatas : ""
-        }
-    },
-    created() {
-        if (this.Data.Type == undefined) {
-            this.Data.Type = "Text";
-        }
-    },
-    methods: {
-        Reply2Parent(){
-            let ans = this.ReplyDatas == this.Data.Text ? true : false; 
-            this.$emit('ReplyAnswer', ans);
-        }
+  },
+  emits: ["replyAnswer"],
+  data() {
+    return {
+      ReplyDatas: "",
+      configs: {},
+    };
+  },
+  created() {
+    this.configs = this.Data;
+    if (this.configs.Type == undefined) {
+      this.configs.Type = "Text";
     }
+  },
+  methods: {
+    Reply2Parent() {
+      let ans = this.ReplyDatas == this.configs.Text ? true : false;
+      this.$emit("replyAnswer", ans);
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 /* Your component styles here */
-.Outter{
+.Outter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  input {
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    input{
-        width: 100%;
-    }
+  }
 }
 </style>

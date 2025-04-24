@@ -13,7 +13,8 @@ export default defineConfig({
         inject({
             $: "jquery", 
             jQuery: "jquery",
-            "windows.jQuery": "jquery"
+            "windows.jQuery": "jquery",
+            include: ['**/*.js'], // 僅作用於 JavaScript 文件
         }),
         quasar({
             sassVariables: 'src/quasar-variables.sass'
@@ -30,5 +31,5 @@ export default defineConfig({
                 additionalData: '@import "@/scss/main.scss";'
             }
         }
-    }
+    },
 })

@@ -1,166 +1,340 @@
 {
-    "id":"MA3022",
-    "introvideo": "src",
-    "TotalLevel": 4,
-    "GameType" : "CompareGame",
-    "IntroText": {
-        "Type": "PlainText",
-        "Content": "數學不好的哥哥打算買運動相關的用品，請聰明的你幫哥哥算出總共要花多少錢"
-    },
-    "GameConfig": {
-        "CustomeSymbol": true,
-        "SystemSymbol": "BigSmall",
-        "WithImage": false,
-        "CheckAnswerMode": "Button"
-    },
-    
-    "Questions": [
-        {
-            "QuestionText": "比大小",
-            "Description": "比大小，選出最大的數字",
-            "SlotComponentVerifycation": true,
-            "OptionBarTitle": "將正確的符號拖曳到上面的框框中",
-            "Datas": [
-                [
-                    {
-                        "Name" : "CircleChart",
-                        "Data" : {
-                            "Text": "1",
-                            "Mother" : 6,
-                            "Child" : 6,
-                            "Unit" : "盒"
-                        }                        
-                    },
-                    {
-                        "Name" : "CircleChart",
-                        "Data" : {
-                            "Mother" : 6,
-                            "Child" : 2,
-                            "Unit" : "盒"
-                        }                        
-                    }
-                ]
-            ],
-            "Answer": ["Big"]
+  "id": "MA3022",
+  "GameType": "CalculatorGame",
+  "GameConfig": {},
+  "Hint": {},
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "請使用計算器將以下的數字相加"
+  },
+  "Questions": [
+    [
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["355", "62"],
+          "Symbol": "-"
         },
-        {
-            "QuestionText": "比大小",
-            "Description": "比大小，選出最大的數字",
-            "OptionBarTitle": "將正確的符號拖曳到上面的框框中",
-            "SlotComponentVerifycation": true,
-            "Datas": [
-                [
-                    {
-                        "Name" : "CoulorBarChart",
-                        "Data" : {
-                            "Text": "1",
-                            "Mother" : 6,
-                            "Child" : 6,
-                            "Unit": "盒"
-                        }                        
-                    },
-                    {
-                        "Name" : "CoulorBarChart",
-                        "Data" : {
-                            "Mother" : 5,
-                            "Child" : 4,
-                            "Unit": "盒"
-                        }                        
-                    }
-                ]
-            ],
-            "Answer": ["Big"]
-        },
-        {
-            "QuestionText": "比大小",
-            "Description": "比大小，選出最大的數字",
-            "OptionBarTitle": "將正確的符號拖曳到上面的框框中",
-            "SlotComponentVerifycation": true,
-            "Datas": [
-                [
-                    {
-                        "Name" : "DrawImage",
-                        "Data": {
-                            "Mother": 4,
-                            "Child": 2,
-                            "Unit": "盒",
-                            "Object": "apple",
-                            "Alt": "image"
-                        }
-                    },
-                    {
-                        "Name" : "DrawImage",
-                        "Data": {
-                            "Mother": 12,
-                            "Child": 2,
-                            "Unit": "盒",
-                            "Object": "apple",
-                            "Alt": "image"
-                        }                                 
-                    }
-                ]
-            ],
-            "Answer": ["Big"]
-        },
-        {
-            "QuestionText": "比大小",
-            "Description": "比大小，選出最大的數字",
-            "OptionBarTitle": "將正確的符號拖曳到上面的框框中",
-            "SlotComponentVerifycation": true,
-            "Datas": [
-                [
-                    {
-                        "Name" : "NumberBoard",
-                        "Data": {
-                            "Unit": ["時", "分", "秒"],
-                            "Number": 1234
-                        }
-                    },
-                    {
-                        "Name" : "NumberBoard",
-                        "Data": {
-                            "Unit": ["時", "分", "秒"],
-                            "Number": 1234
-                        }                                 
-                    }
-                ]
-            ],
-            "Answer": ["Big"]
-        },
-        {
-            "QuestionText": "比大小",
-            "Description": "比大小，選出最大的數字",
-            "OptionBarTitle": "將正確的符號拖曳到上面的框框中",
-            "SlotComponentVerifycation": true,
-            "Datas": [
-                [
-                    {
-                        "Name" : "MoneyGenerator",
-                        "Data": {
-                            "Thousands": 10,
-                            "FiveHundreds": 1,
-                            "Hundreds": 1,
-                            "Fifties": 2,
-                            "Tens": 5,
-                            "Fives": 1,
-                            "Ones": 10
-                        }
-                    },
-                    {
-                        "Name" : "MoneyGenerator",
-                        "Data": {
-                            "Thousands": 1,
-                            "FiveHundreds": 1,
-                            "Hundreds": 1,
-                            "Fifties": 2,
-                            "Tens": 5,
-                            "Fives": 1,
-                            "Ones": 1
-                        }                              
-                    }
-                ]
-            ],
-            "Answer": ["Big"]
+        "Answer": {
+          "Carry": [],
+          "Answer": "273",
+          "Number": ["355", "62"],
+          "Symbol": "-"
         }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["751", "83"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "668",
+          "Number": ["751", "83"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["527", "65"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "462",
+          "Number": ["527", "65"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["624", "59"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "565",
+          "Number": ["624", "59"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["412", "63"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "349",
+          "Number": ["412", "63"],
+          "Symbol": "-"
+        }
+      }
+    ],
+    [
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["452", "138"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "314",
+          "Number": ["452", "138"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["363", "215"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "148",
+          "Number": ["363", "215"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["585", "427"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "158",
+          "Number": ["585", "427"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["674", "365"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "309",
+          "Number": ["674", "365"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["437", "119"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "318",
+          "Number": ["437", "119"],
+          "Symbol": "-"
+        }
+      }
+    ],
+    [
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["925", "351"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "574",
+          "Number": ["925", "351"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["738", "185"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "553",
+          "Number": ["738", "185"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["612", "250"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "362",
+          "Number": ["612", "250"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["841", "581"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "260",
+          "Number": ["841", "581"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["746", "695"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "51",
+          "Number": ["746", "695"],
+          "Symbol": "-"
+        }
+      }
+    ],
+    [
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["455", "167"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "288",
+          "Number": ["455", "167"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["621", "475"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "146",
+          "Number": ["621", "475"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["567", "289"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "278",
+          "Number": ["567", "289"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["470", "296"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "174",
+          "Number": ["470", "296"],
+          "Symbol": "-"
+        }
+      },
+      {
+        "Unit": "Number",
+        "CarryAmount": 1,
+        "CustomeUnit": null,
+        "NumberAmount": 3,
+        "Preset": {
+          "Number": ["845", "367"],
+          "Symbol": "-"
+        },
+        "Answer": {
+          "Carry": [],
+          "Answer": "478",
+          "Number": ["845", "367"],
+          "Symbol": "-"
+        }
+      }
     ]
+  ]
 }

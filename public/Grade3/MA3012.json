@@ -1,105 +1,51 @@
 {
     "id": "MA3012",
-    "introvideo": "",
-    "TotalLevel": 4,
-    "GameType": "SelectGame",
     "IntroText": {
         "Type": "PlainText",
-        "Content": "小明剛剛學會看時鐘，但是他在寫作業的時候忘記了部分的答案，請聰明的你/妳幫助小明檢查答案"
+        "Content": "請使用連線的方式，將數字與對應的題目連在一起"
     },
-    "GameConfig":{
-        "GlobalTitle": "請選擇正確的角度",
-        "RandomMode": true
-    },
-    "Hint":{
-        "ShowAs" : "Single",
-        "Rule" : {
-            "RuleType": "WrongTimes"
-        },
-        "Data" :{
-            "MaxWrongTimes" : 2,
-            "SourceType" : "video",
-            "FilePath" : "hint1.mp4"
-        }
-    },
+    "TotalLevel": 1,
+    "GameType": "LinkToImage",
+    "GameConfig": {},
+    "Hint": {},
     "Questions": [
-        [{
-            "Question": ["鈍角","銳角","直角"],
-            "Question_Text": "左圖的角度是什麼角呢???",
-            "Answer":  "鈍角",
-            "SlotComponents" : [
-                {
-                    "Name" : "ImageContainer",
-                    "Data" : {
-                        "Src":"level1.png",
-                        "Alt": "一個角度"
-                    }
-                }
-            ]
-        },
         {
-            "Question": ["鈍角","銳角","直角"],
-            "Question_Text": "左圖的角度是什麼角呢???",
-            "Answer":  "鈍角",
-            "SlotComponents" : [
-                {
-                    "Name" : "ImageContainer",
-                    "Data" : {
-                        "Src":"level1.png",
-                        "Alt": "一個角度"
-                    }
-                }
-            ],
-            "img":"level1.png",
-            "img_alt": "一個角度"
-        }],
-        [{
-            "Question": ["鈍角","銳角","直角"],
-            "Question_Text": "左圖的角度的角度是什麼角呢???",
-            "Answer":  "銳角",
-            "SlotComponents" : [
-                {
-                    "Name" : "ImageContainer",
-                    "Data" : {
-                        "Src":"level2.png",
-                        "Alt": "一個角度"
-                    }
-                }
+            "Question": "請使用連線的方式，將數字與對應的題目連在一起",
+            "BGSrc": "1-1.png",
+            "SelectionType": "Text",
+            "Selections": ["4128", "3746", "6746", "3828", "5746", "4638"],
+            "MountPoint": [
+              {
+                "Connect2": "6746",
+                "x": 290,
+                "y": 31.32695810564661
+              },
+              {
+                "Connect2": "5746",
+                "x": 383,
+                "y": 38.32695810564661
+              },
+              {
+                "Connect2": "4638",
+                "x": 571,
+                "y": 35.32695810564661
+              },
+              {
+                "Connect2": "4128",
+                "x": 293,
+                "y": 159.3269581056466
+              },
+              {
+                "Connect2": "3828",
+                "x": 477.5,
+                "y": 161.3269581056466
+              },
+              {
+                "Connect2": "3746",
+                "x": 583.5,
+                "y": 159.3269581056466
+              }
             ]
-        }],
-        [{
-            "Question": ["鈍角","銳角","直角"],
-            "Question_Text": "左圖的角度的角度是什麼角呢???",
-            "Answer":  "鈍角",
-            "SlotComponents" : [
-                {
-                    "Name" : "ImageContainer",
-                    "Data" : {
-                        "Src":"level3.png",
-                        "Alt": "一個角度"
-                    }
-                }
-            ]
-        }],
-        [{
-            "Question": ["鈍角","銳角","直角"],
-            "Question_Text": "左圖的角度的角度是什麼角呢???",
-            "Answer":  "銳角",
-            "SlotComponents" : [
-                {
-                    "Name" : "ImageContainer",
-                    "Data" : {
-                        "Src":"level4.png",
-                        "Alt": "一個角度"
-                    }
-                }
-            ]
-        }],[
-            {
-                "Question": ["鈍角","銳角","直角"],
-                "Question_Text": "左圖的角度sssss的角度是什麼角呢???",
-                "Answer":  "銳角"
-            }
-        ]
+        }
     ]
 }

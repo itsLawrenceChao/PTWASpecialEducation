@@ -1,0 +1,505 @@
+{
+  "id": "MA3029",
+  "introvideo": "hint1.mp4",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "[Insert question.]"
+  },
+  "TotalLevel": 1,
+  "GameType": "WordProblemWithCalculator",
+  "GameConfig": {
+    "calculatorVerify": true,
+    "markdownVerify": true
+  },
+  "Hint": {},
+  "Questions": [
+    [
+      {
+        "headQuestion": "一桶冬瓜茶有4公升700毫升，喝掉1630毫升後，還剩下幾公升幾毫升",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["4700", "1630"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3 70",
+            "Number": ["4700", "1630"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "4公升700毫升-1630毫升=3公升70毫升$n$$n$單位換算:1630毫升=$i$公升$i$毫升",
+          "Answer": [1, 630]
+        }
+      },
+      {
+        "headQuestion": "一桶冬瓜茶有3公升500毫升，喝掉1210毫升後，還剩下幾公升幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["3500", "1210"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2290",
+            "Number": ["3500", "1210"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "3公升500毫升-1210毫升=2公升290毫升 $n$$n$ 單位換算: 1210毫升= $i$ 公升 $i$ 毫升",
+          "Answer": [1, 210]
+        }
+      },
+      {
+        "headQuestion": "一桶冬瓜茶有4公升890毫升，喝掉1180毫升後，還剩下幾公升幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["4890", "1180"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3710",
+            "Number": ["4890", "1180"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "4公升890毫升-1180毫升=3公升710毫升$n$$n$單位換算: 1180毫升= $i$ 公升 $i$ 毫升",
+          "Answer": [1, 180]
+        }
+      },
+      {
+        "headQuestion": "一桶冬瓜茶有5公升990毫升，喝掉1540毫升後，還剩下幾公升幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["5990", "1540"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "4450",
+            "Number": ["5990", "1540"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "5公升990毫升-1540毫升=4公升450毫升 $n$$n$ 單位換算: 1540毫升= $i$ 公升 $i$ 毫升",
+          "Answer": [1, 540]
+        }
+      },
+      {
+        "headQuestion": "一桶冬瓜茶有4公升490毫升，喝掉1230毫升後，還剩下幾公升幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["4490", "1230"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3260",
+            "Number": ["4490", "1230"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "4公升490毫升-1230毫升=3公升260毫升 $n$$n$ 單位換算: 1230毫升= $i$ 公升 $i$ 毫升",
+          "Answer": [1, 230]
+        }
+      }
+    ],
+    [
+      {
+        "headQuestion": "家裡有4公升100毫升的西瓜汁，哥哥喝掉160毫升後，還剩下幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["4100", "160"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3940",
+            "Number": ["4100", "160"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "4公升100毫升-160毫升=3940毫升 $n$$n$ 單位換算: 4公升100毫升= $i$ 毫升",
+          "Answer": [4100]
+        }
+      },
+      {
+        "headQuestion": "家裡有3公升100毫升的西瓜汁，哥哥喝掉150毫升後，還剩下幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["3100", "150"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2950",
+            "Number": ["3100", "150"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "3公升100毫升-150毫升=2950毫升 $n$$n$ 單位換算: 3公升100毫升= $i$ 毫升",
+          "Answer": [3100]
+        }
+      },
+      {
+        "headQuestion": "家裡有4公升300毫升的西瓜汁，哥哥喝掉850毫升後，還剩下幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["4300", "850"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3450",
+            "Number": ["4300", "850"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "4公升300毫升-850毫升=3450毫升 $n$$n$單位換算: 4公升300毫升= $i$ 毫升",
+          "Answer": [4300]
+        }
+      },
+      {
+        "headQuestion": "家裡有4公升200毫升的西瓜汁，哥哥喝掉950毫升後，還剩下幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["4200", "950"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3250",
+            "Number": ["4200", "950"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "4公升200毫升-950毫升=3250毫升 $n$$n$單位換算: 4公升200毫升= $i$ 毫升",
+          "Answer": [4200]
+        }
+      },
+      {
+        "headQuestion": "家裡有3公升300毫升的西瓜汁，哥哥喝掉750毫升後，還剩下幾毫升?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["3300", "750"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2550",
+            "Number": ["3300", "750"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "3公升300毫升-750毫升=2550毫升 $n$$n$單位換算: 3公升300毫升= $i$ 毫升",
+          "Answer": [3300]
+        }
+      }
+    ],
+    [
+      {
+        "headQuestion": "爸爸買了兩個容量不同的水壺，小的水壺可以裝790毫升，大的水壺可以裝1公升220毫升，兩個水壺共可裝幾公升幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["1220", "790"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2 10",
+            "Number": ["1220", "790"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "1公升220毫升+790毫升=2公升10毫升",
+          "Answer": [2, 10]
+        }
+      },
+      {
+        "headQuestion": "爸爸買了兩個容量不同的水壺，小的水壺可以裝850毫升，大的水壺可以裝1公升250毫升，兩個水壺共可裝幾公升幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["1250", "850"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2 110",
+            "Number": ["1250", "850"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "1公升250毫升+850毫升=2公升110毫升",
+          "Answer": [2, 110]
+        }
+      },
+      {
+        "headQuestion": "爸爸買了兩個容量不同的水壺，小的水壺可以裝715毫升，大的水壺可以裝1公升550毫升，兩個水壺共可裝幾公升幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["1550", "715"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2 265",
+            "Number": ["1550", "715"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "1公升550毫升+715毫升=2公升265毫升",
+          "Answer": [2, 265]
+        }
+      },
+      {
+        "headQuestion": "爸爸買了兩個容量不同的水壺，小的水壺可以裝655毫升，大的水壺可以裝1公升550毫升，兩個水壺共可裝幾公升幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["1550", "655"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2 205",
+            "Number": ["1550", "655"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "1公升550毫升+655毫升=2公升205毫升",
+          "Answer": [2, 205]
+        }
+      },
+      {
+        "headQuestion": "爸爸買了兩個容量不同的水壺，小的水壺可以裝785毫升，大的水壺可以裝1公升450毫升，兩個水壺共可裝幾公升幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["1450", "850"],
+            "Symbol": "+"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2 300",
+            "Number": ["1450", "850"],
+            "Symbol": "+"
+          }
+        },
+        "markdown": {
+          "Render": "1公升450毫升+850毫升=2公升300毫升",
+          "Answer": [2, 300]
+        }
+      }
+    ],
+    [
+      {
+        "headQuestion": "一桶礦泉水6公升，小明一家人上午喝掉一些後，還剩下2075毫升，他們上午喝掉幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["6000", "2075"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3925",
+            "Number": ["6000", "2075"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "6公升-2075毫升=3925毫升 $n$ 單位換算: 6公升= $i$ 毫升",
+          "Answer": [6000]
+        }
+      },
+      {
+        "headQuestion": "一桶礦泉水5公升，小明一家人上午喝掉一些後，還剩下2750毫升，他們上午喝掉幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["5000", "2750"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2225",
+            "Number": ["5000", "2750"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "5公升-2750毫升=2225毫升 $n$ 單位換算: 5公升= $i$ 毫升",
+          "Answer": [5000]
+        }
+      },
+      {
+        "headQuestion": "一桶礦泉水5公升，小明一家人上午喝掉一些後，還剩下2400毫升，他們上午喝掉幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["5000", "2400"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "2600",
+            "Number": ["5000", "2400"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "5公升-2400毫升=2600毫升 $n$ 單位換算: 5公升= $i$ 毫升",
+          "Answer": [5000]
+        }
+      },
+      {
+        "headQuestion": "一桶礦泉水6公升，小明一家人上午喝掉一些後，還剩下2850毫升，他們上午喝掉幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["6000", "2850"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3150",
+            "Number": ["6000", "2850"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "6公升-2850毫升=3150毫升 $n$ 單位換算: 6公升= $i$ 毫升",
+          "Answer": [6000]
+        }
+      },
+      {
+        "headQuestion": "一桶礦泉水6公升，小明一家人上午喝掉一些後，還剩下2995毫升，他們上午喝掉幾毫升的水?",
+        "calculator": {
+          "Unit": "Volume",
+          "CarryAmount": 1,
+          "CustomeUnit": null,
+          "NumberAmount": 4,
+          "decimalPoint": 0,
+          "Preset": {
+            "Number": ["6000", "2995"],
+            "Symbol": "-"
+          },
+          "Answer": {
+            "Carry": [],
+            "Answer": "3005",
+            "Number": ["6000", "2995"],
+            "Symbol": "-"
+          }
+        },
+        "markdown": {
+          "Render": "6公升-2995毫升=3005毫升 $n$ 單位換算: 6公升= $i$ 毫升",
+          "Answer": [6000]
+        }
+      }
+    ]
+  ]
+}
