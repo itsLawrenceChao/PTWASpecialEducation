@@ -171,15 +171,15 @@ export default {
       context.closePath();
     },
     drawNumber() {
-      this.configNumeratorNumber.x = this.gameWidth * 0.85;
+      this.configNumeratorNumber.x = this.gameWidth * 0.83;
       this.configNumeratorNumber.y = this.gameHeight * 0.325;
-      this.configNumeratorNumber.text = this.numerator;
-      this.configNumeratorNumber.fontSize = this.gameWidth * 0.05;
+      this.configNumeratorNumber.text = `1/${this.numerator}`;
+      this.configNumeratorNumber.fontSize = this.gameWidth * 0.045;
 
-      this.configDenominatorNumber.x = this.gameWidth * 0.85;
-      this.configDenominatorNumber.y = this.gameHeight * 0.825;
-      this.configDenominatorNumber.text = this.denominator;
-      this.configDenominatorNumber.fontSize = this.gameWidth * 0.05;
+      this.configDenominatorNumber.x = this.gameWidth * 0.83;
+      this.configDenominatorNumber.y = this.gameHeight * 0.835;
+      this.configDenominatorNumber.text = `${this.denominator}等分`;
+      this.configDenominatorNumber.fontSize = this.gameWidth * 0.03;
     },
     adjustNumber(e) {
       switch (e.target.attrs.operator) {
@@ -199,8 +199,8 @@ export default {
       this.drawAfterAdjusted();
     },
     drawAfterAdjusted() {
-      this.configNumeratorNumber.text = this.numerator;
-      this.configDenominatorNumber.text = this.denominator;
+      this.configNumeratorNumber.text = `1/${this.numerator}`;
+      this.configDenominatorNumber.text = `${this.denominator}等分`;
 
       if (this.numerator == 2) {
         this.configArrow[0].fill = "#505050";
