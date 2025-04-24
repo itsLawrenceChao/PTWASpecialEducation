@@ -32,7 +32,6 @@
   </div>
 </template>
 <script>
-import { defineAsyncComponent } from "vue";
 import FloatNumPad from "@/components/FloatNumPad.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
@@ -178,7 +177,7 @@ export default {
     markWrong() {
       this.checkAnswer();
       let cnt = 0;
-      this.elements.forEach((element, index) => {
+      this.elements.forEach((element) => {
         if (element.el === "input") {
           if (this.wrongInputIndex.includes(cnt)) {
             this.$refs.inputRefs[cnt].style.backgroundColor = "red";
