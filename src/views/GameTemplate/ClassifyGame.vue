@@ -38,7 +38,7 @@
           v-for="(items, index) in GameData.Answer"
           class="drop-area__container"
         >
-          <p class="drop-area__title">{{ items.GroupName }}</p>
+          <p class="answer-area__title">{{ items.GroupName }}</p>
           <draggable
             :list="groupedItems[index]"
             item-key="Tag"
@@ -209,10 +209,6 @@ export default {
     width: 100%;
     height: 65vh;
   }
-  &--title {
-    font-size: 2rem;
-    margin: 0;
-  }
 
   &__question {
     flex: 3;
@@ -250,6 +246,11 @@ export default {
     &--item {
       cursor: pointer;
     }
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin: 0;
   }
 
   &__drop {
