@@ -234,7 +234,7 @@ export default {
     ),
     ComponentTesters: defineAsyncComponent(
       () => import("@/views/GameTemplate/componentTesters.vue")
-    ),
+    ), //for testing only
     BalloonShooting: defineAsyncComponent(
       () => import("@/views/GameTemplate/BalloonShooting.vue")
     ),
@@ -249,9 +249,6 @@ export default {
     ),
     MultiplyBoard: defineAsyncComponent(
       () => import("@/views/GameTemplate/MultiplyBoard.vue")
-    ),
-    FindFood: defineAsyncComponent(
-      () => import("@/views/GameTemplate/FindFood.vue")
     ),
     FractionArithmetic: defineAsyncComponent(
       () => import("@/views/GameTemplate/FractionArithmetic.vue")

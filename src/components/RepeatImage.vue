@@ -1,5 +1,5 @@
 <template>
-  <div class="repeat-image-container">
+  <div class="repeat-image-container" :style="gridStyle">
     <img
       v-for="index in count"
       :key="index"
@@ -28,20 +28,51 @@ export default {
     return {
       count: this.Data.Count,
       imageUrl: getGameAssets(this.ID, this.Data.Src),
+      columns: 0,
     };
+  },
+  computed: {
+    gridStyle() {
+      const columns = this.calculateColumns();
+      const effectiveColumns = Math.min(columns, this.count);
+      return {
+        gridTemplateColumns: `repeat(${effectiveColumns}, 1fr)`,
+      };
+    },
+  },
+  beforeMount() {
+    try {
+      this.columns = this.calculateColumns();
+      console.log(this.columns);
+    } catch (error) {
+      console.warn("計算列數時發生錯誤：", error);
+      this.columns = 6;
+    }
+  },
+  methods: {
+    calculateColumns() {
+      if (this.Data.Columns) {
+        return this.Data.Columns;
+      }
+      for (let i = 1; i <= 7; i++) {
+        if (this.count / i <= 7) {
+          return Math.ceil(this.count / i);
+        }
+      }
+      return 7;
+    },
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .repeat-image-container {
   display: grid;
   width: 100%;
   height: 100%;
-  padding: 4px;
+  padding: $padding--small;
   box-sizing: border-box;
-  gap: 8px;
-  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: $gap--tiny;
   place-items: center;
 }
 

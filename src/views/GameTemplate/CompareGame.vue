@@ -115,6 +115,7 @@ export default {
     ImageTable: GetComponents("ImageTable"),
     DrawImage: GetComponents("DrawImage"),
     NumberBoard: GetComponents("NumberBoard"),
+    FractionDisplay: GetComponents("FractionDisplay"),
   },
   props: {
     GameData: {

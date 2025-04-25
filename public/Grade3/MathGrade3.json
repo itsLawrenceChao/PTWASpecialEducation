@@ -132,20 +132,30 @@
         "Title": "5 - 角",
         "Section": [
           {
-            "Title": "",
+            "Title": "認識角",
             "Games": [
               {
                 "id": "MA3051",
                 "Name": "什麼是角",
                 "Description": "請選擇正確轉換過的單位",
                 "Img": "MA3051.png"
-              },
+              }
+            ]
+          },
+          {
+            "Title": "角的大小比較",
+            "Games": [
               {
                 "id": "MA3052",
                 "Name": "角的大小比較",
                 "Description": "比比看，並將正確的符號拖曳到框框中",
                 "Img": "MA3052.png"
-              },
+              }
+            ]
+          },
+          {
+            "Title": "正方形和長方形",
+            "Games": [
               {
                 "id": "MA3056",
                 "Name": "畫出正方形或長方形",
@@ -250,6 +260,17 @@
                 "Img": "MA3092.png"
               }
             ]
+          },
+          {
+            "Title": "幾分之幾(二)",
+            "Games": [
+              {
+                "id": "MA3093",
+                "Name": "幾分之幾(離散量情境的分數概念)",
+                "Description": "",
+                "Img": "MA3093.png"
+              }
+            ]
           }
         ]
       }
@@ -307,6 +328,17 @@
                 "Name": "認識一位小數",
                 "Description": "",
                 "Img": "MA3151.png"
+              }
+            ]
+          },
+          {
+            "Title": "小數的大小比較",
+            "Games": [
+              {
+                "id": "MA3154",
+                "Name": "小數的大小比較",
+                "Description": "",
+                "Img": ""
               }
             ]
           },

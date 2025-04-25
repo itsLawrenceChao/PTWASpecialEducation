@@ -3,7 +3,11 @@
     <div class="question">
       {{ GameData.Question }}
       <div class="answer">
-        <numberIncrementor :ID="ID" :Data="incrementorData" @numberChanged="getAnswer" />
+        <numberIncrementor
+          :ID="ID"
+          :Data="incrementorData"
+          @numberChanged="getAnswer"
+        />
         {{ GameData.Unit }}
         <button @click="checkAnswer">提交答案</button>
       </div>
@@ -14,10 +18,18 @@
       </v-layer>
       <v-layer>
         <v-image :config="configTarget" />
-        <v-shape v-for="(food, index) in configFood" :key="index" :config="food" />
+        <v-shape
+          v-for="(food, index) in configFood"
+          :key="index"
+          :config="food"
+        />
       </v-layer>
       <v-layer>
-        <v-circle :key="ringKey" :config="configRing" @dragend="handleDragEnd" />
+        <v-circle
+          :key="ringKey"
+          :config="configRing"
+          @dragend="handleDragEnd"
+        />
         <v-rect
           v-for="(shadow, index) in configShadows"
           :key="index"
@@ -50,8 +62,8 @@ import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
 export default {
   components: {
-    numberIncrementor: defineAsyncComponent(() =>
-      import("@/components/NumberIncrementor.vue")
+    numberIncrementor: defineAsyncComponent(
+      () => import("@/components/NumberIncrementor.vue")
     ),
   },
   props: {
@@ -78,8 +90,8 @@ export default {
       configBG: {
         x: 0,
         y: 0,
-        fill: "#D09F57",
-        stroke: "#D09F57",
+        fill: "#CBF3f0",
+        stroke: "#CBF3f0",
       },
       configRing: {
         stroke: "black",
@@ -199,11 +211,13 @@ export default {
     },
     handleButton(index) {
       this.configRing.radius = this.ringRadius[index];
-      this.configButtons[index].y = this.buttonPos[index].y + this.gameHeight / 60;
+      this.configButtons[index].y =
+        this.buttonPos[index].y + this.gameHeight / 60;
       this.configOptions[index].y =
         this.buttonPos[index].y + this.gameWidth / 60 + this.gameHeight / 60;
       this.configButtons[1 - index].y = this.buttonPos[index].y;
-      this.configOptions[1 - index].y = this.buttonPos[index].y + this.gameWidth / 60;
+      this.configOptions[1 - index].y =
+        this.buttonPos[index].y + this.gameWidth / 60;
       this.snapToOrigin();
       this.ringKey++;
     },
@@ -212,7 +226,10 @@ export default {
         x: this.gameWidth / 4,
         y: this.gameHeight / 2,
       };
-      if (canvasTools.distance(e.target.position(), target) <= this.gameWidth / 20) {
+      if (
+        canvasTools.distance(e.target.position(), target) <=
+        this.gameWidth / 20
+      ) {
         this.snapToTarget();
       } else {
         this.snapToOrigin();
@@ -266,7 +283,9 @@ export default {
       let correctArea =
         Math.pow(this.ringRadius[this.GameData.CorrectRadius], 2) * Math.PI;
       let outsideArea = Math.pow(this.gameHeight, 2) - correctArea;
-      let foodCount = Math.floor((this.GameData.Answer / correctArea) * outsideArea);
+      let foodCount = Math.floor(
+        (this.GameData.Answer / correctArea) * outsideArea
+      );
 
       let bound = {
         up: 0,
@@ -281,8 +300,10 @@ export default {
 
           inCorrectArea = false;
           if (
-            canvasTools.distance(canvasTools.center(this.configTarget), position) <=
-            this.ringRadius[this.GameData.CorrectRadius]
+            canvasTools.distance(
+              canvasTools.center(this.configTarget),
+              position
+            ) <= this.ringRadius[this.GameData.CorrectRadius]
           ) {
             inCorrectArea = true;
           }
@@ -314,7 +335,8 @@ export default {
     },
     isOverlapped(food) {
       for (let i = 0; i < this.configFood.length; i++) {
-        if (canvasTools.distance(food, this.configFood[i]) < this.foodWidth) return true;
+        if (canvasTools.distance(food, this.configFood[i]) < this.foodWidth)
+          return true;
       }
       if (
         canvasTools.distance(food, canvasTools.center(this.configTarget)) <
