@@ -1,28 +1,52 @@
-import pluginVue from 'eslint-plugin-vue'
+import js from "@eslint/js";
+import vue from "eslint-plugin-vue";
+import prettier from "eslint-config-prettier";
+
 export default [
-  // add more generic rulesets here, such as:
-  ...pluginVue.configs['flat/recommended'],
+  js.configs.recommended,
+  ...vue.configs["flat/recommended"],
   {
+    files: ["**/*.vue", "**/*.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        node: true,
+      },
+      parser: vue.parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+      },
+    },
+    plugins: {
+      vue,
+    },
     rules: {
-      // override/add rules settings here, such as:
-      // 'vue/no-unused-vars': 'error'
-      
-      'vue/prop-name-casing': 'off',
-      'vue/require-v-for-key': 'off',
-      'vue/multi-word-component-names': 'off', 
-      'vue/no-duplicate-attributes': 'off', // this mignt cause huge effect to project. hope to be remove in future
-      'vue/html-indent': 'off', // this might conflict with prettier
-      'vue/attribute-hyphenation': 'off', // this might conflict with 'vue/prop-name-casing'
-      'vue/max-attributes-per-line': 'off', // this might conflict with prettier
-      'vue/html-self-closing': 'off', // this might conflict with prettier
-      'vue/singleline-html-element-content-newline': 'off', // this might conflict with prettier
-      "vue/custom-event-name-casing": ["error",
+      "vue/prop-name-casing": "off",
+      "vue/require-v-for-key": "off",
+      "vue/multi-word-component-names": "off",
+      "vue/no-duplicate-attributes": "off",
+      "vue/html-indent": "off",
+      "vue/attribute-hyphenation": "off",
+      "vue/max-attributes-per-line": "off",
+      "vue/html-self-closing": "off",
+      "vue/singleline-html-element-content-newline": "off",
+      "vue/custom-event-name-casing": [
+        "error",
         "camelCase",
         {
-          "ignores": ['/next-question/', '/play-effect/', '/add-record/' ]
-        }
+          ignores: ["/next-question/", "/play-effect/", "/add-record/"],
+        },
       ],
-      "vue/v-on-event-hyphenation": 'off',
-    }
-  }
-]
+      "vue/v-on-event-hyphenation": "off",
+    },
+  },
+  {
+    files: ["**/FractionText.vue"],
+    rules: {
+      "vue/no-v-html": "off",
+    },
+  },
+  prettier,
+];

@@ -230,5 +230,6 @@ export default {
 
 .game__submit-button {
   height: 2.5rem;
+  background-color: $submit-color;
 }
 </style>

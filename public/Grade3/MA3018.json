@@ -2,6 +2,11 @@
   "id": "MA3018",
   "TotalLevel": 3,
   "GameType": "NumberLock",
+  "introvideo": "MA3018.mp4",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "在數線上做做看"
+  },
   "GameConfig": {
     "NumberPadAutoDisappear": false,
     "layout": {

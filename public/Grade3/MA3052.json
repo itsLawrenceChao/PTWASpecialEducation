@@ -40,20 +40,28 @@
                 {
                   "path": "1-1a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "1-1b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -78,20 +86,28 @@
                 {
                   "path": "1-2a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "1-2b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -116,20 +132,28 @@
                 {
                   "path": "1-3a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "1-3b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -154,20 +178,28 @@
                 {
                   "path": "1-4a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "1-4b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -192,20 +224,28 @@
                 {
                   "path": "1-5a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "1-5b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -230,20 +270,28 @@
                 {
                   "path": "1-6a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "1-6b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -270,20 +318,28 @@
                 {
                   "path": "2-1a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "2-1b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -308,20 +364,28 @@
                 {
                   "path": "2-2a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "2-2b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -346,20 +410,28 @@
                 {
                   "path": "2-3a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "2-3b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -384,20 +456,28 @@
                 {
                   "path": "2-4a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "2-4b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -422,20 +502,28 @@
                 {
                   "path": "2-5a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "2-5b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }
@@ -460,20 +548,28 @@
                 {
                   "path": "2-6a.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 1,
+                    "y": 3
+                  }
                 },
                 {
                   "path": "2-6b.png",
                   "ratio": {
-                    "width": 2,
-                    "height": 2
+                    "width": 3,
+                    "height": 3
                   },
                   "draggable": true,
-                  "rotatable": true
+                  "rotatable": true,
+                  "presetPosition": {
+                    "x": 3,
+                    "y": 1
+                  }
                 }
               ]
             }

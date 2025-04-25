@@ -11,7 +11,7 @@
         @reply-answer="getComponentsReply"
       />
     </div>
-    <button class="submit-btn" @click="checkAnswer">檢查答案</button>
+    <button class="submit-btn" @click="checkAnswer">送出答案</button>
   </div>
 </template>
 

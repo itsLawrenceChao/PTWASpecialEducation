@@ -34,8 +34,7 @@
 
 <script>
 import { getSystemAssets } from "@/utilitys/get_assets.js";
-import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
+
 export default {
   components: {},
 
@@ -167,6 +166,7 @@ export default {
           e.target.getStage().getPointerPosition().y,
         ],
         stroke: "green",
+        strokeWidth: 8,
       });
     },
     moveLine(e) {

@@ -146,7 +146,7 @@
         </div>
       </div>
       <div class="buttons">
-        <button @click="CheckAnswer">檢查答案</button>
+        <button class="submit-btn" @click="CheckAnswer">送出答案</button>
       </div>
     </div>
   </div>
@@ -222,39 +222,42 @@ export default {
     this.DotPosition = this.Data.decimalPoint;
     this.CustomeUnit = this.Data.CustomeUnit;
     if (this.Data.CustomeUnit != undefined) {
-      for (var i = 0; i < this.CustomeUnit.length; i++) {
-        this.Title.push(this.CustomeUnit[i]);
+      for (
+        var unitIndex = 0;
+        unitIndex < this.CustomeUnit.length;
+        unitIndex++
+      ) {
+        this.Title.push(this.CustomeUnit[unitIndex]);
       }
     } else {
-      for (var i = 0; i < this.NumberAmount; i++) {
-        this.Title.push(
-          this.UnitPreset.Units[this.UnitPreset.UseUnit].Title[i]
-        );
+      const unitType = this.Data.Unit || this.UnitPreset.UseUnit;
+      for (var titleIndex = 0; titleIndex < this.NumberAmount; titleIndex++) {
+        this.Title.push(this.UnitPreset.Units[unitType].Title[titleIndex]);
       }
     }
-    for (var i = 0; i <= this.NumberAmount; i++) {
+    for (var ansIndex = 0; ansIndex <= this.NumberAmount; ansIndex++) {
       this.Ans.push("");
       this.AnswerLine.push(false);
       this.WrongAnswerMarkup.push(false);
     }
 
-    for (var i = 0; i < this.Data.CarryAmount; i++) {
+    for (var carryIndex = 0; carryIndex < this.Data.CarryAmount; carryIndex++) {
       let temp = [];
       let templine = [];
-      for (var x = 0; x < this.NumberAmount; x++) {
+      for (var carryCol = 0; carryCol < this.NumberAmount; carryCol++) {
         temp.push("");
         templine.push(false);
       }
       this.Carry.push(temp);
       this.CarryLine.push(templine);
     }
-    for (var x = 0; x < this.NumberRow; x++) {
+    for (var rowIndex = 0; rowIndex < this.NumberRow; rowIndex++) {
       let temp = [];
       this.Sy_list.push("");
       this.SymbolEditable.push(true);
       let tempNumber = [];
       let tempeditable = [];
-      for (var i = 0; i < this.NumberAmount; i++) {
+      for (var colIndex = 0; colIndex < this.NumberAmount; colIndex++) {
         temp.push("");
         tempNumber.push(false);
         tempeditable.push(true);
@@ -348,19 +351,31 @@ export default {
         this.Ans = [];
         this.ButtonLine = [];
         this.CarryLine = [];
-        for (var i = 0; i < this.NumberAmount; i++) {
+        for (
+          var newTitleIndex = 0;
+          newTitleIndex < this.NumberAmount;
+          newTitleIndex++
+        ) {
           this.Title.push(
-            this.UnitPreset.Units[this.UnitPreset.UseUnit].Title[i]
+            this.UnitPreset.Units[this.UnitPreset.UseUnit].Title[newTitleIndex]
           );
         }
-        for (var i = 0; i <= this.NumberAmount; i++) {
+        for (
+          var newAnsIndex = 0;
+          newAnsIndex <= this.NumberAmount;
+          newAnsIndex++
+        ) {
           this.Carry.push([]);
           this.Ans.push([]);
         }
-        for (var x = 0; x < this.NumberRow; x++) {
+        for (var newRowIndex = 0; newRowIndex < this.NumberRow; newRowIndex++) {
           let temp = [];
           this.Sy_list.push([]);
-          for (var i = 0; i < this.NumberAmount; i++) {
+          for (
+            var newColIndex = 0;
+            newColIndex < this.NumberAmount;
+            newColIndex++
+          ) {
             temp.push([]);
           }
           this.Num_list.push(temp);
@@ -369,10 +384,17 @@ export default {
     },
     CheckAnswer() {
       let AnswerCheck = true;
-      for (var i in this.Data.Answer.Number) {
-        let temp = this.Num_list[i].length - 1;
-        for (var j = this.Data.Answer.Number[i].length - 1; j >= 0; j--) {
-          if (this.Num_list[i][temp] != this.Data.Answer.Number[i][j]) {
+      for (var numIndex in this.Data.Answer.Number) {
+        let temp = this.Num_list[numIndex].length - 1;
+        for (
+          var answerIndex = this.Data.Answer.Number[numIndex].length - 1;
+          answerIndex >= 0;
+          answerIndex--
+        ) {
+          if (
+            this.Num_list[numIndex][temp] !=
+            this.Data.Answer.Number[numIndex][answerIndex]
+          ) {
             AnswerCheck = false;
             console.log("Number Wrong");
           }
@@ -380,23 +402,34 @@ export default {
         }
       }
       let temp = this.Ans.length - 1;
-      for (var i = this.Data.Answer.Answer.length - 1; i >= 0; i--) {
-        if (this.Ans[temp] != this.Data.Answer.Answer[i]) {
+      for (
+        var ansCheckIndex = this.Data.Answer.Answer.length - 1;
+        ansCheckIndex >= 0;
+        ansCheckIndex--
+      ) {
+        if (this.Ans[temp] != this.Data.Answer.Answer[ansCheckIndex]) {
           AnswerCheck = false;
           this.WrongAnswerMarkup[temp] = true;
         }
         temp--;
       }
-      //Carry
       if (
         this.Data.Answer.Carry != undefined &&
         this.Data.Answer.Carry != null &&
         this.Data.Answer.Carry != []
       ) {
-        for (var i in this.Data.Answer.Carry) {
-          let temp = this.Carry[i].length - 1;
-          for (var j = this.Data.Answer.Carry[i].length - 1; j >= 0; j--) {
-            if (this.Carry[i][temp] != this.Data.Answer.Carry[i][j]) {
+        for (var carryCheckIndex in this.Data.Answer.Carry) {
+          let temp = this.Carry[carryCheckIndex].length - 1;
+          for (
+            var carryColIndex =
+              this.Data.Answer.Carry[carryCheckIndex].length - 1;
+            carryColIndex >= 0;
+            carryColIndex--
+          ) {
+            if (
+              this.Carry[carryCheckIndex][temp] !=
+              this.Data.Answer.Carry[carryCheckIndex][carryColIndex]
+            ) {
               AnswerCheck = false;
               console.log("Carry Wrong");
             }
@@ -418,11 +451,17 @@ export default {
           Math.log(this.Data.Answer.Answer) / Math.log(10)
         );
         this.$emit("play-effect", "WrongSound");
-        for (var i = 0; i < this.Ans.length - 1; ++i) {
-          if (this.Ans[this.Ans.length - i - 1] != null) {
-            wrongAnswer += this.Ans[this.Ans.length - i - 1] * Math.pow(10, i);
+        for (
+          var wrongIndex = 0;
+          wrongIndex < this.Ans.length - 1;
+          ++wrongIndex
+        ) {
+          if (this.Ans[this.Ans.length - wrongIndex - 1] != null) {
+            wrongAnswer +=
+              this.Ans[this.Ans.length - wrongIndex - 1] *
+              Math.pow(10, wrongIndex);
           } else {
-            if (i < digits) wrongAnswer = null;
+            if (wrongIndex < digits) wrongAnswer = null;
             break;
           }
         }
@@ -440,23 +479,23 @@ export default {
           "錯誤",
         ]);
     },
-    clear: function (evt) {
-      for (var x in this.Carry) {
-        for (var y in this.Carry[x]) {
-          this.Carry[x][y] = "";
+    clear: function () {
+      for (var carryRow in this.Carry) {
+        for (var carryCol in this.Carry[carryRow]) {
+          this.Carry[carryRow][carryCol] = "";
         }
       }
-      for (var x in this.Ans) {
-        this.Ans[x] = "";
-        this.WrongAnswerMarkup[x] = false;
+      for (var ansIndex in this.Ans) {
+        this.Ans[ansIndex] = "";
+        this.WrongAnswerMarkup[ansIndex] = false;
       }
-      for (var x in this.Num_list) {
-        for (var y in this.Num_list[x]) {
-          this.Num_list[x][y] = "";
+      for (var numRow in this.Num_list) {
+        for (var numCol in this.Num_list[numRow]) {
+          this.Num_list[numRow][numCol] = "";
         }
       }
-      for (var x in this.Sy_list) {
-        this.Sy_list[x] = "";
+      for (var syIndex in this.Sy_list) {
+        this.Sy_list[syIndex] = "";
       }
       this.presetCalculator();
     },
@@ -526,8 +565,8 @@ export default {
     height: auto;
     border: none;
   }
-  .btn-primary {
-    width: 40px;
+  .submit-btn {
+    background-color: $submit-color;
   }
 }
 .space {

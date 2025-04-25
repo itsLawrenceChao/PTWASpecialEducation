@@ -8,7 +8,7 @@
         :src="imageSrc"
         class="image--container"
         :alt="`${gameInfo.id}的介紹圖片`"
-      >
+      />
     </div>
     <div class="card-info">
       <div class="info--top">
@@ -18,7 +18,8 @@
         <a
           class="btn btn-primary mx-2"
           @click="MakeReadText(item.Name, item.Description)"
-        ><i class="bi bi-volume-up-fill" /></a>
+          ><i class="bi bi-volume-up-fill"
+        /></a>
       </div>
       <p class="description">
         {{ gameInfo.description }}
@@ -39,7 +40,7 @@ export default {
   emits: ["readText", "enterGame"],
   data() {
     return {
-      image404: getSystemAssets("image404width.gif", "general"),
+      image404: getSystemAssets("404-not-found.png", "general"),
       imageSrc: undefined,
     };
   },
@@ -52,7 +53,7 @@ export default {
     }
   },
   methods: {
-    readText(event) {
+    readText() {
       //   event.stopPropagation();
       this.$emit("readText", this.gameInfo.name, this.gameInfo.description);
     },
@@ -98,9 +99,12 @@ export default {
 }
 .image-outter {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .image--container {
     width: 100%;
-    max-height: 230px;
+    height: 100%;
     object-fit: contain;
   }
 }

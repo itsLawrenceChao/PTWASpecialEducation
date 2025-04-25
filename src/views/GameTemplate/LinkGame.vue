@@ -60,7 +60,7 @@
     <div class="Buttons">
       <h3 v-if="NotFinished">請連完所有的線段</h3>
       <button v-if="GameConfig.CheckingMode == 'OnSubmit'" @click="CheckAll">
-        檢查答案
+        送出答案
       </button>
       <button
         v-if="GameConfig.CheckingMode == 'OnSubmit'"
@@ -88,22 +88,22 @@ export default {
     // 'v-layer': Layer,
     // 'v-circle': Circle,
     // 'v-line': Line,
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
-    NumberBoard: defineAsyncComponent(() =>
-      import("@/components/NumberBoard.vue")
+    NumberBoard: defineAsyncComponent(
+      () => import("@/components/NumberBoard.vue")
     ),
-    ElectronicClock: defineAsyncComponent(() =>
-      import("@/components/ElectronicClock.vue")
+    ElectronicClock: defineAsyncComponent(
+      () => import("@/components/ElectronicClock.vue")
     ),
     Clock: defineAsyncComponent(() => import("@/components/Clock.vue")),
-    FractionDisplay: defineAsyncComponent(() =>
-      import("@/components/FractionDisplay.vue")
+    FractionDisplay: defineAsyncComponent(
+      () => import("@/components/FractionDisplay.vue")
     ),
-    InteractiveFractionVisual: defineAsyncComponent(() =>
-      import("@/components/InteractiveFractionVisual.vue")
+    InteractiveFractionVisual: defineAsyncComponent(
+      () => import("@/components/InteractiveFractionVisual.vue")
     ),
   },
   props: {
@@ -628,7 +628,7 @@ export default {
 button {
   height: 3rem;
   border-radius: 15px;
-  background-color: #4caf50;
+  background-color: $submit-color;
   font-size: 2rem;
 }
 :deep(.NumberBoard) {

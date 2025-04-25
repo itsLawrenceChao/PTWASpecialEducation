@@ -23,7 +23,7 @@
           @virtualpadinputDelete="clear"
           @virtualpadinput-pop="pop"
         />
-        <button class="btn-submit" @click="checkAnswer">檢查答案</button>
+        <button class="btn-submit" @click="checkAnswer">送出答案</button>
         <button class="btn-submit" @click="openScratchSheet">開啟畫筆</button>
       </div>
     </div>

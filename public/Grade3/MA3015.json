@@ -1,6 +1,10 @@
 {
   "id": "MA3015",
-  "introvideo": "src",
+  "introvideo": "MA3015.mp4",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "拿出正確的錢幣"
+  },
   "GameType": "MoneyDrag",
   "GameConfig": {
     "auto-rand": true

@@ -24,7 +24,7 @@
     [
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "書包大約700()",
+        "Question_Text": "書包大約700(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -38,7 +38,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "鞋子大約500()",
+        "Question_Text": "鞋子大約500(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -52,7 +52,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "腳踏車大約5()",
+        "Question_Text": "腳踏車大約5(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -66,7 +66,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "水壺大約300()",
+        "Question_Text": "水壺大約300(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -80,7 +80,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "汽車輪胎大約10()",
+        "Question_Text": "汽車輪胎大約10(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -96,7 +96,7 @@
     [
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "電風扇大約600()",
+        "Question_Text": "電風扇大約600(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -110,7 +110,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "電視大約3()",
+        "Question_Text": "電視大約3(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -124,7 +124,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "筆記型電腦大約1()",
+        "Question_Text": "筆記型電腦大約1(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -138,7 +138,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "橘子大約200()",
+        "Question_Text": "橘子大約200(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -152,7 +152,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "冰箱大約12()",
+        "Question_Text": "冰箱大約12(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -168,7 +168,7 @@
     [
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "口香糖大約20()",
+        "Question_Text": "口香糖大約20(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -182,7 +182,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "母雞大約2()",
+        "Question_Text": "母雞大約2(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -196,7 +196,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "一瓶礦泉水大約400()",
+        "Question_Text": "一瓶礦泉水大約400(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -210,7 +210,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "遙控車大約800()",
+        "Question_Text": "遙控車大約800(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -224,7 +224,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "柯基大約15()",
+        "Question_Text": "柯基大約15(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -240,7 +240,7 @@
     [
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "果汁大約350()",
+        "Question_Text": "果汁大約350(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -254,7 +254,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "小狗大約3()",
+        "Question_Text": "小狗大約3(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -268,7 +268,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "故事書大約500()",
+        "Question_Text": "故事書大約500(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -282,7 +282,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "板擦大約100()",
+        "Question_Text": "板擦大約100(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -296,7 +296,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "椅子大約1()",
+        "Question_Text": "椅子大約1(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -312,7 +312,7 @@
     [
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "鉛筆盒大約200()",
+        "Question_Text": "鉛筆盒大約200(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -326,7 +326,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "一顆西瓜大約4()",
+        "Question_Text": "一顆西瓜大約4(        )",
         "Answer": "公斤",
         "SlotComponents": [
           {
@@ -340,7 +340,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "一顆棒球大約150()",
+        "Question_Text": "一顆棒球大約150(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -354,7 +354,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "橡皮擦大約50()",
+        "Question_Text": "橡皮擦大約50(        )",
         "Answer": "公克",
         "SlotComponents": [
           {
@@ -368,7 +368,7 @@
       },
       {
         "Question": ["公斤", "公克"],
-        "Question_Text": "足球大約300()",
+        "Question_Text": "足球大約300(        )",
         "Answer": "公克",
         "SlotComponents": [
           {

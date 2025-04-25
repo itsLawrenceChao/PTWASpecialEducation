@@ -22,7 +22,7 @@
       <div id="navbarText" class="collapse navbar-collapse mx-3">
         <div
           class="container sticky-top d-flex justify-content-end"
-          style="--bs-breadcrumb-divider: '>'"
+          :style="{ '--bs-breadcrumb-divider': '>' }"
         >
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item">
@@ -84,7 +84,7 @@ export default {
 
 <style scoped lang="scss">
 header {
-  background-color: #f19c79;
+  background-color: #f4c49f;
   height: 10vh !important;
   touch-action: none;
   user-select: none;
@@ -97,7 +97,7 @@ header {
 }
 
 .navbar {
-  background-color: #f19c79;
+  background-color: #f4c49f;
 
   .navbar-brand {
     img {

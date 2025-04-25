@@ -13,12 +13,6 @@
                 "Name": "數到10000",
                 "Description": "將數字連連看",
                 "Img": "MA3011.png"
-              },
-              {
-                "id": "MA3013",
-                "Name": "數到10000",
-                "Description": "將數字連連看",
-                "Img": "MA3011.png"
               }
             ]
           },
@@ -26,16 +20,10 @@
             "Title": "使用錢幣",
             "Games": [
               {
-                "id": "MA3014",
-                "Name": "數到10000",
-                "Description": "將數字連連看",
-                "Img": "MA3014.png"
-              },
-              {
                 "id": "MA3015",
                 "Name": "拿出正確的錢幣",
                 "Description": "拿出正確的錢幣",
-                "Img": ""
+                "Img": "MA3015.png"
               }
             ]
           },
@@ -58,12 +46,6 @@
                 "Name": "數線上的空格",
                 "Description": "請點擊數線上的空格，並使用數字鍵盤填入正確的數字。",
                 "Img": "MA3017.png"
-              },
-              {
-                "id": "MA3018",
-                "Name": "數線應用",
-                "Description": "拖曳數線上的小鴨以回答答案",
-                "Img": "MA3018.png"
               }
             ]
           }
@@ -92,12 +74,6 @@
                 "Name": "四位數的減法(計算+應用)",
                 "Description": "透過直式計算板，將題目加加看",
                 "Img": "MA3023.png"
-              },
-              {
-                "id": "MA3024",
-                "Name": "四位數的減法(計算+應用)",
-                "Description": "透過直式計算板，將題目加加看",
-                "Img": "MA3024.png"
               }
             ]
           }
@@ -113,13 +89,7 @@
                 "id": "MA3031",
                 "Name": "量量看",
                 "Description": "",
-                "Img": ""
-              },
-              {
-                "id": "MA3032",
-                "Name": "長度單位換算",
-                "Description": "請選擇正確轉換過的單位",
-                "Img": "MA3032.png"
+                "Img": "MA3031.png"
               },
               {
                 "id": "MA3033",
@@ -135,14 +105,8 @@
               {
                 "id": "MA3034",
                 "Name": "長度的計算(計算題)",
-                "Description": "比比看，並將正確的符號拖曳到框框中",
+                "Description": "用直式算算看",
                 "Img": "MA3034.png"
-              },
-              {
-                "id": "MA3035",
-                "Name": "長度的計算(應用題)",
-                "Description": "將量杯填滿至指定的公升數",
-                "Img": "MA3035.png"
               }
             ]
           }
@@ -159,12 +123,6 @@
                 "Name": "連乘的兩步驟問題(應用題)",
                 "Description": "比比看，並將正確的符號拖曳到框框中",
                 "Img": "MA3043.png"
-              },
-              {
-                "id": "MA3044",
-                "Name": "乘法估算",
-                "Description": "估估看正確的答案，並且控制小精靈走到正確的答案",
-                "Img": "MA3044.png"
               }
             ]
           }
@@ -196,30 +154,13 @@
             ]
           },
           {
-            "Title": "認識直角、銳角和鈍角",
-            "Games": [
-              {
-                "id": "MA3053",
-                "Name": "認識直角、銳角和鈍角",
-                "Description": "請分辨圖片中的角度是什麼角",
-                "Img": "MA3053.png"
-              }
-            ]
-          },
-          {
             "Title": "正方形和長方形",
             "Games": [
               {
-                "id": "MA3055",
-                "Name": "哪些是正方形、哪些是長方形",
-                "Description": "分類看看，哪些圖形是正方形?哪些圖形是長方形?哪些圖形都不是?",
-                "Img": ""
-              },
-              {
-                "id": "MA3057",
+                "id": "MA3056",
                 "Name": "畫出正方形或長方形",
                 "Description": "在邊長為1cm的方格紙上畫畫看",
-                "Img": "MA3057.png"
+                "Img": "MA3056.png"
               }
             ]
           }
@@ -256,35 +197,13 @@
         "Title": "7 - 除法",
         "Section": [
           {
-            "Title": "除法算式(整除)",
-            "Games": [
-              {
-                "id": "MA3071",
-                "Name": "除法算式(整除)",
-                "Description": "用除法算式記記看",
-                "Img": ""
-              }
-            ]
-          },
-          {
-            "Title": "認識餘數",
-            "Games": [
-              {
-                "id": "MA3073",
-                "Name": "除法算式(餘數)",
-                "Description": "用除法算式記記看",
-                "Img": ""
-              }
-            ]
-          },
-          {
             "Title": "認識奇數和偶數",
             "Games": [
               {
                 "id": "MA3076",
                 "Name": "奇數偶數",
                 "Description": "哪些數是偶數?哪些數是奇數?",
-                "Img": ""
+                "Img": "MA3076.png"
               }
             ]
           }
@@ -312,12 +231,6 @@
                 "Name": "比大小",
                 "Description": "比比看，並將正確的符號拖曳到框框中",
                 "Img": "MA3082.png"
-              },
-              {
-                "id": "MA3083",
-                "Name": "認識毫升",
-                "Description": "將量杯填滿至指定的公升數",
-                "Img": "MA3083.png"
               }
             ]
           },
@@ -329,12 +242,6 @@
                 "Name": "容積的加減(計算題)",
                 "Description": "使用定位版計算答案，並且填到框框中",
                 "Img": "MA3084.png"
-              },
-              {
-                "id": "MA3085",
-                "Name": "容積的加減(應用題)",
-                "Description": "使用定位版計算答案，並且填到框框中",
-                "Img": "MA3085.png"
               }
             ]
           }
@@ -346,12 +253,6 @@
           {
             "Title": "幾分之幾(一)",
             "Games": [
-              {
-                "id": "MA3091",
-                "Name": "幾分之幾(連續量情境的分數概念)",
-                "Description": "",
-                "Img": "MA3091.png"
-              },
               {
                 "id": "MA3092",
                 "Name": "分數連連看",
@@ -379,56 +280,6 @@
     "lableName": "下學期",
     "gameItem": [
       {
-        "Title": "1 - 分數的加減",
-        "Section": [
-          {
-            "Title": "和1一樣大的分數",
-            "Games": [
-              {
-                "id": "MA3111",
-                "Name": "和1一樣大的分數",
-                "Description": "",
-                "Img": ""
-              }
-            ]
-          },
-          {
-            "Title": "分數的加法",
-            "Games": [
-              {
-                "id": "MA3112",
-                "Name": "分數的加法(計算題)",
-                "Description": "",
-                "Img": ""
-              },
-              {
-                "id": "MA3113",
-                "Name": "分數的加法(應用題)",
-                "Description": "",
-                "Img": ""
-              }
-            ]
-          },
-          {
-            "Title": "分數的減法",
-            "Games": [
-              {
-                "id": "MA3114",
-                "Name": "分數的減法(計算題)",
-                "Description": "",
-                "Img": ""
-              },
-              {
-                "id": "MA3115",
-                "Name": "分數的減法(應用題)",
-                "Description": "",
-                "Img": ""
-              }
-            ]
-          }
-        ]
-      },
-      {
         "Title": "4 - 公斤和公克",
         "Section": [
           {
@@ -438,7 +289,7 @@
                 "id": "MA3142",
                 "Name": "認識3公斤秤",
                 "Description": "",
-                "Img": ""
+                "Img": "MA3142.png"
               }
             ]
           },
@@ -449,7 +300,7 @@
                 "id": "MA3143",
                 "Name": "重量的量感與估測",
                 "Description": "",
-                "Img": ""
+                "Img": "MA3143.png"
               }
             ]
           },
@@ -460,7 +311,7 @@
                 "id": "MA3145",
                 "Name": "比大小",
                 "Description": "",
-                "Img": ""
+                "Img": "MA3145.png"
               }
             ]
           }
@@ -476,7 +327,7 @@
                 "id": "MA3151",
                 "Name": "認識一位小數",
                 "Description": "",
-                "Img": ""
+                "Img": "MA3151.png"
               }
             ]
           },
@@ -498,7 +349,7 @@
                 "id": "MA3153",
                 "Name": "認識十分位2",
                 "Description": "",
-                "Img": ""
+                "Img": "MA3153.png"
               }
             ]
           }
@@ -514,35 +365,13 @@
                 "id": "MA3161",
                 "Name": "認識圓",
                 "Description": "將圓形的各部位名稱拉到對應位置",
-                "Img": ""
+                "Img": "MA3161.png"
               },
               {
                 "id": "MA3162",
                 "Name": "直徑與半徑",
                 "Description": "",
-                "Img": ""
-              },
-              {
-                "id": "MA3163",
-                "Name": "直徑、半徑、圓心",
-                "Description": "",
-                "Img": ""
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "Title": "7 - 乘法與除法",
-        "Section": [
-          {
-            "Title": "乘與除的關係",
-            "Games": [
-              {
-                "id": "MA3171",
-                "Name": "乘與除的互逆關係",
-                "Description": "想一想，再填填看",
-                "Img": ""
+                "Img": "MA3162.png"
               }
             ]
           }
@@ -582,17 +411,6 @@
                 "Name": "能理解並運用適當的時間單位",
                 "Description": "",
                 "Img": "MA3184.png"
-              }
-            ]
-          },
-          {
-            "Title": "時分的加減計算",
-            "Games": [
-              {
-                "id": "MA3185",
-                "Name": "時分的加減(計算題)",
-                "Description": "",
-                "Img": "MA3185.png"
               }
             ]
           }

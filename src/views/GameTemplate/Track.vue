@@ -29,14 +29,10 @@
                 :Data="GameData.Question[currentQuestions[index]].Data"
                 :ID="ID"
               />
-              <!-- <p class="question-text">{{ item.Question }}</p> -->
             </div>
           </div>
         </div>
       </div>
-      <!-- Spacer between conveyor belt and answer buttons -->
-      <!-- <div class="spacer"></div> -->
-      <!-- Answer buttons or home page -->
       <div class="box ratio-3">
         <div class="button-container">
           <button
@@ -59,12 +55,7 @@
 </template>
 <script>
 import { getComponents } from "@/utilitys/get-components.js";
-import { soundManager } from "@/utilitys/sound-manager.js";
-import {
-  getSystemAssets,
-  getGameStaticAssets,
-  getSoundAssets,
-} from "@/utilitys/get_assets";
+import { getGameStaticAssets } from "@/utilitys/get_assets";
 
 export default {
   name: "QuizComponent",
@@ -89,17 +80,8 @@ export default {
   emits: ["play-effect", "next-question", "add-record"],
   data() {
     return {
-      gameplayMusic: getSoundAssets("game_sounds", "gameplay-music.mp3"),
-      clickSound: getSoundAssets("game_sounds", "click-sound.mp3"),
-      showHomePage: true,
       totalLives: 3,
       remainingLives: 3,
-      backgroundMusicVolume: 0.01,
-      clickSoundVolume: 0.7,
-      wrongSoundVolume: 1.0,
-      isMuted: false,
-      showVolumeSlider: false,
-      volume: 0.15,
       wrongAnswerIndex: null,
       currentQuestions: [], //題目陣列位置
       currentQuestionIndex: 0, //目前的題目
@@ -128,12 +110,6 @@ export default {
     },
   },
   created() {
-    soundManager.registerSound(
-      "trackBackgroundMusic",
-      this.gameplayMusic,
-      true
-    );
-    soundManager.registerSound("trackClickSound", `${this.clickSound}`, true);
     this.startQuiz();
   },
   mounted() {
@@ -145,8 +121,6 @@ export default {
   },
   methods: {
     startQuiz() {
-      this.playBackgroundMusic();
-      this.playCkickSound();
       this.currentQuestionIndex = 0;
       this.isPaused = false;
       this.wrongAnswerIndex = null;
@@ -177,7 +151,6 @@ export default {
           this.$emit("play-effect", "CorrectSound");
         }
         this.wrongAnswerIndex = null;
-        // this.currentQuestionIndex = (this.currentQuestionIndex + 1) % this.currentQuestions.length;
       } else {
         this.$emit("add-record", [
           this.GameData.Question[
@@ -198,27 +171,6 @@ export default {
     },
     pauseConveyor() {
       this.isPaused = true;
-    },
-    playCkickSound() {
-      soundManager.playSoundImmediately("trackClickSound", true, false);
-    },
-    playBackgroundMusic() {
-      soundManager.playSoundLoop("trackBackgroundMusic", true, true);
-    },
-    toggleMute() {
-      this.isMuted = !this.isMuted;
-      this.$refs.backgroundMusic.volume = this.isMuted ? 0 : 0.15;
-      if (this.isMuted) {
-        this.$refs.backgroundMusic.pause();
-      } else {
-        this.$refs.backgroundMusic.play();
-      }
-    },
-    adjustVolume(event) {
-      this.volume = event.target.value;
-      if (!this.isMuted) {
-        this.$refs.backgroundMusic.volume = this.volume;
-      }
     },
     generateRandomOrder(total) {
       const order = [];
@@ -256,7 +208,6 @@ export default {
 .life-bar {
   width: 100%;
   height: 50px;
-  /* background-color: #f0f0f0; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -301,7 +252,6 @@ export default {
 .conveyor-item {
   width: calc(100% / 3);
   height: 100%;
-  // background-image: url("@/assets/images/pics/track2.png");
   background-size: cover;
   display: flex;
   align-items: center;
@@ -362,40 +312,6 @@ export default {
 
 .big-button.wrong-answer {
   background-color: #f44336;
-}
-
-.volume-control {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: -5px;
-  right: 0;
-  padding: 10px;
-  box-sizing: border-box;
-  z-index: 20;
-}
-
-.volume-icon {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-}
-
-.slider-container {
-  display: none;
-  position: absolute;
-  top: 50px;
-  right: 10px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-}
-
-.volume-control:hover .slider-container {
-  display: block;
-}
-
-.volume-slider {
-  width: 100px;
 }
 
 @media (min-height: 600px) {
