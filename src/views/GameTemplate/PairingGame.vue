@@ -52,17 +52,17 @@ export default {
   name: "PairingGame",
   components: {
     draggable,
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
-    ImageWithText: defineAsyncComponent(() =>
-      import("@/components/ImageWithText.vue")
+    ImageWithText: defineAsyncComponent(
+      () => import("@/components/ImageWithText.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     Clock: getComponents("Clock"),
     Water: defineAsyncComponent(() => import("@/components/Water.vue")),
-    ElectronicClock: defineAsyncComponent(() =>
-      import("@/components/ElectronicClock.vue")
+    ElectronicClock: defineAsyncComponent(
+      () => import("@/components/ElectronicClock.vue")
     ),
   },
   props: {
@@ -176,7 +176,7 @@ export default {
     padding: 1rem 1rem;
     border: solid;
     border-radius: 15px;
-    background-color: white;
+    background-color: $submit-color;
     font-size: 1.5rem;
     align-self: flex-end;
   }

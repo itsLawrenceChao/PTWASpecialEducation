@@ -10,7 +10,7 @@
           class="game__fraction-display"
         ></FractionDisplay>
         <button class="game__check-answer-btn" @click="checkAnswer">
-          確認答案
+          送出答案
         </button>
       </div>
       <DragFraction
@@ -29,11 +29,11 @@ import { defineAsyncComponent } from "vue";
 export default {
   name: "MA3091",
   components: {
-    FractionDisplay: defineAsyncComponent(() =>
-      import("@/components/FractionDisplay.vue")
+    FractionDisplay: defineAsyncComponent(
+      () => import("@/components/FractionDisplay.vue")
     ),
-    DragFraction: defineAsyncComponent(() =>
-      import("@/components/DragFraction.vue")
+    DragFraction: defineAsyncComponent(
+      () => import("@/components/DragFraction.vue")
     ),
   },
   props: {
@@ -146,7 +146,7 @@ export default {
 .game__check-answer-btn {
   flex: 1;
   border: none;
-  background-color: #aabdc3;
+  background-color: $submit-color;
 }
 
 .game-section--border {

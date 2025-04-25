@@ -38,6 +38,10 @@ export default {
       type: String,
       required: true,
     },
+    gameId: {
+      type: String,
+      required: true,
+    },
   },
   emits: ["close"],
   data() {
@@ -51,6 +55,7 @@ export default {
   },
   mounted() {
     // if mediaData is not given, use default tech video, if both are not available, load 404 image
+    console.log(this.gameId, this.mediaData);
     if (this.mediaData == undefined) {
       let defaultTechVideo = this.checkDefaultMediaAvailability();
       if (defaultTechVideo == "") {
@@ -81,7 +86,8 @@ export default {
       }
     },
     checkUserGivenMediaAvailability() {
-      const userGivenTechVideo = getGameAssets(this.mediaData);
+      const userGivenTechVideo = getGameAssets(this.gameId, this.mediaData);
+      console.log(userGivenTechVideo);
       if (userGivenTechVideo.includes("undefined")) {
         return "";
       } else {
@@ -89,6 +95,7 @@ export default {
       }
     },
     checkGivenMediaType(src) {
+      console.log(src);
       if (src.includes(".mp4")) {
         return "video";
       } else {
@@ -96,7 +103,7 @@ export default {
       }
     },
     load404Image() {
-      this.mediaSrc = getSystemAssets("image404width.gif", "general");
+      this.mediaSrc = getSystemAssets("404-not-found.png", "general");
     },
     closeModal() {
       this.$emit("close");
@@ -113,7 +120,10 @@ export default {
 }
 video {
   width: 100%;
+  max-width: 800px;
   height: auto;
+  max-height: 60vh;
+  object-fit: contain;
 }
 .tech-modal__container {
   display: flex;
@@ -138,9 +148,20 @@ video {
     margin-bottom: 1rem;
     align-self: flex-start;
   }
+  .tech-modal__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
   img {
     max-height: 60vh;
-    max-width: auto;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 }
 </style>

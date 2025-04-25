@@ -32,7 +32,7 @@
           @virtualpadinput-pop="Pop"
         />
       </div>
-      <button class="button--submit" @click="CheckAnswer">檢查答案</button>
+      <button class="button--submit" @click="CheckAnswer">送出答案</button>
     </div>
     {{ NowSelect }}
   </div>
@@ -42,6 +42,8 @@
 import VirtualNumPad from "@/components/VirtualNumPadInput.vue";
 import { defineAsyncComponent } from "vue";
 import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
+
 export default {
   name: "NumberLock",
   components: {
@@ -256,6 +258,7 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", ["不支援顯示", "不支援顯示", `錯誤`]);
+        emitter.emit("checkAnswer");
       }
     },
   },
@@ -322,6 +325,7 @@ export default {
     gap: 10px;
   }
   .button--submit {
+    background-color: $submit-color;
     width: 100%;
     height: 100%;
     min-height: 50px;

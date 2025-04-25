@@ -69,65 +69,77 @@
       class="game-select__container"
       style="overflow-y: hidden"
     >
-      <div class="sidebar">
-        <p class="sidebar__title">學期</p>
-        <div class="sidebar__button-group">
-          <template v-for="(semester, index) in showInfo" :key="index">
-            <button
-              class="sidebar__button"
-              :class="{
-                'sidebar__button--semester-active': selectedSemester === index,
-              }"
-              @click="selectSemester(index)"
-            >
-              {{ semester.lableName }}
-            </button>
-          </template>
-        </div>
-        <p class="sidebar__title">單元</p>
-        <div v-if="showInfo" class="sidebar__button-group">
-          <template v-for="(items, key) in currentSemesterChapters" :key="key">
-            <button class="sidebar__button" @click="selectChapter(key)">
-              {{ items.Title }}
-            </button>
-          </template>
-        </div>
-      </div>
-      <!-- 遊戲卡片區域 -->
-      <div v-if="showGameCards" :key="refresh" class="game-display__container">
-        <div
-          v-for="(items, index) in currentChapterSections"
-          :key="index"
-          class="game-charpter__container"
-        >
-          <p class="game-charpter__title">
-            {{ items.Title }}
-          </p>
-          <div class="game-card__group">
-            <div v-for="item in items.Games" class="card game-card">
-              <GameCard
-                :game-info="{
-                  id: item.id,
-                  imgSrc: item.Img,
-                  name: item.Name,
-                  description: item.Description,
+      <template v-if="hasCurrentSubjectData">
+        <div class="sidebar">
+          <p class="sidebar__title">學期</p>
+          <div class="sidebar__button-group">
+            <template v-for="(semester, index) in showInfo" :key="index">
+              <button
+                class="sidebar__button"
+                :class="{
+                  'sidebar__button--semester-active':
+                    selectedSemester === index,
                 }"
-                @enter-game="
-                  switchRouter({
-                    name: 'Game',
-                    params: {
-                      id: item.id,
-                      Grade: grade,
-                      Subject: nowSubject,
-                      GameName: item.Name,
-                    },
-                  })
-                "
-                @read-text="makeReadText"
-              />
+                @click="selectSemester(index)"
+              >
+                {{ semester.lableName }}
+              </button>
+            </template>
+          </div>
+          <p class="sidebar__title">單元</p>
+          <div v-if="showInfo" class="sidebar__button-group">
+            <template
+              v-for="(items, key) in currentSemesterChapters"
+              :key="key"
+            >
+              <button class="sidebar__button" @click="selectChapter(key)">
+                {{ items.Title }}
+              </button>
+            </template>
+          </div>
+        </div>
+        <div
+          v-if="showGameCards"
+          :key="refresh"
+          class="game-display__container"
+        >
+          <div
+            v-for="(items, index) in currentChapterSections"
+            :key="index"
+            class="game-charpter__container"
+          >
+            <p class="game-charpter__title">
+              {{ items.Title }}
+            </p>
+            <div class="game-card__group">
+              <div v-for="item in items.Games" class="card game-card">
+                <GameCard
+                  :game-info="{
+                    id: item.id,
+                    imgSrc: item.Img,
+                    name: item.Name,
+                    description: item.Description,
+                  }"
+                  @enter-game="
+                    switchRouter({
+                      name: 'Game',
+                      params: {
+                        id: item.id,
+                        Grade: grade,
+                        Subject: nowSubject,
+                        GameName: item.Name,
+                      },
+                    })
+                  "
+                  @read-text="makeReadText"
+                />
+              </div>
             </div>
           </div>
         </div>
+      </template>
+      <div v-else class="under-construction">
+        <img :src="underConstructionSrc" alt="建構中" />
       </div>
     </section>
     <section v-if="showMode == 'search'" class="search_result">
@@ -202,6 +214,10 @@ export default {
       chineseLogoSrc: getSystemAssets("chinese.png", "subject"),
       technologyLogoSrc: getSystemAssets("technology.png", "subject"),
       navLogoSrc: getSystemAssets("logo.png", "nav_bar"),
+      underConstructionSrc: getSystemAssets(
+        "under-construction.png",
+        "general"
+      ),
       searchInput: "",
       searchResult: [],
       grade: 0,
@@ -220,6 +236,11 @@ export default {
       showMode: "menu", // menu, game, search
       refresh: 0,
       selectedSemester: 0, // 新增：當前選擇的學期
+      externalLinks: {
+        Chinese: "https://jl123.pythonanywhere.com/grade/type/",
+        Technology:
+          "https://ptwa-npo.github.io/games/technology/grade1/index.html",
+      },
     };
   },
   computed: {
@@ -230,6 +251,16 @@ export default {
     currentChapterSections() {
       if (!this.currentSemesterChapters || !this.selectedCharpter) return [];
       return this.currentSemesterChapters[this.selectedCharpter]?.Section || [];
+    },
+    hasCurrentSubjectData() {
+      if (this.nowSubject === "Math") {
+        return this.mathShowInfo !== null;
+      } else if (this.nowSubject === "Chinese") {
+        return this.chineseShowInfo !== null;
+      } else if (this.nowSubject === "Technology") {
+        return this.technologyShowInfo !== null;
+      }
+      return false;
     },
   },
   async created() {
@@ -259,7 +290,7 @@ export default {
     },
     getJsonData(selectedSubject) {
       let url = `./Grade${this.grade}/${selectedSubject}Grade${this.grade}.json`;
-      return fetchJson(url).catch((err) => {
+      return fetchJson(url).catch(() => {
         throw `cannot load ${selectedSubject} 's JSON file`;
       });
     },
@@ -341,6 +372,18 @@ export default {
     },
     changeSubject(subject) {
       this.nowSubject = subject;
+
+      // 檢查是否為三年級的外部連結科目
+      if (
+        this.grade === "3" &&
+        (subject === "Chinese" || subject === "Technology")
+      ) {
+        // 在新視窗開啟外部連結
+        window.open(this.externalLinks[subject], "_blank");
+        return;
+      }
+
+      // 原有的科目邏輯
       if (subject == "Math") {
         this.showInfo = this.mathShowInfo;
         this.handleSession("set", "Subject", subject);
@@ -361,41 +404,84 @@ export default {
       this.switchMode("game");
     },
     queryGame(searchList, tarSymbol) {
+      if (!tarSymbol) return undefined;
+
       let finded_id = new Set();
       let foundGames = [];
-      for (var i in searchList) {
-        for (var z in searchList[i].Section) {
-          for (var x in searchList[i].Section[z].Games) {
-            if (searchList[i].Section[z].Games[x].id.includes(tarSymbol)) {
-              if (!finded_id.has(searchList[i].Section[z].Games[x].id)) {
-                finded_id.add(searchList[i].Section[z].Games[x].id);
-                let temp = searchList[i].Section[z].Games[x];
-                foundGames.push(temp);
-              }
-            }
-            if (searchList[i].Section[z].Games[x].Name.includes(tarSymbol)) {
-              if (!finded_id.has(searchList[i].Section[z].Games[x].id)) {
-                finded_id.add(searchList[i].Section[z].Games[x].id);
-                let temp = searchList[i].Section[z].Games[x];
-                find.push(temp);
+
+      // 將關鍵字轉為小寫以進行不分大小寫搜尋
+      tarSymbol = tarSymbol.toLowerCase();
+
+      for (let chapter in searchList) {
+        const sections = searchList[chapter]?.Section || [];
+        for (let section of sections) {
+          const games = section?.Games || [];
+          for (let game of games) {
+            // 檢查 ID 和名稱（不分大小寫）
+            if (
+              game.id?.toLowerCase().includes(tarSymbol) ||
+              game.Name?.toLowerCase().includes(tarSymbol)
+            ) {
+              if (!finded_id.has(game.id)) {
+                finded_id.add(game.id);
+                foundGames.push(game);
               }
             }
           }
         }
       }
-      if (foundGames.length == 0) {
-        return undefined;
-      }
-      return foundGames;
+
+      return foundGames.length > 0 ? foundGames : undefined;
     },
     switchMode(mode) {
       this.showMode = mode;
-      this.makeReadText("", "", (stop = true));
+      this.makeReadText("", "", true);
     },
     searchGame() {
       let keyword = this.searchInput;
       this.searchResult = [];
-      this.searchResult = this.queryGame(this.mathShowInfo, keyword);
+
+      // 搜尋所有科目和所有學期
+      let mathResults = [];
+      let chineseResults = [];
+      let techResults = [];
+
+      // 遍歷每個學期的資料
+      if (this.mathShowInfo) {
+        this.mathShowInfo.forEach((semester) => {
+          const results = this.queryGame(semester.gameItem || [], keyword);
+          if (results) {
+            mathResults.push(...results);
+          }
+        });
+      }
+
+      if (this.chineseShowInfo) {
+        this.chineseShowInfo.forEach((semester) => {
+          const results = this.queryGame(semester.gameItem || [], keyword);
+          if (results) {
+            chineseResults.push(...results);
+          }
+        });
+      }
+
+      if (this.technologyShowInfo) {
+        this.technologyShowInfo.forEach((semester) => {
+          const results = this.queryGame(semester.gameItem || [], keyword);
+          if (results) {
+            techResults.push(...results);
+          }
+        });
+      }
+
+      // 合併所有搜尋結果
+      this.searchResult = [...mathResults, ...chineseResults, ...techResults];
+
+      // 如果沒有結果，設為 undefined
+      if (this.searchResult.length === 0) {
+        this.searchResult = undefined;
+      }
+
       this.searchInput = "";
       this.switchMode("search");
     },
@@ -404,7 +490,7 @@ export default {
       this.searchInput = "";
     },
     switchRouter(to) {
-      this.makeReadText("", "", (stop = true));
+      this.makeReadText("", "", true);
       this.$router.push(to);
     },
     selectSemester(index) {
@@ -468,7 +554,7 @@ header {
   -moz-user-select: none !important;
   -ms-user-select: none !important;
   .game-select__nav {
-    background-color: #cb9fcf;
+    background-color: #f4c49f;
     height: 10vh !important;
     padding: 0 2rem;
     display: grid;
@@ -498,11 +584,10 @@ header {
         max-width: 9rem;
         height: 3rem;
         border-radius: $border-radius;
-        background-color: #bdb2ff;
+        background-color: #f4fc93;
         border: none;
         &--active {
-          background-color: #9f86ff;
-          color: white;
+          background-color: #d4e700;
         }
       }
     }
@@ -527,7 +612,7 @@ header {
         height: 3rem;
         padding: 10px 1rem;
         border-radius: $border-radius;
-        background-color: #bdb2ff;
+        background-color: #f4fc93;
         border: none;
       }
     }
@@ -617,29 +702,52 @@ header {
   display: flex;
   flex-direction: column;
   height: 90vh;
-  background-color: #ddd;
-  padding: 0 0.7rem;
+  background-color: #dfedb3;
+  padding: 0 0.5rem;
+  overflow-y: auto;
   &__title {
     font-size: 1.5em;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    background-color: #dfedb3;
+    z-index: 1;
   }
   &__button-group {
     display: grid;
-    gap: 1rem;
+    gap: 0.5rem;
   }
   &__button {
     transition: transform 0.3s ease;
     font-size: 1rem;
-    background-color: #feece9;
+    background-color: #f8fbe8;
     color: #333;
     @extend .button-border;
     width: 100%;
     font-weight: 600;
-    height: 2.6rem;
+    height: 2.5rem;
+    padding: 0 0.5rem;
     &--semester-active {
-      background-color: #4caf50; // 綠色
-      color: white;
+      background-color: #a8c2ea;
     }
+  }
+}
+.under-construction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+  grid-column: 1 / -1;
+  padding: 2rem;
+  overflow: hidden;
+
+  img {
+    max-width: 80%;
+    max-height: 79vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 }
 </style>

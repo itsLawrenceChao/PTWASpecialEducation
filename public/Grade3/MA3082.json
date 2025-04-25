@@ -17,19 +17,21 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "4公升"
+                "Text": "4公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "4000毫升"
+                "Text": "4000毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -39,19 +41,21 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "3公升"
+                "Text": "3公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "3000毫升"
+                "Text": "3000毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -61,19 +65,21 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "5公升"
+                "Text": "5公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "5000毫升"
+                "Text": "5000毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -83,19 +89,21 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "9公升"
+                "Text": "9公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "9000毫升"
+                "Text": "9000毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -105,136 +113,21 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "10公升"
+                "Text": "10公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "10000毫升"
-              }
-            }
-          ]
-        ],
-        "Answer": ["Equal"]
-      }
-    ],
-    [
-      {
-        "QuestionText": "毫升公升比大小",
-        "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
-        "Datas": [
-          [
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "一公升"
-              }
-            },
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "一百毫升"
-              }
-            }
-          ]
-        ],
-        "Answer": ["Big"]
-      },
-      {
-        "QuestionText": "毫升公升比大小",
-        "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
-        "Datas": [
-          [
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "兩百毫升"
-              }
-            },
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "兩公升"
-              }
-            }
-          ]
-        ],
-        "Answer": ["Small"]
-      },
-      {
-        "QuestionText": "毫升公升比大小",
-        "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
-        "Datas": [
-          [
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "一公升"
-              }
-            },
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "一千毫升"
-              }
-            }
-          ]
-        ],
-        "Answer": ["Equal"]
-      },
-      {
-        "QuestionText": "毫升公升比大小",
-        "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
-        "Datas": [
-          [
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "三百毫升"
-              }
-            },
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "三公升"
-              }
-            }
-          ]
-        ],
-        "Answer": ["Small"]
-      },
-      {
-        "QuestionText": "毫升公升比大小",
-        "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
-        "Datas": [
-          [
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "兩公升"
-              }
-            },
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "兩千毫升"
+                "Text": "10000毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -246,19 +139,22 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
+
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "1公升"
+                "Text": "1公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "100毫升"
+                "Text": "100毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -268,19 +164,22 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
+
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "200毫升"
+                "Text": "200毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "2公升"
+                "Text": "2公升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -290,19 +189,22 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
+
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "1公升"
+                "Text": "1公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "1000毫升"
+                "Text": "1000毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -312,19 +214,22 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
+
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "300毫升"
+                "Text": "300毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "3公升"
+                "Text": "3公升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -334,19 +239,22 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
+
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "2公升"
+                "Text": "2公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "2000毫升"
+                "Text": "2000毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -358,89 +266,69 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "一千六百毫升"
+                "Text": "17毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "一公升六百毫升"
+                "Text": "17公升",
+                "Size": "title-medium"
               }
             }
           ]
         ],
-        "Answer": ["Equal"]
+        "Answer": ["Small"]
       },
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "一千一百毫升"
+                "Text": "20毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "一公升六十毫升"
+                "Text": "20公升",
+                "Size": "title-medium"
               }
             }
           ]
         ],
-        "Answer": ["Big"]
+        "Answer": ["Small"]
       },
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "兩公升二十毫升"
+                "Text": "50公升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "兩千零二十毫升"
-              }
-            }
-          ]
-        ],
-        "Answer": ["Equal"]
-      },
-      {
-        "QuestionText": "毫升公升比大小",
-        "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
-        "Datas": [
-          [
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "三千五百毫升"
-              }
-            },
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "三公升五十毫升"
+                "Text": "50毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -450,20 +338,45 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
+        "SlotComponentVerifycation": false,
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "兩千四百五十毫升"
+                "Text": "5毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "兩公升四十五毫升"
+                "Text": "5公升",
+                "Size": "title-medium"
+              }
+            }
+          ]
+        ],
+        "Answer": ["Small"]
+      },
+      {
+        "QuestionText": "毫升公升比大小",
+        "Description": "在框框裡拖入>、<或= ",
+        "SlotComponentVerifycation": false,
+        "Datas": [
+          [
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "1公升",
+                "Size": "title-medium"
+              }
+            },
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "1毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -475,89 +388,72 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
 
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "三千零二十毫升"
+                "Text": "1600毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "三公升兩百毫升"
+                "Text": "1公升60毫升",
+                "Size": "title-medium"
               }
             }
           ]
         ],
-        "Answer": ["Small"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
 
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "一千零一十毫升"
+                "Text": "1100毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "一公升一百毫升"
+                "Text": "1公升10毫升",
+                "Size": "title-medium"
               }
             }
           ]
         ],
-        "Answer": ["Small"]
+        "Answer": ["Big"]
       },
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
 
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "兩千兩百毫升"
+                "Text": "2公升20毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "兩公升兩百毫升"
-              }
-            }
-          ]
-        ],
-        "Answer": ["Equal"]
-      },
-      {
-        "QuestionText": "毫升公升比大小",
-        "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
-
-        "Datas": [
-          [
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "一千五百二十毫升"
-              }
-            },
-            {
-              "Name": "TextOnly",
-              "Data": {
-                "Text": "一公升五百二十毫升"
+                "Text": "2020毫升",
+                "Size": "title-medium"
               }
             }
           ]
@@ -567,20 +463,174 @@
       {
         "QuestionText": "毫升公升比大小",
         "Description": "在框框裡拖入>、<或= ",
-        "SlotComponentVerifycation": true,
+        "SlotComponentVerifycation": false,
 
         "Datas": [
           [
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "三千兩百一十毫升"
+                "Text": "3500毫升",
+                "Size": "title-medium"
               }
             },
             {
               "Name": "TextOnly",
               "Data": {
-                "Text": "三公升二十一毫升"
+                "Text": "3公升50毫升",
+                "Size": "title-medium"
+              }
+            }
+          ]
+        ],
+        "Answer": ["Big"]
+      },
+      {
+        "QuestionText": "毫升公升比大小",
+        "Description": "在框框裡拖入>、<或= ",
+        "SlotComponentVerifycation": false,
+
+        "Datas": [
+          [
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "2450毫升",
+                "Size": "title-medium"
+              }
+            },
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "2公升45毫升",
+                "Size": "title-medium"
+              }
+            }
+          ]
+        ],
+        "Answer": ["Big"]
+      }
+    ],
+    [
+      {
+        "QuestionText": "毫升公升比大小",
+        "Description": "在框框裡拖入>、<或= ",
+        "SlotComponentVerifycation": false,
+
+        "Datas": [
+          [
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "3020毫升",
+                "Size": "title-medium"
+              }
+            },
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "3公升200毫升",
+                "Size": "title-medium"
+              }
+            }
+          ]
+        ],
+        "Answer": ["Small"]
+      },
+      {
+        "QuestionText": "毫升公升比大小",
+        "Description": "在框框裡拖入>、<或= ",
+        "SlotComponentVerifycation": false,
+
+        "Datas": [
+          [
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "1010毫升",
+                "Size": "title-medium"
+              }
+            },
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "1公升100毫升",
+                "Size": "title-medium"
+              }
+            }
+          ]
+        ],
+        "Answer": ["Small"]
+      },
+      {
+        "QuestionText": "毫升公升比大小",
+        "Description": "在框框裡拖入>、<或= ",
+        "SlotComponentVerifycation": false,
+
+        "Datas": [
+          [
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "2200毫升",
+                "Size": "title-medium"
+              }
+            },
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "2公升200毫升",
+                "Size": "title-medium"
+              }
+            }
+          ]
+        ],
+        "Answer": ["Equal"]
+      },
+      {
+        "QuestionText": "毫升公升比大小",
+        "Description": "在框框裡拖入>、<或= ",
+        "SlotComponentVerifycation": false,
+
+        "Datas": [
+          [
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "1520毫升",
+                "Size": "title-medium"
+              }
+            },
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "1公升520毫升",
+                "Size": "title-medium"
+              }
+            }
+          ]
+        ],
+        "Answer": ["Equal"]
+      },
+      {
+        "QuestionText": "毫升公升比大小",
+        "Description": "在框框裡拖入>、<或= ",
+        "SlotComponentVerifycation": false,
+
+        "Datas": [
+          [
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "3210毫升",
+                "Size": "title-medium"
+              }
+            },
+            {
+              "Name": "TextOnly",
+              "Data": {
+                "Text": "3公升21毫升",
+                "Size": "title-medium"
               }
             }
           ]

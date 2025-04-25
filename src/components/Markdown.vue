@@ -32,7 +32,6 @@
   </div>
 </template>
 <script>
-import { defineAsyncComponent } from "vue";
 import FloatNumPad from "@/components/FloatNumPad.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
@@ -66,6 +65,9 @@ export default {
     this.markdownContent = this.Data.Render;
     this.parseMarkdown();
     emitter.on("checkAnswer", this.markWrong);
+  },
+  beforeUnmount() {
+    emitter.off("checkAnswer", this.markWrong);
   },
   methods: {
     parseMarkdown() {
@@ -156,8 +158,8 @@ export default {
       const inputRect = event.target.getBoundingClientRect();
       this.isShowNumPad = true;
       this.floatNumPadLocation = {
-        top: `${inputRect.top + window.scrollY + this.numPadOffset}px`,
-        left: `${inputRect.right + window.scrollX}px`,
+        top: `${inputRect.bottom + window.scrollY + this.numPadOffset}px`,
+        left: `${inputRect.left + window.scrollX}px`,
       };
     },
     fillToInput(content) {
@@ -178,9 +180,16 @@ export default {
     markWrong() {
       this.checkAnswer();
       let cnt = 0;
-      this.elements.forEach((element, index) => {
+      // 先檢查 inputRefs 是否存在
+      if (!this.$refs.inputRefs) {
+        console.warn("inputRefs not found");
+        return;
+      }
+
+      this.elements.forEach((element) => {
         if (element.el === "input") {
-          if (this.wrongInputIndex.includes(cnt)) {
+          // 檢查該索引的 input 是否存在
+          if (this.wrongInputIndex.includes(cnt) && this.$refs.inputRefs[cnt]) {
             this.$refs.inputRefs[cnt].style.backgroundColor = "red";
           }
           cnt++;

@@ -149,7 +149,7 @@ export default {
     height: 120px;
     width: 200px;
     border-radius: 10px;
-    background-color: #567c8d;
+    background-color: $submit-color;
     color: #f5efe8;
     border: none;
     cursor: pointer;

@@ -218,6 +218,7 @@ export default {
         text-align: center;
         display: flex;
         justify-content: center;
+        white-space: pre-wrap;
         p {
           margin: auto 0 auto;
         }

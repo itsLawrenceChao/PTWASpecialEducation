@@ -221,7 +221,7 @@ export default {
     width: 13rem;
     height: 4rem;
     border-radius: 15px;
-    background-color: #ffbe0b;
+    background-color: $submit-color;
     scale: 1;
     transition: 0.5s;
     font-size: 1.5rem;

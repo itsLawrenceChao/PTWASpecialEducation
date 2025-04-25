@@ -1,28 +1,9 @@
 <template>
   <div class="game">
     <div class="question-and-answer">
-      <h1 class="question__description">{{ questionDescription }}</h1>
-      <div class="question__math-expression">
-        <FractionDisplay
-          :Data="questionLeftTerm"
-          :ID="ID"
-          class="math-expression__fraction"
-        ></FractionDisplay>
-        <span class="question__math-symbol">{{ operation }}</span>
-        <FractionDisplay
-          :Data="questionRightTerm"
-          :ID="ID"
-          class="math-expression__fraction"
-        ></FractionDisplay>
-        <span class="question__math-symbol">&#61;</span>
-        <FractionForAnswer
-          ref="fractionsComponent"
-          :Data="answerData"
-          :ID="ID"
-          @recordAnswer="handleRecordAnswer"
-          @replyAnswer="handleValidation"
-        ></FractionForAnswer>
-      </div>
+      <h1 class="question__description">
+        <FractionText :text="questionDescription" :ID="ID"></FractionText>
+      </h1>
     </div>
     <div class="check-calculation">
       <DragFraction
@@ -30,9 +11,32 @@
         :ID="ID"
         class="check-calculation-components"
       ></DragFraction>
-      <button class="check-answer-btn" @click="triggerValidation">
-        送出答案
-      </button>
+      <div class="calculation-container">
+        <div class="question__math-expression">
+          <FractionDisplay
+            :Data="questionLeftTerm"
+            :ID="ID"
+            class="math-expression__fraction"
+          ></FractionDisplay>
+          <span class="question__math-symbol">{{ operation }}</span>
+          <FractionDisplay
+            :Data="questionRightTerm"
+            :ID="ID"
+            class="math-expression__fraction"
+          ></FractionDisplay>
+          <span class="question__math-symbol">&#61;</span>
+          <FractionForAnswer
+            ref="fractionsComponent"
+            :Data="answerData"
+            :ID="ID"
+            @recordAnswer="handleRecordAnswer"
+            @replyAnswer="handleValidation"
+          ></FractionForAnswer>
+        </div>
+        <button class="check-answer-btn" @click="triggerValidation">
+          送出答案
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -40,17 +44,19 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import FractionForAnswer from "@/components/FractionForAnswer.vue";
+import FractionText from "@/components/FractionText.vue";
 
 export default {
   name: "FractionArithmetic",
   components: {
-    FractionDisplay: defineAsyncComponent(() =>
-      import("@/components/FractionDisplay.vue")
+    FractionDisplay: defineAsyncComponent(
+      () => import("@/components/FractionDisplay.vue")
     ),
-    DragFraction: defineAsyncComponent(() =>
-      import("@/components/DragFraction.vue")
+    DragFraction: defineAsyncComponent(
+      () => import("@/components/DragFraction.vue")
     ),
     FractionForAnswer,
+    FractionText,
   },
   props: {
     GameData: {
@@ -113,8 +119,7 @@ export default {
 
 .question-and-answer {
   display: flex;
-  height: 15vh;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 20%;
@@ -122,13 +127,11 @@ export default {
 }
 
 .question__math-expression {
-  flex: 2;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
   padding: 0.5rem;
-  gap: $gap--small;
   @extend .game-section--border;
 }
 
@@ -137,7 +140,7 @@ export default {
 }
 
 .question__description {
-  flex: 2;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,6 +150,14 @@ export default {
   @extend .game-section--border;
   height: 100%;
   line-height: 1.3;
+}
+
+.calculation-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $gap--small;
+  width: 100%;
 }
 
 .check-calculation {
@@ -164,13 +175,13 @@ export default {
 }
 
 .check-calculation-components {
-  width: 70%;
+  flex: 3;
 }
 
 .check-answer-btn {
-  height: 100%;
-  width: 25%;
+  width: 100%;
+  padding: 1rem;
   border: none;
-  background-color: #e4c9b6;
+  background-color: $submit-color;
 }
 </style>

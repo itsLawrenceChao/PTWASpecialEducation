@@ -130,6 +130,7 @@
     <TechModal
       v-if="showMediaModal"
       :media-data="GameData.introvideo"
+      :game-id="gameID"
       @close="closeMediaModal"
     />
   </div>
@@ -194,9 +195,6 @@ export default {
     NumberingGame: defineAsyncComponent(
       () => import("@/views/GameTemplate/NumberingGame.vue")
     ),
-    CompareGame: defineAsyncComponent(
-      () => import("@/views/GameTemplate/CompareGame.vue")
-    ),
     FillinBlank: defineAsyncComponent(
       () => import("@/views/GameTemplate/FillinBlank.vue")
     ),
@@ -216,9 +214,6 @@ export default {
       () => import("@/views/GameTemplate/WhackaMole.vue")
     ),
     Maze: defineAsyncComponent(() => import("@/views/GameTemplate/Maze.vue")),
-    NumberLock: defineAsyncComponent(
-      () => import("@/views/GameTemplate/NumberLock.vue")
-    ),
     SelectGameMulti: defineAsyncComponent(
       () => import("@/views/GameTemplate/SelectGameMulti.vue")
     ),
@@ -242,9 +237,6 @@ export default {
     ), //for testing only
     BalloonShooting: defineAsyncComponent(
       () => import("@/views/GameTemplate/BalloonShooting.vue")
-    ),
-    NumberLock: defineAsyncComponent(
-      () => import("@/views/GameTemplate/NumberLock.vue")
     ),
     LinkToImage: defineAsyncComponent(
       () => import("@/views/GameTemplate/LinktoImage.vue")
@@ -359,9 +351,9 @@ export default {
         // this.InitIntroVideo();
         this.Dataloaded = true;
         this.randomChoice();
-        for (let x in this.GameData.Questions) {
+        this.GameData.Questions.forEach(() => {
           this.isPassLevel.push(false);
-        }
+        });
       } catch (error) {
         console.error("Fetch Game Data Error: ", error);
       }
@@ -389,7 +381,6 @@ export default {
   methods: {
     randomChoice() {
       let question = [];
-      let temp = [];
       let checkcorrect = true;
       let record = [];
       for (let i in this.GameData.Questions) {
@@ -477,9 +468,9 @@ export default {
       this.finaltime = 0;
       this.download_data = [[]];
       this.isPassLevel = [];
-      for (let x in this.GameData.Questions) {
+      this.GameData.Questions.forEach(() => {
         this.isPassLevel.push(false);
-      }
+      });
     },
     nextQuestion() {
       this.isPassLevel[this.Nowlevel - 1] = true;
@@ -584,7 +575,6 @@ export default {
       }
     },
     effectPlayer(type) {
-      let sound;
       switch (type) {
         case "CorrectSound":
           this.effectPlayer("CorrectAnimation");
@@ -630,7 +620,9 @@ export default {
           /* IE11 */
           elem.msRequestFullscreen();
         }
-      } catch (error) {}
+      } catch (error) {
+        console.warn("Fullscreen request failed:", error);
+      }
       // window.removeEventListener('mousemove', this.FullScreen);
     },
     exitFullScreen() {

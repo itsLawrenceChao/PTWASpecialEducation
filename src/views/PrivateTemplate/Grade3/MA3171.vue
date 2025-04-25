@@ -301,7 +301,7 @@ export default {
   .submit-btn {
     padding: $padding--small $padding--large;
     font-size: $text-medium;
-    background-color: $accent-color;
+    background-color: $submit-color;
     color: white;
     border: none;
     border-radius: $border-radius;
@@ -309,7 +309,7 @@ export default {
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: $accent-color;
+      background-color: $submit-color;
     }
 
     &:disabled {

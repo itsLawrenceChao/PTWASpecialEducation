@@ -1,6 +1,8 @@
 <template>
   <div class="MA3151__container">
-    <p class="question-text">{{ GameData.questionDescription }}</p>
+    <p class="question-text">
+      <FractionText :text="GameData.questionDescription" :ID="ID" />
+    </p>
     <div class="question-section">
       <InteractiveFractionVisual
         :Data="GameData.question"
@@ -45,19 +47,21 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import { getGameStaticAssets } from "@/utilitys/get_assets.js"; // Feel free to change your the method to get assets.
 
 export default {
   name: "FractionGame",
   components: {
-    InteractiveFractionVisual: defineAsyncComponent(() =>
-      import("@/components/InteractiveFractionVisual.vue")
+    InteractiveFractionVisual: defineAsyncComponent(
+      () => import("@/components/InteractiveFractionVisual.vue")
     ),
-    NumberIncrementor: defineAsyncComponent(() =>
-      import("@/components/NumberIncrementor.vue")
+    NumberIncrementor: defineAsyncComponent(
+      () => import("@/components/NumberIncrementor.vue")
     ),
-    FractionForAnswer: defineAsyncComponent(() =>
-      import("@/components/FractionForAnswer.vue")
+    FractionForAnswer: defineAsyncComponent(
+      () => import("@/components/FractionForAnswer.vue")
+    ),
+    FractionText: defineAsyncComponent(
+      () => import("@/components/FractionText.vue")
     ),
   },
   props: {
@@ -218,7 +222,7 @@ export default {
 
 .submit-btn {
   padding: 0.5rem 2rem;
-  background-color: #4caf50;
+  background-color: $submit-color;
   color: white;
   border: none;
   border-radius: 4px;

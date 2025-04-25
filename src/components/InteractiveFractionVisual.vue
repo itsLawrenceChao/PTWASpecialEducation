@@ -1,30 +1,48 @@
 <template>
-  <div
-    ref="fractionChart"
-    class="fraction-chart"
-    :class="{ 'fraction-chart--clickable': !displayOnly }"
-    @click="handleShapeClick"
-  >
-    <canvas
-      v-if="!isCupMode"
-      ref="canvas"
-      class="fraction-chart__canvas"
-    ></canvas>
+  <div class="fraction-container">
     <div
-      v-else
-      class="fraction-chart__cup"
-      :class="{ 'fraction-chart__cup--disabled': displayOnly }"
+      ref="fractionChart"
+      class="fraction-chart"
+      :class="{ 'fraction-chart--clickable': !displayOnly }"
+      @wheel="handleWheel"
     >
+      <canvas
+        v-if="!isCupMode"
+        ref="canvas"
+        class="fraction-chart__canvas"
+      ></canvas>
       <div
-        v-for="line in denominatorLines"
-        :key="line"
-        class="fraction-chart__division-line"
-        :style="{ top: `${(line / denominator) * 100}%` }"
-      ></div>
-      <div
-        class="fraction-chart__water"
-        :style="{ height: `${(numerator / denominator) * 100}%` }"
-      ></div>
+        v-else
+        class="fraction-chart__cup"
+        :class="{ 'fraction-chart__cup--disabled': displayOnly }"
+      >
+        <div
+          v-for="line in denominatorLines"
+          :key="line"
+          class="fraction-chart__division-line"
+          :style="{ top: `${(line / denominator) * 100}%` }"
+        ></div>
+        <div
+          class="fraction-chart__water"
+          :style="{ height: `${(numerator / denominator) * 100}%` }"
+        ></div>
+      </div>
+    </div>
+    <div v-if="!displayOnly" class="fraction-controls">
+      <button
+        class="fraction-controls__button"
+        :disabled="numerator >= denominator"
+        @click="increaseFraction"
+      >
+        +
+      </button>
+      <button
+        class="fraction-controls__button"
+        :disabled="numerator <= 0"
+        @click="decreaseFraction"
+      >
+        -
+      </button>
     </div>
   </div>
 </template>
@@ -363,24 +381,99 @@ export default {
         y: this.gameHeight * this.gridScale.y,
       };
     },
-
-    handleShapeClick() {
-      if (this.displayOnly) return;
-
-      this.numerator =
-        this.numerator >= this.denominator ? 0 : this.numerator + 1;
-
+    checkAnswer() {
       const isCorrect =
         this.numerator === this.answer.numerator &&
         this.denominator === this.answer.denominator;
 
       this.$emit("replyAnswer", isCorrect);
     },
+    decreaseFraction() {
+      if (this.numerator > 0) {
+        this.numerator--;
+      }
+      this.checkAnswer();
+    },
+
+    increaseFraction() {
+      if (this.numerator < this.denominator) {
+        this.numerator++;
+      }
+      this.checkAnswer();
+    },
+
+    handleWheel(event) {
+      if (this.displayOnly) return;
+
+      // 阻止預設的滾動行為
+      event.preventDefault();
+
+      // 根據滾輪方向增加或減少分數
+      if (event.deltaY < 0) {
+        this.increaseFraction();
+      } else {
+        this.decreaseFraction();
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+.fraction-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.fraction-chart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: inherit;
+  position: relative;
+  overflow: hidden;
+  &__canvas {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.fraction-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.fraction-controls__button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  background-color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background-color: #f0f0f0;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
 .fraction-chart {
   width: 100%;
   height: 100%;

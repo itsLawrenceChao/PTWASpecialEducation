@@ -26,6 +26,7 @@ export default {
       height: 100, // 預設高度
       inputTime: this.Data.time == undefined ? "00:00" : this.Data.time, // 默認時間
       scaledImage: { width: 0, height: 0 }, // 儲存縮放後圖片的大小
+      digitColor: "#800020", // 數字顏色變數
     };
   },
   mounted() {
@@ -205,8 +206,8 @@ export default {
           y,
           width,
           height,
-          fill: "#0f0",
-          shadowColor: "#0f0",
+          fill: this.digitColor,
+          shadowColor: this.digitColor,
           shadowBlur: 5,
         });
         this.layer.add(rect);
@@ -217,17 +218,17 @@ export default {
         x: x + size * 0.4,
         y: y + size * 0.4,
         radius: size * 0.1,
-        fill: "#0f0",
-        shadowColor: "#0f0",
-        shadowBlur: 4,
+        fill: this.digitColor,
+        shadowColor: this.digitColor,
+        shadowBlur: 5,
       });
       const bottomDot = new Konva.Circle({
         x: x + size * 0.4,
         y: y + size * 0.8,
         radius: size * 0.1,
-        fill: "#0f0",
-        shadowColor: "#0f0",
-        shadowBlur: 4,
+        fill: this.digitColor,
+        shadowColor: this.digitColor,
+        shadowBlur: 5,
       });
 
       this.layer.add(topDot, bottomDot);

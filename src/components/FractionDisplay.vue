@@ -61,6 +61,7 @@ export default {
   display: block;
   border-top: 0.2rem solid black;
   width: 100%;
+  max-width: 150px;
   margin: 2px 0;
 }
 

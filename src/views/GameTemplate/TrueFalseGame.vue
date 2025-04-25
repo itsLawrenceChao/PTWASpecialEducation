@@ -182,7 +182,7 @@ button {
       height: 15%;
       border-radius: 20px;
       font-size: 2em;
-      background-color: #bde0fe;
+      background-color: $submit-color;
     }
   }
 }
