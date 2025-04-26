@@ -243,7 +243,7 @@ export default {
 
       this.menuPosition = {
         top: rectTop + 10,
-        left: rectLeft,
+        left: rectLeft + 10,
         id: this.isClickRectID,
       };
     },
