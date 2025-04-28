@@ -5,15 +5,16 @@
     </div>
     <div class="word-problem">
       <div class="left-container">
+        <ImageContainer v-if="GameData.image" :ID="ID" :Data="GameData.image" />
         <Markdown
           class="markdown"
           :Data="markdownData"
           @reply-answer="markdownAnswer"
         />
-        <button class="submit" @click="checkAnswer">檢查答案</button>
       </div>
       <div class="right-container">
         <Calculator :Data="calculatorData" @reply-answer="calculatorAnswer" />
+        <button class="submit" @click="checkAnswer">檢查答案</button>
       </div>
     </div>
   </div>
@@ -21,12 +22,14 @@
 <script>
 import Calculator from "@/components/Calculator.vue";
 import Markdown from "@/components/Markdown.vue";
+import ImageContainer from "@/components/ImageContainer.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "WordProblemWithCalculator",
   components: {
     Calculator,
     Markdown,
+    ImageContainer,
   },
   props: {
     GameData: {
@@ -143,37 +146,34 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: $gap--medium;
+  gap: $gap--small;
   justify-content: center;
   align-items: center;
 }
+
 .head-container {
   @extend .container-basic;
   display: flex;
   background-color: $primary-color;
-  padding: $gap--small;
-  font-size: $text-large;
-}
-.word-problem {
+  padding: 0 $padding--small;
+  font-size: $text-medium;
   width: 100%;
-  padding: $gap--medium;
+  height: 20%;
+}
+
+.word-problem {
+  height: 80%;
+  width: 100%;
+  padding: 0 $padding--small;
   display: flex;
   justify-content: center;
-  gap: $gap--medium;
+  gap: $gap--small;
   flex-direction: row;
   .right-container {
     width: 40%;
-  }
-  .left-container {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 40%;
-    .markdown {
-      width: 100%;
-    }
-    width: 50%;
+    gap: $gap--small;
     .submit {
       @extend .button-basic;
       width: 100%;
@@ -186,5 +186,26 @@ export default {
       }
     }
   }
+  .left-container {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $gap--small;
+    width: 40%;
+    height: 100%;
+    .markdown {
+      width: 100%;
+      max-height: 200px;
+    }
+    .image-container {
+      flex: 1;
+      width: 100%;
+    }
+  }
+}
+p {
+  margin: 0;
+  padding: 0;
 }
 </style>
