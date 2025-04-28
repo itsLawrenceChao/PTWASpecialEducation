@@ -240,6 +240,7 @@ export default {
   },
 };
 </script>
+
 <style scoped lang="scss">
 .math-input-container {
   display: inline-block;
@@ -263,9 +264,23 @@ input {
   margin: 5px;
 }
 .markdown-container {
+  width: 100%;
+  height: 100%;
   span,
   p {
     font-size: $text-medium;
+    margin: 0;
+    padding: 0;
+  }
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+  br {
+    margin: 0;
+    padding: 0;
   }
 }
 </style>
