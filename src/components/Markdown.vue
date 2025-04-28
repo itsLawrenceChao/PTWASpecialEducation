@@ -256,8 +256,8 @@ export default {
 }
 
 input {
-  min-width: 50px;
-  max-width: 100px;
+  min-width: 20px;
+  max-width: 50px;
   border: 1px solid #000;
   border-radius: $border-radius;
   padding: 5px;
