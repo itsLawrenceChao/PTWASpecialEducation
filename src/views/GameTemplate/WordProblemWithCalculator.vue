@@ -9,11 +9,16 @@
         <Markdown
           class="markdown"
           :Data="markdownData"
+          :ID="ID"
           @reply-answer="markdownAnswer"
         />
       </div>
       <div class="right-container">
-        <Calculator :Data="calculatorData" @reply-answer="calculatorAnswer" />
+        <Calculator
+          :Data="calculatorData"
+          :ID="ID"
+          @reply-answer="calculatorAnswer"
+        />
         <button class="submit" @click="checkAnswer">檢查答案</button>
       </div>
     </div>
