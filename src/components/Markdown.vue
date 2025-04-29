@@ -12,6 +12,7 @@
           v-if="element.isSymbol"
           :label="element.content || '?'"
           class="math-symbol-btn"
+          :class="{ 'wrong-answer': element.isWrong }"
           rounded
         >
           <q-menu anchor="bottom start" self="top left">
@@ -160,15 +161,36 @@ export default {
       this.wrongInputIndex = [];
       this.resetInputBG();
       let check = true;
+
+      // 獲取所有輸入框的答案
       let userAnswer = this.elements
-        .filter((element) => element.el === "input")
+        .filter(
+          (element) => element.el === "input" || element.el === "math-input"
+        )
         .map((element) => element.content);
-      for (let i = 0; i < this.Data.Answer.length; i++) {
-        if (this.Data.Answer[i] != userAnswer[i]) {
-          check = false;
-          this.wrongInputIndex.push(i);
+
+      // 檢查輸入框數量是否匹配
+      if (userAnswer.length !== this.Data.Answer.length) {
+        this.$emit("replyAnswer", false);
+        return;
+      }
+
+      let totalIndex = 0;
+      for (let i = 0; i < this.elements.length; i++) {
+        const element = this.elements[i];
+        if (element.el === "input" || element.el === "math-input") {
+          // 將答案轉換為字串進行比較
+          const correctAnswer = String(this.Data.Answer[totalIndex]).trim();
+          const userInput = String(element.content || "").trim();
+
+          if (correctAnswer !== userInput) {
+            check = false;
+            this.wrongInputIndex.push(totalIndex);
+          }
+          totalIndex++;
         }
       }
+
       if (check) {
         this.$emit("replyAnswer", true);
       } else {
@@ -216,7 +238,8 @@ export default {
     },
     markWrong() {
       this.checkAnswer();
-      let cnt = 0;
+      let totalIndex = 0;
+      let inputIndex = 0;
       // 先檢查 inputRefs 是否存在
       if (!this.$refs.inputRefs) {
         console.warn("inputRefs not found");
@@ -224,12 +247,23 @@ export default {
       }
 
       this.elements.forEach((element) => {
-        if (element.el === "input") {
-          // 檢查該索引的 input 是否存在
-          if (this.wrongInputIndex.includes(cnt) && this.$refs.inputRefs[cnt]) {
-            this.$refs.inputRefs[cnt].style.backgroundColor = "red";
+        if (
+          element.el === "input" ||
+          (element.el === "math-input" && element.isSymbol)
+        ) {
+          if (element.el === "input") {
+            if (
+              this.wrongInputIndex.includes(totalIndex) &&
+              this.$refs.inputRefs[inputIndex]
+            ) {
+              this.$refs.inputRefs[inputIndex].style.backgroundColor = "red";
+            }
+            inputIndex++;
+          } else if (element.el === "math-input" && element.isSymbol) {
+            element.isWrong = this.wrongInputIndex.includes(totalIndex);
           }
-          cnt++;
+
+          totalIndex++;
         }
       });
     },
@@ -249,10 +283,15 @@ export default {
 
 .math-symbol-btn {
   border-radius: 20px;
-  font-weight: bold;
+  font-size: $text-small;
   padding: 0;
   min-width: 40px;
   height: 40px;
+
+  &.wrong-answer {
+    background-color: red !important;
+    color: white !important;
+  }
 }
 
 input {
