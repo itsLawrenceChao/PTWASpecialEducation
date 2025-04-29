@@ -28,18 +28,6 @@
             </q-item>
           </q-menu>
         </q-btn>
-        <input
-          v-else
-          v-model="element.content"
-          type="text"
-          @input="checkAnswer($event)"
-          @click="
-            (event) => {
-              showKeyboard(event, index);
-              disableKeyboardOnMobile(event);
-            }
-          "
-        />
       </div>
       <input
         v-else-if="element.el === 'input'"
@@ -247,22 +235,17 @@ export default {
       }
 
       this.elements.forEach((element) => {
-        if (
-          element.el === "input" ||
-          (element.el === "math-input" && element.isSymbol)
-        ) {
-          if (element.el === "input") {
-            if (
-              this.wrongInputIndex.includes(totalIndex) &&
-              this.$refs.inputRefs[inputIndex]
-            ) {
-              this.$refs.inputRefs[inputIndex].style.backgroundColor = "red";
-            }
-            inputIndex++;
-          } else if (element.el === "math-input" && element.isSymbol) {
-            element.isWrong = this.wrongInputIndex.includes(totalIndex);
+        if (element.el === "input") {
+          if (
+            this.wrongInputIndex.includes(totalIndex) &&
+            this.$refs.inputRefs[inputIndex]
+          ) {
+            this.$refs.inputRefs[inputIndex].style.backgroundColor = "red";
           }
-
+          inputIndex++;
+          totalIndex++;
+        } else if (element.el === "math-input") {
+          element.isWrong = this.wrongInputIndex.includes(totalIndex);
           totalIndex++;
         }
       });
