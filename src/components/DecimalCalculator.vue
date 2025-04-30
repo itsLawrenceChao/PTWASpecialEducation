@@ -339,7 +339,7 @@ export default {
     width: 100%;
     max-width: 600px; // 設置最大寬度
     height: 100%;
-    min-height: 500px;
+    min-height: 400px;
     padding: 0 20px; // 增加一些邊距
     gap: 10px;
   }
