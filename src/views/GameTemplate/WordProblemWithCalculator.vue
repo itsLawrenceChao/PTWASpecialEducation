@@ -14,7 +14,8 @@
         />
       </div>
       <div class="right-container">
-        <Calculator
+        <component
+          :is="GameConfig.calculator"
           :Data="calculatorData"
           :ID="ID"
           @reply-answer="calculatorAnswer"
@@ -25,16 +26,20 @@
   </div>
 </template>
 <script>
-import Calculator from "@/components/Calculator.vue";
-import Markdown from "@/components/Markdown.vue";
-import ImageContainer from "@/components/ImageContainer.vue";
+import { getComponents } from "@/utilitys/get-components.js";
+import { defineAsyncComponent } from "vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "WordProblemWithCalculator",
   components: {
-    Calculator,
-    Markdown,
-    ImageContainer,
+    Calculator: getComponents("Calculator"),
+    Markdown: getComponents("Markdown"),
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
+    ),
+    DecimalCalculator: defineAsyncComponent(
+      () => import("@/components/DecimalCalculator.vue")
+    ),
   },
   props: {
     GameData: {
