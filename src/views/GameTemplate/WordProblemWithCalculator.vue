@@ -40,6 +40,7 @@ export default {
     DecimalCalculator: defineAsyncComponent(
       () => import("@/components/DecimalCalculator.vue")
     ),
+    Division: defineAsyncComponent(() => import("@/components/Division.vue")),
   },
   props: {
     GameData: {
