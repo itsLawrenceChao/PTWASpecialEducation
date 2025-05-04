@@ -150,7 +150,7 @@ export default {
     },
 
     // 處理單個計算步驟的輔助方法
-    processDivisionStep(remainingDividend, processedDigits, divisorStr) {
+    processDivisionStep(remainingDividend, processedDigits) {
       const { pos, currentNum } = this.getNextDividendInfo(remainingDividend);
       const step = this.calculateDivisionStep(
         currentNum,
