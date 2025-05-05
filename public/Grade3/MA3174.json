@@ -22,7 +22,7 @@
       {
         "questionText": "(    ) x 5 = 100",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 100,
             "segments": 5,
@@ -41,7 +41,7 @@
       {
         "questionText": "(    ) x 6 = 60",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 60,
             "segments": 6,
@@ -60,7 +60,7 @@
       {
         "questionText": "(    ) x 2 = 80",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 80,
             "segments": 2,
@@ -79,7 +79,7 @@
       {
         "questionText": "(    ) x 3 = 90",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 90,
             "segments": 3,
@@ -98,7 +98,7 @@
       {
         "questionText": "(    ) x 4 = 160",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 160,
             "segments": 4,
@@ -119,7 +119,7 @@
       {
         "questionText": "(    ) x 8 = 88",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 88,
             "segments": 8,
@@ -138,7 +138,7 @@
       {
         "questionText": "(    ) x 4 = 52",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 52,
             "segments": 4,
@@ -157,7 +157,7 @@
       {
         "questionText": "(    ) x 6 = 84",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 84,
             "segments": 6,
@@ -176,7 +176,7 @@
       {
         "questionText": "(    ) x 5 = 75",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 75,
             "segments": 5,
@@ -195,7 +195,7 @@
       {
         "questionText": "(    ) x 7 = 91",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 91,
             "segments": 7,
@@ -216,7 +216,7 @@
       {
         "questionText": "(    ) x 2 = 102",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 102,
             "segments": 2,
@@ -235,7 +235,7 @@
       {
         "questionText": "(    ) x 3 = 144",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 144,
             "segments": 3,
@@ -254,7 +254,7 @@
       {
         "questionText": "(    ) x 4 = 132",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 132,
             "segments": 4,
@@ -273,7 +273,7 @@
       {
         "questionText": "(    ) x 5 = 130",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 130,
             "segments": 5,
@@ -292,7 +292,7 @@
       {
         "questionText": "(    ) x 4 = 164",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 164,
             "segments": 4,
@@ -313,7 +313,7 @@
       {
         "questionText": "一頂帽子價格的3倍剛好和一件360元的褲子一樣，一頂帽子多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 360,
             "segments": 3,
@@ -332,7 +332,7 @@
       {
         "questionText": "一頂帽子價格的2倍剛好和一件500元的褲子一樣，一頂帽子多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 500,
             "segments": 2,
@@ -351,7 +351,7 @@
       {
         "questionText": "一雙襪子價格的6倍剛好和一件474元的衣服一樣，一雙襪子多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 474,
             "segments": 6,
@@ -370,7 +370,7 @@
       {
         "questionText": "一雙襪子價格的5倍剛好和一件245元的衣服一樣，一雙襪子多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 245,
             "segments": 5,
@@ -389,7 +389,7 @@
       {
         "questionText": "一雙襪子價格的4倍剛好和一件396元的衣服一樣，一雙襪子多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 396,
             "segments": 4,
@@ -410,7 +410,7 @@
       {
         "questionText": "爸爸買了9包巧克力，共付了558元，一包巧克力多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 558,
             "segments": 9,
@@ -429,7 +429,7 @@
       {
         "questionText": "哥哥買了8包遊戲卡，共付了376元，一包遊戲卡多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 376,
             "segments": 8,
@@ -448,7 +448,7 @@
       {
         "questionText": "爸爸買了7包巧克力，共付了448元，一包巧克力多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 448,
             "segments": 7,
@@ -467,7 +467,7 @@
       {
         "questionText": "哥哥買了8包遊戲卡，共付了496元，一包遊戲卡多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 496,
             "segments": 8,
@@ -486,7 +486,7 @@
       {
         "questionText": "爸爸買了9包巧克力，共付了522元，一包巧克力多少元?",
         "topComponent": {
-          "Name": "SimpleNumberLine",
+          "Name": "NumberLineVisualizer",
           "Data": {
             "total": 522,
             "segments": 9,
