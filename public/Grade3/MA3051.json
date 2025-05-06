@@ -1,6 +1,10 @@
 {
   "id": "MA3014",
   "introvideo": "src",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "分類看看，哪些是角?哪些不是角?"
+  },
   "GameType": "ClassifyGame",
   "ItemsWithImage": true,
   "GameConfig": {},
@@ -205,11 +209,11 @@
       "Answer": [
         {
           "GroupName": "是角",
-          "Items": ["1", "4", "5", "7"]
+          "Items": ["1", "4", "5", "6"]
         },
         {
           "GroupName": "不是角",
-          "Items": ["2", "3", "4"]
+          "Items": ["2", "3", "7"]
         }
       ]
     }

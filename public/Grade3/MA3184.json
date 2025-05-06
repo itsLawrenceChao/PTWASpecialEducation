@@ -1,9 +1,9 @@
 {
-  "id": "MA3051",
+  "id": "MA3184",
   "GameType": "SelectGame",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請分辨圖片中的角度為鈍角、銳角或直角"
+    "Content": "選選看適合的時間單位"
   },
   "GameConfig": {
     "GlobalTitle": "請選擇正確的單位",
@@ -24,7 +24,7 @@
     [
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "唱一首歌要3 (  )，請問使用哪個單位?",
+        "Question_Text": "唱一首歌要3 (        )，請問使用哪個單位?",
         "Answer": "分鐘",
         "SlotComponents": [
           {
@@ -38,7 +38,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "吃一個漢堡要6 (  )，請問使用哪個單位?",
+        "Question_Text": "吃一個漢堡要6 (        )，請問使用哪個單位?",
         "Answer": "分鐘",
         "SlotComponents": [
           {
@@ -52,7 +52,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "看一則新聞要4 (  )，請問使用哪個單位?",
+        "Question_Text": "看一則新聞要4 (        )，請問使用哪個單位?",
         "Answer": "分鐘",
         "SlotComponents": [
           {
@@ -66,8 +66,8 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "洗手大約需要1 (  )，請問使用哪個單位?",
-        "Answer": "秒鐘",
+        "Question_Text": "洗手大約需要1 (        )，請問使用哪個單位?",
+        "Answer": "分鐘",
         "SlotComponents": [
           {
             "Name": "ImageContainer",
@@ -82,7 +82,7 @@
     [
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "晚上睡覺睡了8 (  )，請問使用哪個單位?",
+        "Question_Text": "晚上睡覺睡了8 (        )，請問使用哪個單位?",
         "Answer": "小時",
         "SlotComponents": [
           {
@@ -96,7 +96,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "一場電影播放2 (  )，請問使用哪個單位?",
+        "Question_Text": "一場電影播放2 (        )，請問使用哪個單位?",
         "Answer": "小時",
         "SlotComponents": [
           {
@@ -110,7 +110,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "高雄搭火車到台北要4 (  )，請問使用哪個單位?",
+        "Question_Text": "高雄搭火車到台北要4 (        )，請問使用哪個單位?",
         "Answer": "小時",
         "SlotComponents": [
           {
@@ -124,7 +124,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "整理房間花了1 (  )，請問使用哪個單位?",
+        "Question_Text": "整理房間花了1 (        )，請問使用哪個單位?",
         "Answer": "小時",
         "SlotComponents": [
           {
@@ -140,7 +140,7 @@
     [
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "出國旅行玩7 (  )，請問使用哪個單位?",
+        "Question_Text": "出國旅行玩7 (        )，請問使用哪個單位?",
         "Answer": "日",
         "SlotComponents": [
           {
@@ -154,7 +154,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "中秋連假放了3 (  )，請問使用哪個單位?",
+        "Question_Text": "中秋連假放了3 (        )，請問使用哪個單位?",
         "Answer": "日",
         "SlotComponents": [
           {
@@ -168,7 +168,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "跟家人去露營玩2 (  )，請問使用哪個單位?",
+        "Question_Text": "跟家人去露營玩2 (        )，請問使用哪個單位?",
         "Answer": "日",
         "SlotComponents": [
           {
@@ -182,7 +182,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "運動會舉行1 (  )，請問使用哪個單位?",
+        "Question_Text": "運動會舉行1 (        )，請問使用哪個單位?",
         "Answer": "日",
         "SlotComponents": [
           {
@@ -198,7 +198,7 @@
     [
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "洗澡用了15 (  )，請問使用哪個單位?",
+        "Question_Text": "洗澡用了15 (        )，請問使用哪個單位?",
         "Answer": "分鐘",
         "SlotComponents": [
           {
@@ -212,7 +212,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "吃午餐要30 (  )，請問使用哪個單位?",
+        "Question_Text": "吃午餐要30 (        )，請問使用哪個單位?",
         "Answer": "分鐘",
         "SlotComponents": [
           {
@@ -226,7 +226,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "一節數學課40 (  )，請問使用哪個單位?",
+        "Question_Text": "一節數學課40 (        )，請問使用哪個單位?",
         "Answer": "分鐘",
         "SlotComponents": [
           {
@@ -240,7 +240,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "看一集卡通要23 (  )，請問使用哪個單位?",
+        "Question_Text": "看一集卡通要23 (        )，請問使用哪個單位?",
         "Answer": "分鐘",
         "SlotComponents": [
           {
@@ -256,7 +256,7 @@
     [
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "喝一口水要4 (  )，請問使用哪個單位?",
+        "Question_Text": "喝一口水要4 (        )，請問使用哪個單位?",
         "Answer": "秒鐘",
         "SlotComponents": [
           {
@@ -270,7 +270,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "短跑100公尺需要12 (  )，請問使用哪個單位?",
+        "Question_Text": "短跑100公尺需要12 (        )，請問使用哪個單位?",
         "Answer": "秒鐘",
         "SlotComponents": [
           {
@@ -284,7 +284,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "穿一雙襪子需要16 (  )，請問使用哪個單位?",
+        "Question_Text": "穿一雙襪子需要16 (        )，請問使用哪個單位?",
         "Answer": "秒鐘",
         "SlotComponents": [
           {
@@ -298,7 +298,7 @@
       },
       {
         "Question": ["日", "小時", "分鐘", "秒鐘"],
-        "Question_Text": "猜拳一次用了5 (  )，請問使用哪個單位?",
+        "Question_Text": "猜拳一次用了5 (        )，請問使用哪個單位?",
         "Answer": "秒鐘",
         "SlotComponents": [
           {

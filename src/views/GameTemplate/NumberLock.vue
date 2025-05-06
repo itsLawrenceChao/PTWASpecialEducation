@@ -32,7 +32,7 @@
           @virtualpadinput-pop="Pop"
         />
       </div>
-      <button class="button--submit" @click="CheckAnswer">檢查答案</button>
+      <button class="button--submit" @click="CheckAnswer">送出答案</button>
     </div>
     {{ NowSelect }}
   </div>
@@ -42,6 +42,8 @@
 import VirtualNumPad from "@/components/VirtualNumPadInput.vue";
 import { defineAsyncComponent } from "vue";
 import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
+
 export default {
   name: "NumberLock",
   components: {
@@ -69,6 +71,12 @@ export default {
     ),
     DragImages: defineAsyncComponent(
       () => import("@/components/DragImages.vue")
+    ),
+    NumberBoard: defineAsyncComponent(
+      () => import("@/components/NumberBoard.vue")
+    ),
+    FractionForAnswer: defineAsyncComponent(
+      () => import("@/components/FractionForAnswer.vue")
     ),
   },
   props: {
@@ -250,6 +258,7 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", ["不支援顯示", "不支援顯示", `錯誤`]);
+        emitter.emit("checkAnswer");
       }
     },
   },
@@ -266,27 +275,40 @@ export default {
   padding: 10px;
   border-radius: 10px;
   border: solid;
-  max-height: 80vh;
+  max-height: 79vh;
 }
 .left-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: $gap--small;
+  max-height: 100%;
+  overflow-y: auto;
 
   .text-area {
+    flex-shrink: 0;
     padding: $gap--tiny;
     background-color: #dfdfdf;
     border-radius: $border-radius;
     font-size: $text-medium;
   }
   .game-area {
-    max-height: 40vh;
+    max-height: 39vh;
+    min-height: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: $border-radius;
     background-color: #f0f0f0;
+
+    &--top {
+      flex-shrink: 0;
+    }
+
+    &--down {
+      flex: 1;
+      min-height: 0;
+    }
   }
 }
 .right-column {
@@ -303,6 +325,7 @@ export default {
     gap: 10px;
   }
   .button--submit {
+    background-color: $submit-color;
     width: 100%;
     height: 100%;
     min-height: 50px;

@@ -104,7 +104,7 @@ export default {
     right: 5vw;
     width: 10rem;
     height: 5rem;
-    background-color: #a6a6a6;
+    background-color: $submit-color;
     border: none;
   }
 }

@@ -29,6 +29,7 @@
             type="text"
             class="interactive-equation__input"
             @touchstart="handleInputClick(index, $event)"
+            @input="validateAnswers()"
           />
         </template>
         <span v-else class="interactive-equation__text">{{ item.value }}</span>
@@ -49,6 +50,7 @@
           type="text"
           class="interactive-equation__input"
           @touchstart="handleFinalAnswerClick($event, index)"
+          @input="validateAnswers()"
         />
         <span v-else class="interactive-equation__text">{{ item.value }}</span>
       </template>
@@ -163,8 +165,8 @@ export default {
     updateNumPadPosition(targetElement) {
       const rect = targetElement.getBoundingClientRect();
       this.numPadPosition = {
-        top: `${rect.bottom + window.scrollY + this.numPadOffset}px`,
-        left: `${rect.left + window.scrollX}px`,
+        top: `${rect.top + window.scrollY + this.numPadOffset}px`,
+        left: `${rect.right + window.scrollX}px`,
       };
     },
 
@@ -274,6 +276,8 @@ export default {
 .interactive-equation {
   $self: &;
   font-size: 24px;
+  height: 100%;
+  width: 100%;
 
   &__container {
     display: flex;

@@ -89,7 +89,7 @@
         class="SucessButton"
         @click="CheckAllAnswer"
       >
-        檢查答案
+        送出答案
       </button>
       <!-- <button @click="Triger" class="btn btn-primary">Triger</button> -->
     </section>
@@ -103,11 +103,11 @@ export default {
   name: "CompareGame",
   components: {
     draggable,
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
-    ImageWithText: defineAsyncComponent(() =>
-      import("@/components/ImageWithText.vue")
+    ImageWithText: defineAsyncComponent(
+      () => import("@/components/ImageWithText.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     CoulorBarChart: GetComponents("CoulorBarChart"),
@@ -115,6 +115,7 @@ export default {
     ImageTable: GetComponents("ImageTable"),
     DrawImage: GetComponents("DrawImage"),
     NumberBoard: GetComponents("NumberBoard"),
+    FractionDisplay: GetComponents("FractionDisplay"),
   },
   props: {
     GameData: {
@@ -161,12 +162,12 @@ export default {
   },
   created() {
     this.TotalQuestion = this.GameData.Datas.length;
-    for (var i in this.GameData.Datas) {
+    this.GameData.Datas.forEach(() => {
       this.Answered.push(null);
       this.Answers.push([]);
       let TempImg = [];
       this.ImageDatas.push(TempImg);
-    }
+    });
     this.Symbol = this.BSESymbol;
   },
   methods: {
@@ -228,12 +229,10 @@ export default {
       if (this.GameData.SlotComponentVerifycation == true) {
         // Check if the SlotComponent is correct
         let temp = true;
-        let cnt = 0;
         this.SlotComponentanswer.forEach((element) => {
           if (element != true) {
             temp = false;
           }
-          cnt++;
         });
         console.log("Temp", temp);
         if (temp == false) {
@@ -382,7 +381,7 @@ export default {
   .SucessButton {
     padding: 1rem;
     width: 40%;
-    background-color: #3a86ff;
+    background-color: $submit-color;
     border: none;
     border-radius: 12px;
     font-size: x-large;

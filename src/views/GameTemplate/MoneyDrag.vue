@@ -111,7 +111,7 @@ export default {
     this.slotData = this.GameData.upperComponent.Data;
   },
   mounted() {
-    this.$refs.deleteArea.$el.style.backgroundImage = `url(${this.GameConfig.trashBin})`;
+    this.$refs.deleteArea.$el.style.backgroundImage = `url(${this.trashBin})`;
   },
   methods: {
     init() {
@@ -168,6 +168,8 @@ export default {
 }
 
 .game {
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   gap: $gap--small;
@@ -228,5 +230,6 @@ export default {
 
 .game__submit-button {
   height: 2.5rem;
+  background-color: $submit-color;
 }
 </style>

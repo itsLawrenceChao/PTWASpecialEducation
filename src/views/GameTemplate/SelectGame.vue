@@ -73,6 +73,7 @@ export default {
   name: "SelectGame",
   components: {
     ImageContainer: getComponents("ImageContainer"),
+    DragImages: getComponents("DragImages"),
   },
   props: {
     GameData: {
@@ -217,6 +218,7 @@ export default {
         text-align: center;
         display: flex;
         justify-content: center;
+        white-space: pre-wrap;
         p {
           margin: auto 0 auto;
         }
