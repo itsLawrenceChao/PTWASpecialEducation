@@ -33,6 +33,8 @@
           :config="arrow"
           @pointerdown="adjustNumber"
         />
+        <v-text :config="configNumeratorOne" />
+        <v-line :config="configNumeratorLine" />
         <v-text :config="configNumeratorNumber" />
         <v-text :config="configDenominatorNumber" />
       </v-layer>
@@ -82,6 +84,8 @@ export default {
       gameHeight: 0,
 
       configArrow: [],
+      configNumeratorOne: {},
+      configNumeratorLine: {},
       configNumeratorNumber: {},
       configDenominatorNumber: {},
       fill: [],
@@ -171,9 +175,20 @@ export default {
       context.closePath();
     },
     drawNumber() {
-      this.configNumeratorNumber.x = this.gameWidth * 0.83;
-      this.configNumeratorNumber.y = this.gameHeight * 0.325;
-      this.configNumeratorNumber.text = `1/${this.numerator}`;
+      this.configNumeratorOne.x = this.gameWidth * 0.86;
+      this.configNumeratorOne.y = this.gameHeight * 0.29;
+      this.configNumeratorOne.text = `1`;
+      this.configNumeratorOne.fontSize = this.gameWidth * 0.045;
+
+      this.configNumeratorLine.x = this.gameWidth * 0.85;
+      this.configNumeratorLine.y = this.gameHeight * 0.345;
+      this.configNumeratorLine.points = [0, 0, this.gameWidth * 0.05, 0];
+      this.configNumeratorLine.stroke = "black";
+      this.configNumeratorLine.strokeWidth = "3";
+
+      this.configNumeratorNumber.x = this.gameWidth * 0.86;
+      this.configNumeratorNumber.y = this.gameHeight * 0.35;
+      this.configNumeratorNumber.text = this.numerator;
       this.configNumeratorNumber.fontSize = this.gameWidth * 0.045;
 
       this.configDenominatorNumber.x = this.gameWidth * 0.83;
@@ -199,7 +214,9 @@ export default {
       this.drawAfterAdjusted();
     },
     drawAfterAdjusted() {
-      this.configNumeratorNumber.text = `1/${this.numerator}`;
+      this.configNumeratorNumber.text = this.numerator;
+      if (this.numerator >= 10) this.configNumeratorNumber.x = this.gameWidth * 0.85;
+      else this.configNumeratorNumber.x = this.gameWidth * 0.86;
       this.configDenominatorNumber.text = `${this.denominator}等分`;
 
       if (this.numerator == 2) {
