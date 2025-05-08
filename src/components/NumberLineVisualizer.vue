@@ -92,6 +92,8 @@ export default {
       const segmentWidth = this.calculateSegmentWidth();
 
       for (let i = 0; i <= this.Data.segments; i++) {
+        if (this.Data.displayOneSegment && i < this.Data.segments && i > 1)
+          continue;
         const x = this.padding + i * segmentWidth;
         lines.push({
           points: [
@@ -103,7 +105,6 @@ export default {
           stroke: "black",
           strokeWidth: this.lineHeight,
         });
-        if (this.Data.displayOneSegment && i > 0) break;
       }
 
       return lines;
@@ -111,7 +112,7 @@ export default {
     numberLabels() {
       const labels = [];
       const segmentWidth = this.calculateSegmentWidth();
-      const y = this.containerHeight / 2 - this.tickHeight - this.fontSize;
+      const y = this.containerHeight / 2 - this.tickHeight - this.fontSize / 2;
 
       for (let i = 0; i < this.Data.segments; i++) {
         const x = this.padding + (i + 0.5) * segmentWidth;
@@ -142,7 +143,7 @@ export default {
     numberCircles() {
       const circles = [];
       const segmentWidth = this.calculateSegmentWidth();
-      const y = this.containerHeight / 2 - this.tickHeight - this.fontSize;
+      const y = this.containerHeight / 2 - this.tickHeight - this.fontSize / 2;
       const radius = this.fontSize * 0.7; // 圓形半徑
 
       for (let i = 0; i < this.Data.segments; i++) {
@@ -171,7 +172,7 @@ export default {
     totalLabel() {
       return {
         x: this.containerWidth / 2 - this.fontSize,
-        y: this.containerHeight / 2 - this.tickHeight - this.fontSize * 3,
+        y: this.containerHeight / 2 - this.containerHeight * 0.4,
         text: this.Data.total.toString(),
         fontSize: this.fontSize,
         align: "center",
@@ -179,11 +180,10 @@ export default {
       };
     },
     curvedConnectorConfig() {
-      const totalY =
-        this.containerHeight / 2 - this.tickHeight - this.fontSize * 3;
+      const totalY = this.containerHeight / 2 - this.containerHeight * 0.4;
       const centerX = this.containerWidth / 2;
       const lineY = this.containerHeight / 2;
-      const controlPointY = totalY + 5;
+      const controlPointY = totalY + this.containerHeight * 0.05;
       const startLabelY =
         this.containerHeight / 2 + this.tickHeight + this.fontSize / 2;
       const segmentWidth = this.calculateSegmentWidth();
@@ -203,9 +203,16 @@ export default {
               context,
               segmentStartX,
               lineY,
-              startLabelY
+              startLabelY,
+              segmentWidth
             );
-            this.drawSegmentConnector(context, segmentEndX, lineY, startLabelY);
+            this.drawSegmentConnector(
+              context,
+              segmentEndX,
+              lineY,
+              startLabelY,
+              segmentWidth
+            );
             if (this.Data.stepLabel === "?" || this.Data.displayOneSegment)
               break;
           }
@@ -260,44 +267,54 @@ export default {
     calculateSegmentWidth() {
       return (this.containerWidth - 2 * this.padding) / this.Data.segments;
     },
-    drawStartLabelConnector(context, segmentStartX, lineY, startLabelY) {
+    drawStartLabelConnector(
+      context,
+      segmentStartX,
+      lineY,
+      startLabelY,
+      segmentWidth
+    ) {
       context.moveTo(segmentStartX, lineY);
       context.quadraticCurveTo(
-        segmentStartX + 20,
+        segmentStartX,
         startLabelY - 10,
-        segmentStartX + 40,
+        segmentStartX + segmentWidth * 0.2,
         startLabelY
       );
     },
-    drawSegmentConnector(context, segmentEndX, lineY, startLabelY) {
+    drawSegmentConnector(
+      context,
+      segmentEndX,
+      lineY,
+      startLabelY,
+      segmentWidth
+    ) {
       context.moveTo(segmentEndX, lineY);
       context.quadraticCurveTo(
-        segmentEndX - 20,
+        segmentEndX,
         startLabelY - 10,
-        segmentEndX - 40,
+        segmentEndX - segmentWidth * 0.2,
         startLabelY
       );
     },
     drawLeftCurve(context, lineY, centerX, controlPointY, totalY) {
       context.moveTo(this.padding, lineY);
       context.quadraticCurveTo(
-        this.padding + (centerX - this.padding) * 0.1,
+        this.padding + (centerX - this.padding) * 0.01,
         controlPointY,
-        centerX - (centerX - this.padding) * 0.6,
-        totalY + this.fontSize / 2
+        centerX - (centerX - this.padding) * 0.8,
+        totalY + this.fontSize * 0.3
       );
     },
     drawRightCurve(context, centerX, controlPointY, totalY, lineY) {
-      context.moveTo(
-        centerX + (centerX - this.padding) * 0.6,
-        totalY + this.fontSize / 2
-      );
-      context.quadraticCurveTo(
-        centerX + (centerX - this.padding) * 0.9,
-        controlPointY,
-        this.containerWidth - this.padding,
-        lineY
-      );
+      const rightStartX = centerX + (centerX - this.padding) * 0.8;
+      const rightControlX =
+        this.containerWidth - this.padding - (centerX - this.padding) * 0.01;
+      const rightEndX = this.containerWidth - this.padding;
+      const rightY = totalY + this.fontSize * 0.3;
+
+      context.moveTo(rightStartX, rightY);
+      context.quadraticCurveTo(rightControlX, controlPointY, rightEndX, lineY);
     },
   },
 };
