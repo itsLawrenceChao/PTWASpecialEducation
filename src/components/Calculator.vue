@@ -207,7 +207,7 @@ export default {
       //       Symbol: "+",
       //     },
       //   },
-      CustomeUnit: undefined,
+      CustomeUnit: null,
       UnitPreset: {
         UseUnit: "Volume",
         Units: {
@@ -239,17 +239,7 @@ export default {
     // this.Data = this.GameData;
     this.NumberAmount = this.Data.NumberAmount;
     this.DotPosition = this.Data.decimalPoint;
-    if (this.Data.CustomeUnit != undefined) {
-      for (let i = 0; i < this.CustomeUnit.length; i++) {
-        this.Title.push(this.CustomeUnit[i]);
-      }
-    } else {
-      for (let j = 0; j < this.NumberAmount; j++) {
-        this.Title.push(
-          this.UnitPreset.Units[this.UnitPreset.UseUnit].Title[j]
-        );
-      }
-    }
+    this.CustomeUnit = this.Data.CustomeUnit;
     for (let k = 0; k <= this.NumberAmount; k++) {
       this.Ans.push("");
       this.AnswerLine.push(false);
@@ -390,12 +380,18 @@ export default {
       }
     },
     UseUnit: function (unit) {
-      this.UnitPreset.UseUnit = unit;
       this.Title = [];
-      for (var i = 0; i < this.NumberAmount; i++) {
-        this.Title.push(
-          this.UnitPreset.Units[this.UnitPreset.UseUnit].Title[i]
-        );
+      if (this.CustomeUnit && this.CustomeUnit.length > 0) {
+        for (let i = 0; i < this.CustomeUnit.length; i++) {
+          this.Title.push(this.CustomeUnit[i]);
+        }
+      } else {
+        this.UnitPreset.UseUnit = unit;
+        const unitObj = this.UnitPreset.Units[this.UnitPreset.UseUnit];
+        if (!unitObj) return;
+        for (var i = 0; i < this.NumberAmount; i++) {
+          this.Title.push(unitObj.Title[i]);
+        }
       }
     },
     checkAnswer() {
