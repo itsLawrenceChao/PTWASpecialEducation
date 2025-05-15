@@ -297,7 +297,6 @@ export default {
     white-space: pre-wrap;
   }
   .game-area {
-    max-height: 39vh;
     min-height: 0;
     display: flex;
     justify-content: center;
