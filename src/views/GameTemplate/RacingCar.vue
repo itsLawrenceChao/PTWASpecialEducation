@@ -4,11 +4,7 @@
       <h2>{{ GameData.Question }}</h2>
       <v-stage :config="configKonva">
         <v-layer>
-          <v-image
-            v-for="(road, index) in configRoad"
-            :key="index"
-            :config="road"
-          />
+          <v-image v-for="(road, index) in configRoad" :key="index" :config="road" />
         </v-layer>
 
         <v-layer>
@@ -21,41 +17,29 @@
             :key="index"
             :config="tunnel"
           />
-          <v-rect
-            v-for="(box, index) in configTextBox"
-            :key="index"
-            :config="box"
-          />
-          <v-text
-            v-for="(option, index) in configOption"
-            :key="index"
-            :config="option"
-          />
+          <v-rect v-for="(box, index) in configTextBox" :key="index" :config="box" />
+          <v-text v-for="(option, index) in configOption" :key="index" :config="option" />
+        </v-layer>
+        <v-layer>
+          <v-image v-for="(smoke, index) in configSmoke" :key="index" :config="smoke" />
+          <v-image :config="configEndingImage" />
         </v-layer>
       </v-stage>
     </div>
     <div id="btnContainer">
       <img :src="upBtn" class="controlBtn" @click="getCurrentOptionId('up')" />
       <br />
-      <img
-        :src="rightBtn"
-        class="controlBtn"
-        @click="getCurrentOptionId('right')"
-      />
+      <img :src="rightBtn" class="controlBtn" @click="getCurrentOptionId('right')" />
       <br />
-      <img
-        :src="downBtn"
-        class="controlBtn"
-        @click="getCurrentOptionId('down')"
-      />
+      <img :src="downBtn" class="controlBtn" @click="getCurrentOptionId('down')" />
     </div>
   </div>
 </template>
 
 <script>
-import { getSystemAssets, getGameStaticAssets } from "@/utilitys/get_assets.js";
+import { getGameAssets, getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, withScopeId } from "vue";
 
 export default {
   props: {
@@ -82,6 +66,8 @@ export default {
       configOption: [],
       configTextBox: [],
       configCar: {},
+      configEndingImage: null,
+      configSmoke: [],
 
       speed: 1,
       canMove: true,
@@ -95,17 +81,15 @@ export default {
   },
 
   mounted() {
-    this.options = canvasTools.shuffleOptions(this.GameData.Options);
-    this.currentOptionId = Math.floor(Math.random() * this.options.length);
     this.initializeScene();
     window.addEventListener("keydown", this.input);
-    var btnCon = document.getElementById("btnContainer");
-    btnCon.style.height = this.configKonva.height + "px";
-    this.game = window.setInterval(this.update, 20);
+    requestAnimationFrame(this.moveRoad);
   },
 
   methods: {
     initializeScene() {
+      this.options = canvasTools.shuffleOptions(this.GameData.Options);
+      this.currentOptionId = Math.floor(Math.random() * this.options.length);
       this.gameWidth = this.$refs.container.clientWidth * 0.8;
       this.configKonva.width = this.gameWidth;
       this.configKonva.height = this.gameWidth / 2;
@@ -114,6 +98,7 @@ export default {
       this.drawOptions();
       this.drawTextBox();
       this.drawCar();
+      this.setBtnStyle();
     },
     drawRoad() {
       const roadImg = new window.Image();
@@ -198,9 +183,9 @@ export default {
         this.carOffset
       ).y;
     },
-    update() {
-      this.moveRoad();
-      this.moveCar();
+    setBtnStyle() {
+      var btnCon = document.getElementById("btnContainer");
+      btnCon.style.height = this.configKonva.height + "px";
     },
     moveRoad() {
       if (this.roadX < this.gameWidth * -1.2) {
@@ -223,6 +208,7 @@ export default {
             this.configRoad[0],
             this.textBoxOffset
           ).x;
+        requestAnimationFrame(this.moveRoad);
       }
     },
     moveCar() {
@@ -230,13 +216,11 @@ export default {
         case "up":
           if (
             this.configCar.y >
-            canvasTools.offset(
-              this.configRoad[this.currentOptionId],
-              this.carOffset
-            ).y
+            canvasTools.offset(this.configRoad[this.currentOptionId], this.carOffset).y
           ) {
             this.configCar.y -= this.speed * 4;
             this.configCar.rotation = -10;
+            requestAnimationFrame(this.moveCar);
           } else {
             this.configCar.rotation = 0;
             this.canMove = true;
@@ -246,13 +230,11 @@ export default {
         case "down":
           if (
             this.configCar.y <
-            canvasTools.offset(
-              this.configRoad[this.currentOptionId],
-              this.carOffset
-            ).y
+            canvasTools.offset(this.configRoad[this.currentOptionId], this.carOffset).y
           ) {
             this.configCar.y += this.speed * 4;
             this.configCar.rotation = 10;
+            requestAnimationFrame(this.moveCar);
           } else {
             this.configCar.rotation = 0;
             this.canMove = true;
@@ -289,6 +271,7 @@ export default {
             else {
               this.movement = "up";
               this.canMove = false;
+              requestAnimationFrame(this.moveCar);
             }
             break;
           case "down":
@@ -298,6 +281,7 @@ export default {
             else {
               this.movement = "down";
               this.canMove = false;
+              requestAnimationFrame(this.moveCar);
             }
             break;
           case "right":
@@ -308,8 +292,7 @@ export default {
     },
     checkAnswer() {
       if (
-        this.options[this.currentOptionId] ==
-        this.GameData.Options[this.GameData.Answer]
+        this.options[this.currentOptionId] == this.GameData.Options[this.GameData.Answer]
       ) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
@@ -317,7 +300,9 @@ export default {
           this.options[this.currentOptionId],
           "正確",
         ]);
-        this.$emit("next-question");
+        this.drawSmoke();
+        this.endingFrameCount = 0;
+        requestAnimationFrame(this.endingAnimation);
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
@@ -333,6 +318,101 @@ export default {
       this.roadX = 0;
       this.speed = 1;
       this.canMove = true;
+      requestAnimationFrame(this.moveRoad);
+    },
+    endingAnimation() {
+      if (this.configCar.x > this.gameWidth && this.configEndingImage == null) {
+        this.$emit("next-question");
+      } else {
+        this.configCar.x += this.speed;
+        this.moveSmoke();
+        requestAnimationFrame(this.endingAnimation);
+      }
+      this.endingFrameCount++;
+      if (this.endingFrameCount % 20 == 0 && this.configCar.x < this.gameWidth)
+        this.drawSmoke();
+    },
+    drawSmoke() {
+      const smokeImg = new window.Image();
+      smokeImg.src = getGameStaticAssets("RacingCar", "smoke.png");
+      let smoke = {
+        x: canvasTools.center(this.configCar).x,
+        y: canvasTools.center(this.configCar).y,
+        height: this.laneWidth * 0.1,
+        width: this.laneWidth * 0.1,
+        image: smokeImg,
+        opacity: 1,
+      };
+      smoke.x = canvasTools.corner(smoke).x;
+      smoke.y = canvasTools.corner(smoke).y;
+      this.configSmoke.push(smoke);
+    },
+    moveSmoke() {
+      for (let i in this.configSmoke) {
+        if (this.GameData.EndingImage && Number(i) == 3) {
+          if (this.configEndingImage) {
+            this.moveImageSmoke();
+            this.moveEndingImage();
+          } else {
+            this.drawEndingImage();
+            this.moveImageSmoke();
+            this.moveEndingImage();
+          }
+        } else {
+          this.configSmoke[i].x -= 2;
+          if (this.configSmoke[i].width < this.laneWidth) {
+            this.configSmoke[i].width++;
+            this.configSmoke[i].height++;
+            this.configSmoke[i].y = canvasTools.center(this.configCar).y;
+            this.configSmoke[i].y = canvasTools.corner(this.configSmoke[i]).y;
+          } else if (this.configSmoke[i].opacity > 0) {
+            this.configSmoke[i].opacity -= 0.05;
+          } else {
+            this.configSmoke[i].visible = false;
+          }
+        }
+      }
+    },
+    drawEndingImage() {
+      const img = new window.Image();
+      img.src = getGameAssets(this.ID, this.GameData.EndingImage);
+      this.configEndingImage = {
+        image: img,
+      };
+    },
+    moveImageSmoke() {
+      let center = {
+        x: this.gameWidth * 0.5,
+        y: this.gameWidth * 0.25,
+      };
+      this.configSmoke[3].x +=
+        canvasTools.unitVector(canvasTools.center(this.configSmoke[3]), center).x * 5;
+      this.configSmoke[3].y +=
+        canvasTools.unitVector(canvasTools.center(this.configSmoke[3]), center).y * 5;
+      if (this.configSmoke[3].height <= this.gameWidth * 0.5)
+        this.configSmoke[3].height += 3;
+      if (this.configSmoke[3].width <= this.gameWidth) this.configSmoke[3].width += 6;
+      else
+        setTimeout(() => {
+          this.$emit("next-question");
+        }, 2000);
+    },
+    moveEndingImage() {
+      this.configEndingImage.x = canvasTools.center(this.configSmoke[3]).x;
+      this.configEndingImage.y = canvasTools.center(this.configSmoke[3]).y;
+      if (this.configEndingImage.image.height * 2 > this.configEndingImage.image.width) {
+        this.configEndingImage.height = this.configSmoke[3].height * 0.75;
+        this.configEndingImage.width =
+          (this.configEndingImage.height * this.configEndingImage.image.width) /
+          this.configEndingImage.image.height;
+      } else {
+        this.configEndingImage.width = this.configSmoke[3].width * 0.75;
+        this.configEndingImage.height =
+          (this.configEndingImage.width * this.configEndingImage.image.height) /
+          this.configEndingImage.image.width;
+      }
+      this.configEndingImage.x = canvasTools.corner(this.configEndingImage).x;
+      this.configEndingImage.y = canvasTools.corner(this.configEndingImage).y;
     },
   },
 };
