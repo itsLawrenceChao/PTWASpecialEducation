@@ -33,7 +33,7 @@
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {
   components: {},
@@ -75,6 +75,11 @@ export default {
   mounted() {
     this.initializeScene();
     this.initializeNumberLine();
+    emitter.on("checkAnswer", this.resetPosition);
+  },
+
+  beforeUnmount() {
+    emitter.off("checkAnswer", this.resetPosition);
   },
 
   methods: {
@@ -254,6 +259,17 @@ export default {
           x: pos.x,
           y: this.configCircle.y,
         };
+      }
+    },
+    resetPosition() {
+      let initId = 0;
+      if (this.Data.init_pos) initId = this.getInitialPositionId();
+      const newX = this.numberX[initId];
+
+      if (this.isImage) {
+        this.configImage.x = newX - this.configImage.width * 0.5;
+      } else {
+        this.configCircle.x = newX;
       }
     },
   },
