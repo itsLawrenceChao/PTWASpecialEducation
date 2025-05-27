@@ -5,26 +5,25 @@
     </div>
     <div class="game-area">
       <div class="left-component">
-        <MoneyGenerator class="money-generator" :Data="moneyGeneratorData" />
+        <MoneyGenerator
+          class="money-generator"
+          :ID="ID"
+          :Data="moneyGeneratorData"
+        />
         <Markdown
           class="markdown"
+          :ID="ID"
           :Data="markdownData"
           @reply-answer="markdownReplyAnswer"
         />
       </div>
       <div class="right-component">
-        <NumberBoardInput
+        <NumberBoard
           class="number-board"
           :Data="numberInputData"
           @reply-answer="numberBoardReply"
         />
-        <VirtualNumPad
-          @virtualpadinputInputt="push"
-          @virtualpadinputDelete="clear"
-          @virtualpadinput-pop="pop"
-        />
         <button class="btn-submit" @click="checkAnswer">送出答案</button>
-        <button class="btn-submit" @click="openScratchSheet">開啟畫筆</button>
       </div>
     </div>
   </div>
@@ -32,18 +31,14 @@
 
 <script>
 import MoneyGenerator from "@/components/MoneyGenerator.vue";
-import VirtualNumPad from "@/components/VirtualNumPadInput.vue";
 import Markdown from "@/components/Markdown.vue";
-import NumberBoardInput from "@/components/NumberBoardInput.vue";
-import { now } from "@vueuse/core";
-
+import NumberBoard from "@/components/NumberBoard.vue";
 export default {
   name: "MA3013",
   components: {
     MoneyGenerator,
-    VirtualNumPad,
     Markdown,
-    NumberBoardInput,
+    NumberBoard,
   },
   props: {
     GameData: {
@@ -70,6 +65,7 @@ export default {
       numberInputData: {
         Unit: ["千位", "百位", "十位", "個位"],
         Number: undefined,
+        isInput: true,
       },
       BoardReply: undefined,
       markdownReply: undefined,
@@ -116,16 +112,14 @@ export default {
     nowClicked() {
       if (document.activeElement.tagName == "INPUT") {
         this.nowSelect = document.activeElement;
-      } else if (document.activeElement.tagName == "BUTTON") {
-        this.NowSelect.focus();
+      } else if (document.activeElement.tagName == "BUTTON" && this.nowSelect) {
+        this.nowSelect.focus();
       }
     },
     clear() {
       let activeElement = this.nowSelect;
       if (activeElement) {
         const start = activeElement.selectionStart;
-        const end = activeElement.selectionEnd;
-        const value = activeElement.value;
         activeElement.value = "";
         activeElement.selectionStart = activeElement.selectionEnd = start - 1;
         const event = new Event("input", { bubbles: true });
@@ -149,8 +143,6 @@ export default {
       activeElement.focus();
       if (activeElement) {
         const start = activeElement.selectionStart;
-        const end = activeElement.selectionEnd;
-        const value = activeElement.value;
         activeElement.value = activeElement.value + ch;
         activeElement.selectionStart = activeElement.selectionEnd = start + 1;
         const event = new Event("input", { bubbles: true });
@@ -158,6 +150,7 @@ export default {
       }
     },
     checkAnswer() {
+      console.log(this.BoardReply, this.markdownReply);
       if (this.BoardReply && this.markdownReply) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("next-question");
@@ -167,25 +160,25 @@ export default {
         this.$emit("add-record", ["不支援", "不支援", "錯誤"]);
       }
     },
-    openScratchSheet() {
-      this.$emit("scratchSheet");
-    },
   },
 };
 </script>
 
 <style scoped lang="scss">
 .outter-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: $gap--small;
   .title {
+    flex: 1;
     @extend .container-basic;
     padding: $gap--small;
     width: 100%;
     background-color: $primary-color;
     font-size: 2em;
-    margin: 10px;
   }
   .left-component {
     display: flex;
@@ -193,11 +186,20 @@ export default {
     align-items: center;
     gap: $gap--small;
     width: 70%;
+    height: 100%;
+    overflow: hidden;
+    .markdown {
+      flex: 1;
+      min-height: 0;
+    }
     .money-generator {
+      flex: 3;
       width: 100%;
+      min-height: 0;
       border-radius: $border-radius;
-      padding: $gap--small;
+      padding: $padding--small;
       background-color: $sub-color;
+      overflow: hidden;
     }
     :deep(input) {
       max-width: 100px;
@@ -207,11 +209,13 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: $gap--small;
     width: 40%;
     .number-board {
-      width: 40%;
+      width: 100%;
+      height: 100%;
+      max-height: 200px;
     }
   }
   .markdown {
@@ -222,7 +226,7 @@ export default {
   }
   .btn-submit {
     padding: $gap--small;
-    width: 70%;
+    width: 100%;
     border: none;
     border-radius: $border-radius;
     background-color: $submit-color;
@@ -233,5 +237,9 @@ export default {
 }
 .game-area {
   display: flex;
+  width: 100%;
+  height: 80%;
+  gap: $gap--small;
+  overflow: hidden;
 }
 </style>
