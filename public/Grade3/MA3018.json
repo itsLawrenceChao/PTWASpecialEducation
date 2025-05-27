@@ -23,6 +23,170 @@
     [
       {
         "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-1.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有兩條緞帶，黃色緞帶長6公分，綠色緞帶長5公分，接在一起會是幾公分?$n$6+5=$i$",
+            "Answer": [11]
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-2.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有兩條緞帶，黃色緞帶長8公分，綠色緞帶長6公分，接在一起會是幾公分?$n$8+6=$i$",
+            "Answer": [14]
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-3.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有兩條緞帶，黃色緞帶長3公分，綠色緞帶長7公分，接在一起會是幾公分?$n$3+7=$i$",
+            "Answer": [10]
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-4.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有兩條緞帶，黃色緞帶長5公分，綠色緞帶長7公分，接在一起會是幾公分?$n$5+7=$i$",
+            "Answer": [12]
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-5.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有兩條緞帶，黃色緞帶長6公分，綠色緞帶長6公分，接在一起會是幾公分?$n$6+6=$i$",
+            "Answer": [12]
+          }
+        }
+      }
+    ],
+    [
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-1.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有一條長12公分的緞帶，剪掉5公分，這條緞帶還剩下幾公分?$n$12-5=$i$",
+            "Answer": [7]
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-2.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有一條長12公分的緞帶，剪掉7公分，這條緞帶還剩下幾公分?$n$12-7=$i$",
+            "Answer": [5]
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-3.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有一條長13公分的緞帶，剪掉6公分，這條緞帶還剩下幾公分?$n$13-6=$i$",
+            "Answer": [7]
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-4.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有一條長11公分的緞帶，剪掉9公分，這條緞帶還剩下幾公分?$n$11-9=$i$",
+            "Answer": [2]
+          }
+        }
+      },
+      {
+        "topComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-5.png"
+          }
+        },
+        "NumberPadAutoDisappear": false,
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "有一條長13公分的緞帶，剪掉4公分，這條緞帶還剩下幾公分?$n$13-4=$i$",
+            "Answer": [9]
+          }
+        }
+      }
+    ],
+    [
+      {
+        "topComponent": {
           "Name": "TextOnly",
           "Data": {
             "Text": "有一隻小鴨停在數線1的位置。小鴨向右移動6格，會停在哪一個數字上呢?",
@@ -37,7 +201,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 1,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 7
           }
         }
@@ -58,7 +222,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 2,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 5
           }
         }
@@ -79,7 +243,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 3,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 14
           }
         }
@@ -100,7 +264,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 3,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 13
           }
         }
@@ -121,7 +285,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 4,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 12
           }
         }
@@ -144,7 +308,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 9,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 6
           }
         }
@@ -165,7 +329,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 15,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 7
           }
         }
@@ -186,7 +350,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 11,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 5
           }
         }
@@ -207,7 +371,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 12,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 8
           }
         }
@@ -228,7 +392,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 13,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 8
           }
         }
@@ -251,7 +415,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 3,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 14
           }
         }
@@ -272,7 +436,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 5,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 10
           }
         }
@@ -293,7 +457,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 12,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 8
           }
         }
@@ -314,7 +478,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 13,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 6
           }
         }
@@ -335,7 +499,7 @@
             "max": 15,
             "min": 0,
             "init_pos": 15,
-            "image": "S_1.png",
+            "image": "duck.png",
             "finalPosition": 4
           }
         }
