@@ -124,6 +124,23 @@ export default {
         line.points = points[p];
         this.configNumberLine.push(line);
       }
+
+      // 添加左右標籤
+      let leftLabel = {
+        text: "左",
+        fontSize: 30,
+        fontFamily: "YuanQuan",
+        x: 0,
+        y: this.numberLineY - 50,
+      };
+      let rightLabel = {
+        text: "右",
+        fontSize: 30,
+        fontFamily: "YuanQuan",
+        x: this.gameWidth * 0.95,
+        y: this.numberLineY - 50,
+      };
+      this.configNumber.push(leftLabel, rightLabel);
     },
     drawNumberLine() {
       this.intervalLength =
