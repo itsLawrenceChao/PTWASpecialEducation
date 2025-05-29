@@ -11,6 +11,7 @@
           v-for="(image, index) in configImage"
           :key="index"
           :config="image"
+          :listening="image.draggable"
           @dragmove="handleDragmove"
           @dragend="handleDragend"
         />
@@ -264,12 +265,22 @@ export default {
       }
     },
     keepInBound(e) {
-      e.target.x(Math.max(e.target.x(), 0));
-      e.target.x(Math.min(e.target.x(), this.gameWidth - e.target.attrs.width));
-      e.target.y(Math.max(e.target.y(), 0));
-      e.target.y(
-        Math.min(e.target.y(), this.gameWidth - e.target.attrs.height)
-      );
+      const target = e.target;
+      const width = target.width();
+      const height = target.height();
+
+      // 限制 x 座標
+      const newX = Math.max(0, Math.min(target.x(), this.gameWidth - width));
+      target.x(newX);
+
+      // 限制 y 座標
+      const newY = Math.max(0, Math.min(target.y(), this.gameHeight - height));
+      target.y(newY);
+
+      // 更新 configImage 中的位置
+      const id = target.attrs.index;
+      this.configImage[id].x = newX;
+      this.configImage[id].y = newY;
     },
     handleDragend(e) {
       let id = e.target.attrs.index;
