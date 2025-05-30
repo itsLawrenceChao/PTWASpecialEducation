@@ -46,7 +46,7 @@ export default {
       console.log(this.columns);
     } catch (error) {
       console.warn("計算列數時發生錯誤：", error);
-      this.columns = 6;
+      this.columns = 10;
     }
   },
   methods: {
@@ -54,12 +54,12 @@ export default {
       if (this.Data.Columns) {
         return this.Data.Columns;
       }
-      for (let i = 1; i <= 7; i++) {
-        if (this.count / i <= 7) {
+      for (let i = 1; i <= 10; i++) {
+        if (this.count / i <= 10) {
           return Math.ceil(this.count / i);
         }
       }
-      return 7;
+      return 10;
     },
   },
 };
@@ -69,7 +69,7 @@ export default {
 .repeat-image-container {
   display: grid;
   width: 100%;
-  height: 100%;
+  height: auto;
   padding: $padding--small;
   box-sizing: border-box;
   gap: $gap--tiny;
