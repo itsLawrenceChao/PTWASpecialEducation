@@ -101,9 +101,9 @@ export default {
     },
   },
   created() {
-    for (var i in this.GameData.Questions) {
+    Array.from({ length: this.GameData.Questions.length }).forEach(() => {
       this.SelectionRecord.push(null);
-    }
+    });
   },
   mounted() {
     let Container = document.getElementsByClassName("Container")[0];
@@ -120,7 +120,6 @@ export default {
     submitSingleAnswer() {
       console.log(this.SelectionRecord[this.currentQuestionIndex]);
       console.log(this.GameData.Questions[this.currentQuestionIndex].Answer);
-      let isCorrect = true;
       if (
         this.SelectionRecord[this.currentQuestionIndex] ==
         this.GameData.Questions[this.currentQuestionIndex].Answer
@@ -153,9 +152,8 @@ export default {
     CheckAnswer() {
       let isCorrect = true;
       let Answers = [];
-      let notFinish = false;
       this.submitAnswerAmount++;
-      for (var i in this.selectionRecord) {
+      for (const i in this.selectionRecord) {
         if (this.selectionRecord[i] == null) {
           this.error = "請將所有答案作答完成";
           this.$emit("play-effect", "WrongSound");
@@ -166,13 +164,13 @@ export default {
           ]);
         }
       }
-      for (var i in this.GameData.Questions) {
-        Answers.push(this.GameData.Questions[i].Answer);
-        if (this.SelectionRecord[i] != this.GameData.Questions[i].Answer) {
+      for (const j in this.GameData.Questions) {
+        Answers.push(this.GameData.Questions[j].Answer);
+        if (this.SelectionRecord[j] != this.GameData.Questions[j].Answer) {
           isCorrect = false;
           this.$emit("add-record", [
             `第${this.submitAnswerAmount}送出答案`,
-            `第${i + 1}題錯誤`,
+            `第${j + 1}題錯誤`,
             "錯誤",
           ]);
           this.error = "答案錯誤，請再試一次";
@@ -274,22 +272,26 @@ export default {
     align-items: center;
     min-height: 5rem;
     .select-component {
-      min-width: 4rem;
-      border: none;
-      margin: 0.5rem;
-      border-radius: 15px;
-      padding: 0.5rem;
+      background-color: white;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
       cursor: pointer;
-      scale: 1;
-      transition: 0.3s;
-    }
-    .select-component:hover {
-      scale: 1.07;
-      transition: 0.3s;
-    }
-    .selected-component {
-      border: solid 3px blue;
-      scale: 1.07;
+      transition: all 0.3s;
+      min-width: 80px;
+      text-align: center;
+      display: inline-block;
+      margin: 0 5px;
+
+      &:hover {
+        background-color: #e9e9e9;
+      }
+
+      &.selected-component {
+        border-color: $hyperlink-color;
+        background-color: $success-color;
+        color: white;
+      }
     }
   }
 }
