@@ -23,7 +23,8 @@
           {
             "unit": "g",
             "Data": {
-              "digitCount": 4
+              "digitCount": 4,
+              "answer": 5000
             }
           }
         ]
@@ -42,7 +43,8 @@
           {
             "unit": "g",
             "Data": {
-              "digitCount": 4
+              "digitCount": 4,
+              "answer": 3000
             }
           }
         ]
@@ -61,7 +63,8 @@
           {
             "unit": "g",
             "Data": {
-              "digitCount": 4
+              "digitCount": 4,
+              "answer": 6000
             }
           }
         ]
@@ -80,7 +83,8 @@
           {
             "unit": "g",
             "Data": {
-              "digitCount": 4
+              "digitCount": 4,
+              "answer": 2000
             }
           }
         ]
@@ -99,7 +103,8 @@
           {
             "unit": "g",
             "Data": {
-              "digitCount": 4
+              "digitCount": 4,
+              "answer": 1000
             }
           }
         ]
@@ -114,20 +119,14 @@
         "HintText": "提示：1公斤=1000公克",
         "Question": "1公斤300公克",
         "correctAnswer": {
-          "kg": 1,
-          "g": 300
+          "g": 1300
         },
         "answerFormat": [
           {
-            "unit": "kg",
-            "Data": {
-              "digitCount": 2
-            }
-          },
-          {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 4,
+              "answer": 1300
             }
           }
         ]
@@ -140,20 +139,14 @@
         "HintText": "提示：1公斤=1000公克",
         "Question": "2公斤400公克",
         "correctAnswer": {
-          "kg": 2,
-          "g": 400
+          "g": 2400
         },
         "answerFormat": [
           {
-            "unit": "kg",
-            "Data": {
-              "digitCount": 2
-            }
-          },
-          {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 4,
+              "answer": 2400
             }
           }
         ]
@@ -166,20 +159,14 @@
         "HintText": "提示：1公斤=1000公克",
         "Question": "3公斤500公克",
         "correctAnswer": {
-          "kg": 3,
-          "g": 500
+          "g": 3500
         },
         "answerFormat": [
           {
-            "unit": "kg",
-            "Data": {
-              "digitCount": 2
-            }
-          },
-          {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 4,
+              "answer": 3500
             }
           }
         ]
@@ -192,20 +179,14 @@
         "HintText": "提示：1公斤=1000公克",
         "Question": "4公斤200公克",
         "correctAnswer": {
-          "kg": 4,
-          "g": 200
+          "g": 4200
         },
         "answerFormat": [
           {
-            "unit": "kg",
-            "Data": {
-              "digitCount": 2
-            }
-          },
-          {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 4,
+              "answer": 4200
             }
           }
         ]
@@ -218,20 +199,14 @@
         "HintText": "提示：1公斤=1000公克",
         "Question": "5公斤100公克",
         "correctAnswer": {
-          "kg": 5,
-          "g": 100
+          "g": 5100
         },
         "answerFormat": [
           {
-            "unit": "kg",
-            "Data": {
-              "digitCount": 2
-            }
-          },
-          {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 4,
+              "answer": 5100
             }
           }
         ]
@@ -252,7 +227,8 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 8
             }
           }
         ]
@@ -271,7 +247,8 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 9
             }
           }
         ]
@@ -290,7 +267,8 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 7
             }
           }
         ]
@@ -309,7 +287,8 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 6
             }
           }
         ]
@@ -328,7 +307,8 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 5
             }
           }
         ]
@@ -350,13 +330,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 9
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 40
             }
           }
         ]
@@ -376,13 +358,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 8
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 50
             }
           }
         ]
@@ -402,13 +386,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 1
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 40
             }
           }
         ]
@@ -428,13 +414,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 2
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 20
             }
           }
         ]
@@ -454,13 +442,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 1
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 9
             }
           }
         ]
@@ -508,13 +498,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 2
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 5
             }
           }
         ]
@@ -534,13 +526,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 3
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 6
             }
           }
         ]
@@ -560,13 +554,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 5
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 1
             }
           }
         ]
@@ -586,13 +582,15 @@
           {
             "unit": "kg",
             "Data": {
-              "digitCount": 2
+              "digitCount": 2,
+              "answer": 8
             }
           },
           {
             "unit": "g",
             "Data": {
-              "digitCount": 3
+              "digitCount": 3,
+              "answer": 7
             }
           }
         ]
