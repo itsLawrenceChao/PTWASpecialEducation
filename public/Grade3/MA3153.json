@@ -13,7 +13,7 @@
       "pad": false
     },
     "checkAnswer": {
-      "top": false,
+      "top": true,
       "down": true
     }
   },
