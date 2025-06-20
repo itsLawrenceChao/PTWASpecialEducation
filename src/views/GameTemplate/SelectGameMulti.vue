@@ -215,6 +215,8 @@ export default {
 .Outter {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
   .SubmitAnswer {
     width: 13rem;
     height: 4rem;
@@ -241,7 +243,7 @@ export default {
 .ComponentArea {
   padding: $gap--tiny;
   display: flex;
-  height: 40vh;
+  height: 65%;
 }
 .Questions {
   width: 30%;
