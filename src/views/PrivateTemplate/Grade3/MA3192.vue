@@ -124,26 +124,37 @@
         </template>
       </table>
     </div>
-    <div
-      v-for="(question, index) in questionData"
-      :key="index"
-      class="ma3192__question"
-    >
-      <template v-if="question.Type == 'DefaultDragBox'">
-        <div>
-          {{ question.Text }}
-          <div class="ma3192__drag-box"></div>
-        </div>
-      </template>
-      <component
-        :is="question.Type"
-        v-else
-        :Data="question.Data"
-        :ID="ID"
-        @replyAnswer="handleAnswer($event, index)"
-      />
+
+    <transition :name="transitionName" mode="out-in">
+      <div
+        v-if="currentQuestion"
+        :key="currentQuestionIndex"
+        class="ma3192__question"
+      >
+        <template v-if="currentQuestion.Type == 'DefaultDragBox'">
+          <div>
+            {{ currentQuestion.Text }}
+            <div class="ma3192__drag-box"></div>
+          </div>
+        </template>
+        <component
+          :is="currentQuestion.Type"
+          v-else
+          :Data="currentQuestion.Data"
+          :ID="ID"
+          @replyAnswer="handleAnswer($event, currentQuestionIndex)"
+        />
+      </div>
+    </transition>
+
+    <div class="function-btns">
+      <button class="ma3192__submit-btn" @click="submitSingleAnswer">
+        送出答案
+      </button>
+      <button v-if="nextable" class="ma3192__submit-btn" @click="nextQuestion">
+        下一題
+      </button>
     </div>
-    <button class="ma3192__submit-btn" @click="checkAnswer">送出答案</button>
   </div>
 </template>
 
@@ -197,6 +208,9 @@ export default {
       answer: [],
       originalPosition: null,
       cloneElement: null,
+      currentQuestionIndex: 0,
+      transitionName: "slide-right",
+      nextable: false,
       scheduleData: {
         dates: [
           { text: "7月10日", colspan: 1 },
@@ -255,8 +269,18 @@ export default {
     };
   },
 
+  computed: {
+    currentQuestion() {
+      if (!this.questionData || this.questionData.length === 0) {
+        return null;
+      }
+      return this.questionData[this.currentQuestionIndex] || null;
+    },
+  },
+
   async mounted() {
     this.setQuestionData();
+    this.answer = new Array(this.GameData.Questions.length).fill(null);
   },
 
   beforeUnmount() {
@@ -272,11 +296,13 @@ export default {
     },
 
     setQuestionData() {
-      this.questionData = this.GameData.Questions.map((question) => ({
-        Text: question.Text,
-        Type: question.Type,
-        Data: question.Data,
-      }));
+      if (this.GameData && this.GameData.Questions) {
+        this.questionData = this.GameData.Questions.map((question) => ({
+          Text: question.Text,
+          Type: question.Type,
+          Data: question.Data,
+        }));
+      }
     },
 
     handleStart(event, columnIndex, elementIndex) {
@@ -360,31 +386,24 @@ export default {
       const dragBoxes = document.querySelectorAll(".ma3192__drag-box");
       const draggedRect = this.cloneElement.getBoundingClientRect();
 
-      dragBoxes.forEach((dragBox, index) => {
+      dragBoxes.forEach((dragBox) => {
         const boxRect = dragBox.getBoundingClientRect();
         if (this.isOverlapping(draggedRect, boxRect)) {
-          this.handleDragBoxDrop(dragBox, index);
+          this.handleDragBoxDrop(dragBox);
         }
       });
     },
 
-    handleDragBoxDrop(dragBox, index) {
+    handleDragBoxDrop(dragBox) {
       const draggedText = this.originalPosition.element.textContent.trim();
       dragBox.textContent = draggedText;
       dragBox.style.justifyContent = "center";
       dragBox.style.alignItems = "center";
       dragBox.classList.remove("ma3192__drag-box--wrong");
 
-      const defaultDragBoxQuestions = this.questionData
-        .map((q, i) => ({ type: q.Type, index: i }))
-        .filter((q) => q.type === "DefaultDragBox");
-
-      if (defaultDragBoxQuestions[index]) {
-        const questionIndex = defaultDragBoxQuestions[index].index;
-        const answer =
-          this.GameData.Questions[questionIndex].Data.answer.trim();
-        this.answer[questionIndex] = draggedText === answer;
-      }
+      const questionIndex = this.currentQuestionIndex;
+      const answer = this.GameData.Questions[questionIndex].Data.answer.trim();
+      this.answer[questionIndex] = draggedText === answer;
     },
 
     cleanupCloneElement() {
@@ -406,6 +425,89 @@ export default {
 
     handleAnswer(event, index) {
       this.answer[index] = event;
+    },
+
+    submitSingleAnswer() {
+      if (!this.currentQuestion) {
+        console.warn("No current question available");
+        return;
+      }
+
+      const currentQuestion =
+        this.GameData.Questions[this.currentQuestionIndex];
+      console.log("Current question:", currentQuestion);
+      console.log("Current question type:", currentQuestion.Type);
+
+      let isCorrect = false;
+
+      if (currentQuestion.Type === "DefaultDragBox") {
+        const dragBoxes = document.querySelectorAll(".ma3192__drag-box");
+        console.log("Found drag boxes:", dragBoxes.length);
+
+        if (dragBoxes.length === 0) {
+          console.warn("No drag boxes found in DOM");
+          return;
+        }
+
+        // 由於現在只顯示當前問題，所以拖拽框索引總是 0
+        const dragBoxIndex = 0;
+
+        console.log("Drag box index:", dragBoxIndex);
+
+        if (dragBoxIndex < dragBoxes.length && dragBoxes[dragBoxIndex]) {
+          const draggedText = dragBoxes[dragBoxIndex].textContent.trim();
+          const answer = currentQuestion.Data.answer.trim();
+          console.log("Dragged text:", draggedText);
+          console.log("Expected answer:", answer);
+          isCorrect = draggedText === answer;
+
+          if (!isCorrect) {
+            dragBoxes[dragBoxIndex].classList.add("ma3192__drag-box--wrong");
+          }
+        } else {
+          console.warn("Drag box not found for current question");
+          return;
+        }
+      } else {
+        console.log(
+          "Non-DefaultDragBox question, checking answer:",
+          this.answer[this.currentQuestionIndex]
+        );
+        isCorrect = this.answer[this.currentQuestionIndex];
+      }
+
+      if (isCorrect) {
+        this.$emit("play-effect", "CorrectSound");
+        this.$emit("add-record", [
+          `第 ${this.currentQuestionIndex + 1}題答案`,
+          `回答正確`,
+          "正確",
+        ]);
+        if (this.currentQuestionIndex < this.questionData.length - 1) {
+          this.nextable = true;
+        } else {
+          this.nextable = false;
+          this.$emit("next-question");
+        }
+      } else {
+        this.$emit("play-effect", "WrongSound");
+        this.$emit("add-record", [
+          `第 ${this.currentQuestionIndex + 1}題答案`,
+          `回答錯誤`,
+          "錯誤",
+        ]);
+      }
+    },
+
+    nextQuestion() {
+      if (
+        this.questionData &&
+        this.currentQuestionIndex < this.questionData.length - 1
+      ) {
+        this.transitionName = "slide-left";
+        this.currentQuestionIndex++;
+      }
+      this.nextable = false;
     },
 
     checkAnswer() {
@@ -452,10 +554,13 @@ export default {
 }
 .ma3192__form {
   width: 100%;
-  max-height: 50%;
+  flex: 1;
+  min-height: 60%;
+  overflow-y: auto;
 }
 .ma3192__schedule-table {
   width: 100%;
+  height: 100%;
   border-collapse: collapse;
   background-color: #fff;
 }
@@ -526,6 +631,9 @@ export default {
   font-size: 1.5rem;
   white-space: pre-line;
   display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .ma3192__question-container {
@@ -554,13 +662,20 @@ export default {
   border-color: #ffcdd2;
 }
 
+.function-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .ma3192__submit-btn {
   max-width: 200px;
   font-size: 1.5rem;
   border: none;
   background-color: $submit-btn-bg;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 10px 20px;
   border-radius: 10px;
   margin: 10px;
 }
@@ -592,5 +707,31 @@ export default {
 .ma3192__station-table td.station {
   font-weight: bold;
   background-color: #f7f7a1;
+}
+
+// 過渡動畫樣式
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 0.5s ease;
+  width: 100%;
+}
+
+.slide-left-enter,
+.slide-right-leave-to {
+  transform: translateX(100%);
+}
+
+.slide-left-leave-to,
+.slide-right-enter {
+  transform: translateX(-100%);
+}
+
+.slide-left-enter-to,
+.slide-left-leave,
+.slide-right-enter-to,
+.slide-right-leave {
+  transform: translateX(0%);
 }
 </style>
