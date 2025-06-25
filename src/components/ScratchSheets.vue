@@ -96,7 +96,13 @@
 <script>
 export default {
   name: "CanvasDrawing",
-  emits: ["closeSheet"],
+  props: {
+    backgroundImage: {
+      type: String,
+      default: null,
+    },
+  },
+  emits: ["closeSheet", "saveCanvas"],
   data() {
     return {
       brushSize: 5,
@@ -132,6 +138,11 @@ export default {
       // Adjust the context scaling to handle higher resolution
       this.ctx.scale(scaleFactor, scaleFactor);
       this.initCanvas();
+
+      // 如果有背景圖片，恢復到畫布上
+      if (this.backgroundImage) {
+        this.restoreBackground();
+      }
     },
     setcolor(color) {
       this.brushColor = color;
@@ -144,6 +155,19 @@ export default {
       this.ctx.lineJoin = "round";
       this.ctx.lineCap = "round";
       this.ctx.strokeStyle = this.brushColor;
+    },
+    restoreBackground() {
+      if (!this.backgroundImage) return;
+
+      const img = new Image();
+      img.onload = () => {
+        // 獲取畫布的顯示尺寸（與保存時使用的尺寸相同）
+        const rect = this.$refs.con.getBoundingClientRect();
+
+        // 將背景圖片繪製到畫布上，使用與保存時相同的尺寸
+        this.ctx.drawImage(img, 0, 0, rect.width, rect.height);
+      };
+      img.src = this.backgroundImage;
     },
     handleMouseDown(event) {
       this.isDrawing = true;
@@ -231,8 +255,49 @@ export default {
         this.$refs.canvas.width,
         this.$refs.canvas.height
       );
+      // 清空後立即更新背景
+      const tempCanvas = document.createElement("canvas");
+      const tempCtx = tempCanvas.getContext("2d");
+
+      // 獲取原始畫布的顯示尺寸
+      const rect = this.$refs.con.getBoundingClientRect();
+      tempCanvas.width = rect.width;
+      tempCanvas.height = rect.height;
+
+      // 將高解析度畫布內容縮放到正確大小
+      tempCtx.drawImage(
+        this.$refs.canvas,
+        0,
+        0,
+        tempCanvas.width,
+        tempCanvas.height
+      );
+
+      const canvasImage = tempCanvas.toDataURL("image/png");
+      this.$emit("saveCanvas", canvasImage);
     },
     closeCanvas() {
+      // 創建一個新的畫布來生成正確大小的圖片
+      const tempCanvas = document.createElement("canvas");
+      const tempCtx = tempCanvas.getContext("2d");
+
+      // 獲取原始畫布的顯示尺寸
+      const rect = this.$refs.con.getBoundingClientRect();
+      tempCanvas.width = rect.width;
+      tempCanvas.height = rect.height;
+
+      // 將高解析度畫布內容縮放到正確大小
+      tempCtx.drawImage(
+        this.$refs.canvas,
+        0,
+        0,
+        tempCanvas.width,
+        tempCanvas.height
+      );
+
+      // 將畫布內容轉換為圖片
+      const canvasImage = tempCanvas.toDataURL("image/png");
+      this.$emit("saveCanvas", canvasImage);
       this.$emit("closeSheet");
     },
   },

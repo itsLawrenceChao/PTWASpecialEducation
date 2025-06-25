@@ -1,5 +1,12 @@
 <template>
   <div id="GameView" ref="GameView">
+    <!-- 背景圖片層 -->
+    <div
+      v-if="scratchSheetBackground"
+      class="scratchsheet-background"
+      :style="{ backgroundImage: `url(${scratchSheetBackground})` }"
+    ></div>
+
     <GameHeader
       :grade="Grade"
       :game-name="gameName"
@@ -126,7 +133,12 @@
         </div>
       </div>
     </section>
-    <scratchSheet v-if="scratchSheetVisible" @close-sheet="closeSratchSheet" />
+    <scratchSheet
+      v-if="scratchSheetVisible"
+      :background-image="scratchSheetBackground"
+      @close-sheet="closeSratchSheet"
+      @save-canvas="saveCanvasBackground"
+    />
     <TechModal
       v-if="showMediaModal"
       :media-data="GameData.introvideo"
@@ -256,8 +268,8 @@ export default {
     FindPattern: defineAsyncComponent(
       () => import("@/views/GameTemplate/FindPattern.vue")
     ),
-    OneDimensionalForm: defineAsyncComponent(() =>
-      import("@/views/GameTemplate/OneDimensionalForm.vue")
+    OneDimensionalForm: defineAsyncComponent(
+      () => import("@/views/GameTemplate/OneDimensionalForm.vue")
     ),
   },
   data() {
@@ -287,6 +299,7 @@ export default {
       QuestionsSequence: [],
       AllQuestions: [],
       ShowReply: false,
+      scratchSheetBackground: null,
       Hint: {
         Type: "None",
         Data: {
@@ -468,6 +481,7 @@ export default {
       this.finaltime = 0;
       this.download_data = [[]];
       this.isPassLevel = [];
+      this.scratchSheetBackground = null;
       this.GameData.Questions.forEach(() => {
         this.isPassLevel.push(false);
       });
@@ -668,6 +682,9 @@ export default {
       modal.classList.remove("show");
       modal.style.display = "none";
     },
+    saveCanvasBackground(canvasImage) {
+      this.scratchSheetBackground = canvasImage;
+    },
     resetWrongTimes() {
       this.WrongTimes = 0;
     },
@@ -675,6 +692,19 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.scratchsheet-background {
+  position: fixed;
+  bottom: 0; /* 對應畫布容器的 align-self: end */
+  left: 0;
+  width: 85vw; /* 對應畫布容器的 width: 85% */
+  height: 90vh; /* 對應畫布容器的 height: 90% */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 100;
+}
+
 .img-hover-zoom {
   transition: transform 0.3s ease; /* 平滑的過渡效果 */
 }
