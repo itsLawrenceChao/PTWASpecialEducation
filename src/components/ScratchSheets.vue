@@ -81,12 +81,7 @@
         <div class="operation-option">
           <button @click="clearCanvas" @touchend="clearCanvas">清空</button>
         </div>
-        <button
-          class="exit-btn"
-          data-bs-dismiss="modal"
-          @click="closeCanvas"
-          @touchend="closeCanvas"
-        >
+        <button class="exit-btn" @click="closeCanvas" @touchend="closeCanvas">
           關閉
         </button>
       </div>
@@ -115,19 +110,35 @@ export default {
       offsetX: 0,
       offsetY: 0,
       prevPinchDistance: 0,
+      resizeObserver: null,
     };
   },
   mounted() {
+    if (!this.$refs.canvas) return;
+
     this.ctx = this.$refs.canvas.getContext("2d");
     this.resizeCanvas();
-    const observer = new ResizeObserver(this.resizeCanvas);
-    observer.observe(this.$refs.con);
+    this.resizeObserver = new ResizeObserver(this.resizeCanvas);
+    if (this.$refs.con) {
+      this.resizeObserver.observe(this.$refs.con);
+    }
+  },
+  beforeUnmount() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   },
   updated() {
-    this.resizeCanvas();
+    if (this.$refs.con && this.$refs.canvas) {
+      this.resizeCanvas();
+    }
   },
   methods: {
     resizeCanvas() {
+      if (!this.$refs.con || !this.$refs.canvas) {
+        return;
+      }
+
       const rect = this.$refs.con.getBoundingClientRect();
       const scaleFactor = 2; // Increase this factor for higher resolution
       this.$refs.canvas.width = rect.width * scaleFactor;
@@ -151,13 +162,15 @@ export default {
       this.brushSize = width;
     },
     initCanvas() {
+      if (!this.ctx) return;
+
       this.ctx.lineWidth = this.brushSize;
       this.ctx.lineJoin = "round";
       this.ctx.lineCap = "round";
       this.ctx.strokeStyle = this.brushColor;
     },
     restoreBackground() {
-      if (!this.backgroundImage) return;
+      if (!this.backgroundImage || !this.$refs.con) return;
 
       const img = new Image();
       img.onload = () => {
@@ -170,6 +183,8 @@ export default {
       img.src = this.backgroundImage;
     },
     handleMouseDown(event) {
+      if (!this.ctx || !this.$refs.canvas) return;
+
       this.isDrawing = true;
       this.ctx.beginPath();
       const rect = this.$refs.canvas.getBoundingClientRect();
@@ -180,7 +195,8 @@ export default {
       this.lastY = y;
     },
     handleMouseMove(event) {
-      if (!this.isDrawing) return;
+      if (!this.isDrawing || !this.ctx || !this.$refs.canvas) return;
+
       const rect = this.$refs.canvas.getBoundingClientRect();
       const x = (event.clientX - rect.left - this.offsetX) / this.scale;
       const y = (event.clientY - rect.top - this.offsetY) / this.scale;
@@ -192,11 +208,15 @@ export default {
       this.lastY = y;
     },
     handleMouseUp() {
+      if (!this.ctx) return;
+
       this.isDrawing = false;
       this.ctx.closePath();
     },
     handleTouchStart(event) {
       event.preventDefault();
+      if (!this.ctx || !this.$refs.canvas) return;
+
       if (event.touches.length === 1) {
         this.isDrawing = true;
         this.ctx.beginPath();
@@ -217,6 +237,8 @@ export default {
     },
     handleTouchMove(event) {
       event.preventDefault();
+      if (!this.ctx || !this.$refs.canvas) return;
+
       if (event.touches.length === 1 && this.isDrawing) {
         const rect = this.$refs.canvas.getBoundingClientRect();
         const x =
@@ -245,10 +267,16 @@ export default {
       }
     },
     handleTouchEnd() {
+      if (!this.ctx) return;
+
       this.isDrawing = false;
       this.ctx.closePath();
     },
     clearCanvas() {
+      if (!this.$refs.canvas || !this.$refs.con) {
+        return;
+      }
+
       this.ctx.clearRect(
         0,
         0,
@@ -277,6 +305,11 @@ export default {
       this.$emit("saveCanvas", canvasImage);
     },
     closeCanvas() {
+      if (!this.$refs.canvas || !this.$refs.con) {
+        this.$emit("closeSheet");
+        return;
+      }
+
       // 創建一個新的畫布來生成正確大小的圖片
       const tempCanvas = document.createElement("canvas");
       const tempCtx = tempCanvas.getContext("2d");
