@@ -75,11 +75,12 @@
                   @timer-start="startTimer"
                   @timer-pause="pauseTimer"
                   @timer-reset="resetTimer"
-                  @scratchSheet="
+                  @calculatorTool="
                     () => {
-                      scratchSheetVisible = true;
+                      calculatorToolVisible = true;
                     }
                   "
+                  @reappear-code="reappearCode"
                 />
               </div>
               <div v-else class="intro">
@@ -115,9 +116,9 @@
             @next-question="nextQuestion"
             @startGame="startGame"
             @reload-page="reloadPage"
-            @scratchSheet="
+            @calculatorTool="
               () => {
-                scratchSheetVisible = true;
+                calculatorToolVisible = true;
               }
             "
             @reappear-code="reappearCode"
@@ -133,11 +134,11 @@
         </div>
       </div>
     </section>
-    <scratchSheet
-      v-if="scratchSheetVisible"
-      :background-image="scratchSheetBackground"
-      @close-sheet="closeSratchSheet"
-      @save-canvas="saveCanvasBackground"
+    <CalculatorTool
+      v-if="calculatorToolVisible"
+      :visible="calculatorToolVisible"
+      @close="calculatorToolVisible = false"
+      @saveCanvas="saveCanvasBackground"
     />
     <TechModal
       v-if="showMediaModal"
@@ -157,7 +158,6 @@ import GameOver from "@/components/game-system/GameOver.vue";
 import Header from "@/components/game-system/header.vue";
 import LevelAndTime from "@/components/game-system/LevelAndTime.vue";
 import MediaModal from "@/components/game-system/MediaModal.vue";
-import scratchSheet from "@/components/ScratchSheets.vue";
 import hintbutton from "@/components/game-system/hintbutton.vue";
 import * as ImportUrl from "@/utilitys/get_assets.js";
 import { defineAsyncComponent } from "vue";
@@ -166,11 +166,11 @@ import gameStore from "@/stores/game";
 import { mapWritableState } from "pinia";
 import { soundManager } from "@/utilitys/sound-manager.js";
 import TechModal from "@/components/game-system/TechModal.vue";
+import CalculatorTool from "@/components/game-system/CalculatorTool.vue";
 export default {
   components: {
     TechModal,
     hintbutton,
-    scratchSheet,
     GameStart,
     GameOver,
     GameHeader: Header,
@@ -271,6 +271,7 @@ export default {
     OneDimensionalForm: defineAsyncComponent(
       () => import("@/views/GameTemplate/OneDimensionalForm.vue")
     ),
+    CalculatorTool,
   },
   data() {
     return {
@@ -295,11 +296,11 @@ export default {
       intervalId: null,
       EffectWindow: false,
       EffectSrc: "",
-      scratchSheetVisible: false,
+      scratchSheetBackground: null,
+      calculatorToolVisible: false,
       QuestionsSequence: [],
       AllQuestions: [],
       ShowReply: false,
-      scratchSheetBackground: null,
       Hint: {
         Type: "None",
         Data: {
@@ -675,12 +676,6 @@ export default {
       soundManager.stopAllSounds();
       this.exitFullScreen();
       this.$router.replace({ path: `/${this.$route.params.Grade}` });
-    },
-    closeSratchSheet() {
-      this.scratchSheetVisible = false;
-      let modal = document.getElementById("Calculator");
-      modal.classList.remove("show");
-      modal.style.display = "none";
     },
     saveCanvasBackground(canvasImage) {
       this.scratchSheetBackground = canvasImage;

@@ -44,7 +44,14 @@ class AddSubConfig {
 
   // 獲取每行的數據
   getRowSet(maxLength, data) {
-    if (data.mode === "freeInput") return [];
+    if (data.mode === "freeInput") {
+      // freeInput 模式下，創建空的數字陣列
+      return [
+        new Array(maxLength).fill(" "),
+        new Array(maxLength).fill(" "),
+        new Array(maxLength).fill(" "),
+      ];
+    }
 
     const { operand1, operand2 } = data.operands;
     const answer = data.answer;
@@ -98,7 +105,12 @@ class AddSubConfig {
       ...(isLastRow && data.mode === "checkAnswer"
         ? { answer: rowSet[rowIndex] ? rowSet[rowIndex][colIndex] : "" }
         : {}),
-      visible: rowSet[rowIndex][colIndex] === " " ? false : true,
+      visible:
+        data.mode === "freeInput"
+          ? true
+          : rowSet[rowIndex][colIndex] === " "
+            ? false
+            : true,
       class: `${isSecondRow ? "--border-bottom" : ""}`,
       ...(isLastRow || data.mode === "freeInput" ? { editable: "number" } : {}),
     };

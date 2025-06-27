@@ -95,34 +95,52 @@ export default {
         left: "0px",
       },
       currentTarget: null,
-      operators: ["", "+", "-", "×", "÷"],
+      operators: ["", "+", "-"],
     };
   },
   computed: {
     // Your computed properties here
   },
+  watch: {
+    // 監聽配置變更，重新初始化計算板
+    config: {
+      handler() {
+        this.initializeBoard();
+      },
+      deep: true,
+    },
+    data: {
+      handler() {
+        this.initializeBoard();
+      },
+      deep: true,
+    },
+  },
   beforeMount() {
-    try {
-      if (!this.data || !this.config || !this.config.getGrid) {
-        console.warn("GenericBoard: Missing required props or methods");
-        return;
-      }
-
-      const { unit, carry, operation } = this.config.getGrid(this.data);
-
-      this.unitArray = unit;
-      this.carryBorrowArray = carry.map((item) => ({
-        ...item,
-        text: "",
-        isValid: true,
-        visible: item.visible,
-      }));
-      this.operationArray = operation;
-    } catch (error) {
-      console.error("GenericBoard initialization error:", error);
-    }
+    this.initializeBoard();
   },
   methods: {
+    initializeBoard() {
+      try {
+        if (!this.data || !this.config || !this.config.getGrid) {
+          console.warn("GenericBoard: Missing required props or methods");
+          return;
+        }
+
+        const { unit, carry, operation } = this.config.getGrid(this.data);
+
+        this.unitArray = unit;
+        this.carryBorrowArray = carry.map((item) => ({
+          ...item,
+          text: "",
+          isValid: true,
+          visible: item.visible,
+        }));
+        this.operationArray = operation;
+      } catch (error) {
+        console.error("GenericBoard initialization error:", error);
+      }
+    },
     handleClick(item, rowIndex, itemIndex, event) {
       if (!item.editable) return;
       const rect = event.target.getBoundingClientRect();
