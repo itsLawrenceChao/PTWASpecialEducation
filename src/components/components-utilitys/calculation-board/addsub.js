@@ -118,22 +118,24 @@ class AddSubConfig {
 
   // 單位顯示
   getUnitLabels(unitType, customUnit) {
-    if (unitType === "Custom") {
-      return [" ", ...customUnit.slice(0, this.maxLength)];
-    }
-
     const allUnits = {
-      Length: ["公分", "", "", "公尺"],
-      Time: ["秒", "", "分", "", "時"],
+      Length: ["毫米", "公分", "", "", "公尺"],
+      Time: ["分", "", "時"],
       Volume: ["毫升", "", "", "公升"],
       Weight: ["公克", "", "", "公斤"],
       Number: ["個位", "十位", "百位", "千位", "萬位"],
     };
 
-    return [
-      " ",
-      ...(allUnits[unitType]?.slice(0, this.maxLength).reverse() || []),
-    ];
+    const source =
+      unitType === "Custom" ? customUnit : allUnits[unitType] || [];
+    const padded = this.slicePadReverse(source, this.maxLength);
+    return [" ", ...padded];
+  }
+
+  slicePadReverse(arr, maxLength) {
+    const sliced = arr.slice(0, maxLength);
+    const padCount = maxLength - sliced.length;
+    return sliced.concat(Array(padCount).fill("")).reverse();
   }
 
   // 處理進位顯示

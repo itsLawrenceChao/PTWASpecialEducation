@@ -1,90 +1,91 @@
 {
-  "id": "MA3123",
-  "introvideo": "src",
-  "GameType": "WordProblemWithCalculator",
+  "id": "MA3041",
+  "introvideo": "MA3041.mp4",
   "IntroText": {
     "Type": "PlainText",
     "Content": "用直式算算看"
   },
+  "GameType": "WordProblemWithCalculator",
   "GameConfig": {
     "calculatorVerify": true,
     "markdownVerify": true,
     "calculator": "CalculationBoard"
   },
+  "Hint": {},
   "Questions": [
     [
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "600",
-            "operand2": "3"
+            "operand1": "20",
+            "operand2": "6"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "600 ÷ 3 = $i$",
-          "Answer": [200]
+          "Render": "20 X 6 = $i$",
+          "Answer": [120]
         }
       },
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "800",
+            "operand1": "20",
+            "operand2": "8"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "20 X 8 = $i$",
+          "Answer": [160]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "30",
             "operand2": "4"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "800 ÷ 4 = $i$",
+          "Render": "30 X 4 = $i$",
+          "Answer": [120]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "40",
+            "operand2": "5"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "40 X 5 = $i$",
           "Answer": [200]
         }
       },
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "900",
-            "operand2": "3"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "900 ÷ 3 = $i$",
-          "Answer": [300]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "600",
+            "operand1": "50",
             "operand2": "2"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "600 ÷ 2 = $i$",
-          "Answer": [300]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "700",
-            "operand2": "7"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "700 ÷ 7 = $i$",
+          "Render": "50 X 2 = $i$",
           "Answer": [100]
         }
       }
@@ -92,308 +93,308 @@
     [
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "482",
-            "operand2": "2"
+            "operand1": "80",
+            "operand2": "7"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "482 ÷ 2 = $i$",
-          "Answer": [241]
+          "Render": "80 X 7 = $i$",
+          "Answer": [560]
         }
       },
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "396",
-            "operand2": "3"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "396 ÷ 3 = $i$",
-          "Answer": [132]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "555",
-            "operand2": "5"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "555 ÷ 5 = $i$",
-          "Answer": [111]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "848",
-            "operand2": "4"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "848 ÷ 4 = $i$",
-          "Answer": [212]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "633",
-            "operand2": "3"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "633 ÷ 3 = $i$",
-          "Answer": [211]
-        }
-      }
-    ],
-    [
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "690",
-            "operand2": "3"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "690 ÷ 3 = $i$",
-          "Answer": [230]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "600",
-            "operand2": "4"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "600 ÷ 4 = $i$",
-          "Answer": [150]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "700",
-            "operand2": "2"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "700 ÷ 2 = $i$",
-          "Answer": [350]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "900",
-            "operand2": "5"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "900 ÷ 5 = $i$",
-          "Answer": [180]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "450",
-            "operand2": "3"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "450 ÷ 3 = $i$",
-          "Answer": [150]
-        }
-      }
-    ],
-    [
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "406",
-            "operand2": "2"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "406 ÷ 2 = $i$",
-          "Answer": [203]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "624",
-            "operand2": "3"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "624 ÷ 3 = $i$",
-          "Answer": [208]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "615",
+            "operand1": "70",
             "operand2": "6"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "615 ÷ 6 = $i$ ... $i$",
-          "Answer": [102, 3]
+          "Render": "70 X 6 = $i$",
+          "Answer": [420]
         }
       },
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "809",
-            "operand2": "8"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "809 ÷ 8 = $i$ ... $i$",
-          "Answer": [101, 1]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "716",
+            "operand1": "60",
             "operand2": "7"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "716 ÷ 7 = $i$ ... $i$",
-          "Answer": [102, 2]
+          "Render": "60 X 7 = $i$",
+          "Answer": [420]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "90",
+            "operand2": "6"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "90 X 6 = $i$",
+          "Answer": [540]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "50",
+            "operand2": "8"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "50 X 8 = $i$",
+          "Answer": [400]
         }
       }
     ],
     [
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "465",
-            "operand2": "5"
+            "operand1": "52",
+            "operand2": "4"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "465 ÷ 5 = $i$",
-          "Answer": [93]
+          "Render": "52 X 4 = $i$",
+          "Answer": [208]
         }
       },
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "104",
-            "operand2": "8"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "104 ÷ 8 = $i$",
-          "Answer": [13]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "136",
-            "operand2": "7"
-          },
-          "unitType": "Number"
-        },
-        "markdown": {
-          "Render": "136 ÷ 7 = $i$ ... $i$",
-          "Answer": [19, 3]
-        }
-      },
-      {
-        "calculator": {
-          "type": "division",
-          "mode": "checkAnswer",
-          "operands": {
-            "operand1": "219",
+            "operand1": "21",
             "operand2": "9"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "219 ÷ 9 = $i$ ... $i$",
-          "Answer": [24, 3]
+          "Render": "21 X 9 = $i$",
+          "Answer": [189]
         }
       },
       {
         "calculator": {
-          "type": "division",
+          "type": "multiply",
           "mode": "checkAnswer",
           "operands": {
-            "operand1": "446",
+            "operand1": "31",
+            "operand2": "6"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "31 X 6 = $i$",
+          "Answer": [186]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "73",
+            "operand2": "2"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "73 X 2 = $i$",
+          "Answer": [146]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "81",
+            "operand2": "5"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "81 X 5 = $i$",
+          "Answer": [405]
+        }
+      }
+    ],
+    [
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "36",
+            "operand2": "4"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "36 X 4 = $i$",
+          "Answer": [144]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "43",
+            "operand2": "5"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "43 X 5 = $i$",
+          "Answer": [215]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "25",
+            "operand2": "8"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "25 X 8 = $i$",
+          "Answer": [200]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "19",
+            "operand2": "6"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "19 X 6 = $i$",
+          "Answer": [114]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "17",
             "operand2": "7"
           },
           "unitType": "Number"
         },
         "markdown": {
-          "Render": "446 ÷ 7 = $i$ ... $i$",
-          "Answer": [63, 5]
+          "Render": "17 X 7 = $i$",
+          "Answer": [119]
+        }
+      }
+    ],
+    [
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "67",
+            "operand2": "6"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "67 X 6 = $i$",
+          "Answer": [402]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "88",
+            "operand2": "3"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "88 X 3 = $i$",
+          "Answer": [264]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "78",
+            "operand2": "4"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "78 X 4 = $i$",
+          "Answer": [312]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "68",
+            "operand2": "8"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "68 X 8 = $i$",
+          "Answer": [544]
+        }
+      },
+      {
+        "calculator": {
+          "type": "multiply",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "87",
+            "operand2": "5"
+          },
+          "unitType": "Number"
+        },
+        "markdown": {
+          "Render": "87 X 5 = $i$",
+          "Answer": [435]
         }
       }
     ]

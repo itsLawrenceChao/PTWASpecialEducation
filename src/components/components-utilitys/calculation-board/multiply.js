@@ -43,7 +43,7 @@ class MultiplyConfig {
     operation.push(this.createMultiplierRow(maxLength, data, rowSet));
 
     // 第二部分：處理中間計算過程
-    if (processRows > 0 && data.mode !== "freeInput") {
+    if (processRows > 1 && data.mode !== "freeInput") {
       const { operand1, operand2 } = data.operands || {};
       if (operand1 !== undefined && operand2 !== undefined) {
         const multiplier = operand2.toString().split("").reverse();
@@ -54,7 +54,7 @@ class MultiplyConfig {
           operation.push(row);
         }
       }
-    } else if (data.mode === "freeInput") {
+    } else if (data.mode === "freeInput" && processRows > 1) {
       // 在 freeInput 模式下，添加空的處理行
       for (let i = 0; i < processRows; i++) {
         const row = this.createProcessRow(i, maxLength, data);

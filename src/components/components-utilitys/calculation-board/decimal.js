@@ -193,6 +193,18 @@ class DecimalConfig {
     if (rowSet[rowIndex]) {
       if (isBeforeDecimal) {
         text = rowSet[rowIndex].beforeDecimal[colIndex];
+        // 只讓最高位（非個位）多餘格子顯示空白，個位一定顯示數字
+        const originalLength = rowSet[rowIndex].beforeDecimal.replace(
+          /^0+/,
+          ""
+        ).length;
+        const isLastBeforeDecimal = colIndex === maxLength.beforeDecimal - 1;
+        if (
+          !isLastBeforeDecimal &&
+          colIndex < maxLength.beforeDecimal - originalLength
+        ) {
+          text = "";
+        }
         if (isLastRow && data.mode === "checkAnswer") {
           answer = rowSet[rowIndex].beforeDecimal[colIndex];
         }
@@ -206,7 +218,7 @@ class DecimalConfig {
 
     const result = {
       text: !isLastRow || data.mode === "display" ? text : "",
-      visible: text !== "0" || isLastRow || data.mode === "freeInput",
+      visible: text !== "" || isLastRow || data.mode === "freeInput",
       class: `${isSecondRow ? "--border-bottom" : ""}`,
     };
 
@@ -306,11 +318,11 @@ class DecimalConfig {
     ];
 
     const totalLength =
-      this.maxLength.beforeDecimal + this.maxLength.afterDecimal;
+      this.maxLength.beforeDecimal + this.maxLength.afterDecimal + 1;
 
     for (let i = 0; i < totalLength; i++) {
       const isLast = i === totalLength - 1;
-      const isAdd = data.type === "add";
+      const isAdd = data.operation === "+";
       const notFreeInput = data.mode !== "freeInput";
 
       // 檢查是否為小數點位置

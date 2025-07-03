@@ -228,7 +228,6 @@ export default {
           }
         }
       }
-      console.log(this.operationArray, isCorrect);
       return isCorrect;
     },
   },

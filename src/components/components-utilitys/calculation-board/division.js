@@ -160,18 +160,22 @@ class DivisionConfig {
       pos += number0.length - (diff !== 0 ? diff.toString().length : 0);
 
       // 第二行（餘數）
-      if (number2) {
-        rows.push(
-          this.createCalculationRow(
-            maxLength,
-            operand2Length,
-            pos,
-            number2,
-            "",
-            data
-          )
-        );
+      // 判斷是不是最後一個 number2（餘數）
+      const isLastRow = i === Math.floor(numbers.length / 2) - 1;
+      let remainderPos = pos;
+      if (isLastRow && number2 === "0") {
+        remainderPos = maxLength - data.operands.operand2.toString().length - 1;
       }
+      rows.push(
+        this.createCalculationRow(
+          maxLength,
+          operand2Length,
+          remainderPos,
+          number2,
+          "",
+          data
+        )
+      );
     }
     return rows;
   }
@@ -185,6 +189,16 @@ class DivisionConfig {
     className = "",
     data
   ) {
+    console.log(
+      "numberStr:",
+      numberStr,
+      "pos:",
+      pos,
+      "operand2Length:",
+      operand2Length,
+      "maxLength:",
+      maxLength
+    );
     return Array.from({ length: maxLength }, (_, j) => {
       const isInRange =
         j >= operand2Length + pos &&
@@ -241,6 +255,7 @@ class DivisionConfig {
     }
 
     numbers.push(parseInt(current));
+    // console.log("numbers:", numbers);
     return { numbers, result };
   }
 
