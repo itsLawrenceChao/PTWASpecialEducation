@@ -3,7 +3,7 @@
   "introvideo": "hint1.mp4",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "[Insert question.]"
+    "Content": "移動圓到圓心，再填填看"
   },
   "GameType": "SelfDefine",
   "GameConfig": {

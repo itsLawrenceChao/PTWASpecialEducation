@@ -2,7 +2,7 @@
   "id": "MA3163",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "算算看，有多少小動物在圖片中，並且圈出正確的答案吧！"
+    "Content": "看圖回答問題"
   },
   "GameType": "SelectGameMulti",
   "GameConfig": {},

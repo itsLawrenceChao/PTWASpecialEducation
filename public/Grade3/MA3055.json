@@ -3,6 +3,10 @@
   "introvideo": "src",
   "GameType": "ClassifyGame",
   "GameConfig": {},
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "分類看看，哪些圖形是正方形?哪些圖形是長方形?哪些圖形都不是?"
+  },
   "Questions": [
     [
       {

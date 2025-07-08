@@ -2,7 +2,7 @@
   "id": "MA3031",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "將物品量一量，再填填看"
+    "Content": "移動物品，再填填看"
   },
   "GameType": "NumberLock",
   "GameConfig": {

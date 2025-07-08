@@ -2,7 +2,7 @@
   "id": "MA3061",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請拉方格圖去對，對完後回答是幾平方公分"
+    "Content": "下面圖形的面積各是多少平方公分?"
   },
   "GameType": "NumberLock",
   "GameConfig": {

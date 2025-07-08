@@ -1,9 +1,9 @@
 {
-  "id": "MA3053",
+  "id": "MA3056",
   "GameType": "SelfDefine",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請畫出題目指定的圖形"
+    "Content": "在邊長為1cm的方格紙上畫畫看"
   },
   "GameConfig": {
     "GlobalTitle": "請選擇正確的角度",

@@ -3,7 +3,7 @@
   "GameType": "SelectGame",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請分辨圖片中的角度為鈍角、銳角或直角"
+    "Content": "用三角板比比看，圖片中的角是什麼角?"
   },
   "GameConfig": {
     "GlobalTitle": "請選擇正確的角度",

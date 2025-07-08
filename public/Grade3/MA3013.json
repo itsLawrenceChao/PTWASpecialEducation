@@ -4,7 +4,7 @@
   "GameType": "SelfDefine",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請數數看出現的金額是多少錢，並且在題目中的框框以及定位版中輸入確的答案"
+    "Content": "數數看，並填入正確的數字"
   },
   "GameConfig": {},
   "Questions": [

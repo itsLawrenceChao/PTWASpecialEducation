@@ -3,7 +3,7 @@
   "introvideo": "hint1.mp4",
   "IntroText": {
     "Type": "PlainText",
-    "Content": ""
+    "Content": "看圖回答問題"
   },
   "GameType": "SelfDefine",
   "GameConfig": {},

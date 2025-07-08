@@ -4,7 +4,7 @@
   "GameType": "LinkGame",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請將一樣容量的物品互相連線"
+    "Content": "把一樣多的容量連起來"
   },
   "GameConfig": {},
   "Questions": [

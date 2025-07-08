@@ -3,7 +3,7 @@
   "introvideo": "src",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "分類看看，哪些是直徑?哪些是半徑?哪些都不是?"
+    "Content": "分分看，哪些是直徑?哪些是半徑?哪些都不是?"
   },
   "GameType": "ClassifyGame",
   "ItemsWithImage": true,

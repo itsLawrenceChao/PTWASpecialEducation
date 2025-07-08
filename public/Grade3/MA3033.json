@@ -3,7 +3,7 @@
   "GameType": "CompareGame",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請先比比看，並且拖曳框框中的 >, =, < 符號到正確的位置"
+    "Content": "在口裡填入>、<或="
   },
   "GameConfig": {
     "CustomeSymbol": true,

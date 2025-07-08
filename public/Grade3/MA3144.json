@@ -1,8 +1,8 @@
 {
-  "id": "MA3142",
+  "id": "MA3144",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "[Insert question.]"
+    "Content": "填填看，完成公斤和公克的換算"
   },
   "GameType": "SelfDefine",
   "GameConfig": {},

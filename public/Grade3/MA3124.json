@@ -4,7 +4,7 @@
   "GameType": "WordProblemWithCalculator",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "用直式算算看"
+    "Content": "把做法和答案記下來"
   },
   "GameConfig": {
     "calculatorVerify": false,

@@ -2,7 +2,7 @@
   "id": "MA3017",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請點擊數線上的空格，並使用數字鍵盤填入正確的數字。"
+    "Content": "口裡的數是多少?填填看"
   },
   "GameType": "NumberLock",
   "GameConfig": {

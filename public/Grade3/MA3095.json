@@ -3,7 +3,7 @@
   "introvideo": "hint1.mp4",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "[Insert question.]"
+    "Content": "想一想，再選選看"
   },
   "GameType": "SelfDefine",
   "GameConfig": {
