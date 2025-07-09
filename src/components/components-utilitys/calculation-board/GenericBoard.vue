@@ -20,6 +20,7 @@
         >
           <button
             class="table__carry-button"
+            :class="{ 'table__carry-button--wrong': carry.isWrong }"
             @click="handleClick(carry, 'carryBorrow', index, $event)"
           >
             {{ carry.text }}
@@ -41,6 +42,10 @@
               'table__button--question': !item.editable,
               'table__button--answer': item.editable,
               'table__button--place-value': item.class === 'place-value-cell',
+              'table__button--wrong': item.isWrong,
+              'table__button--crossed-out':
+                !item.editable &&
+                crossedOutItems.has(`${rowIndex}-${itemIndex}`),
             }"
             @click="handleClick(item, rowIndex, itemIndex, $event)"
           >
@@ -59,6 +64,7 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 // import { getGameAssets } from "@/utilitys/get_assets.js"; // Feel free to change your the method to get assets.
 export default {
   name: "GenericBoard",
@@ -96,6 +102,7 @@ export default {
       },
       currentTarget: null,
       operators: ["", "+", "-"],
+      crossedOutItems: new Set(), // 新增：記錄被劃掉的項目
     };
   },
   computed: {
@@ -119,6 +126,14 @@ export default {
   beforeMount() {
     this.initializeBoard();
   },
+  created() {
+    // 監聽 checkAnswer 事件
+    emitter.on("checkAnswer", this.markWrong);
+  },
+  beforeUnmount() {
+    // 移除事件監聽器
+    emitter.off("checkAnswer", this.markWrong);
+  },
   methods: {
     initializeBoard() {
       try {
@@ -126,6 +141,9 @@ export default {
           console.warn("GenericBoard: Missing required props or methods");
           return;
         }
+
+        // 重置劃線狀態
+        this.crossedOutItems.clear();
 
         const { unit, carry, operation } = this.config.getGrid(this.data);
 
@@ -135,6 +153,7 @@ export default {
           text: "",
           isValid: true,
           visible: item.visible,
+          isWrong: false,
         }));
         this.operationArray = operation;
       } catch (error) {
@@ -142,7 +161,17 @@ export default {
       }
     },
     handleClick(item, rowIndex, itemIndex, event) {
-      if (!item.editable) return;
+      if (!item.editable) {
+        // 處理不可編輯項目的點擊 - 切換劃線狀態
+        const itemKey = `${rowIndex}-${itemIndex}`;
+        if (this.crossedOutItems.has(itemKey)) {
+          this.crossedOutItems.delete(itemKey);
+        } else {
+          this.crossedOutItems.add(itemKey);
+        }
+        return;
+      }
+
       const rect = event.target.getBoundingClientRect();
 
       this.currentTarget = {
@@ -230,6 +259,40 @@ export default {
       }
       return isCorrect;
     },
+    markWrong() {
+      // 重置所有錯誤標記
+      this.resetWrongMarks();
+
+      // 檢查答案並標記錯誤
+      this.checkAnswer();
+
+      // 標記錯誤的欄位
+      for (let i = 0; i < this.operationArray.length; i++) {
+        for (let j = 0; j < this.operationArray[i].length; j++) {
+          const cell = this.operationArray[i][j];
+          if (
+            cell.visible &&
+            cell.editable &&
+            cell.answer &&
+            cell.answer !== ""
+          ) {
+            const isValid = cell.answer.toString() === cell.text.toString();
+            cell.isWrong = !isValid;
+          }
+        }
+      }
+    },
+    resetWrongMarks() {
+      // 重置操作陣列的錯誤標記
+      for (let i = 0; i < this.operationArray.length; i++) {
+        for (let j = 0; j < this.operationArray[i].length; j++) {
+          const cell = this.operationArray[i][j];
+          if (cell) {
+            cell.isWrong = false;
+          }
+        }
+      }
+    },
   },
 };
 </script>
@@ -288,12 +351,37 @@ button {
 .table__button--question {
   background-color: #c4cfc5;
   color: #000;
-  cursor: not-allowed;
 }
 
 .table__button--answer {
   background-color: #f0f4ef;
   cursor: pointer;
+}
+
+.table__button--place-value {
+  background-color: #e8f4f8;
+}
+
+.table__button--wrong {
+  background-color: #ff6b6b !important;
+  color: white !important;
+}
+
+.table__button--crossed-out {
+  position: relative;
+  color: #888;
+}
+
+.table__button--crossed-out::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #ff6b6b;
+  transform: translateY(-50%) rotate(45deg);
+  transform-origin: center;
 }
 
 .table__unit-text {
@@ -307,8 +395,14 @@ button {
   border: 3px dashed #198754;
   border-radius: 5px;
   background-color: #fff;
-  color: #000;
+  color: #afafaf;
   width: 100%;
   height: 100%;
+}
+
+.table__carry-button--wrong {
+  border-color: #ff6b6b !important;
+  background-color: #ff6b6b !important;
+  color: white !important;
 }
 </style>
