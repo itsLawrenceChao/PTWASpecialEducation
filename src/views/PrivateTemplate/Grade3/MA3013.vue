@@ -33,6 +33,7 @@
 import MoneyGenerator from "@/components/MoneyGenerator.vue";
 import Markdown from "@/components/Markdown.vue";
 import NumberBoard from "@/components/NumberBoard.vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3013",
   components: {
@@ -158,6 +159,7 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", ["不支援", "不支援", "錯誤"]);
+        emitter.emit("checkAnswer");
       }
     },
   },

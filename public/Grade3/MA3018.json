@@ -1,6 +1,5 @@
 {
   "id": "MA3018",
-  "TotalLevel": 3,
   "GameType": "NumberLock",
   "introvideo": "MA3018.mp4",
   "IntroText": {
@@ -186,15 +185,8 @@
     ],
     [
       {
+        "questionText": "有一隻小鴨停在數線1的位置。小鴨向右移動6格，會停在哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線1的位置。小鴨向右移動6格，會停在哪一個數字上呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -204,18 +196,18 @@
             "image": "duck.png",
             "finalPosition": 7
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "1 + 6 = $i$",
+            "Answer": [7]
+          }
         }
       },
       {
+        "questionText": "有一隻小鴨停在數線2的位置。小鴨向右移動3格，會停在哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線2的位置。小鴨向右移動3格，會停在哪一個數字上呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -225,18 +217,18 @@
             "image": "duck.png",
             "finalPosition": 5
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "2 + 3 = $i$",
+            "Answer": [5]
+          }
         }
       },
       {
+        "questionText": "有一隻小鴨停在數線3的位置。小鴨向右移動11格，會停在哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線3的位置。小鴨向右移動11格，會停在哪一個數字上呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -246,18 +238,18 @@
             "image": "duck.png",
             "finalPosition": 14
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "3 + 11 = $i$",
+            "Answer": [14]
+          }
         }
       },
       {
+        "questionText": "有一隻小鴨停在數線3的位置。小鴨向右移動10格，會停在哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線3的位置。小鴨向右移動10格，會停在哪一個數字上呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -267,18 +259,18 @@
             "image": "duck.png",
             "finalPosition": 13
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "3 + 10 = $i$",
+            "Answer": [13]
+          }
         }
       },
       {
+        "questionText": "有一隻小鴨停在數線4的位置。小鴨向右移動8格，會停在哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線4的位置。小鴨向右移動8格，會停在哪一個數字上呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -288,20 +280,20 @@
             "image": "duck.png",
             "finalPosition": 12
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "4 + 8 = $i$",
+            "Answer": [12]
+          }
         }
       }
     ],
     [
       {
+        "questionText": "小鴨從9的位置，向左移動3格，會到哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "小鴨從9的位置，向左移動3格，會到哪一個數字上?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -311,18 +303,18 @@
             "image": "duck.png",
             "finalPosition": 6
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "9 - 3 = $i$",
+            "Answer": [6]
+          }
         }
       },
       {
+        "questionText": "小鴨從15的位置，向左移動8格，會到哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "小鴨從15的位置，向左移動8格，會到哪一個數字上?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -332,18 +324,18 @@
             "image": "duck.png",
             "finalPosition": 7
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "15 - 8 = $i$",
+            "Answer": [7]
+          }
         }
       },
       {
+        "questionText": "小鴨從11的位置，向左移動6格，會到哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "小鴨從11的位置，向左移動6格，會到哪一個數字上?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -353,18 +345,18 @@
             "image": "duck.png",
             "finalPosition": 5
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "11 - 6 = $i$",
+            "Answer": [5]
+          }
         }
       },
       {
+        "questionText": "小鴨從12的位置，向左移動4格，會到哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "小鴨從12的位置，向左移動4格，會到哪一個數字上?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -374,18 +366,18 @@
             "image": "duck.png",
             "finalPosition": 8
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "12 - 4 = $i$",
+            "Answer": [8]
+          }
         }
       },
       {
+        "questionText": "小鴨從13的位置，向左移動5格，會到哪一個數字上呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "小鴨從13的位置，向左移動5格，會到哪一個數字上?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -395,20 +387,20 @@
             "image": "duck.png",
             "finalPosition": 8
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "13 - 5 = $i$",
+            "Answer": [8]
+          }
         }
       }
     ],
     [
       {
+        "questionText": "有一隻小鴨停在數線3的位置，牠想吃的糖果在數線14的位置上。小鴨要向右移動多少格，才會到達糖果在的位置呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線3的位置，牠想吃的糖果在數線14的位置上。小鴨要向右移動多少格，才會到達糖果在的位置呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -418,18 +410,18 @@
             "image": "duck.png",
             "finalPosition": 14
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "14 - 3 = $i$",
+            "Answer": [11]
+          }
         }
       },
       {
+        "questionText": "有一隻小鴨停在數線5的位置，牠想吃的糖果在數線10的位置上。小鴨要向右移動多少格，才會到達糖果在的位置呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線5的位置，牠想吃的糖果在數線10的位置上。小鴨要向右移動多少格，才會到達糖果在的位置呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -439,18 +431,18 @@
             "image": "duck.png",
             "finalPosition": 10
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "10 - 5 = $i$",
+            "Answer": [5]
+          }
         }
       },
       {
+        "questionText": "有一隻小鴨停在數線12的位置，牠想吃的糖果在數線8的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線12的位置，牠想吃的糖果在數線8的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -460,18 +452,18 @@
             "image": "duck.png",
             "finalPosition": 8
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "12 - 8 = $i$",
+            "Answer": [4]
+          }
         }
       },
       {
+        "questionText": "有一隻小鴨停在數線13的位置，牠想吃的糖果在數線6的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線13的位置，牠想吃的糖果在數線6的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -481,18 +473,18 @@
             "image": "duck.png",
             "finalPosition": 6
           }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "13 - 6 = $i$",
+            "Answer": [7]
+          }
         }
       },
       {
+        "questionText": "有一隻小鴨停在數線15的位置，牠想吃的糖果在數線4的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
         "topComponent": {
-          "Name": "TextOnly",
-          "Data": {
-            "Text": "有一隻小鴨停在數線15的位置，牠想吃的糖果在數線4的位置上。小鴨要向左移動多少格，才會到達糖果在的位置呢?",
-            "Size": "large"
-          }
-        },
-        "NumberPadAutoDisappear": false,
-        "downComponent": {
           "Name": "DragOnNumberLine",
           "Data": {
             "spacing": 1,
@@ -501,6 +493,13 @@
             "init_pos": 15,
             "image": "duck.png",
             "finalPosition": 4
+          }
+        },
+        "downComponent": {
+          "Name": "Markdown",
+          "Data": {
+            "Render": "15 - 4 = $i$",
+            "Answer": [11]
           }
         }
       }

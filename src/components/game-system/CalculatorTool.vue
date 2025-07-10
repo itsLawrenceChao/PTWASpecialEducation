@@ -36,7 +36,7 @@
                 計算板
               </button>
               <button class="function-btn" @click="activeTab = 'scratch'">
-                計算紙
+                畫筆
               </button>
               <button
                 class="function-btn"
@@ -71,7 +71,7 @@
                 :class="{ active: activeTab === 'scratch' }"
                 @click="activeTab = 'scratch'"
               >
-                計算紙
+                畫筆
               </button>
               <button
                 class="tool-btn"

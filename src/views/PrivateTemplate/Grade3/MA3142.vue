@@ -87,16 +87,16 @@ export default {
     align-items: center;
   }
   &__question-img {
-    flex: 2;
-    max-height: 30%;
+    flex: 1;
+    max-height: 25%;
   }
   &__question-description {
-    flex: 1;
+    flex: 0.5;
   }
   &__scale {
-    flex: 3;
-    min-width: 30%;
-    max-width: 300px;
+    flex: 4;
+    min-width: 40%;
+    max-width: 400px;
   }
   &__submit {
     position: absolute;

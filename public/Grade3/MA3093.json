@@ -1,5 +1,5 @@
 {
-  "id": "MA3031",
+  "id": "MA3093",
   "IntroText": {
     "Type": "PlainText",
     "Content": "移動物品，再填填看"
@@ -20,7 +20,7 @@
   "Questions": [
     [
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味3個/草莓口味5個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -179,7 +179,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味5個/抹茶口味6個/草莓口味1個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -338,7 +338,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味7個/草莓口味2個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -497,7 +497,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味4個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -656,7 +656,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味5個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -817,7 +817,7 @@
     ],
     [
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味3個/草莓口味5個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -976,7 +976,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味5個/抹茶口味6個/草莓口味1個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -1135,7 +1135,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味7個/草莓口味2個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -1294,7 +1294,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味4個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -1453,7 +1453,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味5個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -1614,7 +1614,7 @@
     ],
     [
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味3個/草莓口味5個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -1773,7 +1773,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味5個/抹茶口味6個/草莓口味1個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -1932,7 +1932,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味7個/草莓口味2個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -2091,7 +2091,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味4個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -2250,7 +2250,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味5個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -2411,7 +2411,7 @@
     ],
     [
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味3個/草莓口味5個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -2571,7 +2571,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味5個/抹茶口味6個/草莓口味1個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -2731,7 +2731,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味7個/草莓口味2個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -2891,7 +2891,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味4個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -3051,7 +3051,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味5個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -3213,7 +3213,7 @@
     ],
     [
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味3個/草莓口味5個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -3371,7 +3371,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味5個/抹茶口味6個/草莓口味1個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -3529,7 +3529,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味7個/草莓口味2個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -3687,7 +3687,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味4個/抹茶口味4個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
@@ -3845,7 +3845,7 @@
         }
       },
       {
-        "questionText": "一盒甜甜圈12個，有3種口味。藍莓口味3個/抹茶口味5個/草莓口味4個",
+        "questionText": "一盒甜甜圈12個，有3種口味。",
         "topComponent": {
           "Name": "DragImages",
           "Data": {
