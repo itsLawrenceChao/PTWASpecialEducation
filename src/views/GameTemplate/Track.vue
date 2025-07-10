@@ -62,6 +62,7 @@ export default {
   components: {
     TextOnly: getComponents("TextOnly"),
     ImageContainer: getComponents("ImageContainer"),
+    MoneyGenerator: getComponents("MoneyGenerator"),
   },
   props: {
     GameData: {
@@ -87,6 +88,7 @@ export default {
       currentQuestionIndex: 0, //目前的題目
       isPaused: true,
       backgroundImage: getGameStaticAssets("Track", "track2.png"),
+      needRandom: false,
     };
   },
   computed: {
@@ -111,6 +113,7 @@ export default {
   },
   created() {
     this.startQuiz();
+    this.needRandom = this.GameData.Random ? true : false;
   },
   mounted() {
     this.$nextTick(() => {
@@ -124,9 +127,9 @@ export default {
       this.currentQuestionIndex = 0;
       this.isPaused = false;
       this.wrongAnswerIndex = null;
-      this.currentQuestions = this.generateRandomOrder(
-        this.GameData.Question.length
-      );
+      this.currentQuestions = this.needRandom
+        ? this.generateRandomOrder(this.GameData.Question.length)
+        : Array.from({ length: this.GameData.Question.length }, (_, i) => i);
       this.pauseConveyor();
     },
     handleAnswer(selectedIndex) {

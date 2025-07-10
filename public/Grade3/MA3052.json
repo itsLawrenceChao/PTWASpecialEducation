@@ -1,9 +1,9 @@
 {
-  "id": "MA3051",
+  "id": "MA3052",
   "GameType": "SelectGame",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請分辨圖片中的角度為鈍角、銳角或直角"
+    "Content": "比比看，哪個角最大?哪個角最小?"
   },
   "GameConfig": {
     "GlobalTitle": "請選擇正確的角度",

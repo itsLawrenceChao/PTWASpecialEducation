@@ -3,7 +3,7 @@
   "GameType": "PairingGame",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "把一樣的時間連起來"
+    "Content": "將電子鐘與正確的時間配對"
   },
   "introvideo": "MA3181.mp4",
   "GameConfig": {},

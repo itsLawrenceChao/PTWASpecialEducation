@@ -1,11 +1,10 @@
 {
-  "id": "Dev02_WhackaMole",
+  "id": "MA3076",
   "introvideo": "hint1.mp4",
   "IntroText": {
     "Type": "PlainText",
     "Content": "哪些數是偶數?哪些數是奇數?"
   },
-  "TotalLevel": 2,
   "GameType": "WhackaMole",
   "GameConfig": {
     "GlobalTitle": "[Insert title.]"

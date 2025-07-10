@@ -124,9 +124,7 @@
       </button> -->
       <button
         class="btn btn-primary text-nowrap img-hover-zoom"
-        data-bs-toggle="modal"
-        data-bs-target="#Calculator"
-        @click="scratchSheet()"
+        @click="calculatorTool()"
       >
         <div class="d-flex align-items-center">
           <div class="">
@@ -146,7 +144,7 @@
               />
             </svg>
           </div>
-          <div class="mx-auto">計算紙</div>
+          <div class="mx-auto">計算工具</div>
         </div>
       </button>
       <button
@@ -325,7 +323,7 @@ export default {
     "next-question",
     "startGame",
     "toCsv",
-    "scratchSheet",
+    "calculatorTool",
     "reappearCode",
   ],
   data() {
@@ -370,8 +368,8 @@ export default {
     toCSV(data) {
       this.$emit("toCsv", data);
     },
-    scratchSheet() {
-      this.$emit("scratchSheet");
+    calculatorTool() {
+      this.$emit("calculatorTool");
     },
     reappearCode() {
       this.gameCode = this.code;

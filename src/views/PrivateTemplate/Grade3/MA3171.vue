@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
 import FloatNumPad from "@/components/FloatNumPad.vue";
 
 export default {
@@ -296,6 +295,18 @@ export default {
     font-weight: bold;
     min-width: 30px;
     text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+
+    &::after {
+      content: "→";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: $text-large;
+      color: $accent-color;
+    }
   }
 
   .submit-btn {

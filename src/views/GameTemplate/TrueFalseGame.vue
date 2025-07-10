@@ -46,13 +46,13 @@
 <script>
 import { getGameAssets } from "../../utilitys/get_assets";
 import { getComponents } from "@/utilitys/get-components.js";
-import Water from "../../components/Water.vue";
 export default {
   name: "TrueFalseGame",
   components: {
     ImageContainer: getComponents("ImageContainer"),
     Water: getComponents("Water"),
     Clock: getComponents("Clock"),
+    DragImages: getComponents("DragImages"),
   },
   props: {
     GameData: {

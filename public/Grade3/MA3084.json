@@ -9,28 +9,22 @@
   "GameType": "WordProblemWithCalculator",
   "GameConfig": {
     "calculatorVerify": true,
-    "markdownVerify": true
+    "markdownVerify": true,
+    "calculator": "CalculationBoard"
   },
   "Hint": {},
   "Questions": [
     [
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["1200", "1300"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "1200",
+            "operand2": "1300"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "2500",
-            "Number": ["1200", "1300"],
-            "Symbol": "+"
-          }
+          "answer": "2500",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$1公升200毫升 + 1公升300毫升 = $i$公升$i$毫升",
@@ -39,21 +33,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["1300", "1100"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "1300",
+            "operand2": "1100"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "2400",
-            "Number": ["1300", "1100"],
-            "Symbol": "+"
-          }
+          "answer": "2400",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$1公升300毫升 + 1公升100毫升 = $i$公升$i$毫升",
@@ -62,21 +49,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["1100", "1200"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "1100",
+            "operand2": "1200"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "2300",
-            "Number": ["1100", "1200"],
-            "Symbol": "+"
-          }
+          "answer": "2300",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$1公升100毫升 + 1公升200毫升 = $i$公升$i$毫升",
@@ -85,21 +65,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["1400", "1300"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "1400",
+            "operand2": "1300"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "2700",
-            "Number": ["1400", "1300"],
-            "Symbol": "+"
-          }
+          "answer": "2700",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$1公升400毫升 + 1公升300毫升 = $i$公升$i$毫升",
@@ -108,21 +81,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["1600", "1300"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "1600",
+            "operand2": "1300"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "2900",
-            "Number": ["1600", "1300"],
-            "Symbol": "+"
-          }
+          "answer": "2900",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$1公升600毫升 + 1公升300毫升 = $i$公升$i$毫升",
@@ -133,21 +99,14 @@
     [
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["5500", "2400"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "5500",
+            "operand2": "2400"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "3100",
-            "Number": ["5500", "2400"],
-            "Symbol": "-"
-          }
+          "answer": "3100",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$5公升500毫升 - 2公升400毫升 = $i$公升$i$毫升",
@@ -156,21 +115,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["5400", "1100"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "5400",
+            "operand2": "1100"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "4300",
-            "Number": ["5400", "1100"],
-            "Symbol": "-"
-          }
+          "answer": "4300",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$5公升400毫升 - 1公升100毫升 = $i$公升$i$毫升",
@@ -179,21 +131,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["5600", "2200"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "5600",
+            "operand2": "2200"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "3400",
-            "Number": ["5600", "2200"],
-            "Symbol": "-"
-          }
+          "answer": "3400",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$5公升600毫升 - 2公升200毫升 = $i$公升$i$毫升",
@@ -202,21 +147,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["5800", "2300"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "5800",
+            "operand2": "2300"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "3500",
-            "Number": ["5800", "2300"],
-            "Symbol": "-"
-          }
+          "answer": "3500",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$5公升800毫升 - 2公升300毫升 = $i$公升$i$毫升",
@@ -225,21 +163,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["5600", "1100"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "5600",
+            "operand2": "1100"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "4500",
-            "Number": ["5600", "1100"],
-            "Symbol": "-"
-          }
+          "answer": "4500",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$5公升600毫升 - 1公升100毫升 = $i$公升$i$毫升",
@@ -250,21 +181,14 @@
     [
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["3000", "1100"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "3000",
+            "operand2": "1100"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "1900",
-            "Number": ["3000", "1100"],
-            "Symbol": "-"
-          }
+          "answer": "1900",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$3000毫升 - 1公升100毫升 = $i$毫升$n$單位換算：1公升100毫升 = $i$毫升",
@@ -273,21 +197,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["4000", "1200"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "4000",
+            "operand2": "1200"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "2800",
-            "Number": ["4000", "1200"],
-            "Symbol": "-"
-          }
+          "answer": "2800",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$4000毫升 - 1公升200毫升 = $i$毫升$n$單位換算：1公升200毫升 = $i$毫升",
@@ -296,21 +213,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["5000", "1400"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "5000",
+            "operand2": "1400"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "3600",
-            "Number": ["5000", "1400"],
-            "Symbol": "-"
-          }
+          "answer": "3600",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$5000毫升 - 1公升400毫升 = $i$毫升$n$單位換算：1公升400毫升 = $i$毫升",
@@ -319,21 +229,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["6000", "1300"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "6000",
+            "operand2": "1300"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "4700",
-            "Number": ["6000", "1300"],
-            "Symbol": "-"
-          }
+          "answer": "4700",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$6000毫升 - 1公升300毫升 = $i$毫升$n$單位換算：1公升300毫升 = $i$毫升",
@@ -342,46 +245,32 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["2000", "1200"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "2000",
+            "operand2": "1200"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "800",
-            "Number": ["2000", "1200"],
-            "Symbol": "-"
-          }
+          "answer": "800",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$2000毫升 - 1公升200毫升 = $i$毫升$n$單位換算：1公升200毫升 = $i$毫升",
-          "Answer": [800, 200]
+          "Answer": [800, 1200]
         }
       }
     ],
     [
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["4350", "1200"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "4350",
+            "operand2": "1200"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "5550",
-            "Number": ["4350", "1200"],
-            "Symbol": "+"
-          }
+          "answer": "5550",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$4公升350毫升 + 1200毫升 = $i$毫升$n$單位換算：4公升350毫升 = $i$毫升",
@@ -390,21 +279,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["3200", "1550"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "3200",
+            "operand2": "1550"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "4750",
-            "Number": ["3200", "1550"],
-            "Symbol": "+"
-          }
+          "answer": "4750",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$3公升200毫升 + 1550毫升 = $i$毫升$n$單位換算：3公升200毫升 = $i$毫升",
@@ -413,21 +295,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["2550", "1100"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "2550",
+            "operand2": "1100"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "3650",
-            "Number": ["2550", "1100"],
-            "Symbol": "+"
-          }
+          "answer": "3650",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$2公升550毫升 + 1100毫升 = $i$毫升$n$單位換算：2公升550毫升 = $i$毫升",
@@ -436,21 +311,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["3450", "1200"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "3450",
+            "operand2": "1200"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "4650",
-            "Number": ["3450", "1200"],
-            "Symbol": "+"
-          }
+          "answer": "4650",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$3公升450毫升 + 1200毫升 = $i$毫升$n$單位換算：3公升450毫升 = $i$毫升",
@@ -459,21 +327,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["4600", "1150"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "4600",
+            "operand2": "1150"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "5750",
-            "Number": ["4600", "1150"],
-            "Symbol": "+"
-          }
+          "answer": "5750",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$4公升600毫升 + 1150毫升 = $i$毫升$n$單位換算：4公升600毫升 = $i$毫升",
@@ -484,21 +345,14 @@
     [
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["6200", "2150"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "6200",
+            "operand2": "2150"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "4050",
-            "Number": ["6200", "2150"],
-            "Symbol": "-"
-          }
+          "answer": "4050",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$6公升200毫升 - 2150毫升 = $i$毫升$n$單位換算：2150毫升 = $i$公升$i$毫升",
@@ -507,21 +361,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["5300", "1150"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "5300",
+            "operand2": "1150"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "4150",
-            "Number": ["5300", "1150"],
-            "Symbol": "-"
-          }
+          "answer": "4150",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$5公升300毫升 - 1150毫升 = $i$毫升$n$單位換算：1150毫升 = $i$公升$i$毫升",
@@ -530,21 +377,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["5500", "3250"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "5500",
+            "operand2": "3250"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "2250",
-            "Number": ["5500", "3250"],
-            "Symbol": "-"
-          }
+          "answer": "2250",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$5公升500毫升 - 3250毫升 = $i$毫升$n$單位換算：3250毫升 = $i$公升$i$毫升",
@@ -553,21 +393,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["3700", "2350"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "3700",
+            "operand2": "2350"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "1350",
-            "Number": ["3700", "2350"],
-            "Symbol": "-"
-          }
+          "answer": "1350",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$3公升700毫升 - 2350毫升 = $i$毫升$n$單位換算：2350毫升 = $i$公升$i$毫升",
@@ -576,21 +409,14 @@
       },
       {
         "calculator": {
-          "Unit": "Volume",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["4800", "2550"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "4800",
+            "operand2": "2550"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "2250",
-            "Number": ["4800", "2550"],
-            "Symbol": "-"
-          }
+          "answer": "2250",
+          "unitType": "Volume"
         },
         "markdown": {
           "Render": "# 請回答以下問題：$n$4公升800毫升 - 2550毫升 = $i$毫升$n$單位換算：2550毫升 = $i$公升$i$毫升",

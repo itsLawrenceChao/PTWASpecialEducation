@@ -5,28 +5,49 @@
     </div>
     <div class="word-problem">
       <div class="left-container">
+        <ImageContainer v-if="GameData.image" :ID="ID" :Data="GameData.image" />
         <Markdown
           class="markdown"
           :Data="markdownData"
+          :ID="ID"
           @reply-answer="markdownAnswer"
         />
-        <button class="submit" @click="checkAnswer">檢查答案</button>
       </div>
       <div class="right-container">
-        <Calculator :Data="calculatorData" @reply-answer="calculatorAnswer" />
+        <div class="calculator-container">
+          <component
+            :is="GameConfig.calculator"
+            class="calculator"
+            :Data="calculatorData"
+            :ID="ID"
+            @reply-answer="calculatorAnswer"
+          />
+        </div>
+
+        <button class="submit" @click="checkAnswer">檢查答案</button>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Calculator from "@/components/Calculator.vue";
-import Markdown from "@/components/Markdown.vue";
+import { getComponents } from "@/utilitys/get-components.js";
+import { defineAsyncComponent } from "vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "WordProblemWithCalculator",
   components: {
-    Calculator,
-    Markdown,
+    Calculator: getComponents("Calculator"),
+    Markdown: getComponents("Markdown"),
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
+    ),
+    DecimalCalculator: defineAsyncComponent(
+      () => import("@/components/DecimalCalculator.vue")
+    ),
+    Division: defineAsyncComponent(() => import("@/components/Division.vue")),
+    CalculationBoard: defineAsyncComponent(
+      () => import("@/components/CalculationBoard.vue")
+    ),
   },
   props: {
     GameData: {
@@ -143,48 +164,68 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: $gap--medium;
-  justify-content: center;
-  align-items: center;
+  gap: $gap--small;
 }
+
 .head-container {
   @extend .container-basic;
   display: flex;
   background-color: $primary-color;
-  padding: $gap--small;
-  font-size: $text-large;
-}
-.word-problem {
+  padding: $padding--small;
+  font-size: $text-medium;
   width: 100%;
-  padding: $gap--medium;
+}
+
+.word-problem {
+  flex: 1 1 0%;
+  min-height: 0;
+  width: 100%;
+  padding: 0 $padding--small;
   display: flex;
   justify-content: center;
-  gap: $gap--medium;
+  gap: $gap--small;
   flex-direction: row;
   .right-container {
-    width: 40%;
-  }
-  .left-container {
-    flex: 1;
+    width: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 40%;
-    .markdown {
+    gap: $gap--small;
+    .calculator-container {
+      flex: 1 1 0%;
+      min-height: 0;
       width: 100%;
+      display: flex;
+      flex-direction: column;
     }
-    width: 50%;
     .submit {
       @extend .button-basic;
       width: 100%;
-      border: none;
+      height: 50px;
       min-height: 50px;
+      max-height: 80px;
+      border: none;
       background-color: $submit-color;
-      &:hover {
-        @extend .button--animation;
-        background-color: $submit-color;
-      }
     }
   }
+  .left-container {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $gap--small;
+    .markdown {
+      width: 100%;
+      max-height: 200px;
+    }
+    .image-container {
+      flex: 1;
+      width: 100%;
+    }
+  }
+}
+p {
+  margin: 0;
+  padding: 0;
 }
 </style>

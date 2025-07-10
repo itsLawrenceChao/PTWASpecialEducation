@@ -75,6 +75,12 @@ export default {
     NumberBoard: defineAsyncComponent(
       () => import("@/components/NumberBoard.vue")
     ),
+    FractionForAnswer: defineAsyncComponent(
+      () => import("@/components/FractionForAnswer.vue")
+    ),
+    NumberLineVisualizer: defineAsyncComponent(
+      () => import("@/components/NumberLineVisualizer.vue")
+    ),
   },
   props: {
     GameData: {
@@ -272,7 +278,7 @@ export default {
   padding: 10px;
   border-radius: 10px;
   border: solid;
-  max-height: 78vh;
+  max-height: 79vh;
 }
 .left-column {
   display: flex;
@@ -288,6 +294,7 @@ export default {
     background-color: #dfdfdf;
     border-radius: $border-radius;
     font-size: $text-medium;
+    white-space: pre-wrap;
   }
   .game-area {
     min-height: 0;

@@ -9,28 +9,22 @@
   "GameType": "WordProblemWithCalculator",
   "GameConfig": {
     "calculatorVerify": true,
-    "markdownVerify": true
+    "markdownVerify": true,
+    "calculator": "CalculationBoard"
   },
   "Hint": {},
   "Questions": [
     [
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["48", "12"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "48",
+            "operand2": "12"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "60",
-            "Number": ["48", "12"],
-            "Symbol": "+"
-          }
+          "answer": "60",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "48毫米 + 12毫米 = $i$毫米，$n$也可以說是$i$公分",
@@ -39,21 +33,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["53", "17"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "53",
+            "operand2": "17"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "70",
-            "Number": ["53", "17"],
-            "Symbol": "+"
-          }
+          "answer": "70",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "53毫米 + 17毫米 = $i$毫米，$n$也可以說是$i$公分",
@@ -62,21 +49,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["65", "25"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "65",
+            "operand2": "25"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "90",
-            "Number": ["65", "25"],
-            "Symbol": "+"
-          }
+          "answer": "90",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "65毫米 + 25毫米 = $i$毫米，$n$也可以說是$i$公分",
@@ -85,21 +65,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["46", "34"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "46",
+            "operand2": "34"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "80",
-            "Number": ["46", "34"],
-            "Symbol": "+"
-          }
+          "answer": "80",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "46毫米 + 34毫米 = $i$毫米，$n$也可以說是$i$公分",
@@ -108,21 +81,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["27", "23"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "27",
+            "operand2": "23"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "50",
-            "Number": ["27", "23"],
-            "Symbol": "+"
-          }
+          "answer": "50",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "27毫米 + 23毫米 = $i$毫米，$n$也可以說是$i$公分",
@@ -133,21 +99,14 @@
     [
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["45", "38"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "45",
+            "operand2": "38"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "83",
-            "Number": ["45", "38"],
-            "Symbol": "+"
-          }
+          "answer": "83",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "4公分5毫米 + 38毫米= $i$毫米$n$(單位換算：4公分5毫米 = $i$毫米)",
@@ -156,21 +115,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["36", "41"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "36",
+            "operand2": "41"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "77",
-            "Number": ["36", "41"],
-            "Symbol": "+"
-          }
+          "answer": "77",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "3公分6毫米 + 41毫米 = $i$毫米$n$(單位換算：3公分6毫米 = $i$毫米)",
@@ -179,21 +131,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["28", "36"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "28",
+            "operand2": "36"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "64",
-            "Number": ["28", "36"],
-            "Symbol": "+"
-          }
+          "answer": "64",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "2公分8毫米 + 36毫米 = $i$毫米$n$(單位換算：2公分8毫米 = $i$毫米)",
@@ -202,21 +147,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["43", "29"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "43",
+            "operand2": "29"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "72",
-            "Number": ["43", "29"],
-            "Symbol": "+"
-          }
+          "answer": "72",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "4公分3毫米 + 29毫米 = $i$毫米$n$(單位換算：4公分3毫米 = $i$毫米)",
@@ -225,21 +163,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["35", "24"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "35",
+            "operand2": "24"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "59",
-            "Number": ["35", "24"],
-            "Symbol": "+"
-          }
+          "answer": "59",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "3公分5毫米 + 24毫米 = $i$毫米$n$(單位換算：3公分5毫米 = $i$毫米)",
@@ -250,21 +181,14 @@
     [
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["62", "28"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "62",
+            "operand2": "28"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "90",
-            "Number": ["62", "28"],
-            "Symbol": "+"
-          }
+          "answer": "90",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "6公分2毫米 + 2公分8毫米 = $i$公分",
@@ -273,21 +197,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["49", "111"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "49",
+            "operand2": "111"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "160",
-            "Number": ["49", "111"],
-            "Symbol": "+"
-          }
+          "answer": "160",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "4公分9毫米 + 11公分1毫米 = $i$公分",
@@ -296,21 +213,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["83", "17"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "83",
+            "operand2": "17"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "100",
-            "Number": ["83", "17"],
-            "Symbol": "+"
-          }
+          "answer": "100",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "8公分3毫米 + 1公分7毫米 = $i$公分",
@@ -319,21 +229,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["67", "123"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "67",
+            "operand2": "123"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "190",
-            "Number": ["67", "123"],
-            "Symbol": "+"
-          }
+          "answer": "190",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "6公分7毫米 + 12公分3毫米 = $i$公分",
@@ -342,21 +245,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["202", "48"],
-            "Symbol": "+"
+          "type": "add",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "202",
+            "operand2": "48"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "250",
-            "Number": ["202", "48"],
-            "Symbol": "+"
-          }
+          "answer": "250",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "20公分2毫米 + 4公分8毫米 = $i$公分",
@@ -367,21 +263,14 @@
     [
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["147", "35"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "147",
+            "operand2": "35"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "112",
-            "Number": ["147", "35"],
-            "Symbol": "-"
-          }
+          "answer": "112",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "14公分7毫米 - 35毫米 = $i$公分$i$毫米$n$(單位換算：35毫米 = $i$公分$i$毫米)",
@@ -390,21 +279,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["104", "22"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "104",
+            "operand2": "22"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "82",
-            "Number": ["104", "22"],
-            "Symbol": "-"
-          }
+          "answer": "82",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "10公分4毫米 - 22毫米 = $i$公分$i$毫米$n$(單位換算：22毫米 = $i$公分$i$毫米)",
@@ -413,21 +295,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["159", "48"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "159",
+            "operand2": "48"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "111",
-            "Number": ["159", "48"],
-            "Symbol": "-"
-          }
+          "answer": "111",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "15公分9毫米 - 48毫米 = $i$公分$i$毫米$n$(單位換算：48毫米 = $i$公分$i$毫米)",
@@ -436,21 +311,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["126", "65"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "126",
+            "operand2": "65"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "61",
-            "Number": ["126", "65"],
-            "Symbol": "-"
-          }
+          "answer": "61",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "12公分6毫米 - 65毫米 = $i$公分$i$毫米$n$(單位換算：65毫米 = $i$公分$i$毫米)",
@@ -459,21 +327,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["124", "81"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "124",
+            "operand2": "81"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "43",
-            "Number": ["124", "81"],
-            "Symbol": "-"
-          }
+          "answer": "43",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "12公分4毫米 - 81毫米 = $i$公分$i$毫米$n$(單位換算：81毫米 = $i$公分$i$毫米)",
@@ -484,21 +345,14 @@
     [
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["100", "56"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "100",
+            "operand2": "56"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "44",
-            "Number": ["100", "56"],
-            "Symbol": "-"
-          }
+          "answer": "44",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "10公分 - 5公分6毫米= $i$公分$i$毫米",
@@ -507,21 +361,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["120", "84"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "120",
+            "operand2": "84"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "36",
-            "Number": ["120", "84"],
-            "Symbol": "-"
-          }
+          "answer": "36",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "12公分 - 8公分4毫米 = $i$公分$i$毫米",
@@ -530,21 +377,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["92", "76"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "92",
+            "operand2": "76"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "16",
-            "Number": ["92", "76"],
-            "Symbol": "-"
-          }
+          "answer": "16",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "9公分2毫米 - 7公分6毫米= $i$公分$i$毫米",
@@ -559,8 +399,8 @@
           "NumberAmount": 4,
           "decimalPoint": 0,
           "Preset": {
-            "Number": ["66", "38"],
-            "Symbol": "-"
+            "operand1": "66",
+            "operand2": "38"
           },
           "Answer": {
             "Carry": [],
@@ -576,21 +416,14 @@
       },
       {
         "calculator": {
-          "Unit": "Length",
-          "CarryAmount": 1,
-          "CustomeUnit": null,
-          "NumberAmount": 4,
-          "decimalPoint": 0,
-          "Preset": {
-            "Number": ["208", "189"],
-            "Symbol": "-"
+          "type": "sub",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "208",
+            "operand2": "189"
           },
-          "Answer": {
-            "Carry": [],
-            "Answer": "19",
-            "Number": ["208", "189"],
-            "Symbol": "-"
-          }
+          "answer": "19",
+          "unitType": "Length"
         },
         "markdown": {
           "Render": "20公分8毫米 - 18公分9毫米 = $i$公分$i$毫米",

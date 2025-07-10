@@ -2,7 +2,7 @@
   "id": "MA3043",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請點擊數線上的空格，並使用數字鍵盤填入正確的數字。"
+    "Content": "把做法和答案記下來"
   },
   "introvideo": "MA3043.mp4",
   "TotalLevel": 3,
@@ -287,7 +287,7 @@
         "topComponent": {
           "Name": "Markdown",
           "Data": {
-            "Render": "## 合作社進貨的果汁，一共有幾瓶果汁?$n$ 6 X $i$ = $i$ $n$ $i$ X 2 = $i$ $n$ $t$ 答案: $i$ 瓶",
+            "Render": "## 合作社進貨的果汁，一共有幾瓶果汁?$n$ 6 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 瓶",
             "Answer": ["4", "24", "24", "72", "72"]
           }
         },

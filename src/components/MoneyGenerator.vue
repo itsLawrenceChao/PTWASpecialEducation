@@ -8,29 +8,56 @@
     }"
   >
     <div
-      v-if="Data.Thousands || Data.FiveHundreds"
+      v-if="paperMoneyGroups['1000'].length > 0"
       :key="containerRef"
-      class="Up MoneyContainer papaer-money"
+      class="MoneyContainer papaer-money"
     >
-      <img v-for="item in UpContainer" :src="item" />
+      <MoneyDisplay
+        v-for="(item, index) in paperMoneyGroups['1000']"
+        :key="`1000-${index}`"
+        :Data="{ denomination: item }"
+      />
     </div>
     <div
-      v-if="Data.Hundreds"
+      v-if="paperMoneyGroups['500'].length > 0"
       :key="containerRef"
-      class="Middle MoneyContainer papaer-money"
+      class="MoneyContainer papaer-money"
     >
-      <img v-for="item in MiddleContainer" :src="item" />
+      <MoneyDisplay
+        v-for="(item, index) in paperMoneyGroups['500']"
+        :key="`500-${index}`"
+        :Data="{ denomination: item }"
+      />
     </div>
-    <div v-for="item in DownContainer" class="Down CoinContainer">
-      <div v-for="coin in item" class="PerCoin">
-        <img v-if="coin != ''" :src="coin" />
+    <div
+      v-if="paperMoneyGroups['100'].length > 0"
+      :key="containerRef"
+      class="MoneyContainer papaer-money"
+    >
+      <MoneyDisplay
+        v-for="(item, index) in paperMoneyGroups['100']"
+        :key="`100-${index}`"
+        :Data="{ denomination: item }"
+      />
+    </div>
+    <div
+      v-for="(item, rowIndex) in coinContainer"
+      :key="'row-' + rowIndex"
+      class="CoinContainer"
+    >
+      <div
+        v-for="(coin, coinIndex) in item"
+        :key="'coin-' + coinIndex"
+        class="PerCoin"
+      >
+        <MoneyDisplay v-if="coin !== ''" :Data="{ denomination: coin }" />
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { getSlotComponentAssets } from "../utilitys/get_assets";
 import { ref, onMounted, nextTick } from "vue";
+import MoneyDisplay from "./MoneyDisplay.vue";
 
 const props = defineProps({
   Data: {
@@ -43,103 +70,68 @@ const props = defineProps({
   },
 });
 
-const UpContainer = ref([]);
-const MiddleContainer = ref([]);
-const DownContainer = ref([]);
+const paperMoneyGroups = ref({
+  1000: [],
+  500: [],
+  100: [],
+});
+const coinContainer = ref([]);
 const Data = ref(props.Data);
 const containerSize = ref(false);
 const containerRef = ref(0);
 const Container = ref(null);
 
-const loadData = () => {
-  if (Data.value.Thousands) {
-    for (let i = 0; i < Data.value.Thousands; i++) {
-      UpContainer.value.push(
-        getSlotComponentAssets("MoneyGenerator", "1000.png")
-      );
+const processCoins = (amount, denomination) => {
+  let remaining = amount;
+  while (remaining > 0) {
+    let TempContainer = [];
+    const count = Math.min(remaining, 10);
+    for (let i = 0; i < count; i++) {
+      TempContainer.push(denomination);
     }
-  }
-  if (Data.value.FiveHundreds) {
-    for (let i = 0; i < Data.value.FiveHundreds; i++) {
-      UpContainer.value.push(
-        getSlotComponentAssets("MoneyGenerator", "500.png")
-      );
-    }
-  }
-
-  if (Data.value.Hundreds) {
-    for (let i = 0; i < Data.value.Hundreds; i++) {
-      MiddleContainer.value.push(
-        getSlotComponentAssets("MoneyGenerator", "100.png")
-      );
-    }
-  }
-  let RowIndex = 0;
-  let Cnt = 0;
-  let TempContainer = [];
-  if (Data.value.Fifties) {
-    for (let i = 0; i < Data.value.Fifties; i++) {
-      if (Cnt > 10) {
-        DownContainer.value.push(TempContainer);
-        TempContainer = [];
-        TempContainer.push(getSlotComponentAssets("MoneyGenerator", "50.png"));
-        Cnt = 0;
-      } else {
-        TempContainer.push(getSlotComponentAssets("MoneyGenerator", "50.png"));
-        Cnt++;
-      }
-    }
-  }
-  if (Data.value.Tens) {
-    for (let i = 0; i < Data.value.Tens; i++) {
-      if (Cnt > 10) {
-        DownContainer.value.push(TempContainer);
-        TempContainer = [];
-        TempContainer.push(getSlotComponentAssets("MoneyGenerator", "10.png"));
-        Cnt = 0;
-      } else {
-        TempContainer.push(getSlotComponentAssets("MoneyGenerator", "10.png"));
-        Cnt++;
-      }
-    }
-  }
-  if (Data.value.Fives) {
-    for (let i = 0; i < Data.value.Fives; i++) {
-      if (Cnt > 10) {
-        DownContainer.value.push(TempContainer);
-        TempContainer = [];
-        TempContainer.push(getSlotComponentAssets("MoneyGenerator", "5.png"));
-        Cnt = 0;
-      } else {
-        TempContainer.push(getSlotComponentAssets("MoneyGenerator", "5.png"));
-        Cnt++;
-      }
-    }
-  }
-  if (Data.value.Ones) {
-    for (let i = 0; i < Data.value.Ones; i++) {
-      if (Cnt > 10) {
-        DownContainer.value.push(TempContainer);
-        TempContainer = [];
-        TempContainer.push(getSlotComponentAssets("MoneyGenerator", "1.png"));
-        Cnt = 0;
-      } else {
-        TempContainer.push(getSlotComponentAssets("MoneyGenerator", "1.png"));
-        Cnt++;
-      }
-    }
-  }
-  if (TempContainer.length > 0) {
-    DownContainer.value.push(TempContainer);
-    for (let i = 0; i < 10 - TempContainer.length; i++) {
+    while (TempContainer.length < 10) {
       TempContainer.push("");
     }
+    coinContainer.value.push(TempContainer);
+    remaining -= count;
   }
+};
+
+const processPaperMoney = (amount, denomination) => {
+  for (let i = 0; i < amount; i++) {
+    paperMoneyGroups.value[denomination].push(denomination);
+  }
+};
+
+const loadData = () => {
+  // 處理紙鈔
+  if (Data.value.Thousands) {
+    processPaperMoney(Data.value.Thousands, "1000");
+  }
+  if (Data.value.FiveHundreds) {
+    processPaperMoney(Data.value.FiveHundreds, "500");
+  }
+  if (Data.value.Hundreds) {
+    processPaperMoney(Data.value.Hundreds, "100");
+  }
+
+  // 處理硬幣
+  const coinTypes = {
+    Fifties: "50",
+    Tens: "10",
+    Fives: "5",
+    Ones: "1",
+  };
+
+  Object.entries(coinTypes).forEach(([key, value]) => {
+    if (Data.value[key]) {
+      processCoins(Data.value[key], value);
+    }
+  });
 };
 function updateContainerSize() {
   if (Container.value) {
     const { width, height } = Container.value.getBoundingClientRect();
-    console.log(width, height);
     containerSize.value = { width, height };
   }
 }
@@ -154,11 +146,6 @@ onMounted(() => {
   });
 });
 </script>
-<script>
-export default {
-  name: "MyComponent",
-};
-</script>
 <style scoped lang="scss">
 /* Your component styles here */
 .Container {
@@ -169,7 +156,7 @@ export default {
   justify-content: center;
   /* grid-template-columns: 1fr;
     grid-template-rows: repeat(4,1fr); */
-  gap: 10px;
+  gap: 8px;
 }
 .papaer-money {
   img {

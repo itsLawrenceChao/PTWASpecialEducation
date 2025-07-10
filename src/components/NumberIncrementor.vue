@@ -9,6 +9,10 @@
         <span
           v-else
           class="digit"
+          :class="{
+            'digit--error':
+              isChecking && !isDigitCorrect(getActualIndex(index)),
+          }"
           @click="incrementDigit(getActualIndex(index))"
         >
           {{ digit }}
@@ -20,6 +24,7 @@
 </template>
 
 <script>
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "NumberIncrementor",
   props: {
@@ -42,6 +47,8 @@ export default {
   data() {
     return {
       digits: Array(this.Data.digitCount).fill(0),
+      isChecking: false,
+      correctDigits: [],
     };
   },
   computed: {
@@ -53,6 +60,15 @@ export default {
       }
       return result;
     },
+  },
+  mounted() {
+    emitter.on("checkAnswer", () => {
+      this.isChecking = true;
+      this.checkDigits();
+    });
+  },
+  beforeUnmount() {
+    emitter.off("checkAnswer");
   },
   methods: {
     getActualIndex(displayIndex) {
@@ -71,6 +87,19 @@ export default {
         : totalValue;
       this.$emit("numberChanged", result);
       this.$emit("replyAnswer", result === this.Data.answer);
+    },
+    checkDigits() {
+      const answer = this.Data.answer;
+      const answerDigits = String(answer)
+        .padStart(this.Data.digitCount, "0")
+        .split("")
+        .map(Number);
+      this.correctDigits = this.digits.map(
+        (digit, index) => digit === answerDigits[index]
+      );
+    },
+    isDigitCorrect(index) {
+      return this.correctDigits[index];
     },
   },
 };
@@ -107,10 +136,14 @@ export default {
       min-width: 40px;
       text-align: center;
       cursor: pointer;
-      user-select: none; // 防止文本選中
+      user-select: none;
 
       &:hover {
         background-color: #f0f0f0;
+      }
+
+      &--error {
+        color: red;
       }
     }
   }
