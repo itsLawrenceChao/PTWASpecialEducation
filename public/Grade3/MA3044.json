@@ -2,7 +2,7 @@
   "id": "MA3044",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "[Insert question.]"
+    "Content": "估估看，把最接近正確答案的算式或答案找出來。"
   },
   "TotalLevel": 2,
   "GameType": "Maze",

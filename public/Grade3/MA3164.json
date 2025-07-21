@@ -3,7 +3,7 @@
   "introvideo": "hint1.mp4",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "[Insert question.]"
+    "Content": "移動圓到圓心，再填填看"
   },
   "GameType": "SelfDefine",
   "GameConfig": {
@@ -41,7 +41,9 @@
         "TargetImage": "fishman.png",
         "FoodImage": "fish.png",
         "Answer": 9
-      },
+      }
+    ],
+    [
       {
         "Question": "小老鼠搬起司，他搬光了距離他2公分以內的起司，是搬了幾塊起司？",
         "Unit": "塊",

@@ -3,9 +3,8 @@
   "introvideo": "hint1.mp4",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請使用滑鼠滾輪或者是題目上面的按鈕來作答，填入指定毫/公升的水"
+    "Content": "將量杯裝到指定的位置"
   },
-  "TotalLevel": 2,
   "GameType": "SelfDefine",
   "GameConfig": {
     "GlobalTitle": "[Insert title.]"

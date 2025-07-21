@@ -3,7 +3,7 @@
   "GameType": "CompareGame",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請比較兩邊的容量，並將正確的比大小的符號拖曳到正確框框中"
+    "Content": "在口裡填入>、<或="
   },
   "GameConfig": {
     "CustomeSymbol": true,

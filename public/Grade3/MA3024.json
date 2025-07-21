@@ -1,8 +1,8 @@
 {
-  "id": "Dev02_Maze",
+  "id": "MA3024",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "請使控制小精靈走到正確的答案"
+    "Content": "估估看，哪一個數最接近正確答案?"
   },
   "GameType": "Maze",
   "GameConfig": {},
@@ -103,7 +103,7 @@
       {
         "Question": "小美有810元，跟朋友吃飯花了280元後，大約還剩下多少元?",
         "Options": [600, 500, 700, 1000],
-        "Answer": 0
+        "Answer": 1
       },
       {
         "Question": "小美有410元，跟朋友吃飯花了189元後，大約還剩下多少元?",

@@ -3,7 +3,7 @@
   "introvideo": "hint1.mp4",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "[Insert question.]"
+    "Content": "想一想，再選選看"
   },
   "GameType": "SelfDefine",
   "GameConfig": {
@@ -76,7 +76,7 @@
         "Denominator": 11,
         "Option": 5,
         "CorrectOption": 2,
-        "Itemdescription": "這是一個蛋糕",
+        "Itemdescription": "這是一條緞帶",
         "Color": "orange"
       },
       {
@@ -86,7 +86,7 @@
         "Denominator": 11,
         "Option": 5,
         "CorrectOption": 3,
-        "Itemdescription": "這是一個蛋糕",
+        "Itemdescription": "這是一條緞帶",
         "Color": "orange"
       },
       {
@@ -96,7 +96,7 @@
         "Denominator": 11,
         "Option": 5,
         "CorrectOption": 1,
-        "Itemdescription": "這是一個蛋糕",
+        "Itemdescription": "這是一條緞帶",
         "Color": "orange"
       },
       {
@@ -106,7 +106,7 @@
         "Denominator": 11,
         "Option": 5,
         "CorrectOption": 2,
-        "Itemdescription": "這是一個蛋糕",
+        "Itemdescription": "這是一條緞帶",
         "Color": "orange"
       },
       {
@@ -116,7 +116,7 @@
         "Denominator": 11,
         "Option": 5,
         "CorrectOption": 4,
-        "Itemdescription": "這是一個蛋糕",
+        "Itemdescription": "這是一條緞帶",
         "Color": "orange"
       }
     ],

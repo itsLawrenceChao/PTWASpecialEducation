@@ -11,6 +11,7 @@
         <v-shape :config="configHand" />
         <v-shape :config="configTextBox" />
         <v-shape :config="configWeight" />
+        <v-shape :config="configScale" />
       </v-layer>
     </v-stage>
   </div>
@@ -19,7 +20,7 @@
 <script>
 import { getGameAssets, getSystemAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
+
 export default {
   components: {},
 
@@ -53,6 +54,10 @@ export default {
       configWeight: {
         visible: false,
       },
+      configScale: {
+        stroke: "#333",
+        strokeWidth: 2,
+      },
 
       dragging: false,
 
@@ -73,6 +78,7 @@ export default {
       this.drawHand();
       this.drawTextBox();
       this.drawWeight();
+      this.drawScale();
     },
     drawBG() {
       this.configBG.width = this.gameWidth;
@@ -86,7 +92,7 @@ export default {
     drawHand() {
       this.configHand.x = this.gameWidth / 2;
       this.configHand.y = this.gameWidth / 2;
-      this.configHand.length = this.gameWidth / 6;
+      this.configHand.length = this.gameWidth / 6.5;
       this.configHand.rotation = 0;
       this.configHand.sceneFunc = this.handSceneFunc;
     },
@@ -108,6 +114,11 @@ export default {
       this.configWeight.text = 0;
       this.configWeight.sceneFunc = this.weightSceneFunc;
     },
+    drawScale() {
+      this.configScale.x = this.gameWidth / 2;
+      this.configScale.y = this.gameWidth / 2;
+      this.configScale.sceneFunc = this.scaleSceneFunc;
+    },
     handSceneFunc(context, shape) {
       context.beginPath();
       context.lineWidth = this.gameWidth * 0.03;
@@ -124,7 +135,7 @@ export default {
         position;
       context.beginPath();
       context.rotate(rotation);
-      context.translate(0, -this.gameWidth * 0.2);
+      context.translate(0, -this.gameWidth * 0.3);
       context.rotate(-rotation * (1 + correction));
       if (rotation <= Math.PI / 2) {
         position = {
@@ -164,7 +175,7 @@ export default {
         position;
       context.beginPath();
       context.rotate(rotation);
-      context.translate(0, -this.gameWidth * 0.2);
+      context.translate(0, -this.gameWidth * 0.3);
       context.rotate(-rotation * (1 + correction));
       context.font = shape.getAttr("fontSize") + "px serif";
 
@@ -195,6 +206,63 @@ export default {
         position.y,
         shape.getAttr("width") - offset * 2
       );
+      context.closePath();
+    },
+    scaleSceneFunc(context, shape) {
+      const centerX = 0;
+      const centerY = 0;
+      const radius = this.gameWidth * 0.23; // 進一步縮小刻度圓的半徑
+      const innerRadius = radius - this.gameWidth * 0.02; // 內圈半徑
+      const outerRadius = radius + this.gameWidth * 0.008; // 外圈半徑
+
+      context.beginPath();
+      context.strokeStyle = shape.getAttr("stroke");
+      context.lineWidth = shape.getAttr("strokeWidth");
+
+      // 繪製主要刻度（每50克一個）
+      for (let i = 0; i <= 60; i++) {
+        // 調整角度，讓正上方是0，順時針方向
+        const angle = (i * Math.PI) / 30 - Math.PI / 2; // 減去90度讓正上方是0
+        const startX = centerX + innerRadius * Math.cos(angle);
+        const startY = centerY + innerRadius * Math.sin(angle);
+
+        // 主要刻度（每10個刻度一個長刻度）
+        if (i % 10 === 0) {
+          context.lineWidth = shape.getAttr("strokeWidth") * 2;
+          const longEndX =
+            centerX + (outerRadius + this.gameWidth * 0.008) * Math.cos(angle);
+          const longEndY =
+            centerY + (outerRadius + this.gameWidth * 0.008) * Math.sin(angle);
+          context.moveTo(startX, startY);
+          context.lineTo(longEndX, longEndY);
+
+          // 添加數字標籤在刻度線內部
+          const labelRadius = radius - this.gameWidth * 0.05;
+          const labelX = centerX + labelRadius * Math.cos(angle);
+          const labelY = centerY + labelRadius * Math.sin(angle);
+          context.font = `${this.gameWidth * 0.03}px Arial`;
+          context.fillStyle = "#333";
+          context.textAlign = "center";
+          context.textBaseline = "middle";
+          const weight = (i * 50) % 3000;
+          context.fillText(weight.toString(), labelX, labelY);
+        } else {
+          context.lineWidth = shape.getAttr("strokeWidth");
+          // 短刻度線外端與長刻度線外端切齊，但內端更靠近中心
+          const shortStartX =
+            centerX + (innerRadius + this.gameWidth * 0.025) * Math.cos(angle);
+          const shortStartY =
+            centerY + (innerRadius + this.gameWidth * 0.025) * Math.sin(angle);
+          const shortEndX =
+            centerX + (outerRadius + this.gameWidth * 0.008) * Math.cos(angle);
+          const shortEndY =
+            centerY + (outerRadius + this.gameWidth * 0.008) * Math.sin(angle);
+          context.moveTo(shortStartX, shortStartY);
+          context.lineTo(shortEndX, shortEndY);
+        }
+      }
+
+      context.stroke();
       context.closePath();
     },
     handleDrag(e) {

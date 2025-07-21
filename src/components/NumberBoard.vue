@@ -12,7 +12,10 @@
       <td
         v-for="(number, index) in numbers"
         class="number-board__cell"
-        :class="{ 'number-board__cell--clickable': isInput }"
+        :class="{
+          'number-board__cell--clickable': isInput,
+          'number-board__cell--wrong': showWrong && wrongDigits[index],
+        }"
         @click="isInput ? incrementDigit(index) : null"
       >
         {{ number }}
@@ -22,6 +25,8 @@
 </template>
 
 <script>
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
+
 export default {
   name: "NumberBoard",
   props: {
@@ -36,6 +41,8 @@ export default {
       numbers: [],
       Unit: null,
       isInput: this.Data.isInput || false,
+      wrongDigits: [],
+      showWrong: false,
     };
   },
   created() {
@@ -63,6 +70,15 @@ export default {
         this.numbers[i] = "0";
       }
     }
+
+    // 初始化錯誤狀態陣列
+    this.wrongDigits = new Array(this.numbers.length).fill(false);
+    this.showWrong = false;
+    // 監聽 checkAnswer 事件
+    emitter.on("checkAnswer", this.markWrong);
+  },
+  beforeUnmount() {
+    emitter.off("checkAnswer", this.markWrong);
   },
   methods: {
     incrementDigit(index) {
@@ -79,13 +95,26 @@ export default {
 
       let check = true;
       const correctAnswer = this.Data.Number.toString().split("");
+      // 只檢查正確與否，不標記紅色
       for (var i = correctAnswer.length - 1; i >= 0; i--) {
         if (correctAnswer[i] !== this.numbers[i]) {
           check = false;
-          break;
         }
       }
       this.$emit("replyAnswer", check);
+    },
+    markWrong() {
+      // 觸發紅色標記
+      this.showWrong = true;
+      // 更新錯誤狀態
+      const correctAnswer = this.Data.Number.toString().split("");
+      this.wrongDigits = new Array(this.numbers.length).fill(false);
+      for (var i = correctAnswer.length - 1; i >= 0; i--) {
+        if (correctAnswer[i] !== this.numbers[i]) {
+          this.wrongDigits[i] = true;
+        }
+      }
+      this.checkAnswer();
     },
   },
 };
@@ -134,6 +163,10 @@ export default {
       &:hover {
         background-color: #f0f0f0;
       }
+    }
+
+    &--wrong {
+      background-color: red !important;
     }
   }
 }

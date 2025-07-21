@@ -14,12 +14,16 @@
         />
       </div>
       <div class="right-container">
-        <component
-          :is="GameConfig.calculator"
-          :Data="calculatorData"
-          :ID="ID"
-          @reply-answer="calculatorAnswer"
-        />
+        <div class="calculator-container">
+          <component
+            :is="GameConfig.calculator"
+            class="calculator"
+            :Data="calculatorData"
+            :ID="ID"
+            @reply-answer="calculatorAnswer"
+          />
+        </div>
+
         <button class="submit" @click="checkAnswer">檢查答案</button>
       </div>
     </div>
@@ -41,6 +45,9 @@ export default {
       () => import("@/components/DecimalCalculator.vue")
     ),
     Division: defineAsyncComponent(() => import("@/components/Division.vue")),
+    CalculationBoard: defineAsyncComponent(
+      () => import("@/components/CalculationBoard.vue")
+    ),
   },
   props: {
     GameData: {
@@ -158,22 +165,20 @@ export default {
   display: flex;
   flex-direction: column;
   gap: $gap--small;
-  justify-content: center;
-  align-items: center;
 }
 
 .head-container {
   @extend .container-basic;
   display: flex;
   background-color: $primary-color;
-  padding: 0 $padding--small;
+  padding: $padding--small;
   font-size: $text-medium;
   width: 100%;
-  height: 20%;
 }
 
 .word-problem {
-  height: 80%;
+  flex: 1 1 0%;
+  min-height: 0;
   width: 100%;
   padding: 0 $padding--small;
   display: flex;
@@ -181,20 +186,26 @@ export default {
   gap: $gap--small;
   flex-direction: row;
   .right-container {
-    width: 40%;
+    width: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: $gap--small;
+    .calculator-container {
+      flex: 1 1 0%;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
     .submit {
       @extend .button-basic;
       width: 100%;
-      border: none;
+      height: 50px;
       min-height: 50px;
+      max-height: 80px;
+      border: none;
       background-color: $submit-color;
-      &:hover {
-        @extend .button--animation;
-        background-color: $submit-color;
-      }
     }
   }
   .left-container {
@@ -203,8 +214,6 @@ export default {
     display: flex;
     flex-direction: column;
     gap: $gap--small;
-    width: 40%;
-    height: 100%;
     .markdown {
       width: 100%;
       max-height: 200px;

@@ -44,22 +44,6 @@
       </div>
       <div class="Functions">
         <button @click="CheckAllAnswer">送出答案</button>
-        <button @click="ClearAll">清除所有答案</button>
-        <button @click="Pop">清除最後一個</button>
-
-        <div class="error">
-          <p
-            v-if="
-              ErrorMesseagesSwitch.AllAnswerNotFinish ||
-              ErrorMesseagesSwitch.WrongAnswer
-            "
-            class="header"
-          >
-            錯誤
-          </p>
-          <p v-if="ErrorMesseagesSwitch.AllAnswerNotFinish">所有答案尚未完成</p>
-          <p v-if="ErrorMesseagesSwitch.WrongAnswer">答案有誤</p>
-        </div>
       </div>
     </div>
   </div>
@@ -105,10 +89,6 @@ export default {
       LinkedRecord: [],
       SelectionHeight: 50,
       RectCornerRaduis: 15,
-      ErrorMesseagesSwitch: {
-        AllAnswerNotFinish: false,
-        WrongAnswer: false,
-      },
       randomColorlist: [
         "F6BD60",
         "F7EDE2",
@@ -200,7 +180,6 @@ export default {
 
       this.OnDrawingRectIndex = index;
       this.OnDrawing = true;
-      this.ErrorMesseagesSwitch.WrongAnswer = false;
       // 創建新的線條並添加到 Lines 數組
       const newLine = {
         points: [
@@ -325,14 +304,13 @@ export default {
         if (ans == false) {
           WrongAnsIndexs.push(i);
           WrongAmount++;
-          this.ErrorMesseagesSwitch.WrongAnswer = true;
           this.MarkWrongLine(this.LinkedRecord[i][0], this.LinkedRecord[i][1]);
         }
       }
       if (this.LinkedRecord.length != this.Pair.length) {
-        this.ErrorMesseagesSwitch.AllAnswerNotFinish = true;
+        // this.ErrorMesseagesSwitch.AllAnswerNotFinish = true;
       } else {
-        this.ErrorMesseagesSwitch.AllAnswerNotFinish = false;
+        // this.ErrorMesseagesSwitch.AllAnswerNotFinish = false;
       }
       if (this.LinkedRecord.length == this.Pair.length && WrongAmount == 0) {
         this.$emit("play-effect", "CorrectSound");
@@ -529,20 +507,6 @@ export default {
   button:hover {
     scale: 1.1;
     transition: 0.5s;
-  }
-  .error {
-    align-self: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    .header {
-      font-size: $text-medium;
-      font-weight: $text-bold;
-    }
-    p {
-      font-weight: $text-bold;
-      color: $error-color;
-    }
   }
 }
 </style>

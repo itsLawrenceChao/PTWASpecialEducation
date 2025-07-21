@@ -8,26 +8,14 @@
         {{ element.content }}
       </component>
       <div v-else-if="element.el === 'math-input'" class="math-input-container">
-        <q-btn
+        <button
           v-if="element.isSymbol"
-          :label="element.content || '?'"
           class="math-symbol-btn"
           :class="{ 'wrong-answer': element.isWrong }"
-          rounded
+          @click="showOperatorPad($event, index)"
         >
-          <q-menu anchor="bottom start" self="top left">
-            <q-item
-              v-for="symbol in availableSymbols"
-              :key="symbol"
-              v-close-popup
-              clickable
-              dense
-              @click="handleSymbolSelect(index, symbol)"
-            >
-              {{ symbol }}
-            </q-item>
-          </q-menu>
-        </q-btn>
+          {{ element.content || "?" }}
+        </button>
       </div>
       <input
         v-else-if="element.el === 'input'"
@@ -61,15 +49,22 @@
         :Data="floatNumPadLocation"
         @buttonClicked="fillToInput"
       />
+      <FloatOperatorPad
+        v-if="isShowOperatorPad"
+        :Data="operatorPadLocation"
+        @buttonClicked="handleOperatorSelect"
+      />
     </template>
   </div>
 </template>
 <script>
 import FloatNumPad from "@/components/FloatNumPad.vue";
+import FloatOperatorPad from "@/components/FloatOperatorPad.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   components: {
     FloatNumPad,
+    FloatOperatorPad,
   },
   props: {
     Data: {
@@ -94,6 +89,8 @@ export default {
       numPadOffset: 10,
       availableSymbols: ["+", "-", "×", "÷"],
       selectedOptions: {},
+      isShowOperatorPad: false,
+      operatorPadLocation: { top: 0, left: 0 },
     };
   },
   created() {
@@ -293,6 +290,26 @@ export default {
       this.selectedOptions[elementIndex] = optionIndex;
       this.checkAnswer();
     },
+    handleOperatorSelect(content) {
+      if (content == "關閉") {
+        this.isShowOperatorPad = false;
+        return;
+      }
+      if (this.clickedTarget !== null) {
+        this.elements[this.clickedTarget].content = content;
+        this.checkAnswer();
+        this.isShowOperatorPad = false;
+      }
+    },
+    showOperatorPad(event, index) {
+      this.clickedTarget = index;
+      const buttonRect = event.target.getBoundingClientRect();
+      this.isShowOperatorPad = true;
+      this.operatorPadLocation = {
+        top: `${buttonRect.bottom + window.scrollY}px`,
+        left: `${buttonRect.right + window.scrollX + this.numPadOffset}px`,
+      };
+    },
   },
 };
 </script>
@@ -304,11 +321,18 @@ export default {
 }
 
 .math-symbol-btn {
+  border: 1px solid #000;
   border-radius: 20px;
   font-size: $text-small;
   padding: 0;
   min-width: 40px;
   height: 40px;
+  background-color: white;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
 
   &.wrong-answer {
     background-color: red !important;

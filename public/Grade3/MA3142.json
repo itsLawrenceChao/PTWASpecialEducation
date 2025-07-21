@@ -2,7 +2,7 @@
   "id": "MA3142",
   "IntroText": {
     "Type": "PlainText",
-    "Content": "[Insert question.]"
+    "Content": "在秤面上旋轉指針到正確的位置"
   },
   "GameType": "SelfDefine",
   "GameConfig": {},

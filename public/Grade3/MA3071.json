@@ -21,7 +21,7 @@
   "Questions": [
     [
       {
-        "questionText": "把7花，每7花綁一束，最多可以綁成幾束?",
+        "questionText": "把7朵花，每7朵花綁一束，最多可以綁成幾束?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -42,7 +42,7 @@
         }
       },
       {
-        "questionText": "把6花，每6花綁一束，最多可以綁成幾束?",
+        "questionText": "把6朵花，每6朵花綁一束，最多可以綁成幾束?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -63,7 +63,7 @@
         }
       },
       {
-        "questionText": "把9花，每9花綁一束，最多可以綁成幾束?",
+        "questionText": "把9朵花，每9朵花綁一束，最多可以綁成幾束?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -84,7 +84,7 @@
         }
       },
       {
-        "questionText": "把5花，每5花綁一束，最多可以綁成幾束?",
+        "questionText": "把5朵花，每5朵花綁一束，最多可以綁成幾束?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -105,7 +105,7 @@
         }
       },
       {
-        "questionText": "把8花，每8花綁一束，最多可以綁成幾束?",
+        "questionText": "把8朵花，每8朵花綁一束，最多可以綁成幾束?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -128,7 +128,7 @@
     ],
     [
       {
-        "questionText": "把8玩具車，每2玩具車綁一箱，最多可以綁成幾箱?",
+        "questionText": "把8台玩具車，2台裝一箱，最多可以裝成幾箱?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -149,7 +149,7 @@
         }
       },
       {
-        "questionText": "把10玩具車，每2玩具車綁一箱，最多可以綁成幾箱?",
+        "questionText": "把10台玩具車，2台裝一箱，最多可以裝成幾箱?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -170,7 +170,7 @@
         }
       },
       {
-        "questionText": "把9玩具車，每3玩具車綁一箱，最多可以綁成幾箱?",
+        "questionText": "把9台玩具車，3台裝一箱，最多可以裝成幾箱?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -191,7 +191,7 @@
         }
       },
       {
-        "questionText": "把12玩具車，每3玩具車綁一箱，最多可以綁成幾箱?",
+        "questionText": "把12台玩具車，3台裝一箱，最多可以裝成幾箱?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -212,7 +212,7 @@
         }
       },
       {
-        "questionText": "把12玩具車，每2玩具車綁一箱，最多可以綁成幾箱?",
+        "questionText": "把12台玩具車，2台裝一箱，最多可以裝成幾箱",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -235,7 +235,7 @@
     ],
     [
       {
-        "questionText": "把16糖果，每4糖果綁一袋，最多可以綁成幾袋?",
+        "questionText": "把16顆糖果，4顆裝一袋，最多可以裝成幾盤?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -256,7 +256,7 @@
         }
       },
       {
-        "questionText": "把12糖果，每4糖果綁一袋，最多可以綁成幾袋?",
+        "questionText": "把12顆糖果，4顆裝一袋，最多可以裝成幾盤?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -277,7 +277,7 @@
         }
       },
       {
-        "questionText": "把15糖果，每5糖果綁一袋，最多可以綁成幾袋?",
+        "questionText": "把15顆糖果，5顆裝一袋，最多可以裝成幾盤?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -298,7 +298,7 @@
         }
       },
       {
-        "questionText": "把20糖果，每4糖果綁一袋，最多可以綁成幾袋?",
+        "questionText": "把20顆糖果，4顆裝一袋，最多可以裝成幾盤?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -319,7 +319,7 @@
         }
       },
       {
-        "questionText": "把20糖果，每5糖果綁一袋，最多可以綁成幾袋?",
+        "questionText": "把20顆糖果，5顆裝一袋，最多可以裝成幾盤?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -342,7 +342,7 @@
     ],
     [
       {
-        "questionText": "把18鉛筆，每6鉛筆綁一枝，最多可以綁成幾枝?",
+        "questionText": "有18枝鉛筆，平分成6堆，盡量分完，每堆有幾枝鉛筆?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -363,7 +363,7 @@
         }
       },
       {
-        "questionText": "把30鉛筆，每6鉛筆綁一枝，最多可以綁成幾枝?",
+        "questionText": "有30枝鉛筆，平分給6堆，盡量分完，每堆有幾枝鉛筆?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -384,7 +384,7 @@
         }
       },
       {
-        "questionText": "把14鉛筆，每7鉛筆綁一枝，最多可以綁成幾枝?",
+        "questionText": "有14枝鉛筆，平分給7堆，盡量分完，每堆有幾枝鉛筆?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -405,7 +405,7 @@
         }
       },
       {
-        "questionText": "把21鉛筆，每7鉛筆綁一枝，最多可以綁成幾枝?",
+        "questionText": "有21枝鉛筆，平分給7堆，盡量分完，每堆有幾枝鉛筆?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -426,7 +426,7 @@
         }
       },
       {
-        "questionText": "把12鉛筆，每6鉛筆綁一枝，最多可以綁成幾枝?",
+        "questionText": "有12枝鉛筆，平分給6堆，盡量分完，每堆有幾枝鉛筆?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -449,7 +449,7 @@
     ],
     [
       {
-        "questionText": "把18氣球，每9氣球綁一個人，最多可以綁成幾個人?",
+        "questionText": "把18顆氣球，每9顆分給一個人，最多可以分給幾個人?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -470,7 +470,7 @@
         }
       },
       {
-        "questionText": "把16氣球，每8氣球綁一個人，最多可以綁成幾個人?",
+        "questionText": "把16顆氣球，每8顆分給一個人，最多可以分給幾個人?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -491,7 +491,7 @@
         }
       },
       {
-        "questionText": "把24氣球，每8氣球綁一個人，最多可以綁成幾個人?",
+        "questionText": "把24顆氣球，每8顆分給一個人，最多可以分給幾個人?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -512,7 +512,7 @@
         }
       },
       {
-        "questionText": "把27氣球，每9氣球綁一個人，最多可以綁成幾個人?",
+        "questionText": "把27顆氣球，每9顆分給一個人，最多可以分給幾個人? ",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",
@@ -533,7 +533,7 @@
         }
       },
       {
-        "questionText": "把14氣球，每7氣球綁一個人，最多可以綁成幾個人?",
+        "questionText": "把14顆氣球，每7顆分給一個人，最多可以分給幾個人?",
         "middleText": "用除法算式記記看",
         "topComponent": {
           "Name": "RepeatImage",

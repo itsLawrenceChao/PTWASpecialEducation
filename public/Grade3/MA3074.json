@@ -9,14 +9,19 @@
   "GameConfig": {
     "calculatorVerify": true,
     "markdownVerify": true,
-    "calculator": "Division"
+    "calculator": "CalculationBoard"
   },
   "Questions": [
     [
       {
         "calculator": {
-          "divisor": 5,
-          "dividend": 40
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "40",
+            "operand2": "5"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "40 ÷ 5 = $i$",
@@ -25,8 +30,13 @@
       },
       {
         "calculator": {
-          "divisor": 5,
-          "dividend": 10
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "10",
+            "operand2": "5"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "10 ÷ 5 = $i$",
@@ -35,8 +45,13 @@
       },
       {
         "calculator": {
-          "divisor": 4,
-          "dividend": 32
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "32",
+            "operand2": "4"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "32 ÷ 4 = $i$",
@@ -45,8 +60,13 @@
       },
       {
         "calculator": {
-          "divisor": 3,
-          "dividend": 27
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "27",
+            "operand2": "3"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "27 ÷ 3 = $i$",
@@ -55,8 +75,13 @@
       },
       {
         "calculator": {
-          "divisor": 4,
-          "dividend": 24
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "24",
+            "operand2": "4"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "24 ÷ 4 = $i$",
@@ -67,8 +92,13 @@
     [
       {
         "calculator": {
-          "divisor": 4,
-          "dividend": 23
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "23",
+            "operand2": "4"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "23 ÷ 4 = $i$ ... $i$",
@@ -77,8 +107,13 @@
       },
       {
         "calculator": {
-          "divisor": 3,
-          "dividend": 22
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "22",
+            "operand2": "3"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "22 ÷ 3 = $i$ ... $i$",
@@ -87,8 +122,13 @@
       },
       {
         "calculator": {
-          "divisor": 4,
-          "dividend": 25
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "25",
+            "operand2": "4"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "25 ÷ 4 = $i$ ... $i$",
@@ -97,8 +137,13 @@
       },
       {
         "calculator": {
-          "divisor": 5,
-          "dividend": 27
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "27",
+            "operand2": "5"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "27 ÷ 5 = $i$ ... $i$",
@@ -107,8 +152,13 @@
       },
       {
         "calculator": {
-          "divisor": 4,
-          "dividend": 30
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "30",
+            "operand2": "4"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "30 ÷ 4 = $i$ ... $i$",
@@ -119,8 +169,13 @@
     [
       {
         "calculator": {
-          "divisor": 6,
-          "dividend": 36
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "36",
+            "operand2": "6"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "36 ÷ 6 = $i$",
@@ -129,8 +184,13 @@
       },
       {
         "calculator": {
-          "divisor": 9,
-          "dividend": 72
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "72",
+            "operand2": "9"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "72 ÷ 9 = $i$",
@@ -139,8 +199,13 @@
       },
       {
         "calculator": {
-          "divisor": 6,
-          "dividend": 48
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "48",
+            "operand2": "6"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "48 ÷ 6 = $i$",
@@ -149,8 +214,13 @@
       },
       {
         "calculator": {
-          "divisor": 7,
-          "dividend": 49
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "49",
+            "operand2": "7"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "49 ÷ 7 = $i$",
@@ -159,8 +229,13 @@
       },
       {
         "calculator": {
-          "divisor": 8,
-          "dividend": 64
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "64",
+            "operand2": "8"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "64 ÷ 8 = $i$",
@@ -171,8 +246,13 @@
     [
       {
         "calculator": {
-          "divisor": 8,
-          "dividend": 58
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "58",
+            "operand2": "8"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "58 ÷ 8 = $i$ ... $i$",
@@ -181,8 +261,13 @@
       },
       {
         "calculator": {
-          "divisor": 8,
-          "dividend": 59
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "59",
+            "operand2": "8"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "59 ÷ 8 = $i$ ... $i$",
@@ -191,8 +276,13 @@
       },
       {
         "calculator": {
-          "divisor": 8,
-          "dividend": 62
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "62",
+            "operand2": "8"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "62 ÷ 8 = $i$ ... $i$",
@@ -201,8 +291,13 @@
       },
       {
         "calculator": {
-          "divisor": 8,
-          "dividend": 70
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "70",
+            "operand2": "8"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "70 ÷ 8 = $i$ ... $i$",
@@ -211,8 +306,13 @@
       },
       {
         "calculator": {
-          "divisor": 8,
-          "dividend": 69
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "69",
+            "operand2": "8"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "69 ÷ 8 = $i$ ... $i$",
@@ -223,8 +323,13 @@
     [
       {
         "calculator": {
-          "divisor": 9,
-          "dividend": 64
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "64",
+            "operand2": "9"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "64 ÷ 9 = $i$ ... $i$",
@@ -233,8 +338,13 @@
       },
       {
         "calculator": {
-          "divisor": 9,
-          "dividend": 80
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "80",
+            "operand2": "9"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "80 ÷ 9 = $i$ ... $i$",
@@ -243,8 +353,13 @@
       },
       {
         "calculator": {
-          "divisor": 9,
-          "dividend": 50
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "50",
+            "operand2": "9"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "50 ÷ 9 = $i$ ... $i$",
@@ -253,8 +368,13 @@
       },
       {
         "calculator": {
-          "divisor": 9,
-          "dividend": 62
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "62",
+            "operand2": "9"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "62 ÷ 9 = $i$ ... $i$",
@@ -263,8 +383,13 @@
       },
       {
         "calculator": {
-          "divisor": 9,
-          "dividend": 46
+          "type": "division",
+          "mode": "checkAnswer",
+          "operands": {
+            "operand1": "46",
+            "operand2": "9"
+          },
+          "unitType": "Number"
         },
         "markdown": {
           "Render": "46 ÷ 9 = $i$ ... $i$",

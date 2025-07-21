@@ -16,15 +16,19 @@
           :Data="format.Data"
           :ID="ID"
           @numberChanged="(value) => handleNumberChange(value, format.unit)"
+          @replyAnswer="
+            (isCorrect) => handleReplyAnswer(isCorrect, format.unit)
+          "
         ></NumberIncrementor>
         <span class="MA3144__unit">{{ format.unit }}</span>
       </div>
     </div>
-    <button class="MA3144__submit-btn" @click="checkAnswer">送出答案</button>
+    <button class="MA3144__submit-btn" @click="submitAnswer">送出答案</button>
   </div>
 </template>
 <script>
 import { getComponents } from "@/utilitys/get-components.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3144",
   components: {
@@ -57,6 +61,7 @@ export default {
         kg: 0,
         g: 0,
       },
+      unitCorrect: {},
     };
   },
   computed: {
@@ -73,6 +78,22 @@ export default {
     handleNumberChange(value, unit) {
       this.userAnswer[unit] = value;
     },
+    handleReplyAnswer(isCorrect, unit) {
+      this.unitCorrect[unit] = isCorrect;
+      console.log(this.unitCorrect);
+    },
+    submitAnswer() {
+      const requiredUnits = this.GameData.answerFormat.length;
+      const correctUnits = Object.keys(this.unitCorrect).length;
+      const allCorrect =
+        correctUnits === requiredUnits &&
+        Object.values(this.unitCorrect).every(Boolean);
+
+      const correctAnswer = this.GameData.correctAnswer;
+      const correctAnswerStr = this.formatAnswer(correctAnswer);
+      const userAnswerStr = this.formatAnswer(this.userAnswer);
+      this.emitResult(correctAnswerStr, userAnswerStr, allCorrect);
+    },
     formatAnswer(answer) {
       let result = "";
       if (answer.kg !== undefined && answer.kg !== 0) {
@@ -83,19 +104,6 @@ export default {
       }
       return result;
     },
-    checkAnswer() {
-      const correctAnswer = this.GameData.correctAnswer;
-      const correctAnswerStr = this.formatAnswer(correctAnswer);
-      const userAnswerStr = this.formatAnswer(this.userAnswer);
-      const isCorrect = this.isAnswerCorrect(correctAnswer);
-
-      this.emitResult(correctAnswerStr, userAnswerStr, isCorrect);
-    },
-    isAnswerCorrect(correctAnswer) {
-      return Object.keys(correctAnswer).every(
-        (unit) => this.userAnswer[unit] === correctAnswer[unit]
-      );
-    },
     emitResult(correctAnswerStr, userAnswerStr, isCorrect) {
       const result = isCorrect ? "正確" : "錯誤";
       const soundEffect = isCorrect ? "CorrectSound" : "WrongSound";
@@ -105,6 +113,8 @@ export default {
 
       if (isCorrect) {
         this.$emit("next-question");
+      } else {
+        emitter.emit("checkAnswer");
       }
     },
   },
