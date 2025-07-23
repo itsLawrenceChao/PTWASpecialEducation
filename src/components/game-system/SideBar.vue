@@ -63,6 +63,18 @@
         </div>
       </button>
       <button
+        v-if="GameStatus == 'Progressing' && showSubmitButton"
+        class="btn btn-primary text-nowrap img-hover-zoom"
+        @click="submitAnswer()"
+      >
+        <div class="d-flex align-items-center">
+          <div class="">
+            <i class="bi bi-check" />
+          </div>
+          <div class="mx-auto">送出答案</div>
+        </div>
+      </button>
+      <button
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="reloadPage()"
       >
@@ -290,6 +302,7 @@
   </div>
 </template>
 <script>
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 import gameStore from "@/stores/game";
 import { mapWritableState } from "pinia";
 import { getSystemAssets } from "@/utilitys/get_assets";
@@ -316,6 +329,10 @@ export default {
     levelAmount: {
       type: Number,
       default: 0,
+    },
+    showSubmitButton: {
+      type: Boolean,
+      default: true,
     },
   },
   emits: [
@@ -420,6 +437,9 @@ export default {
         document.documentElement.requestFullscreen();
         this.isFullScreen = true;
       }
+    },
+    submitAnswer() {
+      emitter.emit("submitAnswer");
     },
   },
 };

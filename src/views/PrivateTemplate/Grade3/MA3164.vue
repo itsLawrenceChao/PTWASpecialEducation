@@ -9,7 +9,7 @@
           @numberChanged="getAnswer"
         />
         {{ GameData.Unit }}
-        <button @click="checkAnswer">提交答案</button>
+        <!-- <button @click="checkAnswer">提交答案</button> -->
       </div>
     </div>
     <v-stage :config="configKonva">
@@ -60,6 +60,7 @@
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   components: {
     numberIncrementor: defineAsyncComponent(
@@ -114,7 +115,12 @@ export default {
     this.setRingRadius();
     this.drawOnCanvas();
   },
-
+  created() {
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
+  },
   methods: {
     initializeScene() {
       this.gameWidth = this.$refs.container.clientWidth * 0.8;

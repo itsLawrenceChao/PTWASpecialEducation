@@ -59,7 +59,7 @@
     </div>
     <div class="Buttons">
       <h3 v-if="NotFinished">請連完所有的線段</h3>
-      <button v-if="GameConfig.CheckingMode == 'OnSubmit'" @click="CheckAll">
+      <!-- <button v-if="GameConfig.CheckingMode == 'OnSubmit'" @click="CheckAll">
         送出答案
       </button>
       <button
@@ -68,7 +68,7 @@
       >
         清除所有的線
       </button>
-      <!-- <button
+      <button
           @click="PopLastLine"
           v-if="this.GameConfig.CheckingMode == 'OnSubmit'"
         >
@@ -80,6 +80,7 @@
 
 <script>
 // import { Stage, Layer, Circle, Line } from 'vue-konva';
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 import { defineAsyncComponent } from "vue";
 export default {
   name: "LinkGameV2",
@@ -195,10 +196,12 @@ export default {
       // eslint-disable-next-line vue/no-mutating-props
       this.GameConfig.CheckingMode = "OnSubmit";
     }
+    emitter.on("submitAnswer", this.CheckAll);
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.Init);
     window.removeEventListener("resize", this.ReLinktheLine);
+    emitter.off("submitAnswer", this.CheckAll);
   },
   methods: {
     // MouseDown(e, index) {

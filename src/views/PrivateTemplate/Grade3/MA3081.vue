@@ -8,12 +8,13 @@
         :Data="GameData.waterContainer"
         @update-m-l="recordAnswer"
       />
-      <button class="submit-btn" @click="checkAnswer">送出答案</button>
+      <!-- <button class="submit-btn" @click="checkAnswer">送出答案</button> -->
     </div>
   </div>
 </template>
 <script>
 import WaterScrollable from "@/components/WaterScrollable.vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3031",
   components: {
@@ -39,6 +40,12 @@ export default {
       // Add your component data here
       replyAnswerCache: "",
     };
+  },
+  created() {
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
   methods: {
     recordAnswer(answer) {

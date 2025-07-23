@@ -45,9 +45,9 @@
       </div>
     </div>
 
-    <button class="submit-btn" :disabled="!isAllFilled" @click="checkAnswer">
+    <!-- <button class="submit-btn" :disabled="!isAllFilled" @click="checkAnswer">
       送出答案
-    </button>
+    </button> -->
 
     <FloatNumPad
       v-if="showNumPad"
@@ -59,7 +59,7 @@
 
 <script>
 import FloatNumPad from "@/components/FloatNumPad.vue";
-
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3171",
   components: {
@@ -124,6 +124,10 @@ export default {
         secondRow?.end || "",
       ];
     }
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
 
   methods: {

@@ -24,22 +24,11 @@
         ></component>
       </div>
     </div>
-    <div class="right-column">
-      <div v-if="ShowPad && GameConfig.layout.pad" class="number-pad">
-        <VirtualNumPad
-          @virtualpadinputInput="Input"
-          @virtualpadinputDelete="Delete"
-          @virtualpadinput-pop="Pop"
-        />
-      </div>
-      <button class="button--submit" @click="CheckAnswer">送出答案</button>
-    </div>
     {{ NowSelect }}
   </div>
 </template>
 
 <script>
-import VirtualNumPad from "@/components/VirtualNumPadInput.vue";
 import { defineAsyncComponent } from "vue";
 import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
@@ -47,7 +36,6 @@ import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "NumberLock",
   components: {
-    VirtualNumPad,
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
     Fractions: defineAsyncComponent(() => import("@/components/Fractions.vue")),
     Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
@@ -103,66 +91,6 @@ export default {
       ShowPad: false,
       topComponentsAnswer: false,
       downComponentsAnswer: false,
-      // GameData: {
-      //   topComponent: {
-      //     Name: "TextOnly",
-      //     Data: {
-      //       Text: "Hello",
-      //     },
-      //   },
-      //   NumberPadAutoDisappear: false,
-      //   downComponent: {
-      //     Name: "Markdown",
-      //     Data: {
-      //       Render: `
-      //                       > 123432
-      //                       # Header 1
-      //                       ## Header 2
-      //                       ### Header 3
-      //                       **Bold Text**
-      //                       - List 1
-      //                       $i$ $i$ Input Box
-      //                       $i$ Input Box
-      //                       $t$ tab
-      //                       $s$ space
-      //                       $n$ new line
-      //                   `,
-      //       Answers: ["1", "2", "3"],
-      //     },
-      //   },
-      // },
-      // GameConfig: {
-      //   NumberPadAutoDisappear: false,
-      //   layout: {
-      //     top: true,
-      //     down: true,
-      //     pad: false,
-      //   },
-      //   checkAnswer: {
-      //     top: false,
-      //     down: true,
-      //   },
-      // },
-      // GameData: {
-      //   topComponent: {
-      //     Name: "TextOnly",
-      //     Data: {
-      //       Text: "有一隻小鴨停在數線1的位置。小鴨向右移動6格，會停在哪一個數字上呢?",
-      //     },
-      //   },
-      //   NumberPadAutoDisappear: false,
-      //   downComponent: {
-      //     Name: "DragOnNumberLine",
-      //     Data: {
-      //       spacing: 1,
-      //       max: 15,
-      //       min: 0,
-      //       init_pos: 1,
-      //       image: "S_1.png",
-      //       finalPosition: 7,
-      //     },
-      //   },
-      // },
     };
   },
   computed: {
@@ -188,6 +116,7 @@ export default {
       }
     }
     this.FinalData = NewArr;
+    emitter.on("submitAnswer", this.CheckAnswer);
   },
   mounted() {
     if (this.GameConfig.NumberPadAutoDisappear == false) {
@@ -195,6 +124,9 @@ export default {
       this.ShowPad = true;
     }
     document.addEventListener("click", this.NowClick);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAnswer);
   },
   methods: {
     downReply(result) {
@@ -272,9 +204,8 @@ export default {
 /* Your component-specific styles go here */
 .outter-container {
   width: 100%;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
   padding: 10px;
   border-radius: 10px;
   border: solid;
@@ -311,33 +242,6 @@ export default {
     &--down {
       flex: 1;
       min-height: 0;
-    }
-  }
-}
-.right-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: $gap--small;
-  background-color: $primary-color;
-  border-radius: $border-radius;
-  padding: $gap--small;
-  .number-pad {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .button--submit {
-    background-color: $submit-color;
-    width: 100%;
-    height: 100%;
-    min-height: 50px;
-    border-radius: $border-radius;
-    border: none;
-    font-size: $text-medium;
-    &:hover {
-      transition: 0.3s;
-      transform: scale(1.05);
     }
   }
 }

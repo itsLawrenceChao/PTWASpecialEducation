@@ -4,13 +4,13 @@
       <p class="custom-container__question">
         {{ questionText }}
       </p>
-      <button
+      <!-- <button
         type="button"
         class="custom-container__submit-btn"
         @click="checkAnswer()"
       >
         送出答案
-      </button>
+      </button> -->
     </div>
     <div class="custom-container__answer-area answer-area">
       <div class="answer-area__drag">
@@ -70,6 +70,7 @@
 import draggable from "vuedraggable";
 import CardWithButton from "@/components/CardWithButton.vue";
 import { getComponents } from "@/utilitys/get_components";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "ClassifyGame",
   components: {
@@ -114,6 +115,10 @@ export default {
   },
   created() {
     this.initializeItems();
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
   methods: {
     initializeItems() {

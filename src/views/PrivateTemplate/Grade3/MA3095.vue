@@ -4,7 +4,7 @@
       <div class="questionText">
         <FractionText :ID="ID" :text="GameData.Question" />
       </div>
-      <button class="submitBtn" @click="checkAnswer">提交答案</button>
+      <!-- <button class="submitBtn" @click="checkAnswer">提交答案</button> -->
     </div>
     <div v-if="GameData.Type == 'Ribbon'" class="options flex">
       <div class="ribbons">
@@ -75,6 +75,7 @@
 
 <script>
 import FractionText from "@/components/FractionText.vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   components: {
     FractionText,
@@ -115,7 +116,12 @@ export default {
     }
     this.setbtnStyle();
   },
-
+  created() {
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
+  },
   methods: {
     setMap() {
       this.correctOptionID = this.randomCombination(

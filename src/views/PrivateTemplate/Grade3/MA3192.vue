@@ -147,14 +147,14 @@
       </div>
     </transition>
 
-    <div class="function-btns">
+    <!-- <div class="function-btns">
       <button class="ma3192__submit-btn" @click="submitSingleAnswer">
         送出答案
       </button>
       <button v-if="nextable" class="ma3192__submit-btn" @click="nextQuestion">
         下一題
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -283,7 +283,11 @@ export default {
     this.answer = new Array(this.GameData.Questions.length).fill(null);
   },
 
+  created() {
+    emitter.on("submitAnswer", this.submitSingleAnswer);
+  },
   beforeUnmount() {
+    emitter.off("submitAnswer", this.submitSingleAnswer);
     this.removeEventListeners();
   },
 
@@ -485,6 +489,7 @@ export default {
         ]);
         if (this.currentQuestionIndex < this.questionData.length - 1) {
           this.nextable = true;
+          this.nextQuestion();
         } else {
           this.nextable = false;
           this.$emit("next-question");
@@ -508,37 +513,6 @@ export default {
         this.currentQuestionIndex++;
       }
       this.nextable = false;
-    },
-
-    checkAnswer() {
-      let isCorrect = true;
-      for (let i = 0; i < this.questionData.length; i++) {
-        if (!this.answer[i]) {
-          isCorrect = false;
-          if (this.questionData[i].Type === "DefaultDragBox") {
-            const dragBoxes = document.querySelectorAll(".ma3192__drag-box");
-            const defaultDragBoxQuestions = this.questionData
-              .map((q, idx) => ({ type: q.Type, index: idx }))
-              .filter((q) => q.type === "DefaultDragBox");
-
-            const dragBoxIndex = defaultDragBoxQuestions.findIndex(
-              (q) => q.index === i
-            );
-            if (dragBoxIndex !== -1) {
-              dragBoxes[dragBoxIndex].classList.add("ma3192__drag-box--wrong");
-            }
-          }
-        }
-      }
-      if (isCorrect) {
-        this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", ["不支援顯示", "不支援顯示", "正確"]);
-        this.$emit("next-question");
-      } else {
-        this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", ["不支援顯示", "不支援顯示", "錯誤"]);
-        emitter.emit("checkAnswer");
-      }
     },
   },
 };

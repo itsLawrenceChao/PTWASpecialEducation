@@ -41,13 +41,14 @@
         </div>
       </div>
     </div>
-    <button class="Submit" type="button" @click="CheckAnswer">送出答案</button>
+    <!-- <button class="Submit" type="button" @click="CheckAnswer">送出答案</button> -->
   </div>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
 import { getComponents } from "@/utilitys/get-components";
 import draggable from "vuedraggable";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "PairingGame",
   components: {
@@ -92,16 +93,14 @@ export default {
   created() {
     this.Selections = this.GameData.Properties;
     this.Question = this.GameData.Pairs.map((pair) => pair.Question);
-    for (var i in this.GameData.Pairs) {
+    for (let i = 0; i < this.GameData.Pairs.length; i++) {
       this.AnswersNew.push([]);
       this.AnswersOld.push([]);
     }
+    emitter.on("submitAnswer", this.CheckAnswer);
   },
-  mounted() {
-    // Code to run when the component is mounted goes here
-  },
-  methods: {
-    // Your methods go here
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAnswer);
   },
   methods: {
     PoplastAdd(index) {
@@ -125,13 +124,13 @@ export default {
     },
     CheckAnswer() {
       let AnswerCheck = true;
-      for (var i in this.FalseOption) {
+      for (let i = 0; i < this.FalseOption.length; i++) {
         this.FalseOption[i] = false;
       }
-      for (var i in this.GameData.Pairs) {
-        if (this.GameData.Pairs[i].Answer != this.AnswersNew[i][0].Tag) {
+      for (let j = 0; j < this.GameData.Pairs.length; j++) {
+        if (this.GameData.Pairs[j].Answer != this.AnswersNew[j][0].Tag) {
           AnswerCheck = false;
-          this.FalseOption[i] = true;
+          this.FalseOption[j] = true;
         }
       }
       if (AnswerCheck) {

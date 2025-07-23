@@ -58,9 +58,9 @@
         </template>
       </draggable>
 
-      <button class="game__submit-button" @click="handleSubmit">
+      <!-- <button class="game__submit-button" @click="handleSubmit">
         送出答案
-      </button>
+      </button> -->
     </div>
   </div>
 </template>
@@ -69,6 +69,7 @@
 import draggable from "vuedraggable";
 import { getComponents } from "@/utilitys/get-components.js";
 import { getSystemAssets } from "@/utilitys/get_assets.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {
   components: {
@@ -109,9 +110,13 @@ export default {
     this.init();
     this.slotComponent = this.GameData.upperComponent.Name;
     this.slotData = this.GameData.upperComponent.Data;
+    emitter.on("submitAnswer", this.CheckAnswer);
   },
   mounted() {
     this.$refs.deleteArea.$el.style.backgroundImage = `url(${this.trashBin})`;
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAnswer);
   },
   methods: {
     init() {

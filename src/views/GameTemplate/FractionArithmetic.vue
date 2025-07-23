@@ -33,9 +33,9 @@
             @replyAnswer="handleValidation"
           ></FractionForAnswer>
         </div>
-        <button class="check-answer-btn" @click="triggerValidation">
+        <!-- <button class="check-answer-btn" @click="triggerValidation">
           送出答案
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
@@ -45,6 +45,7 @@
 import { defineAsyncComponent } from "vue";
 import FractionForAnswer from "@/components/FractionForAnswer.vue";
 import FractionText from "@/components/FractionText.vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {
   name: "FractionArithmetic",
@@ -85,6 +86,12 @@ export default {
       isAnswerRight: false,
       questionType: this.GameData.question.questionType,
     };
+  },
+  created() {
+    emitter.on("submitAnswer", this.triggerValidation);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.triggerValidation);
   },
   methods: {
     handleValidation(result) {
@@ -132,7 +139,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  @extend .game-section--border;
+  // @extend .game-section--border;
 }
 
 .question__math-symbol {

@@ -17,11 +17,12 @@
       :ID="ID"
       @replyAnswer="userAnswerUpdate"
     ></Scale>
-    <button class="MA3142__submit" @click="checkAnswer">送出答案</button>
+    <!-- <button class="submit-btn" @click="submitAnswer">送出答案</button> -->
   </div>
 </template>
 <script>
 import { getComponents } from "@/utilitys/get-components.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3142",
   components: {
@@ -53,6 +54,12 @@ export default {
       userAnswer: null,
       correctAnswer: this.GameData.Answer,
     };
+  },
+  created() {
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
   methods: {
     // Your methods here

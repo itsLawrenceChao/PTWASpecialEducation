@@ -32,9 +32,9 @@
         @next-question="$emit('next-question')"
       />
     </template>
-    <div class="button-container">
+    <!-- <div class="button-container">
       <button class="submit-btn" @click="submitAnswer">送出答案</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -42,7 +42,7 @@
 import Level1 from "./games/MA3132/Level1.vue";
 import Level2 from "./games/MA3132/Level2.vue";
 import Level3 from "./games/MA3132/Level3.vue";
-
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3132",
   components: {
@@ -73,6 +73,12 @@ export default {
       gameLevel: this.GameData.GameLevel,
       boxes: this.GameData.Boxes,
     };
+  },
+  created() {
+    emitter.on("submitAnswer", this.submitAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.submitAnswer);
   },
   methods: {
     submitAnswer() {

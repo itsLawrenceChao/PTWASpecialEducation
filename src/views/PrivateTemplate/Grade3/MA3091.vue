@@ -9,9 +9,7 @@
           :Data="questionFraction"
           class="game__fraction-display"
         ></FractionDisplay>
-        <button class="game__check-answer-btn" @click="checkAnswer">
-          送出答案
-        </button>
+        <!-- <button class="game__submit" @click="submit">送出答案</button> -->
       </div>
       <DragFraction
         :Data="configFraction"
