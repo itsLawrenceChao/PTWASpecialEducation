@@ -27,6 +27,7 @@ const componentsMapping = {
   DragImages: () => import("@/components/DragImages.vue"),
   FractionDisplay: () => import("@/components/FractionDisplay.vue"),
   DecimalCalculator: () => import("@/components/DecimalCalculator.vue"),
+  CalculationBoard: () => import("@/components/CalculationBoard.vue"),
 };
 export function GetComponents(name) {
   console.warn(
