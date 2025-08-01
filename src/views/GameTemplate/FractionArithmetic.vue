@@ -18,7 +18,19 @@
             :ID="ID"
             class="math-expression__fraction"
           ></FractionDisplay>
-          <span class="question__math-symbol">{{ operation }}</span>
+          <span
+            class="question__math-symbol"
+            :class="{ clickable: mode === 'application' }"
+            @click="toggleOperation"
+          >
+            {{
+              mode === "application"
+                ? userOperation === " "
+                  ? "?"
+                  : userOperation
+                : operation
+            }}
+          </span>
           <FractionDisplay
             :Data="questionRightTerm"
             :ID="ID"
@@ -75,6 +87,7 @@ export default {
   },
   emits: ["play-effect", "add-record", "next-question"],
   data() {
+    const isApplication = !!this.GameData.answer?.operation;
     return {
       recordedAnswer: null,
       questionDescription: this.GameData.question.description,
@@ -85,21 +98,32 @@ export default {
       answerData: this.GameData.answer,
       isAnswerRight: false,
       questionType: this.GameData.question.questionType,
+      mode: isApplication ? "application" : "arithmetic",
+      userOperation: isApplication
+        ? " " // 一開始是空格
+        : this.GameData.question.operationType,
     };
-  },
-  created() {
-    emitter.on("submitAnswer", this.triggerValidation);
-  },
-  beforeUnmount() {
-    emitter.off("submitAnswer", this.triggerValidation);
   },
   methods: {
     handleValidation(result) {
       this.isAnswerRight = result;
     },
+    toggleOperation() {
+      if (this.mode === "application") {
+        this.userOperation = this.userOperation === "+" ? "-" : "+";
+      }
+    },
     triggerValidation() {
       this.$emit("add-record", this.recordedAnswer);
-      if (this.isAnswerRight) {
+
+      // 新增：應用題要比對 operation
+      let isCorrect = this.isAnswerRight;
+      if (this.mode === "application") {
+        isCorrect =
+          isCorrect && this.userOperation === this.GameData.answer.operation;
+      }
+
+      if (isCorrect) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("next-question", true);
       } else {
@@ -139,11 +163,18 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  // @extend .game-section--border;
+  gap: $gap--tiny;
+  @extend .game-section--border;
 }
 
 .question__math-symbol {
-  font-size: 5rem;
+  font-size: 2.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .question__description {
@@ -190,5 +221,13 @@ export default {
   padding: 1rem;
   border: none;
   background-color: $submit-color;
+}
+
+.question__math-symbol.clickable {
+  cursor: pointer;
+  color: #1976d2;
+  transition: color 0.2s;
+  border: 2px solid #000;
+  border-radius: 8px;
 }
 </style>

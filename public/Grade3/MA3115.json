@@ -14,7 +14,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{3}" },
           "rightTerm": { "Content": "\\frac{1}{3}" },
-          "operationType": "-",
           "description": "桌上有\\frac{2}{3}塊蔥油餅，弟弟吃掉\\frac{1}{3}塊，還剩下幾塊蔥油餅?"
         },
         "acheckCalculationData": {
@@ -22,6 +21,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 1,
           "denominator": 3
         }
@@ -30,7 +30,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{4}" },
           "rightTerm": { "Content": "\\frac{2}{4}" },
-          "operationType": "-",
           "description": "桌上有\\frac{4}{4}塊紅豆大餅，弟弟吃掉\\frac{2}{4}塊，還剩下幾塊紅豆大餅?"
         },
         "acheckCalculationData": {
@@ -38,6 +37,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 2,
           "denominator": 4
         }
@@ -46,7 +46,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{4}" },
           "rightTerm": { "Content": "\\frac{1}{4}" },
-          "operationType": "-",
           "description": "桌上有\\frac{3}{4}塊蔥油餅，弟弟吃掉\\frac{1}{4}塊，還剩下幾塊蔥油餅?"
         },
         "acheckCalculationData": {
@@ -54,6 +53,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 2,
           "denominator": 4
         }
@@ -62,7 +62,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{3}" },
           "rightTerm": { "Content": "\\frac{2}{3}" },
-          "operationType": "-",
           "description": "桌上有\\frac{3}{3}塊紅豆大餅，弟弟吃掉\\frac{2}{3}塊，還剩下幾塊紅豆大餅?"
         },
         "acheckCalculationData": {
@@ -70,6 +69,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 1,
           "denominator": 3
         }
@@ -78,7 +78,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{4}" },
           "rightTerm": { "Content": "\\frac{1}{4}" },
-          "operationType": "-",
           "description": "桌上有\\frac{4}{4}塊蔥油餅，弟弟吃掉\\frac{1}{4}塊，還剩下幾塊蔥油餅?"
         },
         "acheckCalculationData": {
@@ -86,6 +85,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 3,
           "denominator": 4
         }
@@ -96,7 +96,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{5}" },
           "rightTerm": { "Content": "\\frac{1}{5}" },
-          "operationType": "-",
           "description": "哥哥想做蛋糕，第一次用了\\frac{1}{5}公斤的糖，第二次再加了一些糖，總共用了\\frac{4}{5}公斤的糖，哥哥第二次加了\\frac{3}{5}公斤的糖?"
         },
         "acheckCalculationData": {
@@ -104,6 +103,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 3,
           "denominator": 5
         }
@@ -112,7 +112,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{6}" },
           "rightTerm": { "Content": "\\frac{1}{6}" },
-          "operationType": "-",
           "description": "媽媽想做焦糖布丁，第一次用了\\frac{1}{6}公斤的糖，第二次再加了一些糖，總共用了\\frac{4}{6}公斤的糖，媽媽第二次加了\\frac{3}{6}公斤的糖?"
         },
         "acheckCalculationData": {
@@ -120,6 +119,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 3,
           "denominator": 6
         }
@@ -128,7 +128,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{5}{6}" },
           "rightTerm": { "Content": "\\frac{2}{6}" },
-          "operationType": "-",
           "description": "哥哥想做蛋糕，第一次用了\\frac{2}{6}公斤的糖，第二次再加了一些糖，總共用了\\frac{5}{6}公斤的糖，哥哥第二次加了\\frac{3}{6}公斤的糖?"
         },
         "acheckCalculationData": {
@@ -136,6 +135,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 3,
           "denominator": 6
         }
@@ -144,7 +144,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{5}" },
           "rightTerm": { "Content": "\\frac{1}{5}" },
-          "operationType": "-",
           "description": "媽媽想做焦糖布丁，第一次用了\\frac{1}{5}公斤的糖，第二次再加了一些糖，總共用了\\frac{3}{5}公斤的糖，媽媽第二次加了\\frac{2}{5}公斤的糖?"
         },
         "acheckCalculationData": {
@@ -152,6 +151,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 2,
           "denominator": 5
         }
@@ -160,7 +160,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{5}" },
           "rightTerm": { "Content": "\\frac{2}{5}" },
-          "operationType": "-",
           "description": "哥哥想做蛋糕，第一次用了\\frac{2}{5}公斤的糖，第二次再加了一些糖，總共用了\\frac{4}{5}公斤的糖，哥哥第二次加了\\frac{2}{5}公斤的糖?"
         },
         "acheckCalculationData": {
@@ -168,6 +167,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 2,
           "denominator": 5
         }
@@ -178,7 +178,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{7}" },
           "rightTerm": { "Content": "\\frac{2}{7}" },
-          "operationType": "-",
           "description": "桌上有一個披薩，姐姐吃了\\frac{4}{7}個，弟弟比姐姐少吃\\frac{2}{7}個，弟弟吃了幾個披薩?"
         },
         "acheckCalculationData": {
@@ -186,6 +185,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 2,
           "denominator": 7
         }
@@ -194,7 +194,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{6}{8}" },
           "rightTerm": { "Content": "\\frac{4}{8}" },
-          "operationType": "-",
           "description": "桌上有一個蛋糕，姐姐吃了\\frac{6}{8}個，弟弟比姐姐少吃\\frac{4}{8}個，弟弟吃了幾個蛋糕?"
         },
         "acheckCalculationData": {
@@ -202,6 +201,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 2,
           "denominator": 8
         }
@@ -210,7 +210,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{5}{8}" },
           "rightTerm": { "Content": "\\frac{4}{8}" },
-          "operationType": "-",
           "description": "桌上有一個披薩，姐姐吃了\\frac{5}{8}個，弟弟比姐姐少吃\\frac{4}{8}個，弟弟吃了幾個披薩?"
         },
         "acheckCalculationData": {
@@ -218,6 +217,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 1,
           "denominator": 8
         }
@@ -226,7 +226,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{5}{8}" },
           "rightTerm": { "Content": "\\frac{3}{8}" },
-          "operationType": "-",
           "description": "桌上有一個蛋糕，姐姐吃了\\frac{5}{8}個，弟弟比姐姐少吃\\frac{3}{8}個，弟弟吃了幾個蛋糕?"
         },
         "acheckCalculationData": {
@@ -234,6 +233,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 2,
           "denominator": 8
         }
@@ -242,7 +242,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{6}{7}" },
           "rightTerm": { "Content": "\\frac{5}{7}" },
-          "operationType": "-",
           "description": "桌上有一個披薩，姐姐吃了\\frac{6}{7}個，弟弟比姐姐少吃\\frac{5}{7}個，弟弟吃了幾個披薩?"
         },
         "acheckCalculationData": {
@@ -250,6 +249,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 1,
           "denominator": 7
         }
@@ -260,7 +260,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{9}{9}" },
           "rightTerm": { "Content": "\\frac{3}{9}" },
-          "operationType": "-",
           "description": "一盒糖果有9顆，姊姊買了1盒，送給朋友一些後，還剩下\\frac{3}{9}盒，姐姐送給朋友幾盒糖果?"
         },
         "acheckCalculationData": {
@@ -268,6 +267,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 6,
           "denominator": 9
         }
@@ -276,7 +276,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{10}{10}" },
           "rightTerm": { "Content": "\\frac{7}{10}" },
-          "operationType": "-",
           "description": "一盒巧克力有10顆，姊姊買了1盒，送給朋友一些後，還剩下\\frac{7}{10}盒，姐姐送給朋友幾盒巧克力?"
         },
         "acheckCalculationData": {
@@ -284,6 +283,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 3,
           "denominator": 10
         }
@@ -292,7 +292,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{10}{10}" },
           "rightTerm": { "Content": "\\frac{3}{10}" },
-          "operationType": "-",
           "description": "一盒糖果有10顆，姊姊買了1盒，送給朋友一些後，還剩下\\frac{3}{10}盒，姐姐送給朋友幾盒糖果?"
         },
         "acheckCalculationData": {
@@ -300,6 +299,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 7,
           "denominator": 10
         }
@@ -308,7 +308,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{9}{9}" },
           "rightTerm": { "Content": "\\frac{7}{9}" },
-          "operationType": "-",
           "description": "一盒巧克力有9顆，姊姊買了1盒，送給朋友一些後，還剩下\\frac{7}{9}盒，姐姐送給朋友幾盒巧克力?"
         },
         "acheckCalculationData": {
@@ -316,6 +315,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 2,
           "denominator": 9
         }
@@ -324,7 +324,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{10}{10}" },
           "rightTerm": { "Content": "\\frac{6}{10}" },
-          "operationType": "-",
           "description": "一盒糖果有10顆，姊姊買了1盒，送給朋友一些後，還剩下\\frac{6}{10}盒，姐姐送給朋友幾盒糖果?"
         },
         "acheckCalculationData": {
@@ -332,6 +331,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 4,
           "denominator": 10
         }
@@ -342,7 +342,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{11}{11}" },
           "rightTerm": { "Content": "\\frac{3}{11}" },
-          "operationType": "-",
           "description": "家裡有一瓶1公升的牛奶，弟弟喝了一些，還剩下\\frac{3}{11}公升，弟弟喝了幾公升的牛奶?"
         },
         "acheckCalculationData": {
@@ -350,6 +349,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 8,
           "denominator": 11
         }
@@ -358,7 +358,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{11}{11}" },
           "rightTerm": { "Content": "\\frac{7}{11}" },
-          "operationType": "-",
           "description": "水壺裡面原本有一些水，再倒入\\frac{7}{11}公升後，剛好是1公升，水壺裡面本來有幾公升的水?"
         },
         "acheckCalculationData": {
@@ -366,6 +365,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 4,
           "denominator": 11
         }
@@ -374,7 +374,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{12}{12}" },
           "rightTerm": { "Content": "\\frac{8}{12}" },
-          "operationType": "-",
           "description": "家裡有一瓶1公升的牛奶，弟弟喝了一些，還剩下\\frac{8}{12}公升，弟弟喝了幾公升的牛奶?"
         },
         "acheckCalculationData": {
@@ -382,6 +381,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 4,
           "denominator": 12
         }
@@ -390,7 +390,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{12}{12}" },
           "rightTerm": { "Content": "\\frac{2}{12}" },
-          "operationType": "-",
           "description": "水壺裡面原本有一些水，再倒入\\frac{2}{12}公升後，剛好是1公升，水壺裡面本來有幾公升的水?"
         },
         "acheckCalculationData": {
@@ -398,6 +397,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 10,
           "denominator": 12
         }
@@ -406,7 +406,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{12}{12}" },
           "rightTerm": { "Content": "\\frac{3}{12}" },
-          "operationType": "-",
           "description": "家裡有一瓶1公升的牛奶，弟弟喝了一些，還剩下\\frac{3}{12}公升，弟弟喝了幾公升的牛奶?"
         },
         "acheckCalculationData": {
@@ -414,6 +413,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "-",
           "numerator": 9,
           "denominator": 12
         }
