@@ -13,7 +13,7 @@
         >
           <v-layer ref="RectContainer">
             <v-rect
-              v-for="(item, index) in Rects"
+              v-for="(item, index) in rects"
               :key="index"
               :config="item"
               @pointerdown="StartDrawing(index)"
@@ -24,6 +24,22 @@
               :config="item"
               @pointerdown="StartDrawing(index)"
             />
+            <v-group
+              v-for="(item, index) in FractionTexts"
+              :key="`fraction-${index}`"
+              :config="{ x: item.x, y: item.y }"
+              @pointerdown="StartDrawing(item.rectIndex)"
+            >
+              <KonvaFractionText
+                :numerator="item.numerator"
+                :denominator="item.denominator"
+                :x="0"
+                :y="0"
+                :fontSize="item.fontSize"
+                :color="item.color"
+                :align="item.align"
+              />
+            </v-group>
           </v-layer>
           <v-layer ref="layer">
             <v-image :config="ImageConfig" />
@@ -34,11 +50,7 @@
             />
           </v-layer>
           <v-layer ref="LineLayer">
-            <v-line
-              v-for="(item, index) in Lines"
-              :key="index"
-              :config="item"
-            />
+            <v-line v-for="line in lines" :key="line.id" :config="line" />
           </v-layer>
         </v-stage>
       </div>
@@ -52,8 +64,13 @@
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
+import KonvaFractionText from "@/components/KonvaFractionText.vue";
+
 export default {
   name: "LinktoImageGame",
+  components: {
+    KonvaFractionText,
+  },
   props: {
     GameData: {
       type: Object,
@@ -75,19 +92,18 @@ export default {
         width: 700,
         height: 500,
       },
-      Rects: [],
-      Lines: [],
+      rects: [],
+      lines: [], // 取代 Lines
+      currentLineId: null, // 取代 currentLine 直接存物件
+      linksByRect: new Map(), // rectIndex -> lineId
+      linksByPoint: new Map(), // pointIndex -> lineId
       Texts: [],
-      LineLayer: [],
-      OnDrawingLine: {},
+      FractionTexts: [],
       ImageConfig: {},
       ImageMountPoint: [],
       MinGap: 10,
-      OnDrawingRectIndex: null,
-      OnDrawing: false,
       Pair: [],
       FontSize: 20,
-      LinkedRecord: [],
       SelectionHeight: 50,
       RectCornerRaduis: 15,
       randomColorlist: [
@@ -173,75 +189,80 @@ export default {
     emitter.off("submitAnswer", this.CheckAllAnswer);
   },
   methods: {
-    StartDrawing(index) {
-      // 檢查這個矩形是否已經有連線
-      for (let i = this.LinkedRecord.length - 1; i >= 0; i--) {
-        if (this.LinkedRecord[i][0] === index) {
-          // 移除該連線
-          this.LinkedRecord.splice(i, 1);
-          this.Lines.splice(i, 1);
-        }
-      }
+    StartDrawing(rectIndex) {
+      // 若該 rect 已連過線，先刪除舊線
+      const oldId = this.linksByRect.get(rectIndex);
+      if (oldId) this.removeLine(oldId);
 
-      this.OnDrawingRectIndex = index;
-      this.OnDrawing = true;
-      // 創建新的線條並添加到 Lines 數組
-      const newLine = {
+      const start = this.rects[rectIndex];
+      const id = crypto.randomUUID
+        ? crypto.randomUUID()
+        : String(Date.now() + Math.random());
+
+      const line = {
+        id,
+        rectIndex,
+        pointIndex: null, // 還沒接到點
         points: [
-          this.Rects[index].x + this.Rects[index].width / 2,
-          this.Rects[index].y + this.Rects[index].height / 2,
-          this.Rects[index].x + this.Rects[index].width / 2,
-          this.Rects[index].y + this.Rects[index].height / 2,
+          start.x + start.width / 2,
+          start.y + start.height / 2,
+          start.x + start.width / 2,
+          start.y + start.height / 2,
         ],
         stroke: "black",
         strokeWidth: 10,
         lineCap: "round",
         lineJoin: "round",
       };
-      this.Lines.push(newLine);
-      this.currentLine = newLine; // 保存對當前線的引用
-    },
 
+      this.lines.push(line);
+      this.currentLineId = id;
+    },
     Drawing() {
-      if (this.OnDrawing && this.currentLine) {
-        let MousePos = this.$refs.stage.getNode().getPointerPosition();
-        this.currentLine.points.splice(2, 2, MousePos.x, MousePos.y);
-        this.$refs.LineLayer.getNode().batchDraw(); // 使用 batchDraw 來優化性能
-      }
+      if (!this.currentLineId) return;
+      const line = this.lines.find((l) => l.id === this.currentLineId);
+      if (!line) return;
+      const { x, y } = this.$refs.stage.getNode().getPointerPosition();
+      line.points.splice(2, 2, x, y);
+      this.$refs.LineLayer.getNode().batchDraw();
     },
     EndDrawing() {
-      if (!this.OnDrawing) {
-        return;
-      }
-      let MousePos = this.$refs.stage.getNode().getPointerPosition();
-      let point = this.WhichMountPoint(MousePos.x, MousePos.y);
+      if (!this.currentLineId) return;
+      const { x, y } = this.$refs.stage.getNode().getPointerPosition();
+      const pointIndex = this.WhichMountPoint(x, y);
+      const line = this.lines.find((l) => l.id === this.currentLineId);
 
-      if (point === -1) {
-        // 如果沒有連接到有效的點，刪除最後添加的線
-        this.Lines.pop();
+      if (pointIndex === -1) {
+        // 沒接到點 -> 移除暫存線
+        this.removeLine(this.currentLineId);
       } else {
-        // 檢查這個點是否已經有連線
-        for (let i = this.LinkedRecord.length - 1; i >= 0; i--) {
-          if (this.LinkedRecord[i][1] === point) {
-            // 移除該連線
-            this.LinkedRecord.splice(i, 1);
-            this.Lines.splice(i, 1);
-          }
-        }
+        // 若該點已有線，先刪除舊線
+        const oldId = this.linksByPoint.get(pointIndex);
+        if (oldId) this.removeLine(oldId);
 
-        // 更新線的終點為有效的連接點
-        this.currentLine.points.splice(
+        // 完成線
+        line.points.splice(
           2,
           2,
-          this.ImageMountPoint[point].x,
-          this.ImageMountPoint[point].y
+          this.ImageMountPoint[pointIndex].x,
+          this.ImageMountPoint[pointIndex].y
         );
-        this.LinkedRecord.push([this.OnDrawingRectIndex, point]);
+        line.pointIndex = pointIndex;
+
+        this.linksByRect.set(line.rectIndex, line.id);
+        this.linksByPoint.set(pointIndex, line.id);
       }
 
-      this.OnDrawing = false;
-      this.currentLine = null;
+      this.currentLineId = null;
       this.$refs.LineLayer.getNode().batchDraw();
+    },
+    removeLine(id) {
+      const idx = this.lines.findIndex((l) => l.id === id);
+      if (idx === -1) return;
+      const line = this.lines[idx];
+      if (line.pointIndex !== null) this.linksByPoint.delete(line.pointIndex);
+      this.linksByRect.delete(line.rectIndex);
+      this.lines.splice(idx, 1);
     },
     WhichMountPoint(x, y) {
       for (let i = 0; i < this.ImageMountPoint.length; i++) {
@@ -273,8 +294,8 @@ export default {
     MarkWrongLine(start, end) {
       let WrongLine = {
         points: [
-          this.Rects[start].x + this.Rects[start].width / 2,
-          this.Rects[start].y + this.Rects[start].height / 2,
+          this.rects[start].x + this.rects[start].width / 2,
+          this.rects[start].y + this.rects[start].height / 2,
           this.ImageMountPoint[end].x,
           this.ImageMountPoint[end].y,
         ],
@@ -293,45 +314,34 @@ export default {
       }
     },
     CheckAllAnswer() {
-      let WrongAnsIndexs = [];
-      let WrongAmount = 0;
-      let Pass = false;
-      for (let i in this.LinkedRecord) {
-        let ans = false;
-        for (let j in this.Pair) {
-          if (
-            this.LinkedRecord[i][0] == this.Pair[j][1] &&
-            this.LinkedRecord[i][1] == this.Pair[j][0]
-          ) {
-            ans = true;
-          }
-        }
-        if (ans == false) {
-          WrongAnsIndexs.push(i);
-          WrongAmount++;
-          this.MarkWrongLine(this.LinkedRecord[i][0], this.LinkedRecord[i][1]);
+      const answerSet = new Set(this.Pair.map(([p, r]) => `${p}-${r}`));
+
+      let wrong = [];
+      for (const l of this.lines) {
+        if (l.pointIndex === null) continue; // 忽略未接完的線
+        const key = `${l.pointIndex}-${l.rectIndex}`;
+        if (!answerSet.has(key)) wrong.push(l.id);
+      }
+
+      // 標紅錯線
+      for (const id of wrong) {
+        const line = this.lines.find((l) => l.id === id);
+        if (line) {
+          line.stroke = "red";
         }
       }
-      if (this.LinkedRecord.length != this.Pair.length) {
-        // this.ErrorMesseagesSwitch.AllAnswerNotFinish = true;
-      } else {
-        // this.ErrorMesseagesSwitch.AllAnswerNotFinish = false;
-      }
-      if (this.LinkedRecord.length == this.Pair.length && WrongAmount == 0) {
-        this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", ["不支援", "不支援", "正確"]);
-        this.$emit("next-question");
-        Pass = true;
-      } else {
-        this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", ["不支援", "不支援", "正確"]);
-        Pass = false;
-      }
-      return {
-        WrongAmount: WrongAmount,
-        WrongAnsIndexs: WrongAnsIndexs,
-        Pass: Pass,
-      };
+      this.$refs.LineLayer.getNode().batchDraw();
+
+      const pass =
+        wrong.length === 0 &&
+        this.lines.filter((l) => l.pointIndex !== null).length ===
+          this.Pair.length;
+
+      this.$emit("play-effect", pass ? "CorrectSound" : "WrongSound");
+      this.$emit("add-record", ["不支援", "不支援", pass ? "正確" : "錯誤"]);
+      if (pass) this.$emit("next-question");
+
+      return { WrongAmount: wrong.length, WrongAnsIndexs: wrong, Pass: pass };
     },
     Pop() {
       if (this.LinkedRecord.length > 0) {
@@ -345,18 +355,46 @@ export default {
       this.Lines = [];
       this.$refs.LineLayer.getNode().batchDraw();
     },
-    addText({ x, y, width, text }) {
-      this.Texts.push({
-        x: x,
-        y: y,
-        text: text,
-        align: "center",
-        width: width,
-        fontSize: this.FontSize,
-      });
+    parseLatexFraction(latexString) {
+      // 解析 LaTeX 格式的分數，例如 "\\frac{1}{4}" -> {numerator: "1", denominator: "4"}
+      const match = latexString.match(/\\frac\{([^}]+)\}\{([^}]+)\}/);
+      if (match) {
+        return {
+          numerator: match[1],
+          denominator: match[2],
+        };
+      }
+      return null;
+    },
+    addText({ x, y, width, text, rectIndex }) {
+      // 檢查是否為 LaTeX 分數格式
+      const fractionData = this.parseLatexFraction(text);
+      if (fractionData) {
+        // 如果是分數，添加到 FractionTexts
+        this.FractionTexts.push({
+          x: x + width / 2, // 居中顯示
+          y: y - 10, // 垂直居中
+          numerator: fractionData.numerator,
+          denominator: fractionData.denominator,
+          fontSize: Math.max(this.FontSize - 4, 12), // 稍微小一點的字體
+          color: "#111827",
+          align: "center",
+          rectIndex: rectIndex,
+        });
+      } else {
+        // 如果是普通文字，添加到 Texts
+        this.Texts.push({
+          x: x,
+          y: y,
+          text: text,
+          align: "center",
+          width: width,
+          fontSize: this.FontSize,
+        });
+      }
     },
     addRect(x, y, width, height) {
-      this.Rects.push({
+      this.rects.push({
         x: x,
         y: y,
         width: width,
@@ -393,6 +431,7 @@ export default {
             y: (this.SelectionHeight - this.FontSize) / 2,
             text: item,
             width: RectWidth,
+            rectIndex: index,
           });
         });
       } else {
@@ -413,6 +452,7 @@ export default {
               y: (this.SelectionHeight - this.FontSize) / 2,
               width: RectWidth,
               text: item,
+              rectIndex: index,
             });
           } else {
             this.addRect(
@@ -423,9 +463,10 @@ export default {
             );
             this.addText({
               x: this.MinGap + parseInt(index / 2) * (RectWidth + this.MinGap),
-              y: this.stageConfig.height - this.SelectionHeight / 2 - 10, // 10 is magic number
+              y: this.stageConfig.height - this.SelectionHeight / 2 - 10,
               text: item,
               width: RectWidth,
+              rectIndex: index,
             });
           }
         });
