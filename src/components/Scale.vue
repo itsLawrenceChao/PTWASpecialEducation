@@ -226,13 +226,13 @@ export default {
         const startX = centerX + innerRadius * Math.cos(angle);
         const startY = centerY + innerRadius * Math.sin(angle);
 
-        // 主要刻度（每10個刻度一個長刻度）
+        // 500克刻度（每10個刻度一個長刻度）
         if (i % 10 === 0) {
-          context.lineWidth = shape.getAttr("strokeWidth") * 2;
+          context.lineWidth = shape.getAttr("strokeWidth") * 3;
           const longEndX =
-            centerX + (outerRadius + this.gameWidth * 0.008) * Math.cos(angle);
+            centerX + (outerRadius + this.gameWidth * 0.015) * Math.cos(angle);
           const longEndY =
-            centerY + (outerRadius + this.gameWidth * 0.008) * Math.sin(angle);
+            centerY + (outerRadius + this.gameWidth * 0.015) * Math.sin(angle);
           context.moveTo(startX, startY);
           context.lineTo(longEndX, longEndY);
 
@@ -246,7 +246,19 @@ export default {
           context.textBaseline = "middle";
           const weight = (i * 50) % 3000;
           context.fillText(weight.toString(), labelX, labelY);
-        } else {
+        }
+        // 100克刻度（每2個刻度一個中等長度刻度）
+        else if (i % 2 === 0) {
+          context.lineWidth = shape.getAttr("strokeWidth") * 2;
+          const mediumEndX =
+            centerX + (outerRadius + this.gameWidth * 0.012) * Math.cos(angle);
+          const mediumEndY =
+            centerY + (outerRadius + this.gameWidth * 0.012) * Math.sin(angle);
+          context.moveTo(startX, startY);
+          context.lineTo(mediumEndX, mediumEndY);
+        }
+        // 50克刻度（短刻度）
+        else {
           context.lineWidth = shape.getAttr("strokeWidth");
           // 短刻度線外端與長刻度線外端切齊，但內端更靠近中心
           const shortStartX =
