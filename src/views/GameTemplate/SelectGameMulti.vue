@@ -57,13 +57,14 @@
 </template>
 
 <script>
-import { getComponents } from "@/utilitys/get_components";
+import { getComponents } from "@/utilitys/get-components";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "SelectGameMulti",
   components: {
     TextOnly: getComponents("TextOnly"),
     ImageContainer: getComponents("ImageContainer"),
+    DragImages: getComponents("DragImages"),
   },
   props: {
     GameData: {
