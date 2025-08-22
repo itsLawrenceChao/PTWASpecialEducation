@@ -23,7 +23,7 @@
         <span class="MA3144__unit">{{ format.unit }}</span>
       </div>
     </div>
-    <button class="MA3144__submit-btn" @click="submitAnswer">送出答案</button>
+    <!-- <button class="submit-btn" @click="submitAnswer">送出答案</button> -->
   </div>
 </template>
 <script>
@@ -69,9 +69,13 @@ export default {
   },
   created() {
     // Your created hook here
+    emitter.on("submitAnswer", this.submitAnswer);
   },
   mounted() {
     // Your mounted hook here
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.submitAnswer);
   },
   methods: {
     // Your methods here

@@ -84,13 +84,13 @@
           </template>
         </draggable>
       </div>
-      <button
+      <!-- <button
         v-if="GameConfig.CheckAnswerMode == 'Button'"
         class="SucessButton"
         @click="CheckAllAnswer"
       >
         送出答案
-      </button>
+      </button> -->
       <!-- <button @click="Triger" class="btn btn-primary">Triger</button> -->
     </section>
   </div>
@@ -98,7 +98,8 @@
 <script>
 import draggable from "vuedraggable";
 import { defineAsyncComponent } from "vue";
-import { GetComponents } from "@/utilitys/get-components.js";
+import { getComponents } from "@/utilitys/get-components.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "CompareGame",
   components: {
@@ -110,12 +111,12 @@ export default {
       () => import("@/components/ImageWithText.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
-    CoulorBarChart: GetComponents("CoulorBarChart"),
-    CircleChart: GetComponents("CircleChart"),
-    ImageTable: GetComponents("ImageTable"),
-    DrawImage: GetComponents("DrawImage"),
-    NumberBoard: GetComponents("NumberBoard"),
-    FractionDisplay: GetComponents("FractionDisplay"),
+    CoulorBarChart: getComponents("CoulorBarChart"),
+    CircleChart: getComponents("CircleChart"),
+    ImageTable: getComponents("ImageTable"),
+    DrawImage: getComponents("DrawImage"),
+    NumberBoard: getComponents("NumberBoard"),
+    FractionDisplay: getComponents("FractionDisplay"),
   },
   props: {
     GameData: {
@@ -169,6 +170,10 @@ export default {
       this.ImageDatas.push(TempImg);
     });
     this.Symbol = this.BSESymbol;
+    emitter.on("submitAnswer", this.CheckAllAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAllAnswer);
   },
   methods: {
     Triger() {

@@ -45,16 +45,10 @@
         </div>
       </div>
     </transition>
-    <div class="function-btns">
-      <!-- <button @click="prevQuestion" class="SubmitAnswer" v-if="currentQuestionIndex != 0">上一題</button> -->
-      <!-- <button @click="nextQuestion" class="SubmitAnswer" v-if="currentQuestionIndex != this.currentQuestion.Selection.length -1">下一題</button> -->
-      <!-- <button @click="CheckAnswer" class="SubmitAnswer">送出答案</button> -->
-
-      <button class="SubmitAnswer" @click="submitSingleAnswer">送出答案</button>
-      <button v-if="nextable" class="SubmitAnswer" @click="nextQuestion">
-        下一題
-      </button>
-    </div>
+    <!-- 送出答案按鈕已移至 SideBar -->
+    <button v-if="nextable" class="SubmitAnswer" @click="nextQuestion">
+      下一題
+    </button>
     <!-- <div class="error-messeage" >
         <p>請將所有答案作答完成</p>
         <p>答案錯誤，請再試一次</p>
@@ -63,12 +57,14 @@
 </template>
 
 <script>
-import { getComponents } from "@/utilitys/get_components";
+import { getComponents } from "@/utilitys/get-components";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "SelectGameMulti",
   components: {
     TextOnly: getComponents("TextOnly"),
     ImageContainer: getComponents("ImageContainer"),
+    DragImages: getComponents("DragImages"),
   },
   props: {
     GameData: {
@@ -104,6 +100,7 @@ export default {
     Array.from({ length: this.GameData.Questions.length }).forEach(() => {
       this.SelectionRecord.push(null);
     });
+    emitter.on("submitAnswer", this.CheckAnswer);
   },
   mounted() {
     let Container = document.getElementsByClassName("Container")[0];
@@ -111,6 +108,9 @@ export default {
     if (this.GameData.SlotComponent == undefined) {
       Container.style.gridTemplateColumns = "1fr";
     }
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAnswer);
   },
   methods: {
     SelectItem(index, selection) {

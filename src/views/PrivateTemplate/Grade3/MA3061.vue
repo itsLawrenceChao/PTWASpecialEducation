@@ -12,13 +12,14 @@
         :Data="markdownData"
         @ReplyAnswer="updataAnswer"
       ></Markdown>
-      <button class="game__submit" @click="submit">送出答案</button>
+      <!-- <button class="game__submit" @click="submit">送出答案</button> -->
     </div>
   </div>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
 import Markdown from "@/components/Markdown.vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3061",
   components: {
@@ -54,6 +55,12 @@ export default {
       markdownData: this.GameData.markdown,
       userAnswer: false,
     };
+  },
+  created() {
+    emitter.on("submitAnswer", this.submit);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.submit);
   },
   methods: {
     updataAnswer(answer) {

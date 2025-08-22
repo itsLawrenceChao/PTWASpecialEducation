@@ -64,6 +64,7 @@
           :sort="false"
           item-key="name"
           class="compare-game__symbol"
+          @add="onAddSymbol"
         >
           <template #item="{ element }">
             <div class="compare-game__option clickable">
@@ -106,9 +107,9 @@
           </template>
         </draggable>
       </div>
-      <button class="compare-game__check-button" @click="checkAllAnswers">
+      <!-- <button class="compare-game__check-button" @click="checkAllAnswers">
         檢查答案
-      </button>
+      </button> -->
     </section>
   </div>
 </template>
@@ -116,6 +117,7 @@
 <script>
 import draggable from "vuedraggable";
 import { defineAsyncComponent } from "vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "CompareGame",
   components: {
@@ -184,6 +186,10 @@ export default {
   },
   created() {
     this.initializeGame();
+    emitter.on("submitAnswer", this.checkAllAnswers);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAllAnswers);
   },
   methods: {
     initializeGame() {
@@ -191,12 +197,16 @@ export default {
     },
     checkAllAnswers() {
       let allCorrect = true;
-      const userAnswer = this.userAnswer[0]?.tag;
-      const correctAnswer = this.gameData.Answer;
-      console.log(correctAnswer, userAnswer);
-      if (correctAnswer !== userAnswer) {
+      if (this.userAnswer.length !== 1) {
         allCorrect = false;
-        console.log("錯誤");
+      } else {
+        const userAnswer = this.userAnswer[0]?.tag;
+        const correctAnswer = this.gameData.Answer;
+        console.log(correctAnswer, userAnswer);
+        if (correctAnswer !== userAnswer) {
+          allCorrect = false;
+          console.log("錯誤");
+        }
       }
 
       if (!this.slotComponentAnswers.every((answer) => answer === true)) {
@@ -221,6 +231,10 @@ export default {
     },
     handleSlotComponentReply(index, answer) {
       this.slotComponentAnswers[index] = answer;
+    },
+    onAddSymbol(evt) {
+      // 只保留最新拖進來的那個
+      this.userAnswer = [evt.item._underlying_vm_];
     },
   },
 };

@@ -40,14 +40,14 @@
         </template>
       </div>
 
-      <button class="submit-btn" @click="submitAnswer">送出答案</button>
+      <!-- <button class="submit-btn" @click="submitAnswer">送出答案</button> -->
     </div>
   </div>
 </template>
 
 <script>
 import { defineAsyncComponent } from "vue";
-
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "FractionGame",
   components: {
@@ -99,9 +99,10 @@ export default {
   },
   created() {
     this.initializeQuestion();
+    emitter.on("submitAnswer", this.submitAnswer);
   },
-  mounted() {
-    // Your mounted hook here
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.submitAnswer);
   },
   methods: {
     initializeQuestion() {

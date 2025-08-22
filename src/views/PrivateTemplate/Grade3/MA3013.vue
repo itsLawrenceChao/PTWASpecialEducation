@@ -23,7 +23,7 @@
           :Data="numberInputData"
           @reply-answer="numberBoardReply"
         />
-        <button class="btn-submit" @click="checkAnswer">送出答案</button>
+        <!-- <button class="btn-submit" @click="checkAnswer">送出答案</button> -->
       </div>
     </div>
   </div>
@@ -98,9 +98,13 @@ export default {
       Ones: this.answerArr[3],
     };
     document.addEventListener("click", this.nowClicked);
+    emitter.on("submitAnswer", this.checkAnswer);
   },
   mounted() {
     // Lifecycle hook when the component is mounted
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
   methods: {
     // Add your component methods here

@@ -31,14 +31,7 @@
             <i class="bi bi-x-lg" />
           </button>
         </div>
-        <button
-          type="button"
-          class="Submit"
-          :class="{ OnSubmit: Answer != null }"
-          @click="CheckAnswer"
-        >
-          送出答案
-        </button>
+        <!-- 送出答案按鈕已移至 SideBar -->
       </div>
     </div>
   </div>

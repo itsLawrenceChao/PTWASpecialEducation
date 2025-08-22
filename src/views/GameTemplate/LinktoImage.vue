@@ -42,15 +42,16 @@
           </v-layer>
         </v-stage>
       </div>
-      <div class="Functions">
+      <!-- <div class="Functions">
         <button @click="CheckAllAnswer">送出答案</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "LinktoImageGame",
   props: {
@@ -156,6 +157,7 @@ export default {
 
     this.configRect();
     this.configPoint();
+    emitter.on("submitAnswer", this.CheckAllAnswer);
   },
   mounted() {
     // Stage border
@@ -166,6 +168,9 @@ export default {
     let RectContainer = this.$refs.RectContainer.getNode();
     RectContainer.moveToTop();
     RectContainer.draw();
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAllAnswer);
   },
   methods: {
     StartDrawing(index) {

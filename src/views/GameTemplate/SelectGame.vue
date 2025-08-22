@@ -26,14 +26,6 @@
             {{ i }}
           </button>
         </div>
-        <button
-          type="button"
-          class="button--submit"
-          :class="{ 'button--onsubmit': Answer != null }"
-          @click="CheckAnswer"
-        >
-          送出答案
-        </button>
       </div>
       <div v-else class="container__buttom">
         <div class="info__card">
@@ -51,15 +43,6 @@
             >
               {{ i }}
             </button>
-            <hr />
-            <button
-              type="button"
-              class="button--submit"
-              :class="{ 'button--onsubmit': Answer != null }"
-              @click="CheckAnswer"
-            >
-              送出答案
-            </button>
           </div>
         </div>
       </div>
@@ -69,6 +52,7 @@
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import { getComponents } from "@/utilitys/get-components.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "SelectGame",
   components: {
@@ -112,11 +96,15 @@ export default {
       this.SlotComponent = SlotComponentData.Name;
     }
     console.log(this.imageUrl);
+    emitter.on("submitAnswer", this.CheckAnswer);
   },
   mounted() {
     // let selection = document.getElementsByClassName('selection')[0];
     // selection.style.width = '100%';
     // selection.flexDirection = 'row';
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAnswer);
   },
   methods: {
     SelectItem(index) {

@@ -111,6 +111,7 @@
             :download_data="download_data"
             :level-amount="GameData.Questions.length"
             :reappeareCode="questionOrder"
+            :show-submit-button="shouldShowSubmitButton"
             @toCsv="ToCSV"
             @previousQuestion="previousQuestion"
             @next-question="nextQuestion"
@@ -345,6 +346,25 @@ export default {
         WrongTimes: this.WrongTimes,
         MaxWrongTimes: this.MaxWrongTimes,
       };
+    },
+    // 自動判斷是否需要送出答案按鈕
+    shouldShowSubmitButton() {
+      // 如果 GameConfig 中有明確設定，優先使用
+      if (this.GameConfig.showSubmitButton !== undefined) {
+        return this.GameConfig.showSubmitButton;
+      }
+
+      // 根據遊戲類型自動判斷
+      const noSubmitButtonGames = [
+        "WhackaMole",
+        "RacingCar",
+        "Airplane",
+        "BalloonShooting",
+        "Track",
+        "Maze",
+      ];
+
+      return !noSubmitButtonGames.includes(this.gameType);
     },
   },
   created() {

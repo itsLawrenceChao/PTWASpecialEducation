@@ -24,7 +24,7 @@
           />
         </div>
 
-        <button class="submit" @click="checkAnswer">檢查答案</button>
+        <!-- <button class="submit" @click="checkAnswer">檢查答案</button> -->
       </div>
     </div>
   </div>
@@ -120,9 +120,13 @@ export default {
   created() {
     this.calculatorData = this.GameData.calculator;
     this.markdownData = this.GameData.markdown;
+    emitter.on("submitAnswer", this.checkAnswer);
   },
   mounted() {
     // Lifecycle hook when component is mounted
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
   methods: {
     checkAnswer() {

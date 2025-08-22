@@ -146,7 +146,7 @@
         </div>
       </div>
       <div class="buttons">
-        <button class="submit-btn" @click="CheckAnswer">送出答案</button>
+        <!-- 送出答案按鈕已移至 SideBar -->
       </div>
     </div>
   </div>

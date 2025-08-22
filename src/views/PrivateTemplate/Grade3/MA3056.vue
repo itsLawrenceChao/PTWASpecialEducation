@@ -11,12 +11,13 @@
         @reply-answer="getComponentsReply"
       />
     </div>
-    <button class="submit-btn" @click="checkAnswer">送出答案</button>
+    <!-- <button class="submit-btn" @click="checkAnswer">送出答案</button> -->
   </div>
 </template>
 
 <script>
 import DrawShapes from "@/components/DrawShapes.vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3056",
   components: {
@@ -57,6 +58,10 @@ export default {
   created() {
     // Add your created methods here
     this.configDrawShapes.answer = this.GameData.answer;
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
   methods: {
     // Add your component methods here
