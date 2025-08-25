@@ -4,7 +4,11 @@
       <h2>{{ GameData.Question }}</h2>
       <v-stage :config="configKonva">
         <v-layer>
-          <v-image v-for="(road, index) in configRoad" :key="index" :config="road" />
+          <v-image
+            v-for="(road, index) in configRoad"
+            :key="index"
+            :config="road"
+          />
         </v-layer>
 
         <v-layer>
@@ -17,11 +21,23 @@
             :key="index"
             :config="tunnel"
           />
-          <v-rect v-for="(box, index) in configTextBox" :key="index" :config="box" />
-          <v-text v-for="(option, index) in configOption" :key="index" :config="option" />
+          <v-rect
+            v-for="(box, index) in configTextBox"
+            :key="index"
+            :config="box"
+          />
+          <v-text
+            v-for="(option, index) in configOption"
+            :key="index"
+            :config="option"
+          />
         </v-layer>
         <v-layer>
-          <v-image v-for="(smoke, index) in configSmoke" :key="index" :config="smoke" />
+          <v-image
+            v-for="(smoke, index) in configSmoke"
+            :key="index"
+            :config="smoke"
+          />
           <v-image :config="configEndingImage" />
         </v-layer>
       </v-stage>
@@ -29,9 +45,17 @@
     <div id="btnContainer">
       <img :src="upBtn" class="controlBtn" @click="getCurrentOptionId('up')" />
       <br />
-      <img :src="rightBtn" class="controlBtn" @click="getCurrentOptionId('right')" />
+      <img
+        :src="rightBtn"
+        class="controlBtn"
+        @click="getCurrentOptionId('right')"
+      />
       <br />
-      <img :src="downBtn" class="controlBtn" @click="getCurrentOptionId('down')" />
+      <img
+        :src="downBtn"
+        class="controlBtn"
+        @click="getCurrentOptionId('down')"
+      />
     </div>
   </div>
 </template>
@@ -39,7 +63,6 @@
 <script>
 import { getGameAssets, getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent, withScopeId } from "vue";
 
 export default {
   props: {
@@ -139,12 +162,23 @@ export default {
         x: this.gameWidth + this.laneWidth * 0.85,
         y: this.laneWidth * 0.325,
       };
+      let fontSize = this.laneWidth * 0.4;
       for (var i = 0; i < this.options.length; i++) {
+        if (this.options[i].length > 5) {
+          fontSize = this.laneWidth * 0.15;
+        } else if (this.options[i].length > 3) {
+          fontSize = this.laneWidth * 0.2;
+        }
         let option = {
           x: canvasTools.offset(this.configRoad[i], this.optionOffset).x,
           y: canvasTools.offset(this.configRoad[i], this.optionOffset).y,
-          fontSize: this.laneWidth * 0.4,
+          fontSize: fontSize,
           text: this.options[i],
+          wrap: "word",
+          width: this.laneWidth * 0.8,
+          align: "center",
+          padding: 5,
+          lineHeight: 1.2,
         };
         this.configOption.push(option);
       }
@@ -216,7 +250,10 @@ export default {
         case "up":
           if (
             this.configCar.y >
-            canvasTools.offset(this.configRoad[this.currentOptionId], this.carOffset).y
+            canvasTools.offset(
+              this.configRoad[this.currentOptionId],
+              this.carOffset
+            ).y
           ) {
             this.configCar.y -= this.speed * 4;
             this.configCar.rotation = -10;
@@ -230,7 +267,10 @@ export default {
         case "down":
           if (
             this.configCar.y <
-            canvasTools.offset(this.configRoad[this.currentOptionId], this.carOffset).y
+            canvasTools.offset(
+              this.configRoad[this.currentOptionId],
+              this.carOffset
+            ).y
           ) {
             this.configCar.y += this.speed * 4;
             this.configCar.rotation = 10;
@@ -292,7 +332,8 @@ export default {
     },
     checkAnswer() {
       if (
-        this.options[this.currentOptionId] == this.GameData.Options[this.GameData.Answer]
+        this.options[this.currentOptionId] ==
+        this.GameData.Options[this.GameData.Answer]
       ) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
@@ -386,12 +427,15 @@ export default {
         y: this.gameWidth * 0.25,
       };
       this.configSmoke[3].x +=
-        canvasTools.unitVector(canvasTools.center(this.configSmoke[3]), center).x * 5;
+        canvasTools.unitVector(canvasTools.center(this.configSmoke[3]), center)
+          .x * 5;
       this.configSmoke[3].y +=
-        canvasTools.unitVector(canvasTools.center(this.configSmoke[3]), center).y * 5;
+        canvasTools.unitVector(canvasTools.center(this.configSmoke[3]), center)
+          .y * 5;
       if (this.configSmoke[3].height <= this.gameWidth * 0.5)
         this.configSmoke[3].height += 3;
-      if (this.configSmoke[3].width <= this.gameWidth) this.configSmoke[3].width += 6;
+      if (this.configSmoke[3].width <= this.gameWidth)
+        this.configSmoke[3].width += 6;
       else
         setTimeout(() => {
           this.$emit("next-question");
@@ -400,7 +444,10 @@ export default {
     moveEndingImage() {
       this.configEndingImage.x = canvasTools.center(this.configSmoke[3]).x;
       this.configEndingImage.y = canvasTools.center(this.configSmoke[3]).y;
-      if (this.configEndingImage.image.height * 2 > this.configEndingImage.image.width) {
+      if (
+        this.configEndingImage.image.height * 2 >
+        this.configEndingImage.image.width
+      ) {
         this.configEndingImage.height = this.configSmoke[3].height * 0.75;
         this.configEndingImage.width =
           (this.configEndingImage.height * this.configEndingImage.image.width) /
