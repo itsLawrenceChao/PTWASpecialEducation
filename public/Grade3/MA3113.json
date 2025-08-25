@@ -14,7 +14,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{1}{3}" },
           "rightTerm": { "Content": "\\frac{1}{3}" },
-          "operationType": "+",
           "description": "一盒蘋果有3顆，媽媽先吃了\\frac{1}{3}盒，又吃了\\frac{1}{3}盒，媽媽一共吃了幾盒蘋果?"
         },
         "acheckCalculationData": {
@@ -22,6 +21,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 2,
           "denominator": 3
         }
@@ -30,7 +30,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{4}" },
           "rightTerm": { "Content": "\\frac{1}{4}" },
-          "operationType": "+",
           "description": "一盒水蜜桃有4顆，媽媽先吃了\\frac{2}{4}盒，又吃了\\frac{1}{4}盒，媽媽一共吃了幾盒水蜜桃?"
         },
         "acheckCalculationData": {
@@ -38,6 +37,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 3,
           "denominator": 4
         }
@@ -46,7 +46,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{3}" },
           "rightTerm": { "Content": "\\frac{1}{3}" },
-          "operationType": "+",
           "description": "一盒水蜜桃有3顆，媽媽先吃了\\frac{2}{3}盒，又吃了\\frac{1}{3}盒，媽媽一共吃了幾盒水蜜桃?"
         },
         "acheckCalculationData": {
@@ -54,6 +53,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 3,
           "denominator": 3
         }
@@ -62,7 +62,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{1}{4}" },
           "rightTerm": { "Content": "\\frac{1}{4}" },
-          "operationType": "+",
           "description": "一盒蘋果有4顆，媽媽先吃了\\frac{1}{4}盒，又吃了\\frac{1}{4}盒，媽媽一共吃了幾盒蘋果?"
         },
         "acheckCalculationData": {
@@ -70,6 +69,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 2,
           "denominator": 4
         }
@@ -78,7 +78,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{4}" },
           "rightTerm": { "Content": "\\frac{1}{4}" },
-          "operationType": "+",
           "description": "一盒蘋果有4顆，媽媽先吃了\\frac{2}{4}盒，又吃了\\frac{1}{4}盒，媽媽一共吃了幾盒蘋果?"
         },
         "acheckCalculationData": {
@@ -86,6 +85,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 3,
           "denominator": 4
         }
@@ -96,7 +96,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{5}" },
           "rightTerm": { "Content": "\\frac{1}{5}" },
-          "operationType": "+",
           "description": "爸爸買了一個披薩，先吃了\\frac{2}{5}個後，又吃了\\frac{1}{5}個，爸爸一共吃了幾個披薩?"
         },
         "acheckCalculationData": {
@@ -104,6 +103,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 3,
           "denominator": 5
         }
@@ -112,7 +112,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{6}" },
           "rightTerm": { "Content": "\\frac{3}{6}" },
-          "operationType": "+",
           "description": "爸爸買了一個蛋糕，先吃了\\frac{3}{6}個後，又吃了\\frac{3}{6}個，爸爸一共吃了幾個蛋糕?"
         },
         "acheckCalculationData": {
@@ -120,6 +119,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 6,
           "denominator": 6
         }
@@ -128,7 +128,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{5}" },
           "rightTerm": { "Content": "\\frac{1}{5}" },
-          "operationType": "+",
           "description": "爸爸買了一個披薩，先吃了\\frac{3}{5}個後，又吃了\\frac{1}{5}個，爸爸一共吃了幾個披薩?"
         },
         "acheckCalculationData": {
@@ -136,6 +135,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 4,
           "denominator": 5
         }
@@ -144,7 +144,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{5}" },
           "rightTerm": { "Content": "\\frac{2}{5}" },
-          "operationType": "+",
           "description": "爸爸買了一個蛋糕，先吃了\\frac{2}{5}個後，又吃了\\frac{2}{5}個，爸爸一共吃了幾個蛋糕?"
         },
         "acheckCalculationData": {
@@ -152,6 +151,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 4,
           "denominator": 5
         }
@@ -160,7 +160,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{6}" },
           "rightTerm": { "Content": "\\frac{3}{6}" },
-          "operationType": "+",
           "description": "爸爸買了一個披薩，先吃了\\frac{2}{6}個後，又吃了\\frac{3}{6}個，爸爸一共吃了幾個披薩?"
         },
         "acheckCalculationData": {
@@ -168,6 +167,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 5,
           "denominator": 6
         }
@@ -178,7 +178,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{7}" },
           "rightTerm": { "Content": "\\frac{4}{7}" },
-          "operationType": "+",
           "description": "媽媽把\\frac{2}{7}公升的牛奶，混合\\frac{4}{7}公升的紅茶做成奶茶，奶茶一共多少公升?"
         },
         "acheckCalculationData": {
@@ -186,6 +185,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 6,
           "denominator": 7
         }
@@ -194,7 +194,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{8}" },
           "rightTerm": { "Content": "\\frac{2}{8}" },
-          "operationType": "+",
           "description": "媽媽把\\frac{4}{8}公升的冬瓜茶，混合\\frac{2}{8}公升的檸檬汁做成冬瓜檸檬，冬瓜檸檬一共多少公升?"
         },
         "acheckCalculationData": {
@@ -202,6 +201,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 6,
           "denominator": 8
         }
@@ -210,7 +210,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{5}{7}" },
           "rightTerm": { "Content": "\\frac{2}{7}" },
-          "operationType": "+",
           "description": "媽媽把\\frac{5}{7}公升的牛奶，混合\\frac{2}{7}公升的紅茶做成奶茶，奶茶一共多少公升?"
         },
         "acheckCalculationData": {
@@ -218,6 +217,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 7,
           "denominator": 7
         }
@@ -226,7 +226,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{6}{8}" },
           "rightTerm": { "Content": "\\frac{1}{8}" },
-          "operationType": "+",
           "description": "媽媽把\\frac{6}{8}公升的冬瓜茶，混合\\frac{1}{8}公升的檸檬汁做成冬瓜檸檬，冬瓜檸檬一共多少公升?"
         },
         "acheckCalculationData": {
@@ -234,6 +233,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 7,
           "denominator": 8
         }
@@ -242,7 +242,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{8}" },
           "rightTerm": { "Content": "\\frac{2}{8}" },
-          "operationType": "+",
           "description": "媽媽把\\frac{3}{8}公升的牛奶，混合\\frac{2}{8}公升的紅茶做成奶茶，奶茶一共多少公升?"
         },
         "acheckCalculationData": {
@@ -250,6 +249,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 5,
           "denominator": 8
         }
@@ -260,7 +260,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{10}" },
           "rightTerm": { "Content": "\\frac{2}{10}" },
-          "operationType": "+",
           "description": "一盒甜甜圈有10個，姐姐吃了\\frac{4}{10}盒，弟弟吃了\\frac{2}{10}盒，兩人共吃了幾盒甜甜圈?"
         },
         "acheckCalculationData": {
@@ -268,6 +267,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 6,
           "denominator": 10
         }
@@ -276,7 +276,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{9}" },
           "rightTerm": { "Content": "\\frac{1}{9}" },
-          "operationType": "+",
           "description": "一盒巧克力有9個，姐姐吃了\\frac{3}{9}盒，弟弟吃了\\frac{1}{9}盒，兩人共吃了幾盒巧克力?"
         },
         "acheckCalculationData": {
@@ -284,6 +283,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 4,
           "denominator": 9
         }
@@ -292,7 +292,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{2}{9}" },
           "rightTerm": { "Content": "\\frac{4}{9}" },
-          "operationType": "+",
           "description": "一盒巧克力有9個，姐姐吃了\\frac{2}{9}盒，弟弟吃了\\frac{4}{9}盒，兩人共吃了幾盒巧克力?"
         },
         "acheckCalculationData": {
@@ -300,6 +299,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 6,
           "denominator": 9
         }
@@ -308,7 +308,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{7}{9}" },
           "rightTerm": { "Content": "\\frac{2}{9}" },
-          "operationType": "+",
           "description": "一盒巧克力有9個，姐姐吃了\\frac{7}{9}盒，弟弟吃了\\frac{2}{9}盒，兩人共吃了幾盒巧克力?"
         },
         "acheckCalculationData": {
@@ -316,6 +315,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 9,
           "denominator": 9
         }
@@ -324,7 +324,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{4}{10}" },
           "rightTerm": { "Content": "\\frac{3}{10}" },
-          "operationType": "+",
           "description": "一盒甜甜圈有10個，姐姐吃了\\frac{4}{10}盒，弟弟吃了\\frac{3}{10}盒，兩人共吃了幾盒甜甜圈?"
         },
         "acheckCalculationData": {
@@ -332,6 +331,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 7,
           "denominator": 10
         }
@@ -342,7 +342,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{10}" },
           "rightTerm": { "Content": "\\frac{5}{10}" },
-          "operationType": "+",
           "description": "家裡有一些雞蛋，做蛋糕用掉\\frac{3}{10}盒的雞蛋，剩下\\frac{5}{10}盒，家裡原本有幾盒的雞蛋?"
         },
         "acheckCalculationData": {
@@ -350,6 +349,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 8,
           "denominator": 10
         }
@@ -358,7 +358,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{3}{12}" },
           "rightTerm": { "Content": "\\frac{5}{12}" },
-          "operationType": "+",
           "description": "家裡有一些米，煮飯用掉\\frac{3}{12}公斤的米，剩下\\frac{5}{12}公斤，家裡原來有幾公斤的米?"
         },
         "acheckCalculationData": {
@@ -366,6 +365,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 8,
           "denominator": 12
         }
@@ -374,7 +374,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{6}{10}" },
           "rightTerm": { "Content": "\\frac{3}{10}" },
-          "operationType": "+",
           "description": "家裡有一些雞蛋，做蛋糕用掉\\frac{6}{10}盒的雞蛋，剩下\\frac{3}{10}盒，家裡原本有幾盒的雞蛋?"
         },
         "acheckCalculationData": {
@@ -382,6 +381,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 9,
           "denominator": 10
         }
@@ -390,7 +390,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{7}{12}" },
           "rightTerm": { "Content": "\\frac{4}{12}" },
-          "operationType": "+",
           "description": "家裡有一些米，煮飯用掉\\frac{7}{12}公斤的米，剩下\\frac{4}{12}公斤，家裡原來有幾公斤的米?"
         },
         "acheckCalculationData": {
@@ -398,6 +397,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 11,
           "denominator": 12
         }
@@ -406,7 +406,6 @@
         "question": {
           "leftTerm": { "Content": "\\frac{7}{10}" },
           "rightTerm": { "Content": "\\frac{3}{10}" },
-          "operationType": "+",
           "description": "家裡有一些雞蛋，做蛋糕用掉\\frac{7}{10}盒的雞蛋，剩下\\frac{3}{10}盒，家裡原本有幾盒的雞蛋?"
         },
         "acheckCalculationData": {
@@ -414,6 +413,7 @@
           "verifyOption": "value"
         },
         "answer": {
+          "operation": "+",
           "numerator": 10,
           "denominator": 10
         }
