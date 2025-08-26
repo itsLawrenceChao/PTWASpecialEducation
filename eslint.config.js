@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import vue from "eslint-plugin-vue";
 import prettier from "eslint-config-prettier";
+import globals from "globals";
 
 export default [
   js.configs.recommended,
@@ -11,7 +12,8 @@ export default [
       ecmaVersion: "latest",
       sourceType: "module",
       globals: {
-        node: true,
+        ...globals.browser,
+        ...globals.node,
       },
       parser: vue.parser,
       parserOptions: {
@@ -46,6 +48,16 @@ export default [
     files: ["**/FractionText.vue"],
     rules: {
       "vue/no-v-html": "off",
+    },
+  },
+  {
+    files: ["electron/**/*.{js,ts}"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.node, // 這行會讓 ESLint 認得 process、__dirname 等 Node 全域
+      },
     },
   },
   prettier,
