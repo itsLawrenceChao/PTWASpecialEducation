@@ -7,11 +7,11 @@
       :style="{ backgroundImage: `url(${scratchSheetBackground})` }"
     ></div>
 
-    <GameHeader
+    <game-header
       :grade="Grade"
       :game-name="gameName"
       :subject="Subjects[Subject]"
-      @previousPage="previousPage"
+      @previous-page="previousPage"
     />
     <section>
       <div class="">
@@ -22,10 +22,10 @@
               :totaltime="totaltime"
               :questions="GameData.Questions"
               :nowlevel="Nowlevel"
-              @pauseTimer="pauseTimer"
-              @resetTimer="resetTimer"
-              @startTimer="startTimer"
-              @resetWrongTimer="resetWrongTimes"
+              @pause-timer="pauseTimer"
+              @reset-timer="resetTimer"
+              @start-timer="startTimer"
+              @reset-wrong-timer="resetWrongTimes"
             />
             <div class="row Game_Component">
               <!-- Dynamic import component -->
@@ -75,7 +75,7 @@
                   @timer-start="startTimer"
                   @timer-pause="pauseTimer"
                   @timer-reset="resetTimer"
-                  @calculatorTool="
+                  @calculator-tool="
                     () => {
                       calculatorToolVisible = true;
                     }
@@ -96,8 +96,8 @@
                 <GameOver
                   v-if="GameStatus == 'Done'"
                   @restart="reloadPage"
-                  @downloadRecord="ToCSV"
-                  @previousPage="previousPage"
+                  @download-record="ToCSV"
+                  @previous-page="previousPage"
                 />
               </div>
             </div>
@@ -110,14 +110,14 @@
             :Hint="Hint"
             :download_data="download_data"
             :level-amount="GameData.Questions.length"
-            :reappeareCode="questionOrder"
+            :reappeare-code="questionOrder"
             :show-submit-button="shouldShowSubmitButton"
-            @toCsv="ToCSV"
-            @previousQuestion="previousQuestion"
+            @to-csv="ToCSV"
+            @previous-question="previousQuestion"
             @next-question="nextQuestion"
-            @startGame="startGame"
+            @start-game="startGame"
             @reload-page="reloadPage"
-            @calculatorTool="
+            @calculator-tool="
               () => {
                 calculatorToolVisible = true;
               }
@@ -128,7 +128,7 @@
               <hintbutton
                 v-if="GameStatus == 'Progressing' && Hint['Type'] != 'Method'"
                 :HintInfo="hintInfo"
-                @openHintModal="openMediaModal"
+                @open-hint-modal="openMediaModal"
               />
             </template>
           </SideBar>
@@ -139,7 +139,7 @@
       v-if="calculatorToolVisible"
       :visible="calculatorToolVisible"
       @close="calculatorToolVisible = false"
-      @saveCanvas="saveCanvasBackground"
+      @save-canvas="saveCanvasBackground"
     />
     <TechModal
       v-if="showMediaModal"
@@ -155,7 +155,7 @@ import fetchJson from "@/utilitys/fetch-json.js";
 import * as Arr2CSV from "@/utilitys/array2csv.js";
 import GameStart from "@/components/game-system/GameStart.vue";
 import GameOver from "@/components/game-system/GameOver.vue";
-import Header from "@/components/game-system/header.vue";
+import GameHeader from "@/components/game-system/GameHeader.vue";
 import LevelAndTime from "@/components/game-system/LevelAndTime.vue";
 import MediaModal from "@/components/game-system/MediaModal.vue";
 import hintbutton from "@/components/game-system/hintbutton.vue";
@@ -168,12 +168,13 @@ import { soundManager } from "@/utilitys/sound-manager.js";
 import TechModal from "@/components/game-system/TechModal.vue";
 import CalculatorTool from "@/components/game-system/CalculatorTool.vue";
 export default {
+  name: "GameInterface",
   components: {
     TechModal,
     hintbutton,
     GameStart,
     GameOver,
-    GameHeader: Header,
+    GameHeader,
     LevelAndTime,
     MediaModal,
     LinkGame: defineAsyncComponent(
@@ -369,7 +370,7 @@ export default {
     this.Nowlevel = 1;
     (async () => {
       try {
-        let res = await fetchJson(`./Grade${this.Grade}/${this.gameID}.json`);
+        const res = await fetchJson(`./Grade${this.Grade}/${this.gameID}.json`);
         this.GameData = res.data;
         this.gameType = this.GameData.GameType;
         this.GameConfig = this.GameData.GameConfig;
@@ -406,13 +407,13 @@ export default {
   },
   methods: {
     randomChoice() {
-      let question = [];
+      const question = [];
       let checkcorrect = true;
-      let record = [];
-      for (let i in this.GameData.Questions) {
+      const record = [];
+      for (const i in this.GameData.Questions) {
         if (this.GameData.Questions[i].length != undefined) {
-          let num = this.GameData.Questions[i].length;
-          let rand = Math.floor(Math.random() * (num - 0 + 0));
+          const num = this.GameData.Questions[i].length;
+          const rand = Math.floor(Math.random() * (num - 0 + 0));
           question.push(this.GameData.Questions[i][rand]);
           record.push(rand);
         } else {
@@ -433,8 +434,8 @@ export default {
     },
     reappearCode() {
       if (this.gameCode == "origin") return;
-      let reappear = this.gameCode.split("-");
-      let question = [];
+      const reappear = this.gameCode.split("-");
+      const question = [];
       reappear.forEach((element, index) => {
         question.push(this.questionCopy[index][element]);
       });
@@ -459,7 +460,7 @@ export default {
     },
     ToCSV(data = this.download_data, defaultheader = true) {
       if (defaultheader) {
-        let download = Arr2CSV.MadeCsvFile(
+        const download = Arr2CSV.MadeCsvFile(
           this.gameID,
           this.gameName,
           this.Grade,
@@ -470,7 +471,7 @@ export default {
         );
         Arr2CSV.DownloadCSV(download, this.gameName);
       } else {
-        let download = Arr2CSV.MadeCsvFile(
+        const download = Arr2CSV.MadeCsvFile(
           this.gameID,
           this.gameName,
           this.Grade,
@@ -637,7 +638,7 @@ export default {
     },
     fullScreen() {
       try {
-        let elem = document.documentElement;
+        const elem = document.documentElement;
         if (elem.requestFullscreen) {
           elem.requestFullscreen();
         } else if (elem.webkitRequestFullscreen) {

@@ -1,6 +1,6 @@
 <template>
   <!-- <img class="tech-modal__content" :src="mediaSrc" /> -->
-  <Modal @close="closeModal">
+  <base-modal @close="closeModal">
     <div class="tech-modal__container">
       <div class="tech-modal__title">
         <h1>教學影片</h1>
@@ -16,7 +16,7 @@
         <button class="button-close" @click="closeModal">關閉</button>
       </div>
     </div>
-  </Modal>
+  </base-modal>
 </template>
 
 <script>
@@ -27,11 +27,11 @@ import {
 } from "@/utilitys/get_assets.js";
 import gameStore from "@/stores/game";
 import { mapWritableState } from "pinia";
-import Modal from "@/components/game-system/Modal.vue";
+import BaseModal from "@/components/game-system/BaseModal.vue";
 export default {
   name: "TechVideo",
   components: {
-    Modal,
+    BaseModal,
   },
   props: {
     mediaData: {
@@ -57,7 +57,7 @@ export default {
     // if mediaData is not given, use default tech video, if both are not available, load 404 image
     console.log(this.gameId, this.mediaData);
     if (this.mediaData == undefined) {
-      let defaultTechVideo = this.checkDefaultMediaAvailability();
+      const defaultTechVideo = this.checkDefaultMediaAvailability();
       if (defaultTechVideo == "") {
         this.load404Image();
         this.isVideo = false;
@@ -66,7 +66,7 @@ export default {
         this.isVideo = this.checkGivenMediaType(this.mediaSrc) === "video";
       }
     } else {
-      let userGivenTechVideo = this.checkUserGivenMediaAvailability();
+      const userGivenTechVideo = this.checkUserGivenMediaAvailability();
       if (userGivenTechVideo == "") {
         this.load404Image();
         this.isVideo = false;

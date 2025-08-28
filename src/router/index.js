@@ -23,7 +23,7 @@ const router = createRouter({
       path: "/:Grade/:Subject/:id/:GameName",
       name: "Game",
       meta: { transition: "fade" },
-      component: () => import("@/views/Game.vue"),
+      component: () => import("@/views/GameInterface.vue"),
     },
     {
       path: "/DrawImage",
