@@ -14,7 +14,7 @@
 <script>
 import { getSlotComponentAssets } from "../utilitys/get_assets";
 export default {
-  name: "Water",
+  name: "WaterDisplay",
   props: {
     Data: {
       type: Object,
@@ -47,31 +47,31 @@ export default {
   },
   methods: {
     drawCups() {
-      let Outter = this.$refs.Outter;
-      let border = Math.min(Outter.clientWidth, Outter.clientHeight) - 10;
-      let dpr = window.devicePixelRatio || 1;
+      const Outter = this.$refs.Outter;
+      const border = Math.min(Outter.clientWidth, Outter.clientHeight) - 10;
+      const dpr = window.devicePixelRatio || 1;
 
       for (let i = 0; i < this.numberOfCups; i++) {
-        let canvas = this.$refs[`Cup-${i}`][0];
+        const canvas = this.$refs[`Cup-${i}`][0];
         canvas.width = border * dpr;
         canvas.height = border * dpr;
         canvas.style.width = `${border}px`;
         canvas.style.height = `${border}px`;
 
-        let ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d");
         ctx.scale(dpr, dpr);
 
         // Draw Cup
-        let img = new Image();
+        const img = new Image();
         img.onload = () => {
           // 1. 先畫水
-          let ml =
+          const ml =
             i === this.numberOfCups - 1
               ? this.remainingMl === 0
                 ? this.configs.Scale
                 : this.remainingMl
               : this.configs.Scale;
-          let [StartX, StartY, EndX, EndY] = this.ContDrawInfo(
+          const [StartX, StartY, EndX, EndY] = this.ContDrawInfo(
             this.configs.Scale,
             ml,
             dpr
@@ -102,7 +102,7 @@ export default {
       let StartY = 0;
       let EndX = 0;
       let EndY = 0;
-      let canvas = this.$refs[`Cup-${this.numberOfCups - 1}`][0];
+      const canvas = this.$refs[`Cup-${this.numberOfCups - 1}`][0];
       if (Scale == 1000) {
         StartX = (canvas.width / 15) * 2;
         EndX = (canvas.width / 15) * 11 + 2;

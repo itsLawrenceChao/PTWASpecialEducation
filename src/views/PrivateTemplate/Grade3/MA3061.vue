@@ -7,18 +7,17 @@
     >
     </DragToAlign>
     <div class="qestion-and-submit">
-      <Markdown
+      <MarkdownRenderer
         class="game__qestion"
         :Data="markdownData"
-        @ReplyAnswer="updataAnswer"
-      ></Markdown>
+        @reply-answer="updataAnswer"
+      />
       <!-- <button class="game__submit" @click="submit">送出答案</button> -->
     </div>
   </div>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
-import Markdown from "@/components/Markdown.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3061",
@@ -26,7 +25,9 @@ export default {
     DragToAlign: defineAsyncComponent(
       () => import("@/components/DragToAlign.vue")
     ),
-    Markdown,
+    MarkdownRenderer: defineAsyncComponent(
+      () => import("@/components/MarkdownRenderer.vue")
+    ),
   },
   props: {
     GameData: {

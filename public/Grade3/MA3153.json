@@ -21,7 +21,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "8.6是$i$個1和$i$個0.1合起來的",
             "Answer": ["8", "6"]
@@ -38,7 +38,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "3.7是$i$個1和$i$個0.1合起來的",
             "Answer": ["3", "7"]
@@ -55,7 +55,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "4.5是$i$個1和$i$個0.1合起來的",
             "Answer": ["4", "5"]
@@ -72,7 +72,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "2.4是$i$個1和$i$個0.1合起來的",
             "Answer": ["2", "4"]
@@ -89,7 +89,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "6.7是$i$個1和$i$個0.1合起來的",
             "Answer": ["6", "7"]
@@ -108,7 +108,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "10個0.1合起來是$i$",
             "Answer": ["1"]
@@ -125,7 +125,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "65個0.1合起來是$i$",
             "Answer": ["6.5"]
@@ -142,7 +142,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "89個0.1合起來是$i$",
             "Answer": ["8.9"]
@@ -159,7 +159,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "22個0.1合起來是$i$",
             "Answer": ["2.2"]
@@ -176,7 +176,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "43個0.1合起來是$i$",
             "Answer": ["4.3"]
@@ -195,7 +195,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "4個1和9個0.1合起來是$i$",
             "Answer": ["4.9"]
@@ -212,7 +212,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "8個1和3個0.1合起來是$i$",
             "Answer": ["8.3"]
@@ -229,7 +229,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "5個1和1個0.1合起來是$i$",
             "Answer": ["5.1"]
@@ -246,7 +246,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "6個1和6個0.1合起來是$i$",
             "Answer": ["6.6"]
@@ -263,7 +263,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "9個1和9個0.1合起來是$i$",
             "Answer": ["9.9"]
@@ -282,7 +282,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "2個1和10個0.1合起來是$i$",
             "Answer": ["3"]
@@ -299,7 +299,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "4個1和11個0.1合起來是$i$",
             "Answer": ["5.1"]
@@ -316,7 +316,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "6個1和15個0.1合起來是$i$",
             "Answer": ["7.5"]
@@ -333,7 +333,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "8個1和12個0.1合起來是$i$",
             "Answer": ["9.2"]
@@ -350,7 +350,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "3個1和14個0.1合起來是$i$",
             "Answer": ["4.4"]

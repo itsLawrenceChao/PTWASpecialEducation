@@ -21,7 +21,7 @@
 import { getSlotComponentAssets } from "../utilitys/get_assets";
 
 export default {
-  name: "Water",
+  name: "WaterScrollable",
   props: {
     Data: {
       type: Object,

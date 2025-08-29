@@ -6,7 +6,7 @@
 <script>
 import { getSlotComponentAssets } from "../utilitys/get_assets";
 export default {
-  name: "Clock",
+  name: "AnalogClock",
   props: {
     ID: {
       type: String,
@@ -32,13 +32,13 @@ export default {
 
   methods: {
     drawClock() {
-      let canvas = this.$refs.Clock;
-      let ctx = canvas.getContext("2d");
-      let border = Math.min(
+      const canvas = this.$refs.Clock;
+      const ctx = canvas.getContext("2d");
+      const border = Math.min(
         this.$refs.Outter.clientWidth,
         this.$refs.Outter.clientHeight
       );
-      let dpr = window.devicePixelRatio || 1; // 獲取設備像素比率
+      const dpr = window.devicePixelRatio || 1; // 獲取設備像素比率
 
       canvas.width = border * dpr;
       canvas.height = border * dpr;
@@ -48,7 +48,7 @@ export default {
 
       ctx.scale(dpr, dpr); // 根據設備像素比率縮放畫布
 
-      let img = new Image();
+      const img = new Image();
       img.src = getSlotComponentAssets("Clock", "Clock.png");
       img.onload = function () {
         ctx.drawImage(img, 0, 0, border, border);
@@ -66,8 +66,8 @@ export default {
       }
 
       if (this.Data.sec !== undefined && this.Data.sec !== "") {
-        let Lsec = (border / 2) * 0.7;
-        let sec = new Vector(border / 2, border / 2, this.Data.sec * 6, Lsec);
+        const Lsec = (border / 2) * 0.7;
+        const sec = new Vector(border / 2, border / 2, this.Data.sec * 6, Lsec);
         ctx.beginPath();
         ctx.moveTo(border / 2, border / 2);
         ctx.lineTo(sec.endX, sec.endY);
@@ -78,8 +78,8 @@ export default {
       }
 
       if (this.Data.min !== undefined && this.Data.min !== "") {
-        let Lmin = (border / 2) * 0.6;
-        let min = new Vector(border / 2, border / 2, this.Data.min * 6, Lmin);
+        const Lmin = (border / 2) * 0.6;
+        const min = new Vector(border / 2, border / 2, this.Data.min * 6, Lmin);
         ctx.beginPath();
         ctx.moveTo(border / 2, border / 2);
         ctx.lineTo(min.endX, min.endY);
@@ -90,8 +90,8 @@ export default {
       }
 
       if (this.Data.hour !== undefined && this.Data.hour !== "") {
-        let Lhour = (border / 2) * 0.4;
-        let hour = new Vector(
+        const Lhour = (border / 2) * 0.4;
+        const hour = new Vector(
           border / 2,
           border / 2,
           this.Data.hour * 30,

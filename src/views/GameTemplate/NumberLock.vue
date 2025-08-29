@@ -9,7 +9,7 @@
           :is="GameData.topComponent.Name"
           :Data="GameData.topComponent.Data"
           :ID="ID"
-          @replyAnswer="topReply"
+          @reply-answer="topReply"
         ></component>
       </div>
       <div v-if="GameData.middleText" class="text-area">
@@ -20,7 +20,7 @@
           :is="GameData.downComponent.Name"
           :Data="GameData.downComponent.Data"
           :ID="ID"
-          @replyAnswer="downReply"
+          @reply-answer="downReply"
         ></component>
       </div>
     </div>
@@ -37,16 +37,9 @@ export default {
   name: "NumberLock",
   components: {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
-<<<<<<< HEAD
-    Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
-=======
-    Markdown: defineAsyncComponent(
-      () => import("@/components/MarkdownRenderer.vue")
-    ),
     MarkdownRenderer: defineAsyncComponent(
       () => import("@/components/MarkdownRenderer.vue")
     ),
->>>>>>> 1e71029 (chore: remove unused component references)
     NumberLine: defineAsyncComponent(
       () => import("@/components/NumberLine.vue")
     ),
@@ -107,9 +100,9 @@ export default {
     },
   },
   created() {
-    let NewArr = [];
+    const NewArr = [];
     let cnt = 0;
-    for (var i in this.GameData.Data) {
+    for (const i in this.GameData.Data) {
       NewArr.push(this.GameData.Data[i]);
       // Initial the ComponentAnswer
       if (this.GameData.Data[i].Blank == true) {
@@ -164,9 +157,9 @@ export default {
     SlidAnimation(action) {
       if (this.GameConfig.layout.pad == false) return;
       if (this.GameConfig.NumberPadAutoDisappear != false) {
-        let OutterContainer =
+        const OutterContainer =
           document.getElementsByClassName("OutterContainer")[0];
-        let GameWindows = document.getElementsByClassName("GameWindows")[0];
+        const GameWindows = document.getElementsByClassName("GameWindows")[0];
         if (action == "in") {
           OutterContainer.style.gridTemplateColumns = "4fr 1f";
           GameWindows.style.gridColumn = "1/2";
@@ -191,7 +184,7 @@ export default {
         this.downComponentsAnswer = true;
       }
 
-      let ans = this.topComponentsAnswer && this.downComponentsAnswer;
+      const ans = this.topComponentsAnswer && this.downComponentsAnswer;
       console.log(ans);
 
       if (ans == true) {

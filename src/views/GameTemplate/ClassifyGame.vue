@@ -78,7 +78,7 @@ export default {
     CardWithButton,
     TextOnly: getComponents("TextOnly"),
     ImageContainer: getComponents("ImageContainer"),
-    Clock: getComponents("Clock"),
+    AnalogClock: getComponents("AnalogClock"),
     Water: getComponents("Water"),
   },
   props: {
@@ -126,7 +126,7 @@ export default {
       this.groupedItems = this.GameData.Answer.map(() => []);
     },
     checkAnswer() {
-      for (let groupIndex in this.groupedItems) {
+      for (const groupIndex in this.groupedItems) {
         if (!this.isGroupSizeCorrect(groupIndex)) {
           this.handleIncorrectAnswer(groupIndex);
           return;

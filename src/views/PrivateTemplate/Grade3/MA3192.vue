@@ -142,7 +142,7 @@
           v-else
           :Data="currentQuestion.Data"
           :ID="ID"
-          @replyAnswer="handleAnswer($event, currentQuestionIndex)"
+          @reply-answer="handleAnswer($event, currentQuestionIndex)"
         />
       </div>
     </transition>
@@ -170,7 +170,9 @@ const COMPONENTS = {
   NumberIncrementor: defineAsyncComponent(
     () => import("@/components/NumberIncrementor.vue")
   ),
-  Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
+  MarkdownRenderer: defineAsyncComponent(
+    () => import("@/components/MarkdownRenderer.vue")
+  ),
 };
 
 export default {
@@ -320,7 +322,7 @@ export default {
 
       this.originalPosition = {
         element: draggedElement,
-        rect: rect,
+        rect,
       };
 
       this.createCloneElement(rect);

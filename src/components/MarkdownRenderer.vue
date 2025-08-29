@@ -47,12 +47,12 @@
       <FloatNumPad
         v-if="isShowNumPad"
         :Data="floatNumPadLocation"
-        @buttonClicked="fillToInput"
+        @button-clicked="fillToInput"
       />
       <FloatOperatorPad
         v-if="isShowOperatorPad"
         :Data="operatorPadLocation"
-        @buttonClicked="handleOperatorSelect"
+        @button-clicked="handleOperatorSelect"
       />
     </template>
   </div>
@@ -62,6 +62,7 @@ import FloatNumPad from "@/components/FloatNumPad.vue";
 import FloatOperatorPad from "@/components/FloatOperatorPad.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
+  name: "MarkdownRenderer",
   components: {
     FloatNumPad,
     FloatOperatorPad,
@@ -145,8 +146,8 @@ export default {
           // Ignore empty strings
         } else {
           // Process text content with possible formatting
-          let el = currentTag || (bold ? "b" : underline ? "u" : "span");
-          elements.push({ el: el, content: token });
+          const el = currentTag || (bold ? "b" : underline ? "u" : "span");
+          elements.push({ el, content: token });
           currentTag = null;
         }
       });
@@ -163,11 +164,11 @@ export default {
       );
     },
     checkAnswer() {
-      if (typeof this.Data.Answer != "object") return;
+      if (typeof this.Data.Answer !== "object") return;
       this.wrongInputIndex = [];
       this.resetInputBG();
       let check = true;
-      let allAnswers = [];
+      const allAnswers = [];
 
       // 獲取所有輸入框的答案
       this.elements.forEach((element, index) => {

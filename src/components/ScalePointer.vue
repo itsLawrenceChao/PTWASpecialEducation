@@ -22,6 +22,7 @@ import { getGameAssets, getSystemAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
 
 export default {
+  name: "ScalePointer",
   components: {},
 
   props: {
@@ -283,7 +284,7 @@ export default {
         this.dragging &&
         this.canDrag(e.target.getStage().getPointerPosition())
       ) {
-        let angle = canvasTools.angle(
+        const angle = canvasTools.angle(
           this.configHand,
           e.target.getStage().getPointerPosition()
         );
@@ -306,8 +307,8 @@ export default {
       this.configWeight.visible = false;
     },
     canDrag(position) {
-      let angle = canvasTools.angle(this.configHand, position);
-      let margin = 0.3;
+      const angle = canvasTools.angle(this.configHand, position);
+      const margin = 0.3;
       if (
         canvasTools.distance(this.configHand, position) <=
         this.configHand.length
@@ -327,7 +328,8 @@ export default {
       return false;
     },
     getAnswer() {
-      let ans = Math.round((this.configHand.rotation / Math.PI / 2) * 60) * 50;
+      const ans =
+        Math.round((this.configHand.rotation / Math.PI / 2) * 60) * 50;
       if (ans == 3000) return 0;
       else return ans;
     },

@@ -5,12 +5,16 @@
     </div>
     <div class="gameArea">
       <div class="gameImage">
-        <img :src="questionImg">
+        <img :src="questionImg" />
       </div>
       <div class="scaleArea">
         <div class="scaleContainer">
           <div class="scale">
-            <scale :Data="scaleData" :ID="id" @reply-answer="getAnswer" />
+            <scale-pointer
+              :Data="scaleData"
+              :ID="id"
+              @reply-answer="getAnswer"
+            />
           </div>
         </div>
         <div class="btnContainer">
@@ -28,7 +32,9 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 import { defineAsyncComponent } from "vue";
 export default {
   components: {
-    scale: defineAsyncComponent(() => import("@/components/Scale.vue")),
+    ScalePointer: defineAsyncComponent(
+      () => import("@/components/ScalePointer.vue")
+    ),
   },
 
   props: {

@@ -44,7 +44,7 @@ export default {
   components: {
     ImageContainer: getComponents("ImageContainer"),
     Water: getComponents("Water"),
-    Clock: getComponents("Clock"),
+    AnalogClock: getComponents("AnalogClock"),
     DragImages: getComponents("DragImages"),
   },
   props: {
@@ -89,7 +89,7 @@ export default {
       }
     },
     CheckAnswer() {
-      let answer = this.Answer;
+      const answer = this.Answer;
       if (answer == this.GameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);

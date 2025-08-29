@@ -10,7 +10,7 @@
           :ID="ID"
           :Data="moneyGeneratorData"
         />
-        <Markdown
+        <MarkdownRenderer
           class="markdown"
           :ID="ID"
           :Data="markdownData"
@@ -31,14 +31,14 @@
 
 <script>
 import MoneyGenerator from "@/components/MoneyGenerator.vue";
-import Markdown from "@/components/Markdown.vue";
 import NumberBoard from "@/components/NumberBoard.vue";
+import MarkdownRenderer from "@/components/MarkdownRenderer.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3013",
   components: {
     MoneyGenerator,
-    Markdown,
+    MarkdownRenderer,
     NumberBoard,
   },
   props: {
@@ -83,7 +83,7 @@ export default {
     this.markdownData.Answer = this.GameData.markdownInputIndex;
     // 如果答案不是四位數，則補齊
     this.answerArr = this.GameData.moneyBoard;
-    let diff = 4 - this.answerArr.length;
+    const diff = 4 - this.answerArr.length;
     for (let i = 0; i < diff; i++) {
       this.answerArr.unshift(0);
     }
@@ -122,7 +122,7 @@ export default {
       }
     },
     clear() {
-      let activeElement = this.nowSelect;
+      const activeElement = this.nowSelect;
       if (activeElement) {
         const start = activeElement.selectionStart;
         activeElement.value = "";
@@ -132,7 +132,7 @@ export default {
       }
     },
     pop() {
-      let activeElement = this.nowSelect;
+      const activeElement = this.nowSelect;
       if (activeElement) {
         const start = activeElement.selectionStart;
         const end = activeElement.selectionEnd;
@@ -144,7 +144,7 @@ export default {
       }
     },
     push(ch) {
-      let activeElement = this.nowSelect;
+      const activeElement = this.nowSelect;
       activeElement.focus();
       if (activeElement) {
         const start = activeElement.selectionStart;

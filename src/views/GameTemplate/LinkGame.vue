@@ -83,7 +83,7 @@
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 import { defineAsyncComponent } from "vue";
 export default {
-  name: "LinkGameV2",
+  name: "LinkGame",
   components: {
     // 'v-stage': Stage,
     // 'v-layer': Layer,
@@ -99,14 +99,18 @@ export default {
     ElectronicClock: defineAsyncComponent(
       () => import("@/components/ElectronicClock.vue")
     ),
-    Clock: defineAsyncComponent(() => import("@/components/Clock.vue")),
+    AnalogClock: defineAsyncComponent(
+      () => import("@/components/AnalogClock.vue")
+    ),
     FractionDisplay: defineAsyncComponent(
       () => import("@/components/FractionDisplay.vue")
     ),
     InteractiveFractionVisual: defineAsyncComponent(
       () => import("@/components/InteractiveFractionVisual.vue")
     ),
-    Water: defineAsyncComponent(() => import("@/components/Water.vue")),
+    WaterDisplay: defineAsyncComponent(
+      () => import("@/components/WaterDisplay.vue")
+    ),
   },
   props: {
     GameData: {
@@ -226,8 +230,8 @@ export default {
     // },
     MouseDown() {
       const MousePos = this.$refs.stage.getNode().getPointerPosition();
-      let index = this.CheckMouseAtTheDot(MousePos.x, MousePos.y);
-      let Lined = this.CheckLined(index); // 確認該點是否已經連線，有則刪除
+      const index = this.CheckMouseAtTheDot(MousePos.x, MousePos.y);
+      const Lined = this.CheckLined(index); // 確認該點是否已經連線，有則刪除
       if (Lined[0]) {
         this.removeLine(Lined[1]);
       }
@@ -261,13 +265,13 @@ export default {
       if (this.OnDrawing) {
         const MousePos = e.target.getStage().getPointerPosition();
         this.OnDrawingLine.points.splice(2, 2, MousePos.x, MousePos.y);
-        let DotIndex = this.CheckMouseAtTheDot(MousePos.x, MousePos.y);
-        let Lined = this.CheckLined(DotIndex); // 確認該點是否已經連線，有則刪除
+        const DotIndex = this.CheckMouseAtTheDot(MousePos.x, MousePos.y);
+        const Lined = this.CheckLined(DotIndex); // 確認該點是否已經連線，有則刪除
         if (Lined[0]) {
           this.removeLine(Lined[1]);
         }
         if (DotIndex != null) {
-          let LinkAble = this.CheckLinkAble(this.MouseDownDotIndex, DotIndex);
+          const LinkAble = this.CheckLinkAble(this.MouseDownDotIndex, DotIndex);
           // UP OK
           if (LinkAble) {
             let AnswerCorrect = null;
@@ -317,9 +321,9 @@ export default {
       }
     },
     CheckMouseAtTheDot(mouseX, mouseY) {
-      for (var DotIndex in this.DotLocation) {
-        let Dot = this.DotLocation[DotIndex];
-        let differenceRadius = 25;
+      for (const DotIndex in this.DotLocation) {
+        const Dot = this.DotLocation[DotIndex];
+        const differenceRadius = 25;
         if (
           this.twoPointDistance(Dot.X, Dot.Y, mouseX, mouseY) <=
           differenceRadius
@@ -336,8 +340,8 @@ export default {
       return this.IndexMappingTable[DotIndex];
     },
     CheckLinkAble(StartIndex, EndIndex) {
-      let StartColumn = this.MappingDotIndexToAnswerIndex(StartIndex)[0];
-      let EndColumn = this.MappingDotIndexToAnswerIndex(EndIndex)[0];
+      const StartColumn = this.MappingDotIndexToAnswerIndex(StartIndex)[0];
+      const EndColumn = this.MappingDotIndexToAnswerIndex(EndIndex)[0];
       if (StartColumn == EndColumn) {
         return false;
       } else if (StartColumn % 2 == 0 && EndColumn == StartColumn + 1) {
@@ -349,11 +353,11 @@ export default {
       }
     },
     CheckAnswerisCorrect(StartIndex, EndIndex) {
-      let Answer = this.GameData.Answer;
-      let Start = this.MappingDotIndexToAnswerIndex(StartIndex);
-      let End = this.MappingDotIndexToAnswerIndex(EndIndex);
+      const Answer = this.GameData.Answer;
+      const Start = this.MappingDotIndexToAnswerIndex(StartIndex);
+      const End = this.MappingDotIndexToAnswerIndex(EndIndex);
       console.log(Start, End);
-      for (var AnswerIndex in Answer) {
+      for (const AnswerIndex in Answer) {
         if (
           Answer[AnswerIndex][0][0] == Start[0] &&
           Answer[AnswerIndex][0][1] == Start[1] &&
@@ -423,10 +427,10 @@ export default {
         this.NotFinished = true;
         return;
       }
-      for (var i in this.LinkedPoints) {
-        let Start = this.LinkedPoints[i][0];
-        let End = this.LinkedPoints[i][1];
-        let re = this.CheckAnswerisCorrect(Start, End);
+      for (const i in this.LinkedPoints) {
+        const Start = this.LinkedPoints[i][0];
+        const End = this.LinkedPoints[i][1];
+        const re = this.CheckAnswerisCorrect(Start, End);
         if (re) {
           CorrectItem += 1;
         } else {
@@ -451,7 +455,7 @@ export default {
       }
     },
     CheckLined(index) {
-      for (var LinkedPoint in this.LinkedPoints) {
+      for (const LinkedPoint in this.LinkedPoints) {
         if (
           this.LinkedPoints[LinkedPoint][0] == index ||
           this.LinkedPoints[LinkedPoint][1] == index
@@ -463,9 +467,9 @@ export default {
     },
     ReLinktheLine() {
       this.Lines = [];
-      for (var LinkedPoint in this.LinkedPoints) {
-        let Start = this.LinkedPoints[LinkedPoint][0];
-        let End = this.LinkedPoints[LinkedPoint][1];
+      for (const LinkedPoint in this.LinkedPoints) {
+        const Start = this.LinkedPoints[LinkedPoint][0];
+        const End = this.LinkedPoints[LinkedPoint][1];
         this.OnDrawingLine.points = [
           this.DotLocation[Start].X,
           this.DotLocation[Start].Y,
@@ -477,13 +481,13 @@ export default {
     },
     Init() {
       // Sync Canvas Position
-      let KonvaContainer = this.$refs.KonvaContainer;
-      let KonvaBorder = KonvaContainer.getBoundingClientRect();
+      const KonvaContainer = this.$refs.KonvaContainer;
+      const KonvaBorder = KonvaContainer.getBoundingClientRect();
       this.configStage.width = KonvaBorder.width;
       this.configStage.height = KonvaBorder.height;
 
       // Setting Column Gap Width and Object Width
-      let Column = this.GameData.Question.RowData.length;
+      const Column = this.GameData.Question.RowData.length;
 
       // Object Width Occupied 3/5 and Blank Width Occupied 2/5
       this.ComponentPositionConfig.ObjectWidth =
@@ -497,16 +501,16 @@ export default {
       this.DotLocation = [];
       this.IndexMappingTable = [];
       this.ComponentConfig = [];
-      for (var ColumnIndex in this.GameData.Question.RowData) {
-        let ColumnObjectAmount =
+      for (const ColumnIndex in this.GameData.Question.RowData) {
+        const ColumnObjectAmount =
           this.GameData.Question.RowData[ColumnIndex].length;
         // Whe we calculate each object's heght, we add MiniGap at the top and bottom of the column
         this.ComponentPositionConfig.ObjectHeight =
           (KonvaBorder.height - this.MiniGap * (ColumnObjectAmount + 1)) /
           ColumnObjectAmount;
         let NowY = this.MiniGap;
-        for (var ObjectInfo in this.GameData.Question.RowData[ColumnIndex]) {
-          let Object = {};
+        for (const ObjectInfo in this.GameData.Question.RowData[ColumnIndex]) {
+          const Object = {};
           //General Settings
           Object.X = NowX;
           Object.Y = NowY;

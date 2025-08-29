@@ -60,8 +60,8 @@ export default {
       () => import("@/components/ImageWithText.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
-    Clock: getComponents("Clock"),
-    Water: defineAsyncComponent(() => import("@/components/Water.vue")),
+    AnalogClock: getComponents("AnalogClock"),
+    WaterDisplay: getComponents("WaterDisplay"),
     ElectronicClock: defineAsyncComponent(
       () => import("@/components/ElectronicClock.vue")
     ),
@@ -104,11 +104,11 @@ export default {
   },
   methods: {
     PoplastAdd(index) {
-      let Tar = this.AnswersOld[index][0];
+      const Tar = this.AnswersOld[index][0];
       this.FalseOption[index] = false;
       console.log(Tar);
       if (this.AnswersNew[index].length > 1) {
-        for (var i in this.AnswersNew[index]) {
+        for (const i in this.AnswersNew[index]) {
           if (this.AnswersNew[index][i].Tag == Tar.Tag) {
             if (i == 0) {
               this.Selections.push(this.AnswersNew[index][0]);

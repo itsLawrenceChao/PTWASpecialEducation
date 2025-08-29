@@ -35,7 +35,7 @@
       <Markdown
         :ID="ID"
         :Data="markdownData"
-        @replyAnswer="handleMarkdownReply"
+        @reply-answer="handleMarkdownReply"
       />
     </div>
   </div>
@@ -43,7 +43,7 @@
 
 <script>
 import ImageContainer from "@/components/ImageContainer.vue";
-import Markdown from "@/components/Markdown.vue";
+import Markdown from "@/components/MarkdownRenderer.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {

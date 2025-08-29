@@ -50,8 +50,8 @@
       <div v-for="slot in GameData.AssistiveComponent">
         <component
           :is="slot"
-          @virtualpadinputInput="VNInput"
-          @virtualpadinputDelete="VNDelete"
+          @virtualpadinput-input="VNInput"
+          @virtualpadinput-delete="VNDelete"
           @virtualpadinput-pop="VNPop"
         />
       </div>
@@ -64,13 +64,7 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 import { getComponents } from "@/utilitys/get-components";
 export default {
   name: "FillinBlank",
-<<<<<<< HEAD
   components: {},
-=======
-  components: {
-    AnalogClock: getComponents("AnalogClock"),
-  },
->>>>>>> 1e71029 (chore: remove unused component references)
   props: {
     GameData: {
       type: Object,
@@ -98,9 +92,9 @@ export default {
     };
   },
   created() {
-    for (var i in this.GameData.Question) {
-      let temp = [];
-      for (var j in this.GameData.Question[i]) {
+    for (const i in this.GameData.Question) {
+      const temp = [];
+      for (const j in this.GameData.Question[i]) {
         temp.push("");
       }
       this.Value.push(temp);
@@ -143,8 +137,8 @@ export default {
       let result = true;
       let ReMesseage = "";
       let ReAnswer = "";
-      for (var i in this.GameData.Question) {
-        for (var j in this.GameData.Question[i]) {
+      for (const i in this.GameData.Question) {
+        for (const j in this.GameData.Question[i]) {
           if (this.GameData.Question[i][j] == "$input") {
             if (this.Value[i][j] != this.GameData.Answer[count]) {
               result = false;

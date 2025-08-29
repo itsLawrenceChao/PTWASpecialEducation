@@ -42,20 +42,20 @@
         <Markdown
           :ID="ID"
           :Data="markdownData"
-          @replyAnswer="handleMarkdownReply"
+          @reply-answer="handleMarkdownReply"
         />
       </div>
     </div>
     <FloatNumPad
       v-if="isShowNumPad"
       :Data="floatNumPadLocation"
-      @buttonClicked="fillToInput"
+      @button-clicked="fillToInput"
     />
   </div>
 </template>
 
 <script>
-import Markdown from "@/components/Markdown.vue";
+import Markdown from "@/components/MarkdownRenderer.vue";
 import FloatNumPad from "@/components/FloatNumPad.vue";
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
@@ -192,7 +192,7 @@ export default {
     submitAnswer() {
       const correctAnswers = this.GameData.Answer;
       let isCorrect = true;
-      let wrongIndices = [];
+      const wrongIndices = [];
 
       for (let i = 0; i < this.userAnswers.length; i++) {
         const userAnswer = this.userAnswers[i].join("");
