@@ -64,7 +64,13 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 import { getComponents } from "@/utilitys/get-components";
 export default {
   name: "FillinBlank",
+<<<<<<< HEAD
   components: {},
+=======
+  components: {
+    AnalogClock: getComponents("AnalogClock"),
+  },
+>>>>>>> 1e71029 (chore: remove unused component references)
   props: {
     GameData: {
       type: Object,

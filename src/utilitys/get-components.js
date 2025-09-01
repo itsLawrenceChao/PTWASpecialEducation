@@ -9,6 +9,12 @@ const componentsMapping = {
   ImageTable: () => import("@/components/DrawImageTable.vue"),
   DrawImage: () => import("@/components/DrawImage.vue"),
   NumberBoard: () => import("@/components/NumberBoard.vue"),
+<<<<<<< HEAD
+=======
+  AnalogClock: () => import("@/components/AnalogClock.vue"),
+  MarkdownRenderer: () => import("@/components/MarkdownRenderer.vue"),
+  WaterDisplay: () => import("@/components/WaterDisplay.vue"),
+>>>>>>> 1e71029 (chore: remove unused component references)
   MoneyGenerator: () => import("@/components/MoneyGenerator.vue"),
   CardWithButton: () => import("@/components/CardWithButton.vue"),
   MoneyDisplay: () => import("@/components/MoneyDisplay.vue"),

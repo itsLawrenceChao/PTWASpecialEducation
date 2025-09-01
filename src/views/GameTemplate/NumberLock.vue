@@ -37,7 +37,16 @@ export default {
   name: "NumberLock",
   components: {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
+<<<<<<< HEAD
     Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
+=======
+    Markdown: defineAsyncComponent(
+      () => import("@/components/MarkdownRenderer.vue")
+    ),
+    MarkdownRenderer: defineAsyncComponent(
+      () => import("@/components/MarkdownRenderer.vue")
+    ),
+>>>>>>> 1e71029 (chore: remove unused component references)
     NumberLine: defineAsyncComponent(
       () => import("@/components/NumberLine.vue")
     ),
