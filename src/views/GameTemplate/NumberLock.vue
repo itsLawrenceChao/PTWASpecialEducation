@@ -37,7 +37,6 @@ export default {
   name: "NumberLock",
   components: {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
-    Fractions: defineAsyncComponent(() => import("@/components/Fractions.vue")),
     Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
     NumberLine: defineAsyncComponent(
       () => import("@/components/NumberLine.vue")

@@ -153,7 +153,6 @@
 <script>
 import fetchJson from "@/utilitys/fetch-json.js";
 import * as Arr2CSV from "@/utilitys/array2csv.js";
-import loading from "@/components/loading.vue";
 import GameStart from "@/components/game-system/GameStart.vue";
 import GameOver from "@/components/game-system/GameOver.vue";
 import Header from "@/components/game-system/header.vue";
@@ -177,7 +176,6 @@ export default {
     GameHeader: Header,
     LevelAndTime,
     MediaModal,
-    loading,
     LinkGame: defineAsyncComponent(
       () => import("@/views/GameTemplate/LinkGame.vue")
     ),
@@ -189,9 +187,6 @@ export default {
     ),
     SelectGame: defineAsyncComponent(
       () => import("@/views/GameTemplate/SelectGame.vue")
-    ),
-    NumberInputGame: defineAsyncComponent(
-      () => import("@/views/GameTemplate/NumberInputGame.vue")
     ),
     ClassifyGame: defineAsyncComponent(
       () => import("@/views/GameTemplate/ClassifyGame.vue")
@@ -210,9 +205,6 @@ export default {
     ),
     FillinBlank: defineAsyncComponent(
       () => import("@/views/GameTemplate/FillinBlank.vue")
-    ),
-    CalculatorGame: defineAsyncComponent(
-      () => import("@/views/GameTemplate/CalculatorGame.vue")
     ),
     PairingGame: defineAsyncComponent(
       () => import("@/views/GameTemplate/PairingGame.vue")

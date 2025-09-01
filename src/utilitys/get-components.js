@@ -9,13 +9,6 @@ const componentsMapping = {
   ImageTable: () => import("@/components/DrawImageTable.vue"),
   DrawImage: () => import("@/components/DrawImage.vue"),
   NumberBoard: () => import("@/components/NumberBoard.vue"),
-  Numpad: () => import("@/components/VirtualNumPadInput.vue"),
-  Calculator: () => import("@/components/Calculator.vue"),
-  Clock: () => import("@/components/Clock.vue"),
-  VirtualNumPad: () => import("@/components/VirtualNumPad.vue"),
-  Fractions: () => import("@/components/Fractions.vue"),
-  Markdown: () => import("@/components/Markdown.vue"),
-  Water: () => import("@/components/Water.vue"),
   MoneyGenerator: () => import("@/components/MoneyGenerator.vue"),
   CardWithButton: () => import("@/components/CardWithButton.vue"),
   MoneyDisplay: () => import("@/components/MoneyDisplay.vue"),
@@ -26,7 +19,6 @@ const componentsMapping = {
   FloatNumPad: () => import("@/components/FloatNumPad.vue"),
   DragImages: () => import("@/components/DragImages.vue"),
   FractionDisplay: () => import("@/components/FractionDisplay.vue"),
-  DecimalCalculator: () => import("@/components/DecimalCalculator.vue"),
   CalculationBoard: () => import("@/components/CalculationBoard.vue"),
 };
 export function GetComponents(name) {

@@ -36,15 +36,10 @@ import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "WordProblemWithCalculator",
   components: {
-    Calculator: getComponents("Calculator"),
     Markdown: getComponents("Markdown"),
     ImageContainer: defineAsyncComponent(
       () => import("@/components/ImageContainer.vue")
     ),
-    DecimalCalculator: defineAsyncComponent(
-      () => import("@/components/DecimalCalculator.vue")
-    ),
-    Division: defineAsyncComponent(() => import("@/components/Division.vue")),
     CalculationBoard: defineAsyncComponent(
       () => import("@/components/CalculationBoard.vue")
     ),
