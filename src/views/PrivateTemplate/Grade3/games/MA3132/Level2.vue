@@ -35,7 +35,7 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
 
 export default {
-  name: "Level2",
+  name: "MA3132Level2",
   props: {
     GameData: {
       type: Object,

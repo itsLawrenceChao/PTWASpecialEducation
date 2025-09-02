@@ -61,7 +61,7 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {
-  name: "Level3",
+  name: "MA3132Level3",
   components: {
     Markdown,
     FloatNumPad,

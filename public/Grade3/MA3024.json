@@ -4,7 +4,7 @@
     "Type": "PlainText",
     "Content": "估估看，哪一個數最接近正確答案?"
   },
-  "GameType": "Maze",
+  "GameType": "MazeGame",
   "GameConfig": {},
   "Hint": {},
   "Questions": [

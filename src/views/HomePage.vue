@@ -29,6 +29,7 @@
 import NavBar from "./NavBar.vue";
 import { getSystemAssets, getAssets } from "@/utilitys/get_assets.js";
 export default {
+  name: "HomePage",
   components: {
     NavBar,
   },

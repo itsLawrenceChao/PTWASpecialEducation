@@ -219,15 +219,19 @@ export default {
     WhackaMole: defineAsyncComponent(
       () => import("@/views/GameTemplate/WhackaMole.vue")
     ),
-    Maze: defineAsyncComponent(() => import("@/views/GameTemplate/Maze.vue")),
+    MazeGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/MazeGame.vue")
+    ),
     SelectGameMulti: defineAsyncComponent(
       () => import("@/views/GameTemplate/SelectGameMulti.vue")
     ),
     NumberSearchGame: defineAsyncComponent(
       () => import("@/views/GameTemplate/NumberSearchGame.vue")
     ),
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Track: defineAsyncComponent(() => import("@/views/GameTemplate/Track.vue")),
+
+    TrackGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/TrackGame.vue")
+    ),
     EffectWindow,
     SideBar: defineAsyncComponent(
       () => import("@/components/game-system/SideBar.vue")
@@ -235,8 +239,8 @@ export default {
     CopyItem: defineAsyncComponent(
       () => import("@/views/GameTemplate/CopyItem.vue")
     ),
-    Airplane: defineAsyncComponent(
-      () => import("@/views/GameTemplate/Airplane.vue")
+    AirplaneGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/AirplaneGame.vue")
     ),
     ComponentTesters: defineAsyncComponent(
       () => import("@/views/GameTemplate/componentTesters.vue")
@@ -353,8 +357,8 @@ export default {
         "RacingCar",
         "Airplane",
         "BalloonShooting",
-        "Track",
-        "Maze",
+        "TrackGame",
+        "MazeGame",
       ];
 
       return !noSubmitButtonGames.includes(this.gameType);

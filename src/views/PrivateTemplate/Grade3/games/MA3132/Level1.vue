@@ -47,7 +47,7 @@ import Markdown from "@/components/MarkdownRenderer.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {
-  name: "Level1",
+  name: "MA3132Level1",
   components: {
     ImageContainer,
     Markdown,
