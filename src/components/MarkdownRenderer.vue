@@ -237,12 +237,12 @@ export default {
       };
     },
     fillToInput(content) {
-      if (content == "關閉") {
+      if (content === "關閉") {
         this.isShowNumPad = false;
         return;
       }
       if (this.clickedTarget !== null) {
-        if (content == "清除") {
+        if (content === "清除") {
           this.elements[this.clickedTarget].content = "";
           this.checkAnswer();
           return;
@@ -292,7 +292,7 @@ export default {
       this.checkAnswer();
     },
     handleOperatorSelect(content) {
-      if (content == "關閉") {
+      if (content === "關閉") {
         this.isShowOperatorPad = false;
         return;
       }

@@ -103,17 +103,17 @@ export default {
       let EndX = 0;
       let EndY = 0;
       const canvas = this.$refs[`Cup-${this.numberOfCups - 1}`][0];
-      if (Scale == 1000) {
+      if (Scale === 1000) {
         StartX = (canvas.width / 15) * 2;
         EndX = (canvas.width / 15) * 11 + 2;
         StartY = (canvas.height / 12) * (10 - ML / 100 + 1);
         EndY = (canvas.height / 12) * (ML / 100) + 2;
-      } else if (Scale == 250) {
+      } else if (Scale === 250) {
         StartX = (canvas.width / 15) * 2;
         EndX = (canvas.width / 15) * 11 + 2;
         StartY = (canvas.height / 15) * (1 + (13 / 250) * (250 - ML));
         EndY = (canvas.height / 15) * ((13 / 250) * ML);
-      } else if (Scale == 2000) {
+      } else if (Scale === 2000) {
         StartX = (canvas.width / 15) * 2;
         EndX = (canvas.width / 15) * 11 + 2;
         StartY = (canvas.height / 12) * (10 - ML / 200 + 1);

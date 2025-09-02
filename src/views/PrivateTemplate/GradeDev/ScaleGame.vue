@@ -68,7 +68,7 @@ export default {
 
   methods: {
     initializeScale() {
-      if (this.GameData.customOptions.scaleBG == null)
+      if (this.GameData.customOptions.scaleBG === null)
         this.scaleData.customScaleSrc = null;
       else this.scaleData.customScaleSrc = this.GameData.customOptions.scaleBG;
     },
@@ -76,7 +76,7 @@ export default {
       this.answer = ans;
     },
     checkAnswer() {
-      if (this.answer == this.GameData.answer) {
+      if (this.answer === this.GameData.answer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [this.GameData.answer, this.answer, "正確"]);
         this.$emit("next-question");

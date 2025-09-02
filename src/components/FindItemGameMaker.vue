@@ -17,7 +17,7 @@
         開始計算
       </button>
     </div>
-    <div v-if="counter2 - 1 == parseInt(inputNumber)" class="">
+    <div v-if="counter2 - 1 === parseInt(inputNumber)" class="">
       <p style="color: red; font-size: 2rem">
         紀錄完成
       </p>
@@ -119,10 +119,10 @@ export default {
     },
     judge_position(event) {
       console.log(event.pageX, event.pageY);
-      if (this.counter == 1) {
+      if (this.counter === 1) {
         this.drawingprototype.LeftTop = [event.pageX, event.pageY];
         this.counter++;
-      } else if (this.counter == 2) {
+      } else if (this.counter === 2) {
         this.drawingprototype.RightBottom = [event.pageX, event.pageY];
         // this.drawed[this.counter-1] = true;
         this.counter = 1;

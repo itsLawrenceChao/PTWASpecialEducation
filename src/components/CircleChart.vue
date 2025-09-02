@@ -1,6 +1,6 @@
 <template>
   <div class="OutterContainer">
-    <div v-if="Data.Text != undefined" class="TextOnly">
+    <div v-if="Data.Text !== undefined" class="TextOnly">
       <p class="Division">{{ Data.Text }}{{ Data.Unit }}</p>
     </div>
     <div v-else class="Division">
@@ -12,7 +12,7 @@
         {{ motherScore }}
       </p>
     </div>
-    <p v-if="Data.Text == undefined">
+    <p v-if="Data.Text === undefined">
       {{ Data.Unit }}
     </p>
     <div ref="container" class="container">
@@ -111,11 +111,11 @@ export default {
     ReplyAnswer() {
       let temp = 0;
       this.AnswerRecord.forEach((element) => {
-        if (element == true) {
+        if (element === true) {
           temp += 1;
         }
       });
-      if (temp == this.childScore) {
+      if (temp === this.childScore) {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);

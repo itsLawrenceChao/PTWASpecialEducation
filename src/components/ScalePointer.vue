@@ -85,7 +85,7 @@ export default {
       this.configBG.width = this.gameWidth;
       this.configBG.height = this.gameWidth;
       const bgImage = new window.Image();
-      if (this.Data.customScaleSrc == null)
+      if (this.Data.customScaleSrc === null)
         bgImage.src = getSystemAssets("scale.png", "scale");
       else bgImage.src = getGameAssets(this.ID, this.Data.customScaleSrc);
       this.configBG.image = bgImage;
@@ -279,7 +279,7 @@ export default {
       context.closePath();
     },
     handleDrag(e) {
-      if (e.type == "pointerdown") this.dragging = true;
+      if (e.type === "pointerdown") this.dragging = true;
       if (
         this.dragging &&
         this.canDrag(e.target.getStage().getPointerPosition())
@@ -294,7 +294,7 @@ export default {
         this.configWeight.rotation = angle;
 
         this.configWeight.visible = true;
-        if (this.getAnswer() != this.answer) {
+        if (this.getAnswer() !== this.answer) {
           this.answer = this.getAnswer();
           this.configWeight.text = this.getAnswer();
           this.$emit("replyAnswer", this.answer);
@@ -330,7 +330,7 @@ export default {
     getAnswer() {
       const ans =
         Math.round((this.configHand.rotation / Math.PI / 2) * 60) * 50;
-      if (ans == 3000) return 0;
+      if (ans === 3000) return 0;
       else return ans;
     },
   },

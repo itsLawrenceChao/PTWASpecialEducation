@@ -11,37 +11,37 @@
       <option selected>fillImages</option>
     </select>
   </div>
-  <div v-if="tester == 'fraction'" class="testArea">
+  <div v-if="tester === 'fraction'" class="testArea">
     <dragFraction
       :Data="configFraction"
       :ID="gameid"
       @reply-answer="printAns"
     />
   </div>
-  <div v-if="tester == 'numberLine'" class="testArea">
+  <div v-if="tester === 'numberLine'" class="testArea">
     <numberLine
       :Data="configNumberLine"
       :ID="gameid"
       @get-drag-position="printAns"
     />
   </div>
-  <div v-if="tester == 'drawShapes'" class="testArea">
+  <div v-if="tester === 'drawShapes'" class="testArea">
     <drawShapes
       :Data="configDrawShapes"
       :ID="gameid"
       @reply-answer="printAns"
     />
   </div>
-  <div v-if="tester == 'dragToAlign'" class="testArea">
+  <div v-if="tester === 'dragToAlign'" class="testArea">
     <dragToAlign :Data="configDragToAlign" :ID="gameid" />
   </div>
-  <div v-if="tester == 'dragImages'" class="testArea">
+  <div v-if="tester === 'dragImages'" class="testArea">
     <dragImages :Data="configDragImages" :ID="gameid" />
   </div>
-  <div v-if="tester == 'scale'" class="testArea">
+  <div v-if="tester === 'scale'" class="testArea">
     <scale :Data="configScale" :ID="gameid" @reply-answer="printAns" />
   </div>
-  <div v-if="tester == 'drawingBoard'" class="testArea">
+  <div v-if="tester === 'drawingBoard'" class="testArea">
     <drawingBoard :Data="configBrush"></drawingBoard>
     <div class="btnContainer">
       <button
@@ -62,7 +62,7 @@
       </button>
     </div>
   </div>
-  <div v-if="tester == 'fillImages'" class="testArea">
+  <div v-if="tester === 'fillImages'" class="testArea">
     <fillImages
       :key="testerKey"
       :Data="configFillImages"

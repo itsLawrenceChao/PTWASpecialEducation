@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     judgeAnswer(answer) {
-      if (answer == this.GameData.Answer) {
+      if (answer === this.GameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);
         this.$emit("next-question");

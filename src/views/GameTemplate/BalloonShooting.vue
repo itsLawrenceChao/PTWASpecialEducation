@@ -223,22 +223,22 @@ export default {
     checkAnswer(selectedOption) {
       let checkAnswer = false;
       for (let answer in this.GameData.True) {
-        if (this.GameData.True[answer] == selectedOption) checkAnswer = true;
+        if (this.GameData.True[answer] === selectedOption) checkAnswer = true;
       }
       if (checkAnswer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", ["#", selectedOption, "正確"]);
         this.allOptions = this.allOptions.filter(
-          (option) => option != selectedOption
+          (option) => option !== selectedOption
         );
         this.trueOptions = this.trueOptions.filter(
-          (option) => option != selectedOption
+          (option) => option !== selectedOption
         );
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", ["#", selectedOption, "錯誤"]);
       }
-      if (this.trueOptions.length == 0) this.$emit("next-question");
+      if (this.trueOptions.length === 0) this.$emit("next-question");
     },
   },
 };

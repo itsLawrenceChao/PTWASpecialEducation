@@ -2,13 +2,13 @@
   <div class="OutterContainer">
     <div class="Head">
       <p
-        v-if="GameData.QuestionText && GameData.QuestionText != ''"
+        v-if="GameData.QuestionText && GameData.QuestionText !== ''"
         class="h1 Title"
       >
         {{ GameData.QuestionText }}
       </p>
       <p
-        v-if="GameData.Description && GameData.Description != ''"
+        v-if="GameData.Description && GameData.Description !== ''"
         class="h2 SubTitle"
       >
         {{ GameData.Description }}
@@ -24,8 +24,8 @@
         <section
           class="QuestionRow"
           :class="{
-            'QuestionRow-Wrong': Answered[index] == false,
-            'QuestionRow-Right': Answered[index] == true,
+            'QuestionRow-Wrong': Answered[index] === false,
+            'QuestionRow-Right': Answered[index] === true,
           }"
         >
           <div class="CompareCard Left">
@@ -85,7 +85,7 @@
         </draggable>
       </div>
       <!-- <button
-        v-if="GameConfig.CheckAnswerMode == 'Button'"
+        v-if="GameConfig.CheckAnswerMode === 'Button'"
         class="SucessButton"
         @click="CheckAllAnswer"
       >
@@ -189,14 +189,14 @@ export default {
       let tmp = this.Answers[this.SelectedGroup][newVal.newIndex];
       this.Answers[this.SelectedGroup] = [tmp];
       this.RealTimeCheckAnswer();
-      if (this.GameConfig.CheckAnswerMode != "OnFill") {
+      if (this.GameConfig.CheckAnswerMode !== "OnFill") {
         this.Answered[this.SelectedGroup] = null;
       }
     },
     RealTimeCheckAnswer() {
-      if (this.GameConfig.CheckAnswerMode == "OnFill") {
+      if (this.GameConfig.CheckAnswerMode === "OnFill") {
         if (
-          this.GameData.Answer[this.SelectedGroup] ==
+          this.GameData.Answer[this.SelectedGroup] ===
           this.Answers[this.SelectedGroup][0].tag
         ) {
           this.$emit("play-effect", "CorrectSound");
@@ -214,7 +214,7 @@ export default {
     },
     CheckAnsweredAll() {
       for (var i in this.Answered) {
-        if (this.Answered[i] == false || this.Answered[0][i] == null) {
+        if (this.Answered[i] === false || this.Answered[0][i] === null) {
           return false;
         }
       }
@@ -223,7 +223,7 @@ export default {
     CheckAllAnswer() {
       let check = true;
       for (var i in this.GameData.Answer) {
-        if (this.GameData.Answer[i] == this.Answers[i][0].tag) {
+        if (this.GameData.Answer[i] === this.Answers[i][0].tag) {
           //FIXME: UnEfficient
           this.Answered[i] = true;
         } else {
@@ -231,20 +231,20 @@ export default {
           check = false;
         }
       }
-      if (this.GameData.SlotComponentVerifycation == true) {
+      if (this.GameData.SlotComponentVerifycation === true) {
         // Check if the SlotComponent is correct
         let temp = true;
         this.SlotComponentanswer.forEach((element) => {
-          if (element != true) {
+          if (element !== true) {
             temp = false;
           }
         });
         console.log("Temp", temp);
-        if (temp == false) {
+        if (temp === false) {
           check = false;
         }
       }
-      if (check == false) {
+      if (check === false) {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
           this.GameData.Answer[0],

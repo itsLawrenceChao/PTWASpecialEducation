@@ -3,7 +3,7 @@
     <p class="Title">功能區</p>
     <div class="Buttons">
       <button
-        v-if="GameStatus == 'Progressing'"
+        v-if="GameStatus === 'Progressing'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="previousQuestion()"
       >
@@ -27,7 +27,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'Progressing'"
+        v-if="GameStatus === 'Progressing'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="nextQuestion()"
       >
@@ -51,7 +51,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'NotStart'"
+        v-if="GameStatus === 'NotStart'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="startGame()"
       >
@@ -63,7 +63,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'Progressing' && showSubmitButton"
+        v-if="GameStatus === 'Progressing' && showSubmitButton"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="submitAnswer()"
       >
@@ -86,7 +86,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'Done'"
+        v-if="GameStatus === 'Done'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="toCSV()"
       >
@@ -160,7 +160,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'NotStart'"
+        v-if="GameStatus === 'NotStart'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         data-bs-toggle="modal"
         data-bs-target="#reappear"
@@ -173,7 +173,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'Done'"
+        v-if="GameStatus === 'Done'"
         class="btn btn-primary text-nowrap img-hover-zoom"
       >
         <div class="d-flex align-items-center">
@@ -356,8 +356,8 @@ export default {
   computed: {
     ...mapWritableState(gameStore, ["gameCode"]),
     checkformat() {
-      if (this.code == "origin") return true;
-      if (this.code.split("-").length == this.levelAmount) {
+      if (this.code === "origin") return true;
+      if (this.code.split("-").length === this.levelAmount) {
         return true;
       } else {
         return false;

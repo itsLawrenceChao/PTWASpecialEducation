@@ -29,13 +29,13 @@
             class="Question"
           >
             <input
-              v-if="question == '$input'"
+              v-if="question === '$input'"
               v-model="Value[index1][index2]"
               type="text"
               class="input form-control"
               @focus="focusInput(index1, index2)"
             />
-            <div v-else-if="question == '$gap'" class="gap" />
+            <div v-else-if="question === '$gap'" class="gap" />
             <p v-else>
               {{ question }}
             </p>
@@ -115,17 +115,17 @@ export default {
       this.focuslocation = [id1, id2];
     },
     VNInput(data) {
-      if (this.focusInput != null) {
+      if (this.focusInput !== null) {
         this.Value[this.focuslocation[0]][this.focuslocation[1]] += data;
       }
     },
     VNDelete() {
-      if (this.focusInput != null) {
+      if (this.focusInput !== null) {
         this.Value[this.focuslocation[0]][this.focuslocation[1]] = "";
       }
     },
     VNPop() {
-      if (this.focusInput != null) {
+      if (this.focusInput !== null) {
         this.Value[this.focuslocation[0]][this.focuslocation[1]] = this.Value[
           this.focuslocation[0]
         ][this.focuslocation[1]].slice(0, -1);
@@ -139,8 +139,8 @@ export default {
       let ReAnswer = "";
       for (const i in this.GameData.Question) {
         for (const j in this.GameData.Question[i]) {
-          if (this.GameData.Question[i][j] == "$input") {
-            if (this.Value[i][j] != this.GameData.Answer[count]) {
+          if (this.GameData.Question[i][j] === "$input") {
+            if (this.Value[i][j] !== this.GameData.Answer[count]) {
               result = false;
               ReMesseage += "第" + (i + 1) + "格:" + this.Value[i][j] + "\n";
             }

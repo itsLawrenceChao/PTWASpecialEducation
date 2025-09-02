@@ -30,7 +30,7 @@
             <div class="row Game_Component">
               <!-- Dynamic import component -->
               <div
-                v-if="GameStatus == 'Progressing'"
+                v-if="GameStatus === 'Progressing'"
                 id="GameContainer"
                 class="games"
               >
@@ -42,7 +42,7 @@
                 <transition :name="transitionName" mode="out-in">
                   <component
                     :is="gameType"
-                    v-if="gameType != 'SelfDefine'"
+                    v-if="gameType !== 'SelfDefine'"
                     ref="GameComponent"
                     :key="Nowlevel"
                     :ID="gameID"
@@ -56,7 +56,7 @@
 
                 <component
                   :is="selfdefinetemplate"
-                  v-if="gameType == 'SelfDefine'"
+                  v-if="gameType === 'SelfDefine'"
                   :key="Nowlevel"
                   :ID="gameID"
                   :GameData="GameData.Questions[Nowlevel - 1]"
@@ -85,7 +85,7 @@
               </div>
               <div v-else class="intro">
                 <GameStart
-                  v-if="GameStatus == 'NotStart'"
+                  v-if="GameStatus === 'NotStart'"
                   :key="Dataloaded"
                   :Status="GameStatus"
                   :intro="GameData.IntroText"
@@ -94,7 +94,7 @@
                   @open-teaching-modal="openMediaModal"
                 />
                 <GameOver
-                  v-if="GameStatus == 'Done'"
+                  v-if="GameStatus === 'Done'"
                   @restart="reloadPage"
                   @download-record="ToCSV"
                   @previous-page="previousPage"
@@ -126,7 +126,7 @@
           >
             <template #hint>
               <hintbutton
-                v-if="GameStatus == 'Progressing' && Hint['Type'] != 'Method'"
+                v-if="GameStatus === 'Progressing' && Hint['Type'] !== 'Method'"
                 :HintInfo="hintInfo"
                 @open-hint-modal="openMediaModal"
               />
@@ -415,7 +415,7 @@ export default {
       let checkcorrect = true;
       const record = [];
       for (const i in this.GameData.Questions) {
-        if (this.GameData.Questions[i].length != undefined) {
+        if (this.GameData.Questions[i].length !== undefined) {
           const num = this.GameData.Questions[i].length;
           const rand = Math.floor(Math.random() * (num - 0 + 0));
           question.push(this.GameData.Questions[i][rand]);
@@ -437,7 +437,7 @@ export default {
       }
     },
     reappearCode() {
-      if (this.gameCode == "origin") return;
+      if (this.gameCode === "origin") return;
       const reappear = this.gameCode.split("-");
       const question = [];
       reappear.forEach((element, index) => {

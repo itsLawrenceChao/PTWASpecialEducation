@@ -2,7 +2,7 @@
   <div ref="container" class="ma3192">
     <div class="ma3192__form">
       <table class="ma3192__schedule-table">
-        <template v-if="GameData.Level == 1">
+        <template v-if="GameData.Level === 1">
           <thead class="ma3192__station-table">
             <tr v-for="(row, rowIndex) in stationData" :key="rowIndex">
               <th v-if="rowIndex === 0" rowspan="8">搭乘區間</th>
@@ -12,7 +12,7 @@
             </tr>
           </thead>
         </template>
-        <template v-if="GameData.Level == 2">
+        <template v-if="GameData.Level === 2">
           <thead>
             <tr>
               <th class="ma3192__schedule-table__time-col">時間</th>
@@ -41,7 +41,7 @@
             </tr>
           </tbody>
         </template>
-        <template v-if="GameData.Level == 3">
+        <template v-if="GameData.Level === 3">
           <thead>
             <tr>
               <th rowspan="2">站名</th>
@@ -131,7 +131,7 @@
         :key="currentQuestionIndex"
         class="ma3192__question"
       >
-        <template v-if="currentQuestion.Type == 'DefaultDragBox'">
+        <template v-if="currentQuestion.Type === 'DefaultDragBox'">
           <div>
             {{ currentQuestion.Text }}
             <div class="ma3192__drag-box"></div>

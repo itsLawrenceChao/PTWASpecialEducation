@@ -14,7 +14,7 @@
         <template v-for="(item, index) in answerData" :key="index">
           <div class="MA3173__answer-board">
             <div v-if="answerData.length >= 2">
-              <div v-if="index == 0" class="MA3173__text">先</div>
+              <div v-if="index === 0" class="MA3173__text">先</div>
               <div v-else class="MA3173__text">後</div>
             </div>
             <CalculationBoard

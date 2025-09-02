@@ -136,11 +136,11 @@ export default {
     drawingFunc(btn) {
       switch (btn) {
         case "brush":
-          if (this.canvasStyle.zIndex == -1) {
+          if (this.canvasStyle.zIndex === -1) {
             this.canvasStyle.zIndex = 1;
             this.configBrush = this.brush;
             this.brushStatusBtn = "控制";
-          } else if (this.canvasStyle.zIndex == 1) {
+          } else if (this.canvasStyle.zIndex === 1) {
             this.canvasStyle.zIndex = -1;
             this.brushStatusBtn = "畫筆";
           }
@@ -155,10 +155,10 @@ export default {
           this.brushStatusBtn = "控制";
           break;
         case "visibility":
-          if (this.canvasStyle.visibility == "visible") {
+          if (this.canvasStyle.visibility === "visible") {
             this.canvasStyle.visibility = "hidden";
             this.drawingBoardStatusBtn = "顯示";
-          } else if (this.canvasStyle.visibility == "hidden") {
+          } else if (this.canvasStyle.visibility === "hidden") {
             this.canvasStyle.visibility = "visible";
             this.drawingBoardStatusBtn = "隱藏";
           }
@@ -179,7 +179,7 @@ export default {
       this.maxDigit = Math.max(...this.GameData.digitsOfEachRow);
       let btnStyle = [],
         btnColor;
-      if (i == this.GameData.digitsOfEachRow.length - 1) btnColor = "pink";
+      if (i === this.GameData.digitsOfEachRow.length - 1) btnColor = "pink";
       else btnColor = "lightgray";
 
       if (i < this.GameData.digitsOfEachRow.length - 1 && i > 1) {
@@ -209,12 +209,12 @@ export default {
               }
             }
           }
-          if (btn.adjustable == null) btn.adjustable = true;
+          if (btn.adjustable === null) btn.adjustable = true;
           btnStyle.push(btn);
         }
       }
 
-      if (i == 1) {
+      if (i === 1) {
         let btn = {
           gridColumn: 9 - this.maxDigit,
           gridRow: 1,
@@ -285,7 +285,7 @@ export default {
         ans.push(this.rowStyle[this.rowStyle.length - 1].btnStyle[i].value);
       }
       for (let i in ans) {
-        if (ans[i] != this.GameData.answers[i]) {
+        if (ans[i] !== this.GameData.answers[i]) {
           isCorrect = false;
           this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor = "red";
         } else {
@@ -322,11 +322,11 @@ export default {
       }
     },
     handleNumPad(input) {
-      if (input == "清除") {
+      if (input === "清除") {
         this.rowStyle[this.currentInputBtn.row].btnStyle[
           this.currentInputBtn.column
         ].value = null;
-      } else if (input != "關閉") {
+      } else if (input !== "關閉") {
         this.rowStyle[this.currentInputBtn.row].btnStyle[
           this.currentInputBtn.column
         ].value = input;

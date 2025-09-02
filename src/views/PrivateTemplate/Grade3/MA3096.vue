@@ -2,13 +2,13 @@
   <div class="compare-game">
     <div class="compare-game__header">
       <p
-        v-if="gameData.QuestionText && gameData.QuestionText != ''"
+        v-if="gameData.QuestionText && gameData.QuestionText !== ''"
         class="compare-game__title h1"
       >
         {{ gameData.QuestionText }}
       </p>
       <p
-        v-if="gameData.Description && gameData.Description != ''"
+        v-if="gameData.Description && gameData.Description !== ''"
         class="compare-game__subtitle h2"
       >
         {{ gameData.Description }}

@@ -2,8 +2,8 @@
   <div ref="container" class="gameContainer">
     <v-stage :config="configKonva">
       <v-layer>
-        <v-rect v-if="Data.backgroundType == 'color'" :config="configBG" />
-        <v-image v-if="Data.backgroundType == 'image'" :config="configBG" />
+        <v-rect v-if="Data.backgroundType === 'color'" :config="configBG" />
+        <v-image v-if="Data.backgroundType === 'image'" :config="configBG" />
       </v-layer>
 
       <v-layer>
@@ -16,7 +16,7 @@
           @dragend="handleDragend"
         />
       </v-layer>
-      <v-layer v-if="Data.backgroundType == 'grid'">
+      <v-layer v-if="Data.backgroundType === 'grid'">
         <v-line
           v-for="(pointSet, index) in configBG"
           :key="index"
@@ -79,7 +79,7 @@ export default {
       if (
         this.$refs.container.clientWidth * this.Data.backgroundRatio.height <=
           this.$refs.container.clientHeight * this.Data.backgroundRatio.width ||
-        this.$refs.container.clientHeight == 0
+        this.$refs.container.clientHeight === 0
       ) {
         this.gameWidth = this.$refs.container.clientWidth;
         this.gameHeight =
@@ -171,7 +171,7 @@ export default {
         this.images.push(image);
 
         let draggable = true;
-        if (imageData.draggable == false) draggable = false;
+        if (imageData.draggable === false) draggable = false;
 
         let position = this.getPosition(imageData, currentPos).position;
         currentPos = this.getPosition(imageData, currentPos).newPos;
@@ -213,7 +213,7 @@ export default {
       this.configImage[id].y = e.target.y();
       this.keepInBound(e);
       if (this.Data.images[id].rotatable) {
-        if (this.configRotationPanel == null) {
+        if (this.configRotationPanel === null) {
           this.drawPanel();
         }
         this.movePanel(this.configImage[id]);
@@ -247,7 +247,7 @@ export default {
     movePanel(image) {
       this.configRotationPanel.x = image.x;
 
-      if (image.rotation % 180 == 0) {
+      if (image.rotation % 180 === 0) {
         if (image.y + image.height + this.ratioLength > this.gameHeight)
           this.configRotationPanel.y = image.y - this.ratioLength;
         else this.configRotationPanel.y = image.y + image.height;
@@ -284,7 +284,7 @@ export default {
     },
     handleDragend(e) {
       let id = e.target.attrs.index;
-      if (this.Data.images[id].snapToGrid && this.Data.backgroundType == "grid")
+      if (this.Data.images[id].snapToGrid && this.Data.backgroundType === "grid")
         this.snapToGrid(e);
     },
     snapToGrid(e) {
@@ -312,7 +312,7 @@ export default {
     },
     rotateImage(e) {
       let id = this.rotatingImageID;
-      if (e.target.attrs.index == 0) this.configImage[id].rotation -= 90;
+      if (e.target.attrs.index === 0) this.configImage[id].rotation -= 90;
       else this.configImage[id].rotation += 90;
       this.movePanel(this.configImage[id]);
 

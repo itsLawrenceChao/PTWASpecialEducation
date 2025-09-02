@@ -32,7 +32,7 @@
           <input
             v-model="searchInput"
             :placeholder="
-              showMode == 'search' ? '按下esc可以返回' : '輸入ID或者標題'
+              showMode === 'search' ? '按下esc可以返回' : '輸入ID或者標題'
             "
             @keyup.enter="searchGame()"
             @keyup.esc="return2Menu()"
@@ -47,7 +47,7 @@
         </div>
       </nav>
     </header>
-    <section v-if="showMode == 'menu'" class="subjects-menu">
+    <section v-if="showMode === 'menu'" class="subjects-menu">
       <p class="title">請選科目</p>
       <div class="subjects-menu__container">
         <div class="subject" @click="changeSubject('Math')">
@@ -65,7 +65,7 @@
       </div>
     </section>
     <section
-      v-if="showMode == 'game'"
+      v-if="showMode === 'game'"
       class="game-select__container"
       style="overflow-y: hidden"
     >
@@ -113,7 +113,7 @@
             </p>
             <div class="game-card__group">
               <div v-for="item in items.Games" class="card game-card">
-                <GameCard
+                <game-card
                   :game-info="{
                     id: item.id,
                     imgSrc: item.Img,
@@ -142,8 +142,8 @@
         <img :src="underConstructionSrc" alt="建構中" />
       </div>
     </section>
-    <section v-if="showMode == 'search'" class="search_result">
-      <div v-if="searchResult == undefined" class="serch-result__not-found">
+    <section v-if="showMode === 'search'" class="search_result">
+      <div v-if="searchResult === undefined" class="serch-result__not-found">
         <div>
           <p class="h1">沒有搜尋結果</p>
           <br />
@@ -175,7 +175,7 @@
               })
             "
           >
-            <GameCard
+            <game-card
               :game-info="{
                 id: item.id,
                 imgSrc: item.Img,
@@ -203,10 +203,10 @@
 import fetchJson from "@/utilitys/fetch-json.js";
 import * as TEXTREADER from "@/utilitys/readtext.js";
 import { getGameAssets, getSystemAssets } from "@/utilitys/get_assets.js";
-import gameCard from "@/components/game-system/GameCard.vue";
+import GameCard from "@/components/game-system/GameCard.vue";
 export default {
   components: {
-    GameCard: gameCard,
+    GameCard,
   },
   data() {
     return {
@@ -285,24 +285,24 @@ export default {
       }
     },
     getJsonData(selectedSubject) {
-      let url = `./Grade${this.grade}/${selectedSubject}Grade${this.grade}.json`;
+      const url = `./Grade${this.grade}/${selectedSubject}Grade${this.grade}.json`;
       return fetchJson(url).catch(() => {
         throw `cannot load ${selectedSubject} 's JSON file`;
       });
     },
     handleSubjectSession() {
-      let subjectSession = this.handleSession("get", "Subject");
+      const subjectSession = this.handleSession("get", "Subject");
       if (subjectSession) {
         this.nowSubject = subjectSession;
-        if (subjectSession == "Math") {
+        if (subjectSession === "Math") {
           this.showInfo = this.mathShowInfo;
           this.changeSubject("Math");
           this.handleSemesterAndChapterSession("Math");
-        } else if (subjectSession == "Chinese") {
+        } else if (subjectSession === "Chinese") {
           this.showInfo = this.chineseShowInfo;
           this.changeSubject("Chinese");
           this.handleSemesterAndChapterSession("Chinese");
-        } else if (subjectSession == "Technology") {
+        } else if (subjectSession === "Technology") {
           this.showInfo = this.technologyShowInfo;
           this.changeSubject("Technology");
           this.handleSemesterAndChapterSession("Technology");
@@ -310,14 +310,14 @@ export default {
       }
     },
     handleSemesterAndChapterSession(subject) {
-      let semesterSession = this.handleSession("get", `${subject}Semester`);
+      const semesterSession = this.handleSession("get", `${subject}Semester`);
       if (semesterSession) {
         this.selectedSemester = parseInt(semesterSession);
       } else {
         this.selectedSemester = 0;
       }
 
-      let chapterSession = this.handleSession("get", `${subject}Chapter`);
+      const chapterSession = this.handleSession("get", `${subject}Chapter`);
       if (chapterSession) {
         this.selectChapter(chapterSession);
       } else {
@@ -326,12 +326,13 @@ export default {
       }
     },
     convertGameDataImageURLs(originalDatas) {
-      let datas = originalDatas;
-      for (let semester in datas) {
-        for (let chapter in datas[semester].gameItem) {
-          for (let section in datas[semester].gameItem[chapter].Section) {
-            for (let game in datas[semester].gameItem[chapter].Section[section]
-              .Games) {
+      const datas = originalDatas;
+      for (const semester in datas) {
+        for (const chapter in datas[semester].gameItem) {
+          for (const section in datas[semester].gameItem[chapter].Section) {
+            for (const game in datas[semester].gameItem[chapter].Section[
+              section
+            ].Games) {
               datas[semester].gameItem[chapter].Section[section].Games[
                 game
               ].Img = getGameAssets(
@@ -347,7 +348,7 @@ export default {
       return datas;
     },
     makeReadText(title, description, stop = false) {
-      let text = `標題:${title}。說明:${description}。`;
+      const text = `標題:${title}。說明:${description}。`;
       TEXTREADER.ReadText(text, stop);
     },
     selectChapter(key) {
@@ -358,11 +359,11 @@ export default {
       this.showGameCards = true;
     },
     handleSession(action, key, value) {
-      if (action == "set") {
+      if (action === "set") {
         sessionStorage.setItem(key, value);
-      } else if (action == "get") {
+      } else if (action === "get") {
         return sessionStorage.getItem(key);
-      } else if (action == "remove") {
+      } else if (action === "remove") {
         sessionStorage.removeItem(key);
       }
     },
@@ -380,15 +381,15 @@ export default {
       }
 
       // 原有的科目邏輯
-      if (subject == "Math") {
+      if (subject === "Math") {
         this.showInfo = this.mathShowInfo;
         this.handleSession("set", "Subject", subject);
         this.handleSemesterAndChapterSession("Math");
-      } else if (subject == "Chinese") {
+      } else if (subject === "Chinese") {
         this.showInfo = this.chineseShowInfo;
         this.handleSession("set", "Subject", subject);
         this.handleSemesterAndChapterSession("Chinese");
-      } else if (subject == "Technology") {
+      } else if (subject === "Technology") {
         this.showInfo = this.technologyShowInfo;
         this.handleSession("set", "Subject", subject);
         this.handleSemesterAndChapterSession("Technology");
@@ -402,17 +403,17 @@ export default {
     queryGame(searchList, tarSymbol) {
       if (!tarSymbol) return undefined;
 
-      let finded_id = new Set();
-      let foundGames = [];
+      const finded_id = new Set();
+      const foundGames = [];
 
       // 將關鍵字轉為小寫以進行不分大小寫搜尋
       tarSymbol = tarSymbol.toLowerCase();
 
-      for (let chapter in searchList) {
+      for (const chapter in searchList) {
         const sections = searchList[chapter]?.Section || [];
-        for (let section of sections) {
+        for (const section of sections) {
           const games = section?.Games || [];
-          for (let game of games) {
+          for (const game of games) {
             // 檢查 ID 和名稱（不分大小寫）
             if (
               game.id?.toLowerCase().includes(tarSymbol) ||
@@ -434,13 +435,13 @@ export default {
       this.makeReadText("", "", true);
     },
     searchGame() {
-      let keyword = this.searchInput;
+      const keyword = this.searchInput;
       this.searchResult = [];
 
       // 搜尋所有科目和所有學期
-      let mathResults = [];
-      let chineseResults = [];
-      let techResults = [];
+      const mathResults = [];
+      const chineseResults = [];
+      const techResults = [];
 
       // 遍歷每個學期的資料
       if (this.mathShowInfo) {

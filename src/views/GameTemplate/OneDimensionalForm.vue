@@ -45,7 +45,7 @@
     >
       <div>{{ question.Text }}</div>
       <div class="questionContent">
-        <div v-if="question.Type == 'DefaultDragBox'" class="defaultDragBox" />
+        <div v-if="question.Type === 'DefaultDragBox'" class="defaultDragBox" />
         <component
           :is="question.Type"
           v-else
@@ -206,7 +206,7 @@ export default {
       const draggedRect = draggedElement.getBoundingClientRect();
 
       for (let boxIndex = 0; boxIndex < dragBoxes.length; boxIndex++) {
-        if (this.GameData.Questions[boxIndex].Type == "DefaultDragBox") {
+        if (this.GameData.Questions[boxIndex].Type === "DefaultDragBox") {
           const box = dragBoxes[boxIndex];
           const boxRect = box.getBoundingClientRect();
           if (this.isOverlapping(draggedRect, boxRect)) {
@@ -257,12 +257,12 @@ export default {
       switch (this.questionData[index].Type) {
         case "ImageContainer":
           this.answer[index] =
-            draggedElement.Data.Src ==
+            draggedElement.Data.Src ===
             this.GameData.Questions[index].Data.answer;
           break;
         case "TextOnly":
           this.answer[index] =
-            draggedElement.Data.Text ==
+            draggedElement.Data.Text ===
             this.GameData.Questions[index].Data.answer;
           break;
       }

@@ -63,7 +63,7 @@ export default {
       this.question = this.GameData.Question.options;
       this.RandomtheList();
       let randed = this.Checkrand();
-      while (randed == false) {
+      while (randed === false) {
         this.RandomtheList();
         randed = this.Checkrand();
       }
@@ -85,7 +85,7 @@ export default {
       for (var i in this.answer) {
         list2 += this.answer[i];
       }
-      if (list1 == list2) {
+      if (list1 === list2) {
         return false;
       } else {
         return true;
@@ -94,11 +94,11 @@ export default {
     CheckAnswer() {
       var AnswerCheck = true;
       for (var i in this.answer) {
-        if (this.answer[i] != this.options[i]) {
+        if (this.answer[i] !== this.options[i]) {
           AnswerCheck = false;
         }
       }
-      if (AnswerCheck == true) {
+      if (AnswerCheck === true) {
         console.log("SortGame ChenckAnswer: Right");
         this.show = false;
         this.$emit("play-effect", "CorrectSound");

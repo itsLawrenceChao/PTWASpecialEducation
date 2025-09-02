@@ -1,6 +1,6 @@
 <template>
   <div class="Outter">
-    <div v-if="GameData.TopContainer != undefined" class="TopContainer">
+    <div v-if="GameData.TopContainer !== undefined" class="TopContainer">
       <component
         :is="GameData.TopContainer.Name"
         :Data="GameData.TopContainer.Data"
@@ -8,7 +8,7 @@
       />
     </div>
 
-    <div v-if="GameData.SlotComponent != undefined" class="ComponentArea Rect">
+    <div v-if="GameData.SlotComponent !== undefined" class="ComponentArea Rect">
       <component
         :is="GameData.SlotComponent.Name"
         :ID="ID"
@@ -105,7 +105,7 @@ export default {
   mounted() {
     let Container = document.getElementsByClassName("Container")[0];
     console.log(Container);
-    if (this.GameData.SlotComponent == undefined) {
+    if (this.GameData.SlotComponent === undefined) {
       Container.style.gridTemplateColumns = "1fr";
     }
   },
@@ -121,7 +121,7 @@ export default {
       console.log(this.SelectionRecord[this.currentQuestionIndex]);
       console.log(this.GameData.Questions[this.currentQuestionIndex].Answer);
       if (
-        this.SelectionRecord[this.currentQuestionIndex] ==
+        this.SelectionRecord[this.currentQuestionIndex] ===
         this.GameData.Questions[this.currentQuestionIndex].Answer
       ) {
         this.$emit("play-effect", "CorrectSound");
@@ -154,7 +154,7 @@ export default {
       let Answers = [];
       this.submitAnswerAmount++;
       for (const i in this.selectionRecord) {
-        if (this.selectionRecord[i] == null) {
+        if (this.selectionRecord[i] === null) {
           this.error = "請將所有答案作答完成";
           this.$emit("play-effect", "WrongSound");
           this.$emit("add-record", [
@@ -166,7 +166,7 @@ export default {
       }
       for (const j in this.GameData.Questions) {
         Answers.push(this.GameData.Questions[j].Answer);
-        if (this.SelectionRecord[j] != this.GameData.Questions[j].Answer) {
+        if (this.SelectionRecord[j] !== this.GameData.Questions[j].Answer) {
           isCorrect = false;
           this.$emit("add-record", [
             `第${this.submitAnswerAmount}送出答案`,

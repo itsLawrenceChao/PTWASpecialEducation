@@ -7,12 +7,12 @@
     </div>
     <div class="down-container">
       <div
-        v-if="GameData.SlotComponents != undefined"
+        v-if="GameData.SlotComponents !== undefined"
         class="component-container"
       >
         <component :is="SlotComponent" :ID="ID" :Data="SlotData" />
       </div>
-      <div v-if="GameData.SlotComponents != undefined" class="container__right">
+      <div v-if="GameData.SlotComponents !== undefined" class="container__right">
         <div class="info__card">
           <p>{{ GameData.Question_Text }}</p>
         </div>
@@ -90,7 +90,7 @@ export default {
       this.Select.push(false);
     }
     this.imageUrl = getGameAssets(this.ID, this.GameData.img);
-    if (this.GameData.SlotComponents != undefined) {
+    if (this.GameData.SlotComponents !== undefined) {
       let SlotComponentData = this.GameData.SlotComponents[0];
       this.SlotData = SlotComponentData.Data;
       this.SlotComponent = SlotComponentData.Name;
@@ -116,7 +116,7 @@ export default {
     },
     CheckAnswer() {
       let answer = this.Answer;
-      if (answer == this.GameData.Answer) {
+      if (answer === this.GameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);
         this.$emit("next-question");

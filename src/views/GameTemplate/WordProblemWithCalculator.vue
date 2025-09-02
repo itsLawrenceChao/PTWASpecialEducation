@@ -134,15 +134,15 @@ export default {
         this.$emit("add-record", ["答案全對", "", "正確"]);
         this.$emit("next-question");
       } else if (
-        this.markdownAnswerStatus == false &&
-        this.calculatorAnswerStatus == false
+        this.markdownAnswerStatus === false &&
+        this.calculatorAnswerStatus === false
       ) {
         this.$emit("add-record", ["答案全錯", "", "錯誤"]);
         this.$emit("play-effect", "WrongSound");
-      } else if (this.calculatorAnswerStatus == false) {
+      } else if (this.calculatorAnswerStatus === false) {
         this.$emit("add-record", ["計算機答案錯誤", "", "錯誤"]);
         this.$emit("play-effect", "WrongSound");
-      } else if (this.markdownAnswerStatus == false) {
+      } else if (this.markdownAnswerStatus === false) {
         this.$emit("add-record", ["填空部分出現錯誤", "", "錯誤"]);
         this.$emit("play-effect", "WrongSound");
       }

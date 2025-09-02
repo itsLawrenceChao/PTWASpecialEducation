@@ -133,7 +133,7 @@ export default {
           );
         }
       }
-      if (this.configDenominator.slice[i - 1].slices != this.denominator)
+      if (this.configDenominator.slice[i - 1].slices !== this.denominator)
         this.configDenominator.slice[i - 1].slices = this.denominator;
     },
     animation(currentWidth, targetWidth) {

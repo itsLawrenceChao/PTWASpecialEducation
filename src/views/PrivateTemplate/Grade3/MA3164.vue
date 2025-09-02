@@ -256,7 +256,7 @@ export default {
     drawFoodinCorrectRadius() {
       const foodImage = new window.Image();
       foodImage.src = getGameAssets(this.ID, this.GameData.FoodImage);
-      if (this.GameData.CorrectRadius == this.findLargestRadius())
+      if (this.GameData.CorrectRadius === this.findLargestRadius())
         this.foodWidth = this.gameHeight / 15;
       else this.foodWidth = this.gameHeight / 20;
       for (let i = 0; i < this.GameData.Answer; i++) {
@@ -367,7 +367,7 @@ export default {
       this.answer = num;
     },
     checkAnswer() {
-      if (this.answer == this.GameData.Answer) {
+      if (this.answer === this.GameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [this.GameData.Answer, this.answer, "正確"]);
         requestAnimationFrame(this.gatheringAnimation);

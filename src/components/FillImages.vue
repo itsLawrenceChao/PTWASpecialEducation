@@ -72,7 +72,7 @@ export default {
       if (
         this.$refs.container.clientWidth * this.ratio.row <=
           this.$refs.container.clientHeight * this.ratio.column ||
-        this.$refs.container.clientHeight == 0
+        this.$refs.container.clientHeight === 0
       ) {
         this.gameWidth = this.$refs.container.clientWidth;
         this.gameHeight = (this.gameWidth * this.ratio.row) / this.ratio.column;
@@ -86,16 +86,16 @@ export default {
     },
     setMap() {
       let rowWithLessElements = this.ratio.column - (this.Data.frame % this.ratio.column);
-      if (rowWithLessElements == this.ratio.column) rowWithLessElements = 0;
+      if (rowWithLessElements === this.ratio.column) rowWithLessElements = 0;
       if (rowWithLessElements < this.ratio.row / 2) {
         for (let i = 0; i < this.ratio.row; ++i) {
-          if (i % 2 == 1 && i < rowWithLessElements * 2)
+          if (i % 2 === 1 && i < rowWithLessElements * 2)
             this.mapOfRows.push(this.ratio.column - 1);
           else this.mapOfRows.push(this.ratio.column);
         }
       } else {
         for (let i = 0; i < this.ratio.row; ++i) {
-          if (i % 2 == 1 && i < (this.ratio.row - rowWithLessElements) * 2)
+          if (i % 2 === 1 && i < (this.ratio.row - rowWithLessElements) * 2)
             this.mapOfRows.push(this.ratio.column);
           else this.mapOfRows.push(this.ratio.column - 1);
         }
@@ -108,7 +108,7 @@ export default {
       fillImage.src = getGameAssets(this.ID, this.Data.fillImage);
       for (let i in this.mapOfRows) {
         let posX;
-        if (this.mapOfRows[i] == this.ratio.column) posX = 0;
+        if (this.mapOfRows[i] === this.ratio.column) posX = 0;
         else posX = this.ratioLength * 0.5;
         for (let j = 0; j < this.mapOfRows[i]; ++j) {
           let frame = {
@@ -142,7 +142,7 @@ export default {
       for (let i in this.configFill) {
         if (this.configFill[i].visible) fills++;
       }
-      this.$emit("replyAnswer", fills == this.Data.fill);
+      this.$emit("replyAnswer", fills === this.Data.fill);
     },
   },
 };

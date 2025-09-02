@@ -56,9 +56,9 @@ export default {
   mounted() {
     // if mediaData is not given, use default tech video, if both are not available, load 404 image
     console.log(this.gameId, this.mediaData);
-    if (this.mediaData == undefined) {
+    if (this.mediaData === undefined) {
       const defaultTechVideo = this.checkDefaultMediaAvailability();
-      if (defaultTechVideo == "") {
+      if (defaultTechVideo === "") {
         this.load404Image();
         this.isVideo = false;
       } else {
@@ -67,7 +67,7 @@ export default {
       }
     } else {
       const userGivenTechVideo = this.checkUserGivenMediaAvailability();
-      if (userGivenTechVideo == "") {
+      if (userGivenTechVideo === "") {
         this.load404Image();
         this.isVideo = false;
       } else {

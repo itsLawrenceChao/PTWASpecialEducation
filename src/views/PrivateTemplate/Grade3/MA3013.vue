@@ -115,9 +115,9 @@ export default {
       this.markdownReply = reply;
     },
     nowClicked() {
-      if (document.activeElement.tagName == "INPUT") {
+      if (document.activeElement.tagName === "INPUT") {
         this.nowSelect = document.activeElement;
-      } else if (document.activeElement.tagName == "BUTTON" && this.nowSelect) {
+      } else if (document.activeElement.tagName === "BUTTON" && this.nowSelect) {
         this.nowSelect.focus();
       }
     },

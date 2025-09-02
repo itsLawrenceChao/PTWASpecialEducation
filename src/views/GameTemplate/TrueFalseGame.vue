@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     Select(index) {
-      if (index == 0) {
+      if (index === 0) {
         this.TFSelect[0] = true;
         this.TFSelect[1] = false;
         this.Answer = true;
@@ -90,7 +90,7 @@ export default {
     },
     CheckAnswer() {
       const answer = this.Answer;
-      if (answer == this.GameData.Answer) {
+      if (answer === this.GameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);
         this.$emit("next-question");

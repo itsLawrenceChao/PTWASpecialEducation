@@ -170,7 +170,7 @@ export default {
       ) {
         let number = {};
         let offset;
-        if (i == 0) offset = this.gameWidth * 0.0085;
+        if (i === 0) offset = this.gameWidth * 0.0085;
         else
           offset =
             Math.ceil(Math.log(i + 1) / Math.log(10)) * this.gameWidth * 0.0085;
@@ -223,7 +223,7 @@ export default {
         i <= this.Data.max;
         i += this.Data.spacing, ++initId
       ) {
-        if (i == this.Data.init_pos) return initId;
+        if (i === this.Data.init_pos) return initId;
       }
     },
     handleDragend(e) {
@@ -259,7 +259,7 @@ export default {
     },
     checkAnswer(output) {
       console.log(output, this.Data.finalPosition);
-      if (output == this.Data.finalPosition) {
+      if (output === this.Data.finalPosition) {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);

@@ -1,7 +1,7 @@
 <template>
   <div class="OutterContainer">
     <img
-      v-if="imageURL != undefined && imageURL != ''"
+      v-if="imageURL !== undefined && imageURL !== ''"
       :src="imageURL"
       class=""
       :alt="altText"

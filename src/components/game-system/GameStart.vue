@@ -1,9 +1,9 @@
 <template>
-  <div v-if="Status == 'NotStart'" class="game-start container">
+  <div v-if="Status === 'NotStart'" class="game-start container">
     <div class="upper-container">
       <h1>{{ GameName }}</h1>
       <div class="card">
-        <p v-if="introType == 'PlainText'">
+        <p v-if="introType === 'PlainText'">
           {{ ShowContent }}
         </p>
         <p v-else>無介紹文字</p>
@@ -73,11 +73,11 @@ export default {
   },
   methods: {
     initIntroType() {
-      if (this.intro != undefined) {
-        if (this.intro.Type == "Html") {
+      if (this.intro !== undefined) {
+        if (this.intro.Type === "Html") {
           this.introType = "Html";
           this.ShowContent = this.intro.Content;
-        } else if (this.intro.Type == "PlainText") {
+        } else if (this.intro.Type === "PlainText") {
           this.introType = "PlainText";
           this.ShowContent = this.intro.Content;
         } else {

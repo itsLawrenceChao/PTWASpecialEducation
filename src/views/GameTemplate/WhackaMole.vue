@@ -202,7 +202,7 @@ export default {
           i < this.configObjects.position.length;
           ++i
         ) {
-          if (this.configObjects.position[i] == null) continue;
+          if (this.configObjects.position[i] === null) continue;
           if (
             canvasTools.distance(position, this.configObjects.position[i]) <
             this.gameWidth * 0.2
@@ -223,7 +223,7 @@ export default {
       }
     },
     moleAnimation(id) {
-      if (this.configObjects.status[id] == "up") {
+      if (this.configObjects.status[id] === "up") {
         this.configObjects.mole[id].y--;
         if (this.configObjects.cropPercent[id] < 100) {
           this.configObjects.cropPercent[id] += 1.2;
@@ -245,7 +245,7 @@ export default {
             this.configObjects.status[id] = "down";
           }, 2000);
         }
-      } else if (this.configObjects.status[id] == "down") {
+      } else if (this.configObjects.status[id] === "down") {
         this.configObjects.mole[id].y++;
         if (this.configObjects.cropPercent[id] > 0) {
           this.configObjects.cropPercent[id] -= 1.2;
@@ -269,11 +269,11 @@ export default {
       }
     },
     burrowAnimation(id) {
-      if (this.configObjects.hole[id].image == this.images.hole) {
+      if (this.configObjects.hole[id].image === this.images.hole) {
         this.configObjects.hole[id].image = this.images.holeup;
         this.configObjects.hole[id].y = this.configObjects.position[id].y;
         window.setTimeout(this.burrowAnimation, 200, id);
-      } else if (this.configObjects.hole[id].image == this.images.holeup) {
+      } else if (this.configObjects.hole[id].image === this.images.holeup) {
         this.configObjects.hole[id].image = this.images.hole;
         this.configObjects.hole[id].y = canvasTools.offset(
           this.configObjects.position[id],
@@ -311,13 +311,13 @@ export default {
       }
       for (let i = this.startId; i < this.configObjects.position.length; ++i) {
         this.startId = i;
-        if (this.configObjects.position[i] != null) break;
+        if (this.configObjects.position[i] !== null) break;
       }
     },
     whacked(e) {
       let id = e.target.attrs.id;
       this.checkAnswer(id);
-      if (this.configObjects.mole[id].image == this.images.mole) {
+      if (this.configObjects.mole[id].image === this.images.mole) {
         this.configObjects.status[id] = "hold";
         this.configObjects.mole[id].image = this.images.moleWhacked;
         window.setTimeout(() => {
@@ -336,7 +336,7 @@ export default {
     checkAnswer(id) {
       let isCorrect = false;
       for (let answer in this.GameData.True) {
-        if (this.GameData.True[answer] == this.configObjects.option[id].text)
+        if (this.GameData.True[answer] === this.configObjects.option[id].text)
           isCorrect = true;
       }
       if (isCorrect) {
@@ -347,16 +347,16 @@ export default {
           "正確",
         ]);
         this.allOptions = this.allOptions.filter(
-          (option) => option != this.configObjects.option[id].text
+          (option) => option !== this.configObjects.option[id].text
         );
         this.trueOptions = this.trueOptions.filter(
-          (option) => option != this.configObjects.option[id].text
+          (option) => option !== this.configObjects.option[id].text
         );
         this.correctCount++;
         if (this.correctCount >= this.requiredCorrect) {
           this.$emit("next-question");
         }
-      } else if (this.configObjects.option[id].text == null) {
+      } else if (this.configObjects.option[id].text === null) {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
           this.printCorrectAnswers(),

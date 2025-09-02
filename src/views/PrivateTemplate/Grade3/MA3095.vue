@@ -6,7 +6,7 @@
       </div>
       <!-- <button class="submitBtn" @click="checkAnswer">提交答案</button> -->
     </div>
-    <div v-if="GameData.Type == 'Ribbon'" class="options flex">
+    <div v-if="GameData.Type === 'Ribbon'" class="options flex">
       <div class="ribbons">
         <div class="rowContainer">
           <div
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div v-if="GameData.Type == 'Paper'" class="options grid">
+    <div v-if="GameData.Type === 'Paper'" class="options grid">
       <div class="paper">
         <div class="gridContainer" :style="gridContainerStyle">
           <div
@@ -109,9 +109,9 @@ export default {
 
   beforeMount() {
     this.setMap();
-    if (this.GameData.Type == "Ribbon") {
+    if (this.GameData.Type === "Ribbon") {
       this.setRibbonStyle();
-    } else if (this.GameData.Type == "Paper") {
+    } else if (this.GameData.Type === "Paper") {
       this.setPaperStyle();
     }
     this.setbtnStyle();
@@ -135,7 +135,7 @@ export default {
           let random;
           do {
             random = Math.ceil(Math.random() * this.GameData.Denominator);
-          } while (random == this.GameData.Numerator);
+          } while (random === this.GameData.Numerator);
           this.map.push(random);
         }
       }
@@ -146,8 +146,8 @@ export default {
         let style = {
           backgroundColor: this.color,
         };
-        if (j == 0) style.borderLeft = "1px black solid";
-        else if (j == this.GameData.Denominator - 1)
+        if (j === 0) style.borderLeft = "1px black solid";
+        else if (j === this.GameData.Denominator - 1)
           style.borderRight = "1px black solid";
         this.wholeRibbonStyle.push(style);
       }
@@ -160,8 +160,8 @@ export default {
         );
         for (let j = 0; j < this.GameData.Denominator; ++j) {
           let style = {};
-          if (j == 0) style.borderLeft = "1px black solid";
-          else if (j == this.GameData.Denominator - 1)
+          if (j === 0) style.borderLeft = "1px black solid";
+          else if (j === this.GameData.Denominator - 1)
             style.borderRight = "1px black solid";
 
           if (coloredRibbon.includes(j)) style.backgroundColor = this.color;
@@ -180,12 +180,12 @@ export default {
           let style = {
             backgroundColor: this.color,
           };
-          if (i == 0) style.borderTop = "1px black solid";
-          else if (i == this.GameData.Factors[1] - 1)
+          if (i === 0) style.borderTop = "1px black solid";
+          else if (i === this.GameData.Factors[1] - 1)
             style.borderBottom = "1px black solid";
 
-          if (j == 0) style.borderLeft = "1px black solid";
-          else if (j == this.GameData.Factors[0] - 1)
+          if (j === 0) style.borderLeft = "1px black solid";
+          else if (j === this.GameData.Factors[0] - 1)
             style.borderRight = "1px black solid";
           this.wholePaperStyle.push(style);
         }
@@ -199,12 +199,12 @@ export default {
         for (let i = 0; i < this.GameData.Factors[1]; ++i) {
           for (let j = 0; j < this.GameData.Factors[0]; ++j) {
             let style = {};
-            if (i == 0) style.borderTop = "1px black solid";
-            else if (i == this.GameData.Factors[1] - 1)
+            if (i === 0) style.borderTop = "1px black solid";
+            else if (i === this.GameData.Factors[1] - 1)
               style.borderBottom = "1px black solid";
 
-            if (j == 0) style.borderLeft = "1px black solid";
-            else if (j == this.GameData.Factors[0] - 1)
+            if (j === 0) style.borderLeft = "1px black solid";
+            else if (j === this.GameData.Factors[0] - 1)
               style.borderRight = "1px black solid";
             if (coloredPaper.includes(grid.length))
               style.backgroundColor = this.color;
@@ -232,7 +232,7 @@ export default {
       return combination;
     },
     handleClick(i) {
-      if (this.btnStyle[i].color == "black") {
+      if (this.btnStyle[i].color === "black") {
         this.btnStyle[i].color = "transparent";
         this.selected[i] = false;
       } else {
@@ -244,7 +244,7 @@ export default {
       let isCorrect = true,
         wrongAnswers = [];
       for (let i = 0; i < this.GameData.Option; ++i) {
-        if (this.selected[i] != this.correctOptionID.includes(i)) {
+        if (this.selected[i] !== this.correctOptionID.includes(i)) {
           isCorrect = false;
           wrongAnswers.push(this.map[i]);
         }
@@ -254,7 +254,7 @@ export default {
     },
     emitAnswers(wrongAnswers) {
       if (wrongAnswers.length > 0) {
-        while (wrongAnswers.findIndex(this.isNumerator) != -1) {
+        while (wrongAnswers.findIndex(this.isNumerator) !== -1) {
           wrongAnswers[wrongAnswers.findIndex(this.isNumerator)] = "未勾選";
         }
         this.$emit("play-effect", "WrongSound");
@@ -270,7 +270,7 @@ export default {
       }
     },
     isNumerator(i) {
-      if (i == this.GameData.Numerator) return true;
+      if (i === this.GameData.Numerator) return true;
       else return false;
     },
   },

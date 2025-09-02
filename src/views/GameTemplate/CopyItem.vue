@@ -143,14 +143,14 @@ export default {
     },
     deleteItem(item) {
       this.tarList = this.tarList.filter((element) => {
-        return element.ID != item.ID;
+        return element.ID !== item.ID;
       });
     },
     checkAnswer() {
       let stack = {};
       let isTrue = true;
       for (var i in this.tarList) {
-        if (stack[this.tarList[i].item] == undefined) {
+        if (stack[this.tarList[i].item] === undefined) {
           stack[this.tarList[i].item] = 1;
         } else {
           stack[this.tarList[i].item] += 1;
@@ -158,8 +158,8 @@ export default {
       }
       for (var i in this.GameData.Items) {
         if (
-          stack[i] == undefined ||
-          stack[i] != this.GameData.Items[i].Amount
+          stack[i] === undefined ||
+          stack[i] !== this.GameData.Items[i].Amount
         ) {
           isTrue = false;
         }

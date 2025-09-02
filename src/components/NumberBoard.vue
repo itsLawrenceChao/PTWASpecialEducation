@@ -51,7 +51,7 @@ export default {
     if (typeof this.Data.Number === "number") {
       this.numbers = this.Data.Number.toString().split("");
     }
-    if (this.Data.Unit.length != this.numbers.length) {
+    if (this.Data.Unit.length !== this.numbers.length) {
       if (this.Data.Unit.length > this.numbers.length) {
         let diff = this.Data.Unit.length - this.numbers.length;
         for (let i = 0; i < diff; i++) {

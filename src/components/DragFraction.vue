@@ -5,7 +5,7 @@
         <v-rect :config="configBG" />
         <v-rect :config="configSideBar" />
       </v-layer>
-      <v-layer v-if="Data.shape == 'circle'">
+      <v-layer v-if="Data.shape === 'circle'">
         <circleFraction
           :key="componentKey"
           :game-width="gameWidth"
@@ -16,7 +16,7 @@
         />
       </v-layer>
 
-      <v-layer v-if="Data.shape == 'rect'">
+      <v-layer v-if="Data.shape === 'rect'">
         <rectFraction
           :key="componentKey"
           :game-width="gameWidth"
@@ -106,7 +106,7 @@ export default {
       console.log(this.$refs.container.clientWidth, this.$refs.container.clientHeight);
       if (
         this.$refs.container.clientWidth * 0.75 <= this.$refs.container.clientHeight ||
-        this.$refs.container.clientHeight == 0
+        this.$refs.container.clientHeight === 0
       ) {
         this.gameWidth = this.$refs.container.clientWidth;
         this.gameHeight = this.gameWidth * 0.75;
@@ -219,10 +219,10 @@ export default {
       else this.configNumeratorNumber.x = this.gameWidth * 0.86;
       this.configDenominatorNumber.text = `${this.denominator}等分`;
 
-      if (this.numerator == 2) {
+      if (this.numerator === 2) {
         this.configArrow[0].fill = "#505050";
         this.configArrow[0].stroke = "#505050";
-      } else if (this.numerator == 12) {
+      } else if (this.numerator === 12) {
         this.configArrow[1].fill = "#505050";
         this.configArrow[1].stroke = "#505050";
       } else {
@@ -232,10 +232,10 @@ export default {
         this.configArrow[1].stroke = "#BA3F38";
       }
 
-      if (this.denominator == 2) {
+      if (this.denominator === 2) {
         this.configArrow[2].fill = "#505050";
         this.configArrow[2].stroke = "#505050";
-      } else if (this.denominator == 12) {
+      } else if (this.denominator === 12) {
         this.configArrow[3].fill = "#505050";
         this.configArrow[3].stroke = "#505050";
       } else {
@@ -250,16 +250,16 @@ export default {
       for (let fraction in fill) {
         total += fill[fraction];
       }
-      if (this.Data.verifyOption == "answer") {
+      if (this.Data.verifyOption === "answer") {
         let answer = this.Data.answer.numerator / this.Data.answer.denominator;
-        let isCorrect = answer.toFixed(2) == total.toFixed(2);
+        let isCorrect = answer.toFixed(2) === total.toFixed(2);
         this.$emit("replyAnswer", isCorrect);
         this.$emit("recordAnswer", [
           answer.toFixed(2),
           total.toFixed(2),
           isCorrect ? "正確" : "錯誤",
         ]);
-      } else if (this.Data.verifyOption == "value") {
+      } else if (this.Data.verifyOption === "value") {
         this.$emit("replyAnswer", total.toFixed(2));
       }
     },

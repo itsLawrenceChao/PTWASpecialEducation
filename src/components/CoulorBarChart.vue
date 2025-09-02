@@ -1,6 +1,6 @@
 <template>
   <div class="OutterContainer">
-    <p v-if="configs.Text != undefined">{{ configs.Text }}{{ configs.Unit }}</p>
+    <p v-if="configs.Text !== undefined">{{ configs.Text }}{{ configs.Unit }}</p>
     <div v-else class="Number">
       <div class="Division">
         <p class="Child">
@@ -52,7 +52,7 @@ export default {
     this.configs = this.Data;
     this.configs.Total = this.configs.Mother;
     this.Drawed = [];
-    if (this.configs.Total % 2 != 0) {
+    if (this.configs.Total % 2 !== 0) {
       //奇數
       let temp = [];
       for (var i = 0; i < this.configs.Total; i++) {
@@ -82,7 +82,7 @@ export default {
     for (var i = 0; i < tableData.length; i++) {
       tableData[i].style.width = width + "px";
     }
-    if (this.configs.Coulor == undefined) {
+    if (this.configs.Coulor === undefined) {
       this.configs.Coulor = "#bde0fe";
     }
   },
@@ -100,12 +100,12 @@ export default {
       let TempAnswer = 0;
       for (var i = 0; i < this.Drawed.length; i++) {
         for (var x = 0; x < this.Drawed[i].length; x++) {
-          if (this.Drawed[i][x] == false) {
+          if (this.Drawed[i][x] === false) {
             TempAnswer += 1;
           }
         }
       }
-      if (TempAnswer == this.configs.Child) {
+      if (TempAnswer === this.configs.Child) {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);
@@ -115,12 +115,12 @@ export default {
       let TempAnswer = 0;
       for (var i = 0; i < this.Drawed.length; i++) {
         for (var x = 0; x < this.Drawed[i].length; x++) {
-          if (this.Drawed[i][x] == false) {
+          if (this.Drawed[i][x] === false) {
             TempAnswer += 1;
           }
         }
       }
-      if (TempAnswer == this.configs.Child) {
+      if (TempAnswer === this.configs.Child) {
         alert("Correct" + TempAnswer + this.configs.Child);
       } else {
         alert("Incorrect" + TempAnswer + this.configs.Child);

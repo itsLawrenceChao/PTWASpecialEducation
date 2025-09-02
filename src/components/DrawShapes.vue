@@ -78,14 +78,14 @@ export default {
     this.setGrid();
     this.drawGrid();
     this.drawReturnBtn();
-    if (this.Data.givenPoints != null) {
+    if (this.Data.givenPoints !== null) {
       this.drawGiven();
     }
   },
 
   methods: {
     getData() {
-      if (this.Data.bgRatio != null) {
+      if (this.Data.bgRatio !== null) {
         this.ratio = this.Data.bgRatio;
       }
     },
@@ -222,7 +222,7 @@ export default {
     },
     slope(id) {
       let pointSet = this.getPointSetFromLine(id);
-      if (pointSet[0].x == pointSet[1].x) return "vertical";
+      if (pointSet[0].x === pointSet[1].x) return "vertical";
       else
         return (
           (pointSet[0].y - pointSet[1].y) /
@@ -230,20 +230,20 @@ export default {
         ).toFixed(2);
     },
     isParallel(id1, id2) {
-      if (this.slope(id1) == this.slope(id2)) return true;
+      if (this.slope(id1) === this.slope(id2)) return true;
       else return false;
     },
     isPerpendicular(id1, id2) {
-      if (this.slope(id1) == "vertical" || this.slope(id2) == "vertical") {
-        if (this.slope(id1) == 0 || this.slope(id2) == 0) return true;
+      if (this.slope(id1) === "vertical" || this.slope(id2) === "vertical") {
+        if (this.slope(id1) === 0 || this.slope(id2) === 0) return true;
         else return false;
-      } else if (this.slope(id1) * this.slope(id2) == -1) return true;
+      } else if (this.slope(id1) * this.slope(id2) === -1) return true;
       else return false;
     },
     isLinked(id1, id2) {
       let pointSet1 = this.getPointSetFromLine(id1),
         pointSet2 = this.getPointSetFromLine(id2);
-      if (this.isSameLine(id1, id2) || id1 == id2) return false;
+      if (this.isSameLine(id1, id2) || id1 === id2) return false;
       else if (
         this.isSamePoint(pointSet1[0], pointSet2[0]) ||
         this.isSamePoint(pointSet1[0], pointSet2[1]) ||
@@ -263,13 +263,13 @@ export default {
       return links;
     },
     isLinkedByLines(id1, id2) {
-      if (id1 == id2) return false;
+      if (id1 === id2) return false;
       let linkingLines = [];
       for (let link1 in this.findLinks(id1)) {
         for (let link2 in this.findLinks(id2)) {
-          if (this.findLinks(id1)[link1] == this.findLinks(id2)[link2]) {
+          if (this.findLinks(id1)[link1] === this.findLinks(id2)[link2]) {
             linkingLines.push(this.findLinks(id1)[link1]);
-            if (linkingLines.length == 2) {
+            if (linkingLines.length === 2) {
               return linkingLines;
             }
           }
@@ -297,7 +297,7 @@ export default {
       );
     },
     isSamePoint(point1, point2) {
-      if (point1.x == point2.x && point1.y == point2.y) return true;
+      if (point1.x === point2.x && point1.y === point2.y) return true;
       else return false;
     },
     isSameLine(id1, id2) {
@@ -422,9 +422,9 @@ export default {
       return false;
     },
     deleteLine() {
-      if (this.configLine.length == 0) return;
+      if (this.configLine.length === 0) return;
       let id = this.configLine.length - 1;
-      if (this.configLine[id].stroke != "brown") {
+      if (this.configLine[id].stroke !== "brown") {
         this.configLine.splice(id, 1);
       }
     },
@@ -432,7 +432,7 @@ export default {
       if (this.isIntersected()) {
         this.$emit("replyAnswer", false);
         return;
-      } else if (this.Data.verifyOption == "shape") {
+      } else if (this.Data.verifyOption === "shape") {
         switch (this.Data.answer) {
           case "triangle":
             this.$emit("replyAnswer", this.isTriangle());
@@ -447,15 +447,15 @@ export default {
             this.$emit("replyAnswer", this.isParallelogram());
             break;
         }
-      } else if (this.Data.verifyOption == "rect") this.verifyRectangle();
+      } else if (this.Data.verifyOption === "rect") this.verifyRectangle();
     },
     verifyRectangle() {
       if (this.isRectangle()) {
         let height = this.lengthInGrid(this.sides[0]),
           width = this.lengthInGrid(this.sides[1]);
         if (
-          (this.Data.answer[0] == height && this.Data.answer[1] == width) ||
-          (this.Data.answer[0] == width && this.Data.answer[1] == height)
+          (this.Data.answer[0] === height && this.Data.answer[1] === width) ||
+          (this.Data.answer[0] === width && this.Data.answer[1] === height)
         ) {
           this.$emit("replyAnswer", true);
           return;

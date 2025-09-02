@@ -279,13 +279,13 @@ export default {
     CheckPairedBefore(x, y) {
       // 檢查起點是否已經有連線
       for (let i in this.LinkedRecord) {
-        if (this.LinkedRecord[i][0] == x) {
+        if (this.LinkedRecord[i][0] === x) {
           return true;
         }
       }
       // 檢查終點是否已經有連線
       for (let i in this.LinkedRecord) {
-        if (this.LinkedRecord[i][1] == y) {
+        if (this.LinkedRecord[i][1] === y) {
           return true;
         }
       }
@@ -306,8 +306,8 @@ export default {
       };
       for (let i in this.Lines) {
         if (
-          this.Lines[i].points[0] == WrongLine.points[0] &&
-          this.Lines[i].points[1] == WrongLine.points[1]
+          this.Lines[i].points[0] === WrongLine.points[0] &&
+          this.Lines[i].points[1] === WrongLine.points[1]
         ) {
           this.Lines[i] = WrongLine;
         }
@@ -440,7 +440,7 @@ export default {
             (this.GameData.Selections.length / 2 + 1) * this.MinGap) /
           (this.GameData.Selections.length / 2);
         this.GameData.Selections.forEach((item, index) => {
-          if (index % 2 == 0) {
+          if (index % 2 === 0) {
             this.addRect(
               this.MinGap + parseInt(index / 2) * (RectWidth + this.MinGap),
               0,
@@ -476,9 +476,9 @@ export default {
       this.Pair = [];
       for (let i in this.GameData.MountPoint) {
         for (let j in this.GameData.Selections) {
-          if (typeof this.GameData.MountPoint[i].Connect2 == "string") {
+          if (typeof this.GameData.MountPoint[i].Connect2 === "string") {
             if (
-              this.GameData.MountPoint[i].Connect2 ==
+              this.GameData.MountPoint[i].Connect2 ===
               this.GameData.Selections[j]
             ) {
               this.Pair.push([i, j]);
@@ -486,7 +486,7 @@ export default {
           } else {
             for (let k in this.GameData.MountPoint[i].Connect2) {
               if (
-                this.GameData.MountPoint[i].Connect2[k] ==
+                this.GameData.MountPoint[i].Connect2[k] ===
                 this.GameData.Selections[j]
               ) {
                 this.Pair.push([i, j]);

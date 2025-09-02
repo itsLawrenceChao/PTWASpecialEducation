@@ -26,19 +26,19 @@ export default {
     console.log(FONT_PACK["TEXT_LARGE"]);
     if (this.Data.Size) {
       const container = this.$refs.textOnlyContainer;
-      if (this.Data.Size == "large") {
+      if (this.Data.Size === "large") {
         container.style.fontSize = `${FONT_PACK["TEXT_LARGE"]}`;
-      } else if (this.Data.Size == "medium") {
+      } else if (this.Data.Size === "medium") {
         container.style.fontSize = `${FONT_PACK["TEXT_MEDIUM"]}`;
-      } else if (this.Data.Size == "small") {
+      } else if (this.Data.Size === "small") {
         container.style.fontSize = `${FONT_PACK["TEXT_SMALL"]}`;
-      } else if (this.Data.Size == "tiny") {
+      } else if (this.Data.Size === "tiny") {
         container.style.fontSize = `${FONT_PACK["TEXT_TINY"]}`;
-      } else if (this.Data.Size == "title-large") {
+      } else if (this.Data.Size === "title-large") {
         container.style.fontSize = `${FONT_PACK["TITLE_LARGE"]}`;
-      } else if (this.Data.Size == "title-medium") {
+      } else if (this.Data.Size === "title-medium") {
         container.style.fontSize = `${FONT_PACK["TITLE_MEDIUM"]}`;
-      } else if (this.Data.Size == "title-small") {
+      } else if (this.Data.Size === "title-small") {
         container.style.fontSize = `${FONT_PACK["TITLE_SMALL"]}`;
       } else {
         container.style.fontSize = this.Data.Size;

@@ -1,6 +1,6 @@
 <template>
   <div class="Container">
-    <p v-if="Data.Text != undefined">
+    <p v-if="Data.Text !== undefined">
       {{ Data.Text }}
     </p>
     <div class="Division">
@@ -61,7 +61,7 @@ export default {
     };
   },
   created() {
-    if (this.Data.Object != undefined) {
+    if (this.Data.Object !== undefined) {
       if (this.Data.Object in this.DataBase) {
         this.image1 = getSlotComponentAssets(
           "DrawOnImage",
@@ -101,11 +101,11 @@ export default {
     ReplyAnswer() {
       let temp = 0;
       for (var i in this.clickedStatus) {
-        if (this.clickedStatus[i] == true) {
+        if (this.clickedStatus[i] === true) {
           temp += 1;
         }
       }
-      if (temp == this.Data.Child) {
+      if (temp === this.Data.Child) {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);

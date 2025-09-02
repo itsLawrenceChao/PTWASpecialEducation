@@ -208,7 +208,7 @@ export default {
             this.configTarget[i]
           ) <=
             this.configTarget[i].radius * 2 &&
-          this.configTarget[i].opacity != 0.5
+          this.configTarget[i].opacity !== 0.5
         ) {
           this.checkAnswer(i);
         }
@@ -219,7 +219,7 @@ export default {
       this.configTarget[i].opacity = 0.5;
       this.configOptions[i].visible = false;
       for (let answer in this.GameData.True) {
-        if (this.GameData.True[answer] == this.configOptions[i].text)
+        if (this.GameData.True[answer] === this.configOptions[i].text)
           isCorrect = true;
       }
       if (isCorrect) {
@@ -230,10 +230,10 @@ export default {
           "正確",
         ]);
         this.allOptions = this.allOptions.filter(
-          (option) => option != this.configOptions[i].text
+          (option) => option !== this.configOptions[i].text
         );
         this.trueOptions = this.trueOptions.filter(
-          (option) => option != this.configOptions[i].text
+          (option) => option !== this.configOptions[i].text
         );
       } else {
         this.$emit("play-effect", "WrongSound");
@@ -243,7 +243,7 @@ export default {
           "錯誤",
         ]);
       }
-      if (this.trueOptions.length == 0) this.$emit("next-question");
+      if (this.trueOptions.length === 0) this.$emit("next-question");
     },
     printCorrectAnswers() {
       return this.GameData.Question.concat(":", this.GameData.True.join("/"));

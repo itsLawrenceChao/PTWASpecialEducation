@@ -46,7 +46,7 @@ export default {
     },
     handlePointer(e) {
       let pos = this.getPositon(e);
-      if (this.Data.color == "eraser") {
+      if (this.Data.color === "eraser") {
         switch (e.type) {
           case "pointerdown":
             this.drawing = true;

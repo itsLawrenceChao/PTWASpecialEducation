@@ -105,11 +105,11 @@ export default {
     for (const i in this.GameData.Data) {
       NewArr.push(this.GameData.Data[i]);
       // Initial the ComponentAnswer
-      if (this.GameData.Data[i].Blank == true) {
+      if (this.GameData.Data[i].Blank === true) {
         this.ComponentsAnswers[cnt] = false;
       }
       cnt++;
-      if (i != this.GameData.Data.length - 1) {
+      if (i !== this.GameData.Data.length - 1) {
         NewArr.push({
           Arrow: true,
         });
@@ -120,7 +120,7 @@ export default {
     emitter.on("submitAnswer", this.CheckAnswer);
   },
   mounted() {
-    if (this.GameConfig.NumberPadAutoDisappear == false) {
+    if (this.GameConfig.NumberPadAutoDisappear === false) {
       this.SlidAnimation("in");
       this.ShowPad = true;
     }
@@ -139,28 +139,28 @@ export default {
       this.topComponentsAnswer = result;
     },
     NowClick() {
-      if (this.GameConfig.layout.pad == false) return;
-      if (document.activeElement.tagName == "INPUT") {
+      if (this.GameConfig.layout.pad === false) return;
+      if (document.activeElement.tagName === "INPUT") {
         this.SlidAnimation("in");
         this.ShowPad = true;
         this.NowSelect = document.activeElement;
-      } else if (document.activeElement.tagName == "BUTTON") {
+      } else if (document.activeElement.tagName === "BUTTON") {
         this.NowSelect.focus();
         this.ShowPad = true;
       } else {
-        if (this.GameConfig.NumberPadAutoDisappear != false) {
+        if (this.GameConfig.NumberPadAutoDisappear !== false) {
           this.ShowPad = false;
           this.SlidAnimation("out");
         }
       }
     },
     SlidAnimation(action) {
-      if (this.GameConfig.layout.pad == false) return;
-      if (this.GameConfig.NumberPadAutoDisappear != false) {
+      if (this.GameConfig.layout.pad === false) return;
+      if (this.GameConfig.NumberPadAutoDisappear !== false) {
         const OutterContainer =
           document.getElementsByClassName("OutterContainer")[0];
         const GameWindows = document.getElementsByClassName("GameWindows")[0];
-        if (action == "in") {
+        if (action === "in") {
           OutterContainer.style.gridTemplateColumns = "4fr 1f";
           GameWindows.style.gridColumn = "1/2";
         } else {
@@ -172,14 +172,14 @@ export default {
     CheckAnswer() {
       console.log(this.topComponentsAnswer, this.downComponentsAnswer);
       if (
-        this.GameConfig.layout.top == false ||
-        this.GameConfig.checkAnswer.top == false
+        this.GameConfig.layout.top === false ||
+        this.GameConfig.checkAnswer.top === false
       ) {
         this.topComponentsAnswer = true;
       }
       if (
-        this.GameConfig.layout.down == false ||
-        this.GameConfig.checkAnswer.down == false
+        this.GameConfig.layout.down === false ||
+        this.GameConfig.checkAnswer.down === false
       ) {
         this.downComponentsAnswer = true;
       }
@@ -187,7 +187,7 @@ export default {
       const ans = this.topComponentsAnswer && this.downComponentsAnswer;
       console.log(ans);
 
-      if (ans == true) {
+      if (ans === true) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", ["不支援顯示", "不支援顯示", `正確`]);
         this.$emit("next-question");

@@ -43,7 +43,7 @@ export default {
     if (typeof this.Data.Number === "number") {
       this.Number = this.Data.Number.toString().split("");
     }
-    if (this.Data.Unit.length != this.Number.length) {
+    if (this.Data.Unit.length !== this.Number.length) {
       if (this.Data.Unit.length > this.Number.length) {
         let diff = this.Data.Unit.length - this.Number.length;
         for (let i = 0; i < diff; i++) {
@@ -64,7 +64,7 @@ export default {
     checkAnswer() {
       let check = true;
       for (var i = this.Data.Number.toString().split("").length; i >= 0; i--) {
-        if (this.Data.Number.toString().split("")[i] != this.Number[i]) {
+        if (this.Data.Number.toString().split("")[i] !== this.Number[i]) {
           check = false;
           break;
         }

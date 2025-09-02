@@ -21,7 +21,7 @@
       <div class="QuestionArea">
         <p class="Title">答案區</p>
         <div v-for="(pair, index) in GameData.Pairs" class="Pair">
-          <div class="Answer" :class="{ False: FalseOption[index] == true }">
+          <div class="Answer" :class="{ False: FalseOption[index] === true }">
             <draggable
               :list="AnswersNew[index]"
               item-key="Tag"
@@ -109,8 +109,8 @@ export default {
       console.log(Tar);
       if (this.AnswersNew[index].length > 1) {
         for (const i in this.AnswersNew[index]) {
-          if (this.AnswersNew[index][i].Tag == Tar.Tag) {
-            if (i == 0) {
+          if (this.AnswersNew[index][i].Tag === Tar.Tag) {
+            if (i === 0) {
               this.Selections.push(this.AnswersNew[index][0]);
               this.AnswersNew[index] = [this.AnswersNew[index][1]];
             } else {
@@ -128,7 +128,7 @@ export default {
         this.FalseOption[i] = false;
       }
       for (let j = 0; j < this.GameData.Pairs.length; j++) {
-        if (this.GameData.Pairs[j].Answer != this.AnswersNew[j][0].Tag) {
+        if (this.GameData.Pairs[j].Answer !== this.AnswersNew[j][0].Tag) {
           AnswerCheck = false;
           this.FalseOption[j] = true;
         }

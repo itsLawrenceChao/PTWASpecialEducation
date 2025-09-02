@@ -332,7 +332,7 @@ export default {
     },
     checkAnswer() {
       if (
-        this.options[this.currentOptionId] ==
+        this.options[this.currentOptionId] ===
         this.GameData.Options[this.GameData.Answer]
       ) {
         this.$emit("play-effect", "CorrectSound");
@@ -362,7 +362,7 @@ export default {
       requestAnimationFrame(this.moveRoad);
     },
     endingAnimation() {
-      if (this.configCar.x > this.gameWidth && this.configEndingImage == null) {
+      if (this.configCar.x > this.gameWidth && this.configEndingImage === null) {
         this.$emit("next-question");
       } else {
         this.configCar.x += this.speed;
@@ -370,7 +370,7 @@ export default {
         requestAnimationFrame(this.endingAnimation);
       }
       this.endingFrameCount++;
-      if (this.endingFrameCount % 20 == 0 && this.configCar.x < this.gameWidth)
+      if (this.endingFrameCount % 20 === 0 && this.configCar.x < this.gameWidth)
         this.drawSmoke();
     },
     drawSmoke() {
@@ -390,7 +390,7 @@ export default {
     },
     moveSmoke() {
       for (let i in this.configSmoke) {
-        if (this.GameData.EndingImage && Number(i) == 3) {
+        if (this.GameData.EndingImage && Number(i) === 3) {
           if (this.configEndingImage) {
             this.moveImageSmoke();
             this.moveEndingImage();

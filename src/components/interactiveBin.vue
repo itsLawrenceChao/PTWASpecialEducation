@@ -44,7 +44,7 @@ export default {
   },
 
   beforeUpdate() {
-    if (Math.floor(Math.random() * 10) == 0) {
+    if (Math.floor(Math.random() * 10) === 0) {
       this.cat = true;
     } else this.cat = false;
   },

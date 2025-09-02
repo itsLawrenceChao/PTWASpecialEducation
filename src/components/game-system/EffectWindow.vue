@@ -24,10 +24,10 @@ export default {
     // Your computed properties go here
   },
   created() {
-    if (this.Data.Status == "Correct") {
+    if (this.Data.Status === "Correct") {
       this.Src = getSlotComponentAssets("CorrectIncorrect", "check.png");
       console.log(this.Src);
-    } else if (this.Data.Status == "Incorrect") {
+    } else if (this.Data.Status === "Incorrect") {
       this.Src = getSlotComponentAssets("CorrectIncorrect", "cross.png");
       console.log(this.Src);
     }

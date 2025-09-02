@@ -6,10 +6,10 @@
     </div>
     <v-stage :config="configKonva">
       <v-layer>
-        <v-rect v-if="GameData.AnswerType == 'Drag'" :config="configDragBG"></v-rect>
+        <v-rect v-if="GameData.AnswerType === 'Drag'" :config="configDragBG"></v-rect>
       </v-layer>
 
-      <v-layer v-if="GameData.AnswerType == 'Fill'">
+      <v-layer v-if="GameData.AnswerType === 'Fill'">
         <v-image v-for="(block, index) in configFillings" :key="index" :config="block" />
       </v-layer>
 
@@ -23,7 +23,7 @@
         />
       </v-layer>
 
-      <v-layer v-if="GameData.AnswerType == 'Drag'" :key="draggableKey">
+      <v-layer v-if="GameData.AnswerType === 'Drag'" :key="draggableKey">
         <v-image
           v-for="(block, index) in configDraggables"
           :key="index"
@@ -215,7 +215,7 @@ export default {
       this.rotationDividers = [];
       let rotations = this.GameData.FillRotation;
       for (let i in rotations) {
-        if (Number(i) + 1 == rotations.length) {
+        if (Number(i) + 1 === rotations.length) {
           this.rotationDividers.push((rotations[i] + rotations[0] + 360) / 2);
         } else {
           this.rotationDividers.push((rotations[i] + rotations[Number(i) + 1]) / 2);
@@ -224,7 +224,7 @@ export default {
     },
     isBlankSpace(x, y) {
       for (let i in this.GameData.BlankSpace) {
-        if (this.GameData.BlankSpace[i].x == x && this.GameData.BlankSpace[i].y == y)
+        if (this.GameData.BlankSpace[i].x === x && this.GameData.BlankSpace[i].y === y)
           return i;
       }
       return null;
@@ -278,7 +278,7 @@ export default {
       console.log(this.answers);
     },
     handleClick(e) {
-      if (this.GameData.AnswerType == "Drag" || e.target.attrs.answerIndex == null)
+      if (this.GameData.AnswerType === "Drag" || e.target.attrs.answerIndex === null)
         return;
 
       let id = e.target.index,
@@ -289,7 +289,7 @@ export default {
 
       if (
         this.configFillings[id].visible &&
-        this.configFillings[id].rotation == this.GameData.FillRotation[rotationIndex]
+        this.configFillings[id].rotation === this.GameData.FillRotation[rotationIndex]
       ) {
         this.configFillings[id].visible = false;
         this.answers[this.configBlocks[id].answerIndex] = null;
@@ -302,7 +302,7 @@ export default {
     },
     isSlotAvailable(block) {
       if (this.configBlocks[block].answerIndex) {
-        if (this.answers[this.configBlocks[block].answerIndex] == null) return true;
+        if (this.answers[this.configBlocks[block].answerIndex] === null) return true;
       } else return false;
     },
     snapBack(e) {
@@ -325,7 +325,7 @@ export default {
     getClickRotationIndex(block, click) {
       let rotation = (canvasTools.angle(block, click) * 180) / Math.PI;
       for (let i in this.rotationDividers) {
-        if (i == 0) {
+        if (i === 0) {
           if (
             rotation < this.rotationDividers[i] ||
             rotation > this.rotationDividers[this.rotationDividers.length - 1]
@@ -349,7 +349,7 @@ export default {
           y: this.GameData.BlankSpace[i].y,
         };
         let correctAnswerID = this.GameData.Map[blockID.y][blockID.x];
-        if (this.answers[i] != correctAnswerID) {
+        if (this.answers[i] !== correctAnswerID) {
           isCorrect = false;
           wrongAnswers.push(i);
         }
@@ -376,7 +376,7 @@ export default {
         this.$emit("next-question");
       } else {
         this.$emit("play-effect", "WrongSound");
-        if (this.answers.filter((answer) => answer == null).length > 0)
+        if (this.answers.filter((answer) => answer === null).length > 0)
           this.$emit("add-record", [correctAnswers.toString(), "未填答完成", "錯誤"]);
         else
           this.$emit("add-record", [

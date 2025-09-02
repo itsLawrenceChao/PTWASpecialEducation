@@ -24,7 +24,7 @@ export default {
       layer: null,
       width: 100, // 預設寬度
       height: 100, // 預設高度
-      inputTime: this.Data.time == undefined ? "00:00" : this.Data.time, // 默認時間
+      inputTime: this.Data.time === undefined ? "00:00" : this.Data.time, // 默認時間
       scaledImage: { width: 0, height: 0 }, // 儲存縮放後圖片的大小
       digitColor: "#800020", // 數字顏色變數
     };

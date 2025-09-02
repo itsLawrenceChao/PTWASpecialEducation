@@ -271,7 +271,7 @@ export default {
       //         this.$emit('play-effect', 'HarrySound');
       //         this.$emit('next-question')
       //     }, 3000);
-      // if (this.level == this.GameData.Question.Level) {
+      // if (this.level === this.GameData.Question.Level) {
 
       // }
     },
@@ -280,7 +280,7 @@ export default {
        * Start a new game
        */
       this.level += 1;
-      if (this.level == this.GameData.Question.Level) {
+      if (this.level === this.GameData.Question.Level) {
         this.win();
       } else {
         this.errorMsg = "";
