@@ -45,7 +45,7 @@ export default {
       this.ctx.lineCap = "round";
     },
     handlePointer(e) {
-      let pos = this.getPositon(e);
+      const pos = this.getPositon(e);
       if (this.Data.color === "eraser") {
         switch (e.type) {
           case "pointerdown":

@@ -45,25 +45,25 @@ export default {
     }
     if (this.Data.Unit.length !== this.Number.length) {
       if (this.Data.Unit.length > this.Number.length) {
-        let diff = this.Data.Unit.length - this.Number.length;
+        const diff = this.Data.Unit.length - this.Number.length;
         for (let i = 0; i < diff; i++) {
           this.Number.unshift(" ");
         }
       } else {
-        let diff = this.Number.length - this.Data.Unit.length;
+        const diff = this.Number.length - this.Data.Unit.length;
         for (let i = 0; i < diff; i++) {
           this.Unit.unshift(" ");
         }
       }
     }
-    for (var i in this.Number) {
+    for (const i in this.Number) {
       this.Number[i] = "";
     }
   },
   methods: {
     checkAnswer() {
       let check = true;
-      for (var i = this.Data.Number.toString().split("").length; i >= 0; i--) {
+      for (let i = this.Data.Number.toString().split("").length; i >= 0; i--) {
         if (this.Data.Number.toString().split("")[i] !== this.Number[i]) {
           check = false;
           break;

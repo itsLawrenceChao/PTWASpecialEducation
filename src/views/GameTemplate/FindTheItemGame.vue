@@ -96,7 +96,7 @@ export default {
   methods: {
     handleMouseClick() {
       const mousePos = this.$refs.stage.getNode().getPointerPosition();
-      let answer = this.checkAnswer(mousePos.x, mousePos.y);
+      const answer = this.checkAnswer(mousePos.x, mousePos.y);
       if (!this.answered[answer]) {
         this.answered[answer] = true;
         this.addCircle(answer);
@@ -108,8 +108,8 @@ export default {
     },
     checkAnswer(posX, posY) {
       const tolerance = this.GameData.tolerance;
-      for (let i in this.GameData.Objs) {
-        let obj = this.GameData.Objs[i];
+      for (const i in this.GameData.Objs) {
+        const obj = this.GameData.Objs[i];
         if (
           posX >= obj.xRange[0] - tolerance &&
           posX <= obj.xRange[1] + tolerance &&
@@ -130,7 +130,7 @@ export default {
       this.circles.push({
         x: (obj.xRange[0] + obj.xRange[1]) / 2,
         y: (obj.yRange[0] + obj.yRange[1]) / 2,
-        radius: radius,
+        radius,
         stroke: "red",
         strokeWidth: 2,
       });

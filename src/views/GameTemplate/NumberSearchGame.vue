@@ -152,7 +152,7 @@ export default {
     generateRandomOrder(total) {
       const order = [];
       while (order.length < total) {
-        let randomIndex = Math.floor(Math.random() * total);
+        const randomIndex = Math.floor(Math.random() * total);
         if (!order.includes(randomIndex)) {
           order.push(randomIndex);
         }
@@ -186,14 +186,14 @@ export default {
       this.circles.push({
         x: (obj.xRange[0] + obj.xRange[1]) / 2,
         y: (obj.yRange[0] + obj.yRange[1]) / 2,
-        radius: radius,
+        radius,
         stroke: "red",
         strokeWidth: 2,
       });
     },
     getWrongAnswer(x, y) {
       const tolerance = this.GameData.tolerance;
-      for (var i = 0; i < this.GameData.ObjNum; ++i) {
+      for (let i = 0; i < this.GameData.ObjNum; ++i) {
         if (
           x >= this.GameData.Objs[i].xRange[0] - tolerance &&
           x <= this.GameData.Objs[i].xRange[1] + tolerance &&

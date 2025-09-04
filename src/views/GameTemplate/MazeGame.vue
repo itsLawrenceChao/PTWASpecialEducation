@@ -198,9 +198,9 @@ export default {
       } else {
         this.configBg.width = this.laneWidth * 20;
         this.configBg.height = this.laneWidth * 10;
-        for (var i = 0; i < 20; ++i) {
-          for (var j = 0; j < 10; ++j) {
-            let block = {
+        for (let i = 0; i < 20; ++i) {
+          for (let j = 0; j < 10; ++j) {
+            const block = {
               x: i * this.laneWidth,
               y: j * this.laneWidth,
               width: this.laneWidth,
@@ -217,8 +217,8 @@ export default {
     },
 
     getOptionPosition() {
-      for (var i = 0; i < 20; ++i) {
-        for (var j = 0; j < 10; ++j) {
+      for (let i = 0; i < 20; ++i) {
+        for (let j = 0; j < 10; ++j) {
           switch (this.map[this.randomMapId][j][i]) {
             case 2:
               if (this.optionMap[0] === 0) this.optionMap[0] = { x: i, y: j };
@@ -238,8 +238,8 @@ export default {
     },
 
     printOptions() {
-      for (var i = 0; i < 4; ++i) {
-        let option = {
+      for (let i = 0; i < 4; ++i) {
+        const option = {
           stroke: "black",
           text: this.GameData.Options[i],
           x: this.optionMap[i].x * this.laneWidth + 0.1 * this.laneWidth,
@@ -273,7 +273,7 @@ export default {
       }
     },
     initializePlayerPosition() {
-      var possiblePosition = [];
+      const possiblePosition = [];
       for (var i = 4; i < 6; ++i) {
         for (var j = 9; j < 11; ++j) {
           if (this.map[this.randomMapId][i][j] === 0) {
@@ -403,9 +403,9 @@ export default {
         up: false,
         down: false,
       };
-      var margin = 0.1;
-      var roundedX = Math.round(entity.xyGrid.x);
-      var roundedY = Math.round(entity.xyGrid.y);
+      const margin = 0.1;
+      const roundedX = Math.round(entity.xyGrid.x);
+      const roundedY = Math.round(entity.xyGrid.y);
 
       if (entity.xyGrid.x <= 0) entity.collision.left = true;
       else if (entity.movement === "left" && entity.xyGrid.x <= roundedX) {
@@ -459,10 +459,10 @@ export default {
     },
 
     ghostCollision(entity) {
-      var possibleDirection = [];
-      var roundedX = Math.round(entity.xyGrid.x);
-      var roundedY = Math.round(entity.xyGrid.y);
-      var cd = 300;
+      const possibleDirection = [];
+      const roundedX = Math.round(entity.xyGrid.x);
+      const roundedY = Math.round(entity.xyGrid.y);
+      const cd = 300;
       switch (entity.movement) {
         case "left":
           if (roundedY > 0) {
@@ -534,11 +534,11 @@ export default {
     },
 
     ghostRandomRoute(entity) {
-      var margin = 0.1;
-      var cd = 300;
-      var possibleDirection = [entity.movement];
-      var roundedX = Math.round(entity.xyGrid.x);
-      var roundedY = Math.round(entity.xyGrid.y);
+      const margin = 0.1;
+      const cd = 300;
+      const possibleDirection = [entity.movement];
+      const roundedX = Math.round(entity.xyGrid.x);
+      const roundedY = Math.round(entity.xyGrid.y);
       if (roundedX <= 0 || roundedX >= 19 || roundedY <= 0 || roundedY >= 9)
         return 0;
       switch (entity.movement) {
@@ -582,7 +582,7 @@ export default {
           break;
       }
 
-      var newDirection =
+      const newDirection =
         possibleDirection[Math.floor(Math.random() * possibleDirection.length)];
       if (newDirection !== entity.movement) {
         entity.randomRouteCD = false;

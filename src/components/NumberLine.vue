@@ -139,7 +139,7 @@ export default {
       this.NowX += this.Gap;
     }
     let index = 0;
-    for (let i in this.Data.Blank) {
+    for (const i in this.Data.Blank) {
       this.CorrectAnswer[index] = this.Data.Blank[i].TextAnswer;
       index++;
     }
@@ -147,11 +147,11 @@ export default {
   mounted() {
     // Code to run when the component is mounted goes here
     // Get Stage BoundingsClientRect
-    let stage = this.$refs.stage.$el;
+    const stage = this.$refs.stage.$el;
     stage.style.border = "solid 1px black";
-    let stageBound = stage.getBoundingClientRect();
-    let OutterContainer = document.getElementsByClassName("OutterContainer")[0];
-    let OutterContainerBound = OutterContainer.getBoundingClientRect();
+    const stageBound = stage.getBoundingClientRect();
+    const OutterContainer = document.getElementsByClassName("OutterContainer")[0];
+    const OutterContainerBound = OutterContainer.getBoundingClientRect();
     // this.Offset.x = stageBound.x;
     // this.Offset.y = stageBound.y;
     this.Offset.x = stageBound.x - OutterContainerBound.x;
@@ -170,7 +170,7 @@ export default {
     },
     CheckAnswer() {
       let Answer = true;
-      for (let i in this.CorrectAnswer) {
+      for (const i in this.CorrectAnswer) {
         if (this.CorrectAnswer[i] !== parseInt(this.BoxAnswer[i])) {
           console.log("Wrong");
           Answer = false;

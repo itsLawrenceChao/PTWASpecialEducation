@@ -133,7 +133,7 @@ export default {
       this.pauseConveyor();
     },
     handleAnswer(selectedIndex) {
-      var ansIndex =
+      const ansIndex =
         this.GameData.Question[this.currentQuestions[this.currentQuestionIndex]]
           .AnswerIndex;
       this.isPaused = false;
@@ -178,7 +178,7 @@ export default {
     generateRandomOrder(total) {
       const order = [];
       while (order.length < total) {
-        let randomIndex = Math.floor(Math.random() * total);
+        const randomIndex = Math.floor(Math.random() * total);
         if (!order.includes(randomIndex)) {
           order.push(randomIndex);
         }

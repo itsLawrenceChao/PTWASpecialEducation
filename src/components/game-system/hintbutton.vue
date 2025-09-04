@@ -69,7 +69,7 @@ export default {
   },
   watch: {
     HintInfo: {
-      handler: function () {
+      handler () {
         this.updated_hint_status();
         this.shrinkHint();
         console.log(this.HintInfo.WrongTimes);
@@ -87,7 +87,7 @@ export default {
       this.$emit("openHintModal", mediaType);
     },
     updated_hint_status() {
-      let temp =
+      const temp =
         this.HintInfo.MaxWrongTimes - this.HintInfo.WrongTimes > 0
           ? this.HintInfo.MaxWrongTimes - this.HintInfo.WrongTimes
           : 0;

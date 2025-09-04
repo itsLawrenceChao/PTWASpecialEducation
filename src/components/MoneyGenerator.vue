@@ -84,7 +84,7 @@ const Container = ref(null);
 const processCoins = (amount, denomination) => {
   let remaining = amount;
   while (remaining > 0) {
-    let TempContainer = [];
+    const TempContainer = [];
     const count = Math.min(remaining, 10);
     for (let i = 0; i < count; i++) {
       TempContainer.push(denomination);

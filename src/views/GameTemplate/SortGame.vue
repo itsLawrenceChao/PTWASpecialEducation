@@ -68,7 +68,7 @@ export default {
         randed = this.Checkrand();
       }
       this.options = [];
-      for (var i in this.question) {
+      for (const i in this.question) {
         this.options.push(this.question[i]);
       }
       console.log(this.question, this.options, this.answer);
@@ -92,8 +92,8 @@ export default {
       }
     },
     CheckAnswer() {
-      var AnswerCheck = true;
-      for (var i in this.answer) {
+      let AnswerCheck = true;
+      for (const i in this.answer) {
         if (this.answer[i] !== this.options[i]) {
           AnswerCheck = false;
         }

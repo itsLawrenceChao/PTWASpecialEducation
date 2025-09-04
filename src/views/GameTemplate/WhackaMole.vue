@@ -144,15 +144,15 @@ export default {
       this.configBG.height = this.gameHeight;
     },
     spawnMole() {
-      let id = this.configObjects.position.length;
-      let position = this.positionWithoutOverlap();
+      const id = this.configObjects.position.length;
+      const position = this.positionWithoutOverlap();
       this.configObjects.position.push(position);
       this.configObjects.status.push("burrow");
 
-      let cropPercent = 15;
+      const cropPercent = 15;
       this.configObjects.cropPercent.push(cropPercent);
 
-      let board = {
+      const board = {
         visible: false,
         x: position.x,
         y: canvasTools.offset(position, this.offsets.board).y,
@@ -162,7 +162,7 @@ export default {
       };
       this.configObjects.board.push(board);
 
-      let option = {
+      const option = {
         visible: false,
         x: canvasTools.offset(position, this.offsets.option).x,
         y: canvasTools.offset(position, this.offsets.option).y,
@@ -170,7 +170,7 @@ export default {
       };
       this.configObjects.option.push(option);
 
-      let mole = {
+      const mole = {
         id: id.toString(),
         x: position.x,
         y: canvasTools.offset(position, this.offsets.mole).y,
@@ -181,7 +181,7 @@ export default {
       mole.crop = this.crop(cropPercent).crop;
       this.configObjects.mole.push(mole);
 
-      let hole = {
+      const hole = {
         x: position.x,
         y: canvasTools.offset(position, this.offsets.hole).y,
         width: this.gameWidth * 0.16,
@@ -190,7 +190,7 @@ export default {
       };
       this.configObjects.hole.push(hole);
       window.setTimeout(this.burrowAnimation, 200, id);
-      let nextSpawn = Math.random() * 2000 + 1000;
+      const nextSpawn = Math.random() * 2000 + 1000;
       window.setTimeout(this.spawnMole, nextSpawn);
     },
     positionWithoutOverlap() {
@@ -306,7 +306,7 @@ export default {
       };
     },
     destory(i) {
-      for (let object in this.configObjects) {
+      for (const object in this.configObjects) {
         this.configObjects[object][i] = null;
       }
       for (let i = this.startId; i < this.configObjects.position.length; ++i) {
@@ -315,7 +315,7 @@ export default {
       }
     },
     whacked(e) {
-      let id = e.target.attrs.id;
+      const id = e.target.attrs.id;
       this.checkAnswer(id);
       if (this.configObjects.mole[id].image === this.images.mole) {
         this.configObjects.status[id] = "hold";
@@ -335,7 +335,7 @@ export default {
     },
     checkAnswer(id) {
       let isCorrect = false;
-      for (let answer in this.GameData.True) {
+      for (const answer in this.GameData.True) {
         if (this.GameData.True[answer] === this.configObjects.option[id].text)
           isCorrect = true;
       }

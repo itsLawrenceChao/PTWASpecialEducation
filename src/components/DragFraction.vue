@@ -126,7 +126,7 @@ export default {
     },
 
     drawArrow() {
-      let arrowPosition = [
+      const arrowPosition = [
         {
           x: this.gameWidth * 0.825,
           y: this.gameHeight * 0.35,
@@ -148,8 +148,8 @@ export default {
           operator: "denominatorPlus",
         },
       ];
-      for (let pos in arrowPosition) {
-        let arrow = {
+      for (const pos in arrowPosition) {
+        const arrow = {
           stroke: "#BA3F38",
           fill: "#BA3F38",
           length: this.gameWidth * 0.05,
@@ -162,7 +162,7 @@ export default {
       }
     },
     arrowSceneFunc(context, shape) {
-      let length = shape.getAttr("length");
+      const length = shape.getAttr("length");
       context.beginPath();
       context.moveTo(0, length * -0.5);
       context.lineTo(0, length * 0.5);
@@ -247,12 +247,12 @@ export default {
     },
     addFill(fill) {
       let total = 0;
-      for (let fraction in fill) {
+      for (const fraction in fill) {
         total += fill[fraction];
       }
       if (this.Data.verifyOption === "answer") {
-        let answer = this.Data.answer.numerator / this.Data.answer.denominator;
-        let isCorrect = answer.toFixed(2) === total.toFixed(2);
+        const answer = this.Data.answer.numerator / this.Data.answer.denominator;
+        const isCorrect = answer.toFixed(2) === total.toFixed(2);
         this.$emit("replyAnswer", isCorrect);
         this.$emit("recordAnswer", [
           answer.toFixed(2),

@@ -143,7 +143,7 @@ export default {
     setRibbonStyle() {
       if (this.GameData.Color) this.color = this.GameData.Color;
       for (let j = 0; j < this.GameData.Denominator; ++j) {
-        let style = {
+        const style = {
           backgroundColor: this.color,
         };
         if (j === 0) style.borderLeft = "1px black solid";
@@ -153,13 +153,13 @@ export default {
       }
 
       for (let i = 0; i < this.GameData.Option; ++i) {
-        let row = [];
-        let coloredRibbon = this.randomCombination(
+        const row = [];
+        const coloredRibbon = this.randomCombination(
           this.GameData.Denominator,
           this.map[i]
         );
         for (let j = 0; j < this.GameData.Denominator; ++j) {
-          let style = {};
+          const style = {};
           if (j === 0) style.borderLeft = "1px black solid";
           else if (j === this.GameData.Denominator - 1)
             style.borderRight = "1px black solid";
@@ -177,7 +177,7 @@ export default {
       if (this.GameData.Color) this.color = this.GameData.Color;
       for (let i = 0; i < this.GameData.Factors[1]; ++i) {
         for (let j = 0; j < this.GameData.Factors[0]; ++j) {
-          let style = {
+          const style = {
             backgroundColor: this.color,
           };
           if (i === 0) style.borderTop = "1px black solid";
@@ -191,14 +191,14 @@ export default {
         }
       }
       for (let i = 0; i < this.GameData.Option; ++i) {
-        let grid = [];
-        let coloredPaper = this.randomCombination(
+        const grid = [];
+        const coloredPaper = this.randomCombination(
           this.GameData.Denominator,
           this.map[i]
         );
         for (let i = 0; i < this.GameData.Factors[1]; ++i) {
           for (let j = 0; j < this.GameData.Factors[0]; ++j) {
-            let style = {};
+            const style = {};
             if (i === 0) style.borderTop = "1px black solid";
             else if (i === this.GameData.Factors[1] - 1)
               style.borderBottom = "1px black solid";
@@ -216,7 +216,7 @@ export default {
     },
     setbtnStyle() {
       for (let i = 0; i < this.GameData.Option; ++i) {
-        let style = {
+        const style = {
           color: "transparent",
         };
         this.btnStyle.push(style);
@@ -224,9 +224,9 @@ export default {
       }
     },
     randomCombination(n, r) {
-      let combination = [];
+      const combination = [];
       do {
-        let random = Math.floor(Math.random() * n);
+        const random = Math.floor(Math.random() * n);
         if (!combination.includes(random)) combination.push(random);
       } while (combination.length < r);
       return combination;
@@ -241,8 +241,8 @@ export default {
       }
     },
     checkAnswer() {
-      let isCorrect = true,
-        wrongAnswers = [];
+      let isCorrect = true;
+      const wrongAnswers = [];
       for (let i = 0; i < this.GameData.Option; ++i) {
         if (this.selected[i] !== this.correctOptionID.includes(i)) {
           isCorrect = false;

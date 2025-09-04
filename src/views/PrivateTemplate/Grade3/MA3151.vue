@@ -8,7 +8,7 @@
         :Data="GameData.question"
         :ID="ID"
         class="question-visual"
-        @replyAnswer="handleAnswer(0, $event)"
+        @reply-answer="handleAnswer(0, $event)"
       />
     </div>
 
@@ -21,7 +21,7 @@
               :Data="GameData.answer.fraction"
               :ID="ID"
               class="fraction-answer"
-              @replyAnswer="handleAnswer(1, $event)"
+              @reply-answer="handleAnswer(1, $event)"
             />
             <span class="answer-suffix">{{ GameData.answer.suffix }}</span>
           </div>
@@ -33,7 +33,7 @@
             <NumberIncrementor
               :Data="GameData.answer.decimal"
               :ID="ID"
-              @replyAnswer="handleAnswer(2, $event)"
+              @reply-answer="handleAnswer(2, $event)"
             />
             <span class="answer-suffix">{{ GameData.answer.suffix }}</span>
           </div>

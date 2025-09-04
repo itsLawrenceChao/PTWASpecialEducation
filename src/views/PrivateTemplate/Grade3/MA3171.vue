@@ -52,7 +52,7 @@
     <FloatNumPad
       v-if="showNumPad"
       :Data="numPadPosition"
-      @buttonClicked="numPadButtonClicked"
+      @button-clicked="numPadButtonClicked"
     />
   </div>
 </template>

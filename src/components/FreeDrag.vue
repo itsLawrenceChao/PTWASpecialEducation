@@ -146,8 +146,8 @@ export default {
           const newImage = {
             src: getGameAssets(this.ID, image.src),
             alt: image.alt + " " + (i + 1),
-            left: left,
-            top: top,
+            left,
+            top,
           };
           this.expandedImages.push(newImage);
         }

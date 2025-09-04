@@ -131,9 +131,9 @@ export default {
       context.closePath();
     },
     textBoxSceneFunc(context, shape) {
-      let rotation = shape.getAttr("rotation"),
-        correction = 0.017,
-        position;
+      const rotation = shape.getAttr("rotation");
+      const correction = 0.017;
+      let position;
       context.beginPath();
       context.rotate(rotation);
       context.translate(0, -this.gameWidth * 0.3);
@@ -170,10 +170,10 @@ export default {
       context.closePath();
     },
     weightSceneFunc(context, shape) {
-      let rotation = shape.getAttr("rotation"),
-        correction = 0.017,
-        offset = this.gameWidth * 0.01,
-        position;
+      const rotation = shape.getAttr("rotation");
+      const correction = 0.017;
+      const offset = this.gameWidth * 0.01;
+      let position;
       context.beginPath();
       context.rotate(rotation);
       context.translate(0, -this.gameWidth * 0.3);

@@ -100,7 +100,7 @@ export default {
     },
     ReplyAnswer() {
       let temp = 0;
-      for (var i in this.clickedStatus) {
+      for (const i in this.clickedStatus) {
         if (this.clickedStatus[i] === true) {
           temp += 1;
         }

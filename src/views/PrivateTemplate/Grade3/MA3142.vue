@@ -15,7 +15,7 @@
       class="MA3142__scale"
       :Data="scaleData"
       :ID="ID"
-      @replyAnswer="userAnswerUpdate"
+      @reply-answer="userAnswerUpdate"
     ></Scale>
     <!-- <button class="submit-btn" @click="submitAnswer">送出答案</button> -->
   </div>

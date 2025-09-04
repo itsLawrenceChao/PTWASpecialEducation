@@ -41,8 +41,8 @@
             ref="fractionsComponent"
             :Data="answerData"
             :ID="ID"
-            @recordAnswer="handleRecordAnswer"
-            @replyAnswer="handleValidation"
+            @record-answer="handleRecordAnswer"
+            @reply-answer="handleValidation"
           ></FractionForAnswer>
         </div>
         <!-- <button class="check-answer-btn" @click="triggerValidation">

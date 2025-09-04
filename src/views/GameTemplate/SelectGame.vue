@@ -85,13 +85,13 @@ export default {
     };
   },
   created() {
-    for (var i in this.GameData.Question) {
+    for (const i in this.GameData.Question) {
       this.question.push(this.GameData.Question[i]);
       this.Select.push(false);
     }
     this.imageUrl = getGameAssets(this.ID, this.GameData.img);
     if (this.GameData.SlotComponents !== undefined) {
-      let SlotComponentData = this.GameData.SlotComponents[0];
+      const SlotComponentData = this.GameData.SlotComponents[0];
       this.SlotData = SlotComponentData.Data;
       this.SlotComponent = SlotComponentData.Name;
     }
@@ -108,14 +108,14 @@ export default {
   },
   methods: {
     SelectItem(index) {
-      for (var i in this.Select) {
+      for (const i in this.Select) {
         this.Select[i] = false;
       }
       this.Select[index] = true;
       this.Answer = index;
     },
     CheckAnswer() {
-      let answer = this.Answer;
+      const answer = this.Answer;
       if (answer === this.GameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);

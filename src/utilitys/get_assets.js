@@ -1,5 +1,5 @@
 function isUndefined(value) {
-  let patten = /undefined/i;
+  const patten = /undefined/i;
   return patten.test(value);
 }
 
@@ -33,7 +33,7 @@ export function getGameStaticAssets(gameName, url) {
 }
 
 export function getDefaultHintAssets(url) {
-  let path = new URL(`../assets/system/hint-library/${url}`, import.meta.url)
+  const path = new URL(`../assets/system/hint-library/${url}`, import.meta.url)
     .href;
   return path;
 }

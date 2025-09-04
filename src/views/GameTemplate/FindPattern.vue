@@ -6,11 +6,18 @@
     </div>
     <v-stage :config="configKonva">
       <v-layer>
-        <v-rect v-if="GameData.AnswerType === 'Drag'" :config="configDragBG"></v-rect>
+        <v-rect
+          v-if="GameData.AnswerType === 'Drag'"
+          :config="configDragBG"
+        ></v-rect>
       </v-layer>
 
       <v-layer v-if="GameData.AnswerType === 'Fill'">
-        <v-image v-for="(block, index) in configFillings" :key="index" :config="block" />
+        <v-image
+          v-for="(block, index) in configFillings"
+          :key="index"
+          :config="block"
+        />
       </v-layer>
 
       <v-layer>
@@ -81,7 +88,7 @@ export default {
         width: this.GameData.Map[0].length,
         height: this.GameData.Map.length,
       };
-      let gameRatio = this.setGameRatio();
+      const gameRatio = this.setGameRatio();
 
       this.drawCanvas(gameRatio);
 
@@ -132,15 +139,15 @@ export default {
     },
     drawDragMap() {
       this.images = [];
-      for (let i in this.GameData.Images) {
-        let image = new window.Image();
+      for (const i in this.GameData.Images) {
+        const image = new window.Image();
         image.src = getGameAssets(this.ID, this.GameData.Images[i]);
         this.images.push(image);
       }
 
       for (let i = 0; i < this.tableSize.width; ++i) {
         for (let j = 0; j < this.tableSize.height; ++j) {
-          let block = {
+          const block = {
             x: this.blockWidth * i,
             y: this.blockWidth * j,
             height: this.blockWidth,
@@ -155,8 +162,8 @@ export default {
       }
     },
     drawDraggables() {
-      for (let i in this.images) {
-        let block = {
+      for (const i in this.images) {
+        const block = {
           x: this.blockWidth * (Number(i) * 1.25 + 0.25),
           y: this.blockWidth * (this.tableSize.height + 0.25),
           height: this.blockWidth,
@@ -173,7 +180,7 @@ export default {
 
       for (let i = 0; i < this.tableSize.width; ++i) {
         for (let j = 0; j < this.tableSize.height; ++j) {
-          let block = {
+          const block = {
             x: this.blockWidth * i,
             y: this.blockWidth * j,
             height: this.blockWidth,
@@ -188,15 +195,15 @@ export default {
     drawFillings() {
       this.fillingImage = new window.Image();
       this.fillingImage.src = getGameAssets(this.ID, this.GameData.Fill);
-      let offset = {
+      const offset = {
         x: this.blockWidth * 0.5,
         y: this.blockWidth * 0.5,
       };
 
       for (let i = 0; i < this.tableSize.width; ++i) {
         for (let j = 0; j < this.tableSize.height; ++j) {
-          let rotationIndex = this.GameData.Map[j][i];
-          let block = {
+          const rotationIndex = this.GameData.Map[j][i];
+          const block = {
             x: this.blockWidth * (i + 0.5),
             y: this.blockWidth * (j + 0.5),
             height: this.blockWidth,
@@ -204,7 +211,7 @@ export default {
             image: this.fillingImage,
             visible: !this.isBlankSpace(i, j),
             rotation: this.GameData.FillRotation[rotationIndex],
-            offset: offset,
+            offset,
           };
           this.configFillings.push(block);
           if (!block.visible) this.answers.push(null);
@@ -213,29 +220,37 @@ export default {
     },
     setRotationDividers() {
       this.rotationDividers = [];
-      let rotations = this.GameData.FillRotation;
-      for (let i in rotations) {
+      const rotations = this.GameData.FillRotation;
+      for (const i in rotations) {
         if (Number(i) + 1 === rotations.length) {
           this.rotationDividers.push((rotations[i] + rotations[0] + 360) / 2);
         } else {
-          this.rotationDividers.push((rotations[i] + rotations[Number(i) + 1]) / 2);
+          this.rotationDividers.push(
+            (rotations[i] + rotations[Number(i) + 1]) / 2
+          );
         }
       }
     },
     isBlankSpace(x, y) {
-      for (let i in this.GameData.BlankSpace) {
-        if (this.GameData.BlankSpace[i].x === x && this.GameData.BlankSpace[i].y === y)
+      for (const i in this.GameData.BlankSpace) {
+        if (
+          this.GameData.BlankSpace[i].x === x &&
+          this.GameData.BlankSpace[i].y === y
+        )
           return i;
       }
       return null;
     },
     handleDragend(e) {
-      let id = e.target.index;
+      const id = e.target.index;
       if (id < this.images.length) {
-        for (let block in this.configBlocks) {
+        for (const block in this.configBlocks) {
           if (
             this.isSlotAvailable(block) &&
-            canvasTools.distance(e.target.position(), this.configBlocks[block]) <
+            canvasTools.distance(
+              e.target.position(),
+              this.configBlocks[block]
+            ) <
               this.blockWidth * 0.25
           ) {
             this.newDraggable(block, id);
@@ -252,20 +267,23 @@ export default {
           console.log(this.answers);
           return;
         }
-        for (let block in this.configBlocks) {
+        for (const block in this.configBlocks) {
           if (
             this.isSlotAvailable(block) &&
-            canvasTools.distance(e.target.position(), this.configBlocks[block]) <
+            canvasTools.distance(
+              e.target.position(),
+              this.configBlocks[block]
+            ) <
               this.blockWidth * 0.25
           ) {
-            this.answers[this.configBlocks[block].answerIndex] = this.answers[
-              this.configDraggables[id].answerIndex
-            ];
+            this.answers[this.configBlocks[block].answerIndex] =
+              this.answers[this.configDraggables[id].answerIndex];
             this.answers[this.configDraggables[id].answerIndex] = null;
 
             this.configDraggables[id].x = this.configBlocks[block].x;
             this.configDraggables[id].y = this.configBlocks[block].y;
-            this.configDraggables[id].answerIndex = this.configBlocks[block].answerIndex;
+            this.configDraggables[id].answerIndex =
+              this.configBlocks[block].answerIndex;
             this.snapBack(e);
             console.log(this.answers);
             return;
@@ -278,10 +296,13 @@ export default {
       console.log(this.answers);
     },
     handleClick(e) {
-      if (this.GameData.AnswerType === "Drag" || e.target.attrs.answerIndex === null)
+      if (
+        this.GameData.AnswerType === "Drag" ||
+        e.target.attrs.answerIndex === null
+      )
         return;
 
-      let id = e.target.index,
+      const id = e.target.index,
         rotationIndex = this.getClickRotationIndex(
           this.configFillings[id],
           e.target.getStage().getPointerPosition()
@@ -289,7 +310,8 @@ export default {
 
       if (
         this.configFillings[id].visible &&
-        this.configFillings[id].rotation === this.GameData.FillRotation[rotationIndex]
+        this.configFillings[id].rotation ===
+          this.GameData.FillRotation[rotationIndex]
       ) {
         this.configFillings[id].visible = false;
         this.answers[this.configBlocks[id].answerIndex] = null;
@@ -298,20 +320,22 @@ export default {
         this.answers[this.configBlocks[id].answerIndex] = rotationIndex;
       }
 
-      this.configFillings[id].rotation = this.GameData.FillRotation[rotationIndex];
+      this.configFillings[id].rotation =
+        this.GameData.FillRotation[rotationIndex];
     },
     isSlotAvailable(block) {
       if (this.configBlocks[block].answerIndex) {
-        if (this.answers[this.configBlocks[block].answerIndex] === null) return true;
+        if (this.answers[this.configBlocks[block].answerIndex] === null)
+          return true;
       } else return false;
     },
     snapBack(e) {
-      let id = e.target.index;
+      const id = e.target.index;
       e.target.x(this.configDraggables[id].x);
       e.target.y(this.configDraggables[id].y);
     },
     newDraggable(slot, imageID) {
-      let block = {
+      const block = {
         x: this.configBlocks[slot].x,
         y: this.configBlocks[slot].y,
         height: this.blockWidth,
@@ -323,8 +347,8 @@ export default {
       this.configDraggables.push(block);
     },
     getClickRotationIndex(block, click) {
-      let rotation = (canvasTools.angle(block, click) * 180) / Math.PI;
-      for (let i in this.rotationDividers) {
+      const rotation = (canvasTools.angle(block, click) * 180) / Math.PI;
+      for (const i in this.rotationDividers) {
         if (i === 0) {
           if (
             rotation < this.rotationDividers[i] ||
@@ -341,14 +365,14 @@ export default {
       }
     },
     checkAnswer() {
-      let isCorrect = true,
-        wrongAnswers = [];
-      for (let i in this.answers) {
-        let blockID = {
+      let isCorrect = true;
+      const wrongAnswers = [];
+      for (const i in this.answers) {
+        const blockID = {
           x: this.GameData.BlankSpace[i].x,
           y: this.GameData.BlankSpace[i].y,
         };
-        let correctAnswerID = this.GameData.Map[blockID.y][blockID.x];
+        const correctAnswerID = this.GameData.Map[blockID.y][blockID.x];
         if (this.answers[i] !== correctAnswerID) {
           isCorrect = false;
           wrongAnswers.push(i);
@@ -358,9 +382,9 @@ export default {
       if (!isCorrect) this.removeWrongAnswers(wrongAnswers);
     },
     emitAnswer(isCorrect) {
-      let correctAnswers = [];
-      for (let i in this.GameData.BlankSpace) {
-        let blockID = {
+      const correctAnswers = [];
+      for (const i in this.GameData.BlankSpace) {
+        const blockID = {
           x: this.GameData.BlankSpace[i].x,
           y: this.GameData.BlankSpace[i].y,
         };
@@ -377,7 +401,11 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         if (this.answers.filter((answer) => answer === null).length > 0)
-          this.$emit("add-record", [correctAnswers.toString(), "未填答完成", "錯誤"]);
+          this.$emit("add-record", [
+            correctAnswers.toString(),
+            "未填答完成",
+            "錯誤",
+          ]);
         else
           this.$emit("add-record", [
             correctAnswers.toString(),
@@ -389,8 +417,8 @@ export default {
     removeWrongAnswers(wrongAnswers) {
       switch (this.GameData.AnswerType) {
         case "Drag":
-          for (let i in this.configDraggables) {
-            let answerIndex = this.configDraggables[i].answerIndex;
+          for (const i in this.configDraggables) {
+            const answerIndex = this.configDraggables[i].answerIndex;
             if (wrongAnswers.includes(answerIndex)) {
               this.answers[answerIndex] = null;
               this.configDraggables.splice(i, 1);
@@ -398,8 +426,8 @@ export default {
           }
           break;
         case "Fill":
-          for (let i in this.configFillings) {
-            let answerIndex = this.configBlocks[i].answerIndex;
+          for (const i in this.configFillings) {
+            const answerIndex = this.configBlocks[i].answerIndex;
             if (wrongAnswers.includes(answerIndex)) {
               this.answers[answerIndex] = null;
               this.configFillings[i].visible = false;

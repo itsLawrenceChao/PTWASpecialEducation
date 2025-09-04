@@ -51,7 +51,7 @@
           v-else
           :Data="question.Data"
           :ID="ID"
-          @replyAnswer="handleAnswer($event, index)"
+          @reply-answer="handleAnswer($event, index)"
         />
       </div>
     </div>
@@ -127,19 +127,19 @@ export default {
       this.setFormStyle();
     },
     setFormContent() {
-      for (let column in this.formData) {
+      for (const column in this.formData) {
         let columnData = [];
-        for (let row in this.formData[column].Elements) {
+        for (const row in this.formData[column].Elements) {
           columnData = columnData.concat(this.formData[column].Elements[row]);
         }
         this.formDataConcat.push(columnData);
       }
     },
     setFormStyle() {
-      let rowHeight = this.setRowHeight();
-      for (let column in this.formData) {
-        let columnAmount = this.formData[column].Elements[0].length;
-        let formStyle = {
+      const rowHeight = this.setRowHeight();
+      for (const column in this.formData) {
+        const columnAmount = this.formData[column].Elements[0].length;
+        const formStyle = {
           gridTemplateColumns:
             "repeat(" + columnAmount + ", fit-content(100%))",
           gridAutoRows: rowHeight + "%",
@@ -149,7 +149,7 @@ export default {
     },
     setRowHeight() {
       let maxRow = 0;
-      for (let column in this.formData) {
+      for (const column in this.formData) {
         if (this.formData[column].Elements.length > maxRow) {
           maxRow = this.formData[column].Elements.length;
         }
@@ -157,7 +157,7 @@ export default {
       return 100 / maxRow;
     },
     setQuestionData() {
-      for (let question of this.GameData.Questions) {
+      for (const question of this.GameData.Questions) {
         this.questionData.push({
           Text: question.Text,
           Type: question.Type,

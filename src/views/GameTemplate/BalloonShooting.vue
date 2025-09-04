@@ -117,10 +117,10 @@ export default {
 
     balloonSpawner() {
       if (!this.isAiming) {
-        let balloonType = Math.floor(
+        const balloonType = Math.floor(
           Math.random() * this.balloonTemplate.length
         );
-        let balloon = {};
+        const balloon = {};
         balloon.radius = this.gameWidth * 0.07;
         balloon.y = this.gameWidth * 0.5 + balloon.radius;
         balloon.x =
@@ -130,7 +130,7 @@ export default {
         balloon.stroke = this.balloonTemplate[balloonType];
         this.configBalloon.push(balloon);
 
-        let option = canvasTools.offset(balloon, {
+        const option = canvasTools.offset(balloon, {
           x: balloon.radius * -0.8,
           y: balloon.radius * -0.3,
         });
@@ -177,15 +177,15 @@ export default {
       }
     },
     drawCross() {
-      let offset1 = this.configScope.radius,
+      const offset1 = this.configScope.radius,
         offset2 = this.configScope.radius - this.gameWidth * 0.08;
-      let pointOffset1 = [
+      const pointOffset1 = [
         { x: 0, y: -offset1 },
         { x: 0, y: offset1 },
         { x: -offset1, y: 0 },
         { x: offset1, y: 0 },
       ];
-      let pointOffset2 = [
+      const pointOffset2 = [
         { x: 0, y: -offset2 },
         { x: 0, y: offset2 },
         { x: -offset2, y: 0 },
@@ -222,7 +222,7 @@ export default {
     },
     checkAnswer(selectedOption) {
       let checkAnswer = false;
-      for (let answer in this.GameData.True) {
+      for (const answer in this.GameData.True) {
         if (this.GameData.True[answer] === selectedOption) checkAnswer = true;
       }
       if (checkAnswer) {

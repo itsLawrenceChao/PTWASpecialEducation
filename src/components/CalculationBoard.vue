@@ -3,7 +3,7 @@
     :data="Data"
     :ID="ID"
     :config="currentConfig"
-    @replyAnswer="handleReply"
+    @reply-answer="handleReply"
   />
 </template>
 

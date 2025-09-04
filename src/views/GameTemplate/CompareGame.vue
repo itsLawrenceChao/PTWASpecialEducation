@@ -166,7 +166,7 @@ export default {
     this.GameData.Datas.forEach(() => {
       this.Answered.push(null);
       this.Answers.push([]);
-      let TempImg = [];
+      const TempImg = [];
       this.ImageDatas.push(TempImg);
     });
     this.Symbol = this.BSESymbol;
@@ -186,7 +186,7 @@ export default {
     },
     CheckDrop(newVal) {
       console.log(newVal.newIndex);
-      let tmp = this.Answers[this.SelectedGroup][newVal.newIndex];
+      const tmp = this.Answers[this.SelectedGroup][newVal.newIndex];
       this.Answers[this.SelectedGroup] = [tmp];
       this.RealTimeCheckAnswer();
       if (this.GameConfig.CheckAnswerMode !== "OnFill") {
@@ -213,7 +213,7 @@ export default {
       }
     },
     CheckAnsweredAll() {
-      for (var i in this.Answered) {
+      for (const i in this.Answered) {
         if (this.Answered[i] === false || this.Answered[0][i] === null) {
           return false;
         }
@@ -222,7 +222,7 @@ export default {
     },
     CheckAllAnswer() {
       let check = true;
-      for (var i in this.GameData.Answer) {
+      for (const i in this.GameData.Answer) {
         if (this.GameData.Answer[i] === this.Answers[i][0].tag) {
           //FIXME: UnEfficient
           this.Answered[i] = true;
@@ -262,7 +262,7 @@ export default {
       }
     },
     ClearAllData() {
-      for (var i in this.Answered) {
+      for (const i in this.Answered) {
         this.Answers[i][0] = null;
         this.Answers[i][1] = null;
         this.Answered[i] = null;

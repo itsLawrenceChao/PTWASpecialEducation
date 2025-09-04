@@ -117,8 +117,8 @@ export default {
       for (let i = 0; i < this.Data.segments; i++) {
         const x = this.padding + (i + 0.5) * segmentWidth;
         labels.push({
-          x: x,
-          y: y,
+          x,
+          y,
           text: (i + 1).toString(),
           fontSize: this.fontSize,
           align: "center",
@@ -128,7 +128,7 @@ export default {
           // 添加 "...?" 標籤，位置更靠近數字標籤
           labels.push({
             x: x + this.fontSize * 1.5,
-            y: y,
+            y,
             text: "...?",
             fontSize: this.fontSize,
             align: "left",
@@ -236,8 +236,8 @@ export default {
       for (let i = 0; i < this.Data.segments; i++) {
         const x = this.padding + (i + 0.5) * segmentWidth;
         labels.push({
-          x: x,
-          y: y,
+          x,
+          y,
           text: this.Data.stepLabel,
           fontSize: this.fontSize,
           fill: "blue",

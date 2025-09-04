@@ -88,7 +88,7 @@ export default {
   mounted() {
     this.imageUrl = getGameAssets(this.ID, this.GameData.img);
     for (
-      var i = this.GameData.Question.Range[0];
+      let i = this.GameData.Question.Range[0];
       i <= this.GameData.Question.Range[1];
       i++
     ) {

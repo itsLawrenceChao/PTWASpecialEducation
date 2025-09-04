@@ -15,8 +15,8 @@
         <NumberIncrementor
           :Data="format.Data"
           :ID="ID"
-          @numberChanged="(value) => handleNumberChange(value, format.unit)"
-          @replyAnswer="
+          @number-changed="(value) => handleNumberChange(value, format.unit)"
+          @reply-answer="
             (isCorrect) => handleReplyAnswer(isCorrect, format.unit)
           "
         ></NumberIncrementor>

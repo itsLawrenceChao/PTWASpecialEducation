@@ -116,7 +116,7 @@ export default {
     }
   },
   mounted() {
-    let WH = document.getElementById("MainContainer").getBoundingClientRect();
+    const WH = document.getElementById("MainContainer").getBoundingClientRect();
     //Create canvas object
     this.canvas = this.$refs.canvas;
     this.context = this.canvas.getContext("2d");
@@ -127,7 +127,7 @@ export default {
     //bind error text
     this.error_text = document.getElementById("error_msg");
     //load description image FIXME:This is a temporary solution, will be removed in the future
-    var start = true;
+    let start = true;
     if (start === true) {
       this.clearCanvas();
       this.randomPicturePosition();
@@ -144,9 +144,9 @@ export default {
       const num =
         Math.floor(Math.random() * this.GameData.Question.ObjImgList.length) +
         0; //Random number(Range: 0~picture_total-1)
-      var name =
+      const name =
         "S_" + this.GameData.Question.ObjImgList[num] + this.picture_type;
-      var b = getGameAssets(this.ID, name);
+      const b = getGameAssets(this.ID, name);
 
       console.log(b);
       return b;
@@ -156,7 +156,7 @@ export default {
        * 1. Random the position of the picture
        * 2. Draw the picture on the canvas
        */
-      var numImages =
+      let numImages =
         Math.floor(
           Math.random() *
             (this.GameData.Question.Range[1] - this.GameData.Question.Range[0])

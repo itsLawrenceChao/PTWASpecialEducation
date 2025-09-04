@@ -53,12 +53,12 @@ export default {
     }
     if (this.Data.Unit.length !== this.numbers.length) {
       if (this.Data.Unit.length > this.numbers.length) {
-        let diff = this.Data.Unit.length - this.numbers.length;
+        const diff = this.Data.Unit.length - this.numbers.length;
         for (let i = 0; i < diff; i++) {
           this.numbers.unshift(" ");
         }
       } else {
-        let diff = this.numbers.length - this.Data.Unit.length;
+        const diff = this.numbers.length - this.Data.Unit.length;
         for (let i = 0; i < diff; i++) {
           this.Unit.unshift(" ");
         }
@@ -66,7 +66,7 @@ export default {
     }
 
     if (this.isInput) {
-      for (var i in this.numbers) {
+      for (const i in this.numbers) {
         this.numbers[i] = "0";
       }
     }
@@ -96,7 +96,7 @@ export default {
       let check = true;
       const correctAnswer = this.Data.Number.toString().split("");
       // 只檢查正確與否，不標記紅色
-      for (var i = correctAnswer.length - 1; i >= 0; i--) {
+      for (let i = correctAnswer.length - 1; i >= 0; i--) {
         if (correctAnswer[i] !== this.numbers[i]) {
           check = false;
         }
@@ -109,7 +109,7 @@ export default {
       // 更新錯誤狀態
       const correctAnswer = this.Data.Number.toString().split("");
       this.wrongDigits = new Array(this.numbers.length).fill(false);
-      for (var i = correctAnswer.length - 1; i >= 0; i--) {
+      for (let i = correctAnswer.length - 1; i >= 0; i--) {
         if (correctAnswer[i] !== this.numbers[i]) {
           this.wrongDigits[i] = true;
         }

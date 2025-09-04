@@ -88,7 +88,7 @@ export default {
       }
     },
     makeReadText(title, description, stop = false) {
-      let text = `標題:${title}。說明:${description}。`;
+      const text = `標題:${title}。說明:${description}。`;
       Read.ReadText(text, stop);
     },
     startGame() {

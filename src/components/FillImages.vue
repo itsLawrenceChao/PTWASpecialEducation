@@ -60,12 +60,12 @@ export default {
       this.draw();
     },
     setRatio() {
-      let row = Math.floor(Math.pow(this.Data.frame, 0.5));
-      let column = Math.ceil(this.Data.frame / row);
+      const row = Math.floor(Math.pow(this.Data.frame, 0.5));
+      const column = Math.ceil(this.Data.frame / row);
 
       return {
-        row: row,
-        column: column,
+        row,
+        column,
       };
     },
     setCanvas() {
@@ -106,12 +106,12 @@ export default {
       frameImage.src = getGameAssets(this.ID, this.Data.frameImage);
       const fillImage = new window.Image();
       fillImage.src = getGameAssets(this.ID, this.Data.fillImage);
-      for (let i in this.mapOfRows) {
+      for (const i in this.mapOfRows) {
         let posX;
         if (this.mapOfRows[i] === this.ratio.column) posX = 0;
         else posX = this.ratioLength * 0.5;
         for (let j = 0; j < this.mapOfRows[i]; ++j) {
-          let frame = {
+          const frame = {
             width: this.ratioLength,
             height: this.ratioLength,
             x: posX,
@@ -120,7 +120,7 @@ export default {
           };
           this.configFrame.push(frame);
 
-          let fill = {
+          const fill = {
             width: this.ratioLength,
             height: this.ratioLength,
             x: posX,
@@ -139,7 +139,7 @@ export default {
     },
     countFills() {
       let fills = 0;
-      for (let i in this.configFill) {
+      for (const i in this.configFill) {
         if (this.configFill[i].visible) fills++;
       }
       this.$emit("replyAnswer", fills === this.Data.fill);

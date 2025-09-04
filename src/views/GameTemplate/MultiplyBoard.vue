@@ -42,12 +42,15 @@
       <hr />
       <div class="row" :style="btnRowStyle">
         <button
-          v-for="i in rowStyle[GameData.digitsOfEachRow.length - 1].btnStyle.length"
+          v-for="i in rowStyle[GameData.digitsOfEachRow.length - 1].btnStyle
+            .length"
           class="numBtn"
           :style="rowStyle[GameData.digitsOfEachRow.length - 1].btnStyle[i - 1]"
           @click="btnClick($event, GameData.digitsOfEachRow.length - 1, i - 1)"
         >
-          {{ rowStyle[GameData.digitsOfEachRow.length - 1].btnStyle[i - 1].value }}
+          {{
+            rowStyle[GameData.digitsOfEachRow.length - 1].btnStyle[i - 1].value
+          }}
         </button>
       </div>
     </div>
@@ -64,7 +67,11 @@
       <button @click="checkAnswer()">檢查答案</button>
     </div>
     <div class="number-pad">
-      <numPad v-if="showPad" :Data="numPadData" @buttonClicked="handleNumPad" />
+      <numPad
+        v-if="showPad"
+        :Data="numPadData"
+        @button-clicked="handleNumPad"
+      />
     </div>
   </div>
 </template>
@@ -75,7 +82,9 @@ import { defineAsyncComponent } from "vue";
 import fetchJson from "@/utilitys/fetch-json";
 export default {
   components: {
-    drawingBoard: defineAsyncComponent(() => import("@/components/DrawingBoard.vue")),
+    drawingBoard: defineAsyncComponent(
+      () => import("@/components/DrawingBoard.vue")
+    ),
     numPad: defineAsyncComponent(() => import("@/components/FloatNumPad.vue")),
   },
 
@@ -127,7 +136,9 @@ export default {
   },
 
   async mounted() {
-    this.unit = await fetchJson(getGameStaticAssets("MultiplyBoard", "unit.json"));
+    this.unit = await fetchJson(
+      getGameStaticAssets("MultiplyBoard", "unit.json")
+    );
     this.unit = this.unit.data.unit;
     this.setUnit();
   },
@@ -169,22 +180,22 @@ export default {
       this.btnRowStyle = {
         height: 90 / this.GameData.digitsOfEachRow.length + "%",
       };
-      for (let i in this.GameData.digitsOfEachRow) {
-        let rowStyle = {};
+      for (const i in this.GameData.digitsOfEachRow) {
+        const rowStyle = {};
         rowStyle.btnStyle = this.setBtnStyle(i);
         this.rowStyle.push(rowStyle);
       }
     },
     setBtnStyle(i) {
       this.maxDigit = Math.max(...this.GameData.digitsOfEachRow);
-      let btnStyle = [],
-        btnColor;
+      const btnStyle = [];
+      let btnColor;
       if (i === this.GameData.digitsOfEachRow.length - 1) btnColor = "pink";
       else btnColor = "lightgray";
 
       if (i < this.GameData.digitsOfEachRow.length - 1 && i > 1) {
         for (let j = 0; j < this.GameData.digitsOfEachRow[i]; ++j) {
-          let btn = {
+          const btn = {
             gridColumn: j + 10 - this.GameData.digitsOfEachRow[i] - i + 2,
             gridRow: 1,
             backgroundColor: btnColor,
@@ -195,7 +206,7 @@ export default {
         }
       } else {
         for (let j = 0; j < this.GameData.digitsOfEachRow[i]; ++j) {
-          let btn = {
+          const btn = {
             gridColumn: j + 10 - this.GameData.digitsOfEachRow[i],
             gridRow: 1,
             backgroundColor: btnColor,
@@ -215,7 +226,7 @@ export default {
       }
 
       if (i === 1) {
-        let btn = {
+        const btn = {
           gridColumn: 9 - this.maxDigit,
           gridRow: 1,
           backgroundColor: "#aded5d",
@@ -242,11 +253,11 @@ export default {
         case "Time":
         case "Volume":
         case "Weight":
-          for (let i in this.unit[this.GameData.unit]) {
+          for (const i in this.unit[this.GameData.unit]) {
             if (i >= this.maxDigit) break;
 
             if (this.unit[this.GameData.unit][i]) {
-              let unitStyle = {
+              const unitStyle = {
                 gridColumn: 9 - i,
                 gridRow: 1,
                 text: this.unit[this.GameData.unit][i],
@@ -258,10 +269,10 @@ export default {
         case "Number":
           break;
         case "Custom":
-          for (let i in this.GameData.customUnit) {
+          for (const i in this.GameData.customUnit) {
             if (i >= this.maxDigit) break;
             if (this.GameData.customUnit[i]) {
-              let unitStyle = {
+              const unitStyle = {
                 gridColumn: 9 - i,
                 gridRow: 1,
                 text: this.GameData.customUnit[i],
@@ -280,16 +291,18 @@ export default {
     },
     checkAnswer() {
       let isCorrect = true;
-      let ans = [];
-      for (let i in this.rowStyle[this.rowStyle.length - 1].btnStyle) {
+      const ans = [];
+      for (const i in this.rowStyle[this.rowStyle.length - 1].btnStyle) {
         ans.push(this.rowStyle[this.rowStyle.length - 1].btnStyle[i].value);
       }
-      for (let i in ans) {
+      for (const i in ans) {
         if (ans[i] !== this.GameData.answers[i]) {
           isCorrect = false;
-          this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor = "red";
+          this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor =
+            "red";
         } else {
-          this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor = "pink";
+          this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor =
+            "pink";
         }
       }
       if (isCorrect) {
@@ -312,7 +325,7 @@ export default {
     btnClick(e, row, column) {
       if (this.rowStyle[row].btnStyle[column].adjustable) {
         this.showPad = true;
-        this.currentInputBtn = { row: row, column: column };
+        this.currentInputBtn = { row, column };
         this.numPadData = {
           top: e.target.getBoundingClientRect().top,
           left:

@@ -35,20 +35,20 @@ export default {
     Init() {
       const img = new Image();
       img.onload = () => {
-        let ImageDatas = {
+        const ImageDatas = {
           width: img.width,
           height: img.height,
         };
         // Height First
-        let New = this.GetScaledDimensions(
+        const New = this.GetScaledDimensions(
           this.ContainerSize.width,
           this.ContainerSize.height,
           ImageDatas.width,
           ImageDatas.height
         );
-        let newHeight = New.height;
-        let newWidth = New.width;
-        let ApplyImage = document.getElementById("Img");
+        const newHeight = New.height;
+        const newWidth = New.width;
+        const ApplyImage = document.getElementById("Img");
         ApplyImage.style.width = newWidth + "px";
         ApplyImage.style.height = newHeight + "px";
         console.log(newHeight, newWidth);

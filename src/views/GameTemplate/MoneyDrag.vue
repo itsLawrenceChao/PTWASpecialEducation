@@ -121,8 +121,8 @@ export default {
   methods: {
     init() {
       const componentName = "MoneyDisplay";
-      let denominationAvailability = this.GameData.Items;
-      let availableDenominations = Object.keys(denominationAvailability)
+      const denominationAvailability = this.GameData.Items;
+      const availableDenominations = Object.keys(denominationAvailability)
         .filter((key) => denominationAvailability[key] === "true")
         .map(Number);
       this.dragList = availableDenominations.map((item, index) => ({
@@ -134,7 +134,7 @@ export default {
     handleSubmit() {
       const correctAnswer = this.GameData.amount;
       const userAnswer = this.sumMoney();
-      let isAnswerRight = this.checkAnswer(correctAnswer, userAnswer);
+      const isAnswerRight = this.checkAnswer(correctAnswer, userAnswer);
       if (isAnswerRight) {
         this.$emit("next-question", true);
       } else {

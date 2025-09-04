@@ -74,7 +74,7 @@ export default {
   name: "CopyItem",
   components: {
     draggable,
-    ImageContainer: ImageContainer,
+    ImageContainer,
   },
   props: {
     GameData: {
@@ -131,8 +131,8 @@ export default {
     // Your methods go here
     init() {
       this.sourceList = [];
-      for (var i in this.GameData.Items) {
-        var item = this.GameData.Items[i];
+      for (const i in this.GameData.Items) {
+        const item = this.GameData.Items[i];
         this.sourceList.push({
           Name: item.Name,
           Data: item.Data,
@@ -147,7 +147,7 @@ export default {
       });
     },
     checkAnswer() {
-      let stack = {};
+      const stack = {};
       let isTrue = true;
       for (var i in this.tarList) {
         if (stack[this.tarList[i].item] === undefined) {

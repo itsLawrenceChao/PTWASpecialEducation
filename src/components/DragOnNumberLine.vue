@@ -98,7 +98,7 @@ export default {
     },
     drawBaseLine() {
       this.numberLineY = this.gameWidth * 0.15;
-      let points = [
+      const points = [
         [
           this.gameWidth * 0.05,
           this.numberLineY,
@@ -118,22 +118,22 @@ export default {
           this.numberLineY,
         ],
       ];
-      for (let p in points) {
-        let line = {};
+      for (const p in points) {
+        const line = {};
         line.stroke = "black";
         line.points = points[p];
         this.configNumberLine.push(line);
       }
 
       // 添加左右標籤
-      let leftLabel = {
+      const leftLabel = {
         text: "左",
         fontSize: 30,
         fontFamily: "YuanQuan",
         x: 0,
         y: this.numberLineY - 50,
       };
-      let rightLabel = {
+      const rightLabel = {
         text: "右",
         fontSize: 30,
         fontFamily: "YuanQuan",
@@ -148,7 +148,7 @@ export default {
         ((this.Data.max - this.Data.min) / this.Data.spacing + 1);
       let tempX = this.gameWidth * 0.05 + this.intervalLength * 0.5;
       for (let i = this.Data.min; i <= this.Data.max; i += this.Data.spacing) {
-        let line = {};
+        const line = {};
         line.stroke = "black";
         line.points = [
           tempX,
@@ -168,7 +168,7 @@ export default {
         i <= this.Data.max;
         i += this.Data.spacing, ++j
       ) {
-        let number = {};
+        const number = {};
         let offset;
         if (i === 0) offset = this.gameWidth * 0.0085;
         else
@@ -193,7 +193,7 @@ export default {
         console.log(this.ID, this.Data.image);
       } else this.isImage = true;
 
-      let configDraggable = {
+      const configDraggable = {
         x: this.numberX[initId],
         y: this.gameWidth * 0.075,
         draggable: true,

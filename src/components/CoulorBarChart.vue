@@ -54,7 +54,7 @@ export default {
     this.Drawed = [];
     if (this.configs.Total % 2 !== 0) {
       //奇數
-      let temp = [];
+      const temp = [];
       for (var i = 0; i < this.configs.Total; i++) {
         temp.push(true);
       }
@@ -62,11 +62,11 @@ export default {
       this.Drawed.push(temp);
     } else {
       //偶數
-      let temp = [];
-      let div = this.configs.Total / 2;
+      const temp = [];
+      const div = this.configs.Total / 2;
       for (var i = 0; i < 2; i++) {
-        let temp = [];
-        for (var x = 0; x < div; x++) {
+        const temp = [];
+        for (let x = 0; x < div; x++) {
           temp.push(true);
         }
         this.Drawed.push(temp);
@@ -75,11 +75,11 @@ export default {
   },
   mounted() {
     // Code to run when the component is mounted goes here
-    let tableData = document.getElementsByClassName("table");
+    const tableData = document.getElementsByClassName("table");
     let container = document.getElementsByClassName("OutterContainer");
     container = container[0].getBoundingClientRect();
-    let width = container.width / this.configs.Total - 10;
-    for (var i = 0; i < tableData.length; i++) {
+    const width = container.width / this.configs.Total - 10;
+    for (let i = 0; i < tableData.length; i++) {
       tableData[i].style.width = width + "px";
     }
     if (this.configs.Coulor === undefined) {
@@ -98,8 +98,8 @@ export default {
     },
     GetAnswer() {
       let TempAnswer = 0;
-      for (var i = 0; i < this.Drawed.length; i++) {
-        for (var x = 0; x < this.Drawed[i].length; x++) {
+      for (let i = 0; i < this.Drawed.length; i++) {
+        for (let x = 0; x < this.Drawed[i].length; x++) {
           if (this.Drawed[i][x] === false) {
             TempAnswer += 1;
           }
@@ -113,8 +113,8 @@ export default {
     },
     GetAnswer1() {
       let TempAnswer = 0;
-      for (var i = 0; i < this.Drawed.length; i++) {
-        for (var x = 0; x < this.Drawed[i].length; x++) {
+      for (let i = 0; i < this.Drawed.length; i++) {
+        for (let x = 0; x < this.Drawed[i].length; x++) {
           if (this.Drawed[i][x] === false) {
             TempAnswer += 1;
           }

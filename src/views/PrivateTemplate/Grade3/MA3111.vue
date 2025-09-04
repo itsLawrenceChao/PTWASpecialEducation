@@ -24,8 +24,8 @@
         :Data="configFraction"
         :ID="ID"
         class="game__answer-area"
-        @replyAnswer="drag"
-        @recordAnswer="handleRecordAnswer"
+        @reply-answer="drag"
+        @record-answer="handleRecordAnswer"
       ></DragFraction>
     </div>
   </div>

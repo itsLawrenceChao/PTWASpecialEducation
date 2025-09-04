@@ -114,14 +114,14 @@ export default {
           };
           break;
         case "image": {
-          let image = new window.Image();
+          const image = new window.Image();
           image.src = getGameAssets(this.ID, this.Data.background);
           this.configBG = {
             x: 0,
             y: 0,
             width: this.gameWidth,
             height: this.gameHeight,
-            image: image,
+            image,
             strokeEnabled: false,
           };
           break;
@@ -164,23 +164,23 @@ export default {
         y: this.ratioLength,
       };
 
-      for (let i in this.Data.images) {
-        let imageData = this.Data.images[i];
-        let image = new window.Image();
+      for (const i in this.Data.images) {
+        const imageData = this.Data.images[i];
+        const image = new window.Image();
         image.src = getGameAssets(this.ID, imageData.path);
         this.images.push(image);
 
         let draggable = true;
         if (imageData.draggable === false) draggable = false;
 
-        let position = this.getPosition(imageData, currentPos).position;
+        const position = this.getPosition(imageData, currentPos).position;
         currentPos = this.getPosition(imageData, currentPos).newPos;
 
-        let config = {
+        const config = {
           image: this.images[i],
           width: imageData.ratio.width * this.ratioLength,
           height: imageData.ratio.height * this.ratioLength,
-          draggable: draggable,
+          draggable,
           x: position.x,
           y: position.y,
           index: i,
@@ -190,7 +190,7 @@ export default {
       }
     },
     getPosition(imageData, currentPos) {
-      let position = {},
+      const position = {},
         newPos = {};
       if (imageData.presetPosition) {
         position.x = this.ratioLength * imageData.presetPosition.x;
@@ -203,12 +203,12 @@ export default {
         newPos.y = currentPos.y;
       }
       return {
-        position: position,
-        newPos: newPos,
+        position,
+        newPos,
       };
     },
     handleDragmove(e) {
-      let id = e.target.attrs.index;
+      const id = e.target.attrs.index;
       this.configImage[id].x = e.target.x();
       this.configImage[id].y = e.target.y();
       this.keepInBound(e);
@@ -228,12 +228,12 @@ export default {
         cornerRadius: this.ratioLength * 0.5,
       };
 
-      let arrowImage = new window.Image();
+      const arrowImage = new window.Image();
       arrowImage.src = getSystemAssets("backArrow.png", "icon");
-      let flip = [1, -1],
+      const flip = [1, -1],
         offset = [0, this.ratioLength * 0.8];
       for (let i = 0; i < 2; ++i) {
-        let arrow = {
+        const arrow = {
           width: this.ratioLength * 0.8,
           height: this.ratioLength * 0.8,
           image: arrowImage,
@@ -283,22 +283,25 @@ export default {
       this.configImage[id].y = newY;
     },
     handleDragend(e) {
-      let id = e.target.attrs.index;
-      if (this.Data.images[id].snapToGrid && this.Data.backgroundType === "grid")
+      const id = e.target.attrs.index;
+      if (
+        this.Data.images[id].snapToGrid &&
+        this.Data.backgroundType === "grid"
+      )
         this.snapToGrid(e);
     },
     snapToGrid(e) {
-      let id = e.target.attrs.index;
-      let snapTo = {},
-        distance = 999;
-      for (let i in this.gridPos.x) {
+      const id = e.target.attrs.index;
+      const snapTo = {};
+      let distance = 999;
+      for (const i in this.gridPos.x) {
         if (Math.abs(e.target.x() - this.gridPos.x[i]) < distance) {
           distance = Math.abs(e.target.x() - this.gridPos.x[i]);
           snapTo.x = this.gridPos.x[i];
         }
       }
       distance = 999;
-      for (let i in this.gridPos.y) {
+      for (const i in this.gridPos.y) {
         if (Math.abs(e.target.y() - this.gridPos.y[i]) < distance) {
           distance = Math.abs(e.target.y() - this.gridPos.y[i]);
           snapTo.y = this.gridPos.y[i];
@@ -311,7 +314,7 @@ export default {
       this.movePanel(this.configImage[id]);
     },
     rotateImage(e) {
-      let id = this.rotatingImageID;
+      const id = this.rotatingImageID;
       if (e.target.attrs.index === 0) this.configImage[id].rotation -= 90;
       else this.configImage[id].rotation += 90;
       this.movePanel(this.configImage[id]);

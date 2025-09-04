@@ -34,7 +34,7 @@
     <FloatingNumPad
       v-if="virtualNumpadSwitch"
       :Data="{ top: menuPosition.top + 'px', left: menuPosition.left + 'px' }"
-      @buttonClicked="numPadButtonClicked"
+      @button-clicked="numPadButtonClicked"
     />
   </div>
 </template>

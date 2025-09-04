@@ -103,7 +103,7 @@ export default {
     emitter.on("submitAnswer", this.CheckAnswer);
   },
   mounted() {
-    let Container = document.getElementsByClassName("Container")[0];
+    const Container = document.getElementsByClassName("Container")[0];
     console.log(Container);
     if (this.GameData.SlotComponent === undefined) {
       Container.style.gridTemplateColumns = "1fr";
@@ -151,7 +151,7 @@ export default {
     },
     CheckAnswer() {
       let isCorrect = true;
-      let Answers = [];
+      const Answers = [];
       this.submitAnswerAmount++;
       for (const i in this.selectionRecord) {
         if (this.selectionRecord[i] === null) {

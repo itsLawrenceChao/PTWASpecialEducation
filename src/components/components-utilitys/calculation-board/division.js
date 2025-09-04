@@ -239,7 +239,7 @@ class DivisionConfig {
 
     for (let i = 0; i < digits.length; i++) {
       current += digits[i];
-      let currentNum = parseInt(current);
+      const currentNum = parseInt(current);
 
       if (currentNum < divisor && result === "") continue;
 

@@ -3,10 +3,10 @@
     <div class="question">
       {{ GameData.Question }}
       <div class="answer">
-        <numberIncrementor
+        <number-incrementor
           :ID="ID"
           :Data="incrementorData"
-          @numberChanged="getAnswer"
+          @number-changed="getAnswer"
         />
         {{ GameData.Unit }}
         <!-- <button @click="checkAnswer">提交答案</button> -->
@@ -228,7 +228,7 @@ export default {
       this.ringKey++;
     },
     handleDragEnd(e) {
-      let target = {
+      const target = {
         x: this.gameWidth / 4,
         y: this.gameHeight / 2,
       };
@@ -268,7 +268,7 @@ export default {
           );
         } while (this.isOverlapped(position));
 
-        let food = {
+        const food = {
           image: foodImage,
           x: position.x,
           y: position.y,
@@ -286,14 +286,14 @@ export default {
       const foodImage = new window.Image();
       foodImage.src = getGameAssets(this.ID, this.GameData.FoodImage);
 
-      let correctArea =
+      const correctArea =
         Math.pow(this.ringRadius[this.GameData.CorrectRadius], 2) * Math.PI;
-      let outsideArea = Math.pow(this.gameHeight, 2) - correctArea;
-      let foodCount = Math.floor(
+      const outsideArea = Math.pow(this.gameHeight, 2) - correctArea;
+      const foodCount = Math.floor(
         (this.GameData.Answer / correctArea) * outsideArea
       );
 
-      let bound = {
+      const bound = {
         up: 0,
         down: this.gameHeight,
         left: 0,
@@ -315,7 +315,7 @@ export default {
           }
         } while (this.isOverlapped(position) || inCorrectArea);
 
-        let food = {
+        const food = {
           image: foodImage,
           x: position.x,
           y: position.y,
@@ -382,7 +382,7 @@ export default {
       for (let i = 0; i < this.GameData.Answer; i++) {
         if (this.configFood[i].visible) {
           allGathered = false;
-          let unitVector = canvasTools.unitVector(
+          const unitVector = canvasTools.unitVector(
             canvasTools.center(this.configTarget),
             this.configFood[i]
           );

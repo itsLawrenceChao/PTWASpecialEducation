@@ -35,7 +35,7 @@
                 :denominator="item.denominator"
                 :x="0"
                 :y="0"
-                :fontSize="item.fontSize"
+                :font-size="item.fontSize"
                 :color="item.color"
                 :align="item.align"
               />
@@ -121,18 +121,18 @@ export default {
     };
   },
   created() {
-    let BGImage = new window.Image();
+    const BGImage = new window.Image();
     BGImage.src = getGameAssets(this.ID, this.GameData.BGSrc);
 
     // 當圖片載入完成後再進行縮放和定位計算
     BGImage.onload = () => {
-      let StageHeight = this.stageConfig.height - this.SelectionHeight * 2;
+      const StageHeight = this.stageConfig.height - this.SelectionHeight * 2;
 
-      let imgWidth = BGImage.width;
-      let imgHeight = BGImage.height;
+      const imgWidth = BGImage.width;
+      const imgHeight = BGImage.height;
 
       // 計算寬高比
-      let ration = imgWidth / imgHeight;
+      const ration = imgWidth / imgHeight;
 
       // 計算適合的寬度和高度，使其不超過stage的寬高
       let NewImageWidth, NewImageHeight;
@@ -148,8 +148,8 @@ export default {
       }
 
       // 計算圖片的位置，使其居中顯示
-      let NewX = (this.stageConfig.width - NewImageWidth) / 2;
-      let NewY = (StageHeight - NewImageHeight) / 2;
+      const NewX = (this.stageConfig.width - NewImageWidth) / 2;
+      const NewY = (StageHeight - NewImageHeight) / 2;
       console.log(NewX, NewY);
       // 設定ImageConfig
       this.ImageConfig = {
@@ -178,10 +178,10 @@ export default {
   mounted() {
     // Stage border
     // this.InitAnswer();
-    let layer = this.$refs.layer.getNode();
+    const layer = this.$refs.layer.getNode();
     layer.moveToBottom();
     layer.draw();
-    let RectContainer = this.$refs.RectContainer.getNode();
+    const RectContainer = this.$refs.RectContainer.getNode();
     RectContainer.moveToTop();
     RectContainer.draw();
   },
@@ -278,13 +278,13 @@ export default {
     },
     CheckPairedBefore(x, y) {
       // 檢查起點是否已經有連線
-      for (let i in this.LinkedRecord) {
+      for (const i in this.LinkedRecord) {
         if (this.LinkedRecord[i][0] === x) {
           return true;
         }
       }
       // 檢查終點是否已經有連線
-      for (let i in this.LinkedRecord) {
+      for (const i in this.LinkedRecord) {
         if (this.LinkedRecord[i][1] === y) {
           return true;
         }
@@ -292,7 +292,7 @@ export default {
       return false;
     },
     MarkWrongLine(start, end) {
-      let WrongLine = {
+      const WrongLine = {
         points: [
           this.rects[start].x + this.rects[start].width / 2,
           this.rects[start].y + this.rects[start].height / 2,
@@ -304,7 +304,7 @@ export default {
         lineCap: "round",
         lineJoin: "round",
       };
-      for (let i in this.Lines) {
+      for (const i in this.Lines) {
         if (
           this.Lines[i].points[0] === WrongLine.points[0] &&
           this.Lines[i].points[1] === WrongLine.points[1]
@@ -316,7 +316,7 @@ export default {
     CheckAllAnswer() {
       const answerSet = new Set(this.Pair.map(([p, r]) => `${p}-${r}`));
 
-      let wrong = [];
+      const wrong = [];
       for (const l of this.lines) {
         if (l.pointIndex === null) continue; // 忽略未接完的線
         const key = `${l.pointIndex}-${l.rectIndex}`;
@@ -379,26 +379,26 @@ export default {
           fontSize: Math.max(this.FontSize - 4, 12), // 稍微小一點的字體
           color: "#111827",
           align: "center",
-          rectIndex: rectIndex,
+          rectIndex,
         });
       } else {
         // 如果是普通文字，添加到 Texts
         this.Texts.push({
-          x: x,
-          y: y,
-          text: text,
+          x,
+          y,
+          text,
           align: "center",
-          width: width,
+          width,
           fontSize: this.FontSize,
         });
       }
     },
     addRect(x, y, width, height) {
       this.rects.push({
-        x: x,
-        y: y,
-        width: width,
-        height: height,
+        x,
+        y,
+        width,
+        height,
         cornerRadius: this.RectCornerRaduis,
         fill: this.randomColor(),
       });
@@ -414,7 +414,7 @@ export default {
       //Config Rect
       if (this.GameData.Selections.length <= 4) {
         // 小於等於4，一行排列
-        let RectWidth =
+        const RectWidth =
           (this.stageConfig.width -
             (this.GameData.Selections.length + 1) * this.MinGap) /
           this.GameData.Selections.length;
@@ -435,7 +435,7 @@ export default {
           });
         });
       } else {
-        let RectWidth =
+        const RectWidth =
           (this.stageConfig.width -
             (this.GameData.Selections.length / 2 + 1) * this.MinGap) /
           (this.GameData.Selections.length / 2);
@@ -474,8 +474,8 @@ export default {
     },
     configPoint() {
       this.Pair = [];
-      for (let i in this.GameData.MountPoint) {
-        for (let j in this.GameData.Selections) {
+      for (const i in this.GameData.MountPoint) {
+        for (const j in this.GameData.Selections) {
           if (typeof this.GameData.MountPoint[i].Connect2 === "string") {
             if (
               this.GameData.MountPoint[i].Connect2 ===
@@ -484,7 +484,7 @@ export default {
               this.Pair.push([i, j]);
             }
           } else {
-            for (let k in this.GameData.MountPoint[i].Connect2) {
+            for (const k in this.GameData.MountPoint[i].Connect2) {
               if (
                 this.GameData.MountPoint[i].Connect2[k] ===
                 this.GameData.Selections[j]

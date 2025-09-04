@@ -21,7 +21,7 @@
               class="MA3173__calculation-board"
               :Data="item"
               :ID="ID"
-              @replyAnswer="replyAnswerFunc(index, $event)"
+              @reply-answer="replyAnswerFunc(index, $event)"
             />
           </div>
         </template>

@@ -22,7 +22,7 @@
     <FloatNumPad
       v-if="virtualNumpadSwitch"
       :Data="numPadPosition"
-      @buttonClicked="numPadButtonClicked"
+      @button-clicked="numPadButtonClicked"
     />
   </div>
 </template>

@@ -95,7 +95,7 @@ export default {
       this.drawBackground();
       this.configPlane.height = this.gameWidth * 0.1;
       this.configPlane.width = this.configPlane.height;
-      let planePosition = {
+      const planePosition = {
         x: this.gameWidth * 0.1,
         y: this.gameWidth * 0.25,
         width: this.configPlane.width,
@@ -147,10 +147,10 @@ export default {
     },
 
     targetSpawner() {
-      let targetType = Math.floor(Math.random() * this.targetTemplate.length);
-      let target = {};
+      const targetType = Math.floor(Math.random() * this.targetTemplate.length);
+      const target = {};
       target.radius = this.gameWidth * 0.05;
-      let yRange = {
+      const yRange = {
         min: target.radius,
         max: this.gameWidth * 0.5 - target.radius,
       };
@@ -160,11 +160,11 @@ export default {
       target.stroke = this.targetTemplate[targetType];
       this.configTarget.push(target);
 
-      let option = canvasTools.offset(target, {
+      const option = canvasTools.offset(target, {
         x: target.radius * -0.8,
         y: target.radius * -0.3,
       });
-      let randomOptionId = Math.floor(Math.random() * this.allOptions.length);
+      const randomOptionId = Math.floor(Math.random() * this.allOptions.length);
       option.text = this.allOptions[randomOptionId];
       option.fontSize = target.radius * 0.6;
       this.configOptions.push(option);
@@ -174,7 +174,7 @@ export default {
         this.configTarget[i].x -= this.speed;
         this.configOptions[i].x =
           this.configTarget[i].x - this.configTarget[i].radius * 0.8;
-        let leftborder = -this.configTarget[i].radius;
+        const leftborder = -this.configTarget[i].radius;
         if (this.configTarget[i].x < leftborder) {
           this.configTarget.splice(i, 1);
           this.configOptions.splice(i, 1);
@@ -218,7 +218,7 @@ export default {
       let isCorrect = false;
       this.configTarget[i].opacity = 0.5;
       this.configOptions[i].visible = false;
-      for (let answer in this.GameData.True) {
+      for (const answer in this.GameData.True) {
         if (this.GameData.True[answer] === this.configOptions[i].text)
           isCorrect = true;
       }

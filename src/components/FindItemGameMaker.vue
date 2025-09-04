@@ -81,7 +81,7 @@ export default {
             const img = new Image(); // 創建一個 Image
             img.onload = function () {
               console.log("Hello");
-              var cvs = document.getElementById("cvs");
+              const cvs = document.getElementById("cvs");
               const ctx = cvs.getContext("2d");
               ctx.drawImage(img, 0, 0, cvs.width, cvs.height);
             };
@@ -93,23 +93,23 @@ export default {
   },
   methods: {
     Start() {
-      let temp = parseInt(this.inputNumber);
+      const temp = parseInt(this.inputNumber);
       this.btn = [];
       this.drawed = [];
       this.location = [];
-      for (var i = 1; i <= temp; i++) {
+      for (let i = 1; i <= temp; i++) {
         this.btn.push(i);
         this.drawed.push(false);
       }
     },
     outCircle(x, y) {
       console.log("draw circle on number");
-      var canvas = document.getElementById("cvs");
-      var ctx = canvas.getContext("2d");
+      const canvas = document.getElementById("cvs");
+      const ctx = canvas.getContext("2d");
       // 設定圓形參數
-      var radius = 50; //半徑
-      var lineWidth = 2;
-      var strokeColor = "red";
+      const radius = 50; //半徑
+      const lineWidth = 2;
+      const strokeColor = "red";
       // 繪製圓形
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, 2 * Math.PI);
