@@ -6,13 +6,13 @@
     <div class="game__interaction-area">
       <div class="game__fraction-panel">
         <FractionDisplay
-          :Data="questionFraction"
-          :ID="ID"
+          :component-config="questionFraction"
+          :game-id="gameId"
           class="game__fraction-display"
         ></FractionDisplay>
         <FractionChart
-          :Data="chartData"
-          :ID="ID"
+          :component-config="chartData"
+          :game-id="gameId"
           class="game__chart-container"
           @mounted="calculateChartSize"
         ></FractionChart>
@@ -21,8 +21,8 @@
         </button>
       </div>
       <DragFraction
-        :Data="configFraction"
-        :ID="ID"
+        :component-config="configFraction"
+        :game-id="gameId"
         class="game__answer-area"
         @reply-answer="drag"
         @record-answer="handleRecordAnswer"
@@ -45,32 +45,28 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
       required: true,
     },
   },
   emits: ["add-record", "play-effect", "next-question"],
   data() {
     return {
-      configFraction: this.GameData.answerData,
+      configFraction: this.gameData.answerData,
       chartWidth: 0,
       chartHeight: 0,
       isAnswerCorrect: false,
-      questionDescription: this.GameData.question.description,
-      questionFraction: this.GameData.question.fraction,
+      questionDescription: this.gameData.question.description,
+      questionFraction: this.gameData.question.fraction,
       chartData: {
-        shape: this.GameData.answerData.shape,
-        numerator: this.GameData.answerData.answer.numerator, // 分子
-        denominator: this.GameData.answerData.answer.denominator, // 分母
+        shape: this.gameData.answerData.shape,
+        numerator: this.gameData.answerData.answer.numerator, // 分子
+        denominator: this.gameData.answerData.answer.denominator, // 分母
       },
     };
   },

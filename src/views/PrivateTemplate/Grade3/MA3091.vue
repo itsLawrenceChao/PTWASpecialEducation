@@ -6,14 +6,14 @@
     <div class="game__interaction-area">
       <div class="game__fraction-panel">
         <FractionDisplay
-          :Data="questionFraction"
+          :component-config="questionFraction"
           class="game__fraction-display"
         ></FractionDisplay>
         <!-- <button class="game__submit" @click="submit">送出答案</button> -->
       </div>
       <DragFraction
-        :Data="configFraction"
-        :ID="id"
+        :component-config="configFraction"
+        :game-id="gameId"
         class="game__answer-area"
         @reply-answer="drag"
         @record-answer="handleRecordAnswer"
@@ -35,32 +35,28 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    id: {
+    gameId: {
       type: String,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
       required: true,
     },
   },
   emits: ["add-record", "play-effect", "next-question"],
   data() {
     return {
-      configFraction: this.GameData.answerData,
+      configFraction: this.gameData.answerData,
       chartWidth: 0,
       chartHeight: 0,
       isAnswerCorrect: false,
-      questionDescription: this.GameData.question.description,
-      questionFraction: this.GameData.question.fraction,
+      questionDescription: this.gameData.question.description,
+      questionFraction: { Content: this.gameData.question.fraction },
       chartData: {
-        shape: this.GameData.answerData.shape,
-        numerator: this.GameData.answerData.answer.numerator, // 分子
-        denominator: this.GameData.answerData.answer.denominator, // 分母
+        shape: this.gameData.answerData.shape,
+        numerator: this.gameData.answerData.answer.numerator, // 分子
+        denominator: this.gameData.answerData.answer.denominator, // 分母
       },
     };
   },

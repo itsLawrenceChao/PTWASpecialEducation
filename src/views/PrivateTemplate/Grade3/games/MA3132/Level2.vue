@@ -1,7 +1,7 @@
 <template>
   <div class="level-container">
     <div class="level-2-question">
-      <h2>{{ GameData.Question }}</h2>
+      <h2>{{ gameData.Question }}</h2>
     </div>
     <div ref="container" class="v-stage-container">
       <v-stage :config="stageConfig">
@@ -37,11 +37,11 @@ import * as canvasTools from "@/utilitys/canvasTools.js";
 export default {
   name: "MA3132Level2",
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -76,8 +76,8 @@ export default {
   methods: {
     initScene() {
       this.tableSize = {
-        width: this.GameData.Map[0].length,
-        height: this.GameData.Map.length,
+        width: this.gameData.Map[0].length,
+        height: this.gameData.Map.length,
       };
       this.calculateBlockSize();
       this.buildBackground();
@@ -110,11 +110,11 @@ export default {
           const img = new Image();
           img.onload = () => resolve(img);
           img.onerror = reject;
-          img.src = getGameAssets(this.ID, src);
+          img.src = getGameAssets(this.gameId, src);
         });
       };
 
-      Promise.all(this.GameData.Images.map(loadImage))
+      Promise.all(this.gameData.Images.map(loadImage))
         .then((loadedImages) => {
           this.images = loadedImages;
 
@@ -131,9 +131,9 @@ export default {
 
           this.cells = [];
           this.answers = [];
-          this.GameData.Map.forEach((row, r) => {
+          this.gameData.Map.forEach((row, r) => {
             row.forEach((val, c) => {
-              const isBlank = this.GameData.BlankSpace.some(
+              const isBlank = this.gameData.BlankSpace.some(
                 (b) => b.x === c && b.y === r
               );
               this.cells.push({
@@ -158,8 +158,8 @@ export default {
 
     setupDraggables() {
       // Always reset and build your palette items
-      this.draggables = this.GameData.BlankSpace.map(({ x, y }, i) => {
-        const idx = this.GameData.Map[y][x];
+      this.draggables = this.gameData.BlankSpace.map(({ x, y }, i) => {
+        const idx = this.gameData.Map[y][x];
         return {
           id: `palette-${i}`, // unique string id for palette
           imageIndex: idx,
@@ -206,11 +206,11 @@ export default {
     submitAnswer() {
       const wrong = [];
       console.log("Current answers:", this.answers);
-      console.log("BlankSpace:", this.GameData.BlankSpace);
-      console.log("Map:", this.GameData.Map);
+      console.log("BlankSpace:", this.gameData.BlankSpace);
+      console.log("Map:", this.gameData.Map);
 
-      this.GameData.BlankSpace.forEach(({ x, y }) => {
-        const correctValue = this.GameData.Map[y][x];
+      this.gameData.BlankSpace.forEach(({ x, y }) => {
+        const correctValue = this.gameData.Map[y][x];
         const cell = this.cells.find(
           (c) =>
             c.x === this.blockSize * (x + 1.5) && c.y === this.blockSize * y

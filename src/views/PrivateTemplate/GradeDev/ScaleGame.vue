@@ -1,7 +1,7 @@
 <template>
   <div class="gameContainer">
     <div class="gameTitle">
-      <h2>{{ GameData.question }}</h2>
+      <h2>{{ gameData.question }}</h2>
     </div>
     <div class="gameArea">
       <div class="gameImage">
@@ -11,8 +11,8 @@
         <div class="scaleContainer">
           <div class="scale">
             <scale-pointer
-              :Data="scaleData"
-              :ID="id"
+              :game-id="gameId"
+              :component-config="scaleData"
               @reply-answer="getAnswer"
             />
           </div>
@@ -38,15 +38,11 @@ export default {
   },
 
   props: {
-    id: {
+    gameId: {
       type: String,
       required: true,
     },
-    GameData: {
-      type: Object,
-      required: true,
-    },
-    GameConfig: {
+    gameData: {
       type: Object,
       required: true,
     },
@@ -62,27 +58,27 @@ export default {
   },
 
   mounted() {
-    this.questionImg = getGameAssets(this.id, this.GameData.imageSrc);
+    this.questionImg = getGameAssets(this.gameId, this.gameData.imageSrc);
     this.initializeScale();
   },
 
   methods: {
     initializeScale() {
-      if (this.GameData.customOptions.scaleBG === null)
+      if (this.gameData.customOptions.scaleBG === null)
         this.scaleData.customScaleSrc = null;
-      else this.scaleData.customScaleSrc = this.GameData.customOptions.scaleBG;
+      else this.scaleData.customScaleSrc = this.gameData.customOptions.scaleBG;
     },
     getAnswer(ans) {
       this.answer = ans;
     },
     checkAnswer() {
-      if (this.answer === this.GameData.answer) {
+      if (this.answer === this.gameData.answer) {
         this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [this.GameData.answer, this.answer, "正確"]);
+        this.$emit("add-record", [this.gameData.answer, this.answer, "正確"]);
         this.$emit("next-question");
       } else {
         this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", [this.GameData.answer, this.answer, "錯誤"]);
+        this.$emit("add-record", [this.gameData.answer, this.answer, "錯誤"]);
       }
     },
   },

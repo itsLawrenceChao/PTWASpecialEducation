@@ -23,8 +23,8 @@
           'compare-game__card--wrong': answered[0] === false,
           'compare-game__card--correct': answered[0] === true,
         }"
-        :Data="gameData.Datas[0].Data"
-        :ID="id"
+        :component-config="gameData.Datas[0].Data"
+        :game-id="gameId"
         @reply-answer="handleSlotComponentReply(0, $event)"
       />
 
@@ -37,8 +37,8 @@
           'compare-game__card--wrong': answered[1] === false,
           'compare-game__card--correct': answered[1] === true,
         }"
-        :Data="gameData.Datas[1].Data"
-        :ID="id"
+        :component-config="gameData.Datas[1].Data"
+        :game-id="gameId"
         @reply-answer="handleSlotComponentReply(1, $event)"
       />
 
@@ -51,8 +51,8 @@
       >
         <component
           :is="gameData.Datas[2].Name"
-          :Data="gameData.Datas[2].Data"
-          :ID="id"
+          :component-config="gameData.Datas[2].Data"
+          :game-id="gameId"
         />
         <p class="compare-game__card--suffix">{{ gameData.Datas[2].Suffix }}</p>
       </div>
@@ -83,8 +83,8 @@
       >
         <component
           :is="gameData.Datas[3].Name"
-          :Data="gameData.Datas[3].Data"
-          :ID="id"
+          :component-config="gameData.Datas[3].Data"
+          :game-id="gameId"
         />
         <p class="compare-game__card--suffix">{{ gameData.Datas[3].Suffix }}</p>
       </div>
@@ -134,15 +134,11 @@ export default {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -174,12 +170,6 @@ export default {
     };
   },
   computed: {
-    gameData() {
-      return this.GameData;
-    },
-    gameConfig() {
-      return this.GameConfig;
-    },
     id() {
       return this.ID;
     },

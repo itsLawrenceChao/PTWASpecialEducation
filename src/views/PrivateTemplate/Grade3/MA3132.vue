@@ -3,7 +3,7 @@
     <template v-if="gameLevel === 1">
       <Level1
         ref="level1"
-        :ID="ID"
+        :game-id="gameId"
         :image-data="imageData"
         :markdown-data="markdownData"
         :questions="questions"
@@ -14,8 +14,8 @@
     <template v-if="gameLevel === 2">
       <Level2
         ref="level2"
-        :ID="ID"
-        :GameData="GameData"
+        :game-id="gameId"
+        :game-data="gameData"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -23,8 +23,8 @@
     <template v-if="gameLevel === 3">
       <Level3
         ref="level3"
-        :ID="ID"
-        :GameData="GameData"
+        :game-id="gameId"
+        :game-data="gameData"
         :image-data="imageData"
         :markdown-data="markdownData"
         :boxes="boxes"
@@ -51,15 +51,11 @@ export default {
     Level3,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -67,11 +63,11 @@ export default {
   emits: ["play-effect", "next-question"],
   data() {
     return {
-      imageData: this.GameData.imageData,
-      markdownData: this.GameData.markdownData,
-      questions: this.GameData.Questions,
-      gameLevel: this.GameData.GameLevel,
-      boxes: this.GameData.Boxes,
+      imageData: this.gameData.imageData,
+      markdownData: this.gameData.markdownData,
+      questions: this.gameData.Questions,
+      gameLevel: this.gameData.GameLevel,
+      boxes: this.gameData.Boxes,
     };
   },
   created() {

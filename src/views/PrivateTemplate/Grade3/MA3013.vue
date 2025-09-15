@@ -1,26 +1,26 @@
 <template>
   <div class="outter-container">
     <div class="title">
-      <a>{{ GameData.questionText }}</a>
+      <a>{{ gameData.questionText }}</a>
     </div>
     <div class="game-area">
       <div class="left-component">
         <MoneyGenerator
           class="money-generator"
-          :ID="ID"
-          :Data="moneyGeneratorData"
+          :game-id="gameId"
+          :component-config="moneyGeneratorData"
         />
         <MarkdownRenderer
           class="markdown"
-          :ID="ID"
-          :Data="markdownData"
+          :game-id="gameId"
+          :component-config="markdownData"
           @reply-answer="markdownReplyAnswer"
         />
       </div>
       <div class="right-component">
         <NumberBoard
           class="number-board"
-          :Data="numberInputData"
+          :component-config="numberInputData"
           @reply-answer="numberBoardReply"
         />
         <!-- <button class="btn-submit" @click="checkAnswer">送出答案</button> -->
@@ -42,15 +42,11 @@ export default {
     NumberBoard,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -78,11 +74,11 @@ export default {
     // Add your computed properties here
   },
   created() {
-    this.markdownData.Render = this.GameData.markdownIndex;
-    this.numberInputData.Number = this.GameData.answer;
-    this.markdownData.Answer = this.GameData.markdownInputIndex;
+    this.markdownData.Render = this.gameData.markdownIndex;
+    this.numberInputData.Number = this.gameData.answer;
+    this.markdownData.Answer = this.gameData.markdownInputIndex;
     // 如果答案不是四位數，則補齊
-    this.answerArr = this.GameData.moneyBoard;
+    this.answerArr = this.gameData.moneyBoard;
     const diff = 4 - this.answerArr.length;
     for (let i = 0; i < diff; i++) {
       this.answerArr.unshift(0);
@@ -117,7 +113,10 @@ export default {
     nowClicked() {
       if (document.activeElement.tagName === "INPUT") {
         this.nowSelect = document.activeElement;
-      } else if (document.activeElement.tagName === "BUTTON" && this.nowSelect) {
+      } else if (
+        document.activeElement.tagName === "BUTTON" &&
+        this.nowSelect
+      ) {
         this.nowSelect.focus();
       }
     },

@@ -2,7 +2,7 @@
   <div ref="container" class="ma3192">
     <div class="ma3192__form">
       <table class="ma3192__schedule-table">
-        <template v-if="GameData.Level === 1">
+        <template v-if="gameData.Level === 1">
           <thead class="ma3192__station-table">
             <tr v-for="(row, rowIndex) in stationData" :key="rowIndex">
               <th v-if="rowIndex === 0" rowspan="8">搭乘區間</th>
@@ -12,7 +12,7 @@
             </tr>
           </thead>
         </template>
-        <template v-if="GameData.Level === 2">
+        <template v-if="gameData.Level === 2">
           <thead>
             <tr>
               <th class="ma3192__schedule-table__time-col">時間</th>
@@ -41,7 +41,7 @@
             </tr>
           </tbody>
         </template>
-        <template v-if="GameData.Level === 3">
+        <template v-if="gameData.Level === 3">
           <thead>
             <tr>
               <th rowspan="2">站名</th>
@@ -140,8 +140,8 @@
         <component
           :is="currentQuestion.Type"
           v-else
-          :Data="currentQuestion.Data"
-          :ID="ID"
+          :component-config="currentQuestion.Data"
+          :game-id="gameId"
           @reply-answer="handleAnswer($event, currentQuestionIndex)"
         />
       </div>
@@ -180,15 +180,11 @@ export default {
   components: COMPONENTS,
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -282,7 +278,7 @@ export default {
 
   async mounted() {
     this.setQuestionData();
-    this.answer = new Array(this.GameData.Questions.length).fill(null);
+    this.answer = new Array(this.gameData.Questions.length).fill(null);
   },
 
   created() {
@@ -302,8 +298,8 @@ export default {
     },
 
     setQuestionData() {
-      if (this.GameData && this.GameData.Questions) {
-        this.questionData = this.GameData.Questions.map((question) => ({
+      if (this.gameData && this.gameData.Questions) {
+        this.questionData = this.gameData.Questions.map((question) => ({
           Text: question.Text,
           Type: question.Type,
           Data: question.Data,
@@ -408,7 +404,7 @@ export default {
       dragBox.classList.remove("ma3192__drag-box--wrong");
 
       const questionIndex = this.currentQuestionIndex;
-      const answer = this.GameData.Questions[questionIndex].Data.answer.trim();
+      const answer = this.gameData.Questions[questionIndex].Data.answer.trim();
       this.answer[questionIndex] = draggedText === answer;
     },
 
@@ -440,7 +436,7 @@ export default {
       }
 
       const currentQuestion =
-        this.GameData.Questions[this.currentQuestionIndex];
+        this.gameData.Questions[this.currentQuestionIndex];
       console.log("Current question:", currentQuestion);
       console.log("Current question type:", currentQuestion.Type);
 

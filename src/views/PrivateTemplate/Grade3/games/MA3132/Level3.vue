@@ -40,15 +40,15 @@
       </div>
       <div class="right-section">
         <Markdown
-          :ID="ID"
-          :Data="markdownData"
+          :game-id="gameId"
+          :component-config="markdownData"
           @reply-answer="handleMarkdownReply"
         />
       </div>
     </div>
     <FloatNumPad
       v-if="isShowNumPad"
-      :Data="floatNumPadLocation"
+      :component-config="floatNumPadLocation"
       @button-clicked="fillToInput"
     />
   </div>
@@ -67,11 +67,11 @@ export default {
     FloatNumPad,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -129,7 +129,7 @@ export default {
       this.configKonva.height = container.clientHeight;
 
       const image = new window.Image();
-      image.src = getGameAssets(this.ID, this.imageData.Src);
+      image.src = getGameAssets(this.gameId, this.imageData.Src);
       image.onload = () => {
         const scale = Math.min(
           this.configKonva.width / image.width,
@@ -190,7 +190,7 @@ export default {
       }
     },
     submitAnswer() {
-      const correctAnswers = this.GameData.Answer;
+      const correctAnswers = this.gameData.Answer;
       let isCorrect = true;
       const wrongIndices = [];
 

@@ -1,6 +1,10 @@
 <template>
   <div class="level-container">
-    <ImageContainer :ID="ID" :Data="imageData" class="image-container" />
+    <ImageContainer
+      :game-id="gameId"
+      :component-config="imageData"
+      class="image-container"
+    />
     <div class="question-container">
       <div class="questions-flex">
         <div
@@ -33,8 +37,8 @@
         </div>
       </div>
       <Markdown
-        :ID="ID"
-        :Data="markdownData"
+        :game-id="gameId"
+        :component-config="markdownData"
         @reply-answer="handleMarkdownReply"
       />
     </div>
@@ -53,7 +57,7 @@ export default {
     Markdown,
   },
   props: {
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
