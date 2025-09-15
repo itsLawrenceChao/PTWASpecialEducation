@@ -335,7 +335,7 @@ const divisionData = {
 <GenericBoard 
   :data="divisionData" 
   :config="divisionConfig" 
-  :ID="'division-1'"
+  :game-id="'division-1'"
   @replyAnswer="handleAnswer"
 />
 */

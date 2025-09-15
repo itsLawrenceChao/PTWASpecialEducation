@@ -56,7 +56,7 @@
     </table>
     <FloatNumPad
       v-if="showNumPad"
-      :Data="numPadPosition"
+      :component-config="numPadPosition"
       @button-clicked="handleNumPadInput"
     />
   </div>
@@ -78,10 +78,6 @@ export default {
   props: {
     data: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
     config: {
