@@ -194,10 +194,6 @@ export default {
 
   data() {
     return {
-      updateKey: 0,
-      formData: [],
-      formDataConcat: [],
-      formStyle: [],
       questionData: [],
       selectedElement: null,
       isDragging: false,

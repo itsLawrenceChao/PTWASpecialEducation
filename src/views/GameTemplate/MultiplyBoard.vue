@@ -229,14 +229,6 @@ export default {
       }
       return btnStyle;
     },
-    setPadPosition(row, column) {
-      let position;
-      if (row >= this.gameData.digitsOfEachRow.length / 2) position = "upper";
-      else position = "lower";
-
-      if (column > 5) return position.concat("Left");
-      else return position.concat("Right");
-    },
     setUnit() {
       this.unitRowStyle.width = this.$refs.row.clientWidth + "px";
 
@@ -277,9 +269,6 @@ export default {
           console.log("Invalid unit.");
           break;
       }
-    },
-    getAnswer(ans, id) {
-      this.answer[id - 1] = ans;
     },
     checkAnswer() {
       let isCorrect = true;

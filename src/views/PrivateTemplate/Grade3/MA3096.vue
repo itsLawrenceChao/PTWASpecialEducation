@@ -146,11 +146,8 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      selectedGroup: 0,
-      totalQuestions: null,
       answered: [],
       userAnswer: [],
-      imageDatas: [],
       symbols: [],
       slotComponentAnswers: ["", ""], // Two SubComponents
       compareSymbols: [
@@ -169,11 +166,7 @@ export default {
       ],
     };
   },
-  computed: {
-    id() {
-      return this.ID;
-    },
-  },
+  computed: {},
   created() {
     this.initializeGame();
     emitter.on("submitAnswer", this.checkAllAnswers);
@@ -211,13 +204,6 @@ export default {
         this.$emit("add-record", ["不支援", "不支援", "正確"]);
         this.$emit("next-question");
       }
-    },
-    clearAllData() {
-      for (let i = 0; i < 2; i++) {
-        this.answers[i] = [];
-        this.answered[i] = null;
-      }
-      this.slotComponentAnswers = ["", ""];
     },
     handleSlotComponentReply(index, answer) {
       this.slotComponentAnswers[index] = answer;

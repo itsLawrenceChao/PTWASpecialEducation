@@ -94,11 +94,7 @@ export default {
       downComponentsAnswer: false,
     };
   },
-  computed: {
-    Arrow() {
-      return getSlotComponentAssets("NumberLineV2", "ArrowRight.svg"); //FIXME
-    },
-  },
+  computed: {},
   created() {
     const NewArr = [];
     let cnt = 0;

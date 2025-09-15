@@ -90,7 +90,6 @@ export default {
       configNumeratorLine: {},
       configNumeratorNumber: {},
       configDenominatorNumber: {},
-      fill: [],
 
       numerator: 3,
       denominator: 3,

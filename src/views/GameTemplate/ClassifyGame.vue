@@ -95,7 +95,6 @@ export default {
   data() {
     return {
       questionText: this.gameData.Text,
-      GroupID: 0,
       groupedItems: this.gameData.Answer.map(() => []),
       draggableItems: [],
       incorrectItems: [],
@@ -142,14 +141,6 @@ export default {
         this.groupedItems[index].length ===
         this.gameData.Answer[index].Items.length
       );
-    },
-
-    countCorrectItems(index) {
-      return this.groupedItems[index].reduce((matchingItemCount, item) => {
-        return this.gameData.Answer[index].Items.includes(item.Tag)
-          ? matchingItemCount + 1
-          : matchingItemCount;
-      }, 0);
     },
 
     handleIncorrectAnswer(index) {

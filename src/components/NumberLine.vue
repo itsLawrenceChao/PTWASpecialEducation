@@ -72,10 +72,8 @@ export default {
       // },
       AnnotateLineHeight: 30,
       IncrementLineHeight: 15,
-      SvgHeight: 150,
       SvgWidth: 600,
       FontSize: 17,
-      BoxIndex: 1,
       BoxAnswer: {},
       CorrectAnswer: {},
       configStage: {

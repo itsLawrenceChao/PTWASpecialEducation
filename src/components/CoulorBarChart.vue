@@ -29,7 +29,6 @@
   </div>
 </template>
 <script>
-import TextOnly from "./TextOnly.vue";
 export default {
   name: "CoulorBarChart",
   props: {
@@ -42,7 +41,6 @@ export default {
   data() {
     return {
       Drawed: [],
-      container: null,
       configs: {},
     };
   },
@@ -107,21 +105,6 @@ export default {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);
-      }
-    },
-    GetAnswer1() {
-      let TempAnswer = 0;
-      for (let i = 0; i < this.Drawed.length; i++) {
-        for (let x = 0; x < this.Drawed[i].length; x++) {
-          if (this.Drawed[i][x] === false) {
-            TempAnswer += 1;
-          }
-        }
-      }
-      if (TempAnswer === this.configs.Child) {
-        alert("Correct" + TempAnswer + this.configs.Child);
-      } else {
-        alert("Incorrect" + TempAnswer + this.configs.Child);
       }
     },
   },

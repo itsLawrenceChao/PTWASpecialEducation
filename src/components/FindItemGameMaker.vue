@@ -10,17 +10,13 @@
         @click="judge_position($event)"
       />
     </div>
-    <input id="fileInput" type="file">
+    <input id="fileInput" type="file" />
     <div>
-      <input v-model="inputNumber" type="text">
-      <button @click="Start">
-        開始計算
-      </button>
+      <input v-model="inputNumber" type="text" />
+      <button @click="Start">開始計算</button>
     </div>
     <div v-if="counter2 - 1 === parseInt(inputNumber)" class="">
-      <p style="color: red; font-size: 2rem">
-        紀錄完成
-      </p>
+      <p style="color: red; font-size: 2rem">紀錄完成</p>
     </div>
     <div class="">
       <div>
@@ -31,13 +27,13 @@
           {{ item }}
         </button>
       </div>
-      <hr>
+      <hr />
       <div>
         <p>正在紀錄</p>
         <p>請做: {{ command[counter - 1] }}</p>
         {{ drawingprototype }}
       </div>
-      <hr>
+      <hr />
       <div class="">
         <p>紀錄</p>
         {{ location }}
@@ -57,11 +53,6 @@ export default {
       counter: 1,
       counter2: 1,
       command: ["物件左上角", "物件右下角"],
-      prototype: {
-        Name: "",
-        LeftTop: [],
-        RightBottom: [],
-      },
       drawingprototype: {
         Name: "",
         LeftTop: [],
@@ -101,21 +92,6 @@ export default {
         this.btn.push(i);
         this.drawed.push(false);
       }
-    },
-    outCircle(x, y) {
-      console.log("draw circle on number");
-      const canvas = document.getElementById("cvs");
-      const ctx = canvas.getContext("2d");
-      // 設定圓形參數
-      const radius = 50; //半徑
-      const lineWidth = 2;
-      const strokeColor = "red";
-      // 繪製圓形
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, 2 * Math.PI);
-      ctx.lineWidth = lineWidth;
-      ctx.strokeStyle = strokeColor;
-      ctx.stroke();
     },
     judge_position(event) {
       console.log(event.pageX, event.pageY);

@@ -120,39 +120,6 @@ export default {
         this.nowSelect.focus();
       }
     },
-    clear() {
-      const activeElement = this.nowSelect;
-      if (activeElement) {
-        const start = activeElement.selectionStart;
-        activeElement.value = "";
-        activeElement.selectionStart = activeElement.selectionEnd = start - 1;
-        const event = new Event("input", { bubbles: true });
-        activeElement.dispatchEvent(event);
-      }
-    },
-    pop() {
-      const activeElement = this.nowSelect;
-      if (activeElement) {
-        const start = activeElement.selectionStart;
-        const end = activeElement.selectionEnd;
-        const value = activeElement.value;
-        activeElement.value = value.slice(0, start) + value.slice(end);
-        activeElement.selectionStart = activeElement.selectionEnd = start;
-        const event = new Event("input", { bubbles: true });
-        activeElement.dispatchEvent(event);
-      }
-    },
-    push(ch) {
-      const activeElement = this.nowSelect;
-      activeElement.focus();
-      if (activeElement) {
-        const start = activeElement.selectionStart;
-        activeElement.value = activeElement.value + ch;
-        activeElement.selectionStart = activeElement.selectionEnd = start + 1;
-        const event = new Event("input", { bubbles: true });
-        activeElement.dispatchEvent(event);
-      }
-    },
     checkAnswer() {
       console.log(this.BoardReply, this.markdownReply);
       if (this.BoardReply && this.markdownReply) {

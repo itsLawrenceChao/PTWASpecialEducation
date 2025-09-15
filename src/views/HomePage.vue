@@ -35,7 +35,6 @@ export default {
   },
   data() {
     return {
-      grade: 0,
       imgSrcs: [],
     };
   },

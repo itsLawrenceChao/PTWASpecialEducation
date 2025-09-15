@@ -87,6 +87,10 @@ export default {
       type: Array,
       required: true,
     },
+    submitTick: {
+      type: Number,
+      default: 0,
+    },
   },
   emits: ["play-effect", "next-question"],
   data() {
@@ -113,6 +117,11 @@ export default {
       wrongBoxIndices: [],
       markdownAnswer: false,
     };
+  },
+  watch: {
+    submitTick() {
+      this.submitAnswer();
+    },
   },
   mounted() {
     this.$nextTick(() => {

@@ -75,7 +75,6 @@ export default {
   emits: ["play-effect", "next-question", "add-record"],
   data() {
     return {
-      totalLives: 3,
       remainingLives: 3,
       wrongAnswerIndex: null,
       currentQuestions: [], //題目陣列位置

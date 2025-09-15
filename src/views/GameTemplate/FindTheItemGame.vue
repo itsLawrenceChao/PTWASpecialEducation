@@ -53,10 +53,6 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      questionNum: 0,
-      rightAnswerCount: 0,
-      correctlyAnsweredQuestions: [],
-      randomQuestionOrder: [],
       stageSize: {
         width: 800,
         height: 600,

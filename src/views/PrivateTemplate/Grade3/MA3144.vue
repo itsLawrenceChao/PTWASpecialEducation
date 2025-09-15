@@ -53,9 +53,6 @@ export default {
   data() {
     return {
       // Your data here
-      numberData: {
-        digitCount: 2,
-      },
       userAnswer: {
         kg: 0,
         g: 0,

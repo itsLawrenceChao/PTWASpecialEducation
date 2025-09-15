@@ -333,7 +333,6 @@ export default {
   ],
   data() {
     return {
-      CalculatorSwitch: false,
       code: "",
       isFullScreen: false,
       startGameIconSrc: getSystemAssets("start.png", "side_bar"),

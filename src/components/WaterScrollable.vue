@@ -36,8 +36,6 @@ export default {
         height: 0,
       },
       image: null,
-      CupData: [],
-      containVloume: 0,
       dpr: window.devicePixelRatio || 1,
       configs: {},
     };

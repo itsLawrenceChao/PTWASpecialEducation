@@ -54,9 +54,6 @@
           </v-layer>
         </v-stage>
       </div>
-      <!-- <div class="Functions">
-        <button @click="CheckAllAnswer">送出答案</button>
-      </div> -->
     </div>
   </div>
 </template>
@@ -272,43 +269,6 @@ export default {
       }
       return -1;
     },
-    CheckPairedBefore(x, y) {
-      // 檢查起點是否已經有連線
-      for (const i in this.LinkedRecord) {
-        if (this.LinkedRecord[i][0] === x) {
-          return true;
-        }
-      }
-      // 檢查終點是否已經有連線
-      for (const i in this.LinkedRecord) {
-        if (this.LinkedRecord[i][1] === y) {
-          return true;
-        }
-      }
-      return false;
-    },
-    MarkWrongLine(start, end) {
-      const WrongLine = {
-        points: [
-          this.rects[start].x + this.rects[start].width / 2,
-          this.rects[start].y + this.rects[start].height / 2,
-          this.ImageMountPoint[end].x,
-          this.ImageMountPoint[end].y,
-        ],
-        stroke: "red",
-        strokeWidth: 10,
-        lineCap: "round",
-        lineJoin: "round",
-      };
-      for (const i in this.Lines) {
-        if (
-          this.Lines[i].points[0] === WrongLine.points[0] &&
-          this.Lines[i].points[1] === WrongLine.points[1]
-        ) {
-          this.Lines[i] = WrongLine;
-        }
-      }
-    },
     CheckAllAnswer() {
       const answerSet = new Set(this.Pair.map(([p, r]) => `${p}-${r}`));
 
@@ -338,18 +298,6 @@ export default {
       if (pass) this.$emit("next-question");
 
       return { WrongAmount: wrong.length, WrongAnsIndexs: wrong, Pass: pass };
-    },
-    Pop() {
-      if (this.LinkedRecord.length > 0) {
-        this.LinkedRecord.pop();
-        this.Lines.pop();
-        this.$refs.LineLayer.getNode().batchDraw();
-      }
-    },
-    ClearAll() {
-      this.LinkedRecord = [];
-      this.Lines = [];
-      this.$refs.LineLayer.getNode().batchDraw();
     },
     parseLatexFraction(latexString) {
       // 解析 LaTeX 格式的分數，例如 "\\frac{1}{4}" -> {numerator: "1", denominator: "4"}

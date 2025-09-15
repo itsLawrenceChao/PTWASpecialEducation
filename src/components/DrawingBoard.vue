@@ -15,10 +15,9 @@ export default {
   components: {},
 
   props: {
-    // New preferred prop name
     componentConfig: {
       type: Object,
-      required: false,
+      required: true,
     },
   },
 
@@ -101,11 +100,6 @@ export default {
         this.componentConfig.size,
         this.componentConfig.size
       );
-      this.ctx.closePath();
-    },
-    clear() {
-      this.ctx.beginPath();
-      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.closePath();
     },
   },

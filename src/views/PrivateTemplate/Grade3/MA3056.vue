@@ -36,7 +36,6 @@ export default {
   emits: ["play-effect", "next-question"],
   data() {
     return {
-      id: "MA3056",
       componentsReplyAnswer: false,
       configDrawShapes: {
         verifyOption: "rect", //none, rect, shape

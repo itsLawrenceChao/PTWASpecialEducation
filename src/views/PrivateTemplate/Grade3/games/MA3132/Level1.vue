@@ -73,6 +73,10 @@ export default {
       type: Array,
       required: true,
     },
+    submitTick: {
+      type: Number,
+      default: 0,
+    },
   },
   emits: ["play-effect", "next-question"],
   data() {
@@ -89,6 +93,11 @@ export default {
         this.questions[this.currentQuestionIndex],
         this.questions[this.currentQuestionIndex + 1],
       ].filter((q) => q);
+    },
+  },
+  watch: {
+    submitTick() {
+      this.submitAnswer();
     },
   },
   methods: {

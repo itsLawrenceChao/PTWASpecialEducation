@@ -24,6 +24,7 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3091",
   components: {
@@ -48,31 +49,21 @@ export default {
   data() {
     return {
       configFraction: this.gameData.answerData,
-      chartWidth: 0,
-      chartHeight: 0,
       isAnswerCorrect: false,
       questionDescription: this.gameData.question.description,
       questionFraction: { Content: this.gameData.question.fraction },
-      chartData: {
-        shape: this.gameData.answerData.shape,
-        numerator: this.gameData.answerData.answer.numerator, // 分子
-        denominator: this.gameData.answerData.answer.denominator, // 分母
-      },
     };
   },
   computed: {},
+  created() {
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
+  },
   methods: {
     drag(answer) {
       this.isAnswerCorrect = answer;
-    },
-    calculateChartSize() {
-      const fractionChart = this.$refs.fractionChart;
-      if (fractionChart) {
-        this.chartWidth = fractionChart.offsetWidth * 0.85 || 150; // 確保有預設值
-        this.chartHeight = fractionChart.offsetHeight * 0.85 || 150; // 確保有預設值
-      } else {
-        console.error("FractionChart not found!");
-      }
     },
     checkAnswer() {
       this.$emit("add-record", this.recordedAnswer);

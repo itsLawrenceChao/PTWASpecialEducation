@@ -140,15 +140,6 @@ export default {
         slices: this.denominator,
       };
     },
-    getCircleBorderConfig(config) {
-      return {
-        radius: this.gameWidth * config.radiusRatio,
-        stroke: "black", // 邊框顏色
-        strokeWidth: 2, // 邊框寬度
-        x: this.gameWidth / 2,
-        y: this.gameHeight / 2,
-      };
-    },
     getRectBorderConfig(config) {
       return {
         width: this.gameWidth * config.widthRatio,

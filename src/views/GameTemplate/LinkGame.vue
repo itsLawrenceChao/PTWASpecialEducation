@@ -59,21 +59,6 @@
     </div>
     <div class="Buttons">
       <h3 v-if="NotFinished">請連完所有的線段</h3>
-      <!-- <button v-if="gameConfig.CheckingMode === 'OnSubmit'" @click="CheckAll">
-        送出答案
-      </button>
-      <button
-        v-if="gameConfig.CheckingMode === 'OnSubmit'"
-        @click="ClearAllLine"
-      >
-        清除所有的線
-      </button>
-      <button
-          @click="PopLastLine"
-          v-if="this.gameConfig.CheckingMode === 'OnSubmit'"
-        >
-          刪除最後一條線
-        </button> -->
     </div>
   </div>
 </template>
@@ -405,16 +390,6 @@ export default {
     },
     MarkWrongLine(lineIndex) {
       this.Lines[lineIndex].stroke = "red";
-      this.$refs.LineLayer.getNode().draw();
-    },
-    ClearAllLine() {
-      this.Lines = [];
-      this.LinkedPoints = [];
-      this.$refs.LineLayer.getNode().draw();
-    },
-    PopLastLine() {
-      this.Lines.pop();
-      this.LinkedPoints.pop();
       this.$refs.LineLayer.getNode().draw();
     },
     CheckAllAnswered() {

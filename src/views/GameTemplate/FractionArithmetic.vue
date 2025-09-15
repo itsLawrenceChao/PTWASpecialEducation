@@ -88,7 +88,6 @@ export default {
   data() {
     const isApplication = !!this.gameData.answer?.operation;
     return {
-      recordedAnswer: null,
       questionDescription: this.gameData.question.description,
       questionLeftTerm: this.gameData.question.leftTerm,
       questionRightTerm: this.gameData.question.rightTerm,
@@ -96,12 +95,18 @@ export default {
       checkCalculationData: this.gameData.acheckCalculationData,
       answerData: this.gameData.answer,
       isAnswerRight: false,
-      questionType: this.gameData.question.questionType,
       mode: isApplication ? "application" : "arithmetic",
       userOperation: isApplication
         ? " " // 一開始是空格
         : this.gameData.question.operationType,
     };
+  },
+  created() {
+    this.initializeItems();
+    emitter.on("submitAnswer", this.triggerValidation);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.triggerValidation);
   },
   methods: {
     handleValidation(result) {

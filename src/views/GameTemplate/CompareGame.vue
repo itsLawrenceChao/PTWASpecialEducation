@@ -135,13 +135,10 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      a: "",
       SelectedGroup: 0,
       TotalQuestion: null,
       Answered: [],
       Answers: [],
-      Ans1: [],
-      Ans2: [],
       ImageDatas: [],
       Symbol: [],
       SlotComponentanswer: ["", ""], // Two SubComponents
@@ -176,9 +173,6 @@ export default {
     emitter.off("submitAnswer", this.CheckAllAnswer);
   },
   methods: {
-    Triger() {
-      this.$emit("play-effect", "IncorrectAnimation");
-    },
     Add(index) {
       console.log("check drop");
       this.SelectedGroup = index;
@@ -259,14 +253,6 @@ export default {
           "正確",
         ]);
         this.$emit("next-question");
-      }
-    },
-    ClearAllData() {
-      for (const i in this.Answered) {
-        this.Answers[i][0] = null;
-        this.Answers[i][1] = null;
-        this.Answered[i] = null;
-        this.Answers[i] = [];
       }
     },
     SlotComponentReplyAnswer(index, answer) {

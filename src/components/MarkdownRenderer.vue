@@ -84,7 +84,6 @@ export default {
       clickedEvent: null,
       wrongInputIndex: [],
       numPadOffset: 10,
-      availableSymbols: ["+", "-", "×", "÷"],
       selectedOptions: {},
       isShowOperatorPad: false,
       operatorPadLocation: { top: 0, left: 0 },
@@ -271,10 +270,6 @@ export default {
           totalIndex++;
         }
       });
-    },
-    handleSymbolSelect(index, symbol) {
-      this.elements[index].content = symbol;
-      this.checkAnswer();
     },
     selectOption(elementIndex, optionIndex) {
       // 保存原始選項列表

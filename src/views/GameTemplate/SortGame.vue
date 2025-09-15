@@ -37,7 +37,6 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      QuestionWord: "",
       options: [],
       show: false,
       question: null,

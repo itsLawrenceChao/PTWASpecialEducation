@@ -45,6 +45,10 @@ export default {
       type: String,
       required: true,
     },
+    submitTick: {
+      type: Number,
+      default: 0,
+    },
   },
   emits: ["play-effect", "next-question"],
   data() {
@@ -59,11 +63,12 @@ export default {
       blockSize: 0,
       tableSize: { width: 0, height: 0 },
       images: [],
-      configKonva: { width: 0, height: 0 },
-      configDragBG: {},
-      configBlocks: [],
-      configDraggables: [],
     };
+  },
+  watch: {
+    submitTick() {
+      this.submitAnswer();
+    },
   },
   mounted() {
     this.$nextTick(this.initScene);

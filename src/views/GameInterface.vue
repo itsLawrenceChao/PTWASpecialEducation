@@ -272,8 +272,6 @@ export default {
   data() {
     return {
       Dataloaded: false,
-      introvideo: false,
-      VideoSrc: "",
       // gameType: "loading",
       download_data: [[]], //下載的資料，格式為二維陣列。
       header: [],
@@ -294,8 +292,6 @@ export default {
       EffectSrc: "",
       scratchSheetBackground: null,
       calculatorToolVisible: false,
-      QuestionsSequence: [],
-      AllQuestions: [],
       ShowReply: false,
       Hint: {
         Type: "None",
@@ -312,7 +308,6 @@ export default {
       isPassLevel: [],
       questionOrder: [],
       questionCopy: [],
-      isGif: false,
       showMediaModal: false,
       // SentData2ChildComponent: {},
     };

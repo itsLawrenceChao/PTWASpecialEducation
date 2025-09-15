@@ -232,9 +232,6 @@ export default {
 
       this.layer.add(topDot, bottomDot);
     },
-    updateTime() {
-      this.drawTime(this.inputTime);
-    },
     calculateScale(containerWidth, containerHeight, imageWidth, imageHeight) {
       const scaleX = containerWidth / imageWidth;
       const scaleY = containerHeight / imageHeight;

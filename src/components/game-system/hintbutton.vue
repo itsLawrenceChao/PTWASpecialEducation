@@ -62,11 +62,7 @@ export default {
       Shake: false,
     };
   },
-  computed: {
-    hint_percentage() {
-      return `${this.percentage}%`;
-    },
-  },
+  computed: {},
   watch: {
     hintInfo: {
       handler() {

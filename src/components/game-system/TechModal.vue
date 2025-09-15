@@ -51,7 +51,7 @@ export default {
     };
   },
   computed: {
-    ...mapWritableState(gameStore, ["gameID", "gameType"]),
+    ...mapWritableState(gameStore, ["gameType"]),
   },
   mounted() {
     // if mediaData is not given, use default tech video, if both are not available, load 404 image

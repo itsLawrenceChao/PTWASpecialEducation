@@ -83,7 +83,6 @@ export default {
         image: null,
       },
       circles: [],
-      clickFirst: false,
       value: [],
       speakerIcon: getGameStaticAssets("NumberSearchGame", "speaker-icon.png"),
     };

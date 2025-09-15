@@ -57,10 +57,8 @@ export default {
   emits: ["restart", "openTeachingModal", "startGame"],
   data() {
     return {
-      nameofThisComponent: "GameStartandOver Component said:",
       introType: "",
       startGameIconSrc: getSystemAssets("start-game.png", "game_images"),
-      readAloudIconSrc: getSystemAssets("read-aloud.png", "game_images"),
       tutorialVideoIconSrc: getSystemAssets(
         "tutorial-video.png",
         "game_images"

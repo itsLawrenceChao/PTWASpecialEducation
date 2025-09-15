@@ -83,7 +83,6 @@ export default {
       currentQuestionIndex: 0,
       transitionName: "slide-right",
       error: undefined,
-      submitAnswerAmount: 0,
       nextable: false,
     };
   },
@@ -145,46 +144,6 @@ export default {
         ]);
       }
     },
-    CheckAnswer() {
-      let isCorrect = true;
-      const Answers = [];
-      this.submitAnswerAmount++;
-      for (const i in this.selectionRecord) {
-        if (this.selectionRecord[i] === null) {
-          this.error = "請將所有答案作答完成";
-          this.$emit("play-effect", "WrongSound");
-          this.$emit("add-record", [
-            `第${this.submitAnswerAmount}送出答案`,
-            `第${i + 1}題未作答`,
-            "錯誤",
-          ]);
-        }
-      }
-      for (const j in this.gameData.Questions) {
-        Answers.push(this.gameData.Questions[j].Answer);
-        if (this.SelectionRecord[j] !== this.gameData.Questions[j].Answer) {
-          isCorrect = false;
-          this.$emit("add-record", [
-            `第${this.submitAnswerAmount}送出答案`,
-            `第${j + 1}題錯誤`,
-            "錯誤",
-          ]);
-          this.error = "答案錯誤，請再試一次";
-        }
-      }
-      if (isCorrect) {
-        this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [
-          `第${this.submitAnswerAmount}次送出答案`,
-          "",
-          "所有答案正確",
-        ]);
-        this.$emit("next-question");
-      } else {
-        this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", [Answers, this.SelectionRecord, "錯誤"]);
-      }
-    },
     splitQuestion(question) {
       return question.split(/(\$question\$)/g);
     },
@@ -197,12 +156,6 @@ export default {
         this.currentQuestionIndex++;
       }
       this.nextable = false;
-    },
-    prevQuestion() {
-      if (this.currentQuestionIndex > 0) {
-        this.transitionName = "slide-right";
-        this.currentQuestionIndex--;
-      }
     },
   },
 };

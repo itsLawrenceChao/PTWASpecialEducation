@@ -83,7 +83,6 @@ export default {
   emits: ["play-effect", "next-question", "add-record"],
   data() {
     return {
-      InputId: 0,
       ImgSrc: "",
       WithImage: false,
       // id: "MA3023",

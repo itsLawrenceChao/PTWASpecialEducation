@@ -86,7 +86,6 @@ export default {
       imageUrl: "",
       question: [],
       SlotComponent: null,
-      comp: null,
       Answer: null,
       Select: [],
     };

@@ -7,6 +7,7 @@
         :image-data="imageData"
         :markdown-data="markdownData"
         :questions="questions"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -16,6 +17,7 @@
         ref="level2"
         :game-id="gameId"
         :game-data="gameData"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -28,6 +30,7 @@
         :image-data="imageData"
         :markdown-data="markdownData"
         :boxes="boxes"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -68,6 +71,7 @@ export default {
       questions: this.gameData.Questions,
       gameLevel: this.gameData.GameLevel,
       boxes: this.gameData.Boxes,
+      submitTick: 0,
     };
   },
   created() {
@@ -78,10 +82,7 @@ export default {
   },
   methods: {
     submitAnswer() {
-      const levelComponent = this.$refs[`level${this.gameLevel}`];
-      if (levelComponent) {
-        levelComponent.submitAnswer();
-      }
+      this.submitTick++;
     },
   },
 };

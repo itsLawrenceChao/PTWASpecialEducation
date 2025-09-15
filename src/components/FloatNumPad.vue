@@ -47,7 +47,6 @@ export default {
       ],
       adjustedTop: "0px",
       adjustedLeft: "0px",
-      bais: 15,
     };
   },
   watch: {

@@ -32,11 +32,6 @@ export default {
     return {};
   },
   computed: {
-    SentData() {
-      return {
-        Src: this.imageURL,
-      };
-    },
   },
   mounted() {},
 };
