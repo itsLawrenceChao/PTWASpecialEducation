@@ -71,10 +71,10 @@ export default {
     Checkrand() {
       let list1 = "";
       let list2 = "";
-      for (var i in this.question) {
+      for (const i in this.question) {
         list1 += this.question[i];
       }
-      for (var i in this.answer) {
+      for (const i in this.answer) {
         list2 += this.answer[i];
       }
       if (list1 === list2) {

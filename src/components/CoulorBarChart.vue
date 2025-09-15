@@ -53,7 +53,7 @@ export default {
     if (this.configs.Total % 2 !== 0) {
       //奇數
       const temp = [];
-      for (var i = 0; i < this.configs.Total; i++) {
+      for (let i = 0; i < this.configs.Total; i++) {
         temp.push(true);
       }
       console.log(temp);
@@ -62,7 +62,7 @@ export default {
       //偶數
       const temp = [];
       const div = this.configs.Total / 2;
-      for (var i = 0; i < 2; i++) {
+      for (let i = 0; i < 2; i++) {
         const temp = [];
         for (let x = 0; x < div; x++) {
           temp.push(true);

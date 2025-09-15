@@ -243,8 +243,8 @@ export default {
     },
 
     initializeEnemyPosition() {
-      for (var i = 0; i < 10; ++i) {
-        for (var j = 0; j < 20; ++j) {
+      for (let i = 0; i < 10; ++i) {
+        for (let j = 0; j < 20; ++j) {
           if (j >= 8 && j <= 11) continue;
           if (this.map[this.randomMapId][i][j] === 0) {
             this.configGhost_1.x = this.laneWidth * (j + 0.5);
@@ -253,8 +253,8 @@ export default {
           }
         }
       }
-      for (var i = 9; i > -1; --i) {
-        for (var j = 19; j > -1; --j) {
+      for (let i = 9; i > -1; --i) {
+        for (let j = 19; j > -1; --j) {
           if (j >= 8 && j <= 11) continue;
           if (this.map[this.randomMapId][i][j] === 0) {
             this.configGhost_2.x = this.laneWidth * (j + 0.5);
@@ -266,15 +266,15 @@ export default {
     },
     initializePlayerPosition() {
       const possiblePosition = [];
-      for (var i = 4; i < 6; ++i) {
-        for (var j = 9; j < 11; ++j) {
+      for (let i = 4; i < 6; ++i) {
+        for (let j = 9; j < 11; ++j) {
           if (this.map[this.randomMapId][i][j] === 0) {
             possiblePosition.push({ x: j, y: i });
           }
         }
       }
       if (possiblePosition.length > 0) {
-        var randomPosition = Math.floor(
+        const randomPosition = Math.floor(
           Math.random() * possiblePosition.length
         );
         this.configPlayer.x =
@@ -283,15 +283,15 @@ export default {
           this.laneWidth * (possiblePosition[randomPosition].y + 0.5);
         return 0;
       }
-      for (var i = 3; i < 7; ++i) {
-        for (var j = 8; j < 12; ++j) {
+      for (let i = 3; i < 7; ++i) {
+        for (let j = 8; j < 12; ++j) {
           if (this.map[this.randomMapId][i][j] === 0) {
             possiblePosition.push({ x: j, y: i });
           }
         }
       }
       if (possiblePosition.length > 0) {
-        var randomPosition = Math.floor(
+        const randomPosition = Math.floor(
           Math.random() * possiblePosition.length
         );
         this.configPlayer.x =

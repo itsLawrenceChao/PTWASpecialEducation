@@ -104,11 +104,11 @@ export default {
   created() {
     // this.picture_type="sth"//FIXME
     this.QuestionRange = this.gameData.Question.Range;
-    for (var i in this.gameData.Question.ObjImgList) {
+    for (const i in this.gameData.Question.ObjImgList) {
       this.picture_total += 1;
     }
     for (
-      var i = this.gameData.Question.Range[0];
+      let i = this.gameData.Question.Range[0];
       i <= this.gameData.Question.Range[1];
       i++
     ) {

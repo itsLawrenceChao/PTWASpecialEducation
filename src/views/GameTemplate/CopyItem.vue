@@ -142,14 +142,14 @@ export default {
     checkAnswer() {
       const stack = {};
       let isTrue = true;
-      for (var i in this.tarList) {
+      for (const i in this.tarList) {
         if (stack[this.tarList[i].item] === undefined) {
           stack[this.tarList[i].item] = 1;
         } else {
           stack[this.tarList[i].item] += 1;
         }
       }
-      for (var i in this.gameData.Items) {
+      for (const i in this.gameData.Items) {
         if (
           stack[i] === undefined ||
           stack[i] !== this.gameData.Items[i].Amount

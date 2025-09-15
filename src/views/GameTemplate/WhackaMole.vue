@@ -185,9 +185,9 @@ export default {
       window.setTimeout(this.spawnMole, nextSpawn);
     },
     positionWithoutOverlap() {
+      let overlap = false;
+      const position = canvasTools.randomPosition(this.boundaries);
       do {
-        var overlap = false;
-        var position = canvasTools.randomPosition(this.boundaries);
         for (
           let i = this.startId;
           i < this.configObjects.position.length;
