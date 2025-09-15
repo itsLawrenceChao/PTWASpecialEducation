@@ -30,7 +30,7 @@ import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "NumberBoard",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -40,25 +40,25 @@ export default {
     return {
       numbers: [],
       Unit: null,
-      isInput: this.Data.isInput || false,
+      isInput: this.componentConfig.isInput || false,
       wrongDigits: [],
       showWrong: false,
     };
   },
   created() {
-    this.Unit = this.Data.Unit;
-    this.numbers = this.Data.Number;
-    if (typeof this.Data.Number === "number") {
-      this.numbers = this.Data.Number.toString().split("");
+    this.Unit = this.componentConfig.Unit;
+    this.numbers = this.componentConfig.Number;
+    if (typeof this.componentConfig.Number === "number") {
+      this.numbers = this.componentConfig.Number.toString().split("");
     }
-    if (this.Data.Unit.length !== this.numbers.length) {
-      if (this.Data.Unit.length > this.numbers.length) {
-        const diff = this.Data.Unit.length - this.numbers.length;
+    if (this.componentConfig.Unit.length !== this.numbers.length) {
+      if (this.componentConfig.Unit.length > this.numbers.length) {
+        const diff = this.componentConfig.Unit.length - this.numbers.length;
         for (let i = 0; i < diff; i++) {
           this.numbers.unshift(" ");
         }
       } else {
-        const diff = this.numbers.length - this.Data.Unit.length;
+        const diff = this.numbers.length - this.componentConfig.Unit.length;
         for (let i = 0; i < diff; i++) {
           this.Unit.unshift(" ");
         }
@@ -94,7 +94,7 @@ export default {
       if (!this.isInput) return;
 
       let check = true;
-      const correctAnswer = this.Data.Number.toString().split("");
+      const correctAnswer = this.componentConfig.Number.toString().split("");
       // 只檢查正確與否，不標記紅色
       for (let i = correctAnswer.length - 1; i >= 0; i--) {
         if (correctAnswer[i] !== this.numbers[i]) {
@@ -107,7 +107,7 @@ export default {
       // 觸發紅色標記
       this.showWrong = true;
       // 更新錯誤狀態
-      const correctAnswer = this.Data.Number.toString().split("");
+      const correctAnswer = this.componentConfig.Number.toString().split("");
       this.wrongDigits = new Array(this.numbers.length).fill(false);
       for (let i = correctAnswer.length - 1; i >= 0; i--) {
         if (correctAnswer[i] !== this.numbers[i]) {

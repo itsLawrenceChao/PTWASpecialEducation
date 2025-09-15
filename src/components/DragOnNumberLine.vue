@@ -39,11 +39,11 @@ export default {
   components: {},
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -145,9 +145,15 @@ export default {
     drawNumberLine() {
       this.intervalLength =
         (this.gameWidth * 0.9) /
-        ((this.Data.max - this.Data.min) / this.Data.spacing + 1);
+        ((this.componentConfig.max - this.componentConfig.min) /
+          this.componentConfig.spacing +
+          1);
       let tempX = this.gameWidth * 0.05 + this.intervalLength * 0.5;
-      for (let i = this.Data.min; i <= this.Data.max; i += this.Data.spacing) {
+      for (
+        let i = this.componentConfig.min;
+        i <= this.componentConfig.max;
+        i += this.componentConfig.spacing
+      ) {
         const line = {};
         line.stroke = "black";
         line.points = [
@@ -164,9 +170,9 @@ export default {
     drawNumbers() {
       this.numberY = this.gameWidth * 0.175;
       for (
-        let i = this.Data.min, j = 0;
-        i <= this.Data.max;
-        i += this.Data.spacing, ++j
+        let i = this.componentConfig.min, j = 0;
+        i <= this.componentConfig.max;
+        i += this.componentConfig.spacing, ++j
       ) {
         const number = {};
         let offset;
@@ -183,14 +189,20 @@ export default {
     },
     drawDraggable() {
       let initId = 0;
-      if (this.Data.init_pos) initId = this.getInitialPositionId();
+      if (this.componentConfig.init_pos) initId = this.getInitialPositionId();
       console.log(
-        getGameAssets(this.ID, this.Data.image).includes("undefined")
+        getGameAssets(this.gameId, this.componentConfig.image).includes(
+          "undefined"
+        )
       );
-      if (getGameAssets(this.ID, this.Data.image).includes("undefined")) {
+      if (
+        getGameAssets(this.gameId, this.componentConfig.image).includes(
+          "undefined"
+        )
+      ) {
         this.isImage = false;
         console.log("No image found");
-        console.log(this.ID, this.Data.image);
+        console.log(this.gameId, this.componentConfig.image);
       } else this.isImage = true;
 
       const configDraggable = {
@@ -202,7 +214,10 @@ export default {
 
       if (this.isImage) {
         const draggableImage = new window.Image();
-        draggableImage.src = getGameAssets(this.ID, this.Data.image);
+        draggableImage.src = getGameAssets(
+          this.gameId,
+          this.componentConfig.image
+        );
         configDraggable.image = draggableImage;
         configDraggable.width = this.intervalLength;
         configDraggable.height = this.intervalLength;
@@ -219,11 +234,11 @@ export default {
     getInitialPositionId() {
       let initId = 0;
       for (
-        let i = this.Data.min;
-        i <= this.Data.max;
-        i += this.Data.spacing, ++initId
+        let i = this.componentConfig.min;
+        i <= this.componentConfig.max;
+        i += this.componentConfig.spacing, ++initId
       ) {
-        if (i === this.Data.init_pos) return initId;
+        if (i === this.componentConfig.init_pos) return initId;
       }
     },
     handleDragend(e) {
@@ -240,9 +255,9 @@ export default {
       }
 
       for (
-        let i = this.Data.min, j = 0;
-        i <= this.Data.max;
-        i += this.Data.spacing, ++j
+        let i = this.componentConfig.min, j = 0;
+        i <= this.componentConfig.max;
+        i += this.componentConfig.spacing, ++j
       ) {
         if (Math.abs(dragendPosition - this.numberX[j]) < distance) {
           distance = Math.abs(dragendPosition - this.numberX[j]);
@@ -258,8 +273,8 @@ export default {
       this.checkAnswer(output);
     },
     checkAnswer(output) {
-      console.log(output, this.Data.finalPosition);
-      if (output === this.Data.finalPosition) {
+      console.log(output, this.componentConfig.finalPosition);
+      if (output === this.componentConfig.finalPosition) {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);
@@ -280,7 +295,7 @@ export default {
     },
     resetPosition() {
       let initId = 0;
-      if (this.Data.init_pos) initId = this.getInitialPositionId();
+      if (this.componentConfig.init_pos) initId = this.getInitialPositionId();
       const newX = this.numberX[initId];
 
       if (this.isImage) {

@@ -15,7 +15,7 @@
       <MoneyDisplay
         v-for="(item, index) in paperMoneyGroups['1000']"
         :key="`1000-${index}`"
-        :Data="{ denomination: item }"
+        :component-config="{ denomination: item }"
       />
     </div>
     <div
@@ -26,7 +26,7 @@
       <MoneyDisplay
         v-for="(item, index) in paperMoneyGroups['500']"
         :key="`500-${index}`"
-        :Data="{ denomination: item }"
+        :component-config="{ denomination: item }"
       />
     </div>
     <div
@@ -37,7 +37,7 @@
       <MoneyDisplay
         v-for="(item, index) in paperMoneyGroups['100']"
         :key="`100-${index}`"
-        :Data="{ denomination: item }"
+        :component-config="{ denomination: item }"
       />
     </div>
     <div
@@ -50,7 +50,10 @@
         :key="'coin-' + coinIndex"
         class="PerCoin"
       >
-        <MoneyDisplay v-if="coin !== ''" :Data="{ denomination: coin }" />
+        <MoneyDisplay
+          v-if="coin !== ''"
+          :component-config="{ denomination: coin }"
+        />
       </div>
     </div>
   </div>
@@ -60,12 +63,8 @@ import { ref, onMounted, nextTick } from "vue";
 import MoneyDisplay from "./MoneyDisplay.vue";
 
 const props = defineProps({
-  Data: {
+  componentConfig: {
     type: Object,
-    required: true,
-  },
-  ID: {
-    type: String,
     required: true,
   },
 });
@@ -76,7 +75,7 @@ const paperMoneyGroups = ref({
   100: [],
 });
 const coinContainer = ref([]);
-const Data = ref(props.Data);
+const componentConfig = ref(props.componentConfig);
 const containerSize = ref(false);
 const containerRef = ref(0);
 const Container = ref(null);
@@ -105,14 +104,14 @@ const processPaperMoney = (amount, denomination) => {
 
 const loadData = () => {
   // 處理紙鈔
-  if (Data.value.Thousands) {
-    processPaperMoney(Data.value.Thousands, "1000");
+  if (componentConfig.value.Thousands) {
+    processPaperMoney(componentConfig.value.Thousands, "1000");
   }
-  if (Data.value.FiveHundreds) {
-    processPaperMoney(Data.value.FiveHundreds, "500");
+  if (componentConfig.value.FiveHundreds) {
+    processPaperMoney(componentConfig.value.FiveHundreds, "500");
   }
-  if (Data.value.Hundreds) {
-    processPaperMoney(Data.value.Hundreds, "100");
+  if (componentConfig.value.Hundreds) {
+    processPaperMoney(componentConfig.value.Hundreds, "100");
   }
 
   // 處理硬幣
@@ -124,8 +123,8 @@ const loadData = () => {
   };
 
   Object.entries(coinTypes).forEach(([key, value]) => {
-    if (Data.value[key]) {
-      processCoins(Data.value[key], value);
+    if (componentConfig.value[key]) {
+      processCoins(componentConfig.value[key], value);
     }
   });
 };

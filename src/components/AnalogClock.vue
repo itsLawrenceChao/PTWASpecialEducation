@@ -8,11 +8,7 @@ import { getSlotComponentAssets } from "../utilitys/get_assets";
 export default {
   name: "AnalogClock",
   props: {
-    ID: {
-      type: String,
-      required: true,
-    },
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -65,9 +61,17 @@ export default {
         }
       }
 
-      if (this.Data.sec !== undefined && this.Data.sec !== "") {
+      if (
+        this.componentConfig.sec !== undefined &&
+        this.componentConfig.sec !== ""
+      ) {
         const Lsec = (border / 2) * 0.7;
-        const sec = new Vector(border / 2, border / 2, this.Data.sec * 6, Lsec);
+        const sec = new Vector(
+          border / 2,
+          border / 2,
+          this.componentConfig.sec * 6,
+          Lsec
+        );
         ctx.beginPath();
         ctx.moveTo(border / 2, border / 2);
         ctx.lineTo(sec.endX, sec.endY);
@@ -77,9 +81,17 @@ export default {
         ctx.closePath();
       }
 
-      if (this.Data.min !== undefined && this.Data.min !== "") {
+      if (
+        this.componentConfig.min !== undefined &&
+        this.componentConfig.min !== ""
+      ) {
         const Lmin = (border / 2) * 0.6;
-        const min = new Vector(border / 2, border / 2, this.Data.min * 6, Lmin);
+        const min = new Vector(
+          border / 2,
+          border / 2,
+          this.componentConfig.min * 6,
+          Lmin
+        );
         ctx.beginPath();
         ctx.moveTo(border / 2, border / 2);
         ctx.lineTo(min.endX, min.endY);
@@ -89,12 +101,15 @@ export default {
         ctx.closePath();
       }
 
-      if (this.Data.hour !== undefined && this.Data.hour !== "") {
+      if (
+        this.componentConfig.hour !== undefined &&
+        this.componentConfig.hour !== ""
+      ) {
         const Lhour = (border / 2) * 0.4;
         const hour = new Vector(
           border / 2,
           border / 2,
-          this.Data.hour * 30,
+          this.componentConfig.hour * 30,
           Lhour
         );
         ctx.beginPath();

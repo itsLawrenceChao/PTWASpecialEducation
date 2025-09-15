@@ -26,11 +26,11 @@ export default {
   components: {},
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -85,9 +85,13 @@ export default {
       this.configBG.width = this.gameWidth;
       this.configBG.height = this.gameWidth;
       const bgImage = new window.Image();
-      if (this.Data.customScaleSrc === null)
+      if (this.componentConfig.customScaleSrc === null)
         bgImage.src = getSystemAssets("scale.png", "scale");
-      else bgImage.src = getGameAssets(this.ID, this.Data.customScaleSrc);
+      else
+        bgImage.src = getGameAssets(
+          this.gameId,
+          this.componentConfig.customScaleSrc
+        );
       this.configBG.image = bgImage;
     },
     drawHand() {

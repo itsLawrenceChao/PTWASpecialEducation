@@ -33,7 +33,10 @@
     </v-stage>
     <FloatingNumPad
       v-if="virtualNumpadSwitch"
-      :Data="{ top: menuPosition.top + 'px', left: menuPosition.left + 'px' }"
+      :component-config="{
+        top: menuPosition.top + 'px',
+        left: menuPosition.left + 'px',
+      }"
       @button-clicked="numPadButtonClicked"
     />
   </div>
@@ -48,12 +51,8 @@ export default {
     ),
   },
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -148,7 +147,9 @@ export default {
     drawNumberLine() {
       const intervalLength = this.calculateIntervalLength();
       const markerCount =
-        (this.Data.max - this.Data.min) / this.Data.spacing + 1;
+        (this.componentConfig.max - this.componentConfig.min) /
+          this.componentConfig.spacing +
+        1;
 
       for (let index = 0; index < markerCount; index++) {
         const xPosition = this.getMarkerPosition(index, intervalLength);
@@ -171,16 +172,24 @@ export default {
     calculateIntervalLength() {
       return (
         (this.gameWidth * (this.LINE_X_END_RATIO - this.LINE_X_START_RATIO)) /
-        ((this.Data.max - this.Data.min) / this.Data.spacing + 0.5)
+        ((this.componentConfig.max - this.componentConfig.min) /
+          this.componentConfig.spacing +
+          0.5)
       );
     },
     drawNumbers() {
       this.numberY = this.calculateNumberY();
 
       Array.from(
-        { length: (this.Data.max - this.Data.min) / this.Data.spacing + 1 },
+        {
+          length:
+            (this.componentConfig.max - this.componentConfig.min) /
+              this.componentConfig.spacing +
+            1,
+        },
         (_, j) => {
-          const currentValue = this.Data.min + j * this.Data.spacing;
+          const currentValue =
+            this.componentConfig.min + j * this.componentConfig.spacing;
           const offset = this.calculateDigitOffset(currentValue);
 
           if (this.isBlankPosition(currentValue)) {
@@ -199,7 +208,7 @@ export default {
       return this.gameWidth * 0.175;
     },
     isBlankPosition(value) {
-      return this.Data.blank_pos.includes(value);
+      return this.componentConfig.blank_pos.includes(value);
     },
     calculateDigitOffset(value) {
       return value === 0
@@ -220,7 +229,9 @@ export default {
         x: this.numberX[index] - offset - this.rectPadding,
         y: this.numberY - this.rectPadding,
         width:
-          this.gameWidth * 0.02 * (Math.floor(Math.log10(this.Data.max)) + 1) +
+          this.gameWidth *
+            0.02 *
+            (Math.floor(Math.log10(this.componentConfig.max)) + 1) +
           this.rectPadding,
         height: this.gameWidth * 0.03 + this.rectPadding,
         fill: "rgba(255, 255, 255, 0)",
@@ -293,7 +304,8 @@ export default {
     checkAnswer() {
       const isCorrect = this.blankContent.every(
         (content, index) =>
-          content.toString() === this.Data.blank_pos[index].toString()
+          content.toString() ===
+          this.componentConfig.blank_pos[index].toString()
       );
       this.$emit("replyAnswer", isCorrect);
     },

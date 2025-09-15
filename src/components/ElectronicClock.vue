@@ -9,12 +9,8 @@ import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "ElectronicClock",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -24,7 +20,10 @@ export default {
       layer: null,
       width: 100, // 預設寬度
       height: 100, // 預設高度
-      inputTime: this.Data.time === undefined ? "00:00" : this.Data.time, // 默認時間
+      inputTime:
+        this.componentConfig.time === undefined
+          ? "00:00"
+          : this.componentConfig.time, // 默認時間
       scaledImage: { width: 0, height: 0 }, // 儲存縮放後圖片的大小
       digitColor: "#800020", // 數字顏色變數
     };

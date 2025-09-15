@@ -2,8 +2,14 @@
   <div ref="container" class="gameContainer">
     <v-stage :config="configKonva">
       <v-layer>
-        <v-rect v-if="Data.backgroundType === 'color'" :config="configBG" />
-        <v-image v-if="Data.backgroundType === 'image'" :config="configBG" />
+        <v-rect
+          v-if="componentConfig.backgroundType === 'color'"
+          :config="configBG"
+        />
+        <v-image
+          v-if="componentConfig.backgroundType === 'image'"
+          :config="configBG"
+        />
       </v-layer>
 
       <v-layer>
@@ -16,7 +22,7 @@
           @dragend="handleDragend"
         />
       </v-layer>
-      <v-layer v-if="Data.backgroundType === 'grid'">
+      <v-layer v-if="componentConfig.backgroundType === 'grid'">
         <v-line
           v-for="(pointSet, index) in configBG"
           :key="index"
@@ -44,11 +50,11 @@ import { getSystemAssets } from "@/utilitys/get_assets.js";
 export default {
   components: {},
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -77,19 +83,21 @@ export default {
   methods: {
     initializeScene() {
       if (
-        this.$refs.container.clientWidth * this.Data.backgroundRatio.height <=
-          this.$refs.container.clientHeight * this.Data.backgroundRatio.width ||
+        this.$refs.container.clientWidth *
+          this.componentConfig.backgroundRatio.height <=
+          this.$refs.container.clientHeight *
+            this.componentConfig.backgroundRatio.width ||
         this.$refs.container.clientHeight === 0
       ) {
         this.gameWidth = this.$refs.container.clientWidth;
         this.gameHeight =
-          (this.gameWidth * this.Data.backgroundRatio.height) /
-          this.Data.backgroundRatio.width;
+          (this.gameWidth * this.componentConfig.backgroundRatio.height) /
+          this.componentConfig.backgroundRatio.width;
       } else {
         this.gameHeight = this.$refs.container.clientHeight;
         this.gameWidth =
-          (this.gameHeight * this.Data.backgroundRatio.width) /
-          this.Data.backgroundRatio.height;
+          (this.gameHeight * this.componentConfig.backgroundRatio.width) /
+          this.componentConfig.backgroundRatio.height;
       }
 
       this.configKonva.width = this.gameWidth;
@@ -98,7 +106,7 @@ export default {
       this.configBG.height = this.gameHeight;
     },
     drawBackground() {
-      switch (this.Data.backgroundType) {
+      switch (this.componentConfig.backgroundType) {
         case "grid":
           this.setGrid();
           this.drawGrid();
@@ -109,13 +117,16 @@ export default {
             y: 0,
             width: this.gameWidth,
             height: this.gameHeight,
-            fill: this.Data.background,
+            fill: this.componentConfig.background,
             strokeEnabled: false,
           };
           break;
         case "image": {
           const image = new window.Image();
-          image.src = getGameAssets(this.ID, this.Data.background);
+          image.src = getGameAssets(
+            this.gameId,
+            this.componentConfig.background
+          );
           this.configBG = {
             x: 0,
             y: 0,
@@ -129,18 +140,18 @@ export default {
       }
     },
     setGrid() {
-      for (let i = 0; i <= this.Data.backgroundRatio.width; ++i)
+      for (let i = 0; i <= this.componentConfig.backgroundRatio.width; ++i)
         this.gridPos.x.push(
-          (i * this.gameWidth) / this.Data.backgroundRatio.width
+          (i * this.gameWidth) / this.componentConfig.backgroundRatio.width
         );
-      for (let i = 0; i <= this.Data.backgroundRatio.height; ++i)
+      for (let i = 0; i <= this.componentConfig.backgroundRatio.height; ++i)
         this.gridPos.y.push(
-          (i * this.gameHeight) / this.Data.backgroundRatio.height
+          (i * this.gameHeight) / this.componentConfig.backgroundRatio.height
         );
     },
     drawGrid() {
       this.configBG = [];
-      for (let i = 1; i < this.Data.backgroundRatio.width; ++i) {
+      for (let i = 1; i < this.componentConfig.backgroundRatio.width; ++i) {
         this.configBG.push([
           this.gridPos.x[i],
           0,
@@ -148,7 +159,7 @@ export default {
           this.gameHeight,
         ]);
       }
-      for (let i = 1; i < this.Data.backgroundRatio.height; ++i) {
+      for (let i = 1; i < this.componentConfig.backgroundRatio.height; ++i) {
         this.configBG.push([
           0,
           this.gridPos.y[i],
@@ -158,16 +169,17 @@ export default {
       }
     },
     drawImages() {
-      this.ratioLength = this.gameWidth / this.Data.backgroundRatio.width;
+      this.ratioLength =
+        this.gameWidth / this.componentConfig.backgroundRatio.width;
       let currentPos = {
         x: this.ratioLength,
         y: this.ratioLength,
       };
 
-      for (const i in this.Data.images) {
-        const imageData = this.Data.images[i];
+      for (const i in this.componentConfig.images) {
+        const imageData = this.componentConfig.images[i];
         const image = new window.Image();
-        image.src = getGameAssets(this.ID, imageData.path);
+        image.src = getGameAssets(this.gameId, imageData.path);
         this.images.push(image);
 
         let draggable = true;
@@ -212,7 +224,7 @@ export default {
       this.configImage[id].x = e.target.x();
       this.configImage[id].y = e.target.y();
       this.keepInBound(e);
-      if (this.Data.images[id].rotatable) {
+      if (this.componentConfig.images[id].rotatable) {
         if (this.configRotationPanel === null) {
           this.drawPanel();
         }
@@ -285,8 +297,8 @@ export default {
     handleDragend(e) {
       const id = e.target.attrs.index;
       if (
-        this.Data.images[id].snapToGrid &&
-        this.Data.backgroundType === "grid"
+        this.componentConfig.images[id].snapToGrid &&
+        this.componentConfig.backgroundType === "grid"
       )
         this.snapToGrid(e);
     },

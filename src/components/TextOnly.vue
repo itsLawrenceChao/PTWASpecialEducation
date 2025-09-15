@@ -1,7 +1,7 @@
 <template>
   <div class="word">
     <p ref="textOnlyContainer">
-      {{ Data.Text }}
+      {{ componentConfig.Text }}
     </p>
   </div>
 </template>
@@ -10,38 +10,30 @@ import { FONT_PACK } from "@/utilitys/get-scss-variables";
 export default {
   name: "TextOnly",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
-      type: String,
-      required: true,
-    },
-  },
-  data() {
-    return {};
   },
   mounted() {
-    console.log(FONT_PACK["TEXT_LARGE"]);
-    if (this.Data.Size) {
+    if (this.componentConfig.Size) {
       const container = this.$refs.textOnlyContainer;
-      if (this.Data.Size === "large") {
+      if (this.componentConfig.Size === "large") {
         container.style.fontSize = `${FONT_PACK["TEXT_LARGE"]}`;
-      } else if (this.Data.Size === "medium") {
+      } else if (this.componentConfig.Size === "medium") {
         container.style.fontSize = `${FONT_PACK["TEXT_MEDIUM"]}`;
-      } else if (this.Data.Size === "small") {
+      } else if (this.componentConfig.Size === "small") {
         container.style.fontSize = `${FONT_PACK["TEXT_SMALL"]}`;
-      } else if (this.Data.Size === "tiny") {
+      } else if (this.componentConfig.Size === "tiny") {
         container.style.fontSize = `${FONT_PACK["TEXT_TINY"]}`;
-      } else if (this.Data.Size === "title-large") {
+      } else if (this.componentConfig.Size === "title-large") {
         container.style.fontSize = `${FONT_PACK["TITLE_LARGE"]}`;
-      } else if (this.Data.Size === "title-medium") {
+      } else if (this.componentConfig.Size === "title-medium") {
         container.style.fontSize = `${FONT_PACK["TITLE_MEDIUM"]}`;
-      } else if (this.Data.Size === "title-small") {
+      } else if (this.componentConfig.Size === "title-small") {
         container.style.fontSize = `${FONT_PACK["TITLE_SMALL"]}`;
       } else {
-        container.style.fontSize = this.Data.Size;
+        container.style.fontSize = this.componentConfig.Size;
       }
     } else {
       const container = this.$refs.textOnlyContainer;

@@ -4,7 +4,7 @@
       v-for="index in count"
       :key="index"
       :src="imageUrl"
-      :alt="Data.Alt"
+      :alt="componentConfig.Alt"
       class="repeated-image"
     />
   </div>
@@ -15,19 +15,19 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "RepeatImage",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
   },
   data() {
     return {
-      count: this.Data.Count,
-      imageUrl: getGameAssets(this.ID, this.Data.Src),
+      count: this.componentConfig.Count,
+      imageUrl: getGameAssets(this.gameId, this.componentConfig.Src),
       columns: 0,
     };
   },
@@ -51,8 +51,8 @@ export default {
   },
   methods: {
     calculateColumns() {
-      if (this.Data.Columns) {
-        return this.Data.Columns;
+      if (this.componentConfig.Columns) {
+        return this.componentConfig.Columns;
       }
       for (let i = 1; i <= 10; i++) {
         if (this.count / i <= 10) {

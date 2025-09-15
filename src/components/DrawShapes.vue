@@ -39,12 +39,8 @@ export default {
   components: {},
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -78,15 +74,24 @@ export default {
     this.setGrid();
     this.drawGrid();
     this.drawReturnBtn();
-    if (this.Data.givenPoints !== null) {
+    // Only draw given points if provided as a non-empty array
+    if (
+      Array.isArray(this.componentConfig?.givenPoints) &&
+      this.componentConfig.givenPoints.length > 0
+    ) {
       this.drawGiven();
     }
   },
 
   methods: {
     getData() {
-      if (this.Data.bgRatio !== null) {
-        this.ratio = this.Data.bgRatio;
+      const bgRatio = this.componentConfig?.bgRatio;
+      if (
+        bgRatio &&
+        typeof bgRatio.width === "number" &&
+        typeof bgRatio.height === "number"
+      ) {
+        this.ratio = bgRatio;
       }
     },
     initializeScene() {
@@ -129,17 +134,17 @@ export default {
       this.configReturnBtn.height = this.gameWidth * 0.15;
     },
     drawGiven() {
-      for (const point in this.Data.givenPoints) {
+      for (const point in this.componentConfig.givenPoints) {
         this.configGivenPoint.push({
-          x: this.gridPos.x[this.Data.givenPoints[point][0]],
-          y: this.gridPos.y[this.Data.givenPoints[point][1]],
+          x: this.gridPos.x[this.componentConfig.givenPoints[point][0]],
+          y: this.gridPos.y[this.componentConfig.givenPoints[point][1]],
           radius: this.configKonva.width * 0.01,
           stroke: "brown",
           fill: "white",
         });
       }
-      if (this.Data.givenPoints.length > 1) {
-        for (let i = 0; i < this.Data.givenPoints.length - 1; ++i) {
+      if (this.componentConfig.givenPoints.length > 1) {
+        for (let i = 0; i < this.componentConfig.givenPoints.length - 1; ++i) {
           this.configLine.push({
             points: [
               this.configGivenPoint[i].x,
@@ -290,8 +295,12 @@ export default {
       ];
     },
     lengthInGrid(id) {
-      const pointOnGrid1 = this.getClosestPoint(this.getPointSetFromLine(id)[0]);
-      const pointOnGrid2 = this.getClosestPoint(this.getPointSetFromLine(id)[1]);
+      const pointOnGrid1 = this.getClosestPoint(
+        this.getPointSetFromLine(id)[0]
+      );
+      const pointOnGrid2 = this.getClosestPoint(
+        this.getPointSetFromLine(id)[1]
+      );
       return Math.abs(
         pointOnGrid1.x + pointOnGrid1.y - pointOnGrid2.x - pointOnGrid2.y
       );
@@ -431,9 +440,8 @@ export default {
     verify() {
       if (this.isIntersected()) {
         this.$emit("replyAnswer", false);
-        
-      } else if (this.Data.verifyOption === "shape") {
-        switch (this.Data.answer) {
+      } else if (this.componentConfig.verifyOption === "shape") {
+        switch (this.componentConfig.answer) {
           case "triangle":
             this.$emit("replyAnswer", this.isTriangle());
             break;
@@ -447,15 +455,18 @@ export default {
             this.$emit("replyAnswer", this.isParallelogram());
             break;
         }
-      } else if (this.Data.verifyOption === "rect") this.verifyRectangle();
+      } else if (this.componentConfig.verifyOption === "rect")
+        this.verifyRectangle();
     },
     verifyRectangle() {
       if (this.isRectangle()) {
         const height = this.lengthInGrid(this.sides[0]),
           width = this.lengthInGrid(this.sides[1]);
         if (
-          (this.Data.answer[0] === height && this.Data.answer[1] === width) ||
-          (this.Data.answer[0] === width && this.Data.answer[1] === height)
+          (this.componentConfig.answer[0] === height &&
+            this.componentConfig.answer[1] === width) ||
+          (this.componentConfig.answer[0] === width &&
+            this.componentConfig.answer[1] === height)
         ) {
           this.$emit("replyAnswer", true);
           return;

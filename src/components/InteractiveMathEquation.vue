@@ -36,7 +36,7 @@
       </template>
     </div>
     <div
-      v-if="Data.finalAnswerTemplate"
+      v-if="componentConfig.finalAnswerTemplate"
       class="interactive-equation__final-answer"
     >
       <span class="interactive-equation__text">答:</span>
@@ -58,7 +58,7 @@
 
     <FloatNumPad
       v-if="showNumPad"
-      :Data="numPadPosition"
+      :component-config="numPadPosition"
       @button-clicked="handleNumPadInput"
     />
   </div>
@@ -77,16 +77,12 @@ export default {
   },
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
       validator(value) {
         return value.equation && Array.isArray(value.answers);
       },
-    },
-    ID: {
-      type: String,
-      required: true,
     },
   },
 
@@ -127,8 +123,8 @@ export default {
 
   methods: {
     initialize() {
-      this.equation = this.Data.equation;
-      this.answers = this.Data.answers;
+      this.equation = this.componentConfig.equation;
+      this.answers = this.componentConfig.answers;
       this.parseEquationString();
       this.parseFinalAnswerString();
     },
@@ -255,14 +251,14 @@ export default {
 
     areFinalAnswersCorrect() {
       return Object.entries(this.finalAnswers).every(
-        ([index, answer]) => answer === this.Data.finalAnswers[index]
+        ([index, answer]) => answer === this.componentConfig.finalAnswers[index]
       );
     },
 
     parseFinalAnswerString() {
-      if (!this.Data.finalAnswerTemplate) return;
+      if (!this.componentConfig.finalAnswerTemplate) return;
 
-      const parts = this.Data.finalAnswerTemplate.split(" ");
+      const parts = this.componentConfig.finalAnswerTemplate.split(" ");
       this.parsedFinalAnswer = parts.map((part) => ({
         value: part === "_" ? "" : part,
         isInput: part === "_",

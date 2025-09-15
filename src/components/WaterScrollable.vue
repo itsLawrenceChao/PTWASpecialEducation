@@ -23,7 +23,7 @@ import { getSlotComponentAssets } from "../utilitys/get_assets";
 export default {
   name: "WaterScrollable",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -68,12 +68,12 @@ export default {
   },
   watch: {
     // 監聽 Data 的變化
-    "Data.Scale"() {
+    "componentConfig.Scale"() {
       this.loadImage();
     },
   },
   created() {
-    this.configs = this.Data;
+    this.configs = this.componentConfig;
   },
   mounted() {
     // 初始化尺寸

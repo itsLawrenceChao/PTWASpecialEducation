@@ -24,7 +24,7 @@ import { set } from "@vueuse/core";
 export default {
   name: "NumberBoard",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -38,19 +38,19 @@ export default {
   },
   created() {
     // 如果單位和數字的長度不一樣，則補齊。
-    this.Unit = this.Data.Unit;
-    this.Number = this.Data.Number;
-    if (typeof this.Data.Number === "number") {
-      this.Number = this.Data.Number.toString().split("");
+    this.Unit = this.componentConfig.Unit;
+    this.Number = this.componentConfig.Number;
+    if (typeof this.componentConfig.Number === "number") {
+      this.Number = this.componentConfig.Number.toString().split("");
     }
-    if (this.Data.Unit.length !== this.Number.length) {
-      if (this.Data.Unit.length > this.Number.length) {
-        const diff = this.Data.Unit.length - this.Number.length;
+    if (this.componentConfig.Unit.length !== this.Number.length) {
+      if (this.componentConfig.Unit.length > this.Number.length) {
+        const diff = this.componentConfig.Unit.length - this.Number.length;
         for (let i = 0; i < diff; i++) {
           this.Number.unshift(" ");
         }
       } else {
-        const diff = this.Number.length - this.Data.Unit.length;
+        const diff = this.Number.length - this.componentConfig.Unit.length;
         for (let i = 0; i < diff; i++) {
           this.Unit.unshift(" ");
         }
@@ -63,8 +63,14 @@ export default {
   methods: {
     checkAnswer() {
       let check = true;
-      for (let i = this.Data.Number.toString().split("").length; i >= 0; i--) {
-        if (this.Data.Number.toString().split("")[i] !== this.Number[i]) {
+      for (
+        let i = this.componentConfig.Number.toString().split("").length;
+        i >= 0;
+        i--
+      ) {
+        if (
+          this.componentConfig.Number.toString().split("")[i] !== this.Number[i]
+        ) {
           check = false;
           break;
         }

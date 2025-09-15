@@ -46,12 +46,12 @@
       </div>
       <FloatNumPad
         v-if="isShowNumPad"
-        :Data="floatNumPadLocation"
+        :component-config="floatNumPadLocation"
         @button-clicked="fillToInput"
       />
       <FloatOperatorPad
         v-if="isShowOperatorPad"
-        :Data="operatorPadLocation"
+        :component-config="operatorPadLocation"
         @button-clicked="handleOperatorSelect"
       />
     </template>
@@ -68,12 +68,8 @@ export default {
     FloatOperatorPad,
   },
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -95,7 +91,7 @@ export default {
     };
   },
   created() {
-    this.markdownContent = this.Data.Render;
+    this.markdownContent = this.componentConfig.Render;
     this.parseMarkdown();
     emitter.on("checkAnswer", this.markWrong);
   },
@@ -164,7 +160,7 @@ export default {
       );
     },
     checkAnswer() {
-      if (typeof this.Data.Answer !== "object") return;
+      if (typeof this.componentConfig.Answer !== "object") return;
       this.wrongInputIndex = [];
       this.resetInputBG();
       let check = true;
@@ -192,16 +188,15 @@ export default {
         return userAns === correctAns;
       };
 
-      for (let i = 0; i < this.Data.Answer.length; i++) {
+      for (let i = 0; i < this.componentConfig.Answer.length; i++) {
         const userAnswer = allAnswers[i].trim();
-        const correctAnswer = this.Data.Answer[i];
+        const correctAnswer = this.componentConfig.Answer[i];
 
         if (!isAnswerCorrect(userAnswer, correctAnswer)) {
           check = false;
           this.wrongInputIndex.push(i);
         }
       }
-      console.log(check);
 
       this.$emit("replyAnswer", check);
     },

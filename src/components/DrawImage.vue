@@ -1,19 +1,19 @@
 <template>
   <div class="Container">
-    <p v-if="Data.Text !== undefined">
-      {{ Data.Text }}
+    <p v-if="componentConfig.Text !== undefined">
+      {{ componentConfig.Text }}
     </p>
     <div class="Division">
       <p class="Child">
-        {{ Data.Child }}
+        {{ componentConfig.Child }}
       </p>
       <hr class="Fraction-line" />
       <p class="Mother">
-        {{ Data.Mother }}
+        {{ componentConfig.Mother }}
       </p>
     </div>
     <p class="Unit">
-      {{ Data.Unit }}
+      {{ componentConfig.Unit }}
     </p>
     <div class="table-container">
       <div
@@ -22,7 +22,7 @@
         class="table-cell"
         @click="toggleImage(index)"
       >
-        <img :src="item" :alt="Data.Alt" />
+        <img :src="item" :alt="componentConfig.Alt" />
       </div>
     </div>
   </div>
@@ -34,11 +34,11 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "DrawImage",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -61,21 +61,31 @@ export default {
     };
   },
   created() {
-    if (this.Data.Object !== undefined) {
-      if (this.Data.Object in this.DataBase) {
+    if (this.componentConfig.Object !== undefined) {
+      if (this.componentConfig.Object in this.DataBase) {
         this.image1 = getSlotComponentAssets(
           "DrawOnImage",
-          this.DataBase[this.Data.Object].First
+          this.DataBase[this.componentConfig.Object].First
         );
         this.image2 = getSlotComponentAssets(
           "DrawOnImage",
-          this.DataBase[this.Data.Object].Second
+          this.DataBase[this.componentConfig.Object].Second
         );
-        this.Alt = this.DataBase[this.Data.Object].Alt;
-      } else if (this.Data.Src && this.Data.Src.First && this.Data.Src.Second) {
-        this.image1 = getGameAssets(this.ID, this.Data.Src.First);
-        this.image2 = getGameAssets(this.ID, this.Data.Src.Second);
-        this.Alt = this.Data.Alt;
+        this.Alt = this.DataBase[this.componentConfig.Object].Alt;
+      } else if (
+        this.componentConfig.Src &&
+        this.componentConfig.Src.First &&
+        this.componentConfig.Src.Second
+      ) {
+        this.image1 = getGameAssets(
+          this.gameId,
+          this.componentConfig.Src.First
+        );
+        this.image2 = getGameAssets(
+          this.gameId,
+          this.componentConfig.Src.Second
+        );
+        this.Alt = this.componentConfig.Alt;
       } else {
         this.image1 = getSlotComponentAssets("DrawOnImage", "apple1.png");
         this.image2 = getSlotComponentAssets("DrawOnImage", "apple2.png");
@@ -84,8 +94,8 @@ export default {
     }
 
     // 初始化每個格子中的圖片為圖片1，並將 clickedStatus 初始化為 false
-    this.Items = Array(this.Data.Mother).fill(this.image1);
-    this.clickedStatus = Array(this.Data.Mother).fill(false);
+    this.Items = Array(this.componentConfig.Mother).fill(this.image1);
+    this.clickedStatus = Array(this.componentConfig.Mother).fill(false);
   },
   methods: {
     toggleImage(index) {
@@ -105,7 +115,7 @@ export default {
           temp += 1;
         }
       }
-      if (temp === this.Data.Child) {
+      if (temp === this.componentConfig.Child) {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);

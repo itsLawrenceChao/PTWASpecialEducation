@@ -7,7 +7,7 @@
       :alt="altText"
     />
     <p class="h3">
-      {{ Text }}
+      {{ text }}
     </p>
   </div>
 </template>
@@ -15,7 +15,7 @@
 export default {
   name: "CardWithButton",
   props: {
-    Text: {
+    text: {
       type: String,
       required: true,
     },

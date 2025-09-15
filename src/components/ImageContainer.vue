@@ -1,6 +1,6 @@
-<template>
+﻿<template>
   <div id="ImageContainer" ref="ImageContainer" class="image-container">
-    <img id="Img" ref="Image" :src="imageUrl" :alt="Data.Alt" />
+    <img id="Img" ref="Image" :src="imageUrl" :alt="componentConfig.Alt" />
   </div>
 </template>
 <script>
@@ -9,13 +9,13 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "ImageContainer",
   props: {
-    ID: {
+    gameId: {
       type: String,
-      required: true,
+      required: false,
     },
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
+      required: false,
     },
   },
   data() {
@@ -28,8 +28,7 @@ export default {
     };
   },
   mounted() {
-    this.imageUrl = getGameAssets(this.ID, this.Data.Src);
-    console.log(this.imageUrl, this.Data.Alt, this.ID, this.Data.Src);
+    this.imageUrl = getGameAssets(this.gameId, this.componentConfig.Src);
   },
   methods: {
     Init() {

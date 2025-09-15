@@ -27,11 +27,11 @@ export default {
   components: {},
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -60,8 +60,8 @@ export default {
       this.draw();
     },
     setRatio() {
-      const row = Math.floor(Math.pow(this.Data.frame, 0.5));
-      const column = Math.ceil(this.Data.frame / row);
+      const row = Math.floor(Math.pow(this.componentConfig.frame, 0.5));
+      const column = Math.ceil(this.componentConfig.frame / row);
 
       return {
         row,
@@ -85,7 +85,8 @@ export default {
       this.ratioLength = this.gameWidth / this.ratio.column;
     },
     setMap() {
-      let rowWithLessElements = this.ratio.column - (this.Data.frame % this.ratio.column);
+      let rowWithLessElements =
+        this.ratio.column - (this.componentConfig.frame % this.ratio.column);
       if (rowWithLessElements === this.ratio.column) rowWithLessElements = 0;
       if (rowWithLessElements < this.ratio.row / 2) {
         for (let i = 0; i < this.ratio.row; ++i) {
@@ -103,9 +104,15 @@ export default {
     },
     draw() {
       const frameImage = new window.Image();
-      frameImage.src = getGameAssets(this.ID, this.Data.frameImage);
+      frameImage.src = getGameAssets(
+        this.gameId,
+        this.componentConfig.frameImage
+      );
       const fillImage = new window.Image();
-      fillImage.src = getGameAssets(this.ID, this.Data.fillImage);
+      fillImage.src = getGameAssets(
+        this.gameId,
+        this.componentConfig.fillImage
+      );
       for (const i in this.mapOfRows) {
         let posX;
         if (this.mapOfRows[i] === this.ratio.column) posX = 0;
@@ -142,7 +149,7 @@ export default {
       for (const i in this.configFill) {
         if (this.configFill[i].visible) fills++;
       }
-      this.$emit("replyAnswer", fills === this.Data.fill);
+      this.$emit("replyAnswer", fills === this.componentConfig.fill);
     },
   },
 };

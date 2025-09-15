@@ -3,8 +3,8 @@
     <div id="container" ref="container">
       <ImageContainer
         class="Background"
-        :ID="ID"
-        :Data="Background"
+        :game-id="gameId"
+        :component-config="Background"
       />
       <img
         v-for="(image, index) in expandedImages"
@@ -14,7 +14,7 @@
         :alt="image.alt"
         :style="{ left: image.left + 'px', top: image.top + 'px' }"
         @mousedown="onMouseDown($event, index)"
-      >
+      />
     </div>
   </div>
 </template>
@@ -22,10 +22,10 @@
 import { getSlotComponentAssets } from "../utilitys/get_assets";
 import ImageContainer from "@/components/ImageContainer.vue";
 import { getGameAssets } from "@/utilitys/get_assets.js";
-//Data Structure
+//componentConfig Structure
 // SlotData = {
 //     "Name" : "SlotData",
-//     "Data" : {
+//     "componentConfig" : {
 //         "Images" : [
 //             {
 //                 "src" : "image1.png",
@@ -49,11 +49,11 @@ export default {
     ImageContainer,
   },
   props: {
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -74,7 +74,7 @@ export default {
     };
   },
   created() {
-    this.Background = this.Data.Background;
+    this.Background = this.componentConfig.Background;
   },
   mounted() {
     this.expandImages();
@@ -129,7 +129,7 @@ export default {
       const offsetX = 10; // 每張圖片相對於前一張圖片向右偏移量
       const offsetY = 10; // 每張圖片相對於前一張圖片向下偏移量
 
-      this.images = this.Data.Images;
+      this.images = this.componentConfig.Images;
       this.images.forEach((image) => {
         for (let i = 0; i < image.Amount; i++) {
           let left = i * offsetX;
@@ -144,7 +144,7 @@ export default {
           }
 
           const newImage = {
-            src: getGameAssets(this.ID, image.src),
+            src: getGameAssets(this.gameId, image.src),
             alt: image.alt + " " + (i + 1),
             left,
             top,

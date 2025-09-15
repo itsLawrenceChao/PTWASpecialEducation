@@ -1,7 +1,9 @@
 <template>
   <div :class="$attrs.class">
     <div ref="container" class="fraction-for-answer">
-      <span v-if="Data.prefix" class="prefix">{{ Data.prefix }}</span>
+      <span v-if="componentConfig.prefix" class="prefix">{{
+        componentConfig.prefix
+      }}</span>
       <div class="fraction-container">
         <input
           ref="numerator"
@@ -17,11 +19,13 @@
           @click="showNumPad('denominator', $event)"
         />
       </div>
-      <span v-if="Data.suffix" class="suffix">{{ Data.suffix }}</span>
+      <span v-if="componentConfig.suffix" class="suffix">{{
+        componentConfig.suffix
+      }}</span>
     </div>
     <FloatNumPad
       v-if="virtualNumpadSwitch"
-      :Data="numPadPosition"
+      :component-config="numPadPosition"
       @button-clicked="numPadButtonClicked"
     />
   </div>
@@ -38,12 +42,8 @@ export default {
     ),
   },
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -102,12 +102,13 @@ export default {
       }
 
       // 計算實際的小數值來比較
-      const correctValue = this.Data.numerator / this.Data.denominator;
+      const correctValue =
+        this.componentConfig.numerator / this.componentConfig.denominator;
       const userValue = userNumerator / userDenominator;
 
       const isCorrect = correctValue === userValue;
 
-      const correctAnswer = `${this.Data.numerator}/${this.Data.denominator}`;
+      const correctAnswer = `${this.componentConfig.numerator}/${this.componentConfig.denominator}`;
       const userAnswer = `${userNumerator}/${userDenominator}`;
 
       this.$emit("replyAnswer", isCorrect);

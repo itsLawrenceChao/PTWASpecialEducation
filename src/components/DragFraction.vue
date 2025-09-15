@@ -5,7 +5,7 @@
         <v-rect :config="configBG" />
         <v-rect :config="configSideBar" />
       </v-layer>
-      <v-layer v-if="Data.shape === 'circle'">
+      <v-layer v-if="componentConfig.shape === 'circle'">
         <circleFraction
           :key="componentKey"
           :game-width="gameWidth"
@@ -16,7 +16,7 @@
         />
       </v-layer>
 
-      <v-layer v-if="Data.shape === 'rect'">
+      <v-layer v-if="componentConfig.shape === 'rect'">
         <rectFraction
           :key="componentKey"
           :game-width="gameWidth"
@@ -48,21 +48,23 @@ import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
 export default {
   components: {
-    circleFraction: defineAsyncComponent(() =>
-      import("@/components/components-utilitys/drag-fraction/DragFractionCircle.vue")
+    circleFraction: defineAsyncComponent(
+      () =>
+        import(
+          "@/components/components-utilitys/drag-fraction/DragFractionCircle.vue"
+        )
     ),
-    rectFraction: defineAsyncComponent(() =>
-      import("@/components/components-utilitys/drag-fraction/DragFractionRect.vue")
+    rectFraction: defineAsyncComponent(
+      () =>
+        import(
+          "@/components/components-utilitys/drag-fraction/DragFractionRect.vue"
+        )
     ),
   },
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -103,9 +105,13 @@ export default {
 
   methods: {
     initializeScene() {
-      console.log(this.$refs.container.clientWidth, this.$refs.container.clientHeight);
+      console.log(
+        this.$refs.container.clientWidth,
+        this.$refs.container.clientHeight
+      );
       if (
-        this.$refs.container.clientWidth * 0.75 <= this.$refs.container.clientHeight ||
+        this.$refs.container.clientWidth * 0.75 <=
+          this.$refs.container.clientHeight ||
         this.$refs.container.clientHeight === 0
       ) {
         this.gameWidth = this.$refs.container.clientWidth;
@@ -184,7 +190,7 @@ export default {
       this.configNumeratorLine.y = this.gameHeight * 0.345;
       this.configNumeratorLine.points = [0, 0, this.gameWidth * 0.05, 0];
       this.configNumeratorLine.stroke = "black";
-      this.configNumeratorLine.strokeWidth = "3";
+      this.configNumeratorLine.strokeWidth = 3;
 
       this.configNumeratorNumber.x = this.gameWidth * 0.86;
       this.configNumeratorNumber.y = this.gameHeight * 0.35;
@@ -215,7 +221,8 @@ export default {
     },
     drawAfterAdjusted() {
       this.configNumeratorNumber.text = this.numerator;
-      if (this.numerator >= 10) this.configNumeratorNumber.x = this.gameWidth * 0.85;
+      if (this.numerator >= 10)
+        this.configNumeratorNumber.x = this.gameWidth * 0.85;
       else this.configNumeratorNumber.x = this.gameWidth * 0.86;
       this.configDenominatorNumber.text = `${this.denominator}等分`;
 
@@ -250,8 +257,10 @@ export default {
       for (const fraction in fill) {
         total += fill[fraction];
       }
-      if (this.Data.verifyOption === "answer") {
-        const answer = this.Data.answer.numerator / this.Data.answer.denominator;
+      if (this.componentConfig.verifyOption === "answer") {
+        const answer =
+          this.componentConfig.answer.numerator /
+          this.componentConfig.answer.denominator;
         const isCorrect = answer.toFixed(2) === total.toFixed(2);
         this.$emit("replyAnswer", isCorrect);
         this.$emit("recordAnswer", [
@@ -259,7 +268,7 @@ export default {
           total.toFixed(2),
           isCorrect ? "正確" : "錯誤",
         ]);
-      } else if (this.Data.verifyOption === "value") {
+      } else if (this.componentConfig.verifyOption === "value") {
         this.$emit("replyAnswer", total.toFixed(2));
       }
     },

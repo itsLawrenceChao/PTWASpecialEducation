@@ -1,6 +1,8 @@
 <template>
   <div class="OutterContainer">
-    <p v-if="configs.Text !== undefined">{{ configs.Text }}{{ configs.Unit }}</p>
+    <p v-if="configs.Text !== undefined">
+      {{ configs.Text }}{{ configs.Unit }}
+    </p>
     <div v-else class="Number">
       <div class="Division">
         <p class="Child">
@@ -31,12 +33,8 @@ import TextOnly from "./TextOnly.vue";
 export default {
   name: "CoulorBarChart",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -49,7 +47,7 @@ export default {
     };
   },
   created() {
-    this.configs = this.Data;
+    this.configs = this.componentConfig;
     this.configs.Total = this.configs.Mother;
     this.Drawed = [];
     if (this.configs.Total % 2 !== 0) {

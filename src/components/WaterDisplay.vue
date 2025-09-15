@@ -16,7 +16,7 @@ import { getSlotComponentAssets } from "../utilitys/get_assets";
 export default {
   name: "WaterDisplay",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -38,7 +38,7 @@ export default {
     },
   },
   created() {
-    this.configs = this.Data;
+    this.configs = this.componentConfig;
   },
   mounted() {
     this.$nextTick(() => {
