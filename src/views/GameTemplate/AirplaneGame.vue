@@ -1,6 +1,6 @@
 <template>
-  <div ref="container">
-    <h2>{{ GameData.Question }}</h2>
+  <div ref="container" class="gameContainer">
+    <h2>{{ gameData.Question }}</h2>
     <v-stage :config="configKonva">
       <v-layer>
         <v-image :config="configBG_1" />
@@ -30,22 +30,14 @@
 <script>
 import { getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 
 export default {
+  name: "AirplaneGame",
   components: {},
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -80,11 +72,14 @@ export default {
   },
 
   mounted() {
-    this.initializeScene();
-    this.initializeOptions();
-    this.targetSpawner();
-    this.game = window.setInterval(this.update, 20);
-    this.spawner = window.setInterval(this.targetSpawner, 3000);
+    // 使用 nextTick 確保 DOM 完全渲染後再初始化
+    this.$nextTick(() => {
+      this.initializeScene();
+      this.initializeOptions();
+      this.targetSpawner();
+      this.game = window.setInterval(this.update, 20);
+      this.spawner = window.setInterval(this.targetSpawner, 3000);
+    });
   },
 
   methods: {
@@ -116,8 +111,8 @@ export default {
       this.configBG_2.x = this.gameWidth;
     },
     initializeOptions() {
-      this.allOptions = this.GameData.True.concat(this.GameData.False);
-      this.trueOptions = this.GameData.True;
+      this.allOptions = this.gameData.True.concat(this.gameData.False);
+      this.trueOptions = this.gameData.True;
     },
     update() {
       this.backgroundScroll();
@@ -218,8 +213,8 @@ export default {
       let isCorrect = false;
       this.configTarget[i].opacity = 0.5;
       this.configOptions[i].visible = false;
-      for (const answer in this.GameData.True) {
-        if (this.GameData.True[answer] === this.configOptions[i].text)
+      for (const answer in this.gameData.True) {
+        if (this.gameData.True[answer] === this.configOptions[i].text)
           isCorrect = true;
       }
       if (isCorrect) {
@@ -246,8 +241,19 @@ export default {
       if (this.trueOptions.length === 0) this.$emit("next-question");
     },
     printCorrectAnswers() {
-      return this.GameData.Question.concat(":", this.GameData.True.join("/"));
+      return this.gameData.Question.concat(":", this.gameData.True.join("/"));
     },
   },
 };
 </script>
+
+<style scoped lang="scss">
+.gameContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

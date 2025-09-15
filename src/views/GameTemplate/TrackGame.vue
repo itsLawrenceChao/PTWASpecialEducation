@@ -25,9 +25,11 @@
           >
             <div class="question-container">
               <component
-                :is="GameData.Question[currentQuestions[index]].name"
-                :Data="GameData.Question[currentQuestions[index]].Data"
-                :ID="ID"
+                :is="gameData.Question[currentQuestions[index]].name"
+                :component-config="
+                  gameData.Question[currentQuestions[index]].Data
+                "
+                :game-id="gameId"
               />
             </div>
           </div>
@@ -36,7 +38,7 @@
       <div class="box ratio-3">
         <div class="button-container">
           <button
-            v-for="(selection, index) in GameData.Question[
+            v-for="(selection, index) in gameData.Question[
               currentQuestions[currentQuestionIndex]
             ].Selections"
             :key="index"
@@ -58,23 +60,15 @@ import { getComponents } from "@/utilitys/get-components.js";
 import { getGameStaticAssets } from "@/utilitys/get_assets";
 
 export default {
-  name: "QuizComponent",
+  name: "TrackGame",
   components: {
     TextOnly: getComponents("TextOnly"),
     ImageContainer: getComponents("ImageContainer"),
     MoneyGenerator: getComponents("MoneyGenerator"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -113,7 +107,7 @@ export default {
   },
   created() {
     this.startQuiz();
-    this.needRandom = this.GameData.Random ? true : false;
+    this.needRandom = this.gameData.Random ? true : false;
   },
   mounted() {
     this.$nextTick(() => {
@@ -128,27 +122,27 @@ export default {
       this.isPaused = false;
       this.wrongAnswerIndex = null;
       this.currentQuestions = this.needRandom
-        ? this.generateRandomOrder(this.GameData.Question.length)
-        : Array.from({ length: this.GameData.Question.length }, (_, i) => i);
+        ? this.generateRandomOrder(this.gameData.Question.length)
+        : Array.from({ length: this.gameData.Question.length }, (_, i) => i);
       this.pauseConveyor();
     },
     handleAnswer(selectedIndex) {
       const ansIndex =
-        this.GameData.Question[this.currentQuestions[this.currentQuestionIndex]]
+        this.gameData.Question[this.currentQuestions[this.currentQuestionIndex]]
           .AnswerIndex;
       this.isPaused = false;
       if (selectedIndex === ansIndex) {
         this.$emit("add-record", [
-          this.GameData.Question[
+          this.gameData.Question[
             this.currentQuestions[this.currentQuestionIndex]
           ].Selections[ansIndex],
-          this.GameData.Question[
+          this.gameData.Question[
             this.currentQuestions[this.currentQuestionIndex]
           ].Selections[selectedIndex],
           "正確",
         ]);
         this.currentQuestionIndex += 1;
-        if (this.currentQuestionIndex === this.GameData.Question.length) {
+        if (this.currentQuestionIndex === this.gameData.Question.length) {
           this.$emit("next-question", true);
         } else {
           this.$emit("play-effect", "CorrectSound");
@@ -156,10 +150,10 @@ export default {
         this.wrongAnswerIndex = null;
       } else {
         this.$emit("add-record", [
-          this.GameData.Question[
+          this.gameData.Question[
             this.currentQuestions[this.currentQuestionIndex]
           ].Selections[ansIndex],
-          this.GameData.Question[
+          this.gameData.Question[
             this.currentQuestions[this.currentQuestionIndex]
           ].Selections[selectedIndex],
           "錯誤",

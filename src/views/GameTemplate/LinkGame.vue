@@ -1,7 +1,7 @@
 <template>
   <div class="Container">
     <p class="h1">
-      {{ GameData.Question.text }}
+      {{ gameData.Question.text }}
     </p>
     <div ref="Index" class="Index">
       <div ref="KonvaContainer" class="Konva-container">
@@ -51,26 +51,26 @@
         <component
           :is="Object.Name"
           :key="ComponentConfig"
-          :Data="Object.Data"
-          :ID="ID"
+          :component-config="Object.Data"
+          :game-id="gameId"
           class="Component"
         />
       </div>
     </div>
     <div class="Buttons">
       <h3 v-if="NotFinished">請連完所有的線段</h3>
-      <!-- <button v-if="GameConfig.CheckingMode === 'OnSubmit'" @click="CheckAll">
+      <!-- <button v-if="gameConfig.CheckingMode === 'OnSubmit'" @click="CheckAll">
         送出答案
       </button>
       <button
-        v-if="GameConfig.CheckingMode === 'OnSubmit'"
+        v-if="gameConfig.CheckingMode === 'OnSubmit'"
         @click="ClearAllLine"
       >
         清除所有的線
       </button>
       <button
           @click="PopLastLine"
-          v-if="this.GameConfig.CheckingMode === 'OnSubmit'"
+          v-if="this.gameConfig.CheckingMode === 'OnSubmit'"
         >
           刪除最後一條線
         </button> -->
@@ -113,15 +113,15 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -130,7 +130,7 @@ export default {
   data() {
     return {
       // id: "MA4008",
-      // GameData: {
+      // gameData: {
       //     "Question": {
       //         "text": "把一樣的數連起來",
       //         "RowData": [
@@ -196,9 +196,9 @@ export default {
     window.addEventListener("resize", this.ReLinktheLine);
   },
   created() {
-    if (this.GameConfig.CheckingMode === undefined) {
+    if (this.gameConfig.CheckingMode === undefined) {
       // eslint-disable-next-line vue/no-mutating-props
-      this.GameConfig.CheckingMode = "OnSubmit";
+      this.gameConfig.CheckingMode = "OnSubmit";
     }
     emitter.on("submitAnswer", this.CheckAll);
   },
@@ -275,7 +275,7 @@ export default {
           // UP OK
           if (LinkAble) {
             let AnswerCorrect = null;
-            if (this.GameConfig.CheckingMode === "OnAnswered") {
+            if (this.gameConfig.CheckingMode === "OnAnswered") {
               AnswerCorrect = this.CheckAnswerisCorrect(
                 this.MouseDownDotIndex,
                 DotIndex
@@ -302,7 +302,7 @@ export default {
               this.$refs.LineLayer.getNode().draw();
               this.$refs.OnDrawLineLayer.getNode().draw();
               this.LinkedPoints.push([this.MouseDownDotIndex, DotIndex]);
-              if (this.GameConfig.CheckingMode === "OnAnswered") {
+              if (this.gameConfig.CheckingMode === "OnAnswered") {
                 this.CheckAllAnswered();
               }
               return;
@@ -342,6 +342,8 @@ export default {
     CheckLinkAble(StartIndex, EndIndex) {
       const StartColumn = this.MappingDotIndexToAnswerIndex(StartIndex)[0];
       const EndColumn = this.MappingDotIndexToAnswerIndex(EndIndex)[0];
+      console.log(StartColumn, EndColumn);
+      console.log(StartColumn % 2 === 0);
       if (StartColumn === EndColumn) {
         return false;
       } else if (StartColumn % 2 === 0 && EndColumn === StartColumn + 1) {
@@ -353,7 +355,7 @@ export default {
       }
     },
     CheckAnswerisCorrect(StartIndex, EndIndex) {
-      const Answer = this.GameData.Answer;
+      const Answer = this.gameData.Answer;
       const Start = this.MappingDotIndexToAnswerIndex(StartIndex);
       const End = this.MappingDotIndexToAnswerIndex(EndIndex);
       console.log(Start, End);
@@ -364,12 +366,12 @@ export default {
           Answer[AnswerIndex][1][0] === End[0] &&
           Answer[AnswerIndex][1][1] === End[1]
         ) {
-          if (this.GameConfig.CheckingMode === "OnSubmit") {
+          if (this.gameConfig.CheckingMode === "OnSubmit") {
             return true;
           }
           this.$emit("play-effect", "CorrectSound");
           this.$emit("add-record", [
-            this.GameData.Answer,
+            this.gameData.Answer,
             [Start, End],
             "正確",
           ]);
@@ -382,23 +384,23 @@ export default {
           Answer[AnswerIndex][1][0] === Start[0] &&
           Answer[AnswerIndex][1][1] === Start[1]
         ) {
-          if (this.GameConfig.CheckingMode === "OnSubmit") {
+          if (this.gameConfig.CheckingMode === "OnSubmit") {
             return true;
           }
           this.$emit("play-effect", "CorrectSound");
           this.$emit("add-record", [
-            this.GameData.Answer,
+            this.gameData.Answer,
             [Start, End],
             "正確",
           ]);
           return true;
         }
       }
-      if (this.GameConfig.CheckingMode === "OnSubmit") {
+      if (this.gameConfig.CheckingMode === "OnSubmit") {
         return false;
       }
       this.$emit("play-effect", "WrongSound");
-      this.$emit("add-record", [this.GameData.Answer, [Start, End], "錯誤"]);
+      this.$emit("add-record", [this.gameData.Answer, [Start, End], "錯誤"]);
       return false;
     },
     MarkWrongLine(lineIndex) {
@@ -416,13 +418,13 @@ export default {
       this.$refs.LineLayer.getNode().draw();
     },
     CheckAllAnswered() {
-      if (this.LinkedPoints.length === this.GameData.Answer.length) {
+      if (this.LinkedPoints.length === this.gameData.Answer.length) {
         this.$emit("next-question");
       }
     },
     CheckAll() {
       let CorrectItem = 0;
-      if (this.LinkedPoints.length !== this.GameData.Answer.length) {
+      if (this.LinkedPoints.length !== this.gameData.Answer.length) {
         this.$emit("play-effect", "WrongSound");
         this.NotFinished = true;
         return;
@@ -437,10 +439,10 @@ export default {
           this.MarkWrongLine(i);
         }
       }
-      if (CorrectItem === this.GameData.Answer.length) {
+      if (CorrectItem === this.gameData.Answer.length) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
-          this.GameData.Answer,
+          this.gameData.Answer,
           this.LinkedPoints,
           "正確",
         ]);
@@ -448,7 +450,7 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.Answer,
+          this.gameData.Answer,
           this.LinkedPoints,
           "錯誤",
         ]);
@@ -487,7 +489,7 @@ export default {
       this.configStage.height = KonvaBorder.height;
 
       // Setting Column Gap Width and Object Width
-      const Column = this.GameData.Question.RowData.length;
+      const Column = this.gameData.Question.RowData.length;
 
       // Object Width Occupied 3/5 and Blank Width Occupied 2/5
       this.ComponentPositionConfig.ObjectWidth =
@@ -501,28 +503,28 @@ export default {
       this.DotLocation = [];
       this.IndexMappingTable = [];
       this.ComponentConfig = [];
-      for (const ColumnIndex in this.GameData.Question.RowData) {
+      for (const ColumnIndex in this.gameData.Question.RowData) {
         const ColumnObjectAmount =
-          this.GameData.Question.RowData[ColumnIndex].length;
+          this.gameData.Question.RowData[ColumnIndex].length;
         // Whe we calculate each object's heght, we add MiniGap at the top and bottom of the column
         this.ComponentPositionConfig.ObjectHeight =
           (KonvaBorder.height - this.MiniGap * (ColumnObjectAmount + 1)) /
           ColumnObjectAmount;
         let NowY = this.MiniGap;
-        for (const ObjectInfo in this.GameData.Question.RowData[ColumnIndex]) {
+        for (const ObjectInfo in this.gameData.Question.RowData[ColumnIndex]) {
           const Object = {};
           //General Settings
           Object.X = NowX;
           Object.Y = NowY;
           Object.Name =
-            this.GameData.Question.RowData[ColumnIndex][ObjectInfo].Name;
+            this.gameData.Question.RowData[ColumnIndex][ObjectInfo].Name;
           Object.Data =
-            this.GameData.Question.RowData[ColumnIndex][ObjectInfo].Data;
+            this.gameData.Question.RowData[ColumnIndex][ObjectInfo].Data;
 
           //Dot Settings, if not first or last column, add 2 dots at each side
           if (
             ColumnIndex !== 0 &&
-            ColumnIndex !== this.GameData.Question.RowData.length - 1
+            ColumnIndex !== this.gameData.Question.RowData.length - 1
           ) {
             this.IndexMappingTable.push([
               parseInt(DotColIndex + 1),
@@ -549,7 +551,10 @@ export default {
               X: NowX + this.ComponentPositionConfig.ObjectWidth + this.MiniGap,
               Y: NowY + this.ComponentPositionConfig.ObjectHeight / 2,
             });
-          } else if (ColumnIndex === this.GameData.Question.RowData.length - 1) {
+          } else if (
+            ColumnIndex ===
+            this.gameData.Question.RowData.length - 1
+          ) {
             this.IndexMappingTable.push([
               parseInt(DotColIndex),
               parseInt(ObjectInfo),
@@ -567,7 +572,7 @@ export default {
           this.ComponentPositionConfig.BlankWidth;
         if (
           ColumnIndex !== 0 &&
-          ColumnIndex !== this.GameData.Question.RowData.length - 1
+          ColumnIndex !== this.gameData.Question.RowData.length - 1
         ) {
           DotColIndex += 2;
         } else {

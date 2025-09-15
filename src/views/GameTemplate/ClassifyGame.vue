@@ -14,7 +14,7 @@
     </div>
     <div class="custom-container__answer-area answer-area">
       <div class="answer-area__drag">
-        <p class="answer-area__title">{{ GameData.InitBox }}</p>
+        <p class="answer-area__title">{{ gameData.InitBox }}</p>
         <draggable
           :list="draggableItems"
           item-key="Tag"
@@ -26,8 +26,8 @@
             <div class="answer-area__drag--item">
               <component
                 :is="element['Name']"
-                :Data="element['Data']"
-                :ID="ID"
+                :component-config="element['Data']"
+                :game-id="gameId"
               />
             </div>
           </template>
@@ -35,7 +35,7 @@
       </div>
       <div class="answer-area__drop">
         <div
-          v-for="(items, index) in GameData.Answer"
+          v-for="(items, index) in gameData.Answer"
           class="drop-area__container"
         >
           <p class="answer-area__title">{{ items.GroupName }}</p>
@@ -55,8 +55,8 @@
               >
                 <component
                   :is="element['Name']"
-                  :Data="element['Data']"
-                  :ID="ID"
+                  :component-config="element['Data']"
+                  :game-id="gameId"
                 />
               </div>
             </template>
@@ -82,15 +82,11 @@ export default {
     Water: getComponents("Water"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -98,15 +94,15 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      questionText: this.GameData.Text,
+      questionText: this.gameData.Text,
       GroupID: 0,
-      groupedItems: this.GameData.Answer.map(() => []),
+      groupedItems: this.gameData.Answer.map(() => []),
       draggableItems: [],
       incorrectItems: [],
     };
   },
   watch: {
-    GameData: {
+    gameData: {
       handler() {
         this.initializeItems();
       },
@@ -122,8 +118,8 @@ export default {
   },
   methods: {
     initializeItems() {
-      this.draggableItems = [...this.GameData.Question];
-      this.groupedItems = this.GameData.Answer.map(() => []);
+      this.draggableItems = [...this.gameData.Question];
+      this.groupedItems = this.gameData.Answer.map(() => []);
     },
     checkAnswer() {
       for (const groupIndex in this.groupedItems) {
@@ -144,13 +140,13 @@ export default {
     isGroupSizeCorrect(index) {
       return (
         this.groupedItems[index].length ===
-        this.GameData.Answer[index].Items.length
+        this.gameData.Answer[index].Items.length
       );
     },
 
     countCorrectItems(index) {
       return this.groupedItems[index].reduce((matchingItemCount, item) => {
-        return this.GameData.Answer[index].Items.includes(item.Tag)
+        return this.gameData.Answer[index].Items.includes(item.Tag)
           ? matchingItemCount + 1
           : matchingItemCount;
       }, 0);
@@ -163,7 +159,7 @@ export default {
       const allIncorrectItems = [];
       this.groupedItems.forEach((group, groupIndex) => {
         const incorrectItems = group.filter(
-          (item) => !this.GameData.Answer[groupIndex].Items.includes(item.Tag)
+          (item) => !this.gameData.Answer[groupIndex].Items.includes(item.Tag)
         );
         allIncorrectItems.push(...incorrectItems.map((item) => item.Tag));
       });
@@ -171,7 +167,7 @@ export default {
 
       this.$emit("add-record", [
         this.groupedItems[index],
-        this.GameData.Answer[index].Items,
+        this.gameData.Answer[index].Items,
         "錯誤",
       ]);
     },
@@ -180,13 +176,13 @@ export default {
       this.incorrectItems = [];
       this.$emit("add-record", [
         this.groupedItems,
-        this.GameData.Answer,
+        this.gameData.Answer,
         "正確",
       ]);
       this.$emit("play-effect", "CorrectSound");
     },
     isGroupContentCorrect(groupIndex) {
-      const correctItems = this.GameData.Answer[groupIndex].Items;
+      const correctItems = this.gameData.Answer[groupIndex].Items;
       return this.groupedItems[groupIndex].every((item) =>
         correctItems.includes(item.Tag)
       );

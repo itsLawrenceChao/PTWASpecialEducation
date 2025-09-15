@@ -1,7 +1,7 @@
 <template>
   <div class="OutterContainer container">
     <div class="title">
-      <a>{{ GameData.Question }}</a>
+      <a>{{ gameData.Question }}</a>
     </div>
     <div class="game-area">
       <div class="main-stage">
@@ -72,15 +72,11 @@ export default {
     KonvaFractionText,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -122,7 +118,7 @@ export default {
   },
   created() {
     const BGImage = new window.Image();
-    BGImage.src = getGameAssets(this.ID, this.GameData.BGSrc);
+    BGImage.src = getGameAssets(this.gameId, this.gameData.BGSrc);
 
     // 當圖片載入完成後再進行縮放和定位計算
     BGImage.onload = () => {
@@ -161,7 +157,7 @@ export default {
       };
 
       console.log(this.ImageConfig.x, this.ImageConfig.y);
-      this.GameData.MountPoint.forEach((item) => {
+      this.gameData.MountPoint.forEach((item) => {
         this.ImageMountPoint.push({
           x: item.x + NewX,
           y: item.y + NewY + this.SelectionHeight,
@@ -412,14 +408,14 @@ export default {
     },
     configRect() {
       //Config Rect
-      if (this.GameData.Selections.length <= 4) {
+      if (this.gameData.Selections.length <= 4) {
         // 小於等於4，一行排列
         const RectWidth =
           (this.stageConfig.width -
-            (this.GameData.Selections.length + 1) * this.MinGap) /
-          this.GameData.Selections.length;
+            (this.gameData.Selections.length + 1) * this.MinGap) /
+          this.gameData.Selections.length;
 
-        this.GameData.Selections.forEach((item, index) => {
+        this.gameData.Selections.forEach((item, index) => {
           this.addRect(
             this.MinGap + index * (RectWidth + this.MinGap),
             0,
@@ -437,9 +433,9 @@ export default {
       } else {
         const RectWidth =
           (this.stageConfig.width -
-            (this.GameData.Selections.length / 2 + 1) * this.MinGap) /
-          (this.GameData.Selections.length / 2);
-        this.GameData.Selections.forEach((item, index) => {
+            (this.gameData.Selections.length / 2 + 1) * this.MinGap) /
+          (this.gameData.Selections.length / 2);
+        this.gameData.Selections.forEach((item, index) => {
           if (index % 2 === 0) {
             this.addRect(
               this.MinGap + parseInt(index / 2) * (RectWidth + this.MinGap),
@@ -474,20 +470,20 @@ export default {
     },
     configPoint() {
       this.Pair = [];
-      for (const i in this.GameData.MountPoint) {
-        for (const j in this.GameData.Selections) {
-          if (typeof this.GameData.MountPoint[i].Connect2 === "string") {
+      for (const i in this.gameData.MountPoint) {
+        for (const j in this.gameData.Selections) {
+          if (typeof this.gameData.MountPoint[i].Connect2 === "string") {
             if (
-              this.GameData.MountPoint[i].Connect2 ===
-              this.GameData.Selections[j]
+              this.gameData.MountPoint[i].Connect2 ===
+              this.gameData.Selections[j]
             ) {
               this.Pair.push([i, j]);
             }
           } else {
-            for (const k in this.GameData.MountPoint[i].Connect2) {
+            for (const k in this.gameData.MountPoint[i].Connect2) {
               if (
-                this.GameData.MountPoint[i].Connect2[k] ===
-                this.GameData.Selections[j]
+                this.gameData.MountPoint[i].Connect2[k] ===
+                this.gameData.Selections[j]
               ) {
                 this.Pair.push([i, j]);
               }

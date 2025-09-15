@@ -2,30 +2,30 @@
   <div class="Container container">
     <div class="index">
       <p class="MainQuestion">
-        {{ GameData.Question_Text }}
+        {{ gameData.Question_Text }}
       </p>
       <div class="SlotArea">
         <component
           :is="slot.Name"
-          v-for="(slot, index) in GameData.SlotComponents"
+          v-for="(slot, index) in gameData.SlotComponents"
           :key="index"
           class="SlotItem"
-          :ID="ID"
-          :Data="slot.Data"
+          :game-id="gameId"
+          :component-config="slot.Data"
         />
       </div>
       <div class="QuestionArea card">
         <p class="SubQuestion">
-          {{ GameData.SubQuestionTitle }}
+          {{ gameData.SubQuestionTitle }}
         </p>
         <hr />
         <div
-          v-for="(item, index1) in GameData.Question"
+          v-for="(item, index1) in gameData.Question"
           :key="index1"
           class="QuestionRow"
         >
           <div
-            v-for="(question, index2) in GameData.Question[index1]"
+            v-for="(question, index2) in gameData.Question[index1]"
             class="Question"
           >
             <input
@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="Slot">
-      <div v-for="slot in GameData.AssistiveComponent">
+      <div v-for="slot in gameData.AssistiveComponent">
         <component
           :is="slot"
           @virtualpadinput-input="VNInput"
@@ -66,15 +66,15 @@ export default {
   name: "FillinBlank",
   components: {},
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -92,18 +92,18 @@ export default {
     };
   },
   created() {
-    for (const i in this.GameData.Question) {
+    for (const i in this.gameData.Question) {
       const temp = [];
-      for (const j in this.GameData.Question[i]) {
+      for (const j in this.gameData.Question[i]) {
         temp.push("");
       }
       this.Value.push(temp);
     }
   },
   mounted() {
-    if (this.GameConfig.WithImage) {
+    if (this.gameConfig.WithImage) {
       this.WithImage = true;
-      this.ImgSrc = getGameAssets(this.ID, this.GameData.Img);
+      this.ImgSrc = getGameAssets(this.ID, this.gameData.Img);
       const patten = /undefined/;
       if (patten.test(this.ImgSrc)) {
         this.WithImage = false;
@@ -137,10 +137,10 @@ export default {
       let result = true;
       let ReMesseage = "";
       let ReAnswer = "";
-      for (const i in this.GameData.Question) {
-        for (const j in this.GameData.Question[i]) {
-          if (this.GameData.Question[i][j] === "$input") {
-            if (this.Value[i][j] !== this.GameData.Answer[count]) {
+      for (const i in this.gameData.Question) {
+        for (const j in this.gameData.Question[i]) {
+          if (this.gameData.Question[i][j] === "$input") {
+            if (this.Value[i][j] !== this.gameData.Answer[count]) {
               result = false;
               ReMesseage += "第" + (i + 1) + "格:" + this.Value[i][j] + "\n";
             }

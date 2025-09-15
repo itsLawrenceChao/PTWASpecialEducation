@@ -1,25 +1,25 @@
 <template>
   <div class="outter-container">
     <div class="left-column">
-      <div v-if="GameData.questionText" class="text-area">
-        {{ GameData.questionText }}
+      <div v-if="gameData.questionText" class="text-area">
+        {{ gameData.questionText }}
       </div>
-      <div v-if="GameConfig.layout.top" class="game-area--top game-area">
+      <div v-if="gameConfig.layout.top" class="game-area--top game-area">
         <component
-          :is="GameData.topComponent.Name"
-          :Data="GameData.topComponent.Data"
-          :ID="ID"
+          :is="gameData.topComponent.Name"
+          :component-config="gameData.topComponent.Data"
+          :game-id="gameId"
           @reply-answer="topReply"
         ></component>
       </div>
-      <div v-if="GameData.middleText" class="text-area">
-        {{ GameData.middleText }}
+      <div v-if="gameData.middleText" class="text-area">
+        {{ gameData.middleText }}
       </div>
-      <div v-if="GameConfig.layout.down" class="game-area--down game-area">
+      <div v-if="gameConfig.layout.down" class="game-area--down game-area">
         <component
-          :is="GameData.downComponent.Name"
-          :Data="GameData.downComponent.Data"
-          :ID="ID"
+          :is="gameData.downComponent.Name"
+          :component-config="gameData.downComponent.Data"
+          :game-id="gameId"
           @reply-answer="downReply"
         ></component>
       </div>
@@ -72,15 +72,15 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -102,14 +102,14 @@ export default {
   created() {
     const NewArr = [];
     let cnt = 0;
-    for (const i in this.GameData.Data) {
-      NewArr.push(this.GameData.Data[i]);
+    for (const i in this.gameData.Data) {
+      NewArr.push(this.gameData.Data[i]);
       // Initial the ComponentAnswer
-      if (this.GameData.Data[i].Blank === true) {
+      if (this.gameData.Data[i].Blank === true) {
         this.ComponentsAnswers[cnt] = false;
       }
       cnt++;
-      if (i !== this.GameData.Data.length - 1) {
+      if (i !== this.gameData.Data.length - 1) {
         NewArr.push({
           Arrow: true,
         });
@@ -120,7 +120,7 @@ export default {
     emitter.on("submitAnswer", this.CheckAnswer);
   },
   mounted() {
-    if (this.GameConfig.NumberPadAutoDisappear === false) {
+    if (this.gameConfig.NumberPadAutoDisappear === false) {
       this.SlidAnimation("in");
       this.ShowPad = true;
     }
@@ -139,7 +139,7 @@ export default {
       this.topComponentsAnswer = result;
     },
     NowClick() {
-      if (this.GameConfig.layout.pad === false) return;
+      if (this.gameConfig.layout.pad === false) return;
       if (document.activeElement.tagName === "INPUT") {
         this.SlidAnimation("in");
         this.ShowPad = true;
@@ -148,15 +148,15 @@ export default {
         this.NowSelect.focus();
         this.ShowPad = true;
       } else {
-        if (this.GameConfig.NumberPadAutoDisappear !== false) {
+        if (this.gameConfig.NumberPadAutoDisappear !== false) {
           this.ShowPad = false;
           this.SlidAnimation("out");
         }
       }
     },
     SlidAnimation(action) {
-      if (this.GameConfig.layout.pad === false) return;
-      if (this.GameConfig.NumberPadAutoDisappear !== false) {
+      if (this.gameConfig.layout.pad === false) return;
+      if (this.gameConfig.NumberPadAutoDisappear !== false) {
         const OutterContainer =
           document.getElementsByClassName("OutterContainer")[0];
         const GameWindows = document.getElementsByClassName("GameWindows")[0];
@@ -172,20 +172,19 @@ export default {
     CheckAnswer() {
       console.log(this.topComponentsAnswer, this.downComponentsAnswer);
       if (
-        this.GameConfig.layout.top === false ||
-        this.GameConfig.checkAnswer.top === false
+        this.gameConfig.layout.top === false ||
+        this.gameConfig.checkAnswer.top === false
       ) {
         this.topComponentsAnswer = true;
       }
       if (
-        this.GameConfig.layout.down === false ||
-        this.GameConfig.checkAnswer.down === false
+        this.gameConfig.layout.down === false ||
+        this.gameConfig.checkAnswer.down === false
       ) {
         this.downComponentsAnswer = true;
       }
 
       const ans = this.topComponentsAnswer && this.downComponentsAnswer;
-      console.log(ans);
 
       if (ans === true) {
         this.$emit("play-effect", "CorrectSound");

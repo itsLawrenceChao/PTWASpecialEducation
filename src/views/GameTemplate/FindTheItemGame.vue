@@ -2,13 +2,13 @@
   <div class="container">
     <div class="gameAndQuestion">
       <p class="h1">
-        {{ GameData.Text }}
+        {{ gameData.Text }}
       </p>
       <div class="ObjList">
         <p class="h4">尚未被找到:</p>
         <div class="Objects">
           <button
-            v-for="(button, index) in GameData.Objs"
+            v-for="(button, index) in gameData.Objs"
             class="Object"
             :class="{ activebutton: answered[index] }"
           >
@@ -41,19 +41,14 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "FindTheItem",
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
-    //Other Game Methods
   },
   emits: ["play-effect", "add-record", "next-question"],
   data() {
@@ -79,7 +74,7 @@ export default {
   },
   created() {
     const image = new window.Image();
-    image.src = getGameAssets(this.ID, this.GameData.img);
+    image.src = getGameAssets(this.gameId, this.gameData.img);
     image.onload = () => {
       const aspectRatio = image.width / image.height;
       if (this.stageSize.width / this.stageSize.height > aspectRatio) {
@@ -107,9 +102,9 @@ export default {
       }
     },
     checkAnswer(posX, posY) {
-      const tolerance = this.GameData.tolerance;
-      for (const i in this.GameData.Objs) {
-        const obj = this.GameData.Objs[i];
+      const tolerance = this.gameData.tolerance;
+      for (const i in this.gameData.Objs) {
+        const obj = this.gameData.Objs[i];
         if (
           posX >= obj.xRange[0] - tolerance &&
           posX <= obj.xRange[1] + tolerance &&
@@ -121,7 +116,7 @@ export default {
       }
     },
     addCircle(checkNum) {
-      const obj = this.GameData.Objs[checkNum];
+      const obj = this.gameData.Objs[checkNum];
       const radius =
         Math.sqrt(
           (obj.xRange[1] - obj.xRange[0]) ** 2 +
@@ -140,7 +135,7 @@ export default {
       while (this.answered[rightAnswerCount]) {
         rightAnswerCount++;
       }
-      if (rightAnswerCount >= this.GameData.Objs.length) {
+      if (rightAnswerCount >= this.gameData.Objs.length) {
         return true;
       } else {
         return false;

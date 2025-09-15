@@ -2,7 +2,7 @@
   <div class="game">
     <div class="game__target-section">
       <h1 class="game__title">
-        {{ GameData.title }}
+        {{ gameData.title }}
       </h1>
       <draggable
         class="game__drop-area"
@@ -14,8 +14,8 @@
         <template #item="{ element }">
           <component
             :is="element.name"
-            :ID="ID"
-            :Data="element.Data"
+            :game-id="gameId"
+            :component-config="element.Data"
             @touchstart="startTrashMode"
             @mousedown="startTrashMode"
           />
@@ -25,7 +25,11 @@
 
     <div class="game__action-section">
       <div class="game__quation">
-        <component :is="slotComponent" :Data="slotData" :ID="ID" />
+        <component
+          :is="slotComponent"
+          :component-config="slotData"
+          :game-id="gameId"
+        />
       </div>
 
       <draggable
@@ -40,7 +44,7 @@
         <template #item="{ element }">
           <div>
             <!-- 這裡的div刪了就沒辦法將錢拖曳到drop-area -->
-            <component :is="element.name" :Data="element.Data" />
+            <component :is="element.name" :component-config="element.Data" />
           </div>
         </template>
       </draggable>
@@ -79,15 +83,11 @@ export default {
     MoneyDisplay: getComponents("MoneyDisplay"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -108,9 +108,9 @@ export default {
   },
   created() {
     this.init();
-    this.slotComponent = this.GameData.upperComponent.Name;
-    this.slotData = this.GameData.upperComponent.Data;
-    emitter.on("submitAnswer", this.CheckAnswer);
+    this.slotComponent = this.gameData.upperComponent.Name;
+    this.slotData = this.gameData.upperComponent.Data;
+    emitter.on("submitAnswer", this.handleSubmit);
   },
   mounted() {
     this.$refs.deleteArea.$el.style.backgroundImage = `url(${this.trashBin})`;
@@ -121,7 +121,7 @@ export default {
   methods: {
     init() {
       const componentName = "MoneyDisplay";
-      const denominationAvailability = this.GameData.Items;
+      const denominationAvailability = this.gameData.Items;
       const availableDenominations = Object.keys(denominationAvailability)
         .filter((key) => denominationAvailability[key] === "true")
         .map(Number);
@@ -132,7 +132,7 @@ export default {
       }));
     },
     handleSubmit() {
-      const correctAnswer = this.GameData.amount;
+      const correctAnswer = this.gameData.amount;
       const userAnswer = this.sumMoney();
       const isAnswerRight = this.checkAnswer(correctAnswer, userAnswer);
       if (isAnswerRight) {

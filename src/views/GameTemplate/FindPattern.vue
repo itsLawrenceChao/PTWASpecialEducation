@@ -1,18 +1,18 @@
 <template>
   <div ref="container">
     <div class="question">
-      <h2>{{ GameData.Question }}</h2>
+      <h2>{{ gameData.Question }}</h2>
       <button @click="checkAnswer">提交答案</button>
     </div>
     <v-stage :config="configKonva">
       <v-layer>
         <v-rect
-          v-if="GameData.AnswerType === 'Drag'"
+          v-if="gameData.AnswerType === 'Drag'"
           :config="configDragBG"
         ></v-rect>
       </v-layer>
 
-      <v-layer v-if="GameData.AnswerType === 'Fill'">
+      <v-layer v-if="gameData.AnswerType === 'Fill'">
         <v-image
           v-for="(block, index) in configFillings"
           :key="index"
@@ -30,7 +30,7 @@
         />
       </v-layer>
 
-      <v-layer v-if="GameData.AnswerType === 'Drag'" :key="draggableKey">
+      <v-layer v-if="gameData.AnswerType === 'Drag'" :key="draggableKey">
         <v-image
           v-for="(block, index) in configDraggables"
           :key="index"
@@ -45,20 +45,15 @@
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 export default {
   components: {},
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -85,14 +80,14 @@ export default {
   methods: {
     initializeScene() {
       this.tableSize = {
-        width: this.GameData.Map[0].length,
-        height: this.GameData.Map.length,
+        width: this.gameData.Map[0].length,
+        height: this.gameData.Map.length,
       };
       const gameRatio = this.setGameRatio();
 
       this.drawCanvas(gameRatio);
 
-      switch (this.GameData.AnswerType) {
+      switch (this.gameData.AnswerType) {
         case "Drag":
           this.drawDragBG();
           this.drawDragMap();
@@ -106,7 +101,7 @@ export default {
       }
     },
     setGameRatio() {
-      switch (this.GameData.AnswerType) {
+      switch (this.gameData.AnswerType) {
         case "Drag":
           return this.tableSize.width / (this.tableSize.height + 1.5);
         case "Fill":
@@ -139,9 +134,9 @@ export default {
     },
     drawDragMap() {
       this.images = [];
-      for (const i in this.GameData.Images) {
+      for (const i in this.gameData.Images) {
         const image = new window.Image();
-        image.src = getGameAssets(this.ID, this.GameData.Images[i]);
+        image.src = getGameAssets(this.gameId, this.gameData.Images[i]);
         this.images.push(image);
       }
 
@@ -152,7 +147,7 @@ export default {
             y: this.blockWidth * j,
             height: this.blockWidth,
             width: this.blockWidth,
-            image: this.images[this.GameData.Map[j][i]],
+            image: this.images[this.gameData.Map[j][i]],
             visible: !this.isBlankSpace(i, j),
             answerIndex: this.isBlankSpace(i, j),
           };
@@ -176,7 +171,7 @@ export default {
     },
     drawFillMap() {
       this.frameImage = new window.Image();
-      this.frameImage.src = getGameAssets(this.ID, this.GameData.Frame);
+      this.frameImage.src = getGameAssets(this.gameId, this.gameData.Frame);
 
       for (let i = 0; i < this.tableSize.width; ++i) {
         for (let j = 0; j < this.tableSize.height; ++j) {
@@ -194,7 +189,7 @@ export default {
     },
     drawFillings() {
       this.fillingImage = new window.Image();
-      this.fillingImage.src = getGameAssets(this.ID, this.GameData.Fill);
+      this.fillingImage.src = getGameAssets(this.gameId, this.gameData.Fill);
       const offset = {
         x: this.blockWidth * 0.5,
         y: this.blockWidth * 0.5,
@@ -202,7 +197,7 @@ export default {
 
       for (let i = 0; i < this.tableSize.width; ++i) {
         for (let j = 0; j < this.tableSize.height; ++j) {
-          const rotationIndex = this.GameData.Map[j][i];
+          const rotationIndex = this.gameData.Map[j][i];
           const block = {
             x: this.blockWidth * (i + 0.5),
             y: this.blockWidth * (j + 0.5),
@@ -210,7 +205,7 @@ export default {
             width: this.blockWidth,
             image: this.fillingImage,
             visible: !this.isBlankSpace(i, j),
-            rotation: this.GameData.FillRotation[rotationIndex],
+            rotation: this.gameData.FillRotation[rotationIndex],
             offset,
           };
           this.configFillings.push(block);
@@ -220,7 +215,7 @@ export default {
     },
     setRotationDividers() {
       this.rotationDividers = [];
-      const rotations = this.GameData.FillRotation;
+      const rotations = this.gameData.FillRotation;
       for (const i in rotations) {
         if (Number(i) + 1 === rotations.length) {
           this.rotationDividers.push((rotations[i] + rotations[0] + 360) / 2);
@@ -232,10 +227,10 @@ export default {
       }
     },
     isBlankSpace(x, y) {
-      for (const i in this.GameData.BlankSpace) {
+      for (const i in this.gameData.BlankSpace) {
         if (
-          this.GameData.BlankSpace[i].x === x &&
-          this.GameData.BlankSpace[i].y === y
+          this.gameData.BlankSpace[i].x === x &&
+          this.gameData.BlankSpace[i].y === y
         )
           return i;
       }
@@ -296,9 +291,10 @@ export default {
       console.log(this.answers);
     },
     handleClick(e) {
+      console.log(e.target.attrs.answerIndex);
       if (
-        this.GameData.AnswerType === "Drag" ||
-        e.target.attrs.answerIndex === null
+        this.gameData.AnswerType === "Drag" ||
+        e.target.attrs.answerIndex == null
       )
         return;
 
@@ -311,7 +307,7 @@ export default {
       if (
         this.configFillings[id].visible &&
         this.configFillings[id].rotation ===
-          this.GameData.FillRotation[rotationIndex]
+          this.gameData.FillRotation[rotationIndex]
       ) {
         this.configFillings[id].visible = false;
         this.answers[this.configBlocks[id].answerIndex] = null;
@@ -321,7 +317,7 @@ export default {
       }
 
       this.configFillings[id].rotation =
-        this.GameData.FillRotation[rotationIndex];
+        this.gameData.FillRotation[rotationIndex];
     },
     isSlotAvailable(block) {
       if (this.configBlocks[block].answerIndex) {
@@ -369,10 +365,10 @@ export default {
       const wrongAnswers = [];
       for (const i in this.answers) {
         const blockID = {
-          x: this.GameData.BlankSpace[i].x,
-          y: this.GameData.BlankSpace[i].y,
+          x: this.gameData.BlankSpace[i].x,
+          y: this.gameData.BlankSpace[i].y,
         };
-        const correctAnswerID = this.GameData.Map[blockID.y][blockID.x];
+        const correctAnswerID = this.gameData.Map[blockID.y][blockID.x];
         if (this.answers[i] !== correctAnswerID) {
           isCorrect = false;
           wrongAnswers.push(i);
@@ -383,12 +379,12 @@ export default {
     },
     emitAnswer(isCorrect) {
       const correctAnswers = [];
-      for (const i in this.GameData.BlankSpace) {
+      for (const i in this.gameData.BlankSpace) {
         const blockID = {
-          x: this.GameData.BlankSpace[i].x,
-          y: this.GameData.BlankSpace[i].y,
+          x: this.gameData.BlankSpace[i].x,
+          y: this.gameData.BlankSpace[i].y,
         };
-        correctAnswers.push(this.GameData.Map[blockID.y][blockID.x]);
+        correctAnswers.push(this.gameData.Map[blockID.y][blockID.x]);
       }
       if (isCorrect) {
         this.$emit("play-effect", "CorrectSound");
@@ -415,7 +411,7 @@ export default {
       }
     },
     removeWrongAnswers(wrongAnswers) {
-      switch (this.GameData.AnswerType) {
+      switch (this.gameData.AnswerType) {
         case "Drag":
           for (const i in this.configDraggables) {
             const answerIndex = this.configDraggables[i].answerIndex;

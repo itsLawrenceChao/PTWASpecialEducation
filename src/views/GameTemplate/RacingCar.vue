@@ -1,7 +1,7 @@
 <template>
   <div ref="container" class="gameContainer">
     <div>
-      <h2>{{ GameData.Question }}</h2>
+      <h2>{{ gameData.Question }}</h2>
       <v-stage :config="configKonva">
         <v-layer>
           <v-image
@@ -66,15 +66,11 @@ import * as canvasTools from "@/utilitys/canvasTools.js";
 
 export default {
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -111,7 +107,7 @@ export default {
 
   methods: {
     initializeScene() {
-      this.options = canvasTools.shuffleOptions(this.GameData.Options);
+      this.options = canvasTools.shuffleOptions(this.gameData.Options);
       this.currentOptionId = Math.floor(Math.random() * this.options.length);
       this.gameWidth = this.$refs.container.clientWidth * 0.8;
       this.configKonva.width = this.gameWidth;
@@ -226,7 +222,8 @@ export default {
         this.checkAnswer();
       } else {
         this.roadX -= this.speed;
-        for (const road in this.configRoad) this.configRoad[road].x = this.roadX;
+        for (const road in this.configRoad)
+          this.configRoad[road].x = this.roadX;
         for (const tunnel in this.configTunnel)
           this.configTunnel[tunnel].x = canvasTools.offset(
             this.configRoad[0],
@@ -333,11 +330,11 @@ export default {
     checkAnswer() {
       if (
         this.options[this.currentOptionId] ===
-        this.GameData.Options[this.GameData.Answer]
+        this.gameData.Options[this.gameData.Answer]
       ) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
-          this.GameData.Options[this.GameData.Answer],
+          this.gameData.Options[this.gameData.Answer],
           this.options[this.currentOptionId],
           "正確",
         ]);
@@ -347,7 +344,7 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.Options[this.GameData.Answer],
+          this.gameData.Options[this.gameData.Answer],
           this.options[this.currentOptionId],
           "錯誤",
         ]);
@@ -362,7 +359,10 @@ export default {
       requestAnimationFrame(this.moveRoad);
     },
     endingAnimation() {
-      if (this.configCar.x > this.gameWidth && this.configEndingImage === null) {
+      if (
+        this.configCar.x > this.gameWidth &&
+        this.configEndingImage === null
+      ) {
         this.$emit("next-question");
       } else {
         this.configCar.x += this.speed;
@@ -390,7 +390,7 @@ export default {
     },
     moveSmoke() {
       for (const i in this.configSmoke) {
-        if (this.GameData.EndingImage && Number(i) === 3) {
+        if (this.gameData.EndingImage && Number(i) === 3) {
           if (this.configEndingImage) {
             this.moveImageSmoke();
             this.moveEndingImage();
@@ -416,7 +416,7 @@ export default {
     },
     drawEndingImage() {
       const img = new window.Image();
-      img.src = getGameAssets(this.ID, this.GameData.EndingImage);
+      img.src = getGameAssets(this.gameId, this.gameData.EndingImage);
       this.configEndingImage = {
         image: img,
       };

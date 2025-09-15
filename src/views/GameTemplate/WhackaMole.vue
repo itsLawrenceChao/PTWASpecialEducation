@@ -1,6 +1,6 @@
 <template>
   <div ref="container">
-    <h2>{{ GameData.Question }}</h2>
+    <h2>{{ gameData.Question }}</h2>
     <v-stage :config="configKonva">
       <v-layer>
         <v-image :config="configBG" />
@@ -36,20 +36,11 @@
 <script>
 import { getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 
 export default {
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -81,7 +72,7 @@ export default {
     this.initializeScene();
     this.initializeOption();
     this.requiredCorrect =
-      this.GameData.requiredCorrect || this.trueOptions.length;
+      this.gameData.requiredCorrect || this.trueOptions.length;
     this.game = window.setInterval(this.update, 20);
   },
 
@@ -214,8 +205,8 @@ export default {
     },
 
     initializeOption() {
-      this.allOptions = this.GameData.True.concat(this.GameData.False);
-      this.trueOptions = this.GameData.True;
+      this.allOptions = this.gameData.True.concat(this.gameData.False);
+      this.trueOptions = this.gameData.True;
     },
     update() {
       for (let i = this.startId; i < this.configObjects.position.length; ++i) {
@@ -335,8 +326,8 @@ export default {
     },
     checkAnswer(id) {
       let isCorrect = false;
-      for (const answer in this.GameData.True) {
-        if (this.GameData.True[answer] === this.configObjects.option[id].text)
+      for (const answer in this.gameData.True) {
+        if (this.gameData.True[answer] === this.configObjects.option[id].text)
           isCorrect = true;
       }
       if (isCorrect) {
@@ -373,7 +364,7 @@ export default {
       }
     },
     printCorrectAnswers() {
-      return this.GameData.Question.concat(":", this.GameData.True.join("/"));
+      return this.gameData.Question.concat(":", this.gameData.True.join("/"));
     },
   },
 };

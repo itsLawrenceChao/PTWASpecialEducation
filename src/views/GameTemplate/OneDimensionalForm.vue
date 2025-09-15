@@ -1,10 +1,10 @@
 <template>
   <div ref="container" class="container">
-    <div v-if="GameData.FormTitle" class="title">
+    <div v-if="gameData.FormTitle" class="title">
       <component
-        :is="GameData.FormTitle.Type"
-        :Data="GameData.FormTitle.Data"
-        :ID="ID"
+        :is="gameData.FormTitle.Type"
+        :component-config="gameData.FormTitle.Data"
+        :game-id="gameId"
       />
     </div>
     <div :key="updateKey" class="form">
@@ -12,8 +12,8 @@
         <div v-if="column.Title" class="title">
           <component
             :is="column.Title.Type"
-            :Data="column.Title.Data"
-            :ID="ID"
+            :component-config="column.Title.Data"
+            :game-id="gameId"
           />
         </div>
         <div class="formElements" :style="formStyle[index]">
@@ -30,8 +30,8 @@
           >
             <component
               :is="element.Type"
-              :Data="element.Data"
-              :ID="ID"
+              :component-config="element.Data"
+              :game-id="gameId"
               @copy.prevent
             />
           </div>
@@ -49,8 +49,8 @@
         <component
           :is="question.Type"
           v-else
-          :Data="question.Data"
-          :ID="ID"
+          :component-config="question.Data"
+          :game-id="gameId"
           @reply-answer="handleAnswer($event, index)"
         />
       </div>
@@ -66,24 +66,20 @@ import fetchJson from "@/utilitys/fetch-json";
 export default {
   components: {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
-    NumberIncrementor: defineAsyncComponent(() =>
-      import("@/components/NumberIncrementor.vue")
+    NumberIncrementor: defineAsyncComponent(
+      () => import("@/components/NumberIncrementor.vue")
     ),
   },
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -110,7 +106,7 @@ export default {
     this.formData = await fetchJson(
       getGameAssets("Dev02_OneDimensionalForm", "Forms.json")
     );
-    this.formData = this.formData.data.AllForms[this.GameData.Form];
+    this.formData = this.formData.data.AllForms[this.gameData.Form];
     this.setFormContent();
     this.setFormStyle();
     this.setQuestionData();
@@ -157,7 +153,7 @@ export default {
       return 100 / maxRow;
     },
     setQuestionData() {
-      for (const question of this.GameData.Questions) {
+      for (const question of this.gameData.Questions) {
         this.questionData.push({
           Text: question.Text,
           Type: question.Type,
@@ -206,7 +202,7 @@ export default {
       const draggedRect = draggedElement.getBoundingClientRect();
 
       for (let boxIndex = 0; boxIndex < dragBoxes.length; boxIndex++) {
-        if (this.GameData.Questions[boxIndex].Type === "DefaultDragBox") {
+        if (this.gameData.Questions[boxIndex].Type === "DefaultDragBox") {
           const box = dragBoxes[boxIndex];
           const boxRect = box.getBoundingClientRect();
           if (this.isOverlapping(draggedRect, boxRect)) {
@@ -258,12 +254,12 @@ export default {
         case "ImageContainer":
           this.answer[index] =
             draggedElement.Data.Src ===
-            this.GameData.Questions[index].Data.answer;
+            this.gameData.Questions[index].Data.answer;
           break;
         case "TextOnly":
           this.answer[index] =
             draggedElement.Data.Text ===
-            this.GameData.Questions[index].Data.answer;
+            this.gameData.Questions[index].Data.answer;
           break;
       }
     },

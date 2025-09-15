@@ -13,36 +13,36 @@
   </div>
   <div v-if="tester === 'fraction'" class="testArea">
     <dragFraction
-      :Data="configFraction"
-      :ID="gameid"
+      :game-id="gameid"
+      :component-config="configFraction"
       @reply-answer="printAns"
     />
   </div>
   <div v-if="tester === 'numberLine'" class="testArea">
     <numberLine
-      :Data="configNumberLine"
-      :ID="gameid"
+      :game-id="gameid"
+      :component-config="configNumberLine"
       @get-drag-position="printAns"
     />
   </div>
   <div v-if="tester === 'drawShapes'" class="testArea">
     <drawShapes
-      :Data="configDrawShapes"
-      :ID="gameid"
+      :game-id="gameid"
+      :component-config="configDrawShapes"
       @reply-answer="printAns"
     />
   </div>
   <div v-if="tester === 'dragToAlign'" class="testArea">
-    <dragToAlign :Data="configDragToAlign" :ID="gameid" />
+    <dragToAlign :game-id="gameid" :component-config="configDragToAlign" />
   </div>
   <div v-if="tester === 'dragImages'" class="testArea">
-    <dragImages :Data="configDragImages" :ID="gameid" />
+    <dragImages :game-id="gameid" :component-config="configDragImages" />
   </div>
   <div v-if="tester === 'scale'" class="testArea">
-    <scale :Data="configScale" :ID="gameid" @reply-answer="printAns" />
+    <scale :game-id="gameid" :component-config="configScale" @reply-answer="printAns" />
   </div>
   <div v-if="tester === 'drawingBoard'" class="testArea">
-    <drawingBoard :Data="configBrush"></drawingBoard>
+    <drawingBoard :component-config="configBrush"></drawingBoard>
     <div class="btnContainer">
       <button
         @click="
@@ -65,8 +65,8 @@
   <div v-if="tester === 'fillImages'" class="testArea">
     <fillImages
       :key="testerKey"
-      :Data="configFillImages"
-      :ID="'Dev02_Testers'"
+      :game-id="'Dev02_Testers'"
+      :component-config="configFillImages"
       @reply-answer="printAns"
     />
     <input

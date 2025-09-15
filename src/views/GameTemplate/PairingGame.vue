@@ -12,7 +12,11 @@
           >
             <template #item="{ element }">
               <div class="dragable">
-                <component :is="element.Name" :Data="element.Data" :ID="ID" />
+                <component
+                  :is="element.Name"
+                  :component-config="element.Data"
+                  :game-id="gameId"
+                />
               </div>
             </template>
           </draggable>
@@ -20,7 +24,7 @@
       </div>
       <div class="QuestionArea">
         <p class="Title">答案區</p>
-        <div v-for="(pair, index) in GameData.Pairs" class="Pair">
+        <div v-for="(pair, index) in gameData.Pairs" class="Pair">
           <div class="Answer" :class="{ False: FalseOption[index] === true }">
             <draggable
               :list="AnswersNew[index]"
@@ -30,7 +34,11 @@
             >
               <template #item="{ element }">
                 <div class="dragable">
-                  <component :is="element.Name" :Data="element.Data" :ID="ID" />
+                  <component
+                    :is="element.Name"
+                    :component-config="element.Data"
+                    :game-id="gameId"
+                  />
                 </div>
               </template>
             </draggable>
@@ -67,15 +75,11 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -91,9 +95,9 @@ export default {
     };
   },
   created() {
-    this.Selections = this.GameData.Properties;
-    this.Question = this.GameData.Pairs.map((pair) => pair.Question);
-    for (let i = 0; i < this.GameData.Pairs.length; i++) {
+    this.Selections = this.gameData.Properties;
+    this.Question = this.gameData.Pairs.map((pair) => pair.Question);
+    for (let i = 0; i < this.gameData.Pairs.length; i++) {
       this.AnswersNew.push([]);
       this.AnswersOld.push([]);
     }
@@ -127,8 +131,8 @@ export default {
       for (let i = 0; i < this.FalseOption.length; i++) {
         this.FalseOption[i] = false;
       }
-      for (let j = 0; j < this.GameData.Pairs.length; j++) {
-        if (this.GameData.Pairs[j].Answer !== this.AnswersNew[j][0].Tag) {
+      for (let j = 0; j < this.gameData.Pairs.length; j++) {
+        if (this.gameData.Pairs[j].Answer !== this.AnswersNew[j][0].Tag) {
           AnswerCheck = false;
           this.FalseOption[j] = true;
         }
@@ -136,7 +140,7 @@ export default {
       if (AnswerCheck) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
-          this.GameData.Pairs,
+          this.gameData.Pairs,
           this.AnswersNew,
           "正確",
         ]);
@@ -145,7 +149,7 @@ export default {
         console.log("Wrong");
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.Pairs,
+          this.gameData.Pairs,
           this.AnswersNew,
           "錯誤",
         ]);

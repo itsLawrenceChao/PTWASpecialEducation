@@ -4,7 +4,7 @@
     <br />
     <div class="container">
       <p class="h1">
-        {{ GameData.Question.Text }}
+        {{ gameData.Question.Text }}
       </p>
       <div id="MainContainer" class="d-flex justify-content-between flex-row">
         <div class="canvascontainer">
@@ -15,7 +15,7 @@
           style="width: 100%"
         >
           <p class="h5">
-            {{ GameConfig.OptionBarText }}
+            {{ gameConfig.OptionBarText }}
           </p>
           <div id="error_msg">
             {{ errorMsg }}
@@ -68,15 +68,15 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "AutoNumberingGame",
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -103,13 +103,13 @@ export default {
   },
   created() {
     // this.picture_type="sth"//FIXME
-    this.QuestionRange = this.GameData.Question.Range;
-    for (var i in this.GameData.Question.ObjImgList) {
+    this.QuestionRange = this.gameData.Question.Range;
+    for (var i in this.gameData.Question.ObjImgList) {
       this.picture_total += 1;
     }
     for (
-      var i = this.GameData.Question.Range[0];
-      i <= this.GameData.Question.Range[1];
+      var i = this.gameData.Question.Range[0];
+      i <= this.gameData.Question.Range[1];
       i++
     ) {
       this.btn.push(i);
@@ -142,11 +142,11 @@ export default {
        * @return {string} b - The path of the picture
        */
       const num =
-        Math.floor(Math.random() * this.GameData.Question.ObjImgList.length) +
+        Math.floor(Math.random() * this.gameData.Question.ObjImgList.length) +
         0; //Random number(Range: 0~picture_total-1)
       const name =
-        "S_" + this.GameData.Question.ObjImgList[num] + this.picture_type;
-      const b = getGameAssets(this.ID, name);
+        "S_" + this.gameData.Question.ObjImgList[num] + this.picture_type;
+      const b = getGameAssets(this.gameId, name);
 
       console.log(b);
       return b;
@@ -159,8 +159,8 @@ export default {
       let numImages =
         Math.floor(
           Math.random() *
-            (this.GameData.Question.Range[1] - this.GameData.Question.Range[0])
-        ) + this.GameData.Question.Range[0];
+            (this.gameData.Question.Range[1] - this.gameData.Question.Range[0])
+        ) + this.gameData.Question.Range[0];
       const image = new Image();
       this.exist_image = 0;
       image.src = this.getRandPicture();
@@ -271,7 +271,7 @@ export default {
       //         this.$emit('play-effect', 'HarrySound');
       //         this.$emit('next-question')
       //     }, 3000);
-      // if (this.level === this.GameData.Question.Level) {
+      // if (this.level === this.gameData.Question.Level) {
 
       // }
     },
@@ -280,7 +280,7 @@ export default {
        * Start a new game
        */
       this.level += 1;
-      if (this.level === this.GameData.Question.Level) {
+      if (this.level === this.gameData.Question.Level) {
         this.win();
       } else {
         this.errorMsg = "";

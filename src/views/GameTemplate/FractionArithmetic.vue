@@ -2,20 +2,23 @@
   <div class="game">
     <div class="question-and-answer">
       <h1 class="question__description">
-        <FractionText :text="questionDescription" :ID="ID"></FractionText>
+        <FractionText
+          :text="questionDescription"
+          :game-id="gameId"
+        ></FractionText>
       </h1>
     </div>
     <div class="check-calculation">
       <DragFraction
-        :Data="checkCalculationData"
-        :ID="ID"
+        :component-config="checkCalculationData"
+        :game-id="gameId"
         class="check-calculation-components"
       ></DragFraction>
       <div class="calculation-container">
         <div class="question__math-expression">
           <FractionDisplay
-            :Data="questionLeftTerm"
-            :ID="ID"
+            :component-config="questionLeftTerm"
+            :game-id="gameId"
             class="math-expression__fraction"
           ></FractionDisplay>
           <span
@@ -32,15 +35,15 @@
             }}
           </span>
           <FractionDisplay
-            :Data="questionRightTerm"
-            :ID="ID"
+            :component-config="questionRightTerm"
+            :game-id="gameId"
             class="math-expression__fraction"
           ></FractionDisplay>
           <span class="question__math-symbol">&#61;</span>
           <FractionForAnswer
             ref="fractionsComponent"
-            :Data="answerData"
-            :ID="ID"
+            :component-config="answerData"
+            :game-id="gameId"
             @record-answer="handleRecordAnswer"
             @reply-answer="handleValidation"
           ></FractionForAnswer>
@@ -72,36 +75,32 @@ export default {
     FractionText,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
       required: true,
     },
   },
   emits: ["play-effect", "add-record", "next-question"],
   data() {
-    const isApplication = !!this.GameData.answer?.operation;
+    const isApplication = !!this.gameData.answer?.operation;
     return {
       recordedAnswer: null,
-      questionDescription: this.GameData.question.description,
-      questionLeftTerm: this.GameData.question.leftTerm,
-      questionRightTerm: this.GameData.question.rightTerm,
-      operation: this.GameData.question.operationType,
-      checkCalculationData: this.GameData.acheckCalculationData,
-      answerData: this.GameData.answer,
+      questionDescription: this.gameData.question.description,
+      questionLeftTerm: this.gameData.question.leftTerm,
+      questionRightTerm: this.gameData.question.rightTerm,
+      operation: this.gameData.question.operationType,
+      checkCalculationData: this.gameData.acheckCalculationData,
+      answerData: this.gameData.answer,
       isAnswerRight: false,
-      questionType: this.GameData.question.questionType,
+      questionType: this.gameData.question.questionType,
       mode: isApplication ? "application" : "arithmetic",
       userOperation: isApplication
         ? " " // 一開始是空格
-        : this.GameData.question.operationType,
+        : this.gameData.question.operationType,
     };
   },
   methods: {
@@ -120,7 +119,7 @@ export default {
       let isCorrect = this.isAnswerRight;
       if (this.mode === "application") {
         isCorrect =
-          isCorrect && this.userOperation === this.GameData.answer.operation;
+          isCorrect && this.userOperation === this.gameData.answer.operation;
       }
 
       if (isCorrect) {

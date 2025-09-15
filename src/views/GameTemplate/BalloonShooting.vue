@@ -1,6 +1,6 @@
 <template>
-  <div ref="container">
-    <h2>{{ GameData.Question }}</h2>
+  <div ref="container" class="gameContainer">
+    <h2>{{ gameData.Question }}</h2>
     <v-stage
       :config="configKonva"
       @pointerdown="aimStart"
@@ -38,24 +38,15 @@
 </template>
 
 <script>
-import { getGameAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 
 export default {
+  name: "BalloonShooting",
   components: {},
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -63,11 +54,16 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      configKonva: {},
+      configKonva: {
+        width: 800,
+        height: 400,
+      },
 
       configBG: {
         fill: "gray",
         stroke: "gray",
+        width: 800,
+        height: 400,
       },
       configScope: {
         stroke: "white",
@@ -88,27 +84,32 @@ export default {
   },
 
   mounted() {
-    this.initializeScene();
-    this.initializeOptions();
-    this.balloonSpawner();
-    this.game = window.setInterval(this.update, 20);
-    this.spawner = window.setInterval(this.balloonSpawner, 1000);
+    // 使用 nextTick 確保 DOM 完全渲染後再初始化
+    this.$nextTick(() => {
+      this.initializeScene();
+      this.initializeOptions();
+      this.balloonSpawner();
+      this.game = window.setInterval(this.update, 20);
+      this.spawner = window.setInterval(this.balloonSpawner, 1000);
+    });
   },
 
   methods: {
     initializeScene() {
+      // 計算實際尺寸
       this.gameWidth = this.$refs.container.clientWidth * 0.8;
       this.configKonva.width = this.gameWidth;
       this.configKonva.height = this.gameWidth / 2;
       this.configBG.width = this.gameWidth;
       this.configBG.height = this.gameWidth / 2;
+
       for (let i = 0; i < 4; ++i) {
         this.configCross[i].stroke = "white";
       }
     },
     initializeOptions() {
-      this.allOptions = this.GameData.True.concat(this.GameData.False);
-      this.trueOptions = this.GameData.True;
+      this.allOptions = this.gameData.True.concat(this.gameData.False);
+      this.trueOptions = this.gameData.True;
     },
     update() {
       this.moveBalloon();
@@ -222,8 +223,8 @@ export default {
     },
     checkAnswer(selectedOption) {
       let checkAnswer = false;
-      for (const answer in this.GameData.True) {
-        if (this.GameData.True[answer] === selectedOption) checkAnswer = true;
+      for (const answer in this.gameData.True) {
+        if (this.gameData.True[answer] === selectedOption) checkAnswer = true;
       }
       if (checkAnswer) {
         this.$emit("play-effect", "CorrectSound");
@@ -243,3 +244,14 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.gameContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

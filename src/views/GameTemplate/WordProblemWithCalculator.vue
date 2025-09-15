@@ -1,25 +1,29 @@
 <template>
   <div class="outter-container">
-    <div v-if="GameData.headQuestion" class="head-container">
-      <p>{{ GameData.headQuestion }}</p>
+    <div v-if="gameData.headQuestion" class="head-container">
+      <p>{{ gameData.headQuestion }}</p>
     </div>
     <div class="word-problem">
       <div class="left-container">
-        <ImageContainer v-if="GameData.image" :ID="ID" :Data="GameData.image" />
-        <Markdown
+        <ImageContainer
+          v-if="gameData.image"
+          :game-id="gameId"
+          :component-config="gameData.image"
+        />
+        <MarkdownRenderer
           class="markdown"
-          :Data="markdownData"
-          :ID="ID"
+          :component-config="markdownData"
+          :game-id="gameId"
           @reply-answer="markdownAnswer"
         />
       </div>
       <div class="right-container">
         <div class="calculator-container">
           <component
-            :is="GameConfig.calculator"
+            :is="gameConfig.calculator"
             class="calculator"
-            :Data="calculatorData"
-            :ID="ID"
+            :component-config="calculatorData"
+            :game-id="gameId"
             @reply-answer="calculatorAnswer"
           />
         </div>
@@ -36,7 +40,7 @@ import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "WordProblemWithCalculator",
   components: {
-    Markdown: getComponents("Markdown"),
+    MarkdownRenderer: getComponents("MarkdownRenderer"),
     ImageContainer: defineAsyncComponent(
       () => import("@/components/ImageContainer.vue")
     ),
@@ -45,15 +49,15 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -61,7 +65,7 @@ export default {
   emits: ["play-effect", "next-question", "add-record"],
   data() {
     return {
-      // GameData: {
+      // gameData: {
       //   calculator: {
       //     Unit: "Volume",
       //     CarryAmount: 1,
@@ -113,8 +117,8 @@ export default {
     // Add your computed properties here
   },
   created() {
-    this.calculatorData = this.GameData.calculator;
-    this.markdownData = this.GameData.markdown;
+    this.calculatorData = this.gameData.calculator;
+    this.markdownData = this.gameData.markdown;
     emitter.on("submitAnswer", this.checkAnswer);
   },
   mounted() {
@@ -125,8 +129,8 @@ export default {
   },
   methods: {
     checkAnswer() {
-      if (!this.GameConfig.calculatorVerify) this.calculatorAnswerStatus = true;
-      if (!this.GameConfig.markdownVerify) this.markdownAnswerStatus = true;
+      if (!this.gameConfig.calculatorVerify) this.calculatorAnswerStatus = true;
+      if (!this.gameConfig.markdownVerify) this.markdownAnswerStatus = true;
 
       emitter.emit("checkAnswer");
       if (this.markdownAnswerStatus && this.calculatorAnswerStatus) {

@@ -2,19 +2,26 @@
   <div class="outter-container">
     <div class="head-container">
       <p style="font-weight: bold">
-        {{ GameConfig.GlobalTitle }}
+        {{ gameConfig.GlobalTitle }}
       </p>
     </div>
     <div class="down-container">
       <div
-        v-if="GameData.SlotComponents !== undefined"
+        v-if="gameData.SlotComponents !== undefined"
         class="component-container"
       >
-        <component :is="SlotComponent" :ID="ID" :Data="SlotData" />
+        <component
+          :is="SlotComponent"
+          :game-id="gameId"
+          :component-config="SlotData"
+        />
       </div>
-      <div v-if="GameData.SlotComponents !== undefined" class="container__right">
+      <div
+        v-if="gameData.SlotComponents !== undefined"
+        class="container__right"
+      >
         <div class="info__card">
-          <p>{{ GameData.Question_Text }}</p>
+          <p>{{ gameData.Question_Text }}</p>
         </div>
         <div class="select-button__group">
           <button
@@ -30,7 +37,7 @@
       <div v-else class="container__buttom">
         <div class="info__card">
           <p class="h2">
-            {{ GameData.Question_Text }}
+            {{ gameData.Question_Text }}
           </p>
         </div>
         <div class="right--container">
@@ -60,15 +67,15 @@ export default {
     DragImages: getComponents("DragImages"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -85,13 +92,13 @@ export default {
     };
   },
   created() {
-    for (const i in this.GameData.Question) {
-      this.question.push(this.GameData.Question[i]);
+    for (const i in this.gameData.Question) {
+      this.question.push(this.gameData.Question[i]);
       this.Select.push(false);
     }
-    this.imageUrl = getGameAssets(this.ID, this.GameData.img);
-    if (this.GameData.SlotComponents !== undefined) {
-      const SlotComponentData = this.GameData.SlotComponents[0];
+    this.imageUrl = getGameAssets(this.gameId, this.gameData.img);
+    if (this.gameData.SlotComponents !== undefined) {
+      const SlotComponentData = this.gameData.SlotComponents[0];
       this.SlotData = SlotComponentData.Data;
       this.SlotComponent = SlotComponentData.Name;
     }
@@ -116,14 +123,14 @@ export default {
     },
     CheckAnswer() {
       const answer = this.Answer;
-      if (answer === this.GameData.Answer) {
+      if (answer === this.gameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);
+        this.$emit("add-record", [this.gameData.Answer, answer, "正確"]);
         this.$emit("next-question");
         console.log("check answer : True");
       } else {
         this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", [this.GameData.Answer, answer, "錯誤"]);
+        this.$emit("add-record", [this.gameData.Answer, answer, "錯誤"]);
         console.log("check answer : False");
       }
     },

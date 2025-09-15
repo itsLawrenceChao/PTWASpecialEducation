@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>{{ GameData.Question.text }}</h1>
+    <h1>{{ gameData.Question.text }}</h1>
     <hr />
     <draggable :key="options[0]" :list="options" group="Sentense">
       <template #item="{ element }">
@@ -29,16 +29,8 @@ export default {
     draggable,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -59,8 +51,8 @@ export default {
   mounted() {},
   methods: {
     UpdateQuestion() {
-      this.answer = this.GameData.Answer;
-      this.question = this.GameData.Question.options;
+      this.answer = this.gameData.Answer;
+      this.question = this.gameData.Question.options;
       this.RandomtheList();
       let randed = this.Checkrand();
       while (randed === false) {
@@ -102,7 +94,7 @@ export default {
         console.log("SortGame ChenckAnswer: Right");
         this.show = false;
         this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [this.GameData.Answer, this.options, "正確"]);
+        this.$emit("add-record", [this.gameData.Answer, this.options, "正確"]);
         this.$emit("next-question");
         setTimeout(this.UpdateQuestion, 100);
         this.UpdateQuestion();

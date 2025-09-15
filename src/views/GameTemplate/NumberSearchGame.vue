@@ -2,7 +2,7 @@
   <div class="game-container">
     <div class="gameAndQuestion">
       <p class="question">
-        {{ GameData.Text }}
+        {{ gameData.Text }}
       </p>
       <p class="game__remaining">剩餘題數：{{ remainingQuestions }}</p>
       <div class="progress">
@@ -55,15 +55,11 @@ import { soundManager } from "@/utilitys/sound-manager.js";
 export default {
   name: "NumberSearchGame",
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -95,18 +91,18 @@ export default {
   computed: {
     progressPercentage() {
       const percentageFactor = 100;
-      return (this.rightAnswerCount / this.GameData.ObjNum) * percentageFactor;
+      return (this.rightAnswerCount / this.gameData.ObjNum) * percentageFactor;
     },
     progressBarWidth() {
       return `${this.progressPercentage}%`;
     },
     remainingQuestions() {
-      return this.GameData.ObjNum - this.rightAnswerCount;
+      return this.gameData.ObjNum - this.rightAnswerCount;
     },
   },
   created() {
     const image = new window.Image();
-    image.src = getGameAssets(this.ID, this.GameData.img);
+    image.src = getGameAssets(this.gameId, this.gameData.img);
     image.onload = () => {
       const aspectRatio = image.width / image.height;
       if (this.stageSize.width / this.stageSize.height > aspectRatio) {
@@ -119,7 +115,7 @@ export default {
       this.imageConfig.image = image;
     };
 
-    this.randomQuestionOrder = this.generateRandomOrder(this.GameData.ObjNum);
+    this.randomQuestionOrder = this.generateRandomOrder(this.gameData.ObjNum);
 
     for (let i = 0; i < 11; i++) {
       const numberSound = getSystemAssets(`${i}.mp3`, "read-numbers");
@@ -160,8 +156,8 @@ export default {
       return order;
     },
     checkAnswer(questionNum, posX, posY) {
-      const obj = this.GameData.Objs[questionNum];
-      const tolerance = this.GameData.tolerance;
+      const obj = this.gameData.Objs[questionNum];
+      const tolerance = this.gameData.tolerance;
       return (
         posX >= obj.xRange[0] - tolerance &&
         posX <= obj.xRange[1] + tolerance &&
@@ -176,7 +172,7 @@ export default {
       this.$emit("add-record", [questionNum, questionNum, "正確"]);
     },
     addCircle(questionNum) {
-      const obj = this.GameData.Objs[questionNum];
+      const obj = this.gameData.Objs[questionNum];
       const radius =
         Math.sqrt(
           (obj.xRange[1] - obj.xRange[0]) ** 2 +
@@ -192,15 +188,15 @@ export default {
       });
     },
     getWrongAnswer(x, y) {
-      const tolerance = this.GameData.tolerance;
-      for (let i = 0; i < this.GameData.ObjNum; ++i) {
+      const tolerance = this.gameData.tolerance;
+      for (let i = 0; i < this.gameData.ObjNum; ++i) {
         if (
-          x >= this.GameData.Objs[i].xRange[0] - tolerance &&
-          x <= this.GameData.Objs[i].xRange[1] + tolerance &&
-          y >= this.GameData.Objs[i].yRange[0] - tolerance &&
-          y <= this.GameData.Objs[i].yRange[1] + tolerance
+          x >= this.gameData.Objs[i].xRange[0] - tolerance &&
+          x <= this.gameData.Objs[i].xRange[1] + tolerance &&
+          y >= this.gameData.Objs[i].yRange[0] - tolerance &&
+          y <= this.gameData.Objs[i].yRange[1] + tolerance
         )
-          return this.GameData.Objs[i].Name;
+          return this.gameData.Objs[i].Name;
       }
       return "空白處";
     },
@@ -219,12 +215,12 @@ export default {
     previousQuestion() {
       this.questionNum--;
       if (this.questionNum < 0) {
-        this.questionNum = this.GameData.ObjNum - 1;
+        this.questionNum = this.gameData.ObjNum - 1;
       }
       this.playNumberSound();
     },
     skipAnsweredQuestions() {
-      const totalQuestions = this.GameData.ObjNum;
+      const totalQuestions = this.gameData.ObjNum;
       if (
         this.correctlyAnsweredQuestions[this.questionNum] ||
         this.questionNum >= totalQuestions
@@ -237,7 +233,7 @@ export default {
       }
     },
     gameOver() {
-      return this.rightAnswerCount >= this.GameData.ObjNum;
+      return this.rightAnswerCount >= this.gameData.ObjNum;
     },
   },
 };

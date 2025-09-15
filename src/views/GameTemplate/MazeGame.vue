@@ -1,6 +1,6 @@
 <template>
   <div ref="container">
-    <h2>{{ GameData.Question }}</h2>
+    <h2>{{ gameData.Question }}</h2>
     <v-stage
       :config="configKonva"
       @touchstart="touchStart"
@@ -58,22 +58,14 @@ import fetchJson from "@/utilitys/fetch-json";
 
 export default {
   components: {
-    joystick: defineAsyncComponent(() =>
-      import("@/components/touchscreenJoystick.vue")
+    joystick: defineAsyncComponent(
+      () => import("@/components/touchscreenJoystick.vue")
     ),
   },
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -241,7 +233,7 @@ export default {
       for (let i = 0; i < 4; ++i) {
         const option = {
           stroke: "black",
-          text: this.GameData.Options[i],
+          text: this.gameData.Options[i],
           x: this.optionMap[i].x * this.laneWidth + 0.1 * this.laneWidth,
           y: this.optionMap[i].y * this.laneWidth + 0.1 * this.laneWidth,
           fontSize: this.laneWidth * 0.8,
@@ -682,7 +674,7 @@ export default {
         this.initializePlayerPosition();
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.Options[this.GameData.Answer],
+          this.gameData.Options[this.gameData.Answer],
           "與敵人碰撞",
           "錯誤",
         ]);
@@ -698,15 +690,15 @@ export default {
         ] !== 1
       ) {
         if (
-          this.GameData.Answer + 2 ===
+          this.gameData.Answer + 2 ===
           this.map[this.randomMapId][
             Math.round(this.entityInfo.player.xyGrid.y)
           ][Math.round(this.entityInfo.player.xyGrid.x)]
         ) {
           this.$emit("play-effect", "CorrectSound");
           this.$emit("add-record", [
-            this.GameData.Options[this.GameData.Answer],
-            this.GameData.Options[
+            this.gameData.Options[this.gameData.Answer],
+            this.gameData.Options[
               this.map[this.randomMapId][
                 Math.round(this.entityInfo.player.xyGrid.y)
               ][Math.round(this.entityInfo.player.xyGrid.x)] - 2
@@ -719,8 +711,8 @@ export default {
           this.initializePlayerPosition();
           this.$emit("play-effect", "WrongSound");
           this.$emit("add-record", [
-            this.GameData.Options[this.GameData.Answer],
-            this.GameData.Options[
+            this.gameData.Options[this.gameData.Answer],
+            this.gameData.Options[
               this.map[this.randomMapId][
                 Math.round(this.entityInfo.player.xyGrid.y)
               ][Math.round(this.entityInfo.player.xyGrid.x)] - 2
