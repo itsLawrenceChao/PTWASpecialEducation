@@ -18,6 +18,7 @@
         <div class="Container">
           <div class="col-10 GameArea">
             <LevelAndTime
+              v-if="Dataloaded && GameData.Questions"
               :time="time"
               :totaltime="totaltime"
               :questions="GameData.Questions"
@@ -37,7 +38,7 @@
                 <EffectWindow
                   v-if="ShowReply"
                   id="CorrecIncorrect"
-                  :Data="CorrectIncorrect"
+                  :answer-result="CorrectIncorrect"
                 />
                 <transition :name="transitionName" mode="out-in">
                   <component
@@ -45,9 +46,9 @@
                     v-if="gameType !== 'SelfDefine'"
                     ref="GameComponent"
                     :key="Nowlevel"
-                    :ID="gameID"
-                    :GameData="GameData.Questions[Nowlevel - 1]"
-                    :GameConfig="GameConfig"
+                    :game-id="gameID"
+                    :game-data="GameData.Questions[Nowlevel - 1]"
+                    :game-config="GameConfig"
                     @add-record="gameDataRecord"
                     @play-effect="effectPlayer"
                     @next-question="nextQuestion"
@@ -58,10 +59,9 @@
                   :is="selfdefinetemplate"
                   v-if="gameType === 'SelfDefine'"
                   :key="Nowlevel"
-                  :ID="gameID"
-                  :GameData="GameData.Questions[Nowlevel - 1]"
-                  :GameConfig="GameConfig"
-                  :EnviromerntInfo="getAllInfo()"
+                  :game-id="gameID"
+                  :game-data="GameData.Questions[Nowlevel - 1]"
+                  :game-config="GameConfig"
                   @get-info="getAllInfo"
                   @add-record="gameDataRecord"
                   @download-data="ToCSV"
@@ -85,11 +85,11 @@
               </div>
               <div v-else class="intro">
                 <GameStart
-                  v-if="GameStatus === 'NotStart'"
+                  v-if="GameStatus === 'NotStart' && Dataloaded"
                   :key="Dataloaded"
-                  :Status="GameStatus"
+                  :game-status="GameStatus"
                   :intro="GameData.IntroText"
-                  :GameName="gameName"
+                  :game-name="gameName"
                   @start-game="startGame"
                   @open-teaching-modal="openMediaModal"
                 />
@@ -105,9 +105,7 @@
           <SideBar
             v-if="Dataloaded"
             class="SideBar col-2"
-            :GameStatus="GameStatus"
-            :HintInfo="hintInfo"
-            :Hint="Hint"
+            :game-status="GameStatus"
             :download_data="download_data"
             :level-amount="GameData.Questions.length"
             :reappeare-code="questionOrder"
@@ -127,7 +125,7 @@
             <template #hint>
               <hintbutton
                 v-if="GameStatus === 'Progressing' && Hint['Type'] !== 'Method'"
-                :HintInfo="hintInfo"
+                :hint-info="hintInfo"
                 @open-hint-modal="openMediaModal"
               />
             </template>
@@ -376,6 +374,7 @@ export default {
       try {
         const res = await fetchJson(`./Grade${this.Grade}/${this.gameID}.json`);
         this.GameData = res.data;
+        console.log(this.GameData.Questions);
         this.gameType = this.GameData.GameType;
         this.GameConfig = this.GameData.GameConfig;
         this.questionCopy = this.GameData.Questions;
@@ -427,7 +426,6 @@ export default {
       }
       this.gameCode = record.toString().replaceAll(",", "-");
       if (checkcorrect) {
-        console.log(question);
         this.GameData.Questions = question;
       } else {
         this.gameCode = "origin";
@@ -785,6 +783,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: relative; /* 添加相對定位 */
   .games {
     width: 100%;
     height: 100%;
@@ -792,6 +791,8 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative; /* 確保子元素正確定位 */
+    min-height: 400px; /* 設置最小高度避免佈局跳動 */
   }
 
   overflow-x: auto;
@@ -937,5 +938,14 @@ img.media-content {
 .mediaModal-content {
   margin: 0;
   font-size: 1.5rem;
+}
+
+/* 防止組件載入時的佈局跳動 */
+#GameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 </style>
