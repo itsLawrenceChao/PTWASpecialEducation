@@ -34,8 +34,8 @@
     <div v-if="!isMinimized" class="calculator-content">
       <GenericBoard
         :key="selectedType"
+        :game-id="'floating-calculator'"
         :data="currentCalculatorData"
-        :ID="'floating-calculator'"
         :config="currentConfig"
         @reply-answer="handleCalculatorResult"
       />
