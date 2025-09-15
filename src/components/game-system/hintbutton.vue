@@ -8,6 +8,7 @@
         v-for="i in hintInfo.MaxWrongTimes - hintInfo.WrongTimes > 0
           ? hintInfo.MaxWrongTimes - hintInfo.WrongTimes
           : 0"
+        :key="i"
       >
         ❤
       </p>

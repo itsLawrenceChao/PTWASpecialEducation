@@ -26,6 +26,7 @@
         <div class="select-button__group">
           <button
             v-for="i in question"
+            :key="i"
             type="button"
             :class="{ 'button--onclick': Select[i] }"
             @click="SelectItem(i)"
@@ -44,6 +45,7 @@
           <div class="select-button__group">
             <button
               v-for="i in question"
+              :key="i"
               type="button"
               :class="{ 'button--onclick': Select[i] }"
               @click="SelectItem(i)"

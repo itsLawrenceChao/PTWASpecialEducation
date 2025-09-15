@@ -112,7 +112,7 @@
               {{ items.Title }}
             </p>
             <div class="game-card__group">
-              <div v-for="item in items.Games" class="card game-card">
+              <div v-for="item in items.Games" :key="item.id" class="card game-card">
                 <game-card
                   :game-info="{
                     id: item.id,
@@ -161,6 +161,7 @@
         <div class="game-card__group">
           <div
             v-for="item in searchResult"
+            :key="item.id"
             class="card game-card"
             style="width: 18rem"
             @click="

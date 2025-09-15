@@ -16,9 +16,10 @@
       <p>{{ configs.Unit }}</p>
     </div>
     <table class="OddBorderOutline">
-      <tr v-for="(items, index1) in Drawed">
+      <tr v-for="(items, itemIndex) in Drawed" :key="itemIndex">
         <td
           v-for="(item, index2) in items"
+          :key="index2"
           class="table"
           @click="handleClick($event, index1, index2)"
         />

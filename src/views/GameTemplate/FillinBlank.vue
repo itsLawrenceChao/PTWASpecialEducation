@@ -20,12 +20,13 @@
         </p>
         <hr />
         <div
-          v-for="(item, index1) in gameData.Question"
-          :key="index1"
+          v-for="(item, itemIndex) in gameData.Question"
+          :key="itemIndex"
           class="QuestionRow"
         >
           <div
-            v-for="(question, index2) in gameData.Question[index1]"
+            v-for="(question, questionIndex) in gameData.Question[itemIndex]"
+            :key="questionIndex"
             class="Question"
           >
             <input
@@ -47,7 +48,10 @@
       </div>
     </div>
     <div class="Slot">
-      <div v-for="slot in gameData.AssistiveComponent">
+      <div
+        v-for="(slot, slotIndex) in gameData.AssistiveComponent"
+        :key="slotIndex"
+      >
         <component
           :is="slot"
           @virtualpadinput-input="VNInput"

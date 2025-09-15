@@ -2,12 +2,12 @@
   <!-- Your component's HTML template goes here -->
   <table class="NumberBoard">
     <tr class="EachRow">
-      <td v-for="unit in Unit" class="UnitEachBlanket">
+      <td v-for="(unit, uIndex) in Unit" :key="uIndex" class="UnitEachBlanket">
         {{ unit }}
       </td>
     </tr>
     <tr class="EachRow">
-      <td v-for="(number, index) in Number" class="EachBlanket">
+      <td v-for="(number, index) in Number" :key="index" class="EachBlanket">
         <input
           v-model="Number[index]"
           class="inside-input"

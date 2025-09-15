@@ -36,6 +36,7 @@
       <div class="answer-area__drop">
         <div
           v-for="(items, index) in gameData.Answer"
+          :key="index"
           class="drop-area__container"
         >
           <p class="answer-area__title">{{ items.GroupName }}</p>

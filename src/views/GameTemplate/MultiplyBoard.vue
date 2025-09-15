@@ -2,11 +2,12 @@
   <div class="container">
     <div class="board">
       <div class="unit" :style="unitRowStyle">
-        <button v-for="i in unitStyle" :style="i">{{ i.text }}</button>
+        <button v-for="(i, idx) in unitStyle" :key="idx" :style="i">{{ i.text }}</button>
       </div>
       <div ref="row" class="row" :style="btnRowStyle">
         <button
           v-for="i in rowStyle[0].btnStyle.length"
+          :key="i"
           class="numBtn"
           :style="rowStyle[0].btnStyle[i - 1]"
           @click="btnClick($event, 0, i - 1)"
@@ -17,6 +18,7 @@
       <div class="row" :style="btnRowStyle">
         <button
           v-for="i in rowStyle[1].btnStyle.length"
+          :key="i"
           class="numBtn"
           :style="rowStyle[1].btnStyle[i - 1]"
           @click="btnClick($event, 1, i - 1)"
@@ -27,11 +29,13 @@
       <hr />
       <div
         v-for="i in gameData.digitsOfEachRow.length - 3"
+        :key="i"
         class="row"
         :style="btnRowStyle"
       >
         <button
           v-for="j in rowStyle[i + 1].btnStyle.length"
+          :key="j"
           class="numBtn"
           :style="rowStyle[i + 1].btnStyle[j - 1]"
           @click="btnClick($event, i + 1, j - 1)"
@@ -44,6 +48,7 @@
         <button
           v-for="i in rowStyle[gameData.digitsOfEachRow.length - 1].btnStyle
             .length"
+          :key="i"
           class="numBtn"
           :style="rowStyle[gameData.digitsOfEachRow.length - 1].btnStyle[i - 1]"
           @click="btnClick($event, gameData.digitsOfEachRow.length - 1, i - 1)"

@@ -9,6 +9,7 @@
         <div class="Objects">
           <button
             v-for="(button, index) in gameData.Objs"
+            :key="index"
             class="Object"
             :class="{ activebutton: answered[index] }"
           >

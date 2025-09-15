@@ -24,7 +24,7 @@
       </div>
       <div class="QuestionArea">
         <p class="Title">答案區</p>
-        <div v-for="(pair, index) in gameData.Pairs" class="Pair">
+        <div v-for="(pair, index) in gameData.Pairs" :key="index" class="Pair">
           <div class="Answer" :class="{ False: FalseOption[index] === true }">
             <draggable
               :list="AnswersNew[index]"

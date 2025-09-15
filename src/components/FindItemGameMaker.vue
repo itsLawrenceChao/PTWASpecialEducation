@@ -22,6 +22,7 @@
       <div>
         <button
           v-for="(item, index) in btn"
+          :key="index"
           :class="{ actbtn: drawed[index + 1] }"
         >
           {{ item }}

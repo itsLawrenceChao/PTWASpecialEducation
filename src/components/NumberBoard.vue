@@ -2,7 +2,8 @@
   <table class="number-board">
     <tr class="number-board__row">
       <td
-        v-for="unit in Unit"
+        v-for="(unit, uIndex) in Unit"
+        :key="uIndex"
         class="number-board__cell number-board__cell--unit"
       >
         {{ unit }}
@@ -11,6 +12,7 @@
     <tr class="number-board__row">
       <td
         v-for="(number, index) in numbers"
+        :key="index"
         class="number-board__cell"
         :class="{
           'number-board__cell--clickable': isInput,
