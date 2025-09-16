@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import { objectEntries } from "@vueuse/core";
-
 const SHAPE_CONFIGS = {
   circle: {
     radiusRatio: 0.4,

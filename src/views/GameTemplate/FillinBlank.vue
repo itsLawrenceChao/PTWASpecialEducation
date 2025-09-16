@@ -63,7 +63,6 @@
   </div>
 </template>
 <script>
-import { defineAsyncComponent } from "vue";
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import { getComponents } from "@/utilitys/get-components";
 export default {
@@ -96,10 +95,8 @@ export default {
   },
   created() {
     for (const i in this.gameData.Question) {
-      const temp = [];
-      for (const j in this.gameData.Question[i]) {
-        temp.push("");
-      }
+      let temp = [];
+      temp = Array(Object.keys(this.gameData.Question[i]).length).fill("");
       this.Value.push(temp);
     }
   },

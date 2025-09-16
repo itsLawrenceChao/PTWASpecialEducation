@@ -236,7 +236,7 @@ export default {
     },
 
     areAllAnswersCorrect() {
-      return Object.entries(this.userAnswers).every(([index, answer]) =>
+      return Object.entries(this.userAnswers).every(([index]) =>
         this.isAnswerCorrect(index)
       );
     },

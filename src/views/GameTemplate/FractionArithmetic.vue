@@ -102,7 +102,6 @@ export default {
     };
   },
   created() {
-    this.initializeItems();
     emitter.on("submitAnswer", this.triggerValidation);
   },
   beforeUnmount() {

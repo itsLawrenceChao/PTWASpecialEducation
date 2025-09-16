@@ -13,13 +13,12 @@
         class="draggable"
         :alt="image.alt"
         :style="{ left: image.left + 'px', top: image.top + 'px' }"
-        @mousedown="onMouseDown($event, index)"
+        @mousedown="onMouseDown($event)"
       />
     </div>
   </div>
 </template>
 <script>
-import { getSlotComponentAssets } from "../utilitys/get_assets";
 import ImageContainer from "@/components/ImageContainer.vue";
 import { getGameAssets } from "@/utilitys/get_assets.js";
 //componentConfig Structure
@@ -80,7 +79,7 @@ export default {
     this.expandImages();
   },
   methods: {
-    onMouseDown(event, index) {
+    onMouseDown(event) {
       event.preventDefault();
       const draggable = event.target;
       this.highestZIndex++;

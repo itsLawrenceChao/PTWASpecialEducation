@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { set } from "@vueuse/core";
 export default {
   name: "NumberBoard",
   props: {

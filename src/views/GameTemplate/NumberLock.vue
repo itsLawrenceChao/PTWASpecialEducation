@@ -30,7 +30,6 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {

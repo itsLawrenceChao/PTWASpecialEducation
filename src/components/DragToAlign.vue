@@ -16,19 +16,17 @@
 
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
-import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 export default {
   components: {},
 
   props: {
     componentConfig: {
       type: Object,
-      required: false,
+      required: true,
     },
     gameId: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   data() {

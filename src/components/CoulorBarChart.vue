@@ -59,7 +59,6 @@ export default {
       this.Drawed.push(temp);
     } else {
       //偶數
-      const temp = [];
       const div = this.configs.Total / 2;
       for (let i = 0; i < 2; i++) {
         const temp = [];
