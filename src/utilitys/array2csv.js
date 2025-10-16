@@ -13,10 +13,10 @@ export function DownloadCSV (csv_array,GameName="") {
         return arr.map(row => row.join(',')).join('\n');
     };
 
-    var csvString = arrayToCSV(csv_array);
+    let csvString = arrayToCSV(csv_array);
     csvString=  '\ufeff'+csvString; // 添加 BOM
 
-    var blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement('a');
@@ -29,7 +29,7 @@ export function DownloadCSV (csv_array,GameName="") {
 
 export function MadeCsvFile(id,name,grade,subject,recoders,totaltime,questionRecord,header=["編號","正確答案","學生作答答案","是否正確","作答秒數(單題)","總耗時時間(秒)"]){
     const today = new Date();
-    var csv_array = [];
+    const csv_array = [];
     csv_array.push(["學生姓名"])
     csv_array.push(["遊玩日期",today.toLocaleDateString()])
     csv_array.push(["遊戲名稱",name])
@@ -39,13 +39,13 @@ export function MadeCsvFile(id,name,grade,subject,recoders,totaltime,questionRec
     csv_array.push(["總耗時時間(秒)",totaltime])
     csv_array.push(["遊玩紀錄"])
     let count=1;
-    for(var i in recoders){
+    for(const i in recoders){
         csv_array.push(["第"+count+"關"])
         csv_array.push(header)
-        for(var j in recoders[i]){
-            var temp=[]
+        for(const j in recoders[i]){
+            const temp=[]
             temp.push(j)
-            for(var k in recoders[i][j]){
+            for(const k in recoders[i][j]){
                 temp.push(recoders[i][j][k])
             }
             csv_array.push(temp)
@@ -58,7 +58,7 @@ export function MadeCsvFile(id,name,grade,subject,recoders,totaltime,questionRec
 }
 
 export function ArrayTemplate2Record(arr, level, time,totaltime){
-    var templatecode ={
+    const templatecode ={
         "%%level%%":level, // 關卡
         "%%time%%":time, // 已用時間
         "%%totaltime%%":totaltime // 總耗時時間(秒)

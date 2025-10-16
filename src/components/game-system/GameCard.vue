@@ -53,10 +53,6 @@ export default {
     }
   },
   methods: {
-    readText() {
-      //   event.stopPropagation();
-      this.$emit("readText", this.gameInfo.name, this.gameInfo.description);
-    },
     enterGame() {
       this.$emit("enterGame");
     },

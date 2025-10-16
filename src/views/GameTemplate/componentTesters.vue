@@ -11,26 +11,42 @@
       <option selected>fillImages</option>
     </select>
   </div>
-  <div v-if="tester == 'fraction'" class="testArea">
-    <dragFraction :Data="configFraction" :ID="gameid" @reply-answer="printAns" />
+  <div v-if="tester === 'fraction'" class="testArea">
+    <dragFraction
+      :game-id="gameid"
+      :component-config="configFraction"
+      @reply-answer="printAns"
+    />
   </div>
-  <div v-if="tester == 'numberLine'" class="testArea">
-    <numberLine :Data="configNumberLine" :ID="gameid" @get-drag-position="printAns" />
+  <div v-if="tester === 'numberLine'" class="testArea">
+    <numberLine
+      :game-id="gameid"
+      :component-config="configNumberLine"
+      @get-drag-position="printAns"
+    />
   </div>
-  <div v-if="tester == 'drawShapes'" class="testArea">
-    <drawShapes :Data="configDrawShapes" :ID="gameid" @reply-answer="printAns" />
+  <div v-if="tester === 'drawShapes'" class="testArea">
+    <drawShapes
+      :game-id="gameid"
+      :component-config="configDrawShapes"
+      @reply-answer="printAns"
+    />
   </div>
-  <div v-if="tester == 'dragToAlign'" class="testArea">
-    <dragToAlign :Data="configDragToAlign" :ID="gameid" />
+  <div v-if="tester === 'dragToAlign'" class="testArea">
+    <dragToAlign :game-id="gameid" :component-config="configDragToAlign" />
   </div>
-  <div v-if="tester == 'dragImages'" class="testArea">
-    <dragImages :Data="configDragImages" :ID="gameid" />
+  <div v-if="tester === 'dragImages'" class="testArea">
+    <dragImages :game-id="gameid" :component-config="configDragImages" />
   </div>
-  <div v-if="tester == 'scale'" class="testArea">
-    <scale :Data="configScale" :ID="gameid" @replyAnswer="printAns" />
+  <div v-if="tester === 'scale'" class="testArea">
+    <scale
+      :game-id="gameid"
+      :component-config="configScale"
+      @reply-answer="printAns"
+    />
   </div>
-  <div v-if="tester == 'drawingBoard'" class="testArea">
-    <drawingBoard :Data="configBrush"></drawingBoard>
+  <div v-if="tester === 'drawingBoard'" class="testArea">
+    <drawingBoard :component-config="configBrush"></drawingBoard>
     <div class="btnContainer">
       <button
         @click="
@@ -50,12 +66,12 @@
       </button>
     </div>
   </div>
-  <div v-if="tester == 'fillImages'" class="testArea">
+  <div v-if="tester === 'fillImages'" class="testArea">
     <fillImages
       :key="testerKey"
-      :Data="configFillImages"
-      :ID="'Dev02_Testers'"
-      @replyAnswer="printAns"
+      :game-id="'Dev02_Testers'"
+      :component-config="configFillImages"
+      @reply-answer="printAns"
     />
     <input
       type="number"
@@ -72,19 +88,31 @@
 </template>
 
 <script>
-import { getGameAssets } from "@/utilitys/get_assets.js";
-import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
 export default {
   components: {
-    dragFraction: defineAsyncComponent(() => import("@/components/DragFraction.vue")),
-    numberLine: defineAsyncComponent(() => import("@/components/DragOnNumberLine.vue")),
-    drawShapes: defineAsyncComponent(() => import("@/components/DrawShapes.vue")),
-    dragToAlign: defineAsyncComponent(() => import("@/components/DragToAlign.vue")),
-    dragImages: defineAsyncComponent(() => import("@/components/DragImages.vue")),
-    scale: defineAsyncComponent(() => import("@/components/Scale.vue")),
-    drawingBoard: defineAsyncComponent(() => import("@/components/DrawingBoard.vue")),
-    fillImages: defineAsyncComponent(() => import("@/components/FillImages.vue")),
+    dragFraction: defineAsyncComponent(
+      () => import("@/components/DragFraction.vue")
+    ),
+    numberLine: defineAsyncComponent(
+      () => import("@/components/DragOnNumberLine.vue")
+    ),
+    drawShapes: defineAsyncComponent(
+      () => import("@/components/DrawShapes.vue")
+    ),
+    dragToAlign: defineAsyncComponent(
+      () => import("@/components/DragToAlign.vue")
+    ),
+    dragImages: defineAsyncComponent(
+      () => import("@/components/DragImages.vue")
+    ),
+    scale: defineAsyncComponent(() => import("@/components/ScalePointer.vue")),
+    drawingBoard: defineAsyncComponent(
+      () => import("@/components/DrawingBoard.vue")
+    ),
+    fillImages: defineAsyncComponent(
+      () => import("@/components/FillImages.vue")
+    ),
   },
   data() {
     return {

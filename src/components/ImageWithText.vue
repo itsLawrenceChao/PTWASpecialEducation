@@ -1,8 +1,8 @@
 <template>
   <div class="image-with-text">
     <ImageContainer
-      :ID="ID"
-      :Data="{ Src: Data.Src, Alt: Data.Alt }"
+      :game-id="gameId"
+      :component-config="{ Src: componentConfig.Src, Alt: componentConfig.Alt }"
     />
     <p class="h1">
       {{ text }}
@@ -18,11 +18,11 @@ export default {
     ImageContainer,
   },
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -35,8 +35,8 @@ export default {
   },
   mounted() {
     // Your code here
-    this.imageUrl = getGameAssets(this.ID, this.Data.Src);
-    this.text = this.Data.Text;
+    this.imageUrl = getGameAssets(this.gameId, this.componentConfig.Src);
+    this.text = this.componentConfig.Text;
   },
 };
 </script>

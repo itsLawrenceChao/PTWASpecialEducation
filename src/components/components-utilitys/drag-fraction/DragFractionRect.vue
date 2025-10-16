@@ -133,7 +133,7 @@ export default {
           );
         }
       }
-      if (this.configDenominator.slice[i - 1].slices != this.denominator)
+      if (this.configDenominator.slice[i - 1].slices !== this.denominator)
         this.configDenominator.slice[i - 1].slices = this.denominator;
     },
     animation(currentWidth, targetWidth) {
@@ -153,7 +153,7 @@ export default {
       this.configNumerator.y = this.numeratorSnapTo.y;
     },
     drawDenominator() {
-      let frame = {
+      const frame = {
         width: this.rectAttr.width,
         height: this.rectAttr.height,
         x: this.denominatorSnapTo.x,
@@ -163,7 +163,7 @@ export default {
         draggable: true,
         name: this.fill.length.toString(),
       };
-      let rect = {
+      const rect = {
         strokeEnabled: false,
         visible: false,
         width: 0,
@@ -174,7 +174,7 @@ export default {
         draggable: true,
         name: this.fill.length.toString(),
       };
-      let slice = {
+      const slice = {
         width: this.rectAttr.width,
         height: this.rectAttr.height,
         stroke: "black",
@@ -196,7 +196,7 @@ export default {
     sliceSceneFunc(context, shape) {
       context.beginPath();
       context.setLineDash([5, 5]);
-      let sliceWidth = shape.getAttr("width") / shape.getAttr("slices");
+      const sliceWidth = shape.getAttr("width") / shape.getAttr("slices");
       for (let i = 1; i < shape.getAttr("slices"); ++i) {
         context.moveTo(sliceWidth * i, 0);
         context.lineTo(sliceWidth * i, shape.getAttr("height"));
@@ -205,7 +205,7 @@ export default {
       context.closePath();
     },
     denominatorDragMove(e) {
-      let id = e.target.attrs.name;
+      const id = e.target.attrs.name;
       if (this.configDenominator.rect[id].visible) {
         e.target.x(Math.max(e.target.x(), this.boundaries.left));
         e.target.x(Math.min(e.target.x(), this.boundaries.right));
@@ -231,7 +231,7 @@ export default {
       }
     },
     denominatorDragEnd(e) {
-      let id = e.target.attrs.name;
+      const id = e.target.attrs.name;
       if (!this.configDenominator.rect[id].visible) {
         if (canvasTools.isInBound(e.target.position(), this.boundaries)) {
           this.drawDenominator();
@@ -256,7 +256,7 @@ export default {
     numeratorDragEnd(e) {
       for (let i = 0; i < this.fill.length; ++i) {
         if (this.configDenominator.rect[i].visible) {
-          let range = {
+          const range = {
             up: this.configDenominator.rect[i].y,
             down: this.configDenominator.rect[i].y + this.rectAttr.height,
             left: this.configDenominator.rect[i].x,
@@ -276,7 +276,7 @@ export default {
       e.target.y(this.numeratorSnapTo.y);
     },
     destory(id) {
-      for (let object in this.configDenominator) {
+      for (const object in this.configDenominator) {
         this.configDenominator[object][id] = null;
       }
       this.fill[id] = 0;

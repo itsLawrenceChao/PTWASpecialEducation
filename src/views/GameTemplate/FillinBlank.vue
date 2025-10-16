@@ -2,40 +2,41 @@
   <div class="Container container">
     <div class="index">
       <p class="MainQuestion">
-        {{ GameData.Question_Text }}
+        {{ gameData.Question_Text }}
       </p>
       <div class="SlotArea">
         <component
           :is="slot.Name"
-          v-for="(slot, index) in GameData.SlotComponents"
+          v-for="(slot, index) in gameData.SlotComponents"
           :key="index"
           class="SlotItem"
-          :ID="ID"
-          :Data="slot.Data"
+          :game-id="gameId"
+          :component-config="slot.Data"
         />
       </div>
       <div class="QuestionArea card">
         <p class="SubQuestion">
-          {{ GameData.SubQuestionTitle }}
+          {{ gameData.SubQuestionTitle }}
         </p>
         <hr />
         <div
-          v-for="(item, index1) in GameData.Question"
-          :key="index1"
+          v-for="(item, itemIndex) in gameData.Question"
+          :key="itemIndex"
           class="QuestionRow"
         >
           <div
-            v-for="(question, index2) in GameData.Question[index1]"
+            v-for="(question, questionIndex) in gameData.Question[itemIndex]"
+            :key="questionIndex"
             class="Question"
           >
             <input
-              v-if="question == '$input'"
+              v-if="question === '$input'"
               v-model="Value[index1][index2]"
               type="text"
               class="input form-control"
               @focus="focusInput(index1, index2)"
             />
-            <div v-else-if="question == '$gap'" class="gap" />
+            <div v-else-if="question === '$gap'" class="gap" />
             <p v-else>
               {{ question }}
             </p>
@@ -47,11 +48,14 @@
       </div>
     </div>
     <div class="Slot">
-      <div v-for="slot in GameData.AssistiveComponent">
+      <div
+        v-for="(slot, slotIndex) in gameData.AssistiveComponent"
+        :key="slotIndex"
+      >
         <component
           :is="slot"
-          @virtualpadinputInput="VNInput"
-          @virtualpadinputDelete="VNDelete"
+          @virtualpadinput-input="VNInput"
+          @virtualpadinput-delete="VNDelete"
           @virtualpadinput-pop="VNPop"
         />
       </div>
@@ -59,22 +63,21 @@
   </div>
 </template>
 <script>
-import { defineAsyncComponent } from "vue";
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import { getComponents } from "@/utilitys/get-components";
 export default {
   name: "FillinBlank",
   components: {},
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -83,7 +86,6 @@ export default {
   emits: ["play-effect", "next-question", "add-record"],
   data() {
     return {
-      InputId: 0,
       ImgSrc: "",
       WithImage: false,
       // id: "MA3023",
@@ -92,18 +94,16 @@ export default {
     };
   },
   created() {
-    for (var i in this.GameData.Question) {
+    for (const i in this.gameData.Question) {
       let temp = [];
-      for (var j in this.GameData.Question[i]) {
-        temp.push("");
-      }
+      temp = Array(Object.keys(this.gameData.Question[i]).length).fill("");
       this.Value.push(temp);
     }
   },
   mounted() {
-    if (this.GameConfig.WithImage) {
+    if (this.gameConfig.WithImage) {
       this.WithImage = true;
-      this.ImgSrc = getGameAssets(this.ID, this.GameData.Img);
+      this.ImgSrc = getGameAssets(this.ID, this.gameData.Img);
       const patten = /undefined/;
       if (patten.test(this.ImgSrc)) {
         this.WithImage = false;
@@ -115,17 +115,17 @@ export default {
       this.focuslocation = [id1, id2];
     },
     VNInput(data) {
-      if (this.focusInput != null) {
+      if (this.focusInput !== null) {
         this.Value[this.focuslocation[0]][this.focuslocation[1]] += data;
       }
     },
     VNDelete() {
-      if (this.focusInput != null) {
+      if (this.focusInput !== null) {
         this.Value[this.focuslocation[0]][this.focuslocation[1]] = "";
       }
     },
     VNPop() {
-      if (this.focusInput != null) {
+      if (this.focusInput !== null) {
         this.Value[this.focuslocation[0]][this.focuslocation[1]] = this.Value[
           this.focuslocation[0]
         ][this.focuslocation[1]].slice(0, -1);
@@ -137,10 +137,10 @@ export default {
       let result = true;
       let ReMesseage = "";
       let ReAnswer = "";
-      for (var i in this.GameData.Question) {
-        for (var j in this.GameData.Question[i]) {
-          if (this.GameData.Question[i][j] == "$input") {
-            if (this.Value[i][j] != this.GameData.Answer[count]) {
+      for (const i in this.gameData.Question) {
+        for (const j in this.gameData.Question[i]) {
+          if (this.gameData.Question[i][j] === "$input") {
+            if (this.Value[i][j] !== this.gameData.Answer[count]) {
               result = false;
               ReMesseage += "第" + (i + 1) + "格:" + this.Value[i][j] + "\n";
             }

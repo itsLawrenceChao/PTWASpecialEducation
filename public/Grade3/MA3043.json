@@ -23,7 +23,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一顆甜甜圈45元，一盒有2個甜甜圈，媽媽買了4盒，共要付多少元$n$ 45 X $i$ = $i$ $n$ $i$ X 4 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "90", "90", "360", "360"]
@@ -39,7 +39,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一顆甜甜圈50元，一盒有2個甜甜圈，媽媽買了5盒，共要付多少元$n$ 50 X $i$ = $i$ $n$ $i$ X 5 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "100", "100", "500", "500"]
@@ -55,7 +55,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一顆甜甜圈35元，一盒有2個甜甜圈，媽媽買了3盒，共要付多少元$n$ 35 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "70", "70", "210", "210"]
@@ -71,7 +71,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一顆甜甜圈25元，一盒有2個甜甜圈，媽媽買了6盒，共要付多少元$n$ 25 X $i$ = $i$ $n$ $i$ X 6 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "50", "50", "300", "300"]
@@ -87,7 +87,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一顆甜甜圈40元，一盒有2個甜甜圈，媽媽買了7盒，共要付多少元$n$ 40 X $i$ = $i$ $n$ $i$ X 7 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "80", "80", "560", "560"]
@@ -105,7 +105,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一枝自動鉛筆35元，一個鉛筆盒的價錢是自動鉛筆的2倍，一個便當袋的價錢是鉛筆盒的3倍，一個便當袋是多少元?$n$ 35 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "70", "70", "210", "210"]
@@ -121,7 +121,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一枝自動鉛筆40元，一個鉛筆盒的價錢是自動鉛筆的2倍，一個便當袋的價錢是鉛筆盒的3倍，一個便當袋是多少元?$n$ 40 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "80", "80", "240", "240"]
@@ -137,7 +137,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一枝自動鉛筆33元，一個鉛筆盒的價錢是自動鉛筆的2倍，一個便當袋的價錢是鉛筆盒的3倍，一個便當袋是多少元?$n$ 33 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "66", "66", "198", "198"]
@@ -153,7 +153,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一枝自動鉛筆29元，一個鉛筆盒的價錢是自動鉛筆的2倍，一個便當袋的價錢是鉛筆盒的3倍，一個便當袋是多少元?$n$ 29 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "58", "58", "174", "174"]
@@ -169,7 +169,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 一枝自動鉛筆42元，一個鉛筆盒的價錢是自動鉛筆的2倍，一個便當袋的價錢是鉛筆盒的3倍，一個便當袋是多少元?$n$ 42 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["2", "84", "84", "252", "252"]
@@ -187,7 +187,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 飲料店賣了36杯綠茶，賣出的紅茶杯數是綠茶的2倍，賣出的奶茶杯數是紅茶的5倍，奶茶賣了幾杯?$n$ 36 X $i$ = $i$ $n$ $i$ X 5 = $i$ $n$ $t$ 答案: $i$ 杯",
             "Answer": ["2", "72", "72", "360", "360"]
@@ -203,7 +203,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 飲料店賣了19杯綠茶，賣出的紅茶杯數是綠茶的2倍，賣出的奶茶杯數是紅茶的5倍，奶茶賣了幾杯?$n$ 19 X $i$ = $i$ $n$ $i$ X 5 = $i$ $n$ $t$ 答案: $i$ 杯",
             "Answer": ["2", "38", "38", "190", "190"]
@@ -219,7 +219,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 飲料店賣了50杯綠茶，賣出的紅茶杯數是綠茶的2倍，賣出的奶茶杯數是紅茶的5倍，奶茶賣了幾杯?$n$ 50 X $i$ = $i$ $n$ $i$ X 5 = $i$ $n$ $t$ 答案: $i$ 杯",
             "Answer": ["2", "100", "100", "500", "500"]
@@ -235,7 +235,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 飲料店賣了22杯綠茶，賣出的紅茶杯數是綠茶的2倍，賣出的奶茶杯數是紅茶的5倍，奶茶賣了幾杯?$n$ 22 X $i$ = $i$ $n$ $i$ X 5 = $i$ $n$ $t$ 答案: $i$ 杯",
             "Answer": ["2", "44", "44", "220", "220"]
@@ -251,7 +251,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 飲料店賣了27杯綠茶，賣出的紅茶杯數是綠茶的2倍，賣出的奶茶杯數是紅茶的5倍，奶茶賣了幾杯?$n$ 27 X $i$ = $i$ $n$ $i$ X 5 = $i$ $n$ $t$ 答案: $i$ 杯",
             "Answer": ["2", "54", "54", "270", "270"]
@@ -269,7 +269,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 合作社進貨的果汁，一共有幾瓶果汁?$n$ 3 X $i$ = $i$ $n$ $i$ X 2 = $i$ $n$ $t$ 答案: $i$ 瓶",
             "Answer": ["8", "24", "24", "48", "48"]
@@ -285,7 +285,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 合作社進貨的果汁，一共有幾瓶果汁?$n$ 6 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 瓶",
             "Answer": ["4", "24", "24", "72", "72"]
@@ -301,7 +301,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 合作社進貨的果汁，一共有幾瓶果汁?$n$ 6 X $i$ = $i$ $n$ $i$ X 6 = $i$ $n$ $t$ 答案: $i$ 瓶",
             "Answer": ["5", "30", "30", "180", "180"]
@@ -317,7 +317,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 合作社進貨的果汁，一共有幾瓶果汁?$n$ 8 X $i$ = $i$ $n$ $i$ X 5 = $i$ $n$ $t$ 答案: $i$ 瓶",
             "Answer": ["4", "32", "32", "160", "160"]
@@ -333,7 +333,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 合作社進貨的果汁，一共有幾瓶果汁?$n$ $i$ X 7 = $i$ $n$ $i$ X 4 = $i$ $n$ $t$ 答案: $i$ 瓶",
             "Answer": ["4", "28", "28", "112", "112"]
@@ -351,7 +351,7 @@
     [
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 小海有13元，哥哥的錢是小海的5倍，姐姐的錢是哥哥的3倍，請問姐姐有幾元?$n$ 13 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["5", "65", "65", "195", "195"]
@@ -367,7 +367,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 小海有20元，哥哥的錢是小海的5倍，姐姐的錢是哥哥的3倍，請問姐姐有幾元?$n$ 20 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["5", "100", "100", "300", "300"]
@@ -383,7 +383,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 小海有41元，哥哥的錢是小海的5倍，姐姐的錢是哥哥的3倍，請問姐姐有幾元?$n$ 41 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["5", "205", "205", "615", "615"]
@@ -399,7 +399,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 小海有31元，哥哥的錢是小海的5倍，姐姐的錢是哥哥的3倍，請問姐姐有幾元?$n$ 31 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["5", "155", "155", "465", "465"]
@@ -415,7 +415,7 @@
       },
       {
         "topComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "## 小海有27元，哥哥的錢是小海的5倍，姐姐的錢是哥哥的3倍，請問姐姐有幾元?$n$ 27 X $i$ = $i$ $n$ $i$ X 3 = $i$ $n$ $t$ 答案: $i$ 元",
             "Answer": ["5", "135", "135", "405", "405"]

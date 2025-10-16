@@ -3,7 +3,7 @@
     <!-- <div class="container-top"> -->
     <div class="container-title title">
       <p class="title__text">
-        {{ GameData.Title }}
+        {{ gameData.Title }}
       </p>
     </div>
     <!-- <draggable
@@ -22,8 +22,8 @@
           <template #item="{ element }">
             <component
               :is="element.Name"
-              :Data="element.Data"
-              :ID="element.ID"
+              :component-config="element.Data"
+              :game-id="gameId"
               class="list-group-item"
               @click="deleteItem(index)"
             />
@@ -32,7 +32,7 @@
       </div>
       <div class="box-source">
         <div class="box question">
-          <p v-for="(question, index) in GameData.Questions" :key="index">
+          <p v-for="(question, index) in gameData.Questions" :key="index">
             {{ question }}
           </p>
         </div>
@@ -49,8 +49,8 @@
             <template #item="{ element }">
               <component
                 :is="element.Name"
-                :Data="element.Data"
-                :ID="element.ID"
+                :component-config="element.Data"
+                :game-id="gameId"
                 class="list-group-item"
               />
             </template>
@@ -66,26 +66,19 @@
 
 <script>
 import draggable from "vuedraggable";
-import { defineAsyncComponent } from "vue";
 import ImageContainer from "@/components/ImageContainer.vue";
-import draggableComponent from "vuedraggable";
-import { fasWineGlassEmpty } from "@quasar/extras/fontawesome-v6";
 export default {
   name: "CopyItem",
   components: {
     draggable,
-    ImageContainer: ImageContainer,
+    ImageContainer,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -95,7 +88,7 @@ export default {
     return {
       // Your data properties go here
       // id: 'Dev0105',
-      // GameData: {
+      // gameData: {
       //     Title: "123456",
       //     Questions: [
       //         "請放入五個糖果"
@@ -131,35 +124,35 @@ export default {
     // Your methods go here
     init() {
       this.sourceList = [];
-      for (var i in this.GameData.Items) {
-        var item = this.GameData.Items[i];
+      for (const i in this.gameData.Items) {
+        const item = this.gameData.Items[i];
         this.sourceList.push({
           Name: item.Name,
           Data: item.Data,
-          ID: this.ID,
+          ID: this.gameId,
           item: i,
         });
       }
     },
     deleteItem(item) {
       this.tarList = this.tarList.filter((element) => {
-        return element.ID != item.ID;
+        return element.ID !== item.ID;
       });
     },
     checkAnswer() {
-      let stack = {};
+      const stack = {};
       let isTrue = true;
-      for (var i in this.tarList) {
-        if (stack[this.tarList[i].item] == undefined) {
+      for (const i in this.tarList) {
+        if (stack[this.tarList[i].item] === undefined) {
           stack[this.tarList[i].item] = 1;
         } else {
           stack[this.tarList[i].item] += 1;
         }
       }
-      for (var i in this.GameData.Items) {
+      for (const i in this.gameData.Items) {
         if (
-          stack[i] == undefined ||
-          stack[i] != this.GameData.Items[i].Amount
+          stack[i] === undefined ||
+          stack[i] !== this.gameData.Items[i].Amount
         ) {
           isTrue = false;
         }

@@ -1,7 +1,9 @@
 <template>
   <div class="number-incrementor__container">
     <div class="number-display">
-      <span v-if="Data.prefix" class="prefix">{{ Data.prefix }}</span>
+      <span v-if="componentConfig.prefix" class="prefix">{{
+        componentConfig.prefix
+      }}</span>
       <template v-for="(digit, index) in formattedDigits" :key="index">
         <span v-if="digit === '.'" class="decimal-point">
           {{ digit }}
@@ -18,7 +20,9 @@
           {{ digit }}
         </span>
       </template>
-      <span v-if="Data.suffix" class="suffix">{{ Data.suffix }}</span>
+      <span v-if="componentConfig.suffix" class="suffix">{{
+        componentConfig.suffix
+      }}</span>
     </div>
   </div>
 </template>
@@ -28,7 +32,7 @@ import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "NumberIncrementor",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
       validator: (prop) => {
@@ -38,15 +42,11 @@ export default {
         );
       },
     },
-    ID: {
-      type: String,
-      required: true,
-    },
   },
   emits: ["numberChanged", "replyAnswer"],
   data() {
     return {
-      digits: Array(this.Data.digitCount).fill(0),
+      digits: Array(this.componentConfig.digitCount).fill(0),
       isChecking: false,
       correctDigits: [],
     };
@@ -54,8 +54,9 @@ export default {
   computed: {
     formattedDigits() {
       const result = [...this.digits];
-      if (this.Data.decimalPlaces) {
-        const insertPosition = this.digits.length - this.Data.decimalPlaces;
+      if (this.componentConfig.decimalPlaces) {
+        const insertPosition =
+          this.digits.length - this.componentConfig.decimalPlaces;
         result.splice(insertPosition, 0, ".");
       }
       return result;
@@ -72,8 +73,9 @@ export default {
   },
   methods: {
     getActualIndex(displayIndex) {
-      if (!this.Data.decimalPlaces) return displayIndex;
-      const decimalPosition = this.digits.length - this.Data.decimalPlaces;
+      if (!this.componentConfig.decimalPlaces) return displayIndex;
+      const decimalPosition =
+        this.digits.length - this.componentConfig.decimalPlaces;
       return displayIndex > decimalPosition ? displayIndex - 1 : displayIndex;
     },
     incrementDigit(index) {
@@ -82,16 +84,16 @@ export default {
       const totalValue = this.digits.reduce((acc, curr, idx) => {
         return acc + curr * Math.pow(10, this.digits.length - 1 - idx);
       }, 0);
-      const result = this.Data.decimalPlaces
-        ? totalValue / Math.pow(10, this.Data.decimalPlaces)
+      const result = this.componentConfig.decimalPlaces
+        ? totalValue / Math.pow(10, this.componentConfig.decimalPlaces)
         : totalValue;
       this.$emit("numberChanged", result);
-      this.$emit("replyAnswer", result === this.Data.answer);
+      this.$emit("replyAnswer", result === this.componentConfig.answer);
     },
     checkDigits() {
-      const answer = this.Data.answer;
+      const answer = this.componentConfig.answer;
       const answerDigits = String(answer)
-        .padStart(this.Data.digitCount, "0")
+        .padStart(this.componentConfig.digitCount, "0")
         .split("")
         .map(Number);
       this.correctDigits = this.digits.map(

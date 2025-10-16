@@ -44,7 +44,7 @@ export default {
   //   'v-text': Text,
   // },
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -55,7 +55,7 @@ export default {
       bais: 20,
       NowX: 0,
       Gap: undefined,
-      // Data: {
+      // componentConfig: {
       //   Unit: "Number",
       //   Start: 0,
       //   End: 1000,
@@ -72,10 +72,8 @@ export default {
       // },
       AnnotateLineHeight: 30,
       IncrementLineHeight: 15,
-      SvgHeight: 150,
       SvgWidth: 600,
       FontSize: 17,
-      BoxIndex: 1,
       BoxAnswer: {},
       CorrectAnswer: {},
       configStage: {
@@ -100,16 +98,16 @@ export default {
     this.NowX = this.bais;
     this.CountGap(this.SvgWidth);
     for (
-      let i = this.Data.Start;
-      i <= this.Data.End;
-      i += this.Data.Increment
+      let i = this.componentConfig.Start;
+      i <= this.componentConfig.End;
+      i += this.componentConfig.Increment
     ) {
-      if (i in this.Data.Blank) {
+      if (i in this.componentConfig.Blank) {
         this.inputConfigs.push({
           x: this.NowX,
           y: this.AnnotateLineHeight + this.FontSize,
         });
-      } else if (i % this.Data.Annotate === 0) {
+      } else if (i % this.componentConfig.Annotate === 0) {
         this.textConfigs.push({
           x: this.NowX - (i.toString().length * this.FontSize) / 4,
           y: this.AnnotateLineHeight + this.FontSize,
@@ -118,7 +116,7 @@ export default {
           align: "center",
         });
       }
-      if (i % this.Data.Annotate === 0) {
+      if (i % this.componentConfig.Annotate === 0) {
         this.lineConfigs.push({
           points: [this.NowX, 0, this.NowX, this.AnnotateLineHeight],
           stroke: "black",
@@ -139,19 +137,20 @@ export default {
       this.NowX += this.Gap;
     }
     let index = 0;
-    for (let i in this.Data.Blank) {
-      this.CorrectAnswer[index] = this.Data.Blank[i].TextAnswer;
+    for (const i in this.componentConfig.Blank) {
+      this.CorrectAnswer[index] = this.componentConfig.Blank[i].TextAnswer;
       index++;
     }
   },
   mounted() {
     // Code to run when the component is mounted goes here
     // Get Stage BoundingsClientRect
-    let stage = this.$refs.stage.$el;
+    const stage = this.$refs.stage.$el;
     stage.style.border = "solid 1px black";
-    let stageBound = stage.getBoundingClientRect();
-    let OutterContainer = document.getElementsByClassName("OutterContainer")[0];
-    let OutterContainerBound = OutterContainer.getBoundingClientRect();
+    const stageBound = stage.getBoundingClientRect();
+    const OutterContainer =
+      document.getElementsByClassName("OutterContainer")[0];
+    const OutterContainerBound = OutterContainer.getBoundingClientRect();
     // this.Offset.x = stageBound.x;
     // this.Offset.y = stageBound.y;
     this.Offset.x = stageBound.x - OutterContainerBound.x;
@@ -162,7 +161,8 @@ export default {
     CountGap(CanvasWidth) {
       this.Gap =
         (CanvasWidth - this.bais * 2) /
-        (Math.abs(this.Data.End - this.Data.Start) / this.Data.Increment);
+        (Math.abs(this.componentConfig.End - this.componentConfig.Start) /
+          this.componentConfig.Increment);
     },
     onInput(index) {
       this.BoxAnswer[index] = document.getElementById(`Box${index}`).value;
@@ -170,7 +170,7 @@ export default {
     },
     CheckAnswer() {
       let Answer = true;
-      for (let i in this.CorrectAnswer) {
+      for (const i in this.CorrectAnswer) {
         if (this.CorrectAnswer[i] !== parseInt(this.BoxAnswer[i])) {
           console.log("Wrong");
           Answer = false;

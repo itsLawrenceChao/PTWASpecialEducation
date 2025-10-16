@@ -16,17 +16,15 @@
 
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
-import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 export default {
   components: {},
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -89,12 +87,14 @@ export default {
     },
     drawImage() {
       const image = new window.Image();
-      image.src = getGameAssets(this.ID, this.Data.image);
+      image.src = getGameAssets(this.gameId, this.componentConfig.image);
       this.configImage.image = image;
       this.configImage.x = this.gridWidth;
       this.configImage.y = this.gridWidth;
-      this.configImage.width = this.gridWidth * this.Data.imageRatio[0];
-      this.configImage.height = this.gridWidth * this.Data.imageRatio[1];
+      this.configImage.width =
+        this.gridWidth * this.componentConfig.imageRatio[0];
+      this.configImage.height =
+        this.gridWidth * this.componentConfig.imageRatio[1];
     },
     keepInBound(e) {
       e.target.x(Math.max(e.target.x(), 0));

@@ -1,26 +1,26 @@
 <template>
   <div class="outter-container">
     <div class="title">
-      <a>{{ GameData.questionText }}</a>
+      <a>{{ gameData.questionText }}</a>
     </div>
     <div class="game-area">
       <div class="left-component">
         <MoneyGenerator
           class="money-generator"
-          :ID="ID"
-          :Data="moneyGeneratorData"
+          :game-id="gameId"
+          :component-config="moneyGeneratorData"
         />
-        <Markdown
+        <MarkdownRenderer
           class="markdown"
-          :ID="ID"
-          :Data="markdownData"
+          :game-id="gameId"
+          :component-config="markdownData"
           @reply-answer="markdownReplyAnswer"
         />
       </div>
       <div class="right-component">
         <NumberBoard
           class="number-board"
-          :Data="numberInputData"
+          :component-config="numberInputData"
           @reply-answer="numberBoardReply"
         />
         <!-- <button class="btn-submit" @click="checkAnswer">送出答案</button> -->
@@ -31,26 +31,22 @@
 
 <script>
 import MoneyGenerator from "@/components/MoneyGenerator.vue";
-import Markdown from "@/components/Markdown.vue";
 import NumberBoard from "@/components/NumberBoard.vue";
+import MarkdownRenderer from "@/components/MarkdownRenderer.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3013",
   components: {
     MoneyGenerator,
-    Markdown,
+    MarkdownRenderer,
     NumberBoard,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -78,12 +74,12 @@ export default {
     // Add your computed properties here
   },
   created() {
-    this.markdownData.Render = this.GameData.markdownIndex;
-    this.numberInputData.Number = this.GameData.answer;
-    this.markdownData.Answer = this.GameData.markdownInputIndex;
+    this.markdownData.Render = this.gameData.markdownIndex;
+    this.numberInputData.Number = this.gameData.answer;
+    this.markdownData.Answer = this.gameData.markdownInputIndex;
     // 如果答案不是四位數，則補齊
-    this.answerArr = this.GameData.moneyBoard;
-    let diff = 4 - this.answerArr.length;
+    this.answerArr = this.gameData.moneyBoard;
+    const diff = 4 - this.answerArr.length;
     for (let i = 0; i < diff; i++) {
       this.answerArr.unshift(0);
     }
@@ -115,43 +111,13 @@ export default {
       this.markdownReply = reply;
     },
     nowClicked() {
-      if (document.activeElement.tagName == "INPUT") {
+      if (document.activeElement.tagName === "INPUT") {
         this.nowSelect = document.activeElement;
-      } else if (document.activeElement.tagName == "BUTTON" && this.nowSelect) {
+      } else if (
+        document.activeElement.tagName === "BUTTON" &&
+        this.nowSelect
+      ) {
         this.nowSelect.focus();
-      }
-    },
-    clear() {
-      let activeElement = this.nowSelect;
-      if (activeElement) {
-        const start = activeElement.selectionStart;
-        activeElement.value = "";
-        activeElement.selectionStart = activeElement.selectionEnd = start - 1;
-        const event = new Event("input", { bubbles: true });
-        activeElement.dispatchEvent(event);
-      }
-    },
-    pop() {
-      let activeElement = this.nowSelect;
-      if (activeElement) {
-        const start = activeElement.selectionStart;
-        const end = activeElement.selectionEnd;
-        const value = activeElement.value;
-        activeElement.value = value.slice(0, start) + value.slice(end);
-        activeElement.selectionStart = activeElement.selectionEnd = start;
-        const event = new Event("input", { bubbles: true });
-        activeElement.dispatchEvent(event);
-      }
-    },
-    push(ch) {
-      let activeElement = this.nowSelect;
-      activeElement.focus();
-      if (activeElement) {
-        const start = activeElement.selectionStart;
-        activeElement.value = activeElement.value + ch;
-        activeElement.selectionStart = activeElement.selectionEnd = start + 1;
-        const event = new Event("input", { bubbles: true });
-        activeElement.dispatchEvent(event);
       }
     },
     checkAnswer() {

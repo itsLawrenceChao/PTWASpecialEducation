@@ -1,6 +1,6 @@
 <template>
-  <div ref="container">
-    <h2>{{ GameData.Question }}</h2>
+  <div ref="container" class="gameContainer">
+    <h2>{{ gameData.Question }}</h2>
     <v-stage :config="configKonva">
       <v-layer>
         <v-image :config="configBG_1" />
@@ -30,22 +30,14 @@
 <script>
 import { getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 
 export default {
+  name: "AirplaneGame",
   components: {},
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -80,11 +72,14 @@ export default {
   },
 
   mounted() {
-    this.initializeScene();
-    this.initializeOptions();
-    this.targetSpawner();
-    this.game = window.setInterval(this.update, 20);
-    this.spawner = window.setInterval(this.targetSpawner, 3000);
+    // 使用 nextTick 確保 DOM 完全渲染後再初始化
+    this.$nextTick(() => {
+      this.initializeScene();
+      this.initializeOptions();
+      this.targetSpawner();
+      this.game = window.setInterval(this.update, 20);
+      this.spawner = window.setInterval(this.targetSpawner, 3000);
+    });
   },
 
   methods: {
@@ -95,7 +90,7 @@ export default {
       this.drawBackground();
       this.configPlane.height = this.gameWidth * 0.1;
       this.configPlane.width = this.configPlane.height;
-      let planePosition = {
+      const planePosition = {
         x: this.gameWidth * 0.1,
         y: this.gameWidth * 0.25,
         width: this.configPlane.width,
@@ -116,8 +111,8 @@ export default {
       this.configBG_2.x = this.gameWidth;
     },
     initializeOptions() {
-      this.allOptions = this.GameData.True.concat(this.GameData.False);
-      this.trueOptions = this.GameData.True;
+      this.allOptions = this.gameData.True.concat(this.gameData.False);
+      this.trueOptions = this.gameData.True;
     },
     update() {
       this.backgroundScroll();
@@ -147,10 +142,10 @@ export default {
     },
 
     targetSpawner() {
-      let targetType = Math.floor(Math.random() * this.targetTemplate.length);
-      let target = {};
+      const targetType = Math.floor(Math.random() * this.targetTemplate.length);
+      const target = {};
       target.radius = this.gameWidth * 0.05;
-      let yRange = {
+      const yRange = {
         min: target.radius,
         max: this.gameWidth * 0.5 - target.radius,
       };
@@ -160,11 +155,11 @@ export default {
       target.stroke = this.targetTemplate[targetType];
       this.configTarget.push(target);
 
-      let option = canvasTools.offset(target, {
+      const option = canvasTools.offset(target, {
         x: target.radius * -0.8,
         y: target.radius * -0.3,
       });
-      let randomOptionId = Math.floor(Math.random() * this.allOptions.length);
+      const randomOptionId = Math.floor(Math.random() * this.allOptions.length);
       option.text = this.allOptions[randomOptionId];
       option.fontSize = target.radius * 0.6;
       this.configOptions.push(option);
@@ -174,7 +169,7 @@ export default {
         this.configTarget[i].x -= this.speed;
         this.configOptions[i].x =
           this.configTarget[i].x - this.configTarget[i].radius * 0.8;
-        let leftborder = -this.configTarget[i].radius;
+        const leftborder = -this.configTarget[i].radius;
         if (this.configTarget[i].x < leftborder) {
           this.configTarget.splice(i, 1);
           this.configOptions.splice(i, 1);
@@ -208,7 +203,7 @@ export default {
             this.configTarget[i]
           ) <=
             this.configTarget[i].radius * 2 &&
-          this.configTarget[i].opacity != 0.5
+          this.configTarget[i].opacity !== 0.5
         ) {
           this.checkAnswer(i);
         }
@@ -218,8 +213,8 @@ export default {
       let isCorrect = false;
       this.configTarget[i].opacity = 0.5;
       this.configOptions[i].visible = false;
-      for (let answer in this.GameData.True) {
-        if (this.GameData.True[answer] == this.configOptions[i].text)
+      for (const answer in this.gameData.True) {
+        if (this.gameData.True[answer] === this.configOptions[i].text)
           isCorrect = true;
       }
       if (isCorrect) {
@@ -230,10 +225,10 @@ export default {
           "正確",
         ]);
         this.allOptions = this.allOptions.filter(
-          (option) => option != this.configOptions[i].text
+          (option) => option !== this.configOptions[i].text
         );
         this.trueOptions = this.trueOptions.filter(
-          (option) => option != this.configOptions[i].text
+          (option) => option !== this.configOptions[i].text
         );
       } else {
         this.$emit("play-effect", "WrongSound");
@@ -243,11 +238,22 @@ export default {
           "錯誤",
         ]);
       }
-      if (this.trueOptions.length == 0) this.$emit("next-question");
+      if (this.trueOptions.length === 0) this.$emit("next-question");
     },
     printCorrectAnswers() {
-      return this.GameData.Question.concat(":", this.GameData.True.join("/"));
+      return this.gameData.Question.concat(":", this.gameData.True.join("/"));
     },
   },
 };
 </script>
+
+<style scoped lang="scss">
+.gameContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

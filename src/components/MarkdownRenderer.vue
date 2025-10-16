@@ -46,13 +46,13 @@
       </div>
       <FloatNumPad
         v-if="isShowNumPad"
-        :Data="floatNumPadLocation"
-        @buttonClicked="fillToInput"
+        :component-config="floatNumPadLocation"
+        @button-clicked="fillToInput"
       />
       <FloatOperatorPad
         v-if="isShowOperatorPad"
-        :Data="operatorPadLocation"
-        @buttonClicked="handleOperatorSelect"
+        :component-config="operatorPadLocation"
+        @button-clicked="handleOperatorSelect"
       />
     </template>
   </div>
@@ -62,17 +62,14 @@ import FloatNumPad from "@/components/FloatNumPad.vue";
 import FloatOperatorPad from "@/components/FloatOperatorPad.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
+  name: "MarkdownRenderer",
   components: {
     FloatNumPad,
     FloatOperatorPad,
   },
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -87,14 +84,13 @@ export default {
       clickedEvent: null,
       wrongInputIndex: [],
       numPadOffset: 10,
-      availableSymbols: ["+", "-", "×", "÷"],
       selectedOptions: {},
       isShowOperatorPad: false,
       operatorPadLocation: { top: 0, left: 0 },
     };
   },
   created() {
-    this.markdownContent = this.Data.Render;
+    this.markdownContent = this.componentConfig.Render;
     this.parseMarkdown();
     emitter.on("checkAnswer", this.markWrong);
   },
@@ -145,8 +141,8 @@ export default {
           // Ignore empty strings
         } else {
           // Process text content with possible formatting
-          let el = currentTag || (bold ? "b" : underline ? "u" : "span");
-          elements.push({ el: el, content: token });
+          const el = currentTag || (bold ? "b" : underline ? "u" : "span");
+          elements.push({ el, content: token });
           currentTag = null;
         }
       });
@@ -163,11 +159,11 @@ export default {
       );
     },
     checkAnswer() {
-      if (typeof this.Data.Answer != "object") return;
+      if (typeof this.componentConfig.Answer !== "object") return;
       this.wrongInputIndex = [];
       this.resetInputBG();
       let check = true;
-      let allAnswers = [];
+      const allAnswers = [];
 
       // 獲取所有輸入框的答案
       this.elements.forEach((element, index) => {
@@ -191,16 +187,15 @@ export default {
         return userAns === correctAns;
       };
 
-      for (let i = 0; i < this.Data.Answer.length; i++) {
+      for (let i = 0; i < this.componentConfig.Answer.length; i++) {
         const userAnswer = allAnswers[i].trim();
-        const correctAnswer = this.Data.Answer[i];
+        const correctAnswer = this.componentConfig.Answer[i];
 
         if (!isAnswerCorrect(userAnswer, correctAnswer)) {
           check = false;
           this.wrongInputIndex.push(i);
         }
       }
-      console.log(check);
 
       this.$emit("replyAnswer", check);
     },
@@ -236,12 +231,12 @@ export default {
       };
     },
     fillToInput(content) {
-      if (content == "關閉") {
+      if (content === "關閉") {
         this.isShowNumPad = false;
         return;
       }
       if (this.clickedTarget !== null) {
-        if (content == "清除") {
+        if (content === "清除") {
           this.elements[this.clickedTarget].content = "";
           this.checkAnswer();
           return;
@@ -276,10 +271,6 @@ export default {
         }
       });
     },
-    handleSymbolSelect(index, symbol) {
-      this.elements[index].content = symbol;
-      this.checkAnswer();
-    },
     selectOption(elementIndex, optionIndex) {
       // 保存原始選項列表
       const element = this.elements[elementIndex];
@@ -291,7 +282,7 @@ export default {
       this.checkAnswer();
     },
     handleOperatorSelect(content) {
-      if (content == "關閉") {
+      if (content === "關閉") {
         this.isShowOperatorPad = false;
         return;
       }

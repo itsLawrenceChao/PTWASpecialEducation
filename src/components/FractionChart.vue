@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import { objectEntries } from "@vueuse/core";
-
 const SHAPE_CONFIGS = {
   circle: {
     radiusRatio: 0.4,
@@ -33,7 +31,7 @@ const SHAPE_CONFIGS = {
 export default {
   name: "FractionChart",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -42,9 +40,9 @@ export default {
     return {
       gameWidth: 150,
       gameHeight: 150,
-      numerator: this.Data.numerator,
-      denominator: this.Data.denominator,
-      shape: this.Data.shape,
+      numerator: this.componentConfig.numerator,
+      denominator: this.componentConfig.denominator,
+      shape: this.componentConfig.shape,
     };
   },
   computed: {
@@ -138,15 +136,6 @@ export default {
         y: this.gameHeight * config.yOffset,
         sceneFunc: this.drawSlice,
         slices: this.denominator,
-      };
-    },
-    getCircleBorderConfig(config) {
-      return {
-        radius: this.gameWidth * config.radiusRatio,
-        stroke: "black", // 邊框顏色
-        strokeWidth: 2, // 邊框寬度
-        x: this.gameWidth / 2,
-        y: this.gameHeight / 2,
       };
     },
     getRectBorderConfig(config) {

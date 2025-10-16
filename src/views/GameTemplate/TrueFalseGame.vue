@@ -2,15 +2,19 @@
   <div class="container">
     <div class="card">
       <p class="h3">
-        {{ GameConfig.GlobalTitle }}
+        {{ gameConfig.GlobalTitle }}
       </p>
       <p class="h5">
-        {{ GameData.Question }}
+        {{ gameData.Question }}
       </p>
     </div>
     <div class="Content">
       <div class="QuestionView">
-        <component :is="SlotComponent" :Data="SlotData" :ID="ID" />
+        <component
+          :is="SlotComponent"
+          :component-config="SlotData"
+          :game-id="gameId"
+        />
       </div>
       <div class="SelectArea">
         <div class="TFArea">
@@ -39,24 +43,25 @@
 <script>
 import { getGameAssets } from "../../utilitys/get_assets";
 import { getComponents } from "@/utilitys/get-components.js";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "TrueFalseGame",
   components: {
     ImageContainer: getComponents("ImageContainer"),
     Water: getComponents("Water"),
-    Clock: getComponents("Clock"),
+    AnalogClock: getComponents("AnalogClock"),
     DragImages: getComponents("DragImages"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -72,13 +77,17 @@ export default {
     };
   },
   created() {
-    this.imageUrl = getGameAssets(this.ID, this.GameData.img);
-    this.SlotComponent = this.GameData.SlotComponents[0].Name;
-    this.SlotData = this.GameData.SlotComponents[0].Data;
+    this.imageUrl = getGameAssets(this.gameId, this.gameData.img);
+    this.SlotComponent = this.gameData.SlotComponents[0].Name;
+    this.SlotData = this.gameData.SlotComponents[0].Data;
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
   methods: {
     Select(index) {
-      if (index == 0) {
+      if (index === 0) {
         this.TFSelect[0] = true;
         this.TFSelect[1] = false;
         this.Answer = true;
@@ -88,16 +97,16 @@ export default {
         this.Answer = false;
       }
     },
-    CheckAnswer() {
-      let answer = this.Answer;
-      if (answer == this.GameData.Answer) {
+    checkAnswer() {
+      const answer = this.Answer;
+      if (answer === this.gameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);
+        this.$emit("add-record", [this.gameData.Answer, answer, "正確"]);
         this.$emit("next-question");
         console.log("check answer : True");
       } else {
         this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", [this.GameData.Answer, answer, "錯誤"]);
+        this.$emit("add-record", [this.gameData.Answer, answer, "錯誤"]);
         console.log("check answer : False");
       }
     },

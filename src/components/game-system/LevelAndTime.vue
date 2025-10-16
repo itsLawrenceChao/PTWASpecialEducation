@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="GameStatus == 'Progressing'"
+    v-if="GameStatus === 'Progressing'"
     class="row levelbutton d-sm-none d-md-block d-none d-sm-block"
   >
     <div class="d-grid gap-2 d-flex justify-content-center mb-3 levebar">
@@ -19,14 +19,14 @@
         <button
           type="button"
           class="btn btn-success flex-fill"
-          :class="{ active: Nowlevel == key + 1 }"
+          :class="{ active: Nowlevel === key + 1 }"
           @click="changelevel(key + 1)"
         >
           {{ key + 1 }}
         </button>
       </div>
       <button
-        v-if="GameStatus == 'Progressing'"
+        v-if="GameStatus === 'Progressing'"
         type="button"
         class="btn btn-primary flex-fill text-nowrap"
         disabled
@@ -34,7 +34,7 @@
         時間 : {{ time }}
       </button>
       <button
-        v-if="GameStatus == 'Progressing'"
+        v-if="GameStatus === 'Progressing'"
         type="button"
         class="btn btn-primary flex-fill text-nowrap"
         disabled

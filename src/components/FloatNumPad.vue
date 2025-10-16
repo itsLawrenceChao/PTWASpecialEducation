@@ -21,7 +21,7 @@
 export default {
   name: "FloatNumPad",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -47,11 +47,10 @@ export default {
       ],
       adjustedTop: "0px",
       adjustedLeft: "0px",
-      bais: 15,
     };
   },
   watch: {
-    Data: {
+    componentConfig: {
       handler() {
         this.adjustPosition();
       },
@@ -80,8 +79,8 @@ export default {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
 
-        let top = parseFloat(this.Data.top);
-        let left = parseFloat(this.Data.left);
+        let top = parseFloat(this.componentConfig.top);
+        let left = parseFloat(this.componentConfig.left);
 
         if (top + numpadHeight > viewportHeight) {
           top = viewportHeight - numpadHeight;

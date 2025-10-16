@@ -2,23 +2,23 @@
   <div class="container">
     <div class="question">
       <div class="questionText">
-        <FractionText :ID="ID" :text="GameData.Question" />
+        <FractionText :game-id="gameId" :text="gameData.Question" />
       </div>
       <!-- <button class="submitBtn" @click="checkAnswer">提交答案</button> -->
     </div>
-    <div v-if="GameData.Type == 'Ribbon'" class="options flex">
+    <div v-if="gameData.Type === 'Ribbon'" class="options flex">
       <div class="ribbons">
         <div class="rowContainer">
           <div
-            v-for="j in GameData.Denominator"
+            v-for="j in gameData.Denominator"
             :key="j - 1"
             class="ribbonPart"
             :style="wholeRibbonStyle[j - 1]"
           ></div>
         </div>
-        <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
+        <div v-for="i in gameData.Option" :key="i - 1" class="rowContainer">
           <div
-            v-for="j in GameData.Denominator"
+            v-for="j in gameData.Denominator"
             :key="j - 1"
             class="ribbonPart"
             :style="ribbonStyle[i - 1][j - 1]"
@@ -26,8 +26,8 @@
         </div>
       </div>
       <div class="checkBoxes">
-        <div class="rowContainer">{{ GameData.Itemdescription }}</div>
-        <div v-for="i in GameData.Option" :key="i - 1" class="rowContainer">
+        <div class="rowContainer">{{ gameData.Itemdescription }}</div>
+        <div v-for="i in gameData.Option" :key="i - 1" class="rowContainer">
           <button
             class="checkBoxBtn"
             :style="btnStyle[i - 1]"
@@ -38,22 +38,22 @@
         </div>
       </div>
     </div>
-    <div v-if="GameData.Type == 'Paper'" class="options grid">
+    <div v-if="gameData.Type === 'Paper'" class="options grid">
       <div class="paper">
         <div class="gridContainer" :style="gridContainerStyle">
           <div
-            v-for="j in GameData.Denominator"
+            v-for="j in gameData.Denominator"
             :key="j - 1"
             class="paperPiece"
             :style="wholePaperStyle[j - 1]"
           ></div>
         </div>
-        {{ GameData.Itemdescription }}
+        {{ gameData.Itemdescription }}
       </div>
-      <div v-for="i in GameData.Option" :key="i - 1" class="paper">
+      <div v-for="i in gameData.Option" :key="i - 1" class="paper">
         <div class="gridContainer" :style="gridContainerStyle">
           <div
-            v-for="j in GameData.Denominator"
+            v-for="j in gameData.Denominator"
             :key="j - 1"
             class="paperPiece"
             :style="paperStyle[i - 1][j - 1]"
@@ -82,12 +82,12 @@ export default {
   },
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
+    gameId: {
+      type: String,
       required: true,
     },
   },
@@ -109,9 +109,9 @@ export default {
 
   beforeMount() {
     this.setMap();
-    if (this.GameData.Type == "Ribbon") {
+    if (this.gameData.Type === "Ribbon") {
       this.setRibbonStyle();
-    } else if (this.GameData.Type == "Paper") {
+    } else if (this.gameData.Type === "Paper") {
       this.setPaperStyle();
     }
     this.setbtnStyle();
@@ -125,43 +125,43 @@ export default {
   methods: {
     setMap() {
       this.correctOptionID = this.randomCombination(
-        this.GameData.Option,
-        this.GameData.CorrectOption
+        this.gameData.Option,
+        this.gameData.CorrectOption
       );
-      for (let i = 0; i < this.GameData.Option; ++i) {
+      for (let i = 0; i < this.gameData.Option; ++i) {
         if (this.correctOptionID.includes(i))
-          this.map.push(this.GameData.Numerator);
+          this.map.push(this.gameData.Numerator);
         else {
           let random;
           do {
-            random = Math.ceil(Math.random() * this.GameData.Denominator);
-          } while (random == this.GameData.Numerator);
+            random = Math.ceil(Math.random() * this.gameData.Denominator);
+          } while (random === this.gameData.Numerator);
           this.map.push(random);
         }
       }
     },
     setRibbonStyle() {
-      if (this.GameData.Color) this.color = this.GameData.Color;
-      for (let j = 0; j < this.GameData.Denominator; ++j) {
-        let style = {
+      if (this.gameData.Color) this.color = this.gameData.Color;
+      for (let j = 0; j < this.gameData.Denominator; ++j) {
+        const style = {
           backgroundColor: this.color,
         };
-        if (j == 0) style.borderLeft = "1px black solid";
-        else if (j == this.GameData.Denominator - 1)
+        if (j === 0) style.borderLeft = "1px black solid";
+        else if (j === this.gameData.Denominator - 1)
           style.borderRight = "1px black solid";
         this.wholeRibbonStyle.push(style);
       }
 
-      for (let i = 0; i < this.GameData.Option; ++i) {
-        let row = [];
-        let coloredRibbon = this.randomCombination(
-          this.GameData.Denominator,
+      for (let i = 0; i < this.gameData.Option; ++i) {
+        const row = [];
+        const coloredRibbon = this.randomCombination(
+          this.gameData.Denominator,
           this.map[i]
         );
-        for (let j = 0; j < this.GameData.Denominator; ++j) {
-          let style = {};
-          if (j == 0) style.borderLeft = "1px black solid";
-          else if (j == this.GameData.Denominator - 1)
+        for (let j = 0; j < this.gameData.Denominator; ++j) {
+          const style = {};
+          if (j === 0) style.borderLeft = "1px black solid";
+          else if (j === this.gameData.Denominator - 1)
             style.borderRight = "1px black solid";
 
           if (coloredRibbon.includes(j)) style.backgroundColor = this.color;
@@ -172,39 +172,39 @@ export default {
     },
     setPaperStyle() {
       this.gridContainerStyle = {
-        gridTemplateColumns: `repeat(${this.GameData.Factors[0]}, 1fr)`,
+        gridTemplateColumns: `repeat(${this.gameData.Factors[0]}, 1fr)`,
       };
-      if (this.GameData.Color) this.color = this.GameData.Color;
-      for (let i = 0; i < this.GameData.Factors[1]; ++i) {
-        for (let j = 0; j < this.GameData.Factors[0]; ++j) {
-          let style = {
+      if (this.gameData.Color) this.color = this.gameData.Color;
+      for (let i = 0; i < this.gameData.Factors[1]; ++i) {
+        for (let j = 0; j < this.gameData.Factors[0]; ++j) {
+          const style = {
             backgroundColor: this.color,
           };
-          if (i == 0) style.borderTop = "1px black solid";
-          else if (i == this.GameData.Factors[1] - 1)
+          if (i === 0) style.borderTop = "1px black solid";
+          else if (i === this.gameData.Factors[1] - 1)
             style.borderBottom = "1px black solid";
 
-          if (j == 0) style.borderLeft = "1px black solid";
-          else if (j == this.GameData.Factors[0] - 1)
+          if (j === 0) style.borderLeft = "1px black solid";
+          else if (j === this.gameData.Factors[0] - 1)
             style.borderRight = "1px black solid";
           this.wholePaperStyle.push(style);
         }
       }
-      for (let i = 0; i < this.GameData.Option; ++i) {
-        let grid = [];
-        let coloredPaper = this.randomCombination(
-          this.GameData.Denominator,
+      for (let i = 0; i < this.gameData.Option; ++i) {
+        const grid = [];
+        const coloredPaper = this.randomCombination(
+          this.gameData.Denominator,
           this.map[i]
         );
-        for (let i = 0; i < this.GameData.Factors[1]; ++i) {
-          for (let j = 0; j < this.GameData.Factors[0]; ++j) {
-            let style = {};
-            if (i == 0) style.borderTop = "1px black solid";
-            else if (i == this.GameData.Factors[1] - 1)
+        for (let i = 0; i < this.gameData.Factors[1]; ++i) {
+          for (let j = 0; j < this.gameData.Factors[0]; ++j) {
+            const style = {};
+            if (i === 0) style.borderTop = "1px black solid";
+            else if (i === this.gameData.Factors[1] - 1)
               style.borderBottom = "1px black solid";
 
-            if (j == 0) style.borderLeft = "1px black solid";
-            else if (j == this.GameData.Factors[0] - 1)
+            if (j === 0) style.borderLeft = "1px black solid";
+            else if (j === this.gameData.Factors[0] - 1)
               style.borderRight = "1px black solid";
             if (coloredPaper.includes(grid.length))
               style.backgroundColor = this.color;
@@ -215,8 +215,8 @@ export default {
       }
     },
     setbtnStyle() {
-      for (let i = 0; i < this.GameData.Option; ++i) {
-        let style = {
+      for (let i = 0; i < this.gameData.Option; ++i) {
+        const style = {
           color: "transparent",
         };
         this.btnStyle.push(style);
@@ -224,15 +224,15 @@ export default {
       }
     },
     randomCombination(n, r) {
-      let combination = [];
+      const combination = [];
       do {
-        let random = Math.floor(Math.random() * n);
+        const random = Math.floor(Math.random() * n);
         if (!combination.includes(random)) combination.push(random);
       } while (combination.length < r);
       return combination;
     },
     handleClick(i) {
-      if (this.btnStyle[i].color == "black") {
+      if (this.btnStyle[i].color === "black") {
         this.btnStyle[i].color = "transparent";
         this.selected[i] = false;
       } else {
@@ -241,10 +241,10 @@ export default {
       }
     },
     checkAnswer() {
-      let isCorrect = true,
-        wrongAnswers = [];
-      for (let i = 0; i < this.GameData.Option; ++i) {
-        if (this.selected[i] != this.correctOptionID.includes(i)) {
+      let isCorrect = true;
+      const wrongAnswers = [];
+      for (let i = 0; i < this.gameData.Option; ++i) {
+        if (this.selected[i] !== this.correctOptionID.includes(i)) {
           isCorrect = false;
           wrongAnswers.push(this.map[i]);
         }
@@ -254,23 +254,23 @@ export default {
     },
     emitAnswers(wrongAnswers) {
       if (wrongAnswers.length > 0) {
-        while (wrongAnswers.findIndex(this.isNumerator) != -1) {
+        while (wrongAnswers.findIndex(this.isNumerator) !== -1) {
           wrongAnswers[wrongAnswers.findIndex(this.isNumerator)] = "未勾選";
         }
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.Numerator,
+          this.gameData.Numerator,
           wrongAnswers.toString(),
           "錯誤",
         ]);
       } else {
         this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [this.GameData.Numerator, "#", "正確"]);
+        this.$emit("add-record", [this.gameData.Numerator, "#", "正確"]);
         this.$emit("next-question");
       }
     },
     isNumerator(i) {
-      if (i == this.GameData.Numerator) return true;
+      if (i === this.gameData.Numerator) return true;
       else return false;
     },
   },

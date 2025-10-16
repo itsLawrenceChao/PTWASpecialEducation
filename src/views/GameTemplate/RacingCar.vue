@@ -1,7 +1,7 @@
 <template>
   <div ref="container" class="gameContainer">
     <div>
-      <h2>{{ GameData.Question }}</h2>
+      <h2>{{ gameData.Question }}</h2>
       <v-stage :config="configKonva">
         <v-layer>
           <v-image
@@ -66,15 +66,11 @@ import * as canvasTools from "@/utilitys/canvasTools.js";
 
 export default {
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -111,7 +107,7 @@ export default {
 
   methods: {
     initializeScene() {
-      this.options = canvasTools.shuffleOptions(this.GameData.Options);
+      this.options = canvasTools.shuffleOptions(this.gameData.Options);
       this.currentOptionId = Math.floor(Math.random() * this.options.length);
       this.gameWidth = this.$refs.container.clientWidth * 0.8;
       this.configKonva.width = this.gameWidth;
@@ -128,8 +124,8 @@ export default {
       roadImg.src = getGameStaticAssets("RacingCar", "road.png");
       this.laneWidth = this.gameWidth / 2 / this.options.length;
       this.roadX = 0;
-      for (var i = 0; i < this.options.length; i++) {
-        let road = {
+      for (let i = 0; i < this.options.length; i++) {
+        const road = {
           x: 0,
           y: this.laneWidth * i,
           width: this.gameWidth * 2.225,
@@ -146,8 +142,8 @@ export default {
         x: this.gameWidth,
         y: 0,
       };
-      for (var i = 0; i < this.options.length; i++) {
-        let tunnel = {
+      for (let i = 0; i < this.options.length; i++) {
+        const tunnel = {
           x: canvasTools.offset(this.configRoad[i], this.tunnelOffset).x,
           y: this.laneWidth * i,
           width: this.laneWidth * 2,
@@ -163,16 +159,16 @@ export default {
         y: this.laneWidth * 0.325,
       };
       let fontSize = this.laneWidth * 0.4;
-      for (var i = 0; i < this.options.length; i++) {
+      for (let i = 0; i < this.options.length; i++) {
         if (this.options[i].length > 5) {
           fontSize = this.laneWidth * 0.15;
         } else if (this.options[i].length > 3) {
           fontSize = this.laneWidth * 0.2;
         }
-        let option = {
+        const option = {
           x: canvasTools.offset(this.configRoad[i], this.optionOffset).x,
           y: canvasTools.offset(this.configRoad[i], this.optionOffset).y,
-          fontSize: fontSize,
+          fontSize,
           text: this.options[i],
           wrap: "word",
           width: this.laneWidth * 0.8,
@@ -188,8 +184,8 @@ export default {
         x: this.gameWidth + this.laneWidth * 0.75,
         y: this.laneWidth * 0.25,
       };
-      for (var i = 0; i < this.options.length; i++) {
-        let box = {
+      for (let i = 0; i < this.options.length; i++) {
+        const box = {
           cornerRadius: this.laneWidth * 0.1,
           stroke: "black",
           fill: "white",
@@ -218,7 +214,7 @@ export default {
       ).y;
     },
     setBtnStyle() {
-      var btnCon = document.getElementById("btnContainer");
+      const btnCon = document.getElementById("btnContainer");
       btnCon.style.height = this.configKonva.height + "px";
     },
     moveRoad() {
@@ -226,18 +222,19 @@ export default {
         this.checkAnswer();
       } else {
         this.roadX -= this.speed;
-        for (let road in this.configRoad) this.configRoad[road].x = this.roadX;
-        for (let tunnel in this.configTunnel)
+        for (const road in this.configRoad)
+          this.configRoad[road].x = this.roadX;
+        for (const tunnel in this.configTunnel)
           this.configTunnel[tunnel].x = canvasTools.offset(
             this.configRoad[0],
             this.tunnelOffset
           ).x;
-        for (let option in this.configOption)
+        for (const option in this.configOption)
           this.configOption[option].x = canvasTools.offset(
             this.configRoad[0],
             this.optionOffset
           ).x;
-        for (let box in this.configTextBox)
+        for (const box in this.configTextBox)
           this.configTextBox[box].x = canvasTools.offset(
             this.configRoad[0],
             this.textBoxOffset
@@ -332,12 +329,12 @@ export default {
     },
     checkAnswer() {
       if (
-        this.options[this.currentOptionId] ==
-        this.GameData.Options[this.GameData.Answer]
+        this.options[this.currentOptionId] ===
+        this.gameData.Options[this.gameData.Answer]
       ) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
-          this.GameData.Options[this.GameData.Answer],
+          this.gameData.Options[this.gameData.Answer],
           this.options[this.currentOptionId],
           "正確",
         ]);
@@ -347,7 +344,7 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.Options[this.GameData.Answer],
+          this.gameData.Options[this.gameData.Answer],
           this.options[this.currentOptionId],
           "錯誤",
         ]);
@@ -362,7 +359,10 @@ export default {
       requestAnimationFrame(this.moveRoad);
     },
     endingAnimation() {
-      if (this.configCar.x > this.gameWidth && this.configEndingImage == null) {
+      if (
+        this.configCar.x > this.gameWidth &&
+        this.configEndingImage === null
+      ) {
         this.$emit("next-question");
       } else {
         this.configCar.x += this.speed;
@@ -370,13 +370,13 @@ export default {
         requestAnimationFrame(this.endingAnimation);
       }
       this.endingFrameCount++;
-      if (this.endingFrameCount % 20 == 0 && this.configCar.x < this.gameWidth)
+      if (this.endingFrameCount % 20 === 0 && this.configCar.x < this.gameWidth)
         this.drawSmoke();
     },
     drawSmoke() {
       const smokeImg = new window.Image();
       smokeImg.src = getGameStaticAssets("RacingCar", "smoke.png");
-      let smoke = {
+      const smoke = {
         x: canvasTools.center(this.configCar).x,
         y: canvasTools.center(this.configCar).y,
         height: this.laneWidth * 0.1,
@@ -389,8 +389,8 @@ export default {
       this.configSmoke.push(smoke);
     },
     moveSmoke() {
-      for (let i in this.configSmoke) {
-        if (this.GameData.EndingImage && Number(i) == 3) {
+      for (const i in this.configSmoke) {
+        if (this.gameData.EndingImage && Number(i) === 3) {
           if (this.configEndingImage) {
             this.moveImageSmoke();
             this.moveEndingImage();
@@ -416,13 +416,13 @@ export default {
     },
     drawEndingImage() {
       const img = new window.Image();
-      img.src = getGameAssets(this.ID, this.GameData.EndingImage);
+      img.src = getGameAssets(this.gameId, this.gameData.EndingImage);
       this.configEndingImage = {
         image: img,
       };
     },
     moveImageSmoke() {
-      let center = {
+      const center = {
         x: this.gameWidth * 0.5,
         y: this.gameWidth * 0.25,
       };

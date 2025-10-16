@@ -2,11 +2,12 @@
   <div class="container">
     <div class="board">
       <div class="unit" :style="unitRowStyle">
-        <button v-for="i in unitStyle" :style="i">{{ i.text }}</button>
+        <button v-for="(i, idx) in unitStyle" :key="idx" :style="i">{{ i.text }}</button>
       </div>
       <div ref="row" class="row" :style="btnRowStyle">
         <button
           v-for="i in rowStyle[0].btnStyle.length"
+          :key="i"
           class="numBtn"
           :style="rowStyle[0].btnStyle[i - 1]"
           @click="btnClick($event, 0, i - 1)"
@@ -17,6 +18,7 @@
       <div class="row" :style="btnRowStyle">
         <button
           v-for="i in rowStyle[1].btnStyle.length"
+          :key="i"
           class="numBtn"
           :style="rowStyle[1].btnStyle[i - 1]"
           @click="btnClick($event, 1, i - 1)"
@@ -26,12 +28,14 @@
       </div>
       <hr />
       <div
-        v-for="i in GameData.digitsOfEachRow.length - 3"
+        v-for="i in gameData.digitsOfEachRow.length - 3"
+        :key="i"
         class="row"
         :style="btnRowStyle"
       >
         <button
           v-for="j in rowStyle[i + 1].btnStyle.length"
+          :key="j"
           class="numBtn"
           :style="rowStyle[i + 1].btnStyle[j - 1]"
           @click="btnClick($event, i + 1, j - 1)"
@@ -42,17 +46,21 @@
       <hr />
       <div class="row" :style="btnRowStyle">
         <button
-          v-for="i in rowStyle[GameData.digitsOfEachRow.length - 1].btnStyle.length"
+          v-for="i in rowStyle[gameData.digitsOfEachRow.length - 1].btnStyle
+            .length"
+          :key="i"
           class="numBtn"
-          :style="rowStyle[GameData.digitsOfEachRow.length - 1].btnStyle[i - 1]"
-          @click="btnClick($event, GameData.digitsOfEachRow.length - 1, i - 1)"
+          :style="rowStyle[gameData.digitsOfEachRow.length - 1].btnStyle[i - 1]"
+          @click="btnClick($event, gameData.digitsOfEachRow.length - 1, i - 1)"
         >
-          {{ rowStyle[GameData.digitsOfEachRow.length - 1].btnStyle[i - 1].value }}
+          {{
+            rowStyle[gameData.digitsOfEachRow.length - 1].btnStyle[i - 1].value
+          }}
         </button>
       </div>
     </div>
     <div class="drawingBoard" :style="canvasStyle">
-      <drawingBoard ref="canvas" :Data="configBrush"></drawingBoard>
+      <drawingBoard ref="canvas" :component-config="configBrush"></drawingBoard>
     </div>
     <div class="function">
       <button @click="drawingFunc('brush')">{{ brushStatusBtn }}</button>
@@ -64,7 +72,11 @@
       <button @click="checkAnswer()">檢查答案</button>
     </div>
     <div class="number-pad">
-      <numPad v-if="showPad" :Data="numPadData" @buttonClicked="handleNumPad" />
+      <numPad
+        v-if="showPad"
+        :component-config="numPadData"
+        @button-clicked="handleNumPad"
+      />
     </div>
   </div>
 </template>
@@ -75,21 +87,15 @@ import { defineAsyncComponent } from "vue";
 import fetchJson from "@/utilitys/fetch-json";
 export default {
   components: {
-    drawingBoard: defineAsyncComponent(() => import("@/components/DrawingBoard.vue")),
+    drawingBoard: defineAsyncComponent(
+      () => import("@/components/DrawingBoard.vue")
+    ),
     numPad: defineAsyncComponent(() => import("@/components/FloatNumPad.vue")),
   },
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -127,7 +133,9 @@ export default {
   },
 
   async mounted() {
-    this.unit = await fetchJson(getGameStaticAssets("MultiplyBoard", "unit.json"));
+    this.unit = await fetchJson(
+      getGameStaticAssets("MultiplyBoard", "unit.json")
+    );
     this.unit = this.unit.data.unit;
     this.setUnit();
   },
@@ -136,11 +144,11 @@ export default {
     drawingFunc(btn) {
       switch (btn) {
         case "brush":
-          if (this.canvasStyle.zIndex == -1) {
+          if (this.canvasStyle.zIndex === -1) {
             this.canvasStyle.zIndex = 1;
             this.configBrush = this.brush;
             this.brushStatusBtn = "控制";
-          } else if (this.canvasStyle.zIndex == 1) {
+          } else if (this.canvasStyle.zIndex === 1) {
             this.canvasStyle.zIndex = -1;
             this.brushStatusBtn = "畫筆";
           }
@@ -155,10 +163,10 @@ export default {
           this.brushStatusBtn = "控制";
           break;
         case "visibility":
-          if (this.canvasStyle.visibility == "visible") {
+          if (this.canvasStyle.visibility === "visible") {
             this.canvasStyle.visibility = "hidden";
             this.drawingBoardStatusBtn = "顯示";
-          } else if (this.canvasStyle.visibility == "hidden") {
+          } else if (this.canvasStyle.visibility === "hidden") {
             this.canvasStyle.visibility = "visible";
             this.drawingBoardStatusBtn = "隱藏";
           }
@@ -167,25 +175,25 @@ export default {
     },
     setRowStyles() {
       this.btnRowStyle = {
-        height: 90 / this.GameData.digitsOfEachRow.length + "%",
+        height: 90 / this.gameData.digitsOfEachRow.length + "%",
       };
-      for (let i in this.GameData.digitsOfEachRow) {
-        let rowStyle = {};
+      for (const i in this.gameData.digitsOfEachRow) {
+        const rowStyle = {};
         rowStyle.btnStyle = this.setBtnStyle(i);
         this.rowStyle.push(rowStyle);
       }
     },
     setBtnStyle(i) {
-      this.maxDigit = Math.max(...this.GameData.digitsOfEachRow);
-      let btnStyle = [],
-        btnColor;
-      if (i == this.GameData.digitsOfEachRow.length - 1) btnColor = "pink";
+      this.maxDigit = Math.max(...this.gameData.digitsOfEachRow);
+      const btnStyle = [];
+      let btnColor;
+      if (i === this.gameData.digitsOfEachRow.length - 1) btnColor = "pink";
       else btnColor = "lightgray";
 
-      if (i < this.GameData.digitsOfEachRow.length - 1 && i > 1) {
-        for (let j = 0; j < this.GameData.digitsOfEachRow[i]; ++j) {
-          let btn = {
-            gridColumn: j + 10 - this.GameData.digitsOfEachRow[i] - i + 2,
+      if (i < this.gameData.digitsOfEachRow.length - 1 && i > 1) {
+        for (let j = 0; j < this.gameData.digitsOfEachRow[i]; ++j) {
+          const btn = {
+            gridColumn: j + 10 - this.gameData.digitsOfEachRow[i] - i + 2,
             gridRow: 1,
             backgroundColor: btnColor,
             adjustable: true,
@@ -194,28 +202,28 @@ export default {
           btnStyle.push(btn);
         }
       } else {
-        for (let j = 0; j < this.GameData.digitsOfEachRow[i]; ++j) {
-          let btn = {
-            gridColumn: j + 10 - this.GameData.digitsOfEachRow[i],
+        for (let j = 0; j < this.gameData.digitsOfEachRow[i]; ++j) {
+          const btn = {
+            gridColumn: j + 10 - this.gameData.digitsOfEachRow[i],
             gridRow: 1,
             backgroundColor: btnColor,
           };
           if (i < 2) {
-            if (this.GameData.preset) {
-              if (this.GameData.preset[i][j]) {
-                btn.value = this.GameData.preset[i][j];
+            if (this.gameData.preset) {
+              if (this.gameData.preset[i][j]) {
+                btn.value = this.gameData.preset[i][j];
                 btn.adjustable = false;
                 btn.backgroundColor = "#909CA7";
               }
             }
           }
-          if (btn.adjustable == null) btn.adjustable = true;
+          if (btn.adjustable === null) btn.adjustable = true;
           btnStyle.push(btn);
         }
       }
 
-      if (i == 1) {
-        let btn = {
+      if (i === 1) {
+        const btn = {
           gridColumn: 9 - this.maxDigit,
           gridRow: 1,
           backgroundColor: "#aded5d",
@@ -226,30 +234,22 @@ export default {
       }
       return btnStyle;
     },
-    setPadPosition(row, column) {
-      let position;
-      if (row >= this.GameData.digitsOfEachRow.length / 2) position = "upper";
-      else position = "lower";
-
-      if (column > 5) return position.concat("Left");
-      else return position.concat("Right");
-    },
     setUnit() {
       this.unitRowStyle.width = this.$refs.row.clientWidth + "px";
 
-      switch (this.GameData.unit) {
+      switch (this.gameData.unit) {
         case "Length":
         case "Time":
         case "Volume":
         case "Weight":
-          for (let i in this.unit[this.GameData.unit]) {
+          for (const i in this.unit[this.gameData.unit]) {
             if (i >= this.maxDigit) break;
 
-            if (this.unit[this.GameData.unit][i]) {
-              let unitStyle = {
+            if (this.unit[this.gameData.unit][i]) {
+              const unitStyle = {
                 gridColumn: 9 - i,
                 gridRow: 1,
-                text: this.unit[this.GameData.unit][i],
+                text: this.unit[this.gameData.unit][i],
               };
               this.unitStyle.push(unitStyle);
             }
@@ -258,13 +258,13 @@ export default {
         case "Number":
           break;
         case "Custom":
-          for (let i in this.GameData.customUnit) {
+          for (const i in this.gameData.customUnit) {
             if (i >= this.maxDigit) break;
-            if (this.GameData.customUnit[i]) {
-              let unitStyle = {
+            if (this.gameData.customUnit[i]) {
+              const unitStyle = {
                 gridColumn: 9 - i,
                 gridRow: 1,
-                text: this.GameData.customUnit[i],
+                text: this.gameData.customUnit[i],
               };
               this.unitStyle.push(unitStyle);
             }
@@ -275,27 +275,26 @@ export default {
           break;
       }
     },
-    getAnswer(ans, id) {
-      this.answer[id - 1] = ans;
-    },
     checkAnswer() {
       let isCorrect = true;
-      let ans = [];
-      for (let i in this.rowStyle[this.rowStyle.length - 1].btnStyle) {
+      const ans = [];
+      for (const i in this.rowStyle[this.rowStyle.length - 1].btnStyle) {
         ans.push(this.rowStyle[this.rowStyle.length - 1].btnStyle[i].value);
       }
-      for (let i in ans) {
-        if (ans[i] != this.GameData.answers[i]) {
+      for (const i in ans) {
+        if (ans[i] !== this.gameData.answers[i]) {
           isCorrect = false;
-          this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor = "red";
+          this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor =
+            "red";
         } else {
-          this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor = "pink";
+          this.rowStyle[this.rowStyle.length - 1].btnStyle[i].backgroundColor =
+            "pink";
         }
       }
       if (isCorrect) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
-          this.GameData.answers.toString(),
+          this.gameData.answers.toString(),
           ans.toString(),
           "正確",
         ]);
@@ -303,7 +302,7 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.answers.toString(),
+          this.gameData.answers.toString(),
           ans.toString(),
           "錯誤",
         ]);
@@ -312,7 +311,7 @@ export default {
     btnClick(e, row, column) {
       if (this.rowStyle[row].btnStyle[column].adjustable) {
         this.showPad = true;
-        this.currentInputBtn = { row: row, column: column };
+        this.currentInputBtn = { row, column };
         this.numPadData = {
           top: e.target.getBoundingClientRect().top,
           left:
@@ -322,11 +321,11 @@ export default {
       }
     },
     handleNumPad(input) {
-      if (input == "清除") {
+      if (input === "清除") {
         this.rowStyle[this.currentInputBtn.row].btnStyle[
           this.currentInputBtn.column
         ].value = null;
-      } else if (input != "關閉") {
+      } else if (input !== "關閉") {
         this.rowStyle[this.currentInputBtn.row].btnStyle[
           this.currentInputBtn.column
         ].value = input;

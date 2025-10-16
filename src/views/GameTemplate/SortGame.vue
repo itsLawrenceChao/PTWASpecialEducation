@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>{{ GameData.Question.text }}</h1>
+    <h1>{{ gameData.Question.text }}</h1>
     <hr />
     <draggable :key="options[0]" :list="options" group="Sentense">
       <template #item="{ element }">
@@ -29,23 +29,14 @@ export default {
     draggable,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      QuestionWord: "",
       options: [],
       show: false,
       question: null,
@@ -59,16 +50,16 @@ export default {
   mounted() {},
   methods: {
     UpdateQuestion() {
-      this.answer = this.GameData.Answer;
-      this.question = this.GameData.Question.options;
+      this.answer = this.gameData.Answer;
+      this.question = this.gameData.Question.options;
       this.RandomtheList();
       let randed = this.Checkrand();
-      while (randed == false) {
+      while (randed === false) {
         this.RandomtheList();
         randed = this.Checkrand();
       }
       this.options = [];
-      for (var i in this.question) {
+      for (const i in this.question) {
         this.options.push(this.question[i]);
       }
       console.log(this.question, this.options, this.answer);
@@ -79,30 +70,30 @@ export default {
     Checkrand() {
       let list1 = "";
       let list2 = "";
-      for (var i in this.question) {
+      for (const i in this.question) {
         list1 += this.question[i];
       }
-      for (var i in this.answer) {
+      for (const i in this.answer) {
         list2 += this.answer[i];
       }
-      if (list1 == list2) {
+      if (list1 === list2) {
         return false;
       } else {
         return true;
       }
     },
     CheckAnswer() {
-      var AnswerCheck = true;
-      for (var i in this.answer) {
-        if (this.answer[i] != this.options[i]) {
+      let AnswerCheck = true;
+      for (const i in this.answer) {
+        if (this.answer[i] !== this.options[i]) {
           AnswerCheck = false;
         }
       }
-      if (AnswerCheck == true) {
+      if (AnswerCheck === true) {
         console.log("SortGame ChenckAnswer: Right");
         this.show = false;
         this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [this.GameData.Answer, this.options, "正確"]);
+        this.$emit("add-record", [this.gameData.Answer, this.options, "正確"]);
         this.$emit("next-question");
         setTimeout(this.UpdateQuestion, 100);
         this.UpdateQuestion();

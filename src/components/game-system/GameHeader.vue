@@ -51,6 +51,7 @@
 <script>
 import { getSystemAssets } from "@/utilitys/get_assets.js";
 export default {
+  name: "GameHeader",
   props: {
     grade: {
       type: String,

@@ -47,7 +47,7 @@
 export default {
   name: "NumberLineVisualizer",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
       default: () => ({
@@ -91,8 +91,12 @@ export default {
       const lines = [];
       const segmentWidth = this.calculateSegmentWidth();
 
-      for (let i = 0; i <= this.Data.segments; i++) {
-        if (this.Data.displayOneSegment && i < this.Data.segments && i > 1)
+      for (let i = 0; i <= this.componentConfig.segments; i++) {
+        if (
+          this.componentConfig.displayOneSegment &&
+          i < this.componentConfig.segments &&
+          i > 1
+        )
           continue;
         const x = this.padding + i * segmentWidth;
         lines.push({
@@ -114,21 +118,21 @@ export default {
       const segmentWidth = this.calculateSegmentWidth();
       const y = this.containerHeight / 2 - this.tickHeight - this.fontSize / 2;
 
-      for (let i = 0; i < this.Data.segments; i++) {
+      for (let i = 0; i < this.componentConfig.segments; i++) {
         const x = this.padding + (i + 0.5) * segmentWidth;
         labels.push({
-          x: x,
-          y: y,
+          x,
+          y,
           text: (i + 1).toString(),
           fontSize: this.fontSize,
           align: "center",
           fill: "purple",
         });
-        if (this.Data.displayOneSegment) {
+        if (this.componentConfig.displayOneSegment) {
           // 添加 "...?" 標籤，位置更靠近數字標籤
           labels.push({
             x: x + this.fontSize * 1.5,
-            y: y,
+            y,
             text: "...?",
             fontSize: this.fontSize,
             align: "left",
@@ -146,7 +150,7 @@ export default {
       const y = this.containerHeight / 2 - this.tickHeight - this.fontSize / 2;
       const radius = this.fontSize * 0.7; // 圓形半徑
 
-      for (let i = 0; i < this.Data.segments; i++) {
+      for (let i = 0; i < this.componentConfig.segments; i++) {
         const x = this.padding + (i + 0.5) * segmentWidth;
         circles.push({
           sceneFunc: function (context) {
@@ -164,7 +168,7 @@ export default {
             context.stroke();
           }.bind(this),
         });
-        if (this.Data.displayOneSegment) break;
+        if (this.componentConfig.displayOneSegment) break;
       }
 
       return circles;
@@ -173,7 +177,7 @@ export default {
       return {
         x: this.containerWidth / 2 - this.fontSize,
         y: this.containerHeight / 2 - this.containerHeight * 0.4,
-        text: this.Data.total.toString(),
+        text: this.componentConfig.total.toString(),
         fontSize: this.fontSize,
         align: "center",
         fill: "red",
@@ -196,7 +200,7 @@ export default {
           context.lineWidth = 2;
 
           // 為每個區段繪製連接線
-          for (let i = 1; i <= this.Data.segments; i++) {
+          for (let i = 1; i <= this.componentConfig.segments; i++) {
             const segmentStartX = this.padding + (i - 1) * segmentWidth;
             const segmentEndX = this.padding + i * segmentWidth;
             this.drawStartLabelConnector(
@@ -213,7 +217,10 @@ export default {
               startLabelY,
               segmentWidth
             );
-            if (this.Data.stepLabel === "?" || this.Data.displayOneSegment)
+            if (
+              this.componentConfig.stepLabel === "?" ||
+              this.componentConfig.displayOneSegment
+            )
               break;
           }
           context.stroke();
@@ -233,18 +240,22 @@ export default {
       const segmentWidth = this.calculateSegmentWidth();
       const y = this.containerHeight / 2 + this.tickHeight + this.fontSize / 2;
 
-      for (let i = 0; i < this.Data.segments; i++) {
+      for (let i = 0; i < this.componentConfig.segments; i++) {
         const x = this.padding + (i + 0.5) * segmentWidth;
         labels.push({
-          x: x,
-          y: y,
-          text: this.Data.stepLabel,
+          x,
+          y,
+          text: this.componentConfig.stepLabel,
           fontSize: this.fontSize,
           fill: "blue",
           align: "center",
           fontStyle: "bold",
         });
-        if (this.Data.stepLabel === "?" || this.Data.displayOneSegment) break;
+        if (
+          this.componentConfig.stepLabel === "?" ||
+          this.componentConfig.displayOneSegment
+        )
+          break;
       }
 
       return labels;
@@ -265,7 +276,9 @@ export default {
       }
     },
     calculateSegmentWidth() {
-      return (this.containerWidth - 2 * this.padding) / this.Data.segments;
+      return (
+        (this.containerWidth - 2 * this.padding) / this.componentConfig.segments
+      );
     },
     drawStartLabelConnector(
       context,

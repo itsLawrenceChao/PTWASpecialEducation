@@ -3363,7 +3363,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "哥哥吃了3/12盒甜甜圈，也就是吃了$i$個甜甜圈。",
             "Answer": [3]
@@ -3521,7 +3521,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "哥哥吃了4/12盒甜甜圈，也就是吃了$i$個甜甜圈。",
             "Answer": [4]
@@ -3679,7 +3679,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "哥哥吃了2/12盒甜甜圈，也就是吃了$i$個甜甜圈。",
             "Answer": [2]
@@ -3837,7 +3837,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "哥哥吃了6/12盒甜甜圈，也就是吃了$i$個甜甜圈。",
             "Answer": [6]
@@ -3995,7 +3995,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "哥哥吃了5/12盒甜甜圈，也就是吃了$i$個甜甜圈。",
             "Answer": [5]

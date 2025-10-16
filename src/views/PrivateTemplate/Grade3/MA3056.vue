@@ -1,13 +1,13 @@
 <template>
   <div class="outter-container container">
     <div class="head-container">
-      {{ GameData.headQuestion }}
+      {{ gameData.headQuestion }}
     </div>
     <div class="game-area">
       <DrawShapes
         id="draw-shapes"
-        :Data="configDrawShapes"
-        :ID="ID"
+        :component-config="configDrawShapes"
+        :game-id="gameId"
         @reply-answer="getComponentsReply"
       />
     </div>
@@ -24,15 +24,11 @@ export default {
     DrawShapes,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -40,7 +36,6 @@ export default {
   emits: ["play-effect", "next-question"],
   data() {
     return {
-      id: "MA3056",
       componentsReplyAnswer: false,
       configDrawShapes: {
         verifyOption: "rect", //none, rect, shape
@@ -57,7 +52,7 @@ export default {
   },
   created() {
     // Add your created methods here
-    this.configDrawShapes.answer = this.GameData.answer;
+    this.configDrawShapes.answer = this.gameData.answer;
     emitter.on("submitAnswer", this.checkAnswer);
   },
   beforeUnmount() {

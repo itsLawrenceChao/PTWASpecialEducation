@@ -1,21 +1,21 @@
 <template>
   <div class="MA3142__container">
-    <!-- <component :is="componentName" :Data="componentsData" :ID="ID" @replyAnswer="replyAnswerFunc"/> -->
+    <!-- <component :is="componentName" :Data="componentsData" :gameId="gameId" @replyAnswer="replyAnswerFunc"/> -->
     <ImageContainer
       class="MA3142__question-img"
-      :Data="imgData"
-      :ID="ID"
+      :component-config="imgData"
+      :game-id="gameId"
     ></ImageContainer>
     <TextOnly
       class="MA3142__question-description"
-      :Data="textData"
-      :ID="ID"
+      :component-config="textData"
+      :game-id="gameId"
     ></TextOnly>
     <Scale
       class="MA3142__scale"
-      :Data="scaleData"
-      :ID="ID"
-      @replyAnswer="userAnswerUpdate"
+      :component-config="scaleData"
+      :game-id="gameId"
+      @reply-answer="userAnswerUpdate"
     ></Scale>
     <!-- <button class="submit-btn" @click="submitAnswer">送出答案</button> -->
   </div>
@@ -27,20 +27,16 @@ export default {
   name: "MA3142",
   components: {
     // Import your components here, use defineAsyncComponent for lazy loading
-    Scale: getComponents("Scale"),
+    Scale: getComponents("ScalePointer"),
     ImageContainer: getComponents("ImageContainer"),
     TextOnly: getComponents("TextOnly"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -48,11 +44,11 @@ export default {
   emits: ["add-record", "next-question", "play-effect"],
   data() {
     return {
-      textData: this.GameData.TextData,
-      imgData: this.GameData.ImageData,
-      scaleData: this.GameData.ScaleData,
+      textData: this.gameData.TextData,
+      imgData: this.gameData.ImageData,
+      scaleData: this.gameData.ScaleData,
       userAnswer: null,
-      correctAnswer: this.GameData.Answer,
+      correctAnswer: this.gameData.Answer,
     };
   },
   created() {

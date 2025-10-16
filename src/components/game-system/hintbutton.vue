@@ -1,13 +1,14 @@
 <template>
   <!-- 大於0的話 -->
   <div class="Content" :class="{ progressShake: Shake }">
-    <!-- <p class="h3">生命值:  {{ (this.HintInfo.MaxWrongTimes - this.HintInfo.WrongTimes) > 0 ? this.HintInfo.MaxWrongTimes - this.HintInfo.WrongTimes: 0}}</p> -->
+    <!-- <p class="h3">生命值:  {{ (this.hintInfo.MaxWrongTimes - this.hintInfo.WrongTimes) > 0 ? this.hintInfo.MaxWrongTimes - this.hintInfo.WrongTimes: 0}}</p> -->
     <div class="Heart">
       <!-- eslint-disable vue/no-unused-vars-->
       <p
-        v-for="i in HintInfo.MaxWrongTimes - HintInfo.WrongTimes > 0
-          ? HintInfo.MaxWrongTimes - HintInfo.WrongTimes
+        v-for="i in hintInfo.MaxWrongTimes - hintInfo.WrongTimes > 0
+          ? hintInfo.MaxWrongTimes - hintInfo.WrongTimes
           : 0"
+        :key="i"
       >
         ❤
       </p>
@@ -49,7 +50,7 @@
 export default {
   name: "HintButton",
   props: {
-    HintInfo: {
+    hintInfo: {
       type: Object,
       required: true,
     },
@@ -62,17 +63,13 @@ export default {
       Shake: false,
     };
   },
-  computed: {
-    hint_percentage() {
-      return `${this.percentage}%`;
-    },
-  },
+  computed: {},
   watch: {
-    HintInfo: {
-      handler: function () {
+    hintInfo: {
+      handler() {
         this.updated_hint_status();
         this.shrinkHint();
-        console.log(this.HintInfo.WrongTimes);
+        console.log(this.hintInfo.WrongTimes);
       },
       deep: true,
     },
@@ -87,11 +84,11 @@ export default {
       this.$emit("openHintModal", mediaType);
     },
     updated_hint_status() {
-      let temp =
-        this.HintInfo.MaxWrongTimes - this.HintInfo.WrongTimes > 0
-          ? this.HintInfo.MaxWrongTimes - this.HintInfo.WrongTimes
+      const temp =
+        this.hintInfo.MaxWrongTimes - this.hintInfo.WrongTimes > 0
+          ? this.hintInfo.MaxWrongTimes - this.hintInfo.WrongTimes
           : 0;
-      this.percentage = temp * (100 / this.HintInfo.MaxWrongTimes);
+      this.percentage = temp * (100 / this.hintInfo.MaxWrongTimes);
       if (this.percentage > 0) {
         this.showhint = false;
       } else {

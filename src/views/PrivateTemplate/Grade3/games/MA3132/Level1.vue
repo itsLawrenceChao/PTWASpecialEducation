@@ -1,6 +1,10 @@
 <template>
   <div class="level-container">
-    <ImageContainer :ID="ID" :Data="imageData" class="image-container" />
+    <ImageContainer
+      :game-id="gameId"
+      :component-config="imageData"
+      class="image-container"
+    />
     <div class="question-container">
       <div class="questions-flex">
         <div
@@ -33,9 +37,9 @@
         </div>
       </div>
       <Markdown
-        :ID="ID"
-        :Data="markdownData"
-        @replyAnswer="handleMarkdownReply"
+        :game-id="gameId"
+        :component-config="markdownData"
+        @reply-answer="handleMarkdownReply"
       />
     </div>
   </div>
@@ -43,17 +47,17 @@
 
 <script>
 import ImageContainer from "@/components/ImageContainer.vue";
-import Markdown from "@/components/Markdown.vue";
+import Markdown from "@/components/MarkdownRenderer.vue";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {
-  name: "Level1",
+  name: "MA3132Level1",
   components: {
     ImageContainer,
     Markdown,
   },
   props: {
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -68,6 +72,10 @@ export default {
     questions: {
       type: Array,
       required: true,
+    },
+    submitTick: {
+      type: Number,
+      default: 0,
     },
   },
   emits: ["play-effect", "next-question"],
@@ -85,6 +93,11 @@ export default {
         this.questions[this.currentQuestionIndex],
         this.questions[this.currentQuestionIndex + 1],
       ].filter((q) => q);
+    },
+  },
+  watch: {
+    submitTick() {
+      this.submitAnswer();
     },
   },
   methods: {

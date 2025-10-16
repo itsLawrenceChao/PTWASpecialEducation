@@ -118,9 +118,9 @@ export default {
     },
     loadImage(img) {
       const StageHeight = this.stageConfig.height - this.SelectionHeight * 2;
-      let imgWidth = img.width;
-      let imgHeight = img.height;
-      let ratio = imgWidth / imgHeight;
+      const imgWidth = img.width;
+      const imgHeight = img.height;
+      const ratio = imgWidth / imgHeight;
 
       let NewImageWidth, NewImageHeight;
 
@@ -134,8 +134,8 @@ export default {
         NewImageHeight = NewImageWidth / ratio;
       }
 
-      let NewX = (this.stageConfig.width - NewImageWidth) / 2;
-      let NewY = (StageHeight - NewImageHeight) / 2 + this.SelectionHeight;
+      const NewX = (this.stageConfig.width - NewImageWidth) / 2;
+      const NewY = (StageHeight - NewImageHeight) / 2 + this.SelectionHeight;
 
       this.imageConfig = {
         image: img,
@@ -164,7 +164,7 @@ export default {
           y >= 0 &&
           y <= this.imageConfig.height
         ) {
-          this.points.push({ x: x, y: y });
+          this.points.push({ x, y });
         }
       }
     },

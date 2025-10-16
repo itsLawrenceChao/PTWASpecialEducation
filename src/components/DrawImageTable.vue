@@ -24,11 +24,11 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "DrawImageTable",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -48,9 +48,9 @@ export default {
     },
   },
   created() {
-    this.configs = this.Data;
+    this.configs = this.componentConfig;
     this.configs.length = this.configs.Mother;
-    this.Src = getGameAssets(this.ID, this.configs.Src);
+    this.Src = getGameAssets(this.gameId, this.configs.Src);
   },
   methods: {
     toggleColor(index) {

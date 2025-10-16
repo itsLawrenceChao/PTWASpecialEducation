@@ -21,9 +21,9 @@
 import { getSlotComponentAssets } from "../utilitys/get_assets";
 
 export default {
-  name: "Water",
+  name: "WaterScrollable",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -36,8 +36,6 @@ export default {
         height: 0,
       },
       image: null,
-      CupData: [],
-      containVloume: 0,
       dpr: window.devicePixelRatio || 1,
       configs: {},
     };
@@ -68,12 +66,12 @@ export default {
   },
   watch: {
     // 監聽 Data 的變化
-    "Data.Scale"() {
+    "componentConfig.Scale"() {
       this.loadImage();
     },
   },
   created() {
-    this.configs = this.Data;
+    this.configs = this.componentConfig;
   },
   mounted() {
     // 初始化尺寸
@@ -103,17 +101,17 @@ export default {
       const width = this.stageSize.width;
       const height = this.stageSize.height;
 
-      if (Scale == 1000) {
+      if (Scale === 1000) {
         StartX = (width / 15) * 2;
         EndX = (width / 15) * 11 + 2;
         StartY = (height / 12) * (10 - ML / 100 + 1);
         EndY = (height / 12) * (ML / 100) + 2;
-      } else if (Scale == 250) {
+      } else if (Scale === 250) {
         StartX = (width / 15) * 2;
         EndX = (width / 15) * 11 + 2;
         StartY = (height / 15) * (1 + (13 / 250) * (250 - ML));
         EndY = (height / 15) * (13 / 250) * ML;
-      } else if (Scale == 2000) {
+      } else if (Scale === 2000) {
         StartX = (width / 15) * 2;
         EndX = (width / 15) * 11 + 2;
         StartY = (height / 12) * (10 - ML / 200 + 1);
@@ -138,7 +136,7 @@ export default {
       }
     },
     addML() {
-      const increment = this.configs.Scale == 250 ? 10 : 100;
+      const increment = this.configs.Scale === 250 ? 10 : 100;
       this.configs.containVloume = Math.min(
         this.configs.containVloume + increment,
         this.configs.Scale
@@ -146,7 +144,7 @@ export default {
       this.$emit("updateML", this.configs.containVloume);
     },
     minusML() {
-      const decrement = this.configs.Scale == 250 ? 10 : 100;
+      const decrement = this.configs.Scale === 250 ? 10 : 100;
       this.configs.containVloume = Math.max(
         this.configs.containVloume - decrement,
         0

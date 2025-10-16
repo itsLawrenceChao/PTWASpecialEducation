@@ -40,38 +40,38 @@
       </div>
       <div class="right-section">
         <Markdown
-          :ID="ID"
-          :Data="markdownData"
-          @replyAnswer="handleMarkdownReply"
+          :game-id="gameId"
+          :component-config="markdownData"
+          @reply-answer="handleMarkdownReply"
         />
       </div>
     </div>
     <FloatNumPad
       v-if="isShowNumPad"
-      :Data="floatNumPadLocation"
-      @buttonClicked="fillToInput"
+      :component-config="floatNumPadLocation"
+      @button-clicked="fillToInput"
     />
   </div>
 </template>
 
 <script>
-import Markdown from "@/components/Markdown.vue";
+import Markdown from "@/components/MarkdownRenderer.vue";
 import FloatNumPad from "@/components/FloatNumPad.vue";
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {
-  name: "Level3",
+  name: "MA3132Level3",
   components: {
     Markdown,
     FloatNumPad,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -86,6 +86,10 @@ export default {
     boxes: {
       type: Array,
       required: true,
+    },
+    submitTick: {
+      type: Number,
+      default: 0,
     },
   },
   emits: ["play-effect", "next-question"],
@@ -114,6 +118,11 @@ export default {
       markdownAnswer: false,
     };
   },
+  watch: {
+    submitTick() {
+      this.submitAnswer();
+    },
+  },
   mounted() {
     this.$nextTick(() => {
       this.initializeLevel3();
@@ -129,7 +138,7 @@ export default {
       this.configKonva.height = container.clientHeight;
 
       const image = new window.Image();
-      image.src = getGameAssets(this.ID, this.imageData.Src);
+      image.src = getGameAssets(this.gameId, this.imageData.Src);
       image.onload = () => {
         const scale = Math.min(
           this.configKonva.width / image.width,
@@ -190,9 +199,9 @@ export default {
       }
     },
     submitAnswer() {
-      const correctAnswers = this.GameData.Answer;
+      const correctAnswers = this.gameData.Answer;
       let isCorrect = true;
-      let wrongIndices = [];
+      const wrongIndices = [];
 
       for (let i = 0; i < this.userAnswers.length; i++) {
         const userAnswer = this.userAnswers[i].join("");

@@ -2,37 +2,37 @@
   <div class="OutterContainer">
     <div class="Head">
       <p
-        v-if="GameData.QuestionText && GameData.QuestionText != ''"
+        v-if="gameData.QuestionText && gameData.QuestionText !== ''"
         class="h1 Title"
       >
-        {{ GameData.QuestionText }}
+        {{ gameData.QuestionText }}
       </p>
       <p
-        v-if="GameData.Description && GameData.Description != ''"
+        v-if="gameData.Description && gameData.Description !== ''"
         class="h2 SubTitle"
       >
-        {{ GameData.Description }}
+        {{ gameData.Description }}
       </p>
     </div>
     <hr />
     <div class="QuestionArea">
       <div
-        v-for="(item, index) in GameData.Datas"
+        v-for="(item, index) in gameData.Datas"
         :key="index"
         class="QuestionContainer"
       >
         <section
           class="QuestionRow"
           :class="{
-            'QuestionRow-Wrong': Answered[index] == false,
-            'QuestionRow-Right': Answered[index] == true,
+            'QuestionRow-Wrong': Answered[index] === false,
+            'QuestionRow-Right': Answered[index] === true,
           }"
         >
           <div class="CompareCard Left">
             <component
               :is="item[0].Name"
-              :Data="item[0].Data"
-              :ID="ID"
+              :component-data="item[0].Data"
+              :game-id="gameId"
               @reply-answer="SlotComponentReplyAnswer(0, $event)"
             />
           </div>
@@ -58,8 +58,8 @@
           <div class="CompareCard Right">
             <component
               :is="item[1].Name"
-              :Data="item[1].Data"
-              :ID="ID"
+              :component-data="item[1].Data"
+              :game-id="gameId"
               @reply-answer="SlotComponentReplyAnswer(1, $event)"
             />
           </div>
@@ -85,7 +85,7 @@
         </draggable>
       </div>
       <!-- <button
-        v-if="GameConfig.CheckAnswerMode == 'Button'"
+        v-if="gameConfig.CheckAnswerMode === 'Button'"
         class="SucessButton"
         @click="CheckAllAnswer"
       >
@@ -119,15 +119,15 @@ export default {
     FractionDisplay: getComponents("FractionDisplay"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -135,13 +135,10 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      a: "",
       SelectedGroup: 0,
       TotalQuestion: null,
       Answered: [],
       Answers: [],
-      Ans1: [],
-      Ans2: [],
       ImageDatas: [],
       Symbol: [],
       SlotComponentanswer: ["", ""], // Two SubComponents
@@ -162,11 +159,11 @@ export default {
     };
   },
   created() {
-    this.TotalQuestion = this.GameData.Datas.length;
-    this.GameData.Datas.forEach(() => {
+    this.TotalQuestion = this.gameData.Datas.length;
+    this.gameData.Datas.forEach(() => {
       this.Answered.push(null);
       this.Answers.push([]);
-      let TempImg = [];
+      const TempImg = [];
       this.ImageDatas.push(TempImg);
     });
     this.Symbol = this.BSESymbol;
@@ -176,9 +173,6 @@ export default {
     emitter.off("submitAnswer", this.CheckAllAnswer);
   },
   methods: {
-    Triger() {
-      this.$emit("play-effect", "IncorrectAnimation");
-    },
     Add(index) {
       console.log("check drop");
       this.SelectedGroup = index;
@@ -186,17 +180,17 @@ export default {
     },
     CheckDrop(newVal) {
       console.log(newVal.newIndex);
-      let tmp = this.Answers[this.SelectedGroup][newVal.newIndex];
+      const tmp = this.Answers[this.SelectedGroup][newVal.newIndex];
       this.Answers[this.SelectedGroup] = [tmp];
       this.RealTimeCheckAnswer();
-      if (this.GameConfig.CheckAnswerMode != "OnFill") {
+      if (this.gameConfig.CheckAnswerMode !== "OnFill") {
         this.Answered[this.SelectedGroup] = null;
       }
     },
     RealTimeCheckAnswer() {
-      if (this.GameConfig.CheckAnswerMode == "OnFill") {
+      if (this.gameConfig.CheckAnswerMode === "OnFill") {
         if (
-          this.GameData.Answer[this.SelectedGroup] ==
+          this.gameData.Answer[this.SelectedGroup] ===
           this.Answers[this.SelectedGroup][0].tag
         ) {
           this.$emit("play-effect", "CorrectSound");
@@ -213,8 +207,8 @@ export default {
       }
     },
     CheckAnsweredAll() {
-      for (var i in this.Answered) {
-        if (this.Answered[i] == false || this.Answered[0][i] == null) {
+      for (const i in this.Answered) {
+        if (this.Answered[i] === false || this.Answered[0][i] === null) {
           return false;
         }
       }
@@ -222,8 +216,8 @@ export default {
     },
     CheckAllAnswer() {
       let check = true;
-      for (var i in this.GameData.Answer) {
-        if (this.GameData.Answer[i] == this.Answers[i][0].tag) {
+      for (const i in this.gameData.Answer) {
+        if (this.gameData.Answer[i] === this.Answers[i][0].tag) {
           //FIXME: UnEfficient
           this.Answered[i] = true;
         } else {
@@ -231,42 +225,34 @@ export default {
           check = false;
         }
       }
-      if (this.GameData.SlotComponentVerifycation == true) {
+      if (this.gameData.SlotComponentVerifycation === true) {
         // Check if the SlotComponent is correct
         let temp = true;
         this.SlotComponentanswer.forEach((element) => {
-          if (element != true) {
+          if (element !== true) {
             temp = false;
           }
         });
         console.log("Temp", temp);
-        if (temp == false) {
+        if (temp === false) {
           check = false;
         }
       }
-      if (check == false) {
+      if (check === false) {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.Answer[0],
+          this.gameData.Answer[0],
           this.Answers[0][0].tag,
           "錯誤",
         ]);
       } else {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
-          this.GameData.Answer[0],
+          this.gameData.Answer[0],
           this.Answers[0][0].tag,
           "正確",
         ]);
         this.$emit("next-question");
-      }
-    },
-    ClearAllData() {
-      for (var i in this.Answered) {
-        this.Answers[i][0] = null;
-        this.Answers[i][1] = null;
-        this.Answered[i] = null;
-        this.Answers[i] = [];
       }
     },
     SlotComponentReplyAnswer(index, answer) {

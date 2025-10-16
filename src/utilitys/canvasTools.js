@@ -16,10 +16,10 @@ export function distance(object_1, object_2){
 }
 
 export function shuffleOptions(array){
-    let shuffled = [];
-    for (let item in array) shuffled.push(array[item]);
+    const shuffled = [];
+    for (const item in array) shuffled.push(array[item]);
     for (let i = shuffled.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
     return shuffled;
@@ -45,7 +45,7 @@ export function randomPosition(boundaries){
 }
 
 export function randomPositionInCircle(center, radius){
-    let boundaries = {
+    const boundaries = {
         up: center.y - radius,
         down: center.y + radius,
         left: center.x - radius,

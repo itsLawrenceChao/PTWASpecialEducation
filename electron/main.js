@@ -1,5 +1,9 @@
-const { app, BrowserWindow } = require("electron");
-const path = require("path");
+import { app, BrowserWindow } from "electron";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 let mainWindow = null;
 
@@ -10,27 +14,25 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: path.join(__dirname, "preload.js"),
+      preload: join(__dirname, "preload.js"), // 若你也改成 ESM，這樣就可以
     },
   });
 
-  // 在開發環境中載入 Vite 開發伺服器
   if (process.env.NODE_ENV === "development") {
-    // 等待開發伺服器準備好
-    const loadURL = async () => {
+    // 等待 Vite dev server 就緒
+    const tryLoad = async () => {
       try {
         await mainWindow.loadURL("http://localhost:5173");
-        // 開發時可以打開開發者工具
         mainWindow.webContents.openDevTools();
-      } catch (e) {
-        console.log("等待開發伺服器啟動...");
-        setTimeout(loadURL, 1000);
+      } catch (err) {
+        console.log("等待開發伺服器啟動...", err?.message ?? err);
+        setTimeout(tryLoad, 1000);
       }
     };
-    loadURL();
+    tryLoad();
   } else {
-    // 在生產環境中載入打包後的檔案
-    mainWindow.loadFile(path.join(__dirname, "../dist/index.html"));
+    // 生產模式：載入打包後檔案
+    mainWindow.loadFile(join(__dirname, "../dist/index.html"));
   }
 
   mainWindow.on("closed", () => {
@@ -41,13 +43,9 @@ function createWindow() {
 app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  if (process.platform !== "darwin") app.quit();
 });
 
 app.on("activate", () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
+  if (mainWindow === null) createWindow();
 });

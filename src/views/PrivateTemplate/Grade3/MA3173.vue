@@ -1,11 +1,11 @@
 <template>
   <div class="MA3173__container">
     <div class="MA3173__question">
-      <div class="MA3173__title">題目：{{ GameData.Question }}</div>
+      <div class="MA3173__title">題目：{{ gameData.Question }}</div>
       <CalculationBoard
         class="MA3173__calculation-board"
-        :Data="questionData"
-        :ID="ID"
+        :component-config="questionData"
+        :game-id="gameId"
       />
     </div>
     <div class="MA3173__verify-answer">
@@ -14,20 +14,20 @@
         <template v-for="(item, index) in answerData" :key="index">
           <div class="MA3173__answer-board">
             <div v-if="answerData.length >= 2">
-              <div v-if="index == 0" class="MA3173__text">先</div>
+              <div v-if="index === 0" class="MA3173__text">先</div>
               <div v-else class="MA3173__text">後</div>
             </div>
             <CalculationBoard
               class="MA3173__calculation-board"
-              :Data="item"
-              :ID="ID"
-              @replyAnswer="replyAnswerFunc(index, $event)"
+              :component-config="item"
+              :game-id="gameId"
+              @reply-answer="replyAnswerFunc(index, $event)"
             />
           </div>
         </template>
       </div>
     </div>
-    <!-- <component :is="componentName" :Data="componentsData" :ID="ID" @replyAnswer="replyAnswerFunc" /> -->
+    <!-- <component :is="componentName" :Data="componentsData" :gameId="gameId" @replyAnswer="replyAnswerFunc" /> -->
   </div>
 </template>
 <script>
@@ -42,15 +42,11 @@ export default {
     // Import your components here, use defineAsyncComponent for lazy loading
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -58,8 +54,8 @@ export default {
   emits: ["add-record", "next-question", "play-effect"],
   data() {
     return {
-      questionData: this.GameData.questionBoard,
-      answerData: this.GameData.answerBoard,
+      questionData: this.gameData.questionBoard,
+      answerData: this.gameData.answerBoard,
       userAnswer: [],
     };
   },

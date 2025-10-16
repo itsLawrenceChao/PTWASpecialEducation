@@ -15,7 +15,7 @@ export default {
   components: {},
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -45,8 +45,8 @@ export default {
       this.ctx.lineCap = "round";
     },
     handlePointer(e) {
-      let pos = this.getPositon(e);
-      if (this.Data.color == "eraser") {
+      const pos = this.getPositon(e);
+      if (this.componentConfig.color === "eraser") {
         switch (e.type) {
           case "pointerdown":
             this.drawing = true;
@@ -83,8 +83,8 @@ export default {
       };
     },
     draw(pos) {
-      this.ctx.strokeStyle = this.Data.color;
-      this.ctx.lineWidth = this.Data.size;
+      this.ctx.strokeStyle = this.componentConfig.color;
+      this.ctx.lineWidth = this.componentConfig.size;
       this.ctx.beginPath();
       this.ctx.moveTo(this.previousPos.x, this.previousPos.y);
       this.ctx.lineTo(pos.x, pos.y);
@@ -95,16 +95,11 @@ export default {
     erase(pos) {
       this.ctx.beginPath();
       this.ctx.clearRect(
-        pos.x - this.Data.size * 0.5,
-        pos.y - this.Data.size * 0.5,
-        this.Data.size,
-        this.Data.size
+        pos.x - this.componentConfig.size * 0.5,
+        pos.y - this.componentConfig.size * 0.5,
+        this.componentConfig.size,
+        this.componentConfig.size
       );
-      this.ctx.closePath();
-    },
-    clear() {
-      this.ctx.beginPath();
-      this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
       this.ctx.closePath();
     },
   },

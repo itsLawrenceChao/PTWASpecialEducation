@@ -1,18 +1,18 @@
 <template>
   <div class="Outter">
-    <div v-if="GameData.TopContainer != undefined" class="TopContainer">
+    <div v-if="gameData.TopContainer !== undefined" class="TopContainer">
       <component
-        :is="GameData.TopContainer.Name"
-        :Data="GameData.TopContainer.Data"
-        :ID="ID"
+        :is="gameData.TopContainer.Name"
+        :component-config="gameData.TopContainer.Data"
+        :game-id="gameId"
       />
     </div>
 
-    <div v-if="GameData.SlotComponent != undefined" class="ComponentArea Rect">
+    <div v-if="gameData.SlotComponent !== undefined" class="ComponentArea Rect">
       <component
-        :is="GameData.SlotComponent.Name"
-        :ID="ID"
-        :Data="GameData.SlotComponent.Data"
+        :is="gameData.SlotComponent.Name"
+        :game-id="gameId"
+        :component-config="gameData.SlotComponent.Data"
       />
     </div>
     <transition :name="transitionName" mode="out-in">
@@ -37,9 +37,9 @@
             @click="SelectItem(currentQuestionIndex, itemIndex)"
           >
             <component
-              :is="GameData.SelectionType"
-              :ID="id"
-              :Data="Selection"
+              :is="gameData.SelectionType"
+              :game-id="gameId"
+              :component-config="Selection"
             />
           </div>
         </div>
@@ -67,15 +67,11 @@ export default {
     DragImages: getComponents("DragImages"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -87,30 +83,29 @@ export default {
       currentQuestionIndex: 0,
       transitionName: "slide-right",
       error: undefined,
-      submitAnswerAmount: 0,
       nextable: false,
     };
   },
   computed: {
     currentQuestion() {
-      return this.GameData.Questions[this.currentQuestionIndex];
+      return this.gameData.Questions[this.currentQuestionIndex];
     },
   },
   created() {
-    Array.from({ length: this.GameData.Questions.length }).forEach(() => {
+    Array.from({ length: this.gameData.Questions.length }).forEach(() => {
       this.SelectionRecord.push(null);
     });
-    emitter.on("submitAnswer", this.CheckAnswer);
+    emitter.on("submitAnswer", this.submitSingleAnswer);
   },
   mounted() {
-    let Container = document.getElementsByClassName("Container")[0];
+    const Container = document.getElementsByClassName("Container")[0];
     console.log(Container);
-    if (this.GameData.SlotComponent == undefined) {
+    if (this.gameData.SlotComponent === undefined) {
       Container.style.gridTemplateColumns = "1fr";
     }
   },
   beforeUnmount() {
-    emitter.off("submitAnswer", this.CheckAnswer);
+    emitter.off("submitAnswer", this.submitSingleAnswer);
   },
   methods: {
     SelectItem(index, selection) {
@@ -119,20 +114,20 @@ export default {
     },
     submitSingleAnswer() {
       console.log(this.SelectionRecord[this.currentQuestionIndex]);
-      console.log(this.GameData.Questions[this.currentQuestionIndex].Answer);
+      console.log(this.gameData.Questions[this.currentQuestionIndex].Answer);
       if (
-        this.SelectionRecord[this.currentQuestionIndex] ==
-        this.GameData.Questions[this.currentQuestionIndex].Answer
+        this.SelectionRecord[this.currentQuestionIndex] ===
+        this.gameData.Questions[this.currentQuestionIndex].Answer
       ) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
           `第 ${this.currentQuestionIndex}題答案 ${
-            this.GameData.Questions[this.currentQuestionIndex].Answer
+            this.gameData.Questions[this.currentQuestionIndex].Answer
           }`,
           `回答${this.SelectionRecord[this.currentQuestionIndex]}`,
           "正確",
         ]);
-        if (this.currentQuestionIndex < this.GameData.Questions.length - 1) {
+        if (this.currentQuestionIndex < this.gameData.Questions.length - 1) {
           this.nextable = true;
         } else {
           this.nextable = false;
@@ -142,51 +137,11 @@ export default {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
           `第 ${this.currentQuestionIndex}題答案 ${
-            this.GameData.Questions[this.currentQuestionIndex].Answer
+            this.gameData.Questions[this.currentQuestionIndex].Answer
           }`,
           `回答${this.SelectionRecord[this.currentQuestionIndex]}`,
           "錯誤",
         ]);
-      }
-    },
-    CheckAnswer() {
-      let isCorrect = true;
-      let Answers = [];
-      this.submitAnswerAmount++;
-      for (const i in this.selectionRecord) {
-        if (this.selectionRecord[i] == null) {
-          this.error = "請將所有答案作答完成";
-          this.$emit("play-effect", "WrongSound");
-          this.$emit("add-record", [
-            `第${this.submitAnswerAmount}送出答案`,
-            `第${i + 1}題未作答`,
-            "錯誤",
-          ]);
-        }
-      }
-      for (const j in this.GameData.Questions) {
-        Answers.push(this.GameData.Questions[j].Answer);
-        if (this.SelectionRecord[j] != this.GameData.Questions[j].Answer) {
-          isCorrect = false;
-          this.$emit("add-record", [
-            `第${this.submitAnswerAmount}送出答案`,
-            `第${j + 1}題錯誤`,
-            "錯誤",
-          ]);
-          this.error = "答案錯誤，請再試一次";
-        }
-      }
-      if (isCorrect) {
-        this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [
-          `第${this.submitAnswerAmount}次送出答案`,
-          "",
-          "所有答案正確",
-        ]);
-        this.$emit("next-question");
-      } else {
-        this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", [Answers, this.SelectionRecord, "錯誤"]);
       }
     },
     splitQuestion(question) {
@@ -196,17 +151,11 @@ export default {
       return part === "$question$";
     },
     nextQuestion() {
-      if (this.currentQuestionIndex < this.GameData.Questions.length - 1) {
+      if (this.currentQuestionIndex < this.gameData.Questions.length - 1) {
         this.transitionName = "slide-left";
         this.currentQuestionIndex++;
       }
       this.nextable = false;
-    },
-    prevQuestion() {
-      if (this.currentQuestionIndex > 0) {
-        this.transitionName = "slide-right";
-        this.currentQuestionIndex--;
-      }
     },
   },
 };

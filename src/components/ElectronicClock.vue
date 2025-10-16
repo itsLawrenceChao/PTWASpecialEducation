@@ -9,12 +9,8 @@ import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "ElectronicClock",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -24,7 +20,10 @@ export default {
       layer: null,
       width: 100, // 預設寬度
       height: 100, // 預設高度
-      inputTime: this.Data.time == undefined ? "00:00" : this.Data.time, // 默認時間
+      inputTime:
+        this.componentConfig.time === undefined
+          ? "00:00"
+          : this.componentConfig.time, // 默認時間
       scaledImage: { width: 0, height: 0 }, // 儲存縮放後圖片的大小
       digitColor: "#800020", // 數字顏色變數
     };
@@ -151,7 +150,7 @@ export default {
       const longSide = size * 0.5;
       const shortSide = size * 0.1;
       const shapes = [
-        { x: x + shortSide, y: y, width: longSide, height: shortSide }, // Top
+        { x: x + shortSide, y, width: longSide, height: shortSide }, // Top
         {
           x: x + shortSide + longSide,
           y: y + shortSide,
@@ -171,12 +170,12 @@ export default {
           height: shortSide,
         }, // Bottom
         {
-          x: x,
+          x,
           y: y + shortSide * 2 + longSide,
           width: shortSide,
           height: longSide,
         }, // Bottom-left
-        { x: x, y: y + shortSide, width: shortSide, height: longSide }, // Top-left
+        { x, y: y + shortSide, width: shortSide, height: longSide }, // Top-left
         {
           x: x + shortSide,
           y: y + shortSide + longSide,
@@ -232,9 +231,6 @@ export default {
       });
 
       this.layer.add(topDot, bottomDot);
-    },
-    updateTime() {
-      this.drawTime(this.inputTime);
     },
     calculateScale(containerWidth, containerHeight, imageWidth, imageHeight) {
       const scaleX = containerWidth / imageWidth;

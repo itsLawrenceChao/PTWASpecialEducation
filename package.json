@@ -2,6 +2,7 @@
   "name": "ptwa_specialeducation",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "description": "PTWA Special Education - 特殊教育學習平台",
   "author": "PTWA Team",
   "main": "electron/main.js",

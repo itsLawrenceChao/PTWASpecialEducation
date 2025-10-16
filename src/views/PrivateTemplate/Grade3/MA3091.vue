@@ -6,17 +6,17 @@
     <div class="game__interaction-area">
       <div class="game__fraction-panel">
         <FractionDisplay
-          :Data="questionFraction"
+          :component-config="questionFraction"
           class="game__fraction-display"
         ></FractionDisplay>
         <!-- <button class="game__submit" @click="submit">送出答案</button> -->
       </div>
       <DragFraction
-        :Data="configFraction"
-        :ID="id"
+        :component-config="configFraction"
+        :game-id="gameId"
         class="game__answer-area"
-        @replyAnswer="drag"
-        @recordAnswer="handleRecordAnswer"
+        @reply-answer="drag"
+        @record-answer="handleRecordAnswer"
       ></DragFraction>
     </div>
   </div>
@@ -24,6 +24,7 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3091",
   components: {
@@ -35,48 +36,34 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    id: {
+    gameId: {
       type: String,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
       required: true,
     },
   },
   emits: ["add-record", "play-effect", "next-question"],
   data() {
     return {
-      configFraction: this.GameData.answerData,
-      chartWidth: 0,
-      chartHeight: 0,
+      configFraction: this.gameData.answerData,
       isAnswerCorrect: false,
-      questionDescription: this.GameData.question.description,
-      questionFraction: this.GameData.question.fraction,
-      chartData: {
-        shape: this.GameData.answerData.shape,
-        numerator: this.GameData.answerData.answer.numerator, // 分子
-        denominator: this.GameData.answerData.answer.denominator, // 分母
-      },
+      questionDescription: this.gameData.question.description,
+      questionFraction: { Content: this.gameData.question.fraction },
     };
   },
   computed: {},
+  created() {
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
+  },
   methods: {
     drag(answer) {
       this.isAnswerCorrect = answer;
-    },
-    calculateChartSize() {
-      const fractionChart = this.$refs.fractionChart;
-      if (fractionChart) {
-        this.chartWidth = fractionChart.offsetWidth * 0.85 || 150; // 確保有預設值
-        this.chartHeight = fractionChart.offsetHeight * 0.85 || 150; // 確保有預設值
-      } else {
-        console.error("FractionChart not found!");
-      }
     },
     checkAnswer() {
       this.$emit("add-record", this.recordedAnswer);

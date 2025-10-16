@@ -1,9 +1,9 @@
 <template>
-  <div v-if="Status == 'NotStart'" class="game-start container">
+  <div v-if="gameStatus === 'NotStart'" class="game-start container">
     <div class="upper-container">
-      <h1>{{ GameName }}</h1>
+      <h1>{{ gameName }}</h1>
       <div class="card">
-        <p v-if="introType == 'PlainText'">
+        <p v-if="introType === 'PlainText'">
           {{ ShowContent }}
         </p>
         <p v-else>無介紹文字</p>
@@ -22,7 +22,7 @@
       </button>
       <button
         class="action-button"
-        @click="makeReadText(GameName, ShowContent)"
+        @click="makeReadText(gameName, ShowContent)"
       >
         <img src="" />
         朗讀
@@ -41,7 +41,7 @@ import { getSystemAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "GameStart",
   props: {
-    GameName: {
+    gameName: {
       type: String,
       required: true,
     },
@@ -49,7 +49,7 @@ export default {
       type: Object,
       required: true,
     },
-    Status: {
+    gameStatus: {
       type: String,
       required: true,
     },
@@ -57,10 +57,8 @@ export default {
   emits: ["restart", "openTeachingModal", "startGame"],
   data() {
     return {
-      nameofThisComponent: "GameStartandOver Component said:",
       introType: "",
       startGameIconSrc: getSystemAssets("start-game.png", "game_images"),
-      readAloudIconSrc: getSystemAssets("read-aloud.png", "game_images"),
       tutorialVideoIconSrc: getSystemAssets(
         "tutorial-video.png",
         "game_images"
@@ -73,11 +71,11 @@ export default {
   },
   methods: {
     initIntroType() {
-      if (this.intro != undefined) {
-        if (this.intro.Type == "Html") {
+      if (this.intro !== undefined) {
+        if (this.intro.Type === "Html") {
           this.introType = "Html";
           this.ShowContent = this.intro.Content;
-        } else if (this.intro.Type == "PlainText") {
+        } else if (this.intro.Type === "PlainText") {
           this.introType = "PlainText";
           this.ShowContent = this.intro.Content;
         } else {
@@ -88,7 +86,7 @@ export default {
       }
     },
     makeReadText(title, description, stop = false) {
-      let text = `標題:${title}。說明:${description}。`;
+      const text = `標題:${title}。說明:${description}。`;
       Read.ReadText(text, stop);
     },
     startGame() {

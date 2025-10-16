@@ -1,7 +1,9 @@
 <template>
   <div class="OutterContainer">
-    <div v-if="Data.Text != undefined" class="TextOnly">
-      <p class="Division">{{ Data.Text }}{{ Data.Unit }}</p>
+    <div v-if="componentConfig.Text !== undefined" class="TextOnly">
+      <p class="Division">
+        {{ componentConfig.Text }}{{ componentConfig.Unit }}
+      </p>
     </div>
     <div v-else class="Division">
       <p class="Child">
@@ -12,8 +14,8 @@
         {{ motherScore }}
       </p>
     </div>
-    <p v-if="Data.Text == undefined">
-      {{ Data.Unit }}
+    <p v-if="componentConfig.Text === undefined">
+      {{ componentConfig.Unit }}
     </p>
     <div ref="container" class="container">
       <canvas ref="canvas" @click="handleClick" />
@@ -24,7 +26,7 @@
 export default {
   name: "CircleChart",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -32,14 +34,14 @@ export default {
   emits: ["replyAnswer"],
   data() {
     return {
-      colors: Array(this.Data.Mother).fill(null), // 儲存每個部分的顏色
-      childScore: this.Data.Child, // 假設的數學分數
-      motherScore: this.Data.Mother, // 假設的數學分數
-      division: this.Data.Mother, // 將分數分成幾個部分
+      colors: Array(this.componentConfig.Mother).fill(null), // 儲存每個部分的顏色
+      childScore: this.componentConfig.Child, // 假設的數學分數
+      motherScore: this.componentConfig.Mother, // 假設的數學分數
+      division: this.componentConfig.Mother, // 將分數分成幾個部分
       centerX: 0,
       centerY: 0,
       radius: 0,
-      AnswerRecord: Array(this.Data.Mother).fill(false),
+      AnswerRecord: Array(this.componentConfig.Mother).fill(false),
     };
   },
   mounted() {
@@ -111,11 +113,11 @@ export default {
     ReplyAnswer() {
       let temp = 0;
       this.AnswerRecord.forEach((element) => {
-        if (element == true) {
+        if (element === true) {
           temp += 1;
         }
       });
-      if (temp == this.childScore) {
+      if (temp === this.childScore) {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);

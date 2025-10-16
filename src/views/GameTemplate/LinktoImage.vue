@@ -1,7 +1,7 @@
 <template>
   <div class="OutterContainer container">
     <div class="title">
-      <a>{{ GameData.Question }}</a>
+      <a>{{ gameData.Question }}</a>
     </div>
     <div class="game-area">
       <div class="main-stage">
@@ -35,7 +35,7 @@
                 :denominator="item.denominator"
                 :x="0"
                 :y="0"
-                :fontSize="item.fontSize"
+                :font-size="item.fontSize"
                 :color="item.color"
                 :align="item.align"
               />
@@ -54,9 +54,6 @@
           </v-layer>
         </v-stage>
       </div>
-      <!-- <div class="Functions">
-        <button @click="CheckAllAnswer">送出答案</button>
-      </div> -->
     </div>
   </div>
 </template>
@@ -72,15 +69,11 @@ export default {
     KonvaFractionText,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -121,18 +114,18 @@ export default {
     };
   },
   created() {
-    let BGImage = new window.Image();
-    BGImage.src = getGameAssets(this.ID, this.GameData.BGSrc);
+    const BGImage = new window.Image();
+    BGImage.src = getGameAssets(this.gameId, this.gameData.BGSrc);
 
     // 當圖片載入完成後再進行縮放和定位計算
     BGImage.onload = () => {
-      let StageHeight = this.stageConfig.height - this.SelectionHeight * 2;
+      const StageHeight = this.stageConfig.height - this.SelectionHeight * 2;
 
-      let imgWidth = BGImage.width;
-      let imgHeight = BGImage.height;
+      const imgWidth = BGImage.width;
+      const imgHeight = BGImage.height;
 
       // 計算寬高比
-      let ration = imgWidth / imgHeight;
+      const ration = imgWidth / imgHeight;
 
       // 計算適合的寬度和高度，使其不超過stage的寬高
       let NewImageWidth, NewImageHeight;
@@ -148,8 +141,8 @@ export default {
       }
 
       // 計算圖片的位置，使其居中顯示
-      let NewX = (this.stageConfig.width - NewImageWidth) / 2;
-      let NewY = (StageHeight - NewImageHeight) / 2;
+      const NewX = (this.stageConfig.width - NewImageWidth) / 2;
+      const NewY = (StageHeight - NewImageHeight) / 2;
       console.log(NewX, NewY);
       // 設定ImageConfig
       this.ImageConfig = {
@@ -161,7 +154,7 @@ export default {
       };
 
       console.log(this.ImageConfig.x, this.ImageConfig.y);
-      this.GameData.MountPoint.forEach((item) => {
+      this.gameData.MountPoint.forEach((item) => {
         this.ImageMountPoint.push({
           x: item.x + NewX,
           y: item.y + NewY + this.SelectionHeight,
@@ -178,10 +171,10 @@ export default {
   mounted() {
     // Stage border
     // this.InitAnswer();
-    let layer = this.$refs.layer.getNode();
+    const layer = this.$refs.layer.getNode();
     layer.moveToBottom();
     layer.draw();
-    let RectContainer = this.$refs.RectContainer.getNode();
+    const RectContainer = this.$refs.RectContainer.getNode();
     RectContainer.moveToTop();
     RectContainer.draw();
   },
@@ -276,47 +269,10 @@ export default {
       }
       return -1;
     },
-    CheckPairedBefore(x, y) {
-      // 檢查起點是否已經有連線
-      for (let i in this.LinkedRecord) {
-        if (this.LinkedRecord[i][0] == x) {
-          return true;
-        }
-      }
-      // 檢查終點是否已經有連線
-      for (let i in this.LinkedRecord) {
-        if (this.LinkedRecord[i][1] == y) {
-          return true;
-        }
-      }
-      return false;
-    },
-    MarkWrongLine(start, end) {
-      let WrongLine = {
-        points: [
-          this.rects[start].x + this.rects[start].width / 2,
-          this.rects[start].y + this.rects[start].height / 2,
-          this.ImageMountPoint[end].x,
-          this.ImageMountPoint[end].y,
-        ],
-        stroke: "red",
-        strokeWidth: 10,
-        lineCap: "round",
-        lineJoin: "round",
-      };
-      for (let i in this.Lines) {
-        if (
-          this.Lines[i].points[0] == WrongLine.points[0] &&
-          this.Lines[i].points[1] == WrongLine.points[1]
-        ) {
-          this.Lines[i] = WrongLine;
-        }
-      }
-    },
     CheckAllAnswer() {
       const answerSet = new Set(this.Pair.map(([p, r]) => `${p}-${r}`));
 
-      let wrong = [];
+      const wrong = [];
       for (const l of this.lines) {
         if (l.pointIndex === null) continue; // 忽略未接完的線
         const key = `${l.pointIndex}-${l.rectIndex}`;
@@ -343,18 +299,6 @@ export default {
 
       return { WrongAmount: wrong.length, WrongAnsIndexs: wrong, Pass: pass };
     },
-    Pop() {
-      if (this.LinkedRecord.length > 0) {
-        this.LinkedRecord.pop();
-        this.Lines.pop();
-        this.$refs.LineLayer.getNode().batchDraw();
-      }
-    },
-    ClearAll() {
-      this.LinkedRecord = [];
-      this.Lines = [];
-      this.$refs.LineLayer.getNode().batchDraw();
-    },
     parseLatexFraction(latexString) {
       // 解析 LaTeX 格式的分數，例如 "\\frac{1}{4}" -> {numerator: "1", denominator: "4"}
       const match = latexString.match(/\\frac\{([^}]+)\}\{([^}]+)\}/);
@@ -379,26 +323,26 @@ export default {
           fontSize: Math.max(this.FontSize - 4, 12), // 稍微小一點的字體
           color: "#111827",
           align: "center",
-          rectIndex: rectIndex,
+          rectIndex,
         });
       } else {
         // 如果是普通文字，添加到 Texts
         this.Texts.push({
-          x: x,
-          y: y,
-          text: text,
+          x,
+          y,
+          text,
           align: "center",
-          width: width,
+          width,
           fontSize: this.FontSize,
         });
       }
     },
     addRect(x, y, width, height) {
       this.rects.push({
-        x: x,
-        y: y,
-        width: width,
-        height: height,
+        x,
+        y,
+        width,
+        height,
         cornerRadius: this.RectCornerRaduis,
         fill: this.randomColor(),
       });
@@ -412,14 +356,14 @@ export default {
     },
     configRect() {
       //Config Rect
-      if (this.GameData.Selections.length <= 4) {
+      if (this.gameData.Selections.length <= 4) {
         // 小於等於4，一行排列
-        let RectWidth =
+        const RectWidth =
           (this.stageConfig.width -
-            (this.GameData.Selections.length + 1) * this.MinGap) /
-          this.GameData.Selections.length;
+            (this.gameData.Selections.length + 1) * this.MinGap) /
+          this.gameData.Selections.length;
 
-        this.GameData.Selections.forEach((item, index) => {
+        this.gameData.Selections.forEach((item, index) => {
           this.addRect(
             this.MinGap + index * (RectWidth + this.MinGap),
             0,
@@ -435,12 +379,12 @@ export default {
           });
         });
       } else {
-        let RectWidth =
+        const RectWidth =
           (this.stageConfig.width -
-            (this.GameData.Selections.length / 2 + 1) * this.MinGap) /
-          (this.GameData.Selections.length / 2);
-        this.GameData.Selections.forEach((item, index) => {
-          if (index % 2 == 0) {
+            (this.gameData.Selections.length / 2 + 1) * this.MinGap) /
+          (this.gameData.Selections.length / 2);
+        this.gameData.Selections.forEach((item, index) => {
+          if (index % 2 === 0) {
             this.addRect(
               this.MinGap + parseInt(index / 2) * (RectWidth + this.MinGap),
               0,
@@ -474,20 +418,20 @@ export default {
     },
     configPoint() {
       this.Pair = [];
-      for (let i in this.GameData.MountPoint) {
-        for (let j in this.GameData.Selections) {
-          if (typeof this.GameData.MountPoint[i].Connect2 == "string") {
+      for (const i in this.gameData.MountPoint) {
+        for (const j in this.gameData.Selections) {
+          if (typeof this.gameData.MountPoint[i].Connect2 === "string") {
             if (
-              this.GameData.MountPoint[i].Connect2 ==
-              this.GameData.Selections[j]
+              this.gameData.MountPoint[i].Connect2 ===
+              this.gameData.Selections[j]
             ) {
               this.Pair.push([i, j]);
             }
           } else {
-            for (let k in this.GameData.MountPoint[i].Connect2) {
+            for (const k in this.gameData.MountPoint[i].Connect2) {
               if (
-                this.GameData.MountPoint[i].Connect2[k] ==
-                this.GameData.Selections[j]
+                this.gameData.MountPoint[i].Connect2[k] ===
+                this.gameData.Selections[j]
               ) {
                 this.Pair.push([i, j]);
               }

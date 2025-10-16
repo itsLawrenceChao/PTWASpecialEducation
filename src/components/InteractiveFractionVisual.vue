@@ -51,27 +51,23 @@
 export default {
   name: "InteractiveFractionVisual",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
       validator(value) {
         return value.Numerator >= 0 && value.Denominator > 0;
       },
     },
-    ID: {
-      type: String,
-      required: true,
-    },
   },
   emits: ["replyAnswer"],
   data() {
     return {
-      numerator: this.Data.Numerator || 0,
-      denominator: this.Data.Denominator || 1,
-      displayOnly: this.Data.DisplayOnly || false,
+      numerator: this.componentConfig.Numerator || 0,
+      denominator: this.componentConfig.Denominator || 1,
+      displayOnly: this.componentConfig.DisplayOnly || false,
       gameWidth: 0,
       gameHeight: 0,
-      shape: this.Data.shape || "rect",
+      shape: this.componentConfig.shape || "rect",
       ctx: null,
       fillColor: "#4C5B3A",
       strokeColor: "black",
@@ -80,9 +76,9 @@ export default {
       rectScale: { width: 0.8, height: 0.6, x: 0.1, y: 0.2 },
       circleScale: 0.45,
       gridScale: { width: 0.8, height: 0.6, x: 0.1, y: 0.2 },
-      isCupMode: this.Data.shape === "cup",
-      answer: this.Data.answer,
-      isRandomFill: this.Data.randomFill || false,
+      isCupMode: this.componentConfig.shape === "cup",
+      answer: this.componentConfig.answer,
+      isRandomFill: this.componentConfig.randomFill || false,
       randomIndices: [],
     };
   },

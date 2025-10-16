@@ -74,7 +74,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "$i$平方公分",
             "Answer": ["12"]
@@ -163,7 +163,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "$i$平方公分",
             "Answer": ["8"]
@@ -252,7 +252,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "$i$平方公分",
             "Answer": ["6"]
@@ -341,7 +341,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "$i$平方公分",
             "Answer": ["11"]
@@ -404,7 +404,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "$i$平方公分",
             "Answer": ["4"]

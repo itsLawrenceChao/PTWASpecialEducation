@@ -7,47 +7,48 @@
       :style="{ backgroundImage: `url(${scratchSheetBackground})` }"
     ></div>
 
-    <GameHeader
+    <game-header
       :grade="Grade"
       :game-name="gameName"
       :subject="Subjects[Subject]"
-      @previousPage="previousPage"
+      @previous-page="previousPage"
     />
     <section>
       <div class="">
         <div class="Container">
           <div class="col-10 GameArea">
             <LevelAndTime
+              v-if="Dataloaded && GameData.Questions"
               :time="time"
               :totaltime="totaltime"
               :questions="GameData.Questions"
               :nowlevel="Nowlevel"
-              @pauseTimer="pauseTimer"
-              @resetTimer="resetTimer"
-              @startTimer="startTimer"
-              @resetWrongTimer="resetWrongTimes"
+              @pause-timer="pauseTimer"
+              @reset-timer="resetTimer"
+              @start-timer="startTimer"
+              @reset-wrong-timer="resetWrongTimes"
             />
             <div class="row Game_Component">
               <!-- Dynamic import component -->
               <div
-                v-if="GameStatus == 'Progressing'"
+                v-if="GameStatus === 'Progressing'"
                 id="GameContainer"
                 class="games"
               >
                 <EffectWindow
                   v-if="ShowReply"
                   id="CorrecIncorrect"
-                  :Data="CorrectIncorrect"
+                  :answer-result="CorrectIncorrect"
                 />
                 <transition :name="transitionName" mode="out-in">
                   <component
                     :is="gameType"
-                    v-if="gameType != 'SelfDefine'"
+                    v-if="gameType !== 'SelfDefine'"
                     ref="GameComponent"
                     :key="Nowlevel"
-                    :ID="gameID"
-                    :GameData="GameData.Questions[Nowlevel - 1]"
-                    :GameConfig="GameConfig"
+                    :game-id="gameID"
+                    :game-data="GameData.Questions[Nowlevel - 1]"
+                    :game-config="GameConfig"
                     @add-record="gameDataRecord"
                     @play-effect="effectPlayer"
                     @next-question="nextQuestion"
@@ -56,12 +57,11 @@
 
                 <component
                   :is="selfdefinetemplate"
-                  v-if="gameType == 'SelfDefine'"
+                  v-if="gameType === 'SelfDefine'"
                   :key="Nowlevel"
-                  :ID="gameID"
-                  :GameData="GameData.Questions[Nowlevel - 1]"
-                  :GameConfig="GameConfig"
-                  :EnviromerntInfo="getAllInfo()"
+                  :game-id="gameID"
+                  :game-data="GameData.Questions[Nowlevel - 1]"
+                  :game-config="GameConfig"
                   @get-info="getAllInfo"
                   @add-record="gameDataRecord"
                   @download-data="ToCSV"
@@ -75,7 +75,7 @@
                   @timer-start="startTimer"
                   @timer-pause="pauseTimer"
                   @timer-reset="resetTimer"
-                  @calculatorTool="
+                  @calculator-tool="
                     () => {
                       calculatorToolVisible = true;
                     }
@@ -85,19 +85,19 @@
               </div>
               <div v-else class="intro">
                 <GameStart
-                  v-if="GameStatus == 'NotStart'"
+                  v-if="GameStatus === 'NotStart' && Dataloaded"
                   :key="Dataloaded"
-                  :Status="GameStatus"
+                  :game-status="GameStatus"
                   :intro="GameData.IntroText"
-                  :GameName="gameName"
+                  :game-name="gameName"
                   @start-game="startGame"
                   @open-teaching-modal="openMediaModal"
                 />
                 <GameOver
-                  v-if="GameStatus == 'Done'"
+                  v-if="GameStatus === 'Done'"
                   @restart="reloadPage"
-                  @downloadRecord="ToCSV"
-                  @previousPage="previousPage"
+                  @download-record="ToCSV"
+                  @previous-page="previousPage"
                 />
               </div>
             </div>
@@ -105,19 +105,17 @@
           <SideBar
             v-if="Dataloaded"
             class="SideBar col-2"
-            :GameStatus="GameStatus"
-            :HintInfo="hintInfo"
-            :Hint="Hint"
+            :game-status="GameStatus"
             :download_data="download_data"
             :level-amount="GameData.Questions.length"
-            :reappeareCode="questionOrder"
+            :reappeare-code="questionOrder"
             :show-submit-button="shouldShowSubmitButton"
-            @toCsv="ToCSV"
-            @previousQuestion="previousQuestion"
+            @to-csv="ToCSV"
+            @previous-question="previousQuestion"
             @next-question="nextQuestion"
-            @startGame="startGame"
+            @start-game="startGame"
             @reload-page="reloadPage"
-            @calculatorTool="
+            @calculator-tool="
               () => {
                 calculatorToolVisible = true;
               }
@@ -126,9 +124,9 @@
           >
             <template #hint>
               <hintbutton
-                v-if="GameStatus == 'Progressing' && Hint['Type'] != 'Method'"
-                :HintInfo="hintInfo"
-                @openHintModal="openMediaModal"
+                v-if="GameStatus === 'Progressing' && Hint['Type'] !== 'Method'"
+                :hint-info="hintInfo"
+                @open-hint-modal="openMediaModal"
               />
             </template>
           </SideBar>
@@ -139,7 +137,7 @@
       v-if="calculatorToolVisible"
       :visible="calculatorToolVisible"
       @close="calculatorToolVisible = false"
-      @saveCanvas="saveCanvasBackground"
+      @save-canvas="saveCanvasBackground"
     />
     <TechModal
       v-if="showMediaModal"
@@ -155,7 +153,7 @@ import fetchJson from "@/utilitys/fetch-json.js";
 import * as Arr2CSV from "@/utilitys/array2csv.js";
 import GameStart from "@/components/game-system/GameStart.vue";
 import GameOver from "@/components/game-system/GameOver.vue";
-import Header from "@/components/game-system/header.vue";
+import GameHeader from "@/components/game-system/GameHeader.vue";
 import LevelAndTime from "@/components/game-system/LevelAndTime.vue";
 import MediaModal from "@/components/game-system/MediaModal.vue";
 import hintbutton from "@/components/game-system/hintbutton.vue";
@@ -168,12 +166,13 @@ import { soundManager } from "@/utilitys/sound-manager.js";
 import TechModal from "@/components/game-system/TechModal.vue";
 import CalculatorTool from "@/components/game-system/CalculatorTool.vue";
 export default {
+  name: "GameInterface",
   components: {
     TechModal,
     hintbutton,
     GameStart,
     GameOver,
-    GameHeader: Header,
+    GameHeader,
     LevelAndTime,
     MediaModal,
     LinkGame: defineAsyncComponent(
@@ -218,15 +217,19 @@ export default {
     WhackaMole: defineAsyncComponent(
       () => import("@/views/GameTemplate/WhackaMole.vue")
     ),
-    Maze: defineAsyncComponent(() => import("@/views/GameTemplate/Maze.vue")),
+    MazeGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/MazeGame.vue")
+    ),
     SelectGameMulti: defineAsyncComponent(
       () => import("@/views/GameTemplate/SelectGameMulti.vue")
     ),
     NumberSearchGame: defineAsyncComponent(
       () => import("@/views/GameTemplate/NumberSearchGame.vue")
     ),
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Track: defineAsyncComponent(() => import("@/views/GameTemplate/Track.vue")),
+
+    TrackGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/TrackGame.vue")
+    ),
     EffectWindow,
     SideBar: defineAsyncComponent(
       () => import("@/components/game-system/SideBar.vue")
@@ -234,8 +237,8 @@ export default {
     CopyItem: defineAsyncComponent(
       () => import("@/views/GameTemplate/CopyItem.vue")
     ),
-    Airplane: defineAsyncComponent(
-      () => import("@/views/GameTemplate/Airplane.vue")
+    AirplaneGame: defineAsyncComponent(
+      () => import("@/views/GameTemplate/AirplaneGame.vue")
     ),
     ComponentTesters: defineAsyncComponent(
       () => import("@/views/GameTemplate/componentTesters.vue")
@@ -269,8 +272,6 @@ export default {
   data() {
     return {
       Dataloaded: false,
-      introvideo: false,
-      VideoSrc: "",
       // gameType: "loading",
       download_data: [[]], //下載的資料，格式為二維陣列。
       header: [],
@@ -291,8 +292,6 @@ export default {
       EffectSrc: "",
       scratchSheetBackground: null,
       calculatorToolVisible: false,
-      QuestionsSequence: [],
-      AllQuestions: [],
       ShowReply: false,
       Hint: {
         Type: "None",
@@ -309,7 +308,6 @@ export default {
       isPassLevel: [],
       questionOrder: [],
       questionCopy: [],
-      isGif: false,
       showMediaModal: false,
       // SentData2ChildComponent: {},
     };
@@ -352,8 +350,8 @@ export default {
         "RacingCar",
         "Airplane",
         "BalloonShooting",
-        "Track",
-        "Maze",
+        "TrackGame",
+        "MazeGame",
       ];
 
       return !noSubmitButtonGames.includes(this.gameType);
@@ -369,8 +367,9 @@ export default {
     this.Nowlevel = 1;
     (async () => {
       try {
-        let res = await fetchJson(`./Grade${this.Grade}/${this.gameID}.json`);
+        const res = await fetchJson(`./Grade${this.Grade}/${this.gameID}.json`);
         this.GameData = res.data;
+        console.log(this.GameData.Questions);
         this.gameType = this.GameData.GameType;
         this.GameConfig = this.GameData.GameConfig;
         this.questionCopy = this.GameData.Questions;
@@ -406,13 +405,13 @@ export default {
   },
   methods: {
     randomChoice() {
-      let question = [];
+      const question = [];
       let checkcorrect = true;
-      let record = [];
-      for (let i in this.GameData.Questions) {
-        if (this.GameData.Questions[i].length != undefined) {
-          let num = this.GameData.Questions[i].length;
-          let rand = Math.floor(Math.random() * (num - 0 + 0));
+      const record = [];
+      for (const i in this.GameData.Questions) {
+        if (this.GameData.Questions[i].length !== undefined) {
+          const num = this.GameData.Questions[i].length;
+          const rand = Math.floor(Math.random() * (num - 0 + 0));
           question.push(this.GameData.Questions[i][rand]);
           record.push(rand);
         } else {
@@ -422,7 +421,6 @@ export default {
       }
       this.gameCode = record.toString().replaceAll(",", "-");
       if (checkcorrect) {
-        console.log(question);
         this.GameData.Questions = question;
       } else {
         this.gameCode = "origin";
@@ -432,9 +430,9 @@ export default {
       }
     },
     reappearCode() {
-      if (this.gameCode == "origin") return;
-      let reappear = this.gameCode.split("-");
-      let question = [];
+      if (this.gameCode === "origin") return;
+      const reappear = this.gameCode.split("-");
+      const question = [];
       reappear.forEach((element, index) => {
         question.push(this.questionCopy[index][element]);
       });
@@ -459,7 +457,7 @@ export default {
     },
     ToCSV(data = this.download_data, defaultheader = true) {
       if (defaultheader) {
-        let download = Arr2CSV.MadeCsvFile(
+        const download = Arr2CSV.MadeCsvFile(
           this.gameID,
           this.gameName,
           this.Grade,
@@ -470,7 +468,7 @@ export default {
         );
         Arr2CSV.DownloadCSV(download, this.gameName);
       } else {
-        let download = Arr2CSV.MadeCsvFile(
+        const download = Arr2CSV.MadeCsvFile(
           this.gameID,
           this.gameName,
           this.Grade,
@@ -637,7 +635,7 @@ export default {
     },
     fullScreen() {
       try {
-        let elem = document.documentElement;
+        const elem = document.documentElement;
         if (elem.requestFullscreen) {
           elem.requestFullscreen();
         } else if (elem.webkitRequestFullscreen) {
@@ -780,6 +778,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: relative; /* 添加相對定位 */
   .games {
     width: 100%;
     height: 100%;
@@ -787,6 +786,8 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative; /* 確保子元素正確定位 */
+    min-height: 400px; /* 設置最小高度避免佈局跳動 */
   }
 
   overflow-x: auto;
@@ -932,5 +933,14 @@ img.media-content {
 .mediaModal-content {
   margin: 0;
   font-size: 1.5rem;
+}
+
+/* 防止組件載入時的佈局跳動 */
+#GameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 </style>

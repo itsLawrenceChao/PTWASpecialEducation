@@ -1,6 +1,6 @@
 <template>
   <div ref="container">
-    <h2>{{ GameData.Question }}</h2>
+    <h2>{{ gameData.Question }}</h2>
     <v-stage :config="configKonva">
       <v-layer>
         <v-image :config="configBG" />
@@ -36,20 +36,11 @@
 <script>
 import { getGameStaticAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 
 export default {
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -81,7 +72,7 @@ export default {
     this.initializeScene();
     this.initializeOption();
     this.requiredCorrect =
-      this.GameData.requiredCorrect || this.trueOptions.length;
+      this.gameData.requiredCorrect || this.trueOptions.length;
     this.game = window.setInterval(this.update, 20);
   },
 
@@ -144,15 +135,15 @@ export default {
       this.configBG.height = this.gameHeight;
     },
     spawnMole() {
-      let id = this.configObjects.position.length;
-      let position = this.positionWithoutOverlap();
+      const id = this.configObjects.position.length;
+      const position = this.positionWithoutOverlap();
       this.configObjects.position.push(position);
       this.configObjects.status.push("burrow");
 
-      let cropPercent = 15;
+      const cropPercent = 15;
       this.configObjects.cropPercent.push(cropPercent);
 
-      let board = {
+      const board = {
         visible: false,
         x: position.x,
         y: canvasTools.offset(position, this.offsets.board).y,
@@ -162,7 +153,7 @@ export default {
       };
       this.configObjects.board.push(board);
 
-      let option = {
+      const option = {
         visible: false,
         x: canvasTools.offset(position, this.offsets.option).x,
         y: canvasTools.offset(position, this.offsets.option).y,
@@ -170,7 +161,7 @@ export default {
       };
       this.configObjects.option.push(option);
 
-      let mole = {
+      const mole = {
         id: id.toString(),
         x: position.x,
         y: canvasTools.offset(position, this.offsets.mole).y,
@@ -181,7 +172,7 @@ export default {
       mole.crop = this.crop(cropPercent).crop;
       this.configObjects.mole.push(mole);
 
-      let hole = {
+      const hole = {
         x: position.x,
         y: canvasTools.offset(position, this.offsets.hole).y,
         width: this.gameWidth * 0.16,
@@ -190,19 +181,19 @@ export default {
       };
       this.configObjects.hole.push(hole);
       window.setTimeout(this.burrowAnimation, 200, id);
-      let nextSpawn = Math.random() * 2000 + 1000;
+      const nextSpawn = Math.random() * 2000 + 1000;
       window.setTimeout(this.spawnMole, nextSpawn);
     },
     positionWithoutOverlap() {
+      let overlap = false;
+      const position = canvasTools.randomPosition(this.boundaries);
       do {
-        var overlap = false;
-        var position = canvasTools.randomPosition(this.boundaries);
         for (
           let i = this.startId;
           i < this.configObjects.position.length;
           ++i
         ) {
-          if (this.configObjects.position[i] == null) continue;
+          if (this.configObjects.position[i] === null) continue;
           if (
             canvasTools.distance(position, this.configObjects.position[i]) <
             this.gameWidth * 0.2
@@ -214,8 +205,8 @@ export default {
     },
 
     initializeOption() {
-      this.allOptions = this.GameData.True.concat(this.GameData.False);
-      this.trueOptions = this.GameData.True;
+      this.allOptions = this.gameData.True.concat(this.gameData.False);
+      this.trueOptions = this.gameData.True;
     },
     update() {
       for (let i = this.startId; i < this.configObjects.position.length; ++i) {
@@ -223,7 +214,7 @@ export default {
       }
     },
     moleAnimation(id) {
-      if (this.configObjects.status[id] == "up") {
+      if (this.configObjects.status[id] === "up") {
         this.configObjects.mole[id].y--;
         if (this.configObjects.cropPercent[id] < 100) {
           this.configObjects.cropPercent[id] += 1.2;
@@ -245,7 +236,7 @@ export default {
             this.configObjects.status[id] = "down";
           }, 2000);
         }
-      } else if (this.configObjects.status[id] == "down") {
+      } else if (this.configObjects.status[id] === "down") {
         this.configObjects.mole[id].y++;
         if (this.configObjects.cropPercent[id] > 0) {
           this.configObjects.cropPercent[id] -= 1.2;
@@ -269,11 +260,11 @@ export default {
       }
     },
     burrowAnimation(id) {
-      if (this.configObjects.hole[id].image == this.images.hole) {
+      if (this.configObjects.hole[id].image === this.images.hole) {
         this.configObjects.hole[id].image = this.images.holeup;
         this.configObjects.hole[id].y = this.configObjects.position[id].y;
         window.setTimeout(this.burrowAnimation, 200, id);
-      } else if (this.configObjects.hole[id].image == this.images.holeup) {
+      } else if (this.configObjects.hole[id].image === this.images.holeup) {
         this.configObjects.hole[id].image = this.images.hole;
         this.configObjects.hole[id].y = canvasTools.offset(
           this.configObjects.position[id],
@@ -306,18 +297,18 @@ export default {
       };
     },
     destory(i) {
-      for (let object in this.configObjects) {
+      for (const object in this.configObjects) {
         this.configObjects[object][i] = null;
       }
       for (let i = this.startId; i < this.configObjects.position.length; ++i) {
         this.startId = i;
-        if (this.configObjects.position[i] != null) break;
+        if (this.configObjects.position[i] !== null) break;
       }
     },
     whacked(e) {
-      let id = e.target.attrs.id;
+      const id = e.target.attrs.id;
       this.checkAnswer(id);
-      if (this.configObjects.mole[id].image == this.images.mole) {
+      if (this.configObjects.mole[id].image === this.images.mole) {
         this.configObjects.status[id] = "hold";
         this.configObjects.mole[id].image = this.images.moleWhacked;
         window.setTimeout(() => {
@@ -335,8 +326,8 @@ export default {
     },
     checkAnswer(id) {
       let isCorrect = false;
-      for (let answer in this.GameData.True) {
-        if (this.GameData.True[answer] == this.configObjects.option[id].text)
+      for (const answer in this.gameData.True) {
+        if (this.gameData.True[answer] === this.configObjects.option[id].text)
           isCorrect = true;
       }
       if (isCorrect) {
@@ -347,16 +338,16 @@ export default {
           "正確",
         ]);
         this.allOptions = this.allOptions.filter(
-          (option) => option != this.configObjects.option[id].text
+          (option) => option !== this.configObjects.option[id].text
         );
         this.trueOptions = this.trueOptions.filter(
-          (option) => option != this.configObjects.option[id].text
+          (option) => option !== this.configObjects.option[id].text
         );
         this.correctCount++;
         if (this.correctCount >= this.requiredCorrect) {
           this.$emit("next-question");
         }
-      } else if (this.configObjects.option[id].text == null) {
+      } else if (this.configObjects.option[id].text === null) {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
           this.printCorrectAnswers(),
@@ -373,7 +364,7 @@ export default {
       }
     },
     printCorrectAnswers() {
-      return this.GameData.Question.concat(":", this.GameData.True.join("/"));
+      return this.gameData.Question.concat(":", this.gameData.True.join("/"));
     },
   },
 };

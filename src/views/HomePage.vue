@@ -4,7 +4,11 @@
     <div ref="gradeContainer" class="grade-container">
       <p class="title">請選擇年級</p>
       <div class="grade-select-menu">
-        <div v-for="(card, index) in imgSrcs" class="grad-card-container">
+        <div
+          v-for="(card, index) in imgSrcs"
+          :key="index"
+          class="grad-card-container"
+        >
           <router-link
             :to="{ name: 'GameSelect', params: { id: index + 1 } }"
             class="submenu-link-block"
@@ -27,14 +31,14 @@
 
 <script>
 import NavBar from "./NavBar.vue";
-import { getSystemAssets, getAssets } from "@/utilitys/get_assets.js";
+import { getSystemAssets } from "@/utilitys/get_assets.js";
 export default {
+  name: "HomePage",
   components: {
     NavBar,
   },
   data() {
     return {
-      grade: 0,
       imgSrcs: [],
     };
   },

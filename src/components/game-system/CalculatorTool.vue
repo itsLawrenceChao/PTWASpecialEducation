@@ -8,7 +8,7 @@
           <FloatingCalculator
             :visible="showFloatingCalculator"
             @close="closeFloatingCalculator"
-            @calculatorResult="handleCalculatorResult"
+            @calculator-result="handleCalculatorResult"
           />
         </div>
 
@@ -16,8 +16,8 @@
         <div v-if="activeTab === 'scratch'" class="scratch-panel">
           <ScratchSheets
             :background-image="scratchBackground"
-            @closeSheet="closeScratch"
-            @saveCanvas="saveScratchCanvas"
+            @close-sheet="closeScratch"
+            @save-canvas="saveScratchCanvas"
           />
         </div>
 

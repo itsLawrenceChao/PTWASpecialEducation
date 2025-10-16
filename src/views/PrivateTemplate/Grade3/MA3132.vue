@@ -3,10 +3,11 @@
     <template v-if="gameLevel === 1">
       <Level1
         ref="level1"
-        :ID="ID"
-        :imageData="imageData"
-        :markdownData="markdownData"
+        :game-id="gameId"
+        :image-data="imageData"
+        :markdown-data="markdownData"
         :questions="questions"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -14,8 +15,9 @@
     <template v-if="gameLevel === 2">
       <Level2
         ref="level2"
-        :ID="ID"
-        :GameData="GameData"
+        :game-id="gameId"
+        :game-data="gameData"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -23,11 +25,12 @@
     <template v-if="gameLevel === 3">
       <Level3
         ref="level3"
-        :ID="ID"
-        :GameData="GameData"
-        :imageData="imageData"
-        :markdownData="markdownData"
+        :game-id="gameId"
+        :game-data="gameData"
+        :image-data="imageData"
+        :markdown-data="markdownData"
         :boxes="boxes"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -51,15 +54,11 @@ export default {
     Level3,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -67,11 +66,12 @@ export default {
   emits: ["play-effect", "next-question"],
   data() {
     return {
-      imageData: this.GameData.imageData,
-      markdownData: this.GameData.markdownData,
-      questions: this.GameData.Questions,
-      gameLevel: this.GameData.GameLevel,
-      boxes: this.GameData.Boxes,
+      imageData: this.gameData.imageData,
+      markdownData: this.gameData.markdownData,
+      questions: this.gameData.Questions,
+      gameLevel: this.gameData.GameLevel,
+      boxes: this.gameData.Boxes,
+      submitTick: 0,
     };
   },
   created() {
@@ -82,10 +82,7 @@ export default {
   },
   methods: {
     submitAnswer() {
-      const levelComponent = this.$refs[`level${this.gameLevel}`];
-      if (levelComponent) {
-        levelComponent.submitAnswer();
-      }
+      this.submitTick++;
     },
   },
 };

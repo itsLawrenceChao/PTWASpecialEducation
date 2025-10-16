@@ -22,14 +22,15 @@ import { getGameAssets, getSystemAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
 
 export default {
+  name: "ScalePointer",
   components: {},
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -84,9 +85,13 @@ export default {
       this.configBG.width = this.gameWidth;
       this.configBG.height = this.gameWidth;
       const bgImage = new window.Image();
-      if (this.Data.customScaleSrc == null)
+      if (this.componentConfig.customScaleSrc === null)
         bgImage.src = getSystemAssets("scale.png", "scale");
-      else bgImage.src = getGameAssets(this.ID, this.Data.customScaleSrc);
+      else
+        bgImage.src = getGameAssets(
+          this.gameId,
+          this.componentConfig.customScaleSrc
+        );
       this.configBG.image = bgImage;
     },
     drawHand() {
@@ -130,9 +135,9 @@ export default {
       context.closePath();
     },
     textBoxSceneFunc(context, shape) {
-      let rotation = shape.getAttr("rotation"),
-        correction = 0.017,
-        position;
+      const rotation = shape.getAttr("rotation");
+      const correction = 0.017;
+      let position;
       context.beginPath();
       context.rotate(rotation);
       context.translate(0, -this.gameWidth * 0.3);
@@ -169,10 +174,10 @@ export default {
       context.closePath();
     },
     weightSceneFunc(context, shape) {
-      let rotation = shape.getAttr("rotation"),
-        correction = 0.017,
-        offset = this.gameWidth * 0.01,
-        position;
+      const rotation = shape.getAttr("rotation");
+      const correction = 0.017;
+      const offset = this.gameWidth * 0.01;
+      let position;
       context.beginPath();
       context.rotate(rotation);
       context.translate(0, -this.gameWidth * 0.3);
@@ -278,12 +283,12 @@ export default {
       context.closePath();
     },
     handleDrag(e) {
-      if (e.type == "pointerdown") this.dragging = true;
+      if (e.type === "pointerdown") this.dragging = true;
       if (
         this.dragging &&
         this.canDrag(e.target.getStage().getPointerPosition())
       ) {
-        let angle = canvasTools.angle(
+        const angle = canvasTools.angle(
           this.configHand,
           e.target.getStage().getPointerPosition()
         );
@@ -293,7 +298,7 @@ export default {
         this.configWeight.rotation = angle;
 
         this.configWeight.visible = true;
-        if (this.getAnswer() != this.answer) {
+        if (this.getAnswer() !== this.answer) {
           this.answer = this.getAnswer();
           this.configWeight.text = this.getAnswer();
           this.$emit("replyAnswer", this.answer);
@@ -306,8 +311,8 @@ export default {
       this.configWeight.visible = false;
     },
     canDrag(position) {
-      let angle = canvasTools.angle(this.configHand, position);
-      let margin = 0.3;
+      const angle = canvasTools.angle(this.configHand, position);
+      const margin = 0.3;
       if (
         canvasTools.distance(this.configHand, position) <=
         this.configHand.length
@@ -327,8 +332,9 @@ export default {
       return false;
     },
     getAnswer() {
-      let ans = Math.round((this.configHand.rotation / Math.PI / 2) * 60) * 50;
-      if (ans == 3000) return 0;
+      const ans =
+        Math.round((this.configHand.rotation / Math.PI / 2) * 60) * 50;
+      if (ans === 3000) return 0;
       else return ans;
     },
   },

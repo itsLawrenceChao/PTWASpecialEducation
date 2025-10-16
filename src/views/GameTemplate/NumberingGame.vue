@@ -1,19 +1,19 @@
 <template>
   <div>
     <p class="h3">
-      {{ GameData.Question.text }}
+      {{ gameData.Question.text }}
     </p>
     <div class="container">
       <div class="component1">
         <component
           :is="slotcomponent.Name"
-          :Data="slotcomponent.Data"
-          :ID="ID"
+          :game-id="gameId"
+          :component-config="slotcomponent.Data"
         />
       </div>
       <div class="optionbar">
         <p class="h5">
-          {{ GameData.Question.SubQuestion }}
+          {{ gameData.Question.SubQuestion }}
         </p>
         <div id="error_msg">
           {{ errorMsg }}
@@ -54,20 +54,16 @@ import { defineAsyncComponent } from "vue";
 export default {
   Name: "NumberingGame",
   components: {
-    ImageContainer: defineAsyncComponent(() =>
-      import("@/components/ImageContainer.vue")
+    ImageContainer: defineAsyncComponent(
+      () => import("@/components/ImageContainer.vue")
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -82,14 +78,14 @@ export default {
     };
   },
   created() {
-    this.slotcomponent.Name = this.GameData.SlotComponents[0].Name;
-    this.slotcomponent.Data = this.GameData.SlotComponents[0].Data;
+    this.slotcomponent.Name = this.gameData.SlotComponents[0].Name;
+    this.slotcomponent.Data = this.gameData.SlotComponents[0].Data;
   },
   mounted() {
-    this.imageUrl = getGameAssets(this.ID, this.GameData.img);
+    this.imageUrl = getGameAssets(this.gameId, this.gameData.img);
     for (
-      var i = this.GameData.Question.Range[0];
-      i <= this.GameData.Question.Range[1];
+      let i = this.gameData.Question.Range[0];
+      i <= this.gameData.Question.Range[1];
       i++
     ) {
       this.btn.push(i);
@@ -97,13 +93,13 @@ export default {
   },
   methods: {
     judgeAnswer(answer) {
-      if (answer == this.GameData.Answer) {
+      if (answer === this.gameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [this.GameData.Answer, answer, "正確"]);
+        this.$emit("add-record", [this.gameData.Answer, answer, "正確"]);
         this.$emit("next-question");
       } else {
         this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", [this.GameData.Answer, answer, "錯誤"]);
+        this.$emit("add-record", [this.gameData.Answer, answer, "錯誤"]);
       }
     },
   },

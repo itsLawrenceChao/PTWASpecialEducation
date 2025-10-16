@@ -31,7 +31,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：8 $$ $i$ = $i$",
             "Answer": ["×", 5, 40]
@@ -50,7 +50,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：20 $$ $i$ = $i$",
             "Answer": ["×", 6, 120]
@@ -69,7 +69,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：10 $$ $i$ = $i$",
             "Answer": ["×", 3, 30]
@@ -88,7 +88,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：40 $$ $i$ = $i$",
             "Answer": ["×", 4, 160]
@@ -107,7 +107,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：30 $$ $i$ = $i$",
             "Answer": ["×", 2, 60]
@@ -128,7 +128,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：11 $$ $i$ = $i$",
             "Answer": ["×", 5, 55]
@@ -147,7 +147,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：13 $$ $i$ = $i$",
             "Answer": ["×", 7, 91]
@@ -166,7 +166,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：12 $$ $i$ = $i$",
             "Answer": ["×", 4, 48]
@@ -185,7 +185,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：28 $$ $i$ = $i$",
             "Answer": ["×", 3, 84]
@@ -204,7 +204,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：43 $$ $i$ = $i$",
             "Answer": ["×", 2, 86]
@@ -225,7 +225,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：11 $$ $i$ = $i$",
             "Answer": ["×", 5, 55]
@@ -244,7 +244,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：13 $$ $i$ = $i$",
             "Answer": ["×", 7, 91]
@@ -263,7 +263,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：12 $$ $i$ = $i$",
             "Answer": ["×", 4, 48]
@@ -282,7 +282,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：28 $$ $i$ = $i$",
             "Answer": ["×", 3, 84]
@@ -301,7 +301,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：43 $$ $i$ = $i$",
             "Answer": ["×", 2, 86]
@@ -322,7 +322,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [5, "×", 10, 50]
@@ -341,7 +341,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [6, "×", 13, 78]
@@ -360,7 +360,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [4, "×", 24, 96]
@@ -379,7 +379,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [7, "×", 11, 77]
@@ -398,7 +398,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [6, "×", 14, 84]
@@ -419,7 +419,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [8, "×", 13, 104]
@@ -438,7 +438,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [9, "×", 12, 108]
@@ -457,7 +457,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [7, "×", 15, 105]
@@ -476,7 +476,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [21, "×", 6, 126]
@@ -495,7 +495,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [32, "×", 8, 256]

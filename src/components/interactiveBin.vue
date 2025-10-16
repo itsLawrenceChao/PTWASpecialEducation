@@ -9,7 +9,6 @@
 <script>
 import { getSystemAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 export default {
   components: {},
 
@@ -44,7 +43,7 @@ export default {
   },
 
   beforeUpdate() {
-    if (Math.floor(Math.random() * 10) == 0) {
+    if (Math.floor(Math.random() * 10) === 0) {
       this.cat = true;
     } else this.cat = false;
   },

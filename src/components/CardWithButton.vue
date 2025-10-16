@@ -1,13 +1,13 @@
 <template>
   <div class="OutterContainer">
     <img
-      v-if="imageURL != undefined && imageURL != ''"
+      v-if="imageURL !== undefined && imageURL !== ''"
       :src="imageURL"
       class=""
       :alt="altText"
     />
     <p class="h3">
-      {{ Text }}
+      {{ text }}
     </p>
   </div>
 </template>
@@ -15,7 +15,7 @@
 export default {
   name: "CardWithButton",
   props: {
-    Text: {
+    text: {
       type: String,
       required: true,
     },
@@ -32,11 +32,6 @@ export default {
     return {};
   },
   computed: {
-    SentData() {
-      return {
-        Src: this.imageURL,
-      };
-    },
   },
   mounted() {},
 };

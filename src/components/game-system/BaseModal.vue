@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "Modal",
+  name: "BaseModal",
   emits: ["close"],
   methods: {
     close() {
