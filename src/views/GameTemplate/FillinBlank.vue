@@ -64,15 +64,7 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 import { getComponents } from "@/utilitys/get-components";
 export default {
   name: "FillinBlank",
-  components: {
-    Numpad: defineAsyncComponent(() =>
-      import("@/components/VirtualNumPadInput.vue")
-    ),
-    Calculator: defineAsyncComponent(() =>
-      import("@/components/Calculator.vue")
-    ),
-    Clock: getComponents("Clock"),
-  },
+  components: {},
   props: {
     GameData: {
       type: Object,

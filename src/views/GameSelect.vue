@@ -273,17 +273,13 @@ export default {
   methods: {
     async getEachSubjectJsonData() {
       try {
-        const [mathRes, chineseRes, technologyRes] = await Promise.all([
-          this.getJsonData("Math"),
-          this.getJsonData("Chinese"),
-          this.getJsonData("Technology"),
-        ]);
-        // 轉譯圖片路徑
+        // 只載入數學科目的資料
+        const mathRes = await this.getJsonData("Math");
         this.mathShowInfo = this.convertGameDataImageURLs(mathRes.data);
-        this.chineseShowInfo = this.convertGameDataImageURLs(chineseRes.data);
-        this.technologyShowInfo = this.convertGameDataImageURLs(
-          technologyRes.data
-        );
+
+        // 國語和科技設為空陣列或 null
+        this.chineseShowInfo = null;
+        this.technologyShowInfo = null;
       } catch (error) {
         console.error(error);
       }
