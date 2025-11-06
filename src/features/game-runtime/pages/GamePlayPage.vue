@@ -252,6 +252,9 @@ export default {
     LinkToImage: defineAsyncComponent(
       () => import("@/features/game-templates/linkto-image/LinktoImage.vue")
     ),
+    LinkToTable: defineAsyncComponent(
+      () => import("@/views/GameTemplate/LinktoTable.vue")
+    ),
     WordProblemWithCalculator: defineAsyncComponent(
       () => import("@/features/game-templates/word-problem-with-calculator/WordProblemWithCalculator.vue")
     ),
