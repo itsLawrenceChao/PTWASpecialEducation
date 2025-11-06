@@ -12,7 +12,11 @@
           >
             <template #item="{ element }">
               <div class="dragable">
-                <component :is="element.Name" :Data="element.Data" :ID="ID" />
+                <component
+                  :is="element.Name"
+                  :component-config="element.Data"
+                  :game-id="gameId"
+                />
               </div>
             </template>
           </draggable>
@@ -20,8 +24,8 @@
       </div>
       <div class="QuestionArea">
         <p class="Title">答案區</p>
-        <div v-for="(pair, index) in GameData.Pairs" class="Pair">
-          <div class="Answer" :class="{ False: FalseOption[index] == true }">
+        <div v-for="(pair, index) in gameData.Pairs" :key="index" class="Pair">
+          <div class="Answer" :class="{ False: FalseOption[index] === true }">
             <draggable
               :list="AnswersNew[index]"
               item-key="Tag"
@@ -30,7 +34,11 @@
             >
               <template #item="{ element }">
                 <div class="dragable">
-                  <component :is="element.Name" :Data="element.Data" :ID="ID" />
+                  <component
+                    :is="element.Name"
+                    :component-config="element.Data"
+                    :game-id="gameId"
+                  />
                 </div>
               </template>
             </draggable>
@@ -41,13 +49,14 @@
         </div>
       </div>
     </div>
-    <button class="Submit" type="button" @click="CheckAnswer">送出答案</button>
+    <!-- <button class="Submit" type="button" @click="CheckAnswer">送出答案</button> -->
   </div>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
 import { getComponents } from "@/utilitys/get-components";
 import draggable from "vuedraggable";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "PairingGame",
   components: {
@@ -59,22 +68,18 @@ export default {
       () => import("@/components/ImageWithText.vue")
     ),
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
-    Clock: getComponents("Clock"),
-    Water: defineAsyncComponent(() => import("@/components/Water.vue")),
+    AnalogClock: getComponents("AnalogClock"),
+    WaterDisplay: getComponents("WaterDisplay"),
     ElectronicClock: defineAsyncComponent(
       () => import("@/components/ElectronicClock.vue")
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -90,28 +95,26 @@ export default {
     };
   },
   created() {
-    this.Selections = this.GameData.Properties;
-    this.Question = this.GameData.Pairs.map((pair) => pair.Question);
-    for (var i in this.GameData.Pairs) {
+    this.Selections = this.gameData.Properties;
+    this.Question = this.gameData.Pairs.map((pair) => pair.Question);
+    for (let i = 0; i < this.gameData.Pairs.length; i++) {
       this.AnswersNew.push([]);
       this.AnswersOld.push([]);
     }
+    emitter.on("submitAnswer", this.CheckAnswer);
   },
-  mounted() {
-    // Code to run when the component is mounted goes here
-  },
-  methods: {
-    // Your methods go here
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAnswer);
   },
   methods: {
     PoplastAdd(index) {
-      let Tar = this.AnswersOld[index][0];
+      const Tar = this.AnswersOld[index][0];
       this.FalseOption[index] = false;
       console.log(Tar);
       if (this.AnswersNew[index].length > 1) {
-        for (var i in this.AnswersNew[index]) {
-          if (this.AnswersNew[index][i].Tag == Tar.Tag) {
-            if (i == 0) {
+        for (const i in this.AnswersNew[index]) {
+          if (this.AnswersNew[index][i].Tag === Tar.Tag) {
+            if (i === 0) {
               this.Selections.push(this.AnswersNew[index][0]);
               this.AnswersNew[index] = [this.AnswersNew[index][1]];
             } else {
@@ -125,19 +128,19 @@ export default {
     },
     CheckAnswer() {
       let AnswerCheck = true;
-      for (var i in this.FalseOption) {
+      for (let i = 0; i < this.FalseOption.length; i++) {
         this.FalseOption[i] = false;
       }
-      for (var i in this.GameData.Pairs) {
-        if (this.GameData.Pairs[i].Answer != this.AnswersNew[i][0].Tag) {
+      for (let j = 0; j < this.gameData.Pairs.length; j++) {
+        if (this.gameData.Pairs[j].Answer !== this.AnswersNew[j][0].Tag) {
           AnswerCheck = false;
-          this.FalseOption[i] = true;
+          this.FalseOption[j] = true;
         }
       }
       if (AnswerCheck) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
-          this.GameData.Pairs,
+          this.gameData.Pairs,
           this.AnswersNew,
           "正確",
         ]);
@@ -146,7 +149,7 @@ export default {
         console.log("Wrong");
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.Pairs,
+          this.gameData.Pairs,
           this.AnswersNew,
           "錯誤",
         ]);

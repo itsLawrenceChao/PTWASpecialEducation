@@ -1,14 +1,14 @@
 <template>
   <div class="MA3151__container">
     <p class="question-text">
-      <FractionText :text="GameData.questionDescription" :ID="ID" />
+      <FractionText :text="gameData.questionDescription" :game-id="gameId" />
     </p>
     <div class="question-section">
       <InteractiveFractionVisual
-        :Data="GameData.question"
-        :ID="ID"
+        :component-config="gameData.question"
+        :game-id="gameId"
         class="question-visual"
-        @replyAnswer="handleAnswer(0, $event)"
+        @reply-answer="handleAnswer(0, $event)"
       />
     </div>
 
@@ -18,12 +18,12 @@
           <div class="answer-item">
             <span>用分數表示：</span>
             <FractionForAnswer
-              :Data="GameData.answer.fraction"
-              :ID="ID"
+              :component-config="gameData.answer.fraction"
+              :game-id="gameId"
               class="fraction-answer"
-              @replyAnswer="handleAnswer(1, $event)"
+              @reply-answer="handleAnswer(1, $event)"
             />
-            <span class="answer-suffix">{{ GameData.answer.suffix }}</span>
+            <span class="answer-suffix">{{ gameData.answer.suffix }}</span>
           </div>
         </template>
 
@@ -31,23 +31,23 @@
           <div class="answer-item">
             <span>用小數表示：</span>
             <NumberIncrementor
-              :Data="GameData.answer.decimal"
-              :ID="ID"
-              @replyAnswer="handleAnswer(2, $event)"
+              :component-config="gameData.answer.decimal"
+              :game-id="gameId"
+              @reply-answer="handleAnswer(2, $event)"
             />
-            <span class="answer-suffix">{{ GameData.answer.suffix }}</span>
+            <span class="answer-suffix">{{ gameData.answer.suffix }}</span>
           </div>
         </template>
       </div>
 
-      <button class="submit-btn" @click="submitAnswer">送出答案</button>
+      <!-- <button class="submit-btn" @click="submitAnswer">送出答案</button> -->
     </div>
   </div>
 </template>
 
 <script>
 import { defineAsyncComponent } from "vue";
-
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "FractionGame",
   components: {
@@ -65,15 +65,11 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -94,21 +90,22 @@ export default {
   },
   computed: {
     answerType() {
-      return this.GameData.answerType || "fraction"; // 可能的值：'fraction', 'decimal', 'both'
+      return this.gameData.answerType || "fraction"; // 可能的值：'fraction', 'decimal', 'both'
     },
   },
   created() {
     this.initializeQuestion();
+    emitter.on("submitAnswer", this.submitAnswer);
   },
-  mounted() {
-    // Your mounted hook here
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.submitAnswer);
   },
   methods: {
     initializeQuestion() {
-      // 從 GameData 初始化當前題目
+      // 從 gameData 初始化當前題目
       this.currentQuestion = {
-        numerator: this.GameData.numerator,
-        denominator: this.GameData.denominator,
+        numerator: this.gameData.numerator,
+        denominator: this.gameData.denominator,
       };
     },
     handleAnswer(answerType, answer) {
@@ -147,7 +144,7 @@ export default {
       }
     },
     checkQuestion() {
-      if (!this.GameData.question.DisplayOnly) {
+      if (!this.gameData.question.DisplayOnly) {
         return this.userAnswer.question;
       }
       return true;

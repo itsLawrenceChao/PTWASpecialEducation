@@ -372,7 +372,7 @@ const data = {
 <GenericBoard 
   :data="data" 
   :config="decimalConfig" 
-  :ID="'decimal-calc-1'"
+  :game-id="'decimal-calc-1'"
   @replyAnswer="handleAnswer"
 />
 */

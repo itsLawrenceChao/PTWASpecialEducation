@@ -1,56 +1,44 @@
 <template>
   <div class="outter-container">
     <div class="left-column">
-      <div v-if="GameData.questionText" class="text-area">
-        {{ GameData.questionText }}
+      <div v-if="gameData.questionText" class="text-area">
+        {{ gameData.questionText }}
       </div>
-      <div v-if="GameConfig.layout.top" class="game-area--top game-area">
+      <div v-if="gameConfig.layout.top" class="game-area--top game-area">
         <component
-          :is="GameData.topComponent.Name"
-          :Data="GameData.topComponent.Data"
-          :ID="ID"
-          @replyAnswer="topReply"
+          :is="gameData.topComponent.Name"
+          :component-config="gameData.topComponent.Data"
+          :game-id="gameId"
+          @reply-answer="topReply"
         ></component>
       </div>
-      <div v-if="GameData.middleText" class="text-area">
-        {{ GameData.middleText }}
+      <div v-if="gameData.middleText" class="text-area">
+        {{ gameData.middleText }}
       </div>
-      <div v-if="GameConfig.layout.down" class="game-area--down game-area">
+      <div v-if="gameConfig.layout.down" class="game-area--down game-area">
         <component
-          :is="GameData.downComponent.Name"
-          :Data="GameData.downComponent.Data"
-          :ID="ID"
-          @replyAnswer="downReply"
+          :is="gameData.downComponent.Name"
+          :component-config="gameData.downComponent.Data"
+          :game-id="gameId"
+          @reply-answer="downReply"
         ></component>
       </div>
-    </div>
-    <div class="right-column">
-      <div v-if="ShowPad && GameConfig.layout.pad" class="number-pad">
-        <VirtualNumPad
-          @virtualpadinputInput="Input"
-          @virtualpadinputDelete="Delete"
-          @virtualpadinput-pop="Pop"
-        />
-      </div>
-      <button class="button--submit" @click="CheckAnswer">送出答案</button>
     </div>
     {{ NowSelect }}
   </div>
 </template>
 
 <script>
-import VirtualNumPad from "@/components/VirtualNumPadInput.vue";
 import { defineAsyncComponent } from "vue";
-import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
 import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 
 export default {
   name: "NumberLock",
   components: {
-    VirtualNumPad,
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
-    Fractions: defineAsyncComponent(() => import("@/components/Fractions.vue")),
-    Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
+    MarkdownRenderer: defineAsyncComponent(
+      () => import("@/components/MarkdownRenderer.vue")
+    ),
     NumberLine: defineAsyncComponent(
       () => import("@/components/NumberLine.vue")
     ),
@@ -83,15 +71,15 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -103,84 +91,20 @@ export default {
       ShowPad: false,
       topComponentsAnswer: false,
       downComponentsAnswer: false,
-      // GameData: {
-      //   topComponent: {
-      //     Name: "TextOnly",
-      //     Data: {
-      //       Text: "Hello",
-      //     },
-      //   },
-      //   NumberPadAutoDisappear: false,
-      //   downComponent: {
-      //     Name: "Markdown",
-      //     Data: {
-      //       Render: `
-      //                       > 123432
-      //                       # Header 1
-      //                       ## Header 2
-      //                       ### Header 3
-      //                       **Bold Text**
-      //                       - List 1
-      //                       $i$ $i$ Input Box
-      //                       $i$ Input Box
-      //                       $t$ tab
-      //                       $s$ space
-      //                       $n$ new line
-      //                   `,
-      //       Answers: ["1", "2", "3"],
-      //     },
-      //   },
-      // },
-      // GameConfig: {
-      //   NumberPadAutoDisappear: false,
-      //   layout: {
-      //     top: true,
-      //     down: true,
-      //     pad: false,
-      //   },
-      //   checkAnswer: {
-      //     top: false,
-      //     down: true,
-      //   },
-      // },
-      // GameData: {
-      //   topComponent: {
-      //     Name: "TextOnly",
-      //     Data: {
-      //       Text: "有一隻小鴨停在數線1的位置。小鴨向右移動6格，會停在哪一個數字上呢?",
-      //     },
-      //   },
-      //   NumberPadAutoDisappear: false,
-      //   downComponent: {
-      //     Name: "DragOnNumberLine",
-      //     Data: {
-      //       spacing: 1,
-      //       max: 15,
-      //       min: 0,
-      //       init_pos: 1,
-      //       image: "S_1.png",
-      //       finalPosition: 7,
-      //     },
-      //   },
-      // },
     };
   },
-  computed: {
-    Arrow() {
-      return getSlotComponentAssets("NumberLineV2", "ArrowRight.svg"); //FIXME
-    },
-  },
+  computed: {},
   created() {
-    let NewArr = [];
+    const NewArr = [];
     let cnt = 0;
-    for (var i in this.GameData.Data) {
-      NewArr.push(this.GameData.Data[i]);
+    for (const i in this.gameData.Data) {
+      NewArr.push(this.gameData.Data[i]);
       // Initial the ComponentAnswer
-      if (this.GameData.Data[i].Blank == true) {
+      if (this.gameData.Data[i].Blank === true) {
         this.ComponentsAnswers[cnt] = false;
       }
       cnt++;
-      if (i != this.GameData.Data.length - 1) {
+      if (i !== this.gameData.Data.length - 1) {
         NewArr.push({
           Arrow: true,
         });
@@ -188,13 +112,17 @@ export default {
       }
     }
     this.FinalData = NewArr;
+    emitter.on("submitAnswer", this.CheckAnswer);
   },
   mounted() {
-    if (this.GameConfig.NumberPadAutoDisappear == false) {
+    if (this.gameConfig.NumberPadAutoDisappear === false) {
       this.SlidAnimation("in");
       this.ShowPad = true;
     }
     document.addEventListener("click", this.NowClick);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.CheckAnswer);
   },
   methods: {
     downReply(result) {
@@ -206,28 +134,28 @@ export default {
       this.topComponentsAnswer = result;
     },
     NowClick() {
-      if (this.GameConfig.layout.pad == false) return;
-      if (document.activeElement.tagName == "INPUT") {
+      if (this.gameConfig.layout.pad === false) return;
+      if (document.activeElement.tagName === "INPUT") {
         this.SlidAnimation("in");
         this.ShowPad = true;
         this.NowSelect = document.activeElement;
-      } else if (document.activeElement.tagName == "BUTTON") {
+      } else if (document.activeElement.tagName === "BUTTON") {
         this.NowSelect.focus();
         this.ShowPad = true;
       } else {
-        if (this.GameConfig.NumberPadAutoDisappear != false) {
+        if (this.gameConfig.NumberPadAutoDisappear !== false) {
           this.ShowPad = false;
           this.SlidAnimation("out");
         }
       }
     },
     SlidAnimation(action) {
-      if (this.GameConfig.layout.pad == false) return;
-      if (this.GameConfig.NumberPadAutoDisappear != false) {
-        let OutterContainer =
+      if (this.gameConfig.layout.pad === false) return;
+      if (this.gameConfig.NumberPadAutoDisappear !== false) {
+        const OutterContainer =
           document.getElementsByClassName("OutterContainer")[0];
-        let GameWindows = document.getElementsByClassName("GameWindows")[0];
-        if (action == "in") {
+        const GameWindows = document.getElementsByClassName("GameWindows")[0];
+        if (action === "in") {
           OutterContainer.style.gridTemplateColumns = "4fr 1f";
           GameWindows.style.gridColumn = "1/2";
         } else {
@@ -239,22 +167,21 @@ export default {
     CheckAnswer() {
       console.log(this.topComponentsAnswer, this.downComponentsAnswer);
       if (
-        this.GameConfig.layout.top == false ||
-        this.GameConfig.checkAnswer.top == false
+        this.gameConfig.layout.top === false ||
+        this.gameConfig.checkAnswer.top === false
       ) {
         this.topComponentsAnswer = true;
       }
       if (
-        this.GameConfig.layout.down == false ||
-        this.GameConfig.checkAnswer.down == false
+        this.gameConfig.layout.down === false ||
+        this.gameConfig.checkAnswer.down === false
       ) {
         this.downComponentsAnswer = true;
       }
 
-      let ans = this.topComponentsAnswer && this.downComponentsAnswer;
-      console.log(ans);
+      const ans = this.topComponentsAnswer && this.downComponentsAnswer;
 
-      if (ans == true) {
+      if (ans === true) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", ["不支援顯示", "不支援顯示", `正確`]);
         this.$emit("next-question");
@@ -272,9 +199,8 @@ export default {
 /* Your component-specific styles go here */
 .outter-container {
   width: 100%;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
   padding: 10px;
   border-radius: 10px;
   border: solid;
@@ -311,33 +237,6 @@ export default {
     &--down {
       flex: 1;
       min-height: 0;
-    }
-  }
-}
-.right-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: $gap--small;
-  background-color: $primary-color;
-  border-radius: $border-radius;
-  padding: $gap--small;
-  .number-pad {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .button--submit {
-    background-color: $submit-color;
-    width: 100%;
-    height: 100%;
-    min-height: 50px;
-    border-radius: $border-radius;
-    border: none;
-    font-size: $text-medium;
-    &:hover {
-      transition: 0.3s;
-      transform: scale(1.05);
     }
   }
 }

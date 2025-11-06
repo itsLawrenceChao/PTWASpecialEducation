@@ -19,10 +19,6 @@ export default {
       type: String,
       required: true,
     },
-    ID: {
-      type: String,
-      required: true,
-    },
   },
   computed: {
     textParts() {

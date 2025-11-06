@@ -40,11 +40,11 @@ export default {
 
   props: {
     numerator: {
-      type: Object,
+      type: Number,
       required: true,
     },
     denominator: {
-      type: Object,
+      type: Number,
       required: true,
     },
     gameWidth: {
@@ -124,7 +124,7 @@ export default {
           );
         }
       }
-      if (this.configDenominator.slice[i - 1].slices != this.denominator)
+      if (this.configDenominator.slice[i - 1].slices !== this.denominator)
         this.configDenominator.slice[i - 1].slices = this.denominator;
     },
     animation(currentRadians, targetRadians) {
@@ -146,7 +146,7 @@ export default {
       this.configNumerator.sceneFunc = this.circleSceneFunc;
     },
     drawDenominator() {
-      let frame = {
+      const frame = {
         radius: this.radius,
         x: this.denominatorSnapTo.x,
         y: this.denominatorSnapTo.y,
@@ -155,7 +155,7 @@ export default {
         draggable: true,
         name: this.fill.length.toString(),
       };
-      let circle = {
+      const circle = {
         strokeEnabled: false,
         visible: false,
         radius: this.radius,
@@ -168,7 +168,7 @@ export default {
         draggable: true,
         name: this.fill.length.toString(),
       };
-      let slice = {
+      const slice = {
         radius: this.radius,
         stroke: "black",
         x: this.denominatorSnapTo.x,
@@ -214,7 +214,7 @@ export default {
       context.closePath();
     },
     denominatorDragMove(e) {
-      let id = e.target.attrs.name;
+      const id = e.target.attrs.name;
       if (this.configDenominator.circle[id].visible) {
         e.target.x(Math.max(e.target.x(), this.boundaries.left));
         e.target.x(Math.min(e.target.x(), this.boundaries.right));
@@ -238,7 +238,7 @@ export default {
       }
     },
     denominatorDragEnd(e) {
-      let id = e.target.attrs.name;
+      const id = e.target.attrs.name;
       if (!this.configDenominator.circle[id].visible) {
         if (canvasTools.isInBound(e.target.position(), this.boundaries)) {
           this.drawDenominator();
@@ -259,7 +259,7 @@ export default {
     },
     numeratorDragEnd(e) {
       for (let i = 0; i < this.fill.length; ++i) {
-        if (this.configDenominator.circle[i] == null) continue;
+        if (this.configDenominator.circle[i] === null) continue;
         if (this.configDenominator.circle[i].visible) {
           if (
             canvasTools.distance(
@@ -279,7 +279,7 @@ export default {
       e.target.y(this.numeratorSnapTo.y);
     },
     destory(id) {
-      for (let object in this.configDenominator) {
+      for (const object in this.configDenominator) {
         this.configDenominator[object][id] = null;
       }
       this.fill[id] = 0;

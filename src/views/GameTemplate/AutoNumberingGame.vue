@@ -4,7 +4,7 @@
     <br />
     <div class="container">
       <p class="h1">
-        {{ GameData.Question.Text }}
+        {{ gameData.Question.Text }}
       </p>
       <div id="MainContainer" class="d-flex justify-content-between flex-row">
         <div class="canvascontainer">
@@ -15,7 +15,7 @@
           style="width: 100%"
         >
           <p class="h5">
-            {{ GameConfig.OptionBarText }}
+            {{ gameConfig.OptionBarText }}
           </p>
           <div id="error_msg">
             {{ errorMsg }}
@@ -68,15 +68,15 @@ import { getGameAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "AutoNumberingGame",
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -103,20 +103,19 @@ export default {
   },
   created() {
     // this.picture_type="sth"//FIXME
-    this.QuestionRange = this.GameData.Question.Range;
-    for (var i in this.GameData.Question.ObjImgList) {
-      this.picture_total += 1;
-    }
+    this.QuestionRange = this.gameData.Question.Range;
+    this.picture_total += Object.keys(this.gameData.Question.ObjImgList).length;
+
     for (
-      var i = this.GameData.Question.Range[0];
-      i <= this.GameData.Question.Range[1];
+      let i = this.gameData.Question.Range[0];
+      i <= this.gameData.Question.Range[1];
       i++
     ) {
       this.btn.push(i);
     }
   },
   mounted() {
-    let WH = document.getElementById("MainContainer").getBoundingClientRect();
+    const WH = document.getElementById("MainContainer").getBoundingClientRect();
     //Create canvas object
     this.canvas = this.$refs.canvas;
     this.context = this.canvas.getContext("2d");
@@ -127,7 +126,7 @@ export default {
     //bind error text
     this.error_text = document.getElementById("error_msg");
     //load description image FIXME:This is a temporary solution, will be removed in the future
-    var start = true;
+    let start = true;
     if (start === true) {
       this.clearCanvas();
       this.randomPicturePosition();
@@ -142,11 +141,11 @@ export default {
        * @return {string} b - The path of the picture
        */
       const num =
-        Math.floor(Math.random() * this.GameData.Question.ObjImgList.length) +
+        Math.floor(Math.random() * this.gameData.Question.ObjImgList.length) +
         0; //Random number(Range: 0~picture_total-1)
-      var name =
-        "S_" + this.GameData.Question.ObjImgList[num] + this.picture_type;
-      var b = getGameAssets(this.ID, name);
+      const name =
+        "S_" + this.gameData.Question.ObjImgList[num] + this.picture_type;
+      const b = getGameAssets(this.gameId, name);
 
       console.log(b);
       return b;
@@ -156,11 +155,11 @@ export default {
        * 1. Random the position of the picture
        * 2. Draw the picture on the canvas
        */
-      var numImages =
+      let numImages =
         Math.floor(
           Math.random() *
-            (this.GameData.Question.Range[1] - this.GameData.Question.Range[0])
-        ) + this.GameData.Question.Range[0];
+            (this.gameData.Question.Range[1] - this.gameData.Question.Range[0])
+        ) + this.gameData.Question.Range[0];
       const image = new Image();
       this.exist_image = 0;
       image.src = this.getRandPicture();
@@ -271,7 +270,7 @@ export default {
       //         this.$emit('play-effect', 'HarrySound');
       //         this.$emit('next-question')
       //     }, 3000);
-      // if (this.level == this.GameData.Question.Level) {
+      // if (this.level === this.gameData.Question.Level) {
 
       // }
     },
@@ -280,7 +279,7 @@ export default {
        * Start a new game
        */
       this.level += 1;
-      if (this.level == this.GameData.Question.Level) {
+      if (this.level === this.gameData.Question.Level) {
         this.win();
       } else {
         this.errorMsg = "";

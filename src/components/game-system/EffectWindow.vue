@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- Your component's HTML template goes here -->
-    <img id="Show" :src="Src" alt="Hahah">
+    <img id="Show" :src="Src" alt="Hahah" />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { getSlotComponentAssets } from "@/utilitys/get_assets.js";
 export default {
   name: "EffectWindow",
   props: {
-    Data: {
+    answerResult: {
       type: Object,
       required: true,
     },
@@ -24,10 +24,10 @@ export default {
     // Your computed properties go here
   },
   created() {
-    if (this.Data.Status == "Correct") {
+    if (this.answerResult.Status === "Correct") {
       this.Src = getSlotComponentAssets("CorrectIncorrect", "check.png");
       console.log(this.Src);
-    } else if (this.Data.Status == "Incorrect") {
+    } else if (this.answerResult.Status === "Incorrect") {
       this.Src = getSlotComponentAssets("CorrectIncorrect", "cross.png");
       console.log(this.Src);
     }

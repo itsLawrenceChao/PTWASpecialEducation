@@ -1,35 +1,28 @@
 <template>
   <div class="container">
     <div class="question-area">
-      {{ GameData.Question }}
+      {{ gameData.Question }}
     </div>
     <div class="game-area">
       <WaterScrollable
-        :Data="GameData.waterContainer"
+        :component-config="gameData.waterContainer"
         @update-m-l="recordAnswer"
       />
-      <button class="submit-btn" @click="checkAnswer">送出答案</button>
+      <!-- <button class="submit-btn" @click="checkAnswer">送出答案</button> -->
     </div>
   </div>
 </template>
 <script>
 import WaterScrollable from "@/components/WaterScrollable.vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3031",
   components: {
     WaterScrollable,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -40,23 +33,29 @@ export default {
       replyAnswerCache: "",
     };
   },
+  created() {
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
+  },
   methods: {
     recordAnswer(answer) {
       this.replyAnswerCache = answer;
     },
     checkAnswer() {
-      if (this.replyAnswerCache === this.GameData.answer) {
+      if (this.replyAnswerCache === this.gameData.answer) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("next-question");
         this.$emit("add-record", [
-          this.GameData.answer,
+          this.gameData.answer,
           this.replyAnswerCache,
           "正確",
         ]);
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          this.GameData.answer,
+          this.gameData.answer,
           this.replyAnswerCache,
           "錯誤",
         ]);

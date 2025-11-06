@@ -34,10 +34,10 @@
     <div v-if="!isMinimized" class="calculator-content">
       <GenericBoard
         :key="selectedType"
+        :game-id="'floating-calculator'"
         :data="currentCalculatorData"
-        :ID="'floating-calculator'"
         :config="currentConfig"
-        @replyAnswer="handleCalculatorResult"
+        @reply-answer="handleCalculatorResult"
       />
     </div>
   </div>
@@ -195,7 +195,7 @@ export default {
       console.log("計算結果:", result);
       this.$emit("calculatorResult", {
         type: this.selectedType,
-        result: result,
+        result,
         data: this.currentCalculatorData,
       });
     },

@@ -1,6 +1,8 @@
 <template>
   <div class="OutterContainer">
-    <p v-if="configs.Text != undefined">{{ configs.Text }}{{ configs.Unit }}</p>
+    <p v-if="configs.Text !== undefined">
+      {{ configs.Text }}{{ configs.Unit }}
+    </p>
     <div v-else class="Number">
       <div class="Division">
         <p class="Child">
@@ -14,9 +16,10 @@
       <p>{{ configs.Unit }}</p>
     </div>
     <table class="OddBorderOutline">
-      <tr v-for="(items, index1) in Drawed">
+      <tr v-for="(items, itemIndex) in Drawed" :key="itemIndex">
         <td
           v-for="(item, index2) in items"
+          :key="index2"
           class="table"
           @click="handleClick($event, index1, index2)"
         />
@@ -27,16 +30,11 @@
   </div>
 </template>
 <script>
-import TextOnly from "./TextOnly.vue";
 export default {
   name: "CoulorBarChart",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -44,29 +42,27 @@ export default {
   data() {
     return {
       Drawed: [],
-      container: null,
       configs: {},
     };
   },
   created() {
-    this.configs = this.Data;
+    this.configs = this.componentConfig;
     this.configs.Total = this.configs.Mother;
     this.Drawed = [];
-    if (this.configs.Total % 2 != 0) {
+    if (this.configs.Total % 2 !== 0) {
       //奇數
-      let temp = [];
-      for (var i = 0; i < this.configs.Total; i++) {
+      const temp = [];
+      for (let i = 0; i < this.configs.Total; i++) {
         temp.push(true);
       }
       console.log(temp);
       this.Drawed.push(temp);
     } else {
       //偶數
-      let temp = [];
-      let div = this.configs.Total / 2;
-      for (var i = 0; i < 2; i++) {
-        let temp = [];
-        for (var x = 0; x < div; x++) {
+      const div = this.configs.Total / 2;
+      for (let i = 0; i < 2; i++) {
+        const temp = [];
+        for (let x = 0; x < div; x++) {
           temp.push(true);
         }
         this.Drawed.push(temp);
@@ -75,14 +71,14 @@ export default {
   },
   mounted() {
     // Code to run when the component is mounted goes here
-    let tableData = document.getElementsByClassName("table");
+    const tableData = document.getElementsByClassName("table");
     let container = document.getElementsByClassName("OutterContainer");
     container = container[0].getBoundingClientRect();
-    let width = container.width / this.configs.Total - 10;
-    for (var i = 0; i < tableData.length; i++) {
+    const width = container.width / this.configs.Total - 10;
+    for (let i = 0; i < tableData.length; i++) {
       tableData[i].style.width = width + "px";
     }
-    if (this.configs.Coulor == undefined) {
+    if (this.configs.Coulor === undefined) {
       this.configs.Coulor = "#bde0fe";
     }
   },
@@ -98,32 +94,17 @@ export default {
     },
     GetAnswer() {
       let TempAnswer = 0;
-      for (var i = 0; i < this.Drawed.length; i++) {
-        for (var x = 0; x < this.Drawed[i].length; x++) {
-          if (this.Drawed[i][x] == false) {
+      for (let i = 0; i < this.Drawed.length; i++) {
+        for (let x = 0; x < this.Drawed[i].length; x++) {
+          if (this.Drawed[i][x] === false) {
             TempAnswer += 1;
           }
         }
       }
-      if (TempAnswer == this.configs.Child) {
+      if (TempAnswer === this.configs.Child) {
         this.$emit("replyAnswer", true);
       } else {
         this.$emit("replyAnswer", false);
-      }
-    },
-    GetAnswer1() {
-      let TempAnswer = 0;
-      for (var i = 0; i < this.Drawed.length; i++) {
-        for (var x = 0; x < this.Drawed[i].length; x++) {
-          if (this.Drawed[i][x] == false) {
-            TempAnswer += 1;
-          }
-        }
-      }
-      if (TempAnswer == this.configs.Child) {
-        alert("Correct" + TempAnswer + this.configs.Child);
-      } else {
-        alert("Incorrect" + TempAnswer + this.configs.Child);
       }
     },
   },

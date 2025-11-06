@@ -1,9 +1,8 @@
 <template>
   <GenericBoard
-    :data="Data"
-    :ID="ID"
+    :data="componentConfig"
     :config="currentConfig"
-    @replyAnswer="handleReply"
+    @reply-answer="handleReply"
   />
 </template>
 
@@ -23,12 +22,8 @@ export default {
     GenericBoard,
   },
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -43,7 +38,7 @@ export default {
         decimal: decimalConfig,
       };
 
-      const type = this.Data.type?.toLowerCase?.() ?? "";
+      const type = this.componentConfig.type?.toLowerCase?.() ?? "";
       const configType = type === "add" || type === "sub" ? "addsub" : type;
 
       return map[configType] || addsubConfig;

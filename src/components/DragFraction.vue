@@ -5,7 +5,7 @@
         <v-rect :config="configBG" />
         <v-rect :config="configSideBar" />
       </v-layer>
-      <v-layer v-if="Data.shape == 'circle'">
+      <v-layer v-if="componentConfig.shape === 'circle'">
         <circleFraction
           :key="componentKey"
           :game-width="gameWidth"
@@ -16,7 +16,7 @@
         />
       </v-layer>
 
-      <v-layer v-if="Data.shape == 'rect'">
+      <v-layer v-if="componentConfig.shape === 'rect'">
         <rectFraction
           :key="componentKey"
           :game-width="gameWidth"
@@ -43,26 +43,26 @@
 </template>
 
 <script>
-import { getGameAssets } from "@/utilitys/get_assets.js";
-import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
 export default {
   components: {
-    circleFraction: defineAsyncComponent(() =>
-      import("@/components/components-utilitys/drag-fraction/DragFractionCircle.vue")
+    circleFraction: defineAsyncComponent(
+      () =>
+        import(
+          "@/components/components-utilitys/drag-fraction/DragFractionCircle.vue"
+        )
     ),
-    rectFraction: defineAsyncComponent(() =>
-      import("@/components/components-utilitys/drag-fraction/DragFractionRect.vue")
+    rectFraction: defineAsyncComponent(
+      () =>
+        import(
+          "@/components/components-utilitys/drag-fraction/DragFractionRect.vue"
+        )
     ),
   },
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -88,7 +88,6 @@ export default {
       configNumeratorLine: {},
       configNumeratorNumber: {},
       configDenominatorNumber: {},
-      fill: [],
 
       numerator: 3,
       denominator: 3,
@@ -103,10 +102,14 @@ export default {
 
   methods: {
     initializeScene() {
-      console.log(this.$refs.container.clientWidth, this.$refs.container.clientHeight);
+      console.log(
+        this.$refs.container.clientWidth,
+        this.$refs.container.clientHeight
+      );
       if (
-        this.$refs.container.clientWidth * 0.75 <= this.$refs.container.clientHeight ||
-        this.$refs.container.clientHeight == 0
+        this.$refs.container.clientWidth * 0.75 <=
+          this.$refs.container.clientHeight ||
+        this.$refs.container.clientHeight === 0
       ) {
         this.gameWidth = this.$refs.container.clientWidth;
         this.gameHeight = this.gameWidth * 0.75;
@@ -126,7 +129,7 @@ export default {
     },
 
     drawArrow() {
-      let arrowPosition = [
+      const arrowPosition = [
         {
           x: this.gameWidth * 0.825,
           y: this.gameHeight * 0.35,
@@ -148,8 +151,8 @@ export default {
           operator: "denominatorPlus",
         },
       ];
-      for (let pos in arrowPosition) {
-        let arrow = {
+      for (const pos in arrowPosition) {
+        const arrow = {
           stroke: "#BA3F38",
           fill: "#BA3F38",
           length: this.gameWidth * 0.05,
@@ -162,7 +165,7 @@ export default {
       }
     },
     arrowSceneFunc(context, shape) {
-      let length = shape.getAttr("length");
+      const length = shape.getAttr("length");
       context.beginPath();
       context.moveTo(0, length * -0.5);
       context.lineTo(0, length * 0.5);
@@ -184,7 +187,7 @@ export default {
       this.configNumeratorLine.y = this.gameHeight * 0.345;
       this.configNumeratorLine.points = [0, 0, this.gameWidth * 0.05, 0];
       this.configNumeratorLine.stroke = "black";
-      this.configNumeratorLine.strokeWidth = "3";
+      this.configNumeratorLine.strokeWidth = 3;
 
       this.configNumeratorNumber.x = this.gameWidth * 0.86;
       this.configNumeratorNumber.y = this.gameHeight * 0.35;
@@ -215,14 +218,15 @@ export default {
     },
     drawAfterAdjusted() {
       this.configNumeratorNumber.text = this.numerator;
-      if (this.numerator >= 10) this.configNumeratorNumber.x = this.gameWidth * 0.85;
+      if (this.numerator >= 10)
+        this.configNumeratorNumber.x = this.gameWidth * 0.85;
       else this.configNumeratorNumber.x = this.gameWidth * 0.86;
       this.configDenominatorNumber.text = `${this.denominator}等分`;
 
-      if (this.numerator == 2) {
+      if (this.numerator === 2) {
         this.configArrow[0].fill = "#505050";
         this.configArrow[0].stroke = "#505050";
-      } else if (this.numerator == 12) {
+      } else if (this.numerator === 12) {
         this.configArrow[1].fill = "#505050";
         this.configArrow[1].stroke = "#505050";
       } else {
@@ -232,10 +236,10 @@ export default {
         this.configArrow[1].stroke = "#BA3F38";
       }
 
-      if (this.denominator == 2) {
+      if (this.denominator === 2) {
         this.configArrow[2].fill = "#505050";
         this.configArrow[2].stroke = "#505050";
-      } else if (this.denominator == 12) {
+      } else if (this.denominator === 12) {
         this.configArrow[3].fill = "#505050";
         this.configArrow[3].stroke = "#505050";
       } else {
@@ -247,19 +251,21 @@ export default {
     },
     addFill(fill) {
       let total = 0;
-      for (let fraction in fill) {
+      for (const fraction in fill) {
         total += fill[fraction];
       }
-      if (this.Data.verifyOption == "answer") {
-        let answer = this.Data.answer.numerator / this.Data.answer.denominator;
-        let isCorrect = answer.toFixed(2) == total.toFixed(2);
+      if (this.componentConfig.verifyOption === "answer") {
+        const answer =
+          this.componentConfig.answer.numerator /
+          this.componentConfig.answer.denominator;
+        const isCorrect = answer.toFixed(2) === total.toFixed(2);
         this.$emit("replyAnswer", isCorrect);
         this.$emit("recordAnswer", [
           answer.toFixed(2),
           total.toFixed(2),
           isCorrect ? "正確" : "錯誤",
         ]);
-      } else if (this.Data.verifyOption == "value") {
+      } else if (this.componentConfig.verifyOption === "value") {
         this.$emit("replyAnswer", total.toFixed(2));
       }
     },

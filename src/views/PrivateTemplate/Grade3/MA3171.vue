@@ -17,26 +17,26 @@
           :key="`${rowIndex}-${index}`"
         >
           <div v-if="type === 'multiply' || type === 'divide'" class="operator">
-            {{ type === "multiply" ? "×" : "÷" }}{{ GameData[row][type] }}
+            {{ type === "multiply" ? "×" : "÷" }}{{ gameData[row][type] }}
           </div>
           <div
             v-else
             class="box"
             :class="{
               error: submitted && !isAnswerCorrect(rowIndex, type),
-              preset: isPresetValue(GameData[row][type]),
+              preset: isPresetValue(gameData[row][type]),
             }"
             @click="
               handleBoxClick(
                 getBoxIndex(rowIndex, type),
-                GameData[row][type],
+                gameData[row][type],
                 $event
               )
             "
           >
             {{
               displayValue(
-                GameData[row][type],
+                gameData[row][type],
                 inputValues[getBoxIndex(rowIndex, type)]
               )
             }}
@@ -45,37 +45,29 @@
       </div>
     </div>
 
-    <button class="submit-btn" :disabled="!isAllFilled" @click="checkAnswer">
+    <!-- <button class="submit-btn" :disabled="!isAllFilled" @click="checkAnswer">
       送出答案
-    </button>
+    </button> -->
 
     <FloatNumPad
       v-if="showNumPad"
-      :Data="numPadPosition"
-      @buttonClicked="numPadButtonClicked"
+      :component-config="numPadPosition"
+      @button-clicked="numPadButtonClicked"
     />
   </div>
 </template>
 
 <script>
 import FloatNumPad from "@/components/FloatNumPad.vue";
-
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3171",
   components: {
     FloatNumPad,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
-      required: true,
-    },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
-      type: String,
       required: true,
     },
   },
@@ -100,7 +92,7 @@ export default {
 
       for (let i = 0; i < rows.length; i++) {
         for (let j = 0; j < types.length; j++) {
-          const value = this.GameData[rows[i]][types[j]];
+          const value = this.gameData[rows[i]][types[j]];
           const inputIndex = this.getBoxIndex(i, types[j]);
           if (!this.isPresetValue(value) && !this.inputValues[inputIndex]) {
             return false;
@@ -113,8 +105,8 @@ export default {
 
   created() {
     // 在組件創建時初始化預設值
-    if (this.GameData) {
-      const { firstRow, secondRow } = this.GameData;
+    if (this.gameData) {
+      const { firstRow, secondRow } = this.gameData;
       this.inputValues = [
         firstRow?.start || "",
         firstRow?.middle || "",
@@ -124,6 +116,10 @@ export default {
         secondRow?.end || "",
       ];
     }
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
 
   methods: {
@@ -185,7 +181,7 @@ export default {
 
       for (let i = 0; i < rows.length; i++) {
         for (let j = 0; j < types.length; j++) {
-          const value = this.GameData[rows[i]][types[j]];
+          const value = this.gameData[rows[i]][types[j]];
           if (!this.isPresetValue(value)) {
             if (i === rowIndex && types[j] === type) {
               return answerCount;
@@ -203,7 +199,7 @@ export default {
       const inputIndex = this.getBoxIndex(rowIndex, type);
       return (
         String(this.inputValues[inputIndex]) ===
-        String(this.GameData.answers[answerIndex])
+        String(this.gameData.answers[answerIndex])
       );
     },
     checkAnswer() {
@@ -215,7 +211,7 @@ export default {
 
       for (let i = 0; i < rows.length; i++) {
         for (let j = 0; j < types.length; j++) {
-          if (!this.isPresetValue(this.GameData[rows[i]][types[j]])) {
+          if (!this.isPresetValue(this.gameData[rows[i]][types[j]])) {
             if (!this.isAnswerCorrect(i, types[j])) {
               isCorrect = false;
             }

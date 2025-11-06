@@ -2,7 +2,7 @@
   <div ref="container" class="ma3192">
     <div class="ma3192__form">
       <table class="ma3192__schedule-table">
-        <template v-if="GameData.Level == 1">
+        <template v-if="gameData.Level === 1">
           <thead class="ma3192__station-table">
             <tr v-for="(row, rowIndex) in stationData" :key="rowIndex">
               <th v-if="rowIndex === 0" rowspan="8">搭乘區間</th>
@@ -12,7 +12,7 @@
             </tr>
           </thead>
         </template>
-        <template v-if="GameData.Level == 2">
+        <template v-if="gameData.Level === 2">
           <thead>
             <tr>
               <th class="ma3192__schedule-table__time-col">時間</th>
@@ -41,7 +41,7 @@
             </tr>
           </tbody>
         </template>
-        <template v-if="GameData.Level == 3">
+        <template v-if="gameData.Level === 3">
           <thead>
             <tr>
               <th rowspan="2">站名</th>
@@ -131,7 +131,7 @@
         :key="currentQuestionIndex"
         class="ma3192__question"
       >
-        <template v-if="currentQuestion.Type == 'DefaultDragBox'">
+        <template v-if="currentQuestion.Type === 'DefaultDragBox'">
           <div>
             {{ currentQuestion.Text }}
             <div class="ma3192__drag-box"></div>
@@ -140,21 +140,21 @@
         <component
           :is="currentQuestion.Type"
           v-else
-          :Data="currentQuestion.Data"
-          :ID="ID"
-          @replyAnswer="handleAnswer($event, currentQuestionIndex)"
+          :component-config="currentQuestion.Data"
+          :game-id="gameId"
+          @reply-answer="handleAnswer($event, currentQuestionIndex)"
         />
       </div>
     </transition>
 
-    <div class="function-btns">
+    <!-- <div class="function-btns">
       <button class="ma3192__submit-btn" @click="submitSingleAnswer">
         送出答案
       </button>
       <button v-if="nextable" class="ma3192__submit-btn" @click="nextQuestion">
         下一題
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -170,7 +170,9 @@ const COMPONENTS = {
   NumberIncrementor: defineAsyncComponent(
     () => import("@/components/NumberIncrementor.vue")
   ),
-  Markdown: defineAsyncComponent(() => import("@/components/Markdown.vue")),
+  MarkdownRenderer: defineAsyncComponent(
+    () => import("@/components/MarkdownRenderer.vue")
+  ),
 };
 
 export default {
@@ -178,15 +180,11 @@ export default {
   components: COMPONENTS,
 
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -196,10 +194,6 @@ export default {
 
   data() {
     return {
-      updateKey: 0,
-      formData: [],
-      formDataConcat: [],
-      formStyle: [],
       questionData: [],
       selectedElement: null,
       isDragging: false,
@@ -280,10 +274,14 @@ export default {
 
   async mounted() {
     this.setQuestionData();
-    this.answer = new Array(this.GameData.Questions.length).fill(null);
+    this.answer = new Array(this.gameData.Questions.length).fill(null);
   },
 
+  created() {
+    emitter.on("submitAnswer", this.submitSingleAnswer);
+  },
   beforeUnmount() {
+    emitter.off("submitAnswer", this.submitSingleAnswer);
     this.removeEventListeners();
   },
 
@@ -296,8 +294,8 @@ export default {
     },
 
     setQuestionData() {
-      if (this.GameData && this.GameData.Questions) {
-        this.questionData = this.GameData.Questions.map((question) => ({
+      if (this.gameData && this.gameData.Questions) {
+        this.questionData = this.gameData.Questions.map((question) => ({
           Text: question.Text,
           Type: question.Type,
           Data: question.Data,
@@ -316,7 +314,7 @@ export default {
 
       this.originalPosition = {
         element: draggedElement,
-        rect: rect,
+        rect,
       };
 
       this.createCloneElement(rect);
@@ -402,7 +400,7 @@ export default {
       dragBox.classList.remove("ma3192__drag-box--wrong");
 
       const questionIndex = this.currentQuestionIndex;
-      const answer = this.GameData.Questions[questionIndex].Data.answer.trim();
+      const answer = this.gameData.Questions[questionIndex].Data.answer.trim();
       this.answer[questionIndex] = draggedText === answer;
     },
 
@@ -434,7 +432,7 @@ export default {
       }
 
       const currentQuestion =
-        this.GameData.Questions[this.currentQuestionIndex];
+        this.gameData.Questions[this.currentQuestionIndex];
       console.log("Current question:", currentQuestion);
       console.log("Current question type:", currentQuestion.Type);
 
@@ -485,6 +483,7 @@ export default {
         ]);
         if (this.currentQuestionIndex < this.questionData.length - 1) {
           this.nextable = true;
+          this.nextQuestion();
         } else {
           this.nextable = false;
           this.$emit("next-question");
@@ -508,37 +507,6 @@ export default {
         this.currentQuestionIndex++;
       }
       this.nextable = false;
-    },
-
-    checkAnswer() {
-      let isCorrect = true;
-      for (let i = 0; i < this.questionData.length; i++) {
-        if (!this.answer[i]) {
-          isCorrect = false;
-          if (this.questionData[i].Type === "DefaultDragBox") {
-            const dragBoxes = document.querySelectorAll(".ma3192__drag-box");
-            const defaultDragBoxQuestions = this.questionData
-              .map((q, idx) => ({ type: q.Type, index: idx }))
-              .filter((q) => q.type === "DefaultDragBox");
-
-            const dragBoxIndex = defaultDragBoxQuestions.findIndex(
-              (q) => q.index === i
-            );
-            if (dragBoxIndex !== -1) {
-              dragBoxes[dragBoxIndex].classList.add("ma3192__drag-box--wrong");
-            }
-          }
-        }
-      }
-      if (isCorrect) {
-        this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", ["不支援顯示", "不支援顯示", "正確"]);
-        this.$emit("next-question");
-      } else {
-        this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", ["不支援顯示", "不支援顯示", "錯誤"]);
-        emitter.emit("checkAnswer");
-      }
     },
   },
 };

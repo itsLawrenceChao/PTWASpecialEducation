@@ -1,15 +1,15 @@
 <template>
   <div ref="container" :key="containerKey">
     <div class="question">
-      {{ GameData.Question }}
+      {{ gameData.Question }}
       <div class="answer">
-        <numberIncrementor
-          :ID="ID"
-          :Data="incrementorData"
-          @numberChanged="getAnswer"
+        <number-incrementor
+          :game-id="gameId"
+          :component-config="incrementorData"
+          @number-changed="getAnswer"
         />
-        {{ GameData.Unit }}
-        <button @click="checkAnswer">提交答案</button>
+        {{ gameData.Unit }}
+        <!-- <button @click="checkAnswer">提交答案</button> -->
       </div>
     </div>
     <v-stage :config="configKonva">
@@ -60,6 +60,7 @@
 import { getGameAssets } from "@/utilitys/get_assets.js";
 import * as canvasTools from "@/utilitys/canvasTools.js";
 import { defineAsyncComponent } from "vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   components: {
     numberIncrementor: defineAsyncComponent(
@@ -67,15 +68,11 @@ export default {
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -114,7 +111,12 @@ export default {
     this.setRingRadius();
     this.drawOnCanvas();
   },
-
+  created() {
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
+  },
   methods: {
     initializeScene() {
       this.gameWidth = this.$refs.container.clientWidth * 0.8;
@@ -128,13 +130,13 @@ export default {
       this.ringRadius[this.findLargestRadius()] = this.gameWidth / 5;
 
       this.smallToLargeRatio =
-        this.GameData.Radius[1 - this.findLargestRadius()] /
-        this.GameData.Radius[this.findLargestRadius()];
+        this.gameData.Radius[1 - this.findLargestRadius()] /
+        this.gameData.Radius[this.findLargestRadius()];
       this.ringRadius[1 - this.findLargestRadius()] =
         this.ringRadius[this.findLargestRadius()] * this.smallToLargeRatio;
     },
     findLargestRadius() {
-      if (this.GameData.Radius[0] < this.GameData.Radius[1]) {
+      if (this.gameData.Radius[0] < this.gameData.Radius[1]) {
         return 1;
       } else {
         return 0;
@@ -165,7 +167,7 @@ export default {
       this.ringKey++;
     },
     drawButtons() {
-      this.buttonPos = this.GameData.Options.map((option, index) => {
+      this.buttonPos = this.gameData.Options.map((option, index) => {
         return {
           x:
             this.gameWidth / 2 +
@@ -174,7 +176,7 @@ export default {
           y: (this.gameHeight / 10) * 9 - this.gameWidth / 40,
         };
       });
-      this.configButtons = this.GameData.Options.map((option, index) => {
+      this.configButtons = this.gameData.Options.map((option, index) => {
         return {
           x: this.buttonPos[index].x,
           y: this.buttonPos[index].y,
@@ -187,7 +189,7 @@ export default {
       this.configButtons[0].y += this.gameHeight / 60;
     },
     drawShadows() {
-      this.configShadows = this.GameData.Options.map((option, index) => {
+      this.configShadows = this.gameData.Options.map((option, index) => {
         return {
           x: this.buttonPos[index].x,
           y: this.buttonPos[index].y + this.gameHeight / 60,
@@ -199,7 +201,7 @@ export default {
       });
     },
     drawOptions() {
-      this.configOptions = this.GameData.Options.map((option, index) => {
+      this.configOptions = this.gameData.Options.map((option, index) => {
         return {
           x: this.buttonPos[index].x + this.gameWidth / 60,
           y: this.buttonPos[index].y + this.gameWidth / 60,
@@ -222,7 +224,7 @@ export default {
       this.ringKey++;
     },
     handleDragEnd(e) {
-      let target = {
+      const target = {
         x: this.gameWidth / 4,
         y: this.gameHeight / 2,
       };
@@ -237,7 +239,7 @@ export default {
     },
     drawTarget() {
       const targetImage = new window.Image();
-      targetImage.src = getGameAssets(this.ID, this.GameData.TargetImage);
+      targetImage.src = getGameAssets(this.gameId, this.gameData.TargetImage);
       this.configTarget.image = targetImage;
       this.configTarget.x = this.gameWidth / 4;
       this.configTarget.y = this.gameHeight / 2;
@@ -249,20 +251,20 @@ export default {
     },
     drawFoodinCorrectRadius() {
       const foodImage = new window.Image();
-      foodImage.src = getGameAssets(this.ID, this.GameData.FoodImage);
-      if (this.GameData.CorrectRadius == this.findLargestRadius())
+      foodImage.src = getGameAssets(this.gameId, this.gameData.FoodImage);
+      if (this.gameData.CorrectRadius === this.findLargestRadius())
         this.foodWidth = this.gameHeight / 15;
       else this.foodWidth = this.gameHeight / 20;
-      for (let i = 0; i < this.GameData.Answer; i++) {
+      for (let i = 0; i < this.gameData.Answer; i++) {
         let position;
         do {
           position = canvasTools.randomPositionInCircle(
             canvasTools.center(this.configTarget),
-            this.ringRadius[this.GameData.CorrectRadius]
+            this.ringRadius[this.gameData.CorrectRadius]
           );
         } while (this.isOverlapped(position));
 
-        let food = {
+        const food = {
           image: foodImage,
           x: position.x,
           y: position.y,
@@ -278,16 +280,16 @@ export default {
     },
     drawFoodOutside() {
       const foodImage = new window.Image();
-      foodImage.src = getGameAssets(this.ID, this.GameData.FoodImage);
+      foodImage.src = getGameAssets(this.gameId, this.gameData.FoodImage);
 
-      let correctArea =
-        Math.pow(this.ringRadius[this.GameData.CorrectRadius], 2) * Math.PI;
-      let outsideArea = Math.pow(this.gameHeight, 2) - correctArea;
-      let foodCount = Math.floor(
-        (this.GameData.Answer / correctArea) * outsideArea
+      const correctArea =
+        Math.pow(this.ringRadius[this.gameData.CorrectRadius], 2) * Math.PI;
+      const outsideArea = Math.pow(this.gameHeight, 2) - correctArea;
+      const foodCount = Math.floor(
+        (this.gameData.Answer / correctArea) * outsideArea
       );
 
-      let bound = {
+      const bound = {
         up: 0,
         down: this.gameHeight,
         left: 0,
@@ -303,13 +305,13 @@ export default {
             canvasTools.distance(
               canvasTools.center(this.configTarget),
               position
-            ) <= this.ringRadius[this.GameData.CorrectRadius]
+            ) <= this.ringRadius[this.gameData.CorrectRadius]
           ) {
             inCorrectArea = true;
           }
         } while (this.isOverlapped(position) || inCorrectArea);
 
-        let food = {
+        const food = {
           image: foodImage,
           x: position.x,
           y: position.y,
@@ -361,22 +363,22 @@ export default {
       this.answer = num;
     },
     checkAnswer() {
-      if (this.answer == this.GameData.Answer) {
+      if (this.answer === this.gameData.Answer) {
         this.$emit("play-effect", "CorrectSound");
-        this.$emit("add-record", [this.GameData.Answer, this.answer, "正確"]);
+        this.$emit("add-record", [this.gameData.Answer, this.answer, "正確"]);
         requestAnimationFrame(this.gatheringAnimation);
       } else {
         this.$emit("play-effect", "WrongSound");
-        this.$emit("add-record", [this.GameData.Answer, this.answer, "錯誤"]);
+        this.$emit("add-record", [this.gameData.Answer, this.answer, "錯誤"]);
         this.containerKey++;
       }
     },
     gatheringAnimation() {
       let allGathered = true;
-      for (let i = 0; i < this.GameData.Answer; i++) {
+      for (let i = 0; i < this.gameData.Answer; i++) {
         if (this.configFood[i].visible) {
           allGathered = false;
-          let unitVector = canvasTools.unitVector(
+          const unitVector = canvasTools.unitVector(
             canvasTools.center(this.configTarget),
             this.configFood[i]
           );

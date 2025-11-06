@@ -29,7 +29,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有兩條緞帶，黃色緞帶長6公分，綠色緞帶長5公分，接在一起會是幾公分?$n$6+5=$i$",
             "Answer": [11]
@@ -45,7 +45,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有兩條緞帶，黃色緞帶長8公分，綠色緞帶長6公分，接在一起會是幾公分?$n$8+6=$i$",
             "Answer": [14]
@@ -61,7 +61,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有兩條緞帶，黃色緞帶長3公分，綠色緞帶長7公分，接在一起會是幾公分?$n$3+7=$i$",
             "Answer": [10]
@@ -77,7 +77,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有兩條緞帶，黃色緞帶長5公分，綠色緞帶長7公分，接在一起會是幾公分?$n$5+7=$i$",
             "Answer": [12]
@@ -93,7 +93,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有兩條緞帶，黃色緞帶長6公分，綠色緞帶長6公分，接在一起會是幾公分?$n$6+6=$i$",
             "Answer": [12]
@@ -111,7 +111,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有一條長12公分的緞帶，剪掉5公分，這條緞帶還剩下幾公分?$n$12-5=$i$",
             "Answer": [7]
@@ -127,7 +127,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有一條長12公分的緞帶，剪掉7公分，這條緞帶還剩下幾公分?$n$12-7=$i$",
             "Answer": [5]
@@ -143,7 +143,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有一條長13公分的緞帶，剪掉6公分，這條緞帶還剩下幾公分?$n$13-6=$i$",
             "Answer": [7]
@@ -159,7 +159,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有一條長11公分的緞帶，剪掉9公分，這條緞帶還剩下幾公分?$n$11-9=$i$",
             "Answer": [2]
@@ -175,7 +175,7 @@
         },
         "NumberPadAutoDisappear": false,
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "有一條長13公分的緞帶，剪掉4公分，這條緞帶還剩下幾公分?$n$13-4=$i$",
             "Answer": [9]
@@ -198,7 +198,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "1 + 6 = $i$",
             "Answer": [7]
@@ -219,7 +219,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "2 + 3 = $i$",
             "Answer": [5]
@@ -240,7 +240,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "3 + 11 = $i$",
             "Answer": [14]
@@ -261,7 +261,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "3 + 10 = $i$",
             "Answer": [13]
@@ -282,7 +282,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "4 + 8 = $i$",
             "Answer": [12]
@@ -305,7 +305,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "9 - 3 = $i$",
             "Answer": [6]
@@ -326,7 +326,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "15 - 8 = $i$",
             "Answer": [7]
@@ -347,7 +347,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "11 - 6 = $i$",
             "Answer": [5]
@@ -368,7 +368,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "12 - 4 = $i$",
             "Answer": [8]
@@ -389,7 +389,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "13 - 5 = $i$",
             "Answer": [8]
@@ -412,7 +412,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "14 - 3 = $i$",
             "Answer": [11]
@@ -433,7 +433,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "10 - 5 = $i$",
             "Answer": [5]
@@ -454,7 +454,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "12 - 8 = $i$",
             "Answer": [4]
@@ -475,7 +475,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "13 - 6 = $i$",
             "Answer": [7]
@@ -496,7 +496,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "15 - 4 = $i$",
             "Answer": [11]

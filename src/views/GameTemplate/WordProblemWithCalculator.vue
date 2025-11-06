@@ -1,30 +1,34 @@
 <template>
   <div class="outter-container">
-    <div v-if="GameData.headQuestion" class="head-container">
-      <p>{{ GameData.headQuestion }}</p>
+    <div v-if="gameData.headQuestion" class="head-container">
+      <p>{{ gameData.headQuestion }}</p>
     </div>
     <div class="word-problem">
       <div class="left-container">
-        <ImageContainer v-if="GameData.image" :ID="ID" :Data="GameData.image" />
-        <Markdown
+        <ImageContainer
+          v-if="gameData.image"
+          :game-id="gameId"
+          :component-config="gameData.image"
+        />
+        <MarkdownRenderer
           class="markdown"
-          :Data="markdownData"
-          :ID="ID"
+          :component-config="markdownData"
+          :game-id="gameId"
           @reply-answer="markdownAnswer"
         />
       </div>
       <div class="right-container">
         <div class="calculator-container">
           <component
-            :is="GameConfig.calculator"
+            :is="gameConfig.calculator"
             class="calculator"
-            :Data="calculatorData"
-            :ID="ID"
+            :component-config="calculatorData"
+            :game-id="gameId"
             @reply-answer="calculatorAnswer"
           />
         </div>
 
-        <button class="submit" @click="checkAnswer">檢查答案</button>
+        <!-- <button class="submit" @click="checkAnswer">檢查答案</button> -->
       </div>
     </div>
   </div>
@@ -36,29 +40,24 @@ import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "WordProblemWithCalculator",
   components: {
-    Calculator: getComponents("Calculator"),
-    Markdown: getComponents("Markdown"),
+    MarkdownRenderer: getComponents("MarkdownRenderer"),
     ImageContainer: defineAsyncComponent(
       () => import("@/components/ImageContainer.vue")
     ),
-    DecimalCalculator: defineAsyncComponent(
-      () => import("@/components/DecimalCalculator.vue")
-    ),
-    Division: defineAsyncComponent(() => import("@/components/Division.vue")),
     CalculationBoard: defineAsyncComponent(
       () => import("@/components/CalculationBoard.vue")
     ),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
+    gameConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -66,7 +65,7 @@ export default {
   emits: ["play-effect", "next-question", "add-record"],
   data() {
     return {
-      // GameData: {
+      // gameData: {
       //   calculator: {
       //     Unit: "Volume",
       //     CarryAmount: 1,
@@ -118,16 +117,20 @@ export default {
     // Add your computed properties here
   },
   created() {
-    this.calculatorData = this.GameData.calculator;
-    this.markdownData = this.GameData.markdown;
+    this.calculatorData = this.gameData.calculator;
+    this.markdownData = this.gameData.markdown;
+    emitter.on("submitAnswer", this.checkAnswer);
   },
   mounted() {
     // Lifecycle hook when component is mounted
   },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
+  },
   methods: {
     checkAnswer() {
-      if (!this.GameConfig.calculatorVerify) this.calculatorAnswerStatus = true;
-      if (!this.GameConfig.markdownVerify) this.markdownAnswerStatus = true;
+      if (!this.gameConfig.calculatorVerify) this.calculatorAnswerStatus = true;
+      if (!this.gameConfig.markdownVerify) this.markdownAnswerStatus = true;
 
       emitter.emit("checkAnswer");
       if (this.markdownAnswerStatus && this.calculatorAnswerStatus) {
@@ -135,15 +138,15 @@ export default {
         this.$emit("add-record", ["答案全對", "", "正確"]);
         this.$emit("next-question");
       } else if (
-        this.markdownAnswerStatus == false &&
-        this.calculatorAnswerStatus == false
+        this.markdownAnswerStatus === false &&
+        this.calculatorAnswerStatus === false
       ) {
         this.$emit("add-record", ["答案全錯", "", "錯誤"]);
         this.$emit("play-effect", "WrongSound");
-      } else if (this.calculatorAnswerStatus == false) {
+      } else if (this.calculatorAnswerStatus === false) {
         this.$emit("add-record", ["計算機答案錯誤", "", "錯誤"]);
         this.$emit("play-effect", "WrongSound");
-      } else if (this.markdownAnswerStatus == false) {
+      } else if (this.markdownAnswerStatus === false) {
         this.$emit("add-record", ["填空部分出現錯誤", "", "錯誤"]);
         this.$emit("play-effect", "WrongSound");
       }

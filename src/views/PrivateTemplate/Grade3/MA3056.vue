@@ -1,37 +1,34 @@
 <template>
   <div class="outter-container container">
     <div class="head-container">
-      {{ GameData.headQuestion }}
+      {{ gameData.headQuestion }}
     </div>
     <div class="game-area">
       <DrawShapes
         id="draw-shapes"
-        :Data="configDrawShapes"
-        :ID="ID"
+        :component-config="configDrawShapes"
+        :game-id="gameId"
         @reply-answer="getComponentsReply"
       />
     </div>
-    <button class="submit-btn" @click="checkAnswer">送出答案</button>
+    <!-- <button class="submit-btn" @click="checkAnswer">送出答案</button> -->
   </div>
 </template>
 
 <script>
 import DrawShapes from "@/components/DrawShapes.vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3056",
   components: {
     DrawShapes,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -39,7 +36,6 @@ export default {
   emits: ["play-effect", "next-question"],
   data() {
     return {
-      id: "MA3056",
       componentsReplyAnswer: false,
       configDrawShapes: {
         verifyOption: "rect", //none, rect, shape
@@ -56,7 +52,11 @@ export default {
   },
   created() {
     // Add your created methods here
-    this.configDrawShapes.answer = this.GameData.answer;
+    this.configDrawShapes.answer = this.gameData.answer;
+    emitter.on("submitAnswer", this.checkAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAnswer);
   },
   methods: {
     // Add your component methods here

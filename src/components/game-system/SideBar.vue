@@ -3,7 +3,7 @@
     <p class="Title">功能區</p>
     <div class="Buttons">
       <button
-        v-if="GameStatus == 'Progressing'"
+        v-if="gameStatus === 'Progressing'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="previousQuestion()"
       >
@@ -27,7 +27,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'Progressing'"
+        v-if="gameStatus === 'Progressing'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="nextQuestion()"
       >
@@ -51,7 +51,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'NotStart'"
+        v-if="gameStatus === 'NotStart'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="startGame()"
       >
@@ -60,6 +60,18 @@
             <img :src="startGameIconSrc" />
           </div>
           <div class="mx-auto">開始</div>
+        </div>
+      </button>
+      <button
+        v-if="gameStatus === 'Progressing' && showSubmitButton"
+        class="btn btn-primary text-nowrap img-hover-zoom"
+        @click="submitAnswer()"
+      >
+        <div class="d-flex align-items-center">
+          <div class="">
+            <i class="bi bi-check" />
+          </div>
+          <div class="mx-auto">送出答案</div>
         </div>
       </button>
       <button
@@ -74,7 +86,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'Done'"
+        v-if="gameStatus === 'Done'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         @click="toCSV()"
       >
@@ -148,7 +160,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'NotStart'"
+        v-if="gameStatus === 'NotStart'"
         class="btn btn-primary text-nowrap img-hover-zoom"
         data-bs-toggle="modal"
         data-bs-target="#reappear"
@@ -161,7 +173,7 @@
         </div>
       </button>
       <button
-        v-if="GameStatus == 'Done'"
+        v-if="gameStatus === 'Done'"
         class="btn btn-primary text-nowrap img-hover-zoom"
       >
         <div class="d-flex align-items-center">
@@ -290,6 +302,7 @@
   </div>
 </template>
 <script>
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 import gameStore from "@/stores/game";
 import { mapWritableState } from "pinia";
 import { getSystemAssets } from "@/utilitys/get_assets";
@@ -297,25 +310,17 @@ import { getSystemAssets } from "@/utilitys/get_assets";
 export default {
   name: "SideBar",
   props: {
-    GameStatus: {
+    gameStatus: {
       type: String,
       default: "NotStart",
-    },
-    HintInfo: {
-      type: Object,
-      default: () => {},
-    },
-    Hint: {
-      type: Object,
-      default: () => {},
-    },
-    download_data: {
-      type: Array,
-      default: () => [],
     },
     levelAmount: {
       type: Number,
       default: 0,
+    },
+    showSubmitButton: {
+      type: Boolean,
+      default: true,
     },
   },
   emits: [
@@ -328,7 +333,6 @@ export default {
   ],
   data() {
     return {
-      CalculatorSwitch: false,
       code: "",
       isFullScreen: false,
       startGameIconSrc: getSystemAssets("start.png", "side_bar"),
@@ -339,8 +343,8 @@ export default {
   computed: {
     ...mapWritableState(gameStore, ["gameCode"]),
     checkformat() {
-      if (this.code == "origin") return true;
-      if (this.code.split("-").length == this.levelAmount) {
+      if (this.code === "origin") return true;
+      if (this.code.split("-").length === this.levelAmount) {
         return true;
       } else {
         return false;
@@ -420,6 +424,9 @@ export default {
         document.documentElement.requestFullscreen();
         this.isFullScreen = true;
       }
+    },
+    submitAnswer() {
+      emitter.emit("submitAnswer");
     },
   },
 };

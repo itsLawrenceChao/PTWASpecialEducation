@@ -3,10 +3,11 @@
     <template v-if="gameLevel === 1">
       <Level1
         ref="level1"
-        :ID="ID"
-        :imageData="imageData"
-        :markdownData="markdownData"
+        :game-id="gameId"
+        :image-data="imageData"
+        :markdown-data="markdownData"
         :questions="questions"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -14,8 +15,9 @@
     <template v-if="gameLevel === 2">
       <Level2
         ref="level2"
-        :ID="ID"
-        :GameData="GameData"
+        :game-id="gameId"
+        :game-data="gameData"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
@@ -23,18 +25,19 @@
     <template v-if="gameLevel === 3">
       <Level3
         ref="level3"
-        :ID="ID"
-        :GameData="GameData"
-        :imageData="imageData"
-        :markdownData="markdownData"
+        :game-id="gameId"
+        :game-data="gameData"
+        :image-data="imageData"
+        :markdown-data="markdownData"
         :boxes="boxes"
+        :submit-tick="submitTick"
         @play-effect="$emit('play-effect', $event)"
         @next-question="$emit('next-question')"
       />
     </template>
-    <div class="button-container">
+    <!-- <div class="button-container">
       <button class="submit-btn" @click="submitAnswer">送出答案</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -42,7 +45,7 @@
 import Level1 from "./games/MA3132/Level1.vue";
 import Level2 from "./games/MA3132/Level2.vue";
 import Level3 from "./games/MA3132/Level3.vue";
-
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "MA3132",
   components: {
@@ -51,15 +54,11 @@ export default {
     Level3,
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -67,19 +66,23 @@ export default {
   emits: ["play-effect", "next-question"],
   data() {
     return {
-      imageData: this.GameData.imageData,
-      markdownData: this.GameData.markdownData,
-      questions: this.GameData.Questions,
-      gameLevel: this.GameData.GameLevel,
-      boxes: this.GameData.Boxes,
+      imageData: this.gameData.imageData,
+      markdownData: this.gameData.markdownData,
+      questions: this.gameData.Questions,
+      gameLevel: this.gameData.GameLevel,
+      boxes: this.gameData.Boxes,
+      submitTick: 0,
     };
+  },
+  created() {
+    emitter.on("submitAnswer", this.submitAnswer);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.submitAnswer);
   },
   methods: {
     submitAnswer() {
-      const levelComponent = this.$refs[`level${this.gameLevel}`];
-      if (levelComponent) {
-        levelComponent.submitAnswer();
-      }
+      this.submitTick++;
     },
   },
 };

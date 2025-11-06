@@ -1,29 +1,32 @@
 <template>
   <div class="MA3144__container">
-    <TextOnly :Data="GameData.QuestionDescription" :ID="ID" />
+    <TextOnly
+      :component-config="gameData.QuestionDescription"
+      :game-id="gameId"
+    />
     <p class="MA3144__hint">
-      {{ GameData.HintText }}
+      {{ gameData.HintText }}
     </p>
     <div class="MA3144__answer">
-      <p class="MA3144__answer-text">{{ GameData.Question }}</p>
+      <p class="MA3144__answer-text">{{ gameData.Question }}</p>
       <span class="MA3144__equals-sign">&#61;</span>
       <div
-        v-for="(format, index) in GameData.answerFormat"
+        v-for="(format, index) in gameData.answerFormat"
         :key="index"
         class="MA3144__input-group"
       >
         <NumberIncrementor
-          :Data="format.Data"
-          :ID="ID"
-          @numberChanged="(value) => handleNumberChange(value, format.unit)"
-          @replyAnswer="
+          :component-config="format.Data"
+          :game-id="gameId"
+          @number-changed="(value) => handleNumberChange(value, format.unit)"
+          @reply-answer="
             (isCorrect) => handleReplyAnswer(isCorrect, format.unit)
           "
         ></NumberIncrementor>
         <span class="MA3144__unit">{{ format.unit }}</span>
       </div>
     </div>
-    <button class="MA3144__submit-btn" @click="submitAnswer">送出答案</button>
+    <!-- <button class="submit-btn" @click="submitAnswer">送出答案</button> -->
   </div>
 </template>
 <script>
@@ -37,15 +40,11 @@ export default {
     TextOnly: getComponents("TextOnly"),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -54,9 +53,6 @@ export default {
   data() {
     return {
       // Your data here
-      numberData: {
-        digitCount: 2,
-      },
       userAnswer: {
         kg: 0,
         g: 0,
@@ -69,9 +65,13 @@ export default {
   },
   created() {
     // Your created hook here
+    emitter.on("submitAnswer", this.submitAnswer);
   },
   mounted() {
     // Your mounted hook here
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.submitAnswer);
   },
   methods: {
     // Your methods here
@@ -83,13 +83,13 @@ export default {
       console.log(this.unitCorrect);
     },
     submitAnswer() {
-      const requiredUnits = this.GameData.answerFormat.length;
+      const requiredUnits = this.gameData.answerFormat.length;
       const correctUnits = Object.keys(this.unitCorrect).length;
       const allCorrect =
         correctUnits === requiredUnits &&
         Object.values(this.unitCorrect).every(Boolean);
 
-      const correctAnswer = this.GameData.correctAnswer;
+      const correctAnswer = this.gameData.correctAnswer;
       const correctAnswerStr = this.formatAnswer(correctAnswer);
       const userAnswerStr = this.formatAnswer(this.userAnswer);
       this.emitResult(correctAnswerStr, userAnswerStr, allCorrect);

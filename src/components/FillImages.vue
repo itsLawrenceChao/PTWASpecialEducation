@@ -21,17 +21,15 @@
 
 <script>
 import { getGameAssets } from "@/utilitys/get_assets.js";
-import * as canvasTools from "@/utilitys/canvasTools.js";
-import { defineAsyncComponent } from "vue";
 export default {
   components: {},
 
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -60,19 +58,19 @@ export default {
       this.draw();
     },
     setRatio() {
-      let row = Math.floor(Math.pow(this.Data.frame, 0.5));
-      let column = Math.ceil(this.Data.frame / row);
+      const row = Math.floor(Math.pow(this.componentConfig.frame, 0.5));
+      const column = Math.ceil(this.componentConfig.frame / row);
 
       return {
-        row: row,
-        column: column,
+        row,
+        column,
       };
     },
     setCanvas() {
       if (
         this.$refs.container.clientWidth * this.ratio.row <=
           this.$refs.container.clientHeight * this.ratio.column ||
-        this.$refs.container.clientHeight == 0
+        this.$refs.container.clientHeight === 0
       ) {
         this.gameWidth = this.$refs.container.clientWidth;
         this.gameHeight = (this.gameWidth * this.ratio.row) / this.ratio.column;
@@ -85,17 +83,18 @@ export default {
       this.ratioLength = this.gameWidth / this.ratio.column;
     },
     setMap() {
-      let rowWithLessElements = this.ratio.column - (this.Data.frame % this.ratio.column);
-      if (rowWithLessElements == this.ratio.column) rowWithLessElements = 0;
+      let rowWithLessElements =
+        this.ratio.column - (this.componentConfig.frame % this.ratio.column);
+      if (rowWithLessElements === this.ratio.column) rowWithLessElements = 0;
       if (rowWithLessElements < this.ratio.row / 2) {
         for (let i = 0; i < this.ratio.row; ++i) {
-          if (i % 2 == 1 && i < rowWithLessElements * 2)
+          if (i % 2 === 1 && i < rowWithLessElements * 2)
             this.mapOfRows.push(this.ratio.column - 1);
           else this.mapOfRows.push(this.ratio.column);
         }
       } else {
         for (let i = 0; i < this.ratio.row; ++i) {
-          if (i % 2 == 1 && i < (this.ratio.row - rowWithLessElements) * 2)
+          if (i % 2 === 1 && i < (this.ratio.row - rowWithLessElements) * 2)
             this.mapOfRows.push(this.ratio.column);
           else this.mapOfRows.push(this.ratio.column - 1);
         }
@@ -103,15 +102,21 @@ export default {
     },
     draw() {
       const frameImage = new window.Image();
-      frameImage.src = getGameAssets(this.ID, this.Data.frameImage);
+      frameImage.src = getGameAssets(
+        this.gameId,
+        this.componentConfig.frameImage
+      );
       const fillImage = new window.Image();
-      fillImage.src = getGameAssets(this.ID, this.Data.fillImage);
-      for (let i in this.mapOfRows) {
+      fillImage.src = getGameAssets(
+        this.gameId,
+        this.componentConfig.fillImage
+      );
+      for (const i in this.mapOfRows) {
         let posX;
-        if (this.mapOfRows[i] == this.ratio.column) posX = 0;
+        if (this.mapOfRows[i] === this.ratio.column) posX = 0;
         else posX = this.ratioLength * 0.5;
         for (let j = 0; j < this.mapOfRows[i]; ++j) {
-          let frame = {
+          const frame = {
             width: this.ratioLength,
             height: this.ratioLength,
             x: posX,
@@ -120,7 +125,7 @@ export default {
           };
           this.configFrame.push(frame);
 
-          let fill = {
+          const fill = {
             width: this.ratioLength,
             height: this.ratioLength,
             x: posX,
@@ -139,10 +144,10 @@ export default {
     },
     countFills() {
       let fills = 0;
-      for (let i in this.configFill) {
+      for (const i in this.configFill) {
         if (this.configFill[i].visible) fills++;
       }
-      this.$emit("replyAnswer", fills == this.Data.fill);
+      this.$emit("replyAnswer", fills === this.componentConfig.fill);
     },
   },
 };

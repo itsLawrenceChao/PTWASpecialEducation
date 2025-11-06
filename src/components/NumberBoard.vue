@@ -2,7 +2,8 @@
   <table class="number-board">
     <tr class="number-board__row">
       <td
-        v-for="unit in Unit"
+        v-for="(unit, uIndex) in Unit"
+        :key="uIndex"
         class="number-board__cell number-board__cell--unit"
       >
         {{ unit }}
@@ -11,6 +12,7 @@
     <tr class="number-board__row">
       <td
         v-for="(number, index) in numbers"
+        :key="index"
         class="number-board__cell"
         :class="{
           'number-board__cell--clickable': isInput,
@@ -30,7 +32,7 @@ import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "NumberBoard",
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
@@ -40,25 +42,25 @@ export default {
     return {
       numbers: [],
       Unit: null,
-      isInput: this.Data.isInput || false,
+      isInput: this.componentConfig.isInput || false,
       wrongDigits: [],
       showWrong: false,
     };
   },
   created() {
-    this.Unit = this.Data.Unit;
-    this.numbers = this.Data.Number;
-    if (typeof this.Data.Number === "number") {
-      this.numbers = this.Data.Number.toString().split("");
+    this.Unit = this.componentConfig.Unit;
+    this.numbers = this.componentConfig.Number;
+    if (typeof this.componentConfig.Number === "number") {
+      this.numbers = this.componentConfig.Number.toString().split("");
     }
-    if (this.Data.Unit.length != this.numbers.length) {
-      if (this.Data.Unit.length > this.numbers.length) {
-        let diff = this.Data.Unit.length - this.numbers.length;
+    if (this.componentConfig.Unit.length !== this.numbers.length) {
+      if (this.componentConfig.Unit.length > this.numbers.length) {
+        const diff = this.componentConfig.Unit.length - this.numbers.length;
         for (let i = 0; i < diff; i++) {
           this.numbers.unshift(" ");
         }
       } else {
-        let diff = this.numbers.length - this.Data.Unit.length;
+        const diff = this.numbers.length - this.componentConfig.Unit.length;
         for (let i = 0; i < diff; i++) {
           this.Unit.unshift(" ");
         }
@@ -66,7 +68,7 @@ export default {
     }
 
     if (this.isInput) {
-      for (var i in this.numbers) {
+      for (const i in this.numbers) {
         this.numbers[i] = "0";
       }
     }
@@ -94,9 +96,9 @@ export default {
       if (!this.isInput) return;
 
       let check = true;
-      const correctAnswer = this.Data.Number.toString().split("");
+      const correctAnswer = this.componentConfig.Number.toString().split("");
       // 只檢查正確與否，不標記紅色
-      for (var i = correctAnswer.length - 1; i >= 0; i--) {
+      for (let i = correctAnswer.length - 1; i >= 0; i--) {
         if (correctAnswer[i] !== this.numbers[i]) {
           check = false;
         }
@@ -107,9 +109,9 @@ export default {
       // 觸發紅色標記
       this.showWrong = true;
       // 更新錯誤狀態
-      const correctAnswer = this.Data.Number.toString().split("");
+      const correctAnswer = this.componentConfig.Number.toString().split("");
       this.wrongDigits = new Array(this.numbers.length).fill(false);
-      for (var i = correctAnswer.length - 1; i >= 0; i--) {
+      for (let i = correctAnswer.length - 1; i >= 0; i--) {
         if (correctAnswer[i] !== this.numbers[i]) {
           this.wrongDigits[i] = true;
         }

@@ -31,7 +31,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：72 $$ $i$ = $i$",
             "Answer": ["÷", 9, 8]
@@ -50,7 +50,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：56 $$ $i$ = $i$",
             "Answer": ["÷", 8, 7]
@@ -69,7 +69,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：54 $$ $i$ = $i$",
             "Answer": ["÷", 9, 6]
@@ -88,7 +88,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：32 $$ $i$ = $i$",
             "Answer": ["÷", 4, 8]
@@ -107,7 +107,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：49 $$ $i$ = $i$",
             "Answer": ["÷", 7, 7]
@@ -128,7 +128,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：60 $$ $i$ = $i$",
             "Answer": ["÷", 5, 12]
@@ -147,7 +147,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：72 $$ $i$ = $i$",
             "Answer": ["÷", 3, 24]
@@ -166,7 +166,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：84 $$ $i$ = $i$",
             "Answer": ["÷", 6, 14]
@@ -185,7 +185,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：91 $$ $i$ = $i$",
             "Answer": ["÷", 7, 13]
@@ -204,7 +204,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：92 $$ $i$ = $i$",
             "Answer": ["÷", 4, 23]
@@ -225,7 +225,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：369 $$ $i$ = $i$",
             "Answer": ["÷", 9, 41]
@@ -244,7 +244,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：380 $$ $i$ = $i$",
             "Answer": ["÷", 4, 95]
@@ -263,7 +263,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：301 $$ $i$ = $i$",
             "Answer": ["÷", 7, 43]
@@ -282,7 +282,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：205 $$ $i$ = $i$",
             "Answer": ["÷", 5, 41]
@@ -301,7 +301,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：520 $$ $i$ = $i$",
             "Answer": ["÷", 8, 65]
@@ -322,7 +322,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [160, "÷", 8, 20]
@@ -341,7 +341,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [100, "÷", 5, 20]
@@ -360,7 +360,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [231, "÷", 7, 33]
@@ -379,7 +379,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [236, "÷", 4, 59]
@@ -398,7 +398,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [224, "÷", 8, 28]
@@ -419,7 +419,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [360, "÷", 9, 40]
@@ -438,7 +438,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [504, "÷", 8, 63]
@@ -457,7 +457,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [390, "÷", 5, 78]
@@ -476,7 +476,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [497, "÷", 7, 71]
@@ -495,7 +495,7 @@
           }
         },
         "downComponent": {
-          "Name": "Markdown",
+          "Name": "MarkdownRenderer",
           "Data": {
             "Render": "橫式：$i$ $$ $i$ = $i$",
             "Answer": [510, "÷", 6, 85]

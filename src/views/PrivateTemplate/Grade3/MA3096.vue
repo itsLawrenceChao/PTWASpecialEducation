@@ -2,13 +2,13 @@
   <div class="compare-game">
     <div class="compare-game__header">
       <p
-        v-if="gameData.QuestionText && gameData.QuestionText != ''"
+        v-if="gameData.QuestionText && gameData.QuestionText !== ''"
         class="compare-game__title h1"
       >
         {{ gameData.QuestionText }}
       </p>
       <p
-        v-if="gameData.Description && gameData.Description != ''"
+        v-if="gameData.Description && gameData.Description !== ''"
         class="compare-game__subtitle h2"
       >
         {{ gameData.Description }}
@@ -23,8 +23,8 @@
           'compare-game__card--wrong': answered[0] === false,
           'compare-game__card--correct': answered[0] === true,
         }"
-        :Data="gameData.Datas[0].Data"
-        :ID="id"
+        :component-config="gameData.Datas[0].Data"
+        :game-id="gameId"
         @reply-answer="handleSlotComponentReply(0, $event)"
       />
 
@@ -37,8 +37,8 @@
           'compare-game__card--wrong': answered[1] === false,
           'compare-game__card--correct': answered[1] === true,
         }"
-        :Data="gameData.Datas[1].Data"
-        :ID="id"
+        :component-config="gameData.Datas[1].Data"
+        :game-id="gameId"
         @reply-answer="handleSlotComponentReply(1, $event)"
       />
 
@@ -51,8 +51,8 @@
       >
         <component
           :is="gameData.Datas[2].Name"
-          :Data="gameData.Datas[2].Data"
-          :ID="id"
+          :component-config="gameData.Datas[2].Data"
+          :game-id="gameId"
         />
         <p class="compare-game__card--suffix">{{ gameData.Datas[2].Suffix }}</p>
       </div>
@@ -64,6 +64,7 @@
           :sort="false"
           item-key="name"
           class="compare-game__symbol"
+          @add="onAddSymbol"
         >
           <template #item="{ element }">
             <div class="compare-game__option clickable">
@@ -82,8 +83,8 @@
       >
         <component
           :is="gameData.Datas[3].Name"
-          :Data="gameData.Datas[3].Data"
-          :ID="id"
+          :component-config="gameData.Datas[3].Data"
+          :game-id="gameId"
         />
         <p class="compare-game__card--suffix">{{ gameData.Datas[3].Suffix }}</p>
       </div>
@@ -106,9 +107,9 @@
           </template>
         </draggable>
       </div>
-      <button class="compare-game__check-button" @click="checkAllAnswers">
+      <!-- <button class="compare-game__check-button" @click="checkAllAnswers">
         檢查答案
-      </button>
+      </button> -->
     </section>
   </div>
 </template>
@@ -116,6 +117,7 @@
 <script>
 import draggable from "vuedraggable";
 import { defineAsyncComponent } from "vue";
+import { subComponentsVerifyAnswer as emitter } from "@/utilitys/mitt.js";
 export default {
   name: "CompareGame",
   components: {
@@ -132,15 +134,11 @@ export default {
     TextOnly: defineAsyncComponent(() => import("@/components/TextOnly.vue")),
   },
   props: {
-    GameData: {
+    gameData: {
       type: Object,
       required: true,
     },
-    GameConfig: {
-      type: Object,
-      required: true,
-    },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -148,11 +146,8 @@ export default {
   emits: ["play-effect", "add-record", "next-question"],
   data() {
     return {
-      selectedGroup: 0,
-      totalQuestions: null,
       answered: [],
       userAnswer: [],
-      imageDatas: [],
       symbols: [],
       slotComponentAnswers: ["", ""], // Two SubComponents
       compareSymbols: [
@@ -171,19 +166,13 @@ export default {
       ],
     };
   },
-  computed: {
-    gameData() {
-      return this.GameData;
-    },
-    gameConfig() {
-      return this.GameConfig;
-    },
-    id() {
-      return this.ID;
-    },
-  },
+  computed: {},
   created() {
     this.initializeGame();
+    emitter.on("submitAnswer", this.checkAllAnswers);
+  },
+  beforeUnmount() {
+    emitter.off("submitAnswer", this.checkAllAnswers);
   },
   methods: {
     initializeGame() {
@@ -191,12 +180,16 @@ export default {
     },
     checkAllAnswers() {
       let allCorrect = true;
-      const userAnswer = this.userAnswer[0]?.tag;
-      const correctAnswer = this.gameData.Answer;
-      console.log(correctAnswer, userAnswer);
-      if (correctAnswer !== userAnswer) {
+      if (this.userAnswer.length !== 1) {
         allCorrect = false;
-        console.log("錯誤");
+      } else {
+        const userAnswer = this.userAnswer[0]?.tag;
+        const correctAnswer = this.gameData.Answer;
+        console.log(correctAnswer, userAnswer);
+        if (correctAnswer !== userAnswer) {
+          allCorrect = false;
+          console.log("錯誤");
+        }
       }
 
       if (!this.slotComponentAnswers.every((answer) => answer === true)) {
@@ -212,15 +205,12 @@ export default {
         this.$emit("next-question");
       }
     },
-    clearAllData() {
-      for (let i = 0; i < 2; i++) {
-        this.answers[i] = [];
-        this.answered[i] = null;
-      }
-      this.slotComponentAnswers = ["", ""];
-    },
     handleSlotComponentReply(index, answer) {
       this.slotComponentAnswers[index] = answer;
+    },
+    onAddSymbol(evt) {
+      // 只保留最新拖進來的那個
+      this.userAnswer = [evt.item._underlying_vm_];
     },
   },
 };

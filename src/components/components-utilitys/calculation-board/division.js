@@ -239,7 +239,7 @@ class DivisionConfig {
 
     for (let i = 0; i < digits.length; i++) {
       current += digits[i];
-      let currentNum = parseInt(current);
+      const currentNum = parseInt(current);
 
       if (currentNum < divisor && result === "") continue;
 
@@ -335,7 +335,7 @@ const divisionData = {
 <GenericBoard 
   :data="divisionData" 
   :config="divisionConfig" 
-  :ID="'division-1'"
+  :game-id="'division-1'"
   @replyAnswer="handleAnswer"
 />
 */

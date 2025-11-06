@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-let usegameStore = defineStore('game Store', {
+const usegameStore = defineStore('game Store', {
     state: () => ({
         reappeareCode: 'None',
         gameCode: 'None',

@@ -2,8 +2,14 @@
   <div ref="container" class="gameContainer">
     <v-stage :config="configKonva">
       <v-layer>
-        <v-rect v-if="Data.backgroundType == 'color'" :config="configBG" />
-        <v-image v-if="Data.backgroundType == 'image'" :config="configBG" />
+        <v-rect
+          v-if="componentConfig.backgroundType === 'color'"
+          :config="configBG"
+        />
+        <v-image
+          v-if="componentConfig.backgroundType === 'image'"
+          :config="configBG"
+        />
       </v-layer>
 
       <v-layer>
@@ -16,7 +22,7 @@
           @dragend="handleDragend"
         />
       </v-layer>
-      <v-layer v-if="Data.backgroundType == 'grid'">
+      <v-layer v-if="componentConfig.backgroundType === 'grid'">
         <v-line
           v-for="(pointSet, index) in configBG"
           :key="index"
@@ -44,11 +50,11 @@ import { getSystemAssets } from "@/utilitys/get_assets.js";
 export default {
   components: {},
   props: {
-    Data: {
+    componentConfig: {
       type: Object,
       required: true,
     },
-    ID: {
+    gameId: {
       type: String,
       required: true,
     },
@@ -77,19 +83,21 @@ export default {
   methods: {
     initializeScene() {
       if (
-        this.$refs.container.clientWidth * this.Data.backgroundRatio.height <=
-          this.$refs.container.clientHeight * this.Data.backgroundRatio.width ||
-        this.$refs.container.clientHeight == 0
+        this.$refs.container.clientWidth *
+          this.componentConfig.backgroundRatio.height <=
+          this.$refs.container.clientHeight *
+            this.componentConfig.backgroundRatio.width ||
+        this.$refs.container.clientHeight === 0
       ) {
         this.gameWidth = this.$refs.container.clientWidth;
         this.gameHeight =
-          (this.gameWidth * this.Data.backgroundRatio.height) /
-          this.Data.backgroundRatio.width;
+          (this.gameWidth * this.componentConfig.backgroundRatio.height) /
+          this.componentConfig.backgroundRatio.width;
       } else {
         this.gameHeight = this.$refs.container.clientHeight;
         this.gameWidth =
-          (this.gameHeight * this.Data.backgroundRatio.width) /
-          this.Data.backgroundRatio.height;
+          (this.gameHeight * this.componentConfig.backgroundRatio.width) /
+          this.componentConfig.backgroundRatio.height;
       }
 
       this.configKonva.width = this.gameWidth;
@@ -98,7 +106,7 @@ export default {
       this.configBG.height = this.gameHeight;
     },
     drawBackground() {
-      switch (this.Data.backgroundType) {
+      switch (this.componentConfig.backgroundType) {
         case "grid":
           this.setGrid();
           this.drawGrid();
@@ -109,19 +117,22 @@ export default {
             y: 0,
             width: this.gameWidth,
             height: this.gameHeight,
-            fill: this.Data.background,
+            fill: this.componentConfig.background,
             strokeEnabled: false,
           };
           break;
         case "image": {
-          let image = new window.Image();
-          image.src = getGameAssets(this.ID, this.Data.background);
+          const image = new window.Image();
+          image.src = getGameAssets(
+            this.gameId,
+            this.componentConfig.background
+          );
           this.configBG = {
             x: 0,
             y: 0,
             width: this.gameWidth,
             height: this.gameHeight,
-            image: image,
+            image,
             strokeEnabled: false,
           };
           break;
@@ -129,18 +140,18 @@ export default {
       }
     },
     setGrid() {
-      for (let i = 0; i <= this.Data.backgroundRatio.width; ++i)
+      for (let i = 0; i <= this.componentConfig.backgroundRatio.width; ++i)
         this.gridPos.x.push(
-          (i * this.gameWidth) / this.Data.backgroundRatio.width
+          (i * this.gameWidth) / this.componentConfig.backgroundRatio.width
         );
-      for (let i = 0; i <= this.Data.backgroundRatio.height; ++i)
+      for (let i = 0; i <= this.componentConfig.backgroundRatio.height; ++i)
         this.gridPos.y.push(
-          (i * this.gameHeight) / this.Data.backgroundRatio.height
+          (i * this.gameHeight) / this.componentConfig.backgroundRatio.height
         );
     },
     drawGrid() {
       this.configBG = [];
-      for (let i = 1; i < this.Data.backgroundRatio.width; ++i) {
+      for (let i = 1; i < this.componentConfig.backgroundRatio.width; ++i) {
         this.configBG.push([
           this.gridPos.x[i],
           0,
@@ -148,7 +159,7 @@ export default {
           this.gameHeight,
         ]);
       }
-      for (let i = 1; i < this.Data.backgroundRatio.height; ++i) {
+      for (let i = 1; i < this.componentConfig.backgroundRatio.height; ++i) {
         this.configBG.push([
           0,
           this.gridPos.y[i],
@@ -158,29 +169,30 @@ export default {
       }
     },
     drawImages() {
-      this.ratioLength = this.gameWidth / this.Data.backgroundRatio.width;
+      this.ratioLength =
+        this.gameWidth / this.componentConfig.backgroundRatio.width;
       let currentPos = {
         x: this.ratioLength,
         y: this.ratioLength,
       };
 
-      for (let i in this.Data.images) {
-        let imageData = this.Data.images[i];
-        let image = new window.Image();
-        image.src = getGameAssets(this.ID, imageData.path);
+      for (const i in this.componentConfig.images) {
+        const imageData = this.componentConfig.images[i];
+        const image = new window.Image();
+        image.src = getGameAssets(this.gameId, imageData.path);
         this.images.push(image);
 
         let draggable = true;
-        if (imageData.draggable == false) draggable = false;
+        if (imageData.draggable === false) draggable = false;
 
-        let position = this.getPosition(imageData, currentPos).position;
+        const position = this.getPosition(imageData, currentPos).position;
         currentPos = this.getPosition(imageData, currentPos).newPos;
 
-        let config = {
+        const config = {
           image: this.images[i],
           width: imageData.ratio.width * this.ratioLength,
           height: imageData.ratio.height * this.ratioLength,
-          draggable: draggable,
+          draggable,
           x: position.x,
           y: position.y,
           index: i,
@@ -190,7 +202,7 @@ export default {
       }
     },
     getPosition(imageData, currentPos) {
-      let position = {},
+      const position = {},
         newPos = {};
       if (imageData.presetPosition) {
         position.x = this.ratioLength * imageData.presetPosition.x;
@@ -203,17 +215,17 @@ export default {
         newPos.y = currentPos.y;
       }
       return {
-        position: position,
-        newPos: newPos,
+        position,
+        newPos,
       };
     },
     handleDragmove(e) {
-      let id = e.target.attrs.index;
+      const id = e.target.attrs.index;
       this.configImage[id].x = e.target.x();
       this.configImage[id].y = e.target.y();
       this.keepInBound(e);
-      if (this.Data.images[id].rotatable) {
-        if (this.configRotationPanel == null) {
+      if (this.componentConfig.images[id].rotatable) {
+        if (this.configRotationPanel === null) {
           this.drawPanel();
         }
         this.movePanel(this.configImage[id]);
@@ -228,12 +240,12 @@ export default {
         cornerRadius: this.ratioLength * 0.5,
       };
 
-      let arrowImage = new window.Image();
+      const arrowImage = new window.Image();
       arrowImage.src = getSystemAssets("backArrow.png", "icon");
-      let flip = [1, -1],
+      const flip = [1, -1],
         offset = [0, this.ratioLength * 0.8];
       for (let i = 0; i < 2; ++i) {
-        let arrow = {
+        const arrow = {
           width: this.ratioLength * 0.8,
           height: this.ratioLength * 0.8,
           image: arrowImage,
@@ -247,7 +259,7 @@ export default {
     movePanel(image) {
       this.configRotationPanel.x = image.x;
 
-      if (image.rotation % 180 == 0) {
+      if (image.rotation % 180 === 0) {
         if (image.y + image.height + this.ratioLength > this.gameHeight)
           this.configRotationPanel.y = image.y - this.ratioLength;
         else this.configRotationPanel.y = image.y + image.height;
@@ -283,22 +295,25 @@ export default {
       this.configImage[id].y = newY;
     },
     handleDragend(e) {
-      let id = e.target.attrs.index;
-      if (this.Data.images[id].snapToGrid && this.Data.backgroundType == "grid")
+      const id = e.target.attrs.index;
+      if (
+        this.componentConfig.images[id].snapToGrid &&
+        this.componentConfig.backgroundType === "grid"
+      )
         this.snapToGrid(e);
     },
     snapToGrid(e) {
-      let id = e.target.attrs.index;
-      let snapTo = {},
-        distance = 999;
-      for (let i in this.gridPos.x) {
+      const id = e.target.attrs.index;
+      const snapTo = {};
+      let distance = 999;
+      for (const i in this.gridPos.x) {
         if (Math.abs(e.target.x() - this.gridPos.x[i]) < distance) {
           distance = Math.abs(e.target.x() - this.gridPos.x[i]);
           snapTo.x = this.gridPos.x[i];
         }
       }
       distance = 999;
-      for (let i in this.gridPos.y) {
+      for (const i in this.gridPos.y) {
         if (Math.abs(e.target.y() - this.gridPos.y[i]) < distance) {
           distance = Math.abs(e.target.y() - this.gridPos.y[i]);
           snapTo.y = this.gridPos.y[i];
@@ -311,8 +326,8 @@ export default {
       this.movePanel(this.configImage[id]);
     },
     rotateImage(e) {
-      let id = this.rotatingImageID;
-      if (e.target.attrs.index == 0) this.configImage[id].rotation -= 90;
+      const id = this.rotatingImageID;
+      if (e.target.attrs.index === 0) this.configImage[id].rotation -= 90;
       else this.configImage[id].rotation += 90;
       this.movePanel(this.configImage[id]);
 
