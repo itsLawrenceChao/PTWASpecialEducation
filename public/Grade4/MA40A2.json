@@ -1,0 +1,1076 @@
+﻿{
+  "id": "MA40A2",
+  "IntroText": {
+    "Type": "PlainText",
+    "Content": "觀察圖表後回答問題"
+  },
+  "GameType": "QuestionSetGame",
+  "GameConfig": {},
+  "Hint": {},
+  "Questions": [
+    [
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡1：月份與降雨量",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-1.png",
+            "Alt": "月份降雨量長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 1
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最多的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 5
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最少的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 0
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量高於500毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [3, 4, 5]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量低於300毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [0, 1, 8, 10, 11]
+          }
+        ]
+      },
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡1：月份與降雨量",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-2.png",
+            "Alt": "月份降雨量長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 1
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最多的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 4
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最少的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 1
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量高於500毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [3, 5, 8]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量低於300毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [0, 1, 6, 10, 11]
+          }
+        ]
+      },
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡1：月份與降雨量",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-3.png",
+            "Alt": "月份降雨量長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 1
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最多的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 5
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最少的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 0
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量高於500毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [4, 5, 6]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量低於300毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [3, 7, 8, 9, 11]
+          }
+        ]
+      },
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡1：月份與降雨量",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-4.png",
+            "Alt": "月份降雨量長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 1
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最多的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 2
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最少的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 7
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量高於500毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [0, 1, 2]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量低於300毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [4, 5, 7, 8, 10]
+          }
+        ]
+      },
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡1：月份與降雨量",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "1-5.png",
+            "Alt": "月份降雨量長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸代表什麼？$dropdown$",
+            "Options": ["月份", "降雨量"],
+            "Answer": 1
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最多的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 8
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "降雨量最少的月份是幾月？$dropdown$",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": 10
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量高於500毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [5, 6, 8]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些月份的降雨量低於300毫米？",
+            "Options": [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            "Answer": [0, 1, 2, 10, 11]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡2：小吃喜好統計圖",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-1.png",
+            "Alt": "小吃喜好長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸表示什麼呢？$dropdown$",
+            "Options": ["種類", "人數"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸表示什麼呢？$dropdown$",
+            "Options": ["人數", "種類"],
+            "Answer": 0
+          },
+          {
+            "Type": "fill",
+            "Prompt": "橫軸的每一小格表示幾人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 2
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃烤魷魚的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 28
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃地瓜球的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 45
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪兩種小吃喜歡的人數一樣多？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [0, 2]
+          },
+          {
+            "Type": "single",
+            "Prompt": "最多人喜歡的小吃是哪一種？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": 1
+          },
+          {
+            "Type": "fill",
+            "Prompt": "最多和最少相差多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 28
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數多於40人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [0, 1, 2]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數少於30人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [3, 4]
+          }
+        ]
+      },
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡2：小吃喜好統計圖",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-2.png",
+            "Alt": "小吃喜好長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸表示什麼呢？$dropdown$",
+            "Options": ["種類", "人數"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸表示什麼呢？$dropdown$",
+            "Options": ["人數", "種類"],
+            "Answer": 0
+          },
+          {
+            "Type": "fill",
+            "Prompt": "橫軸的每一小格表示幾人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 2
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃雞蛋糕的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 28
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃鹹酥雞的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 35
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪兩種小吃喜歡的人數一樣多？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [4, 2]
+          },
+          {
+            "Type": "single",
+            "Prompt": "最多人喜歡的小吃是哪一種？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": 5
+          },
+          {
+            "Type": "fill",
+            "Prompt": "最多和最少相差多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 17
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數多於40人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [3, 5]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數少於30人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [2, 4]
+          }
+        ]
+      },
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡2：小吃喜好統計圖",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-3.png",
+            "Alt": "小吃喜好長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸表示什麼呢？$dropdown$",
+            "Options": ["種類", "人數"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸表示什麼呢？$dropdown$",
+            "Options": ["人數", "種類"],
+            "Answer": 0
+          },
+          {
+            "Type": "fill",
+            "Prompt": "橫軸的每一小格表示幾人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 2
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃牛排的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 42
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃排骨酥的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 30
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪兩種小吃喜歡的人數一樣多？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [0, 3]
+          },
+          {
+            "Type": "single",
+            "Prompt": "最多人喜歡的小吃是哪一種？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": 2
+          },
+          {
+            "Type": "fill",
+            "Prompt": "最多和最少相差多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 17
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數多於40人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [2, 4]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數少於30人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [0, 3]
+          }
+        ]
+      },
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡2：小吃喜好統計圖",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-4.png",
+            "Alt": "小吃喜好長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸表示什麼呢？$dropdown$",
+            "Options": ["種類", "人數"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸表示什麼呢？$dropdown$",
+            "Options": ["人數", "種類"],
+            "Answer": 0
+          },
+          {
+            "Type": "fill",
+            "Prompt": "橫軸的每一小格表示幾人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 2
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃牛排的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 27
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃雞蛋糕的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 39
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪兩種小吃喜歡的人數一樣多？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [0, 1]
+          },
+          {
+            "Type": "single",
+            "Prompt": "最多人喜歡的小吃是哪一種？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": 5
+          },
+          {
+            "Type": "fill",
+            "Prompt": "最多和最少相差多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 22
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數多於40人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [3, 5]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數少於30人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [0, 1, 4]
+          }
+        ]
+      },
+      {
+        "TopContainer": {
+          "Name": "TextOnly",
+          "Data": {
+            "Text": "關卡2：小吃喜好統計圖",
+            "Size": "title-medium"
+          }
+        },
+        "SlotComponent": {
+          "Name": "ImageContainer",
+          "Data": {
+            "Src": "2-5.png",
+            "Alt": "小吃喜好長條圖"
+          }
+        },
+        "Questions": [
+          {
+            "Type": "dropdown",
+            "Prompt": "縱軸表示什麼呢？$dropdown$",
+            "Options": ["種類", "人數"],
+            "Answer": 0
+          },
+          {
+            "Type": "dropdown",
+            "Prompt": "橫軸表示什麼呢？$dropdown$",
+            "Options": ["人數", "種類"],
+            "Answer": 0
+          },
+          {
+            "Type": "fill",
+            "Prompt": "橫軸的每一小格表示幾人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 2
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃地瓜球的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 38
+          },
+          {
+            "Type": "fill",
+            "Prompt": "喜歡吃排骨酥的人數有多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 39
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪兩種小吃喜歡的人數一樣多？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [3, 4]
+          },
+          {
+            "Type": "single",
+            "Prompt": "最多人喜歡的小吃是哪一種？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": 1
+          },
+          {
+            "Type": "fill",
+            "Prompt": "最多和最少相差多少人？$input$ 人",
+            "InputMode": "number",
+            "Answer": 24
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數多於40人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [1]
+          },
+          {
+            "Type": "multi",
+            "Prompt": "哪些小吃喜歡的人數少於30人？",
+            "Options": [
+              "地瓜球",
+              "鹹酥雞",
+              "雞蛋糕",
+              "烤魷魚",
+              "牛排",
+              "排骨酥"
+            ],
+            "Answer": [2, 3, 4]
+          }
+        ]
+      }
+    ]
+  ]
+}

@@ -31,8 +31,7 @@
             :key="itemIndex"
             class="select-component"
             :class="{
-              'selected-component':
-                SelectionRecord[currentQuestionIndex] === itemIndex,
+              'selected-component': isSelected(currentQuestionIndex, itemIndex),
             }"
             @click="SelectItem(currentQuestionIndex, itemIndex)"
           >
@@ -108,23 +107,57 @@ export default {
     emitter.off("submitAnswer", this.submitSingleAnswer);
   },
   methods: {
+    isMultiSelect(index) {
+      const question = this.gameData.Questions[index];
+      if (!question) return false;
+      if (Array.isArray(question.Answer)) return true;
+      return question.MultiSelect === true;
+    },
+    isSelected(index, selection) {
+      const record = this.SelectionRecord[index];
+      if (this.isMultiSelect(index)) {
+        return Array.isArray(record) && record.includes(selection);
+      }
+      return record === selection;
+    },
     SelectItem(index, selection) {
-      this.SelectionRecord[index] = selection;
+      if (this.isMultiSelect(index)) {
+        const current = Array.isArray(this.SelectionRecord[index])
+          ? [...this.SelectionRecord[index]]
+          : [];
+        const target = current.indexOf(selection);
+        if (target >= 0) {
+          current.splice(target, 1);
+        } else {
+          current.push(selection);
+        }
+        this.SelectionRecord[index] = current;
+      } else {
+        this.SelectionRecord[index] = selection;
+      }
       this.error = undefined;
     },
+    isCorrectAnswer(userAnswer, standardAnswer) {
+      if (Array.isArray(standardAnswer)) {
+        if (!Array.isArray(userAnswer)) return false;
+        const userSorted = [...userAnswer].sort((a, b) => a - b);
+        const standardSorted = [...standardAnswer].sort((a, b) => a - b);
+        if (userSorted.length !== standardSorted.length) return false;
+        return userSorted.every((value, idx) => value === standardSorted[idx]);
+      }
+      return userAnswer === standardAnswer;
+    },
     submitSingleAnswer() {
-      console.log(this.SelectionRecord[this.currentQuestionIndex]);
-      console.log(this.gameData.Questions[this.currentQuestionIndex].Answer);
-      if (
-        this.SelectionRecord[this.currentQuestionIndex] ===
-        this.gameData.Questions[this.currentQuestionIndex].Answer
-      ) {
+      const userAnswer = this.SelectionRecord[this.currentQuestionIndex];
+      const standardAnswer = this.gameData.Questions[this.currentQuestionIndex].Answer;
+
+      console.log(userAnswer);
+      console.log(standardAnswer);
+      if (this.isCorrectAnswer(userAnswer, standardAnswer)) {
         this.$emit("play-effect", "CorrectSound");
         this.$emit("add-record", [
-          `第 ${this.currentQuestionIndex}題答案 ${
-            this.gameData.Questions[this.currentQuestionIndex].Answer
-          }`,
-          `回答${this.SelectionRecord[this.currentQuestionIndex]}`,
+          `第 ${this.currentQuestionIndex}題答案 ${standardAnswer}`,
+          `回答${userAnswer}`,
           "正確",
         ]);
         if (this.currentQuestionIndex < this.gameData.Questions.length - 1) {
@@ -136,10 +169,8 @@ export default {
       } else {
         this.$emit("play-effect", "WrongSound");
         this.$emit("add-record", [
-          `第 ${this.currentQuestionIndex}題答案 ${
-            this.gameData.Questions[this.currentQuestionIndex].Answer
-          }`,
-          `回答${this.SelectionRecord[this.currentQuestionIndex]}`,
+          `第 ${this.currentQuestionIndex}題答案 ${standardAnswer}`,
+          `回答${userAnswer}`,
           "錯誤",
         ]);
       }

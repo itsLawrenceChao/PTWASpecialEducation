@@ -63,6 +63,8 @@ const templateLoaders = {
     ),
   BarChartGame: () =>
     import("@/features/game-templates/bar-chart-game/BarChartGame.vue"),
+  QuestionSetGame: () =>
+    import("@/features/game-templates/question-set-game/QuestionSetGame.vue"),
 };
 
 export const templateComponents = Object.fromEntries(
